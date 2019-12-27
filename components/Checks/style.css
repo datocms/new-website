@@ -1,0 +1,18 @@
+.root {
+  display: inline-block;
+}
+
+.list {
+  display: flex;
+  list-style-type: none;
+  font-family: var(--font-sans);
+  font-size: 0.9em;
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.check {
+  padding: 0;
+  margin: 0 10px;
+}

@@ -1,0 +1,31 @@
+{
+  "name": "new-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/react-fontawesome": "^0.1.8",
+    "@svgr/webpack": "^5.0.0",
+    "@zeit/next-css": "^1.0.1",
+    "babel-plugin-react-css-modules": "^5.2.6",
+    "classnames": "^2.2.6",
+    "cssnano": "^4.1.10",
+    "next": "^9.1.7-canary.5",
+    "postcss-advanced-variables": "^3.0.0",
+    "postcss-nested": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-property-lookup": "^2.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}

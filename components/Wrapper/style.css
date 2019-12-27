@@ -1,0 +1,8 @@
+.wrapper {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: var(--page-width-with-margin);
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+}
