@@ -8,6 +8,7 @@ import UseCases from "components/UseCases";
 import Highlights, { Block as HighlightsBlock } from "components/Highlights";
 import Numbers, { Block as NumbersBlock } from "components/Numbers";
 import PersonasPicker from "components/PersonasPicker";
+import Quote from "components/Quote";
 
 import styles from "./style.css";
 
@@ -54,6 +55,11 @@ export default function() {
       </Numbers>
 
       <PersonasPicker />
+
+      <Quote
+        quote={<>DatoCMS gives us <Highlight>flexibility</Highlight> and really good control over validation</>}
+        author={<><strong>Jeff Escalante</strong>, Web designer Manager at Hashicorp</>}
+      />
 
       <UseCases />
     </Layout>
