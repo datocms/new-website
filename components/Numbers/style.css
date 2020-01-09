@@ -1,0 +1,22 @@
+.root {
+  padding: 160px 0 130px;
+  background: linear-gradient(45deg, #E9FCFF 30%, #FDF2ED 60%);
+  clip-path: polygon(0 3vw, 100% 0, 100% calc(100% - 4vw), 0 100%);
+  text-align: center;
+}
+
+.rootBlocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.block {
+  padding: 0 40px;
+  flex: 1;
+}
+
+.blockTitle {
+  font-family: var(--font-headline);
+  font-size: 70px;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,31 @@
+.root {
+  margin: 90px 0;
+  text-align: center;
+}
+
+.rootBlocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rootTitle {
+  color: var(--light-body-color);
+  font-family: var(--font-sans);
+  font-size: 20px;
+  margin-bottom: 70px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--light-body-color);
+  text-transform: uppercase;
+}
+
+.block {
+  padding: 0 30px;
+  flex: 1;
+}
+
+.blockTitle {
+  font-family: var(--font-headline);
+  font-size: 40px;
+  margin-bottom: 30px;
+}

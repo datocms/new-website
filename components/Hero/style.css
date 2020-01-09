@@ -7,7 +7,6 @@
 }
 
 .over {
-  font-family: var(--font-sans);
   font-size: 20px;
   margin-bottom: 30px;
   font-weight: 500;
@@ -17,12 +16,11 @@
 }
 
 .title {
-  font-family: var(--font-serif-headline);
+  font-family: var(--font-headline);
   font-size: 70px;
 }
 
 .subtitle {
-  font-family: var(--font-sans);
   font-size: 25px;
   margin-top: 60px;
 }

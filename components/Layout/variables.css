@@ -1,10 +1,11 @@
 :root {
   --font-sans: colfax,-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-  --font-serif-headline: tiempos-headline,Georgia,serif;
+  --font-headline: tiempos-headline,Georgia,serif;
   --font-serif: tiempos-text,Georgia,serif;
   --page-margin: 20px;
   --page-width-with-margin: 1200px;
   --base-body-color: #2f333f;
   --light-body-color: #969fb6;
+  --border-color: #eee;
   --accent-color: #f5634b;
 }

@@ -1,4 +1,4 @@
-import Wrapper from '../Wrapper';
+import Wrapper from 'components/Wrapper';
 import styles from "./style.css";
 
 export default function Hero({ over, title, subtitle, children }) {

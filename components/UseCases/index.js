@@ -1,6 +1,6 @@
 import s from './style.css';
-import Wrapper from '../Wrapper';
-import Highlight from '../Highlight';
+import Wrapper from 'components/Wrapper';
+import Highlight from 'components/Highlight';
 
 export default function UseCases() {
   return (

@@ -1,4 +1,5 @@
 const withCSS = require("@zeit/next-css");
+const path = require('path');
 
 module.exports = withCSS({
   cssModules: true,
@@ -7,6 +8,8 @@ module.exports = withCSS({
     localIdentName: "[local]_[hash:base64:5]"
   },
   webpack(config) {
+    config.resolve.modules.push(path.resolve('./'));
+
     config.module.rules.push({
       test: /\.svg$/,
       use: [

@@ -1,6 +1,6 @@
 .root {
   padding: 160px 0 130px;
-  background: linear-gradient(25deg, #fefbe4, #fdf0eb);
+  background: linear-gradient(45deg, #fefbe4, #fdf0eb);
   clip-path: polygon(0 3vw, 100% 0, 100% calc(100% - 4vw), 0 100%);
 }
 
@@ -20,7 +20,7 @@
 }
 
 .mainStoryTitle {
-  font-family: var(--font-serif-headline);
+  font-family: var(--font-headline);
   font-size: 70px;
 }
 
