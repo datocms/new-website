@@ -9,29 +9,34 @@ import Highlights, { Block as HighlightsBlock } from "components/Highlights";
 import Numbers, { Block as NumbersBlock } from "components/Numbers";
 import PersonasPicker from "components/PersonasPicker";
 import Quote from "components/Quote";
+import LogosBar from "components/LogosBar";
+import { withDato } from "lib/datocms";
 
 import styles from "./style.css";
 
-export default function() {
+function Homepage() {
   return (
     <Layout>
       <Hero
         title={
           <>
-            Build digital experiences that <Highlight>inspire and convert</Highlight>
+            Improve customer experiences with a <Highlight>seamless, omni-channel</Highlight> content platform
           </>
         }
-        subtitle="Manage your content in a single hub and deliver beautifully crafted customer experiences on all your channels"
+        subtitle="Manage all your online content from a single hub, easily integrable with any digital product."
       >
         <Checks
           checks={['No credit card', 'Easy setup']}
         >
-          <Button fs="big">Try it for free</Button>
+          <Button fs="big">Try it now for free!</Button>
         </Checks>
       </Hero>
 
-      <Highlights title="Why you should use DatoCMS">
-        <HighlightsBlock title="Manage your content in one place">
+      <LogosBar />
+
+      <Highlights title="Your company struggles to build an effective CX, but why?">
+        <HighlightsBlock title="Your content is spread into endless different CMSs
+">
           All your content is safely stored in one hub, ready to be delivered anywhere
         </HighlightsBlock>
         <HighlightsBlock title="Manage your content in one place">
@@ -56,12 +61,9 @@ export default function() {
 
       <PersonasPicker />
 
-      <Quote
-        quote={<>DatoCMS gives us <Highlight>flexibility</Highlight> and really good control over validation</>}
-        author={<><strong>Jeff Escalante</strong>, Web designer Manager at Hashicorp</>}
-      />
-
       <UseCases />
     </Layout>
   );
 }
+
+export default withDato(Homepage);

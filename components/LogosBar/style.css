@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  justify-content: space-around;
+}
+
+.logo {
+  margin: 0 40px;
+
+  img {
+    height: 30px;
+    filter:  saturate(20%) hue-rotate(40deg) brightness(100%);
+  }
+}
