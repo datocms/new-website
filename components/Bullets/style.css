@@ -1,0 +1,11 @@
+.bullet {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.icon {
+  margin-right: 1em;
+  fill: var(--accent-color);
+}
