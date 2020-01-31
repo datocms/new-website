@@ -2,16 +2,15 @@ import Wrapper from 'components/Wrapper';
 import { Textfit } from 'react-textfit';
 import styles from "./style.css";
 
-export default function Hero({ over, title, subtitle, children }) {
+export default function InterstitialTitle({ children, kicker, subtitle }) {
   return (
     <Wrapper>
       <div className={styles.root}>
-        {over && <div className={styles.over}>{over}</div>}
-        <Textfit className={styles.title} mode="multi" max={100}>
-          {title}
+        {kicker && <div className={styles.kicker}>{kicker}</div>}
+        <Textfit className={styles.title} mode="multi" min={20} max={70}>
+          {children}
         </Textfit>
         {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
-        {children && <div className={styles.children}>{children}</div>}
       </div>
     </Wrapper>
   );

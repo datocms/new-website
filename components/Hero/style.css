@@ -17,12 +17,16 @@
 
 .title {
   font-family: var(--font-headline);
-  font-size: 70px;
+  height: 20vh;
+  display: flex;
+  font-size: 50px;
+  align-items: flex-end;
 }
 
 .subtitle {
   font-size: 25px;
-  margin-top: 60px;
+  max-width: 1000px;
+  margin: 60px auto 0 auto;
 }
 
 .children {

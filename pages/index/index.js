@@ -5,9 +5,9 @@ import Highlight from "components/Highlight";
 import Button from "components/Button";
 import Checks from "components/Checks";
 import UseCases from "components/UseCases";
-import Highlights, { Block as HighlightsBlock } from "components/Highlights";
 import Numbers, { Block as NumbersBlock } from "components/Numbers";
 import PersonasPicker from "components/PersonasPicker";
+import InterstitialTitle from "components/InterstitialTitle";
 import Quote from "components/Quote";
 import LogosBar from "components/LogosBar";
 import { withDato } from "lib/datocms";
@@ -20,10 +20,10 @@ function Homepage() {
       <Hero
         title={
           <>
-            Improve customer experiences with a <Highlight>seamless, omni-channel</Highlight> content platform
+            The&nbsp;best&nbsp;companies are&nbsp;built&nbsp;on <Highlight>unified&nbsp;content</Highlight>
           </>
         }
-        subtitle="Manage all your online content from a single hub, easily integrable with any digital product."
+        subtitle="More than 4.000 businesses use DatoCMS to create their online content at scale from a central hub, and distribute it easily via API to websites and any other digital experience."
       >
         <Checks
           checks={['No credit card', 'Easy setup']}
@@ -34,18 +34,9 @@ function Homepage() {
 
       <LogosBar />
 
-      <Highlights title="Your company struggles to build an effective CX, but why?">
-        <HighlightsBlock title="Your content is spread into endless different CMSs
-">
-          All your content is safely stored in one hub, ready to be delivered anywhere
-        </HighlightsBlock>
-        <HighlightsBlock title="Manage your content in one place">
-          All your content is safely stored in one hub, ready to be delivered anywhere
-        </HighlightsBlock>
-        <HighlightsBlock title="Manage your content in one place">
-          All your content is safely stored in one hub, ready to be delivered anywhere
-        </HighlightsBlock>
-      </Highlights>
+      <InterstitialTitle subtitle="Here’s 3 symptoms to watch out">
+        Are you losing money because of <Highlight>legacy content&nbsp;infrastructure</Highlight>?
+      </InterstitialTitle>
 
       <Numbers title="Why you should use DatoCMS">
         <NumbersBlock title="-79%">
