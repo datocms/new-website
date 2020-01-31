@@ -5,6 +5,10 @@
   max-width: 100%;
   text-align: center;
   position: relative;
+}
+
+.one {
+  composes: root;
 
   &:before {
     content: "";
@@ -19,6 +23,40 @@
     left: 50%;
     transform: translate(-50%, -50%) skew(0deg, -15deg);
     background: linear-gradient(45deg, #F9ECFE, #FEFAE4);
+  }
+}
+
+.two {
+  composes: root;
+
+  &:before {
+    content: "";
+    display: block;
+    background-color: #eee;
+    width: 25vw;
+    max-width: 600px;
+    height: 25vh;
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-20%, -50%) skew(0deg, -15deg);
+    background: linear-gradient(45deg, #FEFAE4, #F9ECFE);
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    background-color: #eee;
+    width: 25vw;
+    max-width: 600px;
+    height: 25vh;
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%, -50%) skew(0deg, -15deg);
+    background: linear-gradient(45deg, #FEFAE4, #F9ECFE);
   }
 }
 

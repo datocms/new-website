@@ -7,5 +7,14 @@
 
 .icon {
   margin-right: 1em;
+}
+
+.bad {
+  composes: icon;
   fill: var(--accent-color);
+}
+
+.good {
+  composes: icon;
+  fill: var(--azure-color);
 }

@@ -6,8 +6,19 @@
   align-items: center;
 }
 
-.image {
-  flex: 1;
+.neutral {
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: -1;
+    height: 20vh;
+    width: 20vh;
+    border-radius: 100vh;
+  }
 
   svg {
     height: 50vh;
@@ -15,8 +26,23 @@
   }
 }
 
+.good {
+  composes: neutral;
+  
+  &:before {
+    background: var(--azure-color);
+  }
+}
+
+.bad {
+  composes: neutral;
+  
+  &:before {
+    background: var(--accent-color);
+  }
+}
+
 .content {
-  flex: 1;
   font-size: 0.9em;
 
   p {
@@ -33,4 +59,13 @@
 .body {
   line-height: 1.4;
   padding-right: 8vw;
+}
+
+
+.goodHighlight {
+  color: var(--azure-color);
+}
+
+.badHighlight {
+  color: var(--accent-color);
 }

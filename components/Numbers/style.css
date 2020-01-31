@@ -1,6 +1,6 @@
 .root {
-  padding: 160px 0 130px;
-  background: linear-gradient(45deg, #E9FCFF 30%, #FDF2ED 60%);
+  padding: 15vh 0 13vh;
+  background: linear-gradient(45deg, #FAEDFF, #E4FAFF);
   clip-path: polygon(0 3vw, 100% 0, 100% calc(100% - 4vw), 0 100%);
   text-align: center;
 }
@@ -16,7 +16,18 @@
 }
 
 .blockTitle {
-  font-family: var(--font-headline);
-  font-size: 70px;
-  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 80px;
+  letter-spacing: -0.05em;
+}
+
+.logo {
+  display: block;
+  height: 25px;
+  width: 90%;
+  margin: 40px auto 0;
+
+  path {
+    fill: var(--base-body-color);
+  }
 }

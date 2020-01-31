@@ -13,12 +13,13 @@ export default function Numbers({ children }) {
   );
 }
 
-export function Block({ image, title, children }) {
+export function Block({ image, title, children, logo: Logo }) {
   return (
     <div className={s.block}>
       {image}
       <div className={s.blockTitle}>{title}</div>
       {children}
+      {Logo && <Logo preserveAspectRatio="meet" className={s.logo} />}
     </div>
   );
 }
