@@ -1,8 +1,22 @@
-.root {
+.neutral {
   background-image: linear-gradient(120deg, #f4cf58 0%, #f4cf58 100%);
   background-repeat: no-repeat;
-  background-size: 100% 0.3em;
+  background-size: 100% 0.4em;
   background-position: 0 88%;
-  transition: background-size 0.25s ease-in;
   font-weight: inherit;
+}
+
+.good {
+  composes: neutral;
+  background-image: linear-gradient(120deg, #C6FFC2 0%, #C6FFC2 100%);
+}
+
+.bad {
+  composes: neutral;
+  background-image: linear-gradient(120deg, #FAC2C2 0%, #FAC2C2 100%);
+}
+
+.warning {
+  composes: neutral;
+  background-image: linear-gradient(120deg, #FDF4C2 0%, #FDF4C2 100%);
 }

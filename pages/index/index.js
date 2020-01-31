@@ -8,6 +8,8 @@ import UseCases from 'components/UseCases';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 import PersonasPicker from 'components/PersonasPicker';
 import InterstitialTitle from 'components/InterstitialTitle';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import Result from 'components/Result';
 import Flag from 'components/Flag';
 import Bullets from 'components/Bullets';
 import Quote from 'components/Quote';
@@ -18,6 +20,7 @@ import Ill1 from 'public/images/illustrations/dato-svg-4-02.svg';
 import Ill2 from 'public/images/illustrations/dato-svg-3a-01.svg';
 import Ill3 from 'public/images/illustrations/dato-svg-5-03.svg';
 import Icon from 'public/icons/regular/exclamation-circle.svg';
+
 import styles from './style.css';
 
 function Homepage() {
@@ -124,6 +127,44 @@ function Homepage() {
           ]}
         />
       </Flag>
+
+      <TitleStripWithContent title={<>How much is this already costing you?</>}>
+        <div className={styles.grid}>
+          <Result
+            number="89%"
+            label={
+              <>
+                of <Highlight style="bad">customer loss</Highlight>
+              </>
+            }
+          >
+            <strong>Harris</strong> found 86% of consumers stop
+            interacting&#8203;/&#8203;buying from businesses if they have a bad experience.
+          </Result>
+          <Result
+            number="86%"
+            label={
+              <>
+                of buyers <Highlight style="warning">pay more</Highlight>
+              </>
+            }
+          >
+            According to <strong>Gartner</strong> 89 percent of companies plan to
+            compete primarily on the basis of CX this year.
+          </Result>
+          <Result
+            number="25%"
+            label={
+              <>
+                <Highlight style="good">in profitability</Highlight>
+              </>
+            }
+          >
+            <strong>Oracle</strong> reported that multichannel integration has the
+            ability to increase profitability by 25 percent.
+          </Result>
+        </div>
+      </TitleStripWithContent>
 
       <Numbers title="Why you should use DatoCMS">
         <NumbersBlock title="-79%">
