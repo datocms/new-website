@@ -1,6 +1,6 @@
 .footerBg {
   position: relative;
-  margin-top: 80px;
+  margin-top: 15vh;
 
   &:before {
     content: '';
@@ -22,6 +22,10 @@
   a {
     color: white;
     text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
