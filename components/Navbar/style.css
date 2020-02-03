@@ -1,7 +1,134 @@
 .root {
-  margin: 40px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  z-index: 10;
+}
+
+.placeholder {
+  height: 80px;
+}
+
+.rootHover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.innerRoot {
+  display: flex;
+  align-items: stretch;
+}
+
+.entries {
+  flex: 1;
+  display: flex;
+  padding-left: 40px;
+  position: relative;
+}
+
+.entry,
+.groupTitle {
+  padding: 25px 15px;
+  font-size: 17px;
+  position: relative;
+
+  span {
+    position: relative;
+    padding: 6px 0;
+  }
+
+  span:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--accent-color);
+    transition: width 0.2s ease-in-out;
+  }
+}
+
+.entry,
+.group {
+  &:hover {
+    span:after {
+      width: 100%;
+    }
+  }
+}
+
+.entry {
+  text-decoration: none;
+  color: var(--base-body-color);
 }
 
 .logo {
   display: block;
+}
+
+.group {
+  position: relative;
+  &:hover {
+    .groupPane {
+      pointer-events: auto;
+      opacity: 1;
+    }
+  }
+}
+
+.groupPane {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.2s ease-in-out;
+  padding: 40px;
+  pointer-events: none;
+  left: 0;
+  background: white;
+  box-shadow: 0 0.9px 2.2px rgba(0, 0, 0, 0.02),
+    0 2.2px 5.3px rgba(0, 0, 0, 0.028), 0 4.1px 10px rgba(0, 0, 0, 0.035),
+    0 7.4px 17.9px rgba(0, 0, 0, 0.042), 0 13.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 33px 80px rgba(0, 0, 0, 0.07);
+}
+
+.groupPaneCols {
+  display: flex;
+}
+
+.groupPaneCol {
+  margin-right: 50px;
+  min-width: 180px;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.groupPaneColTitle {
+  color: var(--light-body-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 10px;
+  margin-top: 25px;
+
+  &:first-child {
+    margin-top: 0px;
+  }
+}
+
+.groupPaneLinks {
+  line-height: 1.5;
+}
+
+.groupPaneLink a {
+  font-size: 16px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--base-body-color);
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

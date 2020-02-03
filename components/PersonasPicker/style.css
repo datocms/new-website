@@ -38,7 +38,7 @@
 }
 
 .personas {
-  padding: 50px;
+  padding: 40px 50px;
   border-bottom: 1px solid var(--border-color);
   &:last-child {
     border-bottom-width: 0;
@@ -47,14 +47,16 @@
 
 .personasTitle {
   font-weight: 500;
-  font-size: 30px;
-  margin-bottom: 15px;
+  font-size: 25px;
+  margin-bottom: 10px;
 }
 
 .personasBody {
   margin-bottom: 15px;
+  font-size: 0.9em;
 }
 
 .personasLink {
   font-weight: 500;
+  font-size: 0.9em;
 }

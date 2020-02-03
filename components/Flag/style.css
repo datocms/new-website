@@ -6,40 +6,37 @@
   align-items: center;
 }
 
-.neutral {
+.imageContainer {
   position: relative;
+}
 
-  &:before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: -1;
-    height: 20vh;
-    width: 20vh;
-    border-radius: 100vh;
-  }
-
+.image {
   svg {
     height: 50vh;
+    min-height: 100%;
     width: 100%;
   }
 }
 
-.good {
-  composes: neutral;
-  
-  &:before {
-    background: var(--azure-color);
-  }
+.neutralDot {
+  content: '';
+  position: absolute;
+  left: 30%;
+  top: 30%;
+  z-index: -1;
+  height: 40vh;
+  width: 40vh;
+  border-radius: 100vh;
 }
 
-.bad {
-  composes: neutral;
-  
-  &:before {
-    background: var(--accent-color);
-  }
+.goodDot {
+  composes: neutralDot;
+  background: var(--azure-color);
+}
+
+.badDot {
+  composes: neutralDot;
+  background: var(--accent-color);
 }
 
 .content {
@@ -60,7 +57,6 @@
   line-height: 1.4;
   padding-right: 8vw;
 }
-
 
 .goodHighlight {
   color: var(--azure-color);

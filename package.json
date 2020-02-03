@@ -17,12 +17,17 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
+    "@n8tb1t/use-scroll-position": "^1.0.43",
+    "@react-hook/mouse-position": "^3.0.4",
+    "@react-hook/throttle": "^1.0.12",
+    "@react-hook/window-scroll": "^1.0.7",
     "@svgr/webpack": "^5.0.0",
     "@zeit/next-css": "^1.0.1",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "apollo-link-http": "^1.5.16",
     "babel-plugin-react-css-modules": "^5.2.6",
+    "clamp": "^1.0.1",
     "classnames": "^2.2.6",
     "cssnano": "^4.1.10",
     "graphql": "^14.5.8",
@@ -35,6 +40,8 @@
     "postcss-property-lookup": "^2.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-textfit": "^1.1.0"
+    "react-spring": "^8.0.27",
+    "react-textfit": "^1.1.0",
+    "react-use-gesture": "^7.0.1"
   }
 }
