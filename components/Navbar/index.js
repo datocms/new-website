@@ -111,9 +111,7 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-              <Link href="/foo">
-                <a className={s.entry}><span>Customers</span></a>
-              </Link>
+              
               <Link href="/foo">
                 <a className={s.entry}><span>Integrations</span></a>
               </Link>

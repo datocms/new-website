@@ -1,0 +1,62 @@
+.footerBg {
+  position: relative;
+  margin-top: 80px;
+
+  &:before {
+    content: '';
+    background: #2e343f;
+    clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 130px;
+    bottom: 0;
+    z-index: -1;
+  }
+}
+
+.footerRoot {
+  color: white;
+  padding: 60px 0;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.cols {
+  display: flex;
+}
+
+.col {
+  margin-right: 50px;
+  flex: 1;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.group, .monoLink {
+  margin-bottom: 40px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.groupLinks {
+  line-height: 1.7;
+  font-size: 0.9em;
+}
+
+.groupTitle {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.monoLink {
+  font-weight: bold;
+  margin-bottom: 20px;
+}

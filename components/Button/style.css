@@ -1,11 +1,12 @@
 .root {
-  border-radius: 2px;
   background: var(--accent-color);
   color: white;
   display: inline-block;
   padding: 1em 1.5em;
   font-family: var(--font-sans);
   font-weight: bold;
+  white-space: nowrap;
+  border-radius: 3px;
 }
 
 .disabled {

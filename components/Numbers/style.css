@@ -1,7 +1,7 @@
 .root {
   padding: 15vh 0 13vh;
   background: linear-gradient(45deg, #FAEDFF, #E4FAFF);
-  clip-path: polygon(0 3vw, 100% 0, 100% calc(100% - 4vw), 0 100%);
+  clip-path: var(--clip-path);
   text-align: center;
 }
 
