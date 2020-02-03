@@ -13,6 +13,10 @@
 
 .rootHover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  .entry,
+  .groupTitle {
+    padding: 20px 15px;
+  }
 }
 
 .innerRoot {
@@ -29,9 +33,9 @@
 
 .entry,
 .groupTitle {
-  padding: 25px 15px;
+  padding: 45px 15px;
   font-size: 17px;
-  position: relative;
+  transition: padding 0.2s ease-in-out;
 
   span {
     position: relative;
