@@ -5,7 +5,8 @@ export default function InterstitialTitle({ style = "good", icon: Icon, bullets 
     <div className={styles.root}>
       {bullets.map(bullet => (
         <div key={bullet} className={styles.bullet}>
-          <Icon className={styles[style]} /> {bullet}
+          <div className={styles[style]}><Icon  /></div>
+          <span>{bullet}</span>
         </div>
       ))}
     </div>

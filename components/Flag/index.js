@@ -28,7 +28,7 @@ export default function Flag({ style = "neutral", title, image: Image, children 
       <div ref={elementRef} className={styles.root}>
         <div className={styles.imageContainer}>
           <animated.div className={styles[`${style}Dot`]} style={dotAnimStyle} />
-          <animated.div className={styles.image}><Image preserveAspectRatio="xMinyMin meet" /></animated.div>
+          <animated.div className={styles.image}><Image /></animated.div>
         </div>
         <div className={styles.content}>
           <div className={styles.title}>{title}</div>

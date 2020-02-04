@@ -1,12 +1,16 @@
 .bullet {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   font-weight: bold;
+
+  span {
+    flex: 1;
+  }
 }
 
 .icon {
-  margin-right: 1em;
+  width: 40px;
 }
 
 .bad {

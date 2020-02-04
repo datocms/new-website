@@ -1,0 +1,25 @@
+.background {
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 50px 0px 0px;
+  opacity: 0;
+  animation: 400ms ease-in 1.5s 1 normal forwards running fade-jsx-339728620;
+}
+
+.backgroundInner {
+  width: 2800px;
+  height: 500px;
+  position: relative;
+  left: 50px;
+}
+
+.backgroundImage {
+  position: absolute;
+  object-position: center center;
+  will-change: transform, opacity;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0px 0px -75px;
+  border-radius: 50%;
+}
