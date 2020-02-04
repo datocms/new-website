@@ -1,7 +1,7 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import PersonasPicker from 'components/PersonasPicker';
+import OtherPersonasPicker from 'components/OtherPersonasPicker';
 import TitleIllustrationStripWithContent from 'components/TitleIllustrationStripWithContent';
 import { withDato } from 'lib/datocms';
 import Result from 'components/Result';
@@ -9,6 +9,7 @@ import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
 import IntegrationsBanner from 'components/IntegrationsBanner';
+import Quote from 'components/Quote';
 
 import Ill1 from 'public/images/illustrations/dato-svg-4-02.svg';
 import Ill2 from 'public/images/illustrations/dato-svg-3a-01.svg';
@@ -27,11 +28,11 @@ import SuccessIcon from 'public/icons/regular/check-circle.svg';
 
 import styles from './style.css';
 
-function Homepage() {
+function DigitalMarketers() {
   return (
     <Layout>
       <Hero
-        over="DatoCMS for digital marketers"
+        over="DatoCMS for Digital Marketers"
         title={
           <>
             Win the <Highlight>omnichannel</Highlight> marketing challenge
@@ -118,6 +119,12 @@ function Homepage() {
         />
       </Flag>
 
+      <IntegrationsBanner title={<>Easily connect any MarTech&nbsp;tool</>}>
+        Easily integrate your CMS with your preferred marketing technologies,
+        Marketo, Salesforce, Google Analytics, SEMrush, Brightcove, Watson, etc.
+        so you can get valuable insights to make meaningful business decisions.
+      </IntegrationsBanner>
+
       <Flag
         style="good"
         title={
@@ -143,6 +150,15 @@ function Homepage() {
           ]}
         />
       </Flag>
+
+      <Quote
+        quote={
+          <>
+            With DatoCMS we made the impossibile: we launched a successful omnichannel campaign in <Highlight>less than a month</Highlight>.
+          </>
+        }
+        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
+      />
 
       <Flag
         style="good"
@@ -198,15 +214,21 @@ function Homepage() {
         />
       </Flag>
 
-      <IntegrationsBanner title={<>Easily connect any MarTech&nbsp;tool</>}>
-        Easily integrate your CMS with your preferred marketing technologies,
-        Marketo, Salesforce, Google Analytics, SEMrush, Brightcove, Watson, etc.
-        so you can get valuable insights to make meaningful business decisions.
-      </IntegrationsBanner>
+      <Quote
+        quote={
+          <>
+            With DatoCMS we made the impossibile: we launched a successful omnichannel campaign in <Highlight>less than a month</Highlight>.
+          </>
+        }
+        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
+      />
 
-      <PersonasPicker />
+<OtherPersonasPicker
+        title="Not just for digital marketers"
+        currentPersonas="digital-marketers"
+      />
     </Layout>
   );
 }
 
-export default withDato(Homepage);
+export default withDato(DigitalMarketers);

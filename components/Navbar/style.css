@@ -69,7 +69,8 @@
 }
 
 .logo {
-  display: block;
+  display: flex;
+  align-items: stretch;
 }
 
 .group {

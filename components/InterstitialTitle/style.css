@@ -73,7 +73,7 @@
   height: 25vh;
   display: flex;
   font-size: 50px;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .kicker {

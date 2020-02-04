@@ -1,0 +1,50 @@
+.root {
+  margin: 140px 0;
+}
+
+.intro {
+  margin-bottom: 70px;
+  text-align: center;
+}
+
+.introTitle {
+  font-family: var(--font-headline);
+  line-height: 1.2;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+}
+
+.personas {
+  display: block;
+  color: var(--base-body-color);
+  text-decoration: none;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  padding: 40px 50px;
+  border-bottom: 1px solid var(--border-color);
+  &:last-child {
+    border-bottom-width: 0;
+  }
+}
+
+.personasTitle {
+  font-weight: 500;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.personasBody {
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
+
+.personasLink {
+  font-weight: 500;
+  font-size: 0.9em;
+}

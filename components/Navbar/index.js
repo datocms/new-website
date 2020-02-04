@@ -14,7 +14,11 @@ export default function Navbar() {
       <div className={classnames(s.root, { [s.rootHover]: scrollY > 10 })}>
         <Wrapper>
           <div className={s.innerRoot}>
-            <FullLogo className={s.logo} width={110} height="auto" />
+            <Link href="/">
+              <a className={s.logo}>
+                <FullLogo width={110} height="auto" />
+              </a>
+            </Link>
             <div className={s.entries}>
               <div className={s.group}>
                 <div className={s.groupTitle}><span>Why DatoCMS</span></div>
@@ -24,17 +28,17 @@ export default function Navbar() {
                       <div className={s.groupPaneColTitle}>Team</div>
                       <div className={s.groupPaneLinks}>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/team/developers">
                             <a>For developers</a>
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/team/digital-marketers">
                             <a>For digital marketers</a>
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/team/content-creators">
                             <a>For content creators</a>
                           </Link>
                         </div>

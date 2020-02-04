@@ -26,11 +26,3 @@
   text-align: center;
   margin: 40px auto 70px;
 }
-
-.content {
-  box-shadow: var(--box-shadow);
-  border-radius: 5px;
-  padding: 70px;
-  background: white;
-  margin: 40px;
-}

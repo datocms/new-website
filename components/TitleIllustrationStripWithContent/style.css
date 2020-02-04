@@ -9,8 +9,8 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 30vh;
-    height: 70%;
+    top: 20vh;
+    height: 75%;
     z-index: -1;
   }
 }
@@ -26,7 +26,6 @@
 
 .body {
   width: 60%;
-  padding-bottom: 10vh;
 }
 
 .title {
@@ -51,11 +50,4 @@
     width: 100%;
     height: 100%;
   }
-}
-
-.content {
-  box-shadow: var(--box-shadow);
-  border-radius: 5px;
-  padding: 70px;
-  background: white;
 }

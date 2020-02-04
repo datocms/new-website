@@ -5,7 +5,11 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { useRef, useState } from 'react';
 import clamp from 'clamp';
 
-export default function Flag({ style = "neutral", title, image: Image, children }) {
+export default function Flag({ style = "neutral", title, subtitle, image: Image, children }) {
+  const [size] = useState(Math.floor(Math.random() * 30) + 20);
+  const [x] = useState(Math.floor(Math.random() * 40) + 20);
+  const [y] = useState(Math.floor(Math.random() * 40) + 20);
+
   const elementRef = useRef(null);
 
   const [dotAnimStyle, setDotAnimStyle] = useSpring(() => ({
@@ -27,11 +31,21 @@ export default function Flag({ style = "neutral", title, image: Image, children 
     <Wrapper>
       <div ref={elementRef} className={styles.root}>
         <div className={styles.imageContainer}>
-          <animated.div className={styles[`${style}Dot`]} style={dotAnimStyle} />
+          <animated.div 
+            className={styles[`${style}Dot`]} 
+            style={{ 
+              ...dotAnimStyle, 
+              left: `${x}%`,
+              top: `${y}%`,
+              height: `${size}vh`,
+              width: `${size}vh`,
+            }} 
+          />
           <animated.div className={styles.image}><Image /></animated.div>
         </div>
         <div className={styles.content}>
           <div className={styles.title}>{title}</div>
+          {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
           <div className={styles.body}>{children}</div>
         </div>
       </div>

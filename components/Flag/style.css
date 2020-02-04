@@ -21,11 +21,7 @@
 .neutralDot {
   content: '';
   position: absolute;
-  left: 30%;
-  top: 30%;
   z-index: -1;
-  height: 40vh;
-  width: 40vh;
   border-radius: 100vh;
 }
 
@@ -43,19 +39,26 @@
   font-size: 0.9em;
 
   p {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 }
 
 .title {
-  font-size: 40px;
+  font-size: 45px;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 .body {
   line-height: 1.4;
-  padding-right: 8vw;
+  padding-right: 50px;
 }
 
 .goodHighlight {
