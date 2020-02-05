@@ -111,18 +111,20 @@ export default function CdnMap() {
             </div>
           )}
           {datacenters &&
-            Object.values(groupBy(datacenters, x => x.name.split(/\-/)[0]))
-              .map(dcs => dcs[0])
+            datacenters
               .map(dc => (
                 <div
                   key={dc.code}
                   className={cn(s.datacenter, {
                     [s.activePoint]: ping && ping.datacenter === dc.code,
                   })}
-                  style={convLatLongToStyle(
-                    dc.coordinates.latitude,
-                    dc.coordinates.longitude,
-                  )}
+                  style={{
+                    ...convLatLongToStyle(
+                      dc.coordinates.latitude,
+                      dc.coordinates.longitude,
+                    ),
+                    zIndex: ping && ping.datacenter == dc.code ? 100 : 1,
+                  }}
                   onClick={() => {
                     setAndScroll(dc.code);
                   }}
