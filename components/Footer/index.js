@@ -17,28 +17,40 @@ export default function Footer() {
                     <div className={s.groupTitle}>Team</div>
                     <div className={s.groupLinks}>
                       <div className={s.groupLink}>
-                        <Link href="/">For digital marketers</Link>
+                        <Link href="/">
+                          <a>For digital marketers</a>
+                        </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">For content creators</Link>
+                        <Link href="/">
+                          <a>For content creators</a>
+                        </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">For developers</Link>
+                        <Link href="/">
+                          <a>For developers</a>
+                        </Link>
                       </div>
                     </div>
                   </div>
 
                   <div className={s.monoLink}>
-                    <Link href="/">Pricing</Link>
+                    <Link href="/">
+                      <a>Pricing</a>
+                    </Link>
                   </div>
 
                   <div className={s.monoLink}>
-                    <Link href="/">DatoCMS for Enterprise</Link>
+                    <Link href="/">
+                      <a>DatoCMS for Enterprise</a>
+                    </Link>
                   </div>
                 </div>
                 <div className={s.col}>
-                <div className={s.monoLink}>
-                    <Link href="/">Success stories</Link>
+                  <div className={s.monoLink}>
+                    <Link href="/">
+                      <a>Success stories</a>
+                    </Link>
                   </div>
                   <div className={s.group}>
                     <div className={s.groupTitle}>Features</div>
@@ -156,9 +168,7 @@ export default function Footer() {
         </div>
       </div>
       <div className={s.finalFooter}>
-        <Wrapper>
-          Ciao
-        </Wrapper>
+        <Wrapper>Ciao</Wrapper>
       </div>
     </>
   );

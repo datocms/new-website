@@ -1,5 +1,6 @@
 const withCSS = require("@zeit/next-css");
 const path = require('path');
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 const svgTemplate = (
   { template },
@@ -49,6 +50,13 @@ module.exports = withCSS({
       ]
     });
 
+    config.plugins.push(
+      new FilterWarningsPlugin({
+        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/, 
+      })
+    );
     return config;
   }
 });
+
+ignoreOrder: false
