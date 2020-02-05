@@ -56,7 +56,7 @@ export default function Navbar() {
                       <div className={s.groupPaneColTitle}>Features</div>
                       <div className={s.groupPaneLinks}>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/features/worldwide-cdn">
                             <a>Worldwide CDN</a>
                           </Link>
                         </div>

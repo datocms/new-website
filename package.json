@@ -25,10 +25,13 @@
     "clamp": "^1.0.1",
     "classnames": "^2.2.6",
     "cssnano": "^4.1.10",
+    "dotenv-load": "^2.0.0",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.2",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.2.1",
+    "next-env": "^1.1.0",
+    "node-fetch": "^2.6.0",
     "postcss-advanced-variables": "^3.0.0",
     "postcss-nested": "^4.2.1",
     "postcss-preset-env": "^6.7.0",
@@ -39,9 +42,12 @@
     "react-hook-form": "^4.8.2",
     "react-spring": "^8.0.27",
     "react-textfit": "^1.1.0",
-    "react-use-gesture": "^7.0.2"
+    "react-use-gesture": "^7.0.2",
+    "swr": "^0.1.16",
+    "unfetch": "^4.1.0"
   },
   "devDependencies": {
+    "now": "^16.7.3",
     "webpack-filter-warnings-plugin": "^1.2.1"
   }
 }

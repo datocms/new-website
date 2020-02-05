@@ -1,0 +1,5 @@
+{
+  "env": {
+    "FASTLY_API_KEY": "@fastly_api_key"
+  }
+}

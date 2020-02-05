@@ -1,6 +1,12 @@
 const withCSS = require("@zeit/next-css");
+const nextEnv = require('next-env');
+const dotenvLoad = require('dotenv-load');
 const path = require('path');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+
+dotenvLoad();
+
+const withNextEnv = nextEnv();
 
 const svgTemplate = (
   { template },
@@ -13,7 +19,7 @@ const svgTemplate = (
   `;
 };
 
-module.exports = withCSS({
+module.exports = withNextEnv(withCSS({
   cssModules: true,
   cssLoaderOptions: {
     importLoaders: 1,
@@ -57,6 +63,4 @@ module.exports = withCSS({
     );
     return config;
   }
-});
-
-ignoreOrder: false
+}));
