@@ -12,18 +12,8 @@ import IntegrationsBanner from 'components/IntegrationsBanner';
 import Quote from 'components/Quote';
 
 import Ill1 from 'public/images/illustrations/dato-svg-4-02.svg';
-import Ill2 from 'public/images/illustrations/dato-svg-3a-01.svg';
-import Ill3 from 'public/images/illustrations/dato-svg-5-03.svg';
-
 import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 import Ill5 from 'public/images/illustrations/dato-svg-6-04.svg';
-import Ill6 from 'public/images/illustrations/dato-svg-8-02.svg';
-
-import Nike from 'public/images/clients/nike.svg';
-import Arduino from 'public/images/clients/arduino.svg';
-import Linkedin from 'public/images/clients/linkedin.svg';
-
-import WarningIcon from 'public/icons/regular/exclamation-circle.svg';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
 
 import styles from './style.css';

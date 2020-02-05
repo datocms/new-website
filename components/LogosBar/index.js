@@ -16,7 +16,7 @@ export const QUERY = gql`
   }
 `;
 
-export default function LogosBar({ limit = 6 }) {
+export default function LogosBar({ title, limit = 6 }) {
   const { loading, error, data } = useQuery(QUERY, { variables: { limit } });
 
   if (loading || error) {
@@ -27,6 +27,7 @@ export default function LogosBar({ limit = 6 }) {
 
   return (
     <Wrapper>
+      {title && <div className={s.title}>{title}</div>}
       <div className={s.root}>
         {allCustomers.map(customer => (
           <div className={s.logo} key={customer.id}>

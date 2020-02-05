@@ -46,7 +46,7 @@ export default function Navbar() {
                       <div className={s.groupPaneColTitle}>Enterprise</div>
                       <div className={s.groupPaneLinks}>
                         <div className={s.groupPaneLink}>
-                          <Link href="/foo">
+                          <Link href="/enterprise">
                             <a>DatoCMS for Enterprise</a>
                           </Link>
                         </div>

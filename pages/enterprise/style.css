@@ -1,0 +1,50 @@
+.beforeAfter {
+  margin: 40px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr 90px 1fr;
+  grid-column-gap: 30px;
+  text-align: center;
+}
+
+.beforeAfterCol {
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  padding: 50px;
+  background: white;
+}
+
+.beforeAfterColTitle {
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.beforeAfterPoint {
+  margin: 30px 0;
+  height: 5em;
+  font-size: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.beforeAfterInterstitial {
+  padding-top: 4.5em;
+  text-align: center;
+}
+
+.boxPros {
+  display: flex;
+  justify-content: flex-end;
+}
+.boxProsInner {
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  padding: 50px;
+  background: white;
+}

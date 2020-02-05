@@ -7,6 +7,8 @@
   font-weight: bold;
   white-space: nowrap;
   border-radius: 3px;
+  border: 0;
+  font-size: inherit;
 }
 
 .disabled {

@@ -1,13 +1,30 @@
 .root {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
 .logo {
-  margin: 0 40px;
+  width: 25%;
+  margin-bottom: 40px;
+  text-align: center;
 
   img {
     height: 30px;
     filter:  saturate(20%) hue-rotate(40deg) brightness(100%);
+  }
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--light-body-color);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 auto 50px;
+  max-width: 700px;
+
+  strong {
+    color: #747b8f;
   }
 }
