@@ -1,34 +1,37 @@
 .map {
   position: relative;
+
   svg {
     width: 100%;
   }
 }
 
-.point {
+.datacenter {
   position: absolute;
-  animation-name: bounce;
+  animation-name: appear;
   animation-fill-mode: both;
   animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
   animation-duration: 1s;
   opacity: 0;
 
-  div {
-    width: 16px;
-    height: 16px;
+  .pin {
+    width: 12px;
+    height: 12px;
     border-radius: 50% 50% 50% 0;
     background: var(--azure-color);
     position: absolute;
     transform: rotate(-45deg);
     left: 50%;
     top: 50%;
-    margin: -21px 0 0 -8px;
+    margin: -14px 0 0 -6px;
+    z-index: -1;
+    cursor: pointer;
 
     &:after {
       content: '';
-      width: 6px;
-      height: 6px;
-      margin: 5px 0 0 5px;
+      width: 4px;
+      height: 4px;
+      margin: 4px 0 0 4px;
       background: white;
       position: absolute;
       border-radius: 50%;
@@ -38,8 +41,8 @@
   &.activePoint {
     animation: jump 2s cubic-bezier(0.36, 0.07, 0.19, 0.97) both infinite;
     opacity: 1;
-    
-    div {
+
+    .pin {
       background: var(--accent-color);
     }
   }
@@ -47,6 +50,7 @@
 
 .viewer {
   position: absolute;
+  pointer-events: none;
 
   .pin {
     height: 14px;
@@ -74,33 +78,115 @@
     left: -25px;
     top: -25px;
     transform-origin: center center;
-    z-index: 1;
+    z-index: 0;
   }
 }
 
-@keyframes bounce {
+.list {
+  overflow: hidden;
+}
+
+.listInner {
+  width: 900000px;
+  display: flex;
+  align-items: center;
+}
+
+.itemWrapper {
+  padding: 20px 15px 60px;
+  width: 350px;
+}
+
+.item {
+  padding: 30px;
+  border-radius: 5px;
+  padding: 25px;
+  background: white;
+  box-shadow:
+  0 1.2px 1.1px rgba(0, 0, 0, 0.014),
+  0 3.3px 3.1px rgba(0, 0, 0, 0.02),
+  0 7.8px 7.5px rgba(0, 0, 0, 0.026),
+  0 26px 25px rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.activeItem {
+  top: -20px;
+  transform: scale(1.1);
+  box-shadow:
+  0 1.2px 1.2px rgba(0, 0, 0, 0.022),
+  0 2.8px 2.9px rgba(0, 0, 0, 0.032),
+  0 5.3px 5.5px rgba(0, 0, 0, 0.04),
+  0 9.4px 9.8px rgba(0, 0, 0, 0.048),
+  0 17.5px 18.4px rgba(0, 0, 0, 0.058),
+  0 42px 44px rgba(0, 0, 0, 0.08);
+;
+}
+
+.nearestItem {
+  position: relative;
+
+  &:before {
+    content: '';
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-name: ripple;
+    animation-timing-function: ease-out;
+    background: red;
+    border-radius: 50%;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    transform-origin: center center;
+    z-index: 0;
+  }
+}
+
+.code {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.city {
+  color: var(--light-body-color);
+}
+
+.infos {
+  display: flex;
+  margin-top: 30px;
+}
+
+.info {
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid var(--border-color);
+
+  &:last-child {
+    border: 0;
+  }
+}
+
+.infoTitle {
+  color: var(--azure-color);
+  margin-bottom: 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+@keyframes appear {
   0% {
     opacity: 0;
-    transform: scale(1, 1) translateY(0);
-  }
-  10% {
-    transform: scale(1.1, 0.9) translateY(0);
-  }
-  30% {
-    transform: scale(0.9, 1.1) translateY(-100px);
-  }
-  50% {
-    transform: scale(1.05, 0.95) translateY(0);
-  }
-  57% {
-    transform: scale(1, 1) translateY(-7px);
-  }
-  64% {
-    transform: scale(1, 1) translateY(0);
+    transform: translateY(-15px);
   }
   100% {
     opacity: 1;
-    transform: scale(1, 1) translateY(0);
+    transform: translateY(0);
   }
 }
 
