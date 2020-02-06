@@ -78,7 +78,7 @@ function Param({ param }) {
 
   return (
     <span>
-      {key}=
+      <span className={s.paramName}>{key}</span><span className={s.paramEq}>=</span>
       <span className={s.paramValueContainer}>
         <ReactCSSTransitionGroup
           transitionName={{

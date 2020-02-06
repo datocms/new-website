@@ -86,6 +86,20 @@
   vertical-align: middle;
 }
 
+.paramName {
+  color: #204588;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.paramEq {
+  color: var(--light-body-color);
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
 .paramValue {
   position: absolute;
   transition: all 250ms ease-in-out;
