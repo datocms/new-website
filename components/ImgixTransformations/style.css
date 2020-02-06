@@ -8,7 +8,7 @@
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  min-width: 200px;
+  min-width: 400px;
   box-sizing: border-box;
   overflow: hidden;
   box-shadow: var(--box-shadow);
@@ -20,26 +20,21 @@
 .imageFrame {
   overflow: hidden;
   margin: 0 auto;
+  transform: translateX(-10%);
   position: relative;
   transition: all 0.2s 0.8s ease-in-out;
   box-shadow: var(--box-shadow);
   border-radius: 5px;
 }
 
-.imageInner {
-  transition: all 0.2s 0.8s ease-in-out;
-  position: relative;
-  overflow: hidden;
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: width 0.2s 0.8s ease-in-out, height 0.2s 0.8s ease-in-out, transform 0.2s 0.8s ease-in-out, opacity 250ms ease-in-out;
   transform-origin: 0 0;
-
-  img {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    transition: all 250ms ease-in-out;
-  }
 }
 
 .paramContainer {
@@ -81,7 +76,7 @@
 .paramValueContainer {
   display: inline-block;
   position: relative;
-  width: 200px;
+  width: 150px;
   height: 30px;
   vertical-align: middle;
 }

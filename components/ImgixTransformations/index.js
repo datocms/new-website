@@ -218,38 +218,38 @@ const steps = [
   },
 ];
 
-const stepTime = 1500;
+const stepTime = 2000;
 const width = 1200;
 const height = 757;
 const ar = width / height;
 const url = 'https://assets.imgix.net/hp/snowshoe.jpg?w=1000';
-
+const maxWidth = '60vw';
 export default function InterstitialTitle() {
   const ref = useRef([]);
 
   const [image, setImage] = useState(url);
   const [params, setParams] = useState([]);
   const [result, setResult] = useState({
-    width: `calc(50vw * ${width})`,
-    height: `calc(50vw / ${ar} * ${width})`,
+    width: `calc(${maxWidth} * ${width})`,
+    height: `calc(${maxWidth} / ${ar} * ${width})`,
     transform: 'scale(1)',
   });
 
   const reset = useCallback(() => {
     ref.current.map(clearTimeout);
     for (let i = 0; i < steps.length; i++) {
-
       const colorTransform = steps[i].transforms.find(t =>
         t.match(/(sepia|duotone|blur|htn)/),
       );
 
       const stepImage = url + (colorTransform ? `&${colorTransform}` : '');
 
-      new Image(stepImage);
+      const img = new Image();
+      img.src = stepImage;
 
       ref.current.push(
         setTimeout(() => {
-          setTimeout(() => setImage(stepImage), 700);
+          setImage(stepImage);
           setParams(steps[i].transforms);
           setResult(steps[i].result);
         }, i * stepTime),
@@ -268,31 +268,31 @@ export default function InterstitialTitle() {
         <div
           className={s.imageFrame}
           style={{
-            width: `calc(50vw * ${result.width})`,
-            height: `calc(50vw / ${ar} * ${result.height})`,
+            width: `calc(${maxWidth} * ${result.width})`,
+            height: `calc(${maxWidth} / ${ar} * ${result.height})`,
           }}
         >
-          <div
-            className={s.imageInner}
-            style={{
-              width: `calc(50vw)`,
-              height: `calc(50vw / ${ar})`,
-              transform: result.transform,
+          <ReactCSSTransitionGroup
+            transitionName={{
+              enter: s.imageAnimationEnter,
+              enterActive: s.imageAnimationEnterActive,
+              leave: s.imageAnimationLeave,
+              leaveActive: s.imageAnimationLeaveActive,
             }}
+            transitionEnterTimeout={250}
+            transitionLeaveTimeout={250}
           >
-            <ReactCSSTransitionGroup
-              transitionName={{
-                enter: s.imageAnimationEnter,
-                enterActive: s.imageAnimationEnterActive,
-                leave: s.imageAnimationLeave,
-                leaveActive: s.imageAnimationLeaveActive,
+            <img
+              key={image}
+              src={image}
+              className={s.image}
+              style={{
+                width: `calc(${maxWidth})`,
+                height: `calc(${maxWidth} / ${ar})`,
+                transform: result.transform,
               }}
-              transitionEnterTimeout={250}
-              transitionLeaveTimeout={250}
-            >
-              <img key={image} src={image} />
-            </ReactCSSTransitionGroup>
-          </div>
+            />
+          </ReactCSSTransitionGroup>
         </div>
 
         <div className={s.params}>
