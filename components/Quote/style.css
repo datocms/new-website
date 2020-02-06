@@ -1,8 +1,9 @@
 .root {
-  text-align: center;
-  margin: 20vh 0;
+  text-align: left;
   padding-top: 70px;
   position: relative;
+  max-width: 800px;
+  margin: 20vh auto;
 
   &:before {
     position: absolute;
@@ -19,10 +20,10 @@
 
 .quote {
   font-family: var(--font-serif);
-  font-size: 50px;
+  font-size: 40px;
   font-style: italic;
-  max-width: 800px;
-  margin: 0 auto 40px;
+  margin-bottom: 40px;
+  line-height: 1.2;
 
   &:before {
     content: '\201C'
