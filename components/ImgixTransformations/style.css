@@ -33,8 +33,13 @@
   left: 0;
   bottom: 0;
   right: 0;
-  transition: width 0.2s 0.8s ease-in-out, height 0.2s 0.8s ease-in-out, transform 0.2s 0.8s ease-in-out, opacity 250ms ease-in-out;
+  transition: all 0.2s 0.8s ease-in-out;
   transform-origin: 0 0;
+  overflow: hidden;
+}
+
+.ellipseFrame {
+  border-radius: 50%;
 }
 
 .paramContainer {
