@@ -108,8 +108,6 @@
   color: var(--light-body-color);
 }
 
-
-
 .paramValue {
   position: absolute;
   transition: all 250ms 800ms ease-in-out;

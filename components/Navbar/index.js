@@ -66,7 +66,7 @@ export default function Navbar() {
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/features/video-streaming-encoding">
                             <a>Video streaming/encoding</a>
                           </Link>
                         </div>

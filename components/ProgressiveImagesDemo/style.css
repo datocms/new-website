@@ -15,7 +15,6 @@
 }
 
 .window {
-  
   box-shadow: var(--box-shadow);
   background: #e2e3e5;
   border-radius: 3px 3px 0 0;

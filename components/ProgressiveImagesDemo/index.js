@@ -142,7 +142,13 @@ export default function ProgressiveImagesDemo() {
     next();
   }, 7000);
 
-  useEffect(() => void next(), []);
+  useEffect(() => {
+    images.forEach(image => {
+      const i = new Image();
+      i.src = image.url;
+    });
+    next();
+  }, []);
 
   return (
     <div className={s.root}>

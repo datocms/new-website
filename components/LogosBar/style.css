@@ -11,7 +11,7 @@
 
   img {
     height: 30px;
-    filter:  saturate(20%) hue-rotate(40deg) brightness(100%);
+    filter: saturate(20%) hue-rotate(40deg) brightness(100%);
   }
 }
 

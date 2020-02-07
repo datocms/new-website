@@ -5,6 +5,8 @@ import ImgixTransformations from 'components/ImgixTransformations';
 import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Quote from 'components/Quote';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 
 import styles from './style.css';
 
@@ -41,10 +43,29 @@ function ImagesApi() {
         <ImgixTransformations />
       </TitleStripWithContent>
 
+      <Flag
+        style="good"
+        title={
+          <>
+            Automatically serve{' '}
+            <FlagHighlight>the&nbsp;best&nbsp;output&nbsp;format</FlagHighlight>
+          </>
+        }
+        image={Ill4}
+      >
+        <p>
+          Thanks to automatic Content Negotiation, you are able to serve WebP
+          (and other modern formats as we add them) to browsers that support
+          them without any additional work, reducing the average file size by
+          50%.
+        </p>
+      </Flag>
+
       <Quote
         quote={
           <>
-            With DatoCMS we made the impossibile: we launched a successful omnichannel campaign in <Highlight>less than a month</Highlight>.
+            With DatoCMS we made the impossibile: we launched a successful
+            omnichannel campaign in <Highlight>less than a month</Highlight>.
           </>
         }
         author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
@@ -67,11 +88,28 @@ function ImagesApi() {
       <Quote
         quote={
           <>
-            With DatoCMS we made the impossibile: we launched a successful omnichannel campaign in <Highlight>less than a month</Highlight>.
+            With DatoCMS we made the impossibile: we launched a successful
+            omnichannel campaign in <Highlight>less than a month</Highlight>.
           </>
         }
         author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
       />
+
+      <Flag
+        style="good"
+        title={
+          <>
+            All the <FlagHighlight>metadata</FlagHighlight> you need
+          </>
+        }
+        image={Ill4}
+      >
+        <p>
+          Dominant colors, EXIF data, aspect ratio, filesize, copyright
+          information, geolocation. Every possible information on your images is
+          stored in DatoCMS and ready to be used in your websites.
+        </p>
+      </Flag>
     </Layout>
   );
 }
