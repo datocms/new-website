@@ -61,6 +61,11 @@ export default function Footer() {
                         </Link>
                       </div>
                       <div className={s.groupLink}>
+                          <Link href="/features/graphql-content-api">
+                            <a>GraphQL Content API</a>
+                          </Link>
+                        </div>
+                      <div className={s.groupLink}>
                         <Link href="/">
                           <a>Images API</a>
                         </Link>

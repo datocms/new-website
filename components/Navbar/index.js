@@ -61,6 +61,11 @@ export default function Navbar() {
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
+                          <Link href="/features/graphql-content-api">
+                            <a>GraphQL Content API</a>
+                          </Link>
+                        </div>
+                        <div className={s.groupPaneLink}>
                           <Link href="/features/images-api">
                             <a>Images API</a>
                           </Link>
