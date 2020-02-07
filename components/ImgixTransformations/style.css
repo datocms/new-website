@@ -3,26 +3,13 @@
   position: relative;
 }
 
-.params {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  min-width: 400px;
-  box-sizing: border-box;
-  overflow: hidden;
-  box-shadow: var(--box-shadow);
-  border-radius: 5px;
-  padding: 25px;
-  background: white;
-}
-
 .imageFrame {
   overflow: hidden;
-  margin: 0 auto;
-  transform: translateX(-10%);
-  position: relative;
-  transition: all 0.2s 0.8s ease-in-out;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transition: all 0.2s 1000ms ease-in-out;
   box-shadow: var(--box-shadow);
   border-radius: 5px;
 }
@@ -33,77 +20,101 @@
   left: 0;
   bottom: 0;
   right: 0;
-  transition: all 0.2s 0.8s ease-in-out;
   transform-origin: 0 0;
   overflow: hidden;
+  transition: all 0.2s 1000ms ease-in-out;
+
+  img {
+    display: block;
+  }
 }
 
 .ellipseFrame {
   border-radius: 50%;
 }
 
+.params {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  width: 100%;
+  max-width: 950px;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  padding: 15px;
+  background: white;
+  height: 60px;
+}
+
+.paramsInner {
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: 15px;
+  height: 30px;
+  /* animation: hideUrl 0.5s 4s ease-in-out;
+  animation-fill-mode: both; */
+}
+
+@keyframes hideUrl {
+  0% { left: 15px; }
+  100% { left: -250px; }
+}
+
 .paramContainer {
   overflow: hidden;
-  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-size: 20px;
-  font-weight: 800;
   will-change: transform, opacity, height;
   white-space: nowrap;
   cursor: pointer;
   line-height: 30px;
-  font-family: var(--font-mono);
-  transition: all 250ms ease-in-out;
+  width: var(--content-length)
 }
 
-.paramAnimationEnter {
-  opacity: 0.01;
-  height: 0px;
-}
-
-.paramAnimationEnterActive {
-  opacity: 1;
-  height: 30px;
-}
-
-.paramAnimationLeave {
-  opacity: 1;
-  height: 30px;
-}
-
-.paramAnimationLeaveActive {
-  opacity: 0.01;
-  height: 0px;
+.param {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .paramValueContainer {
-  display: inline-block;
   position: relative;
-  width: 150px;
   height: 30px;
-  vertical-align: middle;
 }
 
 .paramName {
   color: #204588;
-  display: inline-block;
-  vertical-align: middle;
 }
 
 .paramEq {
   color: var(--light-body-color);
-  display: inline-block;
-  vertical-align: middle;
   margin-left: 2px;
   margin-right: 2px;
 }
 
+.paramUrl {
+  color: var(--light-body-color);
+}
+
+
+
 .paramValue {
   position: absolute;
-  transition: all 250ms ease-in-out;
+  transition: all 250ms 800ms ease-in-out;
 }
+
 
 .valueAnimationEnter {
   opacity: 0.01;
@@ -125,8 +136,41 @@
   top: 30px;
 }
 
+
+
+
+.paramAnimationEnter {
+  transition: all 400ms 500ms ease-in-out;
+  opacity: 0.01;
+  width: 0
+}
+
+.paramAnimationEnterActive {
+  opacity: 1;
+  width: var(--content-length)
+}
+
+.paramAnimationLeave {
+  transition: all 400ms ease-in-out;
+  opacity: 1;
+  width: var(--content-length)
+}
+
+.paramAnimationLeaveActive {
+  transition: all 250ms ease-in-out;
+  opacity: 0.01;
+  width: 0px;
+}
+
+
+
+
+
+
+
 .imageAnimationEnter {
   opacity: 0.01;
+  transition: all 300ms 1000ms ease-in-out;
 }
 
 .imageAnimationEnterActive {
@@ -135,6 +179,7 @@
 
 .imageAnimationLeave {
   opacity: 1;
+  transition: all 300ms 1500ms ease-in-out;
 }
 
 .imageAnimationLeaveActive {

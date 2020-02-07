@@ -73,260 +73,174 @@ import s from './style.css';
 //   puts JSON.pretty_generate(res)
 // end
 
-function Param({ param }) {
+function Param({ param, isFirst }) {
   const [key, value] = param.split(/=/);
 
   return (
-    <span>
-      <span className={s.paramName}>{key}</span><span className={s.paramEq}>=</span>
-      <span className={s.paramValueContainer}>
-        <ReactCSSTransitionGroup
-          transitionName={{
-            enter: s.valueAnimationEnter,
-            enterActive: s.valueAnimationEnterActive,
-            leave: s.valueAnimationLeave,
-            leaveActive: s.valueAnimationLeaveActive,
-          }}
-          transitionEnterTimeout={250}
-          transitionLeaveTimeout={250}
-        >
-          <span key={value} className={s.paramValue}>
-            {value}
-          </span>
-        </ReactCSSTransitionGroup>
-      </span>
+    <span className={s.param}>
+      <span className={s.paramEq}>{isFirst ? '?' : '&'}</span>
+      <span className={s.paramName}>{key}</span>
+      <span className={s.paramEq}>=</span>
+      <ReactCSSTransitionGroup
+        className={s.paramValueContainer}
+        style={{ width: `${value.length}ch` }}
+        transitionName={{
+          enter: s.valueAnimationEnter,
+          enterActive: s.valueAnimationEnterActive,
+          leave: s.valueAnimationLeave,
+          leaveActive: s.valueAnimationLeaveActive,
+        }}
+        transitionEnterTimeout={1200}
+        transitionLeaveTimeout={1200}
+      >
+        <span key={value} className={s.paramValue}>
+          {value}
+        </span>
+      </ReactCSSTransitionGroup>
     </span>
   );
 }
 
 const steps = [
   {
-    "transforms": [
-      "auto=compress"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['fit=clamp'],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=clamp"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['fit=clamp', 'w=900'],
+    result: {
+      width: 0.9,
+      height: 0.9,
+      transform: 'scaleX(0.9) scaleY(0.9) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=clamp",
-      "w=900"
-    ],
-    "result": {
-      "width": 0.9,
-      "height": 0.9,
-      "transform": "scaleX(0.9) scaleY(0.9) translate(0.0%, 0.0%)"
-    }
+    transforms: ['fit=clamp', 'rect=200,100,550,450'],
+    result: {
+      width: 0.55,
+      height: 0.71,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(-20.0%, -15.85%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=clamp",
-      "rect=200,100,550,450"
-    ],
-    "result": {
-      "width": 0.55,
-      "height": 0.71,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(-20.0%, -15.85%)"
-    }
+    transforms: ['auto=compress'],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['fit=crop', 'w=900', 'h=400'],
+    result: {
+      width: 0.9,
+      height: 0.63,
+      transform: 'scaleX(0.9) scaleY(0.9) translate(0.0%, -13.3%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=crop"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['fit=crop', 'w=600', 'h=600'],
+    result: {
+      width: 0.6,
+      height: 0.95,
+      transform: 'scaleX(0.95) scaleY(0.95) translate(-17.54%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=crop",
-      "w=900",
-      "h=400"
-    ],
-    "result": {
-      "width": 0.9,
-      "height": 0.63,
-      "transform": "scaleX(0.9) scaleY(0.9) translate(0.0%, -13.3%)"
-    }
+    transforms: ['fit=crop', 'w=600', 'h=600', 'mask=ellipse'],
+    result: {
+      width: 0.6,
+      height: 0.95,
+      transform: 'scaleX(0.95) scaleY(0.95) translate(-17.54%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=crop",
-      "w=600",
-      "h=600"
-    ],
-    "result": {
-      "width": 0.6,
-      "height": 0.95,
-      "transform": "scaleX(0.95) scaleY(0.95) translate(-17.54%, 0.0%)"
-    }
+    transforms: ['fit=crop', 'w=700', 'h=600'],
+    result: {
+      width: 0.7,
+      height: 0.95,
+      transform: 'scaleX(0.95) scaleY(0.95) translate(-12.54%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=crop",
-      "w=600",
-      "h=600",
-      "mask=ellipse"
-    ],
-    "result": {
-      "width": 0.6,
-      "height": 0.95,
-      "transform": "scaleX(0.95) scaleY(0.95) translate(-17.54%, 0.0%)"
-    }
+    transforms: ['fit=crop', 'w=700', 'h=600', 'crop=left'],
+    result: {
+      width: 0.7,
+      height: 0.95,
+      transform: 'scaleX(0.95) scaleY(0.95) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=crop",
-      "w=700",
-      "h=600"
-    ],
-    "result": {
-      "width": 0.7,
-      "height": 0.95,
-      "transform": "scaleX(0.95) scaleY(0.95) translate(-12.54%, 0.0%)"
-    }
+    transforms: ['fit=crop', 'w=700', 'h=600', 'crop=right'],
+    result: {
+      width: 0.7,
+      height: 0.95,
+      transform: 'scaleX(0.95) scaleY(0.95) translate(-25.09%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=crop",
-      "w=700",
-      "h=600",
-      "crop=left"
-    ],
-    "result": {
-      "width": 0.7,
-      "height": 0.95,
-      "transform": "scaleX(0.95) scaleY(0.95) translate(0.0%, 0.0%)"
-    }
+    transforms: [],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fit=crop",
-      "w=700",
-      "h=600",
-      "crop=right"
-    ],
-    "result": {
-      "width": 0.7,
-      "height": 0.95,
-      "transform": "scaleX(0.95) scaleY(0.95) translate(-25.09%, 0.0%)"
-    }
+    transforms: ['sepia=80'],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['blur=30'],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "sepia=80"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['duotone=000080,FA8072'],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "blur=30"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['fm=jpg'],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "duotone=000080,FA8072"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['fm=jpg', 'q=90'],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
   {
-    "transforms": [
-      "auto=compress",
-      "fm=jpg"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
+    transforms: ['fm=webp'],
+    result: {
+      width: 1.0,
+      height: 1.0,
+      transform: 'scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)',
+    },
   },
-  {
-    "transforms": [
-      "auto=compress",
-      "fm=jpg",
-      "q=90"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
-  },
-  {
-    "transforms": [
-      "auto=compress",
-      "fm=webp"
-    ],
-    "result": {
-      "width": 1.0,
-      "height": 1.0,
-      "transform": "scaleX(1.0) scaleY(1.0) translate(0.0%, 0.0%)"
-    }
-  }
 ];
 
-const stepTime = 2000;
+const stepTime = 2500;
 const width = 1000;
 const height = 631;
 const ar = width / height;
@@ -351,9 +265,7 @@ export default function InterstitialTitle() {
         t.match(/(sepia|duotone|blur|htn)/),
       );
 
-      const isEllipse = !!steps[i].transforms.find(t =>
-        t.match(/mask/),
-      );
+      const isEllipse = !!steps[i].transforms.find(t => t.match(/mask/));
 
       const stepImage = url + (colorTransform ? `&${colorTransform}` : '');
 
@@ -378,7 +290,8 @@ export default function InterstitialTitle() {
 
   return (
     <Wrapper>
-      <div className={s.root}>
+      <div className={s.root} style={{ height: `calc(${maxWidth} / ${ar})` }}>
+
         <div
           className={cn(s.imageFrame, { [s.ellipseFrame]: ellipse })}
           style={{
@@ -393,8 +306,8 @@ export default function InterstitialTitle() {
               leave: s.imageAnimationLeave,
               leaveActive: s.imageAnimationLeaveActive,
             }}
-            transitionEnterTimeout={1000}
-            transitionLeaveTimeout={1000}
+            transitionEnterTimeout={1300}
+            transitionLeaveTimeout={1800}
           >
             <img
               key={image}
@@ -411,18 +324,27 @@ export default function InterstitialTitle() {
 
         <div className={s.params}>
           <ReactCSSTransitionGroup
+            className={s.paramsInner}
+            style={{ '--content-length': `${40 + params.join('.').length}ch` }}
             transitionName={{
               enter: s.paramAnimationEnter,
               enterActive: s.paramAnimationEnterActive,
               leave: s.paramAnimationLeave,
               leaveActive: s.paramAnimationLeaveActive,
             }}
-            transitionEnterTimeout={250}
-            transitionLeaveTimeout={250}
+            transitionEnterTimeout={900}
+            transitionLeaveTimeout={400}
           >
-            {params.map(param => (
-              <div className={s.paramContainer} key={param.split(/=/)[0]}>
-                <Param param={param} />
+            <span className={s.paramEq}>
+              https://datocms-assets.com/image.png
+            </span>
+            {params.map((param, i) => (
+              <div
+                className={s.paramContainer}
+                key={param.split(/=/)[0]}
+                style={{ '--content-length': `${param.length + 2}ch` }}
+              >
+                <Param param={param} isFirst={i === 0} />
               </div>
             ))}
           </ReactCSSTransitionGroup>

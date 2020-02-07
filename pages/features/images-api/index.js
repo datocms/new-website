@@ -2,7 +2,9 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import ImgixTransformations from 'components/ImgixTransformations';
-import { withDato } from 'lib/datocms';
+import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import Quote from 'components/Quote';
 
 import styles from './style.css';
 
@@ -13,18 +15,63 @@ function ImagesApi() {
         over="Images API"
         title={
           <>
-            The easiest way to deliver <Highlight>fast,&nbsp;optimized&nbsp;images</Highlight>
+            The easiest way to deliver{' '}
+            <Highlight>fast,&nbsp;optimized&nbsp;images</Highlight>
           </>
         }
         subtitle={
           <>
-            Serve lightning fast images from any digital product with a suite of tools built to save both development time and visitor bandwidth.
+            Serve lightning fast images from any digital product with a suite of
+            tools built to save both development time and visitor bandwidth.
           </>
         }
       />
 
-      <ImgixTransformations />
+      <TitleStripWithContent
+        title={<>Endless image transformations at your disposal</>}
+        subtitle={
+          <>
+            DatoCMS offers best-in-class image processing and image CDN thanks
+            to the seamless partnership with Imgix. Optimize, resize, crop,
+            rotate and watermark images on-the-fly simply adding custom
+            parameters to the URL of your image.
+          </>
+        }
+      >
+        <ImgixTransformations />
+      </TitleStripWithContent>
 
+      <Quote
+        quote={
+          <>
+            With DatoCMS we made the impossibile: we launched a successful omnichannel campaign in <Highlight>less than a month</Highlight>.
+          </>
+        }
+        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
+      />
+
+      <TitleStripWithContent
+        title={<>State of the art for responsive and progressive images</>}
+        subtitle={
+          <>
+            Serving optimized images is incredibly hard, but using our GraphQL
+            Content API you can implement lazy loaded, responsive images in one
+            line of code. Avoid any layout jumping, offer instant previews of
+            images while they load. It’s like magic.
+          </>
+        }
+      >
+        <ProgressiveImagesDemo />
+      </TitleStripWithContent>
+
+      <Quote
+        quote={
+          <>
+            With DatoCMS we made the impossibile: we launched a successful omnichannel campaign in <Highlight>less than a month</Highlight>.
+          </>
+        }
+        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
+      />
     </Layout>
   );
 }

@@ -24,5 +24,16 @@
   align-items: center;
   max-width: 60%;
   text-align: center;
-  margin: 40px auto 70px;
+  margin: 40px auto 0;
+}
+
+.subtitle {
+  margin: 20px auto 0;
+  max-width: 800px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.content {
+  margin-top: 70px;
 }
