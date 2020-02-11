@@ -1,0 +1,57 @@
+.root {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.code {
+  white-space: pre;
+  font-family: var(--font-mono);
+  line-height: 1.3;
+  width: 40ch;
+  margin: 0 30px;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  padding: 30px;
+  background: white;
+  min-height: 18em;
+  color: #204588;
+}
+
+.result {
+  width: 75ch;
+}
+
+.keyword {
+  color: var(--light-body-color);
+}
+
+.cursor {
+  width: 0;
+  height: 1em;
+  margin: -2px 0px -3px 0;
+  position: relative;
+  display: inline;
+
+  &:before {
+    content: '';
+    width: 3px;
+    background-color: #d0d0d0;
+    animation: cursor-blink 0.5s infinite linear both alternate;
+    position: absolute;
+    top: 0;
+    left: 1px;
+    bottom: 0;
+  }
+}
+
+@keyframes cursor-blink {
+  0%,
+  30% {
+    opacity: 0;
+  }
+  70%,
+  100% {
+    opacity: 1;
+  }
+}
