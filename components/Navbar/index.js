@@ -81,7 +81,7 @@ export default function Navbar() {
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/features/dynamic-layouts">
                             <a>Dynamic layouts</a>
                           </Link>
                         </div>
@@ -120,7 +120,7 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-              
+
               <Link href="/foo">
                 <a className={s.entry}><span>Integrations</span></a>
               </Link>
