@@ -1,45 +1,15 @@
 .video {
-  margin: 0 0 20vh;
+  margin: 0 auto 20vh;
   box-shadow: var(--box-shadow);
   border-radius: 3px;
   overflow: hidden;
   background: var(--base-body-color);
+  width: 100%;
+  max-width: 1000px;
 
   video {
     width: 100%;
+    margin: 0;
     display: block;
   }
-}
-
-.frames {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: 30px;
-}
-
-.frame {
-  box-shadow: var(--box-shadow);
-  border-radius: 3px;
-  overflow: hidden;
-  background: white;
-  color: var(--light-body-color);
-
-  img {
-    display: block;
-  }
-}
-
-.frameLabel {
-  padding: 10px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-}
-
-.paramName {
-  color: #204588;
-}
-
-.paramValue {
-  color: var(--base-body-color);
 }

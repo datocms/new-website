@@ -103,93 +103,23 @@ function Char({ char }) {
   return char;
 }
 
-export default function GraphQlDemo() {
+export default function GraphQlDemo({ height, children }) {
   const [text, cursor, typer] = useTyper();
   const [result, setResult] = useState('{}');
 
   useEffect(() => {
     (async () => {
+      const setter = res => setResult(JSON.stringify(res, null, 2));
+
       while (true) {
-        typer.insert('{\n  blogPost {}\n}');
-        typer.moveTo(-3);
-
-        await typer.wait(1000);
-
-        typer.insert('\n');
-        typer.insert('\n  ', { moveCursor: false });
-        typer.indent(2);
-        await typer.type('title');
-        setResult(
-          JSON.stringify({ blogPost: { title: 'Awesome post!' } }, null, 2),
-        );
-
-        await typer.wait(800);
-        typer.insert('\n');
-        typer.indent(2);
-
-        await typer.type('coverImage {');
-        typer.insert('}', { moveCursor: false });
-        await typer.wait(300);
-        typer.insert('\n');
-        typer.insert('\n    ', { moveCursor: false });
-        typer.indent(3);
-        await typer.wait(150);
-        await typer.type('url');
-        setResult(
-          JSON.stringify(
-            {
-              blogPost: {
-                title: 'Awesome post!',
-                coverImage: { url: 'https://datocms-assets.com/cover.png' },
-              },
-            },
-            null,
-            2,
-          ),
-        );
-        await typer.wait(1000);
-
-        await typer.moveTo(6, { animate: true });
-
-        await typer.type('\n');
-        typer.indent(2);
-
-        await typer.type('author {');
-        typer.insert('}', { moveCursor: false });
-        await typer.wait(300);
-        typer.insert('\n');
-        typer.indent(3);
-        typer.insert('\n    ', { moveCursor: false });
-        await typer.wait(150);
-        await typer.type('name');
-        setResult(
-          JSON.stringify(
-            {
-              blogPost: {
-                title: 'Awesome post!',
-                coverImage: { url: 'https://datocms-assets.com/cover.png' },
-                author: { name: 'Mark Smith' },
-              },
-            },
-            null,
-            2,
-          ),
-        );
-        await typer.wait(2000);
-
-        await typer.typeBackspace(12);
-        await typer.deleteForward(6);
-        await typer.typeBackspace(55);
-        await typer.deleteForward(3);
-
-        typer.reset();
+        await children(typer, setter);
       }
     })();
   }, []);
 
   return (
     <div className={s.root}>
-      <div className={s.code}>
+      <div className={s.code} style={{ height: `${1.3 * height}em` }}>
         {text
           .slice(0, cursor)
           .split('')
@@ -207,7 +137,7 @@ export default function GraphQlDemo() {
 
       <Highlight {...defaultProps} code={result} language="json">
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={cn(className, s.code, s.result)} style={style}>
+          <pre className={cn(className, s.code, s.result)} style={{ ...style, height: `${1.3 * height}em` }}>
             {tokens.map((line, i) => (
               <div {...getLineProps({ line, key: i })}>
                 {line.map((token, key) => (

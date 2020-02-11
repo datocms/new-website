@@ -14,12 +14,25 @@
   border-radius: 5px;
   padding: 30px;
   background: white;
-  min-height: 18em;
   color: #204588;
+  box-sizing: content-box;
+  overflow: hidden;
 }
 
 .result {
   width: 75ch;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    bottom: 0px;
+    background: linear-gradient(to bottom, rgba(42, 39, 52, 0%), rgba(42, 39, 52, 100%) 80%);
+    z-index: 2;
+  }
 }
 
 .keyword {
