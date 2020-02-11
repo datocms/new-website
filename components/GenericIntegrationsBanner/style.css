@@ -1,0 +1,118 @@
+.root {
+  position: relative;
+  padding: 15vh 0 12vh;
+}
+
+.background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: 400ms ease-in 1.5s 1 normal forwards running fade-jsx-339728620;
+  z-index: -1;
+}
+
+.backgroundInner {
+  position: absolute;
+  width: 2800px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  animation: slide 40s infinite linear;
+  animation-direction: alternate;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(-700px);
+  }
+}
+
+.backgroundImage {
+  position: absolute;
+  
+  .backgroundImageInner {
+    border-radius: 50%;
+    padding: 20px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  @for $i from 1 to 5 {
+    &:nth-child(5n + $i) {
+      .backgroundImageInner {
+        width: calc(10vh + $i * 2vh);
+        height: calc(10vh + $i * 2vh);
+        margin-top: calc((10vh + $i * 2vh) / -2);
+        margin-left: calc((10vh + $i * 2vh) / -2);
+      }
+    }
+  }
+
+  @for $i from 1 to 4 {
+    &:nth-child(4n + $i) {
+      animation: move-$i calc(1s + $i * 0.6s) infinite ease-in-out;
+      animation-direction: alternate;
+      animation-delay: calc(-2s * $i);
+    }
+
+    @keyframes move-$i {
+      from {
+        transform: translateY(calc(-3px * (3 - $i)));
+      }
+      to {
+        transform: translateY(calc(3px * (3 - $i)));
+      }
+    }
+  }
+
+  @for $i from 1 to 30 {
+    &:nth-child(20n + $i) {
+      left: calc(#{$i} * 7vw);
+    }
+  }
+
+  &:nth-child(3n + 3) {
+    margin-left: -9vw;
+  }
+
+  @for $i from 1 to 3 {
+    &:nth-child(3n + $i) {
+      top: calc(12vh + (#{$i} - 1) * ((100% - 24vh) / 2));
+    }
+  }
+}
+
+.foreground {
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  padding: 70px;
+  background: white;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-headline);
+  margin-bottom: 30px;
+  font-size: 50px;
+}
+
+.content {
+  line-height: 1.4;
+}

@@ -1,0 +1,36 @@
+.root {
+  font-size: 13px;
+  border-radius: 3px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  background: white;
+}
+
+.bar {
+  display: flex;
+}
+
+.barButtons,
+.space {
+  padding: 10px 15px;
+  display: flex;
+}
+
+.space {
+  flex: 1;
+}
+
+.barButton {
+  height: 12px;
+  width: 12px;
+  border-radius: 40px;
+  background: var(--light-body-color);
+  margin-right: 4px;
+}
+
+.tab {
+  border-width: 0px 1px;
+  display: flex;
+  align-items: center;
+  color: var(--light-body-color);
+}

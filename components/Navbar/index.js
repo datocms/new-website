@@ -76,7 +76,7 @@ export default function Navbar() {
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/features/multi-language">
                             <a>Multi-language</a>
                           </Link>
                         </div>
