@@ -57,6 +57,7 @@ const blocksContent = {
 
 export default function UseModularBlocks() {
   const [blockCount, setBlockCount] = useState(-1);
+  const [iteration, setIteration] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -68,14 +69,14 @@ export default function UseModularBlocks() {
         }
         await wait(3500);
         setBlockCount(-1);
-        console.log(new Date() - c);
+        setIteration(i => i + 1);
       }
     })();
   }, []);
 
   return (
     <UIChrome>
-      <div className={s.body}>
+      <div className={s.body} key={iteration}>
         <div className={s.bodyInner}>
           <div className={s.title}>Create new Blog post</div>
           <div className={s.box}>
