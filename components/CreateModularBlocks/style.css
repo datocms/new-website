@@ -30,7 +30,7 @@
   &:before,
   &:after {
     content: '';
-    background: var(--light-body-color);
+    background: var(--extra-light-body-color);
     width: 15px;
     height: 2px;
     display: block;
@@ -64,7 +64,7 @@
     height: 10px;
     width: 10px;
     border-radius: 30px;
-    background: var(--light-body-color);
+    background: var(--extra-light-body-color);
     vertical-align: middle;
     margin-right: 5px;
   }
@@ -77,7 +77,7 @@
 .fieldType {
   font-family: var(--font-mono);
   margin-left: 10px;
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
   font-size: 0.9em;
 }
 

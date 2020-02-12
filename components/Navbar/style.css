@@ -111,7 +111,7 @@
 }
 
 .groupPaneColTitle {
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
   text-transform: uppercase;
   font-weight: bold;
   font-size: 13px;

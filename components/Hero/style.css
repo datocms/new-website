@@ -11,16 +11,13 @@
   margin-bottom: 30px;
   font-weight: 500;
   letter-spacing: 0.05em;
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
   text-transform: uppercase;
 }
 
 .title {
   font-family: var(--font-headline);
-  height: 30vh;
-  display: flex;
-  font-size: 50px;
-  align-items: flex-end;
+  font-size: 80px;
 }
 
 .subtitle {

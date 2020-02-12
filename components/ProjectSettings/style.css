@@ -16,7 +16,7 @@
 }
 
 .label {
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
   margin-bottom: 5px;
 }
 
@@ -60,7 +60,7 @@
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid var(--light-body-color);
+    border-top: 6px solid var(--extra-light-body-color);
   }
 }
 

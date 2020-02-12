@@ -24,7 +24,7 @@
   height: 12px;
   width: 12px;
   border-radius: 40px;
-  background: var(--light-body-color);
+  background: var(--extra-light-body-color);
   margin-right: 4px;
 }
 
@@ -32,5 +32,5 @@
   border-width: 0px 1px;
   display: flex;
   align-items: center;
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
 }

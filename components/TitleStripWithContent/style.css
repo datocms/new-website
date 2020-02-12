@@ -18,13 +18,10 @@
 
 .title {
   font-family: var(--font-headline);
-  height: 20vh;
-  display: flex;
-  font-size: 50px;
-  align-items: center;
-  max-width: 60%;
+  font-size: 60px;
+  max-width: 70%;
   text-align: center;
-  margin: 40px auto 0;
+  margin: 40px auto;
 }
 
 .subtitle {

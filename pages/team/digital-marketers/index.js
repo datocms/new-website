@@ -81,7 +81,7 @@ function DigitalMarketers() {
       <div style={{ margin: '20vh 0 15vh' }}>
         <InterstitialTitle style="two">
           Here's DatoCMS helps you build better{' '}
-          <Highlight>digital experiences</Highlight>
+          <Highlight>digital&nbsp;experiences</Highlight>
         </InterstitialTitle>
       </div>
 
@@ -112,7 +112,7 @@ function DigitalMarketers() {
         />
       </Flag>
 
-      <IntegrationsBanner title={<>Easily connect any MarTech&nbsp;tool</>}>
+      <IntegrationsBanner integrationTypeId="2427498" title={<>Easily connect any MarTech&nbsp;tool</>}>
         Easily integrate your CMS with your preferred marketing technologies,
         Marketo, Salesforce, Google Analytics, SEMrush, Brightcove, Watson, etc.
         so you can get valuable insights to make meaningful business decisions.

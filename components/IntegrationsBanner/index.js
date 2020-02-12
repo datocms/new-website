@@ -4,10 +4,15 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
 export const QUERY = gql`
-  query IntegrationsBannerQuery($limit: IntType!) {
-    allIntegrations(first: $limit) {
+  query IntegrationsBannerQuery(
+    $limit: IntType!
+    $integrationType: LinkFilter!
+  ) {
+    allIntegrations(
+      first: $limit
+      filter: { integrationType: $integrationType }
+    ) {
       id
-
       logo {
         url
       }
@@ -18,9 +23,14 @@ export const QUERY = gql`
   }
 `;
 
-export default function IntegrationsBanner({ bubbles, ...other }) {
+export default function IntegrationsBanner({ integrationTypeId, ...other }) {
   const { loading, error, data } = useQuery(QUERY, {
-    variables: { limit: 30 },
+    variables: {
+      limit: 30,
+      integrationType: Array.isArray(integrationTypeId)
+        ? { in: integrationTypeId }
+        : { eq: integrationTypeId },
+    },
   });
 
   if (loading || error) {

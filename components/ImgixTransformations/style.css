@@ -99,13 +99,13 @@
 }
 
 .paramEq {
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
   margin-left: 2px;
   margin-right: 2px;
 }
 
 .paramUrl {
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
 }
 
 .paramValue {

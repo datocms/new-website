@@ -18,8 +18,8 @@ function Developers() {
         over="DatoCMS for Developers"
         title={
           <>
-            Do you realize that your tech stack is literally{' '}
-            <Highlight>killing your business</Highlight>?
+            Your tech stack is literally{' '}
+            <Highlight>killing your business</Highlight>
           </>
         }
         subtitle={
@@ -191,7 +191,7 @@ function Developers() {
         </p>
       </Flag>
 
-      <IntegrationsBanner title={<>Extensible and integrable by&nbsp;design</>}>
+      <IntegrationsBanner integrationTypeId={['166913', '166915', '166916', '166918', '166919']} title={<>Extensible and integrable by&nbsp;design</>}>
         Being a API-first headless CMS, DatoCMS easily integrates with any
         third-party platform or service. Build your digital products by
         composing the best tools in the market: we offer plugins, webhooks,

@@ -39,7 +39,7 @@ function Homepage() {
       <Hero
         title={
           <>
-            The&nbsp;best&nbsp;companies are&nbsp;built&nbsp;on{' '}
+            The&nbsp;best companies are&nbsp;built&nbsp;on{' '}
             <Highlight>unified&nbsp;content</Highlight>
           </>
         }

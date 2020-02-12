@@ -1,0 +1,69 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "AboutPageModelContentField",
+        "possibleTypes": [
+          {
+            "name": "QuoteRecord"
+          },
+          {
+            "name": "TitleRecord"
+          },
+          {
+            "name": "TextImageRecord"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "BlogPostModelContentField",
+        "possibleTypes": [
+          {
+            "name": "ImageRecord"
+          },
+          {
+            "name": "TextRecord"
+          },
+          {
+            "name": "InternalVideoRecord"
+          },
+          {
+            "name": "VideoRecord"
+          },
+          {
+            "name": "QuoteRecord"
+          },
+          {
+            "name": "TypeformRecord"
+          },
+          {
+            "name": "QuestionAnswerRecord"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "BrandingPageModelContentField",
+        "possibleTypes": [
+          {
+            "name": "ImageRecord"
+          },
+          {
+            "name": "TextRecord"
+          },
+          {
+            "name": "GalleryRecord"
+          },
+          {
+            "name": "TitleRecord"
+          },
+          {
+            "name": "TextImageRecord"
+          }
+        ]
+      }
+    ]
+  }
+}

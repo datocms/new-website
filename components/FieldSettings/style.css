@@ -17,7 +17,7 @@
 }
 
 .label {
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
   margin-bottom: 5px;
 }
 
@@ -48,7 +48,7 @@
   width: 34px;
   position: relative;
   border-radius: 40px;
-  background: var(--light-body-color);
+  background: var(--extra-light-body-color);
   transition: all 0.2s ease-in-out;
 
   margin-right: 10px;

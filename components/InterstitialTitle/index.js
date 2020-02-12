@@ -1,5 +1,4 @@
 import Wrapper from 'components/Wrapper';
-import { Textfit } from 'react-textfit';
 import styles from "./style.css";
 
 export default function InterstitialTitle({ style = "one", children, kicker, subtitle }) {
@@ -7,9 +6,9 @@ export default function InterstitialTitle({ style = "one", children, kicker, sub
     <Wrapper>
       <div className={styles[style]}>
         {kicker && <div className={styles.kicker}>{kicker}</div>}
-        <Textfit className={styles.title} mode="multi" min={20} max={70}>
+        <div className={styles.title}>
           {children}
-        </Textfit>
+        </div>
         {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
       </div>
     </Wrapper>

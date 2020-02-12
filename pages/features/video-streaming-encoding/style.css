@@ -23,7 +23,7 @@
   border-radius: 3px;
   overflow: hidden;
   background: white;
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
 
   img {
     display: block;
