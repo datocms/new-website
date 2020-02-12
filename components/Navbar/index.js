@@ -85,11 +85,6 @@ export default function Navbar() {
                             <a>Dynamic layouts</a>
                           </Link>
                         </div>
-                        <div className={s.groupPaneLink}>
-                          <Link href="/">
-                            <a>Editing experience</a>
-                          </Link>
-                        </div>
                       </div>
                     </div>
                     <div className={s.groupPaneCol}>

@@ -76,7 +76,7 @@ function DynamicLayouts() {
         title={
           <>
             Easily build landing pages with{' '}
-            <FlagHighlight>dynamic templates</FlagHighlight> your content
+            <FlagHighlight>dynamic&nbsp;templates</FlagHighlight>
           </>
         }
         image={LandingPagesGenerator}

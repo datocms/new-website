@@ -66,28 +66,23 @@ export default function Footer() {
                           </Link>
                         </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/features/images-api">
                           <a>Images API</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/features/video-streaming-encoding">
                           <a>Video streaming/encoding</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/features/multi-language">
                           <a>Multi-language</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/features/dynamic-layouts">
                           <a>Dynamic layouts</a>
-                        </Link>
-                      </div>
-                      <div className={s.groupLink}>
-                        <Link href="/">
-                          <a>Editing experience</a>
                         </Link>
                       </div>
                     </div>

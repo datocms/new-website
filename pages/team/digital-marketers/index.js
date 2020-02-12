@@ -9,6 +9,7 @@ import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
 import IntegrationsBanner from 'components/IntegrationsBanner';
+import OmnichannelIllustration from 'components/OmnichannelIllustration';
 import Quote from 'components/Quote';
 
 import Ill1 from 'public/images/illustrations/dato-svg-4-02.svg';
@@ -36,6 +37,8 @@ function DigitalMarketers() {
           </>
         }
       />
+
+      <OmnichannelIllustration />
 
       <TitleIllustrationStripWithContent
         image={Ill4}

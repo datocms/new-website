@@ -9,14 +9,14 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 20vh;
+    top: 10vh;
     height: 75%;
     z-index: -1;
   }
 }
 
 .rootInner {
-  height: 90vh;
+  height: 60vh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -44,7 +44,7 @@
   width: 70vw;
   right: -20vw;
   top: 0;
-  height: 70vh;
+  height: 60vh;
 
   svg {
     width: 100%;

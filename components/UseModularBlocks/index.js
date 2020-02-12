@@ -4,7 +4,12 @@ import cn from 'classnames';
 import { useEffect, useState } from 'react';
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-const labels = { text: 'Text', gallery: 'Gallery', quote: 'Quote', calltoaction: 'Call to action'};
+const labels = {
+  text: 'Text',
+  gallery: 'Gallery',
+  quote: 'Quote',
+  calltoaction: 'Call to action',
+};
 const allBlocks = ['text', 'gallery', 'quote', 'calltoaction'];
 const blocksSequence = ['text', 'gallery', 'text', 'calltoaction', 'quote'];
 
@@ -52,8 +57,8 @@ const blocksContent = {
         <div className={s.input}>Steve Jobs</div>
       </div>
     </>
-  )
-}
+  ),
+};
 
 export default function UseModularBlocks() {
   const [blockCount, setBlockCount] = useState(-1);
@@ -91,7 +96,13 @@ export default function UseModularBlocks() {
             <div className={s.field}>
               <div className={s.label}>Content</div>
               {blocksSequence.map((block, i) => (
-                <div className={cn(s.block, { [s[`block${block}`]]: true, [s.blockHidden]: i >= blockCount })} key={i}>
+                <div
+                  className={cn(s.block, {
+                    [s[`block${block}`]]: true,
+                    [s.blockHidden]: i >= blockCount,
+                  })}
+                  key={i}
+                >
                   <div className={s.blockInner} key={i}>
                     {blocksContent[block]}
                   </div>
@@ -100,7 +111,13 @@ export default function UseModularBlocks() {
               <div className={s.mcAdd}>
                 <div className={s.mcAddLabel}>Add a new block:</div>
                 {allBlocks.map(block => (
-                  <div className={cn(s.mcAddButton, { [s.mcAddButtonActive]: blocksSequence[blockCount] == block })} key={block}>
+                  <div
+                    className={cn(s.mcAddButton, {
+                      [s.mcAddButtonActive]:
+                        blocksSequence[blockCount] == block,
+                    })}
+                    key={block}
+                  >
                     {labels[block]}
                   </div>
                 ))}

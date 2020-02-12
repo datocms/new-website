@@ -1,0 +1,94 @@
+.root {
+  margin-bottom: 60px;
+}
+
+.center {
+  position: relative;
+}
+
+.lines {
+  margin: 15px 40px;
+  stroke-dasharray: 8;
+  stroke: none;
+  stroke-width: 1;
+  fill: none;
+  fill-rule: evenodd;
+  animation: dash 20s linear infinite;
+
+  path,
+  line {
+    stroke: #c2c8d6;
+    stroke-width: 5;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 400;
+  }
+}
+
+.apps,
+.people {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.people {
+  top: auto;
+  bottom: 0;
+}
+
+.app {
+  width: 80px;
+}
+
+.appLabel {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.appIcon svg {
+  height: 75px;
+  width: 75px;
+}
+
+.dato {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 40px;
+  min-width: 600px;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+
+  svg {
+    margin: 0 auto;
+    display: block;
+    width: 200px;
+  }
+}
+
+.person {
+  width: 120px;
+}
+
+.personIcon img {
+  width: 60px;
+  border-radius: 50px;
+  background: linear-gradient(45deg, #fdece5, #fefae4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.personName {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.personRole {
+  font-weight: bold;
+  margin-top: 15px;
+}
