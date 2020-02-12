@@ -33,6 +33,12 @@
   padding: 2px 5px;
   margin-right: 4px;
   margin-bottom: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.multiInputValHidden {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 .singleInput {

@@ -1,7 +1,35 @@
 import UIChrome from 'components/UiChrome';
 import s from './style.css';
+import { useEffect, useState } from 'react';
+import cn from 'classnames';
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-export default function ProjectSettings({ bubbles, ...other }) {
+const locales = [
+  'English (en-US)',
+  'Spanish (es)',
+  'Italian (it)',
+  'French (fr)',
+  'Chinese (ch)',
+];
+
+export default function ProjectSettings() {
+
+  const [blockCount, setBlockCount] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      while (true) {
+        for (let x = 1; x < 5; x++) {
+          await wait(200);
+          setBlockCount(i => i + 1);
+        }
+        await wait(2000);
+        setBlockCount(0);
+        await wait(500);
+      }
+    })();
+  }, []);
+
   return (
     <UIChrome>
       <div className={s.body}>
@@ -10,11 +38,9 @@ export default function ProjectSettings({ bubbles, ...other }) {
           <div className={s.field}>
             <div className={s.label}>Languages</div>
             <div className={s.multiInput}>
-              <div className={s.multiInputVal}>English (en-US)</div>
-              <div className={s.multiInputVal}>Spanish (es)</div>
-              <div className={s.multiInputVal}>Italian (it)</div>
-              <div className={s.multiInputVal}>French (fr)</div>
-              <div className={s.multiInputVal}>Chinese (ch)</div>
+              {locales.map((locale, i) => (
+                <div className={cn(s.multiInputVal, {[s.multiInputValHidden]: i > blockCount })} key={locale}>{locale}</div>
+              ))}
             </div>
           </div>
           <div className={s.field}>

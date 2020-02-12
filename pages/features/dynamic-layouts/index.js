@@ -3,14 +3,12 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import CreateModularBlocks from 'components/CreateModularBlocks';
 import UseModularBlocks from 'components/UseModularBlocks';
-import TitleStripWithContent from 'components/TitleStripWithContent';
+import LandingPagesGenerator from 'components/LandingPagesGenerator';
 
 import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 
 import s from './style.css';
-import { range } from 'range';
 
 function DynamicLayouts() {
   return (
@@ -41,7 +39,8 @@ function DynamicLayouts() {
         image={CreateModularBlocks}
       >
         <p>
-          Modular blocks allow you to define reusable custom components that enable your writers to build rich stories.
+          Modular blocks allow you to define reusable custom components that
+          enable your writers to build rich stories.
         </p>
       </Flag>
 
@@ -55,18 +54,38 @@ function DynamicLayouts() {
         image={UseModularBlocks}
       >
         <p>
-        Modular blocks are very flexible and easy to use. You can stack &amp; reorganize them on the fly with drag and drop functionality.
+          Modular blocks are very flexible and easy to use. You can stack &amp;
+          reorganize them on the fly with drag and drop functionality.
         </p>
       </Flag>
 
       <Quote
         quote={
           <>
-            I think Modular Content is probably <Highlight>one of my favorite features</Highlight>. Being able to put together a piece of content that the client can see on one page and ‘hey, this gets very close to Squarespace‘.
+            I think Modular Content is probably{' '}
+            <Highlight>one of my favorite features</Highlight>. Being able to
+            put together a piece of content that the client can see on one page
+            and ‘hey, this gets very close to Squarespace‘.
           </>
         }
         author="Marc Ammann, CEO @ Matter Supply Co."
       />
+
+      <Flag
+        style="good"
+        title={
+          <>
+            Easily build landing pages with{' '}
+            <FlagHighlight>dynamic templates</FlagHighlight> your content
+          </>
+        }
+        image={LandingPagesGenerator}
+      >
+        <p>
+          Boost your acquisition and SEO by quickly creating rich and inspiring
+          campaign pages featuring trends or events thanks to dynamic layouts.
+        </p>
+      </Flag>
     </Layout>
   );
 }

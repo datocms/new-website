@@ -17,7 +17,9 @@
   transition: all 400ms ease-in-out;
 }
 
-.fieldOuter {
+.fieldInnerHidden {
+  opacity: 0;
+  transform: translateX(-20px);
 }
 
 .fieldDrag {
@@ -82,4 +84,24 @@
 .blocks {
   margin-left: 30px;
   display: block;
+
+  .fieldInner:nth-child(1) .fieldBox:before {
+    background: #2f6ff8;
+  }
+
+  .fieldInner:nth-child(2) .fieldBox:before {
+    background: #7826ce;
+  }
+
+  .fieldInner:nth-child(3) .fieldBox:before {
+    background: #f50580;
+  }
+
+  .fieldInner:nth-child(4) .fieldBox:before {
+    background: #f35650;
+  }
+
+  .fieldInner:nth-child(5) .fieldBox:before {
+    background: #efa700;
+  }
 }

@@ -4,14 +4,13 @@ import cn from 'classnames';
 import { useEffect, useState } from 'react';
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-const allBlocks = ['Hero', 'Gallery', 'Quote', 'Call to action'];
+const allBlocks = ['Text', 'Gallery', 'Quote', 'Call to action'];
 
 export default function FieldSettings() {
   const [blockCount, setBlockCount] = useState(-1);
 
   useEffect(() => {
     (async () => {
-      await wait(1000);
       while (true) {
         for (let x = 0; x < allBlocks.length; x++) {
           await wait(100);
@@ -60,8 +59,7 @@ export default function FieldSettings() {
           <div className={s.blocks}>
             {allBlocks.map((block, i) => (
               <div
-                className={cn(s.fieldInner)}
-                style={{ opacity: i <= blockCount ? 1 : 0 }}
+                className={cn(s.fieldInner, { [s.fieldInnerHidden]: i > blockCount })}
                 key={block}
               >
                 <div className={s.fieldDrag} />
