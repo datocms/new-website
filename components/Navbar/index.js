@@ -132,7 +132,7 @@ export default function Navbar() {
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/product-updates">
                             <a>Product updates</a>
                           </Link>
                         </div>

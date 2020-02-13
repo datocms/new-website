@@ -12,11 +12,10 @@ import gql from 'graphql-tag';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Head from 'next/head';
 import VideoPlayer from 'components/VideoPlayer';
+import SmartMarkdown from 'components/SmartMarkdown';
+import ImageFigure from 'components/ImageFigure';
 import s from './style.css';
 import ResponsiveEmbed from 'react-responsive-embed';
-import parse, { domToReact } from 'html-react-parser';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import cn from 'classnames';
 
 export const unstable_getStaticPaths = gqlStaticPaths(
   gql`
@@ -118,32 +117,6 @@ export const unstable_getStaticProps = gqlStaticProps(
   `,
 );
 
-const parseOptions = {
-  replace: ({ name, attribs, children }) => {
-    if (name !== 'pre' || children[0].name !== 'code') {
-      return;
-    }
-
-    const code = children[0];
-
-    return (
-      <Highlight {...defaultProps} code={code.children[0].data.replace(/\n$/, "")} language={code.attribs.class || 'unknown'}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={cn(className, s.code, s.result)} style={style}>
-            {tokens.map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
-    );
-  },
-};
-
 export default function Article({ post }) {
   return (
     <Layout>
@@ -171,7 +144,9 @@ export default function Article({ post }) {
               <React.Fragment key={block.id}>
                 {block._modelApiKey === 'text' && (
                   <div className={s.text}>
-                    {parse(block.text, parseOptions)}
+                    <SmartMarkdown>
+                      {block.text}
+                    </SmartMarkdown>
                   </div>
                 )}
                 {block._modelApiKey === 'internal_video' && (
@@ -222,43 +197,10 @@ export default function Article({ post }) {
                 </div>
                 )}
                 {block._modelApiKey === 'image' && (
-                  <figure>
-                    {block.image.format === 'gif' && (
-                      <video
-                        poster={`${block.image.url}?auto=format&fit=max&w=900`}
-                        style={{ maxWidth: `${block.image.width}px` }}
-                        autoPlay
-                        loop
-                      >
-                        <source
-                          src={`${block.image.url}?fm=webm&w=900`}
-                          type="video/webm"
-                        />
-                        <source
-                          src={`${block.image.url}?fm=mp4&w=900`}
-                          type="video/mp4"
-                        />
-                      </video>
-                    )}
-                    {block.image.format !== 'gif' &&
-                      block.image.responsiveImage && (
-                        <Image
-                          className={s.responsiveImage}
-                          data={block.image.responsiveImage}
-                        />
-                      )}
-                    {block.image.format !== 'gif' &&
-                      !block.image.responsiveImage && (
-                        <img
-                          alt={block.image.alt}
-                          style={{ maxWidth: `${block.image.width}px` }}
-                          src={`${block.image.url}?auto=format&fit=max&w=900`}
-                        />
-                      )}
-                    {block.image.title && (
-                      <figcaption>{block.image.title}</figcaption>
-                    )}
-                  </figure>
+                  <ImageFigure
+                    imageClassName={s.responsiveImage}
+                    data={block.image}
+                  />
                 )}
                 {block._modelApiKey === 'video' && (
                   <figure>
