@@ -2,22 +2,38 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
-import { withDato } from 'lib/datocms';
+import { gqlStaticPaths, gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
 import { Image } from 'react-datocms';
 import Masonry from 'react-masonry-css';
-import format from 'date-fns/format';
-import parseISO from 'date-fns/parseISO';
-import { useRouter } from 'next/router';
+import FormattedDate from 'components/FormattedDate';
 
+import { range } from 'range';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 
 import s from './style.css';
 
-const QUERY = gql`
+const POSTS_PER_PAGE = 10;
+
+export const unstable_getStaticPaths = gqlStaticPaths(
+  gql`
+    query {
+      posts: allBlogPosts(
+        first: 15,
+        orderBy: _firstPublishedAt_DESC
+      ) {
+        slug
+      }
+    }
+  `,
+  'slug',
+  ({ posts }) => posts.map(p => p.slug),
+);
+
+export const unstable_getStaticProps = gqlStaticProps(
+  gql`
   query ArticleQuery($slug: String!) {
-    blogPost(filter: { slug: { eq: $slug } }) {
+    post: blogPost(filter: { slug: { eq: $slug } }) {
       _seoMetaTags {
         ...seoMetaTagsFields
       }
@@ -98,42 +114,11 @@ const QUERY = gql`
     }
   }
 
-  fragment imageFields on ResponsiveImage {
-    alt
-    title
-    base64
-    height
-    width
-    src
-    srcSet
-    sizes
-    aspectRatio
-  }
+  ${imageFields}
+  ${seoMetaTagsFields}
+`);
 
-  fragment seoMetaTagsFields on Tag {
-    attributes
-    content
-    tag
-  }
-`;
-
-function Article() {
-  const router = useRouter();
-
-  const { slug } = router.query;
-
-  const { loading, error, data } = useQuery(QUERY, {
-    variables: {
-      slug,
-    },
-  });
-
-  if (loading || error) {
-    return 'Loading...';
-  }
-
-  const { blogPost: post } = data;
-
+export default function Article({ post }) {
   return (
     <Layout>
       <Wrapper>
@@ -141,7 +126,7 @@ function Article() {
           <h6 className={s.title}>{post.title}</h6>
           <div className={s.footer}>
             <div className={s.date}>
-              Posted on {format(parseISO(post._firstPublishedAt), 'PPP')}
+              Posted on <FormattedDate date={post._firstPublishedAt} />
             </div>
           </div>
         </div>
@@ -149,5 +134,3 @@ function Article() {
     </Layout>
   );
 }
-
-export default withDato(Article);
