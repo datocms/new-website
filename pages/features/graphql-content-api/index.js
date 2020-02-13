@@ -134,7 +134,7 @@ function GraphQlContentApi() {
         image={Ill4}
       >
         <div className={s.video}>
-          <VideoPlayer url="https://stream.mux.com/dRjI3lukuQDwksXF1sgLQ7Kj4GbAFzUq.m3u8" />
+          <VideoPlayer src="https://stream.mux.com/dRjI3lukuQDwksXF1sgLQ7Kj4GbAFzUq.m3u8" />
         </div>
       </TitleStripWithContent>
 

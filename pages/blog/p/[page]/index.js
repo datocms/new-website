@@ -24,7 +24,7 @@ export const unstable_getStaticPaths = gqlStaticPaths(
     }
   `,
   'page',
-  ({ meta }) => range(0, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE))),
+  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE))),
 );
 
 export const unstable_getStaticProps = gqlStaticProps(
@@ -45,6 +45,10 @@ export const unstable_getStaticProps = gqlStaticProps(
         }
         _firstPublishedAt
       }
+
+      meta: _allBlogPostsMeta {
+        count
+      }
     }
 
     ${imageFields}
@@ -53,9 +57,22 @@ export const unstable_getStaticProps = gqlStaticProps(
     first: POSTS_PER_PAGE,
     skip: POSTS_PER_PAGE * parseInt(page),
   }),
+  ({ posts, meta }, { params: { page } }) => ({
+    posts,
+    prevPage:
+      parseInt(page) > 1
+        ? `/blog/p/${parseInt(page) - 1}`
+        : parseInt(page) === 1
+        ? `/blog`
+        : null,
+    nextPage:
+      (parseInt(page) + 1) * POSTS_PER_PAGE < meta.count
+        ? `/blog/p/${parseInt(page) + 1}`
+        : null,
+  }),
 );
 
-export default function Blog({ posts }) {
+export default function Blog({ posts, prevPage, nextPage }) {
   return (
     <Layout>
       <Hero
@@ -98,6 +115,19 @@ export default function Blog({ posts }) {
             </Link>
           ))}
         </Masonry>
+        {prevPage && (
+          <Link
+            href={prevPage === '/blog' ? prevPage : '/blog/p/[page]'}
+            as={prevPage !== '/blog' && prevPage}
+          >
+            <a>Read more recent posts..</a>
+          </Link>
+        )}
+        {nextPage && (
+          <Link href="/blog/p/[page]" as={nextPage}>
+            <a>Read older posts..</a>
+          </Link>
+        )}
       </Wrapper>
     </Layout>
   );

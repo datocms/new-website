@@ -43,7 +43,7 @@ function VideoStreamingEncoding() {
         }
       >
         <div className={s.video}>
-          <VideoPlayer url="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8" />
+          <VideoPlayer src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8" />
         </div>
       </TitleStripWithContent>
 

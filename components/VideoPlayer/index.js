@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import Hls from 'hls.js';
 
-export default function VideoPlayer({ url }) {
+export default function VideoPlayer({ src, autoPlay, ...other }) {
   const ref = useRef();
 
   useEffect(() => {
@@ -9,19 +9,14 @@ export default function VideoPlayer({ url }) {
     hls.attachMedia(ref.current);
 
     hls.on(Hls.Events.MEDIA_ATTACHED, function() {
-      console.log('video and hls.js are now bound together !');
-
-      hls.loadSource(url);
-
+      hls.loadSource(src);
       hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
-        console.log(
-          'manifest loaded, found ' + data.levels.length + ' quality level',
-        );
-
-        ref.current.play();
+        if (autoPlay) {
+          ref.current.play();
+        }
       });
     });
   }, []);
 
-  return <video autoplay loop controls controlsList="nodownload noremote foobar" ref={ref} />;
+  return <video {...other} ref={ref} />;
 }
