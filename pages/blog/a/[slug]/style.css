@@ -87,7 +87,7 @@
 }
 
 .qa {
-  margin: 50px 0;
+  margin: 50px auto;
 }
 
 .qaQuestion {
@@ -107,4 +107,32 @@
     border-radius: 60px;
     overflow: hidden;
   }
+}
+
+.quote {
+  text-align: left;
+  padding-top: 90px;
+  position: relative;
+  max-width: 800px;
+  margin: 50px auto;
+
+  &:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
+    font-family: var(--font-serif);
+    content: '\201C';
+    color: var(--accent-color);
+    font-size: 200px;
+    line-height: 0.3;
+  }
+}
+
+.quoteQuote {
+  font-family: var(--font-serif);
+  font-size: 35px;
+  font-style: italic;
+  line-height: 1.2;
+  margin-left: 80px;
 }

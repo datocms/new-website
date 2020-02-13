@@ -213,12 +213,13 @@ export default function Article({ post }) {
                 )}
                 {block._modelApiKey === 'quote' && (
                   <div className={s.quote}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: block.quote,
-                      }}
-                    />
-                  </div>
+                  <div
+                    className={s.quoteQuote}
+                    dangerouslySetInnerHTML={{
+                      __html: block.quote,
+                    }}
+                  />
+                </div>
                 )}
                 {block._modelApiKey === 'image' && (
                   <figure>
