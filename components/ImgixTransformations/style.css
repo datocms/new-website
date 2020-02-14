@@ -23,10 +23,7 @@
   transform-origin: 0 0;
   overflow: hidden;
   transition: all 0.2s 1000ms ease-in-out;
-
-  img {
-    display: block;
-  }
+  max-width: none;
 }
 
 .ellipseFrame {

@@ -13,7 +13,7 @@ import gql from 'graphql-tag';
 
 import s from './style.css';
 
-const POSTS_PER_PAGE = 10;
+const POSTS_PER_PAGE = 16;
 
 export const unstable_getStaticPaths = gqlStaticPaths(
   gql`

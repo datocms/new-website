@@ -61,10 +61,10 @@ export default function Footer() {
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                          <Link href="/features/graphql-content-api">
-                            <a>GraphQL Content API</a>
-                          </Link>
-                        </div>
+                        <Link href="/features/graphql-content-api">
+                          <a>GraphQL Content API</a>
+                        </Link>
+                      </div>
                       <div className={s.groupLink}>
                         <Link href="/features/images-api">
                           <a>Images API</a>
@@ -168,7 +168,25 @@ export default function Footer() {
         </div>
       </div>
       <div className={s.finalFooter}>
-        <Wrapper>Ciao</Wrapper>
+        <Wrapper>
+          <div className={s.finalLinks}>
+            <Link href="/legal/privacy-policy">
+              <a className={s.finalLink}>Privacy policy</a>
+            </Link>
+            <Link href="/legal/cookie-policy">
+              <a className={s.finalLink}>Cookie policy</a>
+            </Link>
+            <Link href="/legal/gdpr">
+              <a className={s.finalLink}>GDPR Compliance</a>
+            </Link>
+            <Link href="/legal/terms">
+              <a className={s.finalLink}>Terms of Service</a>
+            </Link>
+          </div>
+          <div className={s.finalLine}>
+            Copyright 2016-2020 — Dato srl — P.IVA 06969620480
+          </div>
+        </Wrapper>
       </div>
     </>
   );

@@ -9,6 +9,7 @@ import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 import Quote from 'components/Quote';
 import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 
 import styles from './style.css';
 
@@ -35,7 +36,8 @@ function Developers() {
 
       <div style={{ margin: '10vh 0 5vh' }}>
         <InterstitialTitle style="two">
-          Delight your customers with <Highlight>lightning fast responses</Highlight>
+          Delight your customers with{' '}
+          <Highlight>lightning fast responses</Highlight>
         </InterstitialTitle>
       </div>
 
@@ -50,43 +52,59 @@ function Developers() {
         image={Ill4}
       >
         <p>
-        We built DatoCMS content infrastructure so you don’t have to. Focus on writing great content and creating new, innovative digital experiences. We build every day to offer a reliable solution capable of following your growth, globally, and lets you adapt along the journey, with no upfront costs.
+          We built DatoCMS content infrastructure so you don’t have to. Focus on
+          writing great content and creating new, innovative digital
+          experiences. We build every day to offer a reliable solution capable
+          of following your growth, globally, and lets you adapt along the
+          journey, with no upfront costs.
         </p>
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            We aired our first Super Bowl ad and <Highlight>the website performed flawlessly</Highlight>, even under high load, which was awesome. We’re transitioning all our sites to DatoCMS in the coming months.
-          </>
-        }
-        author="Andrew Smith, Architect for web @ Little Caesars"
-      />
+      <Numbers>
+        <NumbersBlock title="74">CDN Edges</NumbersBlock>
+        <NumbersBlock title="50TB">Data served daily</NumbersBlock>
+
+        <NumbersBlock title="1.4B">Requests per week</NumbersBlock>
+
+        <NumbersBlock title="99.99%">Guaranteed uptime</NumbersBlock>
+      </Numbers>
 
       <Flag
         style="good"
         title={
           <>
-            A unified set of <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight> to cover every need
+            A unified set of{' '}
+            <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight> to cover
+            every need
           </>
         }
         image={Ill4}
       >
         <p>
-          DatoCMS offers a coordinated suite of different APIs and tools to work seamlessly with the three fundamental blocks of content: text, images and video. Everything is built on CDN, optimized for speed and scalability.
+          DatoCMS offers a coordinated suite of different APIs and tools to work
+          seamlessly with the three fundamental blocks of content: text, images
+          and video. Everything is built on CDN, optimized for speed and
+          scalability.
         </p>
 
         <Bullets
           style="good"
           icon={SuccessIcon}
-          bullets={[
-            'Content GraphQL API',
-            'Images API',
-            'Video streaming API',
-          ]}
+          bullets={['Content GraphQL API', 'Images API', 'Video streaming API']}
         />
       </Flag>
 
+      <Quote
+        quote={
+          <>
+            We aired our first Super Bowl ad and{' '}
+            <Highlight>the website performed flawlessly</Highlight>, even under
+            high load, which was awesome. We’re transitioning all our sites to
+            DatoCMS in the coming months.
+          </>
+        }
+        author="Andrew Smith, Architect for web @ Little Caesars"
+      />
     </Layout>
   );
 }

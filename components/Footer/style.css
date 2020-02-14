@@ -64,3 +64,33 @@
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+.finalFooter {
+  background: #13151B;
+  padding: 50px 0;
+  color: #ddd;
+  font-size: 0.8em;
+
+  a {
+    color: #ddd;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.finalLinks {
+  display: flex;
+  justify-content: center;
+}
+
+.finalLink {
+  margin: 0 30px;
+}
+
+.finalLine {
+  margin-top: 45px;
+  text-align: center;
+}
