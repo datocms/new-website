@@ -1,0 +1,20 @@
+.status {
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #e3bc00;
+    border-radius: 30px;
+    margin-right: 6px;
+  }
+}
+
+.status {
+}
+
+.ok:before {
+  background: #4bcc5f;
+}

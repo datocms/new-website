@@ -42,7 +42,8 @@
   }
 }
 
-.group, .monoLink {
+.group,
+.monoLink {
   margin-bottom: 40px;
 
   &:last-child {
@@ -66,10 +67,9 @@
 }
 
 .finalFooter {
-  background: #13151B;
+  background: #13151b;
   padding: 50px 0;
   color: #ddd;
-  font-size: 0.8em;
 
   a {
     color: #ddd;
@@ -91,6 +91,7 @@
 }
 
 .finalLine {
-  margin-top: 45px;
+  margin-top: 30px;
   text-align: center;
+  font-size: 0.8em;
 }

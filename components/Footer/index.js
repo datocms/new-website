@@ -1,5 +1,6 @@
 import Wrapper from 'components/Wrapper';
 import FinalCta from 'components/FinalCta';
+import StatusBadge from 'components/StatusBadge';
 import Link from 'next/link';
 import s from './style.css';
 
@@ -17,18 +18,18 @@ export default function Footer() {
                     <div className={s.groupTitle}>Team</div>
                     <div className={s.groupLinks}>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/team/developers">
+                          <a>For developers</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/team/digital-marketers">
                           <a>For digital marketers</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/team/content-creators">
                           <a>For content creators</a>
-                        </Link>
-                      </div>
-                      <div className={s.groupLink}>
-                        <Link href="/">
-                          <a>For developers</a>
                         </Link>
                       </div>
                     </div>
@@ -41,7 +42,7 @@ export default function Footer() {
                   </div>
 
                   <div className={s.monoLink}>
-                    <Link href="/">
+                    <Link href="/enterprise">
                       <a>DatoCMS for Enterprise</a>
                     </Link>
                   </div>
@@ -56,7 +57,7 @@ export default function Footer() {
                     <div className={s.groupTitle}>Features</div>
                     <div className={s.groupLinks}>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/features/wordwide-cdn">
                           <a>Worldwide CDN</a>
                         </Link>
                       </div>
@@ -132,6 +133,14 @@ export default function Footer() {
                 </div>
                 <div className={s.col}>
                   <div className={s.group}>
+                    <div className={s.groupTitle}>Status</div>
+                    <div className={s.groupLinks}>
+                      <div className={s.groupLink}>
+                        <StatusBadge />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={s.group}>
                     <div className={s.groupTitle}>Company</div>
                     <div className={s.groupLinks}>
                       <div className={s.groupLink}>
@@ -145,12 +154,7 @@ export default function Footer() {
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
-                          <a>Terms</a>
-                        </Link>
-                      </div>
-                      <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/legal/privacy-policy">
                           <a>Privacy</a>
                         </Link>
                       </div>
@@ -184,7 +188,9 @@ export default function Footer() {
             </Link>
           </div>
           <div className={s.finalLine}>
-            Copyright 2016-2020 — Dato srl — P.IVA 06969620480
+            <a href="mailto:support@datocms.com">support@datocms.com</a> –
+            Copyright ©{new Date().getUTCFullYear()} Dato srl, all rights
+            reserved — P.IVA 06969620480
           </div>
         </Wrapper>
       </div>
