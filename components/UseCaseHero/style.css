@@ -1,0 +1,50 @@
+.hero {
+  display: flex;
+  color: white;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%);
+}
+
+.heroTitle {
+  font-family: var(--font-serif);
+  font-size: 90px;
+  font-weight: bold;
+  line-height: 1;
+  margin: 30px 0 50px;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 30px 30px rgba(0, 0, 0, 0.2);
+}
+
+.heroKicker {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.heroInner {
+  display: flex;
+  align-items: center;
+  height: 70vh;
+  min-height: 500px;
+  position: relative;
+}
+
+.heroBody {
+  width: 60%;
+}
+
+.heroSubtitle {
+  font-size: 20px;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.image {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  border-radius: 40px;
+  z-index: 10;
+  width: 40vw;
+  height: 30vw;
+  z-index: -1;
+  object-fit: cover;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.2);
+}
