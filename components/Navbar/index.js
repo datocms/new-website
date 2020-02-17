@@ -91,23 +91,18 @@ export default function Navbar() {
                       <div className={s.groupPaneColTitle}>Success stories</div>
                       <div className={s.groupPaneLinks}>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/customers/arduino">
                             <a>Arduino</a>
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/customers/hashicorp">
                             <a>Hashicorp</a>
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/customers/nike">
                             <a>Nike</a>
-                          </Link>
-                        </div>
-                        <div className={s.groupPaneLink}>
-                          <Link href="/">
-                            <a>Chilli's</a>
                           </Link>
                         </div>
                       </div>

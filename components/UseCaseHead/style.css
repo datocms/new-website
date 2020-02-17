@@ -1,0 +1,84 @@
+.root {
+  padding: 20vh 0;
+  position: relative;
+  height: 80vh;
+  --half: 50vw;
+}
+
+.box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  clip-path: polygon(calc(var(--half) + 3vw) 0, 100% 0, 100% 100%, calc(var(--half) - 3vw) 100%);
+}
+
+.boxImage {
+  clip-path: polygon(calc(var(--half) + 3vw) 3vh, 100% 0, 100% 100%, calc(var(--half) - 3vw) 93%);
+}
+
+.boxText, .boxCut {
+  color: white;
+}
+
+.boxCut {
+  color: var(--gradient2);
+  clip-path: polygon(0 0, calc(var(--half) + 3vw) 0, calc(var(--half) - 3vw) 100%, 0 100%);
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(100vw - var(--half) + 3vw);
+  background-size: cover;
+  z-index: -1;
+}
+
+.boxInner {
+  width: 100vw;
+}
+
+.inner {
+  width: 70%;
+  max-width: 750px;
+}
+
+.kicker {
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  color: var(--base-body-color);
+
+  img, svg {
+    height: 30px;
+  }
+}
+
+.plus {
+  font-size: 30px;
+  line-height: 1;
+  margin: 0 25px;
+}
+
+.title {
+  font-size: 85px;
+  line-height: 1;
+  margin-bottom: 30px;
+  font-family: var(---serif);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  background-clip: text;
+  mix-blend-mode: difference;
+}
+
+.cta {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--useCaseAccent);
+}

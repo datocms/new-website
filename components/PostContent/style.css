@@ -1,0 +1,125 @@
+.body {
+  font-size: 21px;
+  font-family: var(--font-serif);
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+
+  a {
+    color: inherit;
+
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 130%;
+    line-height: 1.25;
+    margin: 70px 0 40px;
+  }
+
+  h3 {
+    font-size: 160%;
+  }
+
+  p,
+  ul,
+  ol {
+    margin: 0 0 40px;
+  }
+
+  li {
+    margin: 0 0 5px;
+  }
+
+  figure {
+    text-align: center;
+    margin: 80px 0;
+  }
+
+  figcaption {
+    color: var(--light-body-color);
+    font-size: 0.8em;
+    margin-top: 15px;
+  }
+
+  code {
+    background-color: #f4f4f4;
+    margin: 0 0.1em;
+    padding: 0 0.25em;
+    font-family: var(--font-mono);
+    border-radius: 0.25em;
+    font-size: 0.9em;
+  }
+
+  pre,
+  .responsiveImage,
+  video,
+  img {
+    border-radius: 5px;
+    overflow: hidden;
+    display: inline-block;
+    box-shadow: var(--box-shadow);
+  }
+
+  pre {
+    padding: 30px;
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    margin: 40px 0;
+    width: 100%;
+    overflow: auto;
+    line-height: 1.3;
+  }
+
+  .responsiveImage {
+    margin: 0 auto;
+  }
+}
+
+.text,
+.qa {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.qa {
+  margin: 50px auto;
+}
+
+.qaQuestion {
+  color: var(--light-body-color);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.quote {
+  text-align: left;
+  padding-top: 90px;
+  position: relative;
+  max-width: 800px;
+  margin: 50px auto;
+
+  &:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
+    font-family: var(--font-serif);
+    content: '\201C';
+    color: var(--accent-color);
+    font-size: 200px;
+    line-height: 0.3;
+  }
+}
+
+.quoteQuote {
+  font-family: var(--font-serif);
+  font-size: 35px;
+  font-style: italic;
+  line-height: 1.2;
+  margin-left: 80px;
+}

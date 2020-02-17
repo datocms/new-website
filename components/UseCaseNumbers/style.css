@@ -1,0 +1,23 @@
+.root {
+  margin-top: 60px;
+}
+
+.rootBlocks {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.block {
+  padding-right: 80px;
+}
+
+.blockTitle {
+  font-weight: 500;
+  font-size: 110px;
+  letter-spacing: -0.05em;
+  color: var(--useCaseAccent);
+  padding-right: 10px;
+}
+
+.blockResult {
+}

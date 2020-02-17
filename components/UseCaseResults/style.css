@@ -1,0 +1,57 @@
+.root {
+  padding: 20vh 0 17vh;
+  background: var(--gradient1);
+  position: relative;
+  clip-path: var(--clip-path);
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(60vw);
+  background-size: cover;
+  background-position: center right;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--useCaseAccent);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.rootBlocks {
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rootBlocksInner {
+  max-width: 60%;
+}
+
+.block {
+  margin-bottom: 50px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.blockTitle {
+  font-size: 45px;
+  letter-spacing: -0.03em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  line-height: 1;
+}

@@ -1,0 +1,33 @@
+.root {
+  padding: 15vh 0 13vh;
+  background: linear-gradient(45deg, #FAEDFF, #E4FAFF);
+  clip-path: var(--clip-path);
+  text-align: center;
+}
+
+.rootBlocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.block {
+  padding: 0 40px;
+  flex: 1;
+}
+
+.blockTitle {
+  font-weight: 500;
+  font-size: 80px;
+  letter-spacing: -0.05em;
+}
+
+.logo {
+  display: block;
+  height: 25px;
+  width: 90%;
+  margin: 40px auto 0;
+
+  path {
+    fill: var(--base-body-color);
+  }
+}

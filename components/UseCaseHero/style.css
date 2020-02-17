@@ -5,10 +5,10 @@
 }
 
 .heroTitle {
-  font-family: var(--font-serif);
   font-size: 90px;
   font-weight: bold;
   line-height: 1;
+  letter-spacing: -0.02em;
   margin: 30px 0 50px;
   text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 30px 30px rgba(0, 0, 0, 0.2);
 }
@@ -21,7 +21,7 @@
 .heroInner {
   display: flex;
   align-items: center;
-  height: 70vh;
+  height: 80vh;
   min-height: 500px;
   position: relative;
 }
@@ -40,7 +40,6 @@
   position: absolute;
   top: 50%;
   right: 0;
-  border-radius: 40px;
   z-index: 10;
   width: 60%;
   height: 30vw;

@@ -13,6 +13,7 @@
   --accent-color: #f5634b;
   --azure-color: #33A3B1;
   --clip-path: polygon(0 3vw, 100% 0, 100% calc(100% - 4vw), 0 100%);
+  --dato-gradient: linear-gradient(to right, #ff593d, #ff7751);
   --box-shadow: 0 0.9px 2.2px rgba(0, 0, 0, 0.02),
     0 2.2px 5.3px rgba(0, 0, 0, 0.028),
     0 4.1px 10px rgba(0, 0, 0, 0.035),
