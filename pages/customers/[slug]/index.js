@@ -1,6 +1,7 @@
 import Layout from 'components/Layout';
 import UseCaseRecap from 'components/UseCaseRecap';
 import { highlightHtml } from 'components/Highlight';
+import parse from 'html-react-parser';
 import UseCaseHead from 'components/UseCaseHead';
 import Numbers, { Block as NumbersBlock } from 'components/UseCaseNumbers';
 import Results, { Block as ResultsBlock } from 'components/UseCaseResults';
@@ -43,7 +44,7 @@ export const unstable_getStaticProps = gqlStaticProps(
         duotoneColor2 {
           hex
         }
-        title
+        title(markdown: true)
         coverImage {
           url
         }
@@ -143,7 +144,7 @@ export default function UseCase({ post }) {
         }}
       >
         <UseCaseHead
-          title={post.title}
+          title={parse(post.title)}
           logo={post.logo.url}
           image={`${post.coverImage.url}?${duotone}`}
         />
