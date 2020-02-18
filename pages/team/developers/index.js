@@ -256,6 +256,7 @@ function Developers({ integrations }) {
           <Result
             number="-92,5%"
             href="/customers/arduino"
+            as="/customers/[slug]"
             label={
               <>
                 <Highlight style="good">lines of code</Highlight>
@@ -268,6 +269,7 @@ function Developers({ integrations }) {
           <Result
             number="-79%"
             href="/customers/hashicorp"
+            as="/customers/[slug]"
             label={
               <>
                 in <Highlight style="good">operational costs</Highlight>
@@ -280,6 +282,7 @@ function Developers({ integrations }) {
           <Result
             number="0,9s"
             href="/customers/nike"
+            as="/customers/[slug]"
             label={
               <>
                 in <Highlight style="good">loading times</Highlight>

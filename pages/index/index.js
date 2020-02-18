@@ -291,13 +291,13 @@ function Homepage({ successStories }) {
       </Flag>
 
       <Numbers title="Why you should use DatoCMS">
-        <NumbersBlock href="/customers/hashicorp" title="-79%" logo={Hashicorp}>
+        <NumbersBlock href="href=/customers/[slug]" as="/customers/hashicorp" title="-79%" logo={Hashicorp}>
           In operational costs
         </NumbersBlock>
-        <NumbersBlock href="/customers/nike" title="2x" logo={Nike}>
+        <NumbersBlock href="href=/customers/[slug]" as="/customers/nike" title="2x" logo={Nike}>
           Faster time to market
         </NumbersBlock>
-        <NumbersBlock href="/customers/arduino" title="8x" logo={Arduino}>
+        <NumbersBlock href="href=/customers/[slug]" as="/customers/arduino" title="8x" logo={Arduino}>
           Faster loading times
         </NumbersBlock>
       </Numbers>
