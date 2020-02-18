@@ -6,9 +6,8 @@ import ReactMarkdown from 'react-markdown';
 import fs from 'fs';
 import util from 'util';
 
-const readFile = util.promisify(fs.readFile);
-
 export async function unstable_getStaticProps() {
+  const readFile = util.promisify(fs.readFile);
   const body = await readFile('pages/legal/docs/terms.md', 'utf8');
 
   return {
