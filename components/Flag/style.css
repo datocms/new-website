@@ -11,7 +11,7 @@
 }
 
 .image {
-  > svg {
+  > svg, > img {
     height: 50vh;
     min-height: 100%;
     width: 100%;

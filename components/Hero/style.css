@@ -10,7 +10,6 @@
   font-size: 20px;
   margin-bottom: 30px;
   font-weight: 500;
-  letter-spacing: 0.05em;
   color: var(--extra-light-body-color);
   text-transform: uppercase;
 }
@@ -18,6 +17,7 @@
 .title {
   font-family: var(--font-headline);
   font-size: 80px;
+  letter-spacing: -0.02em;
 }
 
 .subtitle {

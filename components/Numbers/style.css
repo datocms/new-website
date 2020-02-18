@@ -13,11 +13,20 @@
 .block {
   padding: 0 40px;
   flex: 1;
+  color: inherit;
+  display: block;
+  text-decoration: none;
+  position: relative;
+  transition: all 200ms ease-in-out;
+}
+
+a.block:hover {
+  transform: translateY(-10px);
 }
 
 .blockTitle {
   font-weight: 500;
-  font-size: 80px;
+  font-size: 90px;
   letter-spacing: -0.05em;
 }
 

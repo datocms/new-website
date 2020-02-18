@@ -20,7 +20,7 @@
 
 .introTitle {
   font-family: var(--font-headline);
-  line-height: 1.2;
+  line-height: 1;
   font-size: 60px;
   margin-bottom: 40px;
 }
@@ -31,10 +31,19 @@
 }
 
 .personas {
+  color: inherit;
+  text-decoration: none;
+  display: block;
   padding: 40px 50px;
   border-bottom: 1px solid var(--border-color);
+  transition: all 200ms ease-in-out;
+  
   &:last-child {
     border-bottom-width: 0;
+  }
+
+  &:hover {
+    padding-left: 60px;
   }
 }
 

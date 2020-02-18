@@ -1,12 +1,10 @@
 import Layout from 'components/Layout';
 import UseCaseRecap from 'components/UseCaseRecap';
-import Highlight from 'components/Highlight';
+import { highlightHtml } from 'components/Highlight';
 import UseCaseHead from 'components/UseCaseHead';
-import HashiCorp from 'public/images/logos/hashicorp.svg';
 import Numbers, { Block as NumbersBlock } from 'components/UseCaseNumbers';
 import Results, { Block as ResultsBlock } from 'components/UseCaseResults';
 import s from './style.css';
-import parse, { domToReact } from 'html-react-parser';
 import {
   gqlStaticPaths,
   gqlStaticProps,
@@ -16,14 +14,6 @@ import {
 import gql from 'graphql-tag';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from '../../../components/PostContent';
-
-const parseOptions = {
-  replace: ({ name, children }) => {
-    if (name === 'strong') {
-      return <Highlight>{domToReact(children)}</Highlight>;
-    }
-  },
-};
 
 export const unstable_getStaticPaths = gqlStaticPaths(
   gql`
@@ -159,8 +149,8 @@ export default function UseCase({ post }) {
         />
 
         <UseCaseRecap
-          challenge={parse(post.challenge, parseOptions)}
-          result={parse(post.result, parseOptions)}
+          challenge={highlightHtml(post.challenge)}
+          result={highlightHtml(post.result)}
         >
           <Numbers>
             {post.numbers.map(number => (

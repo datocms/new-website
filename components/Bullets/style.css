@@ -14,7 +14,9 @@
 }
 
 .icon {
-  width: 40px;
+  width: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .bad {

@@ -1,6 +1,5 @@
 .root {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -9,9 +8,9 @@
   margin-bottom: 40px;
   text-align: center;
 
-  img {
+  svg {
     height: 30px;
-    filter: saturate(20%) hue-rotate(40deg) brightness(100%);
+    fill: var(--light-body-color);
   }
 }
 

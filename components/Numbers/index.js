@@ -1,5 +1,15 @@
-import Wrapper from "components/Wrapper";
-import s from "./style.css";
+import Wrapper from 'components/Wrapper';
+import s from './style.css';
+import Link from 'next/link';
+
+const MaybeLink = ({ href, children, ...other }) =>
+  href ? (
+    <Link href={href}>
+      <a {...other}>{children}</a>
+    </Link>
+  ) : (
+    <div {...other}>{children}</div>
+  );
 
 export default function Numbers({ children }) {
   return (
@@ -13,13 +23,13 @@ export default function Numbers({ children }) {
   );
 }
 
-export function Block({ image, title, children, logo: Logo }) {
+export function Block({ image, title, href, children, logo: Logo }) {
   return (
-    <div className={s.block}>
+    <MaybeLink href={href} className={s.block}>
       {image}
       <div className={s.blockTitle}>{title}</div>
       {children}
       {Logo && <Logo preserveAspectRatio="meet" className={s.logo} />}
-    </div>
+    </MaybeLink>
   );
 }

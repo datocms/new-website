@@ -17,6 +17,7 @@ body {
   font-size: 18px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  background: white;
 }
 
 img, video {

@@ -1,10 +1,9 @@
 import Layout from 'components/Layout';
-import Wrapper from 'components/Wrapper';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Button from 'components/Button';
 import Checks from 'components/Checks';
-import UseCases from 'components/UseCases';
+import UseCaseExcerpts from 'components/UseCaseExcerpts';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 import PersonasPicker from 'components/PersonasPicker';
 import InterstitialTitle from 'components/InterstitialTitle';
@@ -12,28 +11,51 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import Result from 'components/Result';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
-import Quote from 'components/Quote';
 import LogosBar from 'components/LogosBar';
-import { withDato } from 'lib/datocms';
-
-import Ill1 from 'public/images/illustrations/dato-svg-4-02.svg';
-import Ill2 from 'public/images/illustrations/dato-svg-3a-01.svg';
-import Ill3 from 'public/images/illustrations/dato-svg-5-03.svg';
-
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
-import Ill5 from 'public/images/illustrations/dato-svg-6-04.svg';
-import Ill6 from 'public/images/illustrations/dato-svg-8-02.svg';
+import { gqlStaticProps } from 'lib/datocms';
+import gql from 'graphql-tag';
 
 import Nike from 'public/images/clients/nike.svg';
 import Arduino from 'public/images/clients/arduino.svg';
-import Linkedin from 'public/images/clients/linkedin.svg';
 
-import WarningIcon from 'public/icons/regular/exclamation-circle.svg';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import WarningIcon from 'public/icons/regular/times.svg';
+import SuccessIcon from 'public/icons/regular/check.svg';
+
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Dropbox from 'public/images/logos/dropbox.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import Vmware from 'public/images/logos/vmware.svg';
+import Linkedin from 'public/images/logos/linkedin.svg';
 
 import styles from './style.css';
 
-function Homepage() {
+export const unstable_getStaticProps = gqlStaticProps(
+  gql`
+    query {
+      successStories: allSuccessStories(
+        first: 4
+        orderBy: _firstPublishedAt_DESC
+      ) {
+        accentColor {
+          hex
+        }
+        duotoneColor1 {
+          hex
+        }
+        duotoneColor2 {
+          hex
+        }
+        title(markdown: true)
+        slug
+        logo {
+          url
+        }
+      }
+    }
+  `,
+);
+
+function Homepage({ successStories }) {
   return (
     <Layout>
       <Hero
@@ -56,7 +78,7 @@ function Homepage() {
         </Checks>
       </Hero>
 
-      <LogosBar />
+      <LogosBar clients={[Dropbox, Hashicorp, Verizon, Vmware, Linkedin]} />
 
       <div style={{ margin: '15vh 0' }}>
         <InterstitialTitle subtitle="Here’s 3 symptoms to watch out">
@@ -73,7 +95,7 @@ function Homepage() {
             <FlagHighlight style="bad">endless different CMSs</FlagHighlight>?
           </>
         }
-        image={Ill1}
+        image="random-things"
       >
         <p>
           How can you deliver a cohesive brand and message strategy if your
@@ -99,7 +121,7 @@ function Homepage() {
             <FlagHighlight style="bad">legacy&nbsp;technology?</FlagHighlight>
           </>
         }
-        image={Ill2}
+        image="stale-flower"
       >
         <p>
           How can you deliver a cohesive brand and message strategy if your
@@ -122,10 +144,12 @@ function Homepage() {
         title={
           <>
             Is your infrastructure{' '}
-            <FlagHighlight style="bad">ready&nbsp;for&nbsp;scale?</FlagHighlight>
+            <FlagHighlight style="bad">
+              ready&nbsp;for&nbsp;scale?
+            </FlagHighlight>
           </>
         }
-        image={Ill3}
+        image="waves"
       >
         <p>
           New channels, new markets, complex use cases, fast iterations. You can
@@ -197,7 +221,6 @@ function Homepage() {
             <FlagHighlight>in&nbsp;one&nbsp;place</FlagHighlight>
           </>
         }
-        image={Ill4}
       >
         <p>
           Headless CMS means keep everyone on the same page, storing everything
@@ -219,10 +242,11 @@ function Homepage() {
         style="good"
         title={
           <>
-            From idea to market <FlagHighlight>in&nbsp;hours</FlagHighlight>, not months
+            From idea to market <FlagHighlight>in&nbsp;hours</FlagHighlight>,
+            not months
           </>
         }
-        image={Ill5}
+        image="people"
       >
         <p>
           Test and iterate painlessly, no matter what’s the digital product
@@ -244,10 +268,11 @@ function Homepage() {
         style="good"
         title={
           <>
-            A <FlagHighlight>global delivery network</FlagHighlight> at your disposal
+            A <FlagHighlight>global delivery network</FlagHighlight> at your
+            disposal
           </>
         }
-        image={Ill6}
+        image="muscles"
       >
         <p>
           With a network that spans 200 cities in more than 90 countries, you
@@ -266,31 +291,22 @@ function Homepage() {
       </Flag>
 
       <Numbers title="Why you should use DatoCMS">
-        <NumbersBlock
-          title="-79%"
-          logo={Linkedin}
-        >
+        <NumbersBlock href="/customers/hashicorp" title="-79%" logo={Hashicorp}>
           In operational costs
         </NumbersBlock>
-        <NumbersBlock 
-          title="30.000"
-          logo={Nike}
-        >
-          Monthly orders
+        <NumbersBlock href="/customers/nike" title="2x" logo={Nike}>
+          Faster time to market
         </NumbersBlock>
-        <NumbersBlock
-          title="10x"
-          logo={Arduino}
-        >
+        <NumbersBlock href="/customers/arduino" title="8x" logo={Arduino}>
           Faster loading times
         </NumbersBlock>
       </Numbers>
 
       <PersonasPicker />
 
-      <UseCases />
+      <UseCaseExcerpts cases={successStories} />
     </Layout>
   );
 }
 
-export default withDato(Homepage);
+export default Homepage;
