@@ -40,8 +40,8 @@
 
 .boxPros {
   display: flex;
-  justify-content: flex-end;
 }
+
 .boxProsInner {
   box-shadow: var(--box-shadow);
   border-radius: 5px;

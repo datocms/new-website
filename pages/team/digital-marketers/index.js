@@ -3,7 +3,6 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
 import TitleIllustrationStripWithContent from 'components/TitleIllustrationStripWithContent';
-import { withDato } from 'lib/datocms';
 import Result from 'components/Result';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
@@ -11,15 +10,34 @@ import Bullets from 'components/Bullets';
 import IntegrationsBanner from 'components/IntegrationsBanner';
 import OmnichannelIllustration from 'components/OmnichannelIllustration';
 import Quote from 'components/Quote';
+import LazyImage from 'components/LazyImage';
+import gql from 'graphql-tag';
+import { gqlStaticProps } from 'lib/datocms';
 
-import Ill1 from 'public/images/illustrations/dato-svg-4-02.svg';
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
-import Ill5 from 'public/images/illustrations/dato-svg-6-04.svg';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import SuccessIcon from 'public/icons/regular/check.svg';
 
 import styles from './style.css';
 
-function DigitalMarketers() {
+export const unstable_getStaticProps = gqlStaticProps(
+  gql`
+    query {
+      integrations: allIntegrations(
+        first: 30
+        filter: { integrationType: { eq: "2427498" } }
+      ) {
+        id
+        logo {
+          url
+        }
+        squareLogo {
+          url
+        }
+      }
+    }
+  `,
+);
+
+function DigitalMarketers({ integrations }) {
   return (
     <Layout>
       <Hero
@@ -41,7 +59,7 @@ function DigitalMarketers() {
       <OmnichannelIllustration />
 
       <TitleIllustrationStripWithContent
-        image={Ill4}
+        image="oniric-world"
         title="Why omnichannel matters?"
         subtitle={
           <>
@@ -93,7 +111,7 @@ function DigitalMarketers() {
             <FlagHighlight>future&#8209;proof</FlagHighlight>
           </>
         }
-        image={Ill4}
+        image="eye-gazing"
       >
         <p>
           Keep content separate from presentation, uncluttered by code or
@@ -112,7 +130,19 @@ function DigitalMarketers() {
         />
       </Flag>
 
-      <IntegrationsBanner integrationTypeId="2427498" title={<>Easily connect any MarTech&nbsp;tool</>}>
+      <IntegrationsBanner
+        title={<>Easily connect any MarTech&nbsp;tool</>}
+        bubbles={integrations.map(integration => (
+          <LazyImage
+            key={integration.id}
+            src={
+              integration.squareLogo
+                ? integration.squareLogo.url
+                : integration.logo.url
+            }
+          />
+        ))}
+      >
         Easily integrate your CMS with your preferred marketing technologies,
         Marketo, Salesforce, Google Analytics, SEMrush, Brightcove, Watson, etc.
         so you can get valuable insights to make meaningful business decisions.
@@ -125,7 +155,7 @@ function DigitalMarketers() {
             Launch new campaigns <FlagHighlight>in&nbsp;minutes</FlagHighlight>
           </>
         }
-        image={Ill1}
+        image="go-mobile"
       >
         <p>
           Whether you’re looking to launch a landing page, microsite, brand
@@ -147,7 +177,8 @@ function DigitalMarketers() {
       <Quote
         quote={
           <>
-            With DatoCMS we made the impossibile: we launched a successful omnichannel campaign in <Highlight>less than a month</Highlight>.
+            With DatoCMS we made the impossibile: we launched a successful
+            omnichannel campaign in <Highlight>less than a month</Highlight>.
           </>
         }
         author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
@@ -160,7 +191,7 @@ function DigitalMarketers() {
             Streamline <FlagHighlight>SEO</FlagHighlight>
           </>
         }
-        image={Ill1}
+        image="zen"
       >
         <p>
           Take full control over meta titles, descriptions, social shares, URL
@@ -180,6 +211,16 @@ function DigitalMarketers() {
         />
       </Flag>
 
+      <Quote
+        quote={
+          <>
+            With DatoCMS we made the impossibile: we launched a successful
+            omnichannel campaign in <Highlight>less than a month</Highlight>.
+          </>
+        }
+        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
+      />
+
       <Flag
         style="good"
         title={
@@ -187,7 +228,7 @@ function DigitalMarketers() {
             Deliver <FlagHighlight>blazing-fast</FlagHighlight> digital products
           </>
         }
-        image={Ill5}
+        image="rocket"
       >
         <p>
           Your customers will experience sub-second page load times without any
@@ -207,16 +248,7 @@ function DigitalMarketers() {
         />
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
-
-<OtherPersonasPicker
+      <OtherPersonasPicker
         title="Not just for digital marketers"
         currentPersonas="digital-marketers"
       />
@@ -224,4 +256,4 @@ function DigitalMarketers() {
   );
 }
 
-export default withDato(DigitalMarketers);
+export default DigitalMarketers;

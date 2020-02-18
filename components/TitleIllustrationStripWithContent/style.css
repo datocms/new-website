@@ -9,7 +9,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 10vh;
+    top: 6vh;
     height: 75%;
     z-index: -1;
   }
@@ -25,7 +25,8 @@
 }
 
 .body {
-  width: 60%;
+  width: 50%;
+  margin-bottom: 5vh;
 }
 
 .title {
@@ -33,6 +34,7 @@
   font-size: 60px;
   align-items: center;
   margin-bottom: 40px;
+  line-height: 1;
 }
 
 .subtitle {
@@ -41,13 +43,15 @@
 
 .image {
   position: absolute;
-  width: 70vw;
-  right: -20vw;
+  width: 50vw;
+  right: 0vw;
   top: 0;
   height: 60vh;
 
-  svg {
+  img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
+    object-position: center center;
   }
 }

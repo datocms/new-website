@@ -1,10 +1,11 @@
 import Wrapper from 'components/Wrapper';
+import LazyImage from 'components/LazyImage';
 import s from './style.css';
 
 export default function TitleIllustrationStripWithContent({
   title,
   subtitle,
-  image: Image,
+  image,
   children,
 }) {
   return (
@@ -18,7 +19,7 @@ export default function TitleIllustrationStripWithContent({
         </Wrapper>
 
         <div className={s.image}>
-          <Image />
+          <LazyImage src={`/images/illustrations/${image}.svg`} />
         </div>
       </div>
       <Wrapper>

@@ -5,7 +5,6 @@ import fetch from 'unfetch';
 import cn from 'classnames';
 import Wrapper from 'components/Wrapper';
 import { useState } from 'react';
-import scrollIntoView from 'scroll-into-view-if-needed';
 import useInterval from '@use-it/interval';
 
 const fetcher = async url => {
@@ -19,13 +18,6 @@ function convLatLongToStyle(latitude, longitude) {
 
   return { left: `${x}%`, top: `${y * (1 + (400 - 320) / 400)}%` };
 }
-
-const groupBy = function(xs, key) {
-  return xs.reduce(function(rv, x) {
-    (rv[key(x)] = rv[key(x)] || []).push(x);
-    return rv;
-  }, {});
-};
 
 const distance = (lat1, lon1, lat2, lon2, unit = 'K') => {
   if (lat1 == lat2 && lon1 == lon2) {
@@ -72,12 +64,14 @@ export default function CdnMap() {
   const setAndScroll = code => {
     setCurrentDataCenter(code);
     const el = document.getElementById(`datacenter-${code}`);
+
     if (el) {
-      scrollIntoView(el, {
-        scrollMode: 'if-needed',
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
+      const rect = el.getBoundingClientRect();
+
+      el.parentElement.parentElement.scroll({
+        top: 0,
+        left: el.offsetLeft - (window.innerWidth - rect.width) / 2,
+        behavior: 'smooth'
       });
     }
   };
@@ -89,7 +83,7 @@ export default function CdnMap() {
       var end = new Date();
       setPing({ ...data, latency: parseInt((end - start) * 0.8) });
 
-      if (!currentDataCenter && window.scrollY > 60) {
+      if (!currentDataCenter) {
         setAndScroll(data.datacenter);
       }
     })();

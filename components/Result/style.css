@@ -2,11 +2,22 @@
   text-align: center;
   max-width: 300px;
   margin: 0 auto;
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+a.root {
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 }
 
 .number {
   font-weight: bold;
-  font-size: 40px;
+  font-size: 50px;
   line-height: 1;
   margin-bottom: 10px;
 }
@@ -14,6 +25,7 @@
 .label {
   font-weight: bold;
   font-size: 25px;
+  line-height: 1;
   margin-bottom: 30px;
 }
 
@@ -27,4 +39,12 @@
   font-size: 0.9em;
   color: #444;
   line-height: 1.4;
+}
+
+.goto {
+  margin-top: 25px;
+  font-size: 0.8em;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--light-body-color);
 }

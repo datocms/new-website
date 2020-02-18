@@ -2,12 +2,8 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import VideoPlayer from 'components/VideoPlayer';
-import Wrapper from 'components/Wrapper';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 
-import ImgixTransformations from 'components/ImgixTransformations';
-import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
-import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 
@@ -43,7 +39,7 @@ function VideoStreamingEncoding() {
         }
       >
         <div className={s.video}>
-          <VideoPlayer src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8" />
+          <VideoPlayer controls autoPlay muted loop src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8" />
         </div>
       </TitleStripWithContent>
 
@@ -55,7 +51,7 @@ function VideoStreamingEncoding() {
             <FlagHighlight>instantly&nbsp;streamable</FlagHighlight>
           </>
         }
-        image={Ill4}
+        image="go-mobile"
       >
         <p>
           We can ingest almost every available codec — including those for
@@ -74,7 +70,6 @@ function VideoStreamingEncoding() {
             scrub preview images.
           </>
         }
-        image={Ill4}
       >
         <div className={s.frames}>
           {range(1, 12, 2).map(t => (
@@ -101,7 +96,6 @@ function VideoStreamingEncoding() {
             Works with <FlagHighlight>any&nbsp;video&nbsp;player</FlagHighlight>
           </>
         }
-        image={Ill4}
       >
         <p>
           Rather than require you to use a proprietary player, we made it easy
@@ -109,16 +103,6 @@ function VideoStreamingEncoding() {
           or professional, web or native.
         </p>
       </Flag>
-
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
     </Layout>
   );
 }

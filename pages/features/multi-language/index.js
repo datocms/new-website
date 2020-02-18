@@ -1,73 +1,42 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import GenericIntegrationsBanner from 'components/GenericIntegrationsBanner';
-import { withDato } from 'lib/datocms';
-import Quote from 'components/Quote';
+import IntegrationsBanner from 'components/IntegrationsBanner';
+import LazyImage from 'components/LazyImage';
 import ProjectSettings from 'components/ProjectSettings';
 import FieldSettings from 'components/FieldSettings';
 import TranslatedUI from 'components/TranslatedUI';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 
-import s from './style.css';
-
-import argentina from 'public/images/flags/argentina.svg';
-import australia from 'public/images/flags/australia.svg';
-import austria from 'public/images/flags/austria.svg';
-import belgium from 'public/images/flags/belgium.svg';
-import brazil from 'public/images/flags/brazil.svg';
-import canada from 'public/images/flags/canada.svg';
-import china from 'public/images/flags/china.svg';
-import denmark from 'public/images/flags/denmark.svg';
-import england from 'public/images/flags/england.svg';
-import finland from 'public/images/flags/finland.svg';
-import france from 'public/images/flags/france.svg';
-import germany from 'public/images/flags/germany.svg';
-import greece from 'public/images/flags/greece.svg';
-import ireland from 'public/images/flags/ireland.svg';
-import italy from 'public/images/flags/italy.svg';
-import mexico from 'public/images/flags/mexico.svg';
-import netherlands from 'public/images/flags/netherlands.svg';
-import newZealand from 'public/images/flags/new-zealand.svg';
-import norway from 'public/images/flags/norway.svg';
-import portugal from 'public/images/flags/portugal.svg';
-import russia from 'public/images/flags/russia.svg';
-import singapore from 'public/images/flags/singapore.svg';
-import spain from 'public/images/flags/spain.svg';
-import sweden from 'public/images/flags/sweden.svg';
-import switzerland from 'public/images/flags/switzerland.svg';
-import uk from 'public/images/flags/united-kingdom.svg';
-import usa from 'public/images/flags/united-states-of-america.svg';
-
-const icons = {
-  argentina,
-  australia,
-  austria,
-  belgium,
-  brazil,
-  canada,
-  china,
-  denmark,
-  england,
-  finland,
-  france,
-  germany,
-  greece,
-  ireland,
-  italy,
-  mexico,
-  netherlands,
-  newZealand,
-  norway,
-  portugal,
-  russia,
-  singapore,
-  spain,
-  sweden,
-  switzerland,
-  uk,
-  usa,
-};
+const icons = [
+  '/images/flags/argentina.svg',
+  '/images/flags/australia.svg',
+  '/images/flags/austria.svg',
+  '/images/flags/belgium.svg',
+  '/images/flags/brazil.svg',
+  '/images/flags/canada.svg',
+  '/images/flags/china.svg',
+  '/images/flags/denmark.svg',
+  '/images/flags/england.svg',
+  '/images/flags/finland.svg',
+  '/images/flags/france.svg',
+  '/images/flags/germany.svg',
+  '/images/flags/greece.svg',
+  '/images/flags/ireland.svg',
+  '/images/flags/italy.svg',
+  '/images/flags/mexico.svg',
+  '/images/flags/netherlands.svg',
+  '/images/flags/new-zealand.svg',
+  '/images/flags/norway.svg',
+  '/images/flags/portugal.svg',
+  '/images/flags/russia.svg',
+  '/images/flags/singapore.svg',
+  '/images/flags/spain.svg',
+  '/images/flags/sweden.svg',
+  '/images/flags/switzerland.svg',
+  '/images/flags/united-kingdom.svg',
+  '/images/flags/united-states-of-america.svg',
+];
 
 function MultiLanguage() {
   return (
@@ -104,15 +73,15 @@ function MultiLanguage() {
         </p>
       </Flag>
 
-      <GenericIntegrationsBanner
+      <IntegrationsBanner
         title={<>Localize both content&nbsp;and&nbsp;assets</>}
-        bubbles={Object.entries(icons).map(([id, Icon]) => (
-          <Icon key={id} />
+        bubbles={icons.map(path => (
+          <LazyImage key={path} src={path} />
         ))}
       >
         All your content and assets are localizable, including rich text,
         responsive images, geo-points, SEO metadata and especially your URLs.
-      </GenericIntegrationsBanner>
+      </IntegrationsBanner>
 
       <Flag
         style="good"
@@ -151,4 +120,4 @@ function MultiLanguage() {
   );
 }
 
-export default withDato(MultiLanguage);
+export default MultiLanguage;

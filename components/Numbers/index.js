@@ -1,15 +1,6 @@
 import Wrapper from 'components/Wrapper';
+import MaybeLink from 'components/MaybeLink';
 import s from './style.css';
-import Link from 'next/link';
-
-const MaybeLink = ({ href, children, ...other }) =>
-  href ? (
-    <Link href={href}>
-      <a {...other}>{children}</a>
-    </Link>
-  ) : (
-    <div {...other}>{children}</div>
-  );
 
 export default function Numbers({ children }) {
   return (

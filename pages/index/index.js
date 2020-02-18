@@ -15,9 +15,6 @@ import LogosBar from 'components/LogosBar';
 import { gqlStaticProps } from 'lib/datocms';
 import gql from 'graphql-tag';
 
-import Nike from 'public/images/clients/nike.svg';
-import Arduino from 'public/images/clients/arduino.svg';
-
 import WarningIcon from 'public/icons/regular/times.svg';
 import SuccessIcon from 'public/icons/regular/check.svg';
 
@@ -26,6 +23,8 @@ import Dropbox from 'public/images/logos/dropbox.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Vmware from 'public/images/logos/vmware.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
+import Nike from 'public/images/logos/nike.svg';
+import Arduino from 'public/images/logos/arduino.svg';
 
 import styles from './style.css';
 
@@ -215,6 +214,7 @@ function Homepage({ successStories }) {
 
       <Flag
         style="good"
+        image="box-things"
         title={
           <>
             Manage all your content{' '}

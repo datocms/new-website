@@ -2,16 +2,42 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
-import { withDato } from 'lib/datocms';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import IntegrationsBanner from 'components/IntegrationsBanner';
 import Quote from 'components/Quote';
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import Result from 'components/Result';
+import LazyImage from 'components/LazyImage';
+import gql from 'graphql-tag';
+import { gqlStaticProps } from 'lib/datocms';
 
 import styles from './style.css';
 
-function Developers() {
+export const unstable_getStaticProps = gqlStaticProps(
+  gql`
+    query {
+      integrations: allIntegrations(
+        first: 30
+        filter: {
+          integrationType: {
+            in: ["166913", "166915", "166916", "166918", "166919"]
+          }
+        }
+      ) {
+        id
+        logo {
+          url
+        }
+        squareLogo {
+          url
+        }
+      }
+    }
+  `,
+);
+
+function Developers({ integrations }) {
   return (
     <Layout>
       <Hero
@@ -41,11 +67,11 @@ function Developers() {
         style="bad"
         title={
           <>
-            Your website is <FlagHighlight>slow</FlagHighlight>
+            Your website is <FlagHighlight style="bad">slow</FlagHighlight>
           </>
         }
         subtitle="Got the guts to run PageSpeed?"
-        image={Ill4}
+        image="rock-balloons"
       >
         <p>
           Try to check the performance of your site, we’ll wait. Unoptimized
@@ -59,11 +85,12 @@ function Developers() {
         style="bad"
         title={
           <>
-            Your architecture <FlagHighlight>doesn't&nbsp;scale</FlagHighlight>
+            Your architecture{' '}
+            <FlagHighlight style="bad">doesn't&nbsp;scale</FlagHighlight>
           </>
         }
         subtitle="Can it handle massive spikes and adapt costs in real-time?"
-        image={Ill4}
+        image="castle"
       >
         <p>
           As long as you’re receiving the usual amount of web traffic, pretty
@@ -77,11 +104,12 @@ function Developers() {
         style="bad"
         title={
           <>
-            Your CMS <FlagHighlight>is&nbsp;not&nbsp;flexible</FlagHighlight>
+            Your CMS{' '}
+            <FlagHighlight style="bad">is&nbsp;not&nbsp;flexible</FlagHighlight>
           </>
         }
         subtitle="Are your editors free to change websites without asking help from devs?"
-        image={Ill4}
+        image="statue"
       >
         <p>
           It should not be your job to constantly make tiny changes to
@@ -96,11 +124,11 @@ function Developers() {
         style="bad"
         title={
           <>
-            You're <FlagHighlight>wasting&nbsp;time</FlagHighlight>
+            You're <FlagHighlight style="bad">wasting&nbsp;time</FlagHighlight>
           </>
         }
         subtitle="Are your projects reusing code and good practices?"
-        image={Ill4}
+        image="cuckoo"
       >
         <p>
           Most enterprises have many teams working on very similar dev projects,
@@ -110,17 +138,7 @@ function Developers() {
         </p>
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
-
-      <div style={{ margin: '10vh 0 10vh' }}>
+      <div style={{ margin: '30vh 0 10vh' }}>
         <InterstitialTitle style="two">
           Stop using monolithic CMSs. You need an Headless&nbsp;CMS
         </InterstitialTitle>
@@ -134,7 +152,7 @@ function Developers() {
             <FlagHighlight>any modern web tool</FlagHighlight>
           </>
         }
-        image={Ill4}
+        image="people"
       >
         <p>
           React, Vue, Gatsby, Next.js: take advantage of the best frameworks
@@ -165,7 +183,7 @@ function Developers() {
             Content and presentation, <FlagHighlight>decoupled</FlagHighlight>
           </>
         }
-        image={Ill4}
+        image="zen-garden"
       >
         <p>
           By making your editorial team write content using a structured,
@@ -174,24 +192,19 @@ function Developers() {
         </p>
       </Flag>
 
-      <Flag
-        style="good"
-        title={
-          <>
-            All the <FlagHighlight>modelling flexibility</FlagHighlight> you
-            need
-          </>
-        }
-        image={Ill4}
+      <IntegrationsBanner
+        title={<>Extensible and integrable by&nbsp;design</>}
+        bubbles={integrations.map(integration => (
+          <LazyImage
+            key={integration.id}
+            src={
+              integration.squareLogo
+                ? integration.squareLogo.url
+                : integration.logo.url
+            }
+          />
+        ))}
       >
-        <p>
-          From business-critical product pages, to dynamic landing-pages, to
-          tiny microcopy: we give you all the flexibility you need to model any
-          kind of content. And, most importantly, to change it over time.
-        </p>
-      </Flag>
-
-      <IntegrationsBanner integrationTypeId={['166913', '166915', '166916', '166918', '166919']} title={<>Extensible and integrable by&nbsp;design</>}>
         Being a API-first headless CMS, DatoCMS easily integrates with any
         third-party platform or service. Build your digital products by
         composing the best tools in the market: we offer plugins, webhooks,
@@ -202,10 +215,27 @@ function Developers() {
         style="good"
         title={
           <>
+            All the <FlagHighlight>modelling flexibility</FlagHighlight> you
+            need
+          </>
+        }
+        image="fruit"
+      >
+        <p>
+          From business-critical product pages, to dynamic landing-pages, to
+          tiny microcopy: we give you all the flexibility you need to model any
+          kind of content. And, most importantly, to change it over time.
+        </p>
+      </Flag>
+
+      <Flag
+        style="good"
+        title={
+          <>
             Build product, <FlagHighlight>not infrastructure</FlagHighlight>
           </>
         }
-        image={Ill4}
+        image="bear-bird"
       >
         <p>
           You’re not the one that should worry about traffic spikes, performance
@@ -213,6 +243,54 @@ function Developers() {
           is accessible, secure, and close to every visitor.
         </p>
       </Flag>
+
+      <TitleStripWithContent
+        title={
+          <>
+            A technology investment that doubles performaces and dev team
+            productivity
+          </>
+        }
+      >
+        <div className={styles.grid}>
+          <Result
+            number="-92,5%"
+            href="/customers/arduino"
+            label={
+              <>
+                <Highlight style="good">lines of code</Highlight>
+              </>
+            }
+          >
+            <strong>Arduino</strong> could transition from 26,000 lines of code
+            to just 1,200 switching to DatoCMS.
+          </Result>
+          <Result
+            number="-79%"
+            href="/customers/hashicorp"
+            label={
+              <>
+                in <Highlight style="good">operational costs</Highlight>
+              </>
+            }
+          >
+            <strong>HashiCorp</strong> was able to drammatically cut down server
+            expenses.
+          </Result>
+          <Result
+            number="0,9s"
+            href="/customers/nike"
+            label={
+              <>
+                in <Highlight style="good">loading times</Highlight>
+              </>
+            }
+          >
+            <strong>Matter Supply</strong> was able to scale to 200k views/day
+            without sacrificing speed and reliability.
+          </Result>
+        </div>
+      </TitleStripWithContent>
 
       <OtherPersonasPicker
         title="Not just for developers"
@@ -222,4 +300,4 @@ function Developers() {
   );
 }
 
-export default withDato(Developers);
+export default Developers;

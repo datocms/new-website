@@ -1,13 +1,16 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import { withDato } from 'lib/datocms';
 import Quote from 'components/Quote';
 import EnterpriseStrip, { Point } from 'components/EnterpriseStrip';
 import LogosBar from 'components/LogosBar';
 import TalkWithUs from 'components/TalkWithUs';
 
-import s from './style.css';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import Nike from 'public/images/logos/nike.svg';
+import Linkedin from 'public/images/logos/linkedin.svg';
 
 function Enterprise() {
   return (
@@ -34,7 +37,7 @@ function Enterprise() {
             with our Content Delivery API
           </>
         }
-        limit={8}
+        clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
       />
 
       <EnterpriseStrip
@@ -54,7 +57,6 @@ function Enterprise() {
           description="We can tailor a solution to your specific use case, with dedicated priority, 24/7 support, and real-time scaling"
         />
       </EnterpriseStrip>
-
 
       <Quote
         quote={
@@ -87,7 +89,11 @@ function Enterprise() {
       <Quote
         quote={
           <>
-            We are <Highlight>beyond excited</Highlight> about the close relationship we have built between Dato and HashiCorp. It’s amazing. More than once, we have asked, ‘Hey, can we have this thing?’ and the next day we get back a response, ‘Oh yeah, here it is.’ Unbelievable.
+            We are <Highlight>beyond excited</Highlight> about the close
+            relationship we have built between Dato and HashiCorp. It’s amazing.
+            More than once, we have asked, ‘Hey, can we have this thing?’ and
+            the next day we get back a response, ‘Oh yeah, here it is.’
+            Unbelievable.
           </>
         }
         author="Jeff Escalante, Web Engineer Manager @ HashiCorp"
@@ -112,9 +118,8 @@ function Enterprise() {
       </EnterpriseStrip>
 
       <TalkWithUs />
-
     </Layout>
   );
 }
 
-export default withDato(Enterprise);
+export default Enterprise;

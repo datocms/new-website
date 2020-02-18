@@ -6,9 +6,6 @@ import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
-
-import styles from './style.css';
 
 function ImagesApi() {
   return (
@@ -51,7 +48,7 @@ function ImagesApi() {
             <FlagHighlight>the&nbsp;best&nbsp;output&nbsp;format</FlagHighlight>
           </>
         }
-        image={Ill4}
+        image="key"
       >
         <p>
           Thanks to automatic Content Negotiation, you are able to serve WebP
@@ -102,7 +99,7 @@ function ImagesApi() {
             All the <FlagHighlight>metadata</FlagHighlight> you need
           </>
         }
-        image={Ill4}
+        image="eye-gazing"
       >
         <p>
           Dominant colors, EXIF data, aspect ratio, filesize, copyright

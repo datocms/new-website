@@ -240,7 +240,7 @@ const steps = [
   },
 ];
 
-const stepTime = 2500;
+const stepTime = 2000;
 const width = 1000;
 const height = 631;
 const ar = width / height;
@@ -260,6 +260,7 @@ export default function InterstitialTitle() {
 
   const reset = useCallback(() => {
     ref.current.map(clearTimeout);
+
     for (let i = 0; i < steps.length; i++) {
       const colorTransform = steps[i].transforms.find(t =>
         t.match(/(sepia|duotone|blur|htn)/),

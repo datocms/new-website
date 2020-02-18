@@ -3,17 +3,11 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
 import TitleIllustrationStripWithContent from 'components/TitleIllustrationStripWithContent';
-import { withDato } from 'lib/datocms';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
 import Quote from 'components/Quote';
 import TitleStripWithContent from 'components/TitleStripWithContent';
-
-import Ill1 from 'public/images/illustrations/dato-svg-4-02.svg';
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
-import Ill5 from 'public/images/illustrations/dato-svg-6-04.svg';
-
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
 
 import s from './style.css';
@@ -116,7 +110,7 @@ function ContentCreators() {
             <FlagHighlight>Work collaboratively</FlagHighlight> without risks
           </>
         }
-        image={Ill4}
+        image="faces"
       >
         <p>
           Produce publication workflows, see updates in real-time from your team
@@ -143,7 +137,7 @@ function ContentCreators() {
             no&nbsp;IT&nbsp;needed
           </>
         }
-        image={Ill1}
+        image="oniric-world"
       >
         <p>
           Compose inspiring visual stories by alternating a number of reusable
@@ -180,7 +174,6 @@ function ContentCreators() {
             <FlagHighlight>AI-assisted</FlagHighlight> asset management
           </>
         }
-        image={Ill1}
       >
         <p>
           Organize all your digital assets in folders, locate media files
@@ -205,7 +198,7 @@ function ContentCreators() {
             Best in-class <FlagHighlight>localization support</FlagHighlight>
           </>
         }
-        image={Ill5}
+        image="flags-sandwich"
       >
         <p>
           Deliver relevant, consistent content on every locale, on every device.
@@ -224,8 +217,8 @@ function ContentCreators() {
       </Flag>
 
       <TitleIllustrationStripWithContent
-        image={Ill4}
-        title="All in a beautifully fast, distraction-free writing experience"
+        image="zen-garden"
+        title="A fast, distraction-free writing experience"
         subtitle={
           <>
             Everything in DatoCMS is focused on helping you create great
@@ -258,4 +251,4 @@ function ContentCreators() {
   );
 }
 
-export default withDato(ContentCreators);
+export default ContentCreators;

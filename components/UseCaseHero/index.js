@@ -19,7 +19,6 @@ export default function UseCase({ title, subtitle, image, gradient }) {
   }));
 
   const handleMouseMove = useCallback(({ pageX: x, pageY: y }) => {
-    console.log(calc(x, y));
     set({ xy: calc(x, y) });
   }, []);
 

@@ -28,6 +28,13 @@
   border-radius: 5px;
   padding: 40px 50px;
   border-bottom: 1px solid var(--border-color);
+  position: relative;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+  
   &:last-child {
     border-bottom-width: 0;
   }

@@ -1,7 +1,6 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import { withDato } from 'lib/datocms';
 import CdnMap from 'components/CdnMap';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
@@ -11,16 +10,14 @@ import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 
-import styles from './style.css';
-
-function Developers() {
+function WorldwideCdn() {
   return (
     <Layout>
       <Hero
         over="Worldwide smart CDN"
         title={
           <>
-            Content, images and videos, <Highlight>all on the edge</Highlight>
+            Content, images and videos, <Highlight>all&nbsp;on&nbsp;the&nbsp;edge</Highlight>
           </>
         }
         subtitle={
@@ -49,7 +46,7 @@ function Developers() {
             <FlagHighlight>scales&nbsp;infinitely</FlagHighlight>
           </>
         }
-        image={Ill4}
+        image="space"
       >
         <p>
           We built DatoCMS content infrastructure so you don’t have to. Focus on
@@ -59,6 +56,19 @@ function Developers() {
           journey, with no upfront costs.
         </p>
       </Flag>
+
+
+      <Quote
+        quote={
+          <>
+            We aired our first Super Bowl ad and{' '}
+            <Highlight>the website performed flawlessly</Highlight>, even under
+            high load, which was awesome. We’re transitioning all our sites to
+            DatoCMS in the coming months.
+          </>
+        }
+        author="Andrew Smith, Architect for web @ Little Caesars"
+      />
 
       <Numbers>
         <NumbersBlock title="74">CDN Edges</NumbersBlock>
@@ -78,7 +88,7 @@ function Developers() {
             every need
           </>
         }
-        image={Ill4}
+        image="zen"
       >
         <p>
           DatoCMS offers a coordinated suite of different APIs and tools to work
@@ -93,20 +103,8 @@ function Developers() {
           bullets={['Content GraphQL API', 'Images API', 'Video streaming API']}
         />
       </Flag>
-
-      <Quote
-        quote={
-          <>
-            We aired our first Super Bowl ad and{' '}
-            <Highlight>the website performed flawlessly</Highlight>, even under
-            high load, which was awesome. We’re transitioning all our sites to
-            DatoCMS in the coming months.
-          </>
-        }
-        author="Andrew Smith, Architect for web @ Little Caesars"
-      />
     </Layout>
   );
 }
 
-export default withDato(Developers);
+export default WorldwideCdn;

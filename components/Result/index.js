@@ -1,12 +1,14 @@
+import MaybeLink from 'components/MaybeLink';
 import s from './style.css';
 
-export default function Result({ number, title, label, children }) {
+export default function Result({ number, href, title, label, children }) {
   return (
-    <div className={s.root}>
+    <MaybeLink href={href} className={s.root}>
       {number && <div className={s.number}>{number}</div>}
       {label && <div className={s.label}>{label}</div>}
       {title && <div className={s.title}>{title}</div>}
       <div className={s.body}>{children}</div>
-    </div>
+      {href && <div className={s.goto}>Read the whole story</div>}
+    </MaybeLink>
   );
 }

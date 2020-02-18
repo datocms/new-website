@@ -1,9 +1,9 @@
 .grid {
-  margin-top: 10vh;
   box-shadow: var(--box-shadow);
   border-radius: 5px;
   padding: 70px;
   background: white;
+  margin: 40px;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;

@@ -25,7 +25,7 @@ export default function Flag({
 
   const imageEl =
     typeof image === 'string' ? (
-      <LazyImage src={`images/illustrations/${image}.svg`} />
+      <LazyImage src={`/images/illustrations/${image}.svg`} />
     ) : (
       image ? React.createElement(image) : <span />
     );

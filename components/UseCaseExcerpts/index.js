@@ -7,8 +7,6 @@ import LazyImage from 'components/LazyImage';
 export default function UseCaseExcerpts({ cases }) {
   const firstCase = cases[0];
 
-  console.log(firstCase.logo);
-
   return (
     <div className={s.root}>
       <Wrapper>

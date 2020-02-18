@@ -2,15 +2,9 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import GraphQlDemo from 'components/GraphQlDemo';
-import Wrapper from 'components/Wrapper';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import VideoPlayer from 'components/VideoPlayer';
-
-import ImgixTransformations from 'components/ImgixTransformations';
-import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
 import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 
 import s from './style.css';
 
@@ -131,22 +125,11 @@ function GraphQlContentApi() {
             system.
           </>
         }
-        image={Ill4}
       >
         <div className={s.video}>
-          <VideoPlayer src="https://stream.mux.com/dRjI3lukuQDwksXF1sgLQ7Kj4GbAFzUq.m3u8" />
+          <VideoPlayer controls autoPlay muted loop src="https://stream.mux.com/dRjI3lukuQDwksXF1sgLQ7Kj4GbAFzUq.m3u8" />
         </div>
       </TitleStripWithContent>
-
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
 
       <TitleStripWithContent
         title={<>Get many resources in a single request</>}
