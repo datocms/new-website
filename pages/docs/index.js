@@ -1,38 +1,69 @@
-import glob from 'glob';
-import util from 'util';
-import buildTree from 'utils/buildTree';
+import { gqlStaticProps } from 'lib/datocms';
+import BaseLayout from 'components/BaseLayout';
+import gql from 'graphql-tag';
 
 import s from './style.css';
 
-export async function unstable_getStaticProps() {
-  const result = await util.promisify(glob)('docs/**/*.md');
-  const toc = await buildTree(result);
+export const unstable_getStaticProps = gqlStaticProps(
+  gql`
+    query {
+      roots: allDocGroups(filter: { parent: { exists: false } }) {
+        name
+        slug
+        pages {
+          title
+          slug
+        }
+        children {
+          name
+          slug
+          pages {
+            title
+            slug
+          }
+          children {
+            name
+            slug
+            pages {
+              title
+              slug
+            }
+          }
+        }
+      }
+    }
+  `,
+);
 
-  return { props: { toc } };
-}
-
-export default function Docs({ toc }) {
+export default function Docs({ roots }) {
   return (
-    <div className={s.root}>
-      <div className={s.sidebar}>
-        <div className={s.logo}>DatoCMS Docs</div>
-        <div className={s.innerSidebar}>
-          {toc.map(item => (
-            <div className={s.area} key={item.title}>
-              <div className={s.areaName}>{item.title}</div>
-              {item.children.map(sub => (
-                <div className={s.sub} key={sub}>
-                  {sub.title}
-                </div>
-              ))}
-            </div>
-          ))}
+    <BaseLayout>
+      <div className={s.root}>
+        <div className={s.sidebar}>
+          <div className={s.logo}>DatoCMS Docs</div>
+          <div className={s.innerSidebar}>
+            {roots.map(root => (
+              <div className={s.area} key={root.slug}>
+                <div className={s.areaName}>{root.name}</div>
+                {root.children.map(sub => (
+                  <div className={s.sub} key={sub.slug}>
+                    {sub.name}
+                  </div>
+                ))}
+                {root.pages.map(sub => (
+                  <div className={s.sub} key={sub.slug}>
+                    {sub.title}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={s.contentWrapper}>
+          <div className={s.mainHeader}></div>
+          <div className={s.articleContainer}></div>
         </div>
       </div>
-      <div className={s.contentWrapper}>
-        <div className={s.mainHeader}></div>
-        <div className={s.articleContainer}></div>
-      </div>
-    </div>
+    </BaseLayout>
   );
 }
