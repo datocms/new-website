@@ -44,7 +44,7 @@ export default function Docs({ roots }) {
             root.children.length === 0 ? (
               <Link
                 href="/docs/p/[...chunks]"
-                as={`/docs/p/${root.slug}/${root.pages[0].slug}`}
+                as={`/docs/p/${root.slug}${root.pages[0].slug === 'index' ? '' : `/${root.pages[0].slug}`}`}
               >
                 <a className={s.topGuide} key={root.slug}>
                   {root.name}
@@ -57,7 +57,7 @@ export default function Docs({ roots }) {
                   {root.children.map(sub => (
                     <Link
                       href="/docs/p/[...chunks]"
-                      as={`/docs/p/${sub.slug}/${sub.pages[0].slug}`}
+                      as={`/docs/p/${sub.slug}${sub.pages[0].slug === 'index' ? '' : `/${sub.pages[0].slug}`}`}
                       key={sub.slug}
                     >
                       <a className={s.guide}>{sub.name}</a>

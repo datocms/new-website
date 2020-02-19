@@ -8,8 +8,11 @@ import s from '../../pageStyle.css';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 
 export const unstable_getStaticProps = async function({ params: { chunks } }) {
-  const groupSlug = chunks[chunks.length - 2];
-  const pageSlug = chunks[chunks.length - 1];
+  console.log(chunks);
+
+  const groupSlug = chunks.length >= 2 ? chunks[chunks.length - 2] : chunks[0];
+  const pageSlug = chunks.length >= 2 ? chunks[chunks.length - 1] : 'index';
+
   const apolloClient = initApolloClient();
 
   const {
@@ -126,7 +129,7 @@ export default function DocPage({ docGroup, page }) {
           {docGroup.pages.map(page => (
             <ActiveLink
               href="/docs/p/[...chunks]"
-              as={`/docs/p/${docGroup.slug}/${page.slug}`}
+              as={`/docs/p/${docGroup.slug}${page.slug === 'index' ? '' : `/${page.slug}`}`}
               activeClassName={s.activePage}
               key={page.slug}
             >
