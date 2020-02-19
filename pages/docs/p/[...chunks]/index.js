@@ -139,7 +139,7 @@ export default function DocPage({ docGroup, page }) {
       }
     >
       <div className={s.title}>{page.title}</div>
-      <PostContent content={page.content} />
+      <PostContent content={page.content} style={s} />
     </DocsLayout>
   );
 }

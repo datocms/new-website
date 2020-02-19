@@ -3,9 +3,11 @@ import VideoPlayer from 'components/VideoPlayer';
 import SmartMarkdown from 'components/SmartMarkdown';
 import ImageFigure from 'components/ImageFigure';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import s from "./style.css";
+import defaultStyles from "./style.css";
 
-export default function PostContent({ content }) {
+export default function PostContent({ content, style }) {
+  const s = style || defaultStyles;
+
   return (
     <div className={s.body}>
     {content.map(block => (
@@ -55,25 +57,23 @@ export default function PostContent({ content }) {
           </div>
         )}
         {block._modelApiKey === 'code_block' && (
-          <div className={s.qa}>
-            <Highlight
-              {...defaultProps}
-              code={block.code}
-              language={block.language || 'unknown'}
-            >
-              {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={style}>
-                  {tokens.map((line, i) => (
-                    <div {...getLineProps({ line, key: i })}>
-                      {line.map((token, key) => (
-                        <span {...getTokenProps({ token, key })} />
-                      ))}
-                    </div>
-                  ))}
-                </pre>
-              )}
-            </Highlight>
-          </div>
+          <Highlight
+            {...defaultProps}
+            code={block.code}
+            language={block.language || 'unknown'}
+          >
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+              <pre className={className} style={style}>
+                {tokens.map((line, i) => (
+                  <div {...getLineProps({ line, key: i })}>
+                    {line.map((token, key) => (
+                      <span {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+            )}
+          </Highlight>
         )}
         {block._modelApiKey === 'quote' && (
           <div className={s.quote}>
