@@ -1,7 +1,7 @@
 import { gqlStaticProps } from 'lib/datocms';
-import BaseLayout from 'components/BaseLayout';
+import DocsLayout from 'components/DocsLayout';
 import gql from 'graphql-tag';
-
+import Link from 'next/link';
 import s from './style.css';
 
 export const unstable_getStaticProps = gqlStaticProps(
@@ -37,33 +37,38 @@ export const unstable_getStaticProps = gqlStaticProps(
 
 export default function Docs({ roots }) {
   return (
-    <BaseLayout>
-      <div className={s.root}>
-        <div className={s.sidebar}>
-          <div className={s.logo}>DatoCMS Docs</div>
-          <div className={s.innerSidebar}>
-            {roots.map(root => (
-              <div className={s.area} key={root.slug}>
-                <div className={s.areaName}>{root.name}</div>
-                {root.children.map(sub => (
-                  <div className={s.sub} key={sub.slug}>
-                    {sub.name}
-                  </div>
-                ))}
-                {root.pages.map(sub => (
-                  <div className={s.sub} key={sub.slug}>
-                    {sub.title}
-                  </div>
-                ))}
+    <DocsLayout
+      sidebar={
+        <>
+          {roots.map(root =>
+            root.children.length === 0 ? (
+              <Link
+                href="/docs/p/[...chunks]"
+                as={`/docs/p/${root.slug}/${root.pages[0].slug}`}
+              >
+                <a className={s.topGuide} key={root.slug}>
+                  {root.name}
+                </a>
+              </Link>
+            ) : (
+              <div className={s.group} key={root.slug}>
+                <div className={s.groupName}>{root.name}</div>
+                <div className={s.guides}>
+                  {root.children.map(sub => (
+                    <Link
+                      href="/docs/p/[...chunks]"
+                      as={`/docs/p/${sub.slug}/${sub.pages[0].slug}`}
+                      key={sub.slug}
+                    >
+                      <a className={s.guide}>{sub.name}</a>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-        <div className={s.contentWrapper}>
-          <div className={s.mainHeader}></div>
-          <div className={s.articleContainer}></div>
-        </div>
-      </div>
-    </BaseLayout>
+            ),
+          )}
+        </>
+      }
+    />
   );
 }

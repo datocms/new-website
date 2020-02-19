@@ -2,6 +2,7 @@ import ResponsiveEmbed from 'react-responsive-embed';
 import VideoPlayer from 'components/VideoPlayer';
 import SmartMarkdown from 'components/SmartMarkdown';
 import ImageFigure from 'components/ImageFigure';
+import Highlight, { defaultProps } from 'prism-react-renderer';
 import s from "./style.css";
 
 export default function PostContent({ content }) {
@@ -51,6 +52,27 @@ export default function PostContent({ content }) {
                 }}
               />
             </div>
+          </div>
+        )}
+        {block._modelApiKey === 'code_block' && (
+          <div className={s.qa}>
+            <Highlight
+              {...defaultProps}
+              code={block.code}
+              language={block.language || 'unknown'}
+            >
+              {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={className} style={style}>
+                  {tokens.map((line, i) => (
+                    <div {...getLineProps({ line, key: i })}>
+                      {line.map((token, key) => (
+                        <span {...getTokenProps({ token, key })} />
+                      ))}
+                    </div>
+                  ))}
+                </pre>
+              )}
+            </Highlight>
           </div>
         )}
         {block._modelApiKey === 'quote' && (

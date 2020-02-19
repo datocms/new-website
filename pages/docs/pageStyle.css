@@ -1,0 +1,44 @@
+.page {
+  margin-bottom: 7px;
+  color: var(--light-body-color);
+  display: block;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.activePage {
+  color: var(--accent-color);
+}
+
+.backHome {
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--light-body-color);
+  margin-bottom: 20px;
+  display: flex;
+
+  svg {
+    fill: var(--light-body-color);
+    margin-right: 0.5em;
+  }
+}
+
+.groupName {
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 50px;
+  margin-bottom: 40px;
+  font-family: var(--font-serif);
+  line-height: 1;
+  font-weight: bold;
+  letter-spacing: -0.03em;
+}

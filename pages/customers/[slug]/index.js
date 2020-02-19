@@ -14,7 +14,7 @@ import {
 } from 'lib/datocms';
 import gql from 'graphql-tag';
 import { renderMetaTags } from 'react-datocms';
-import PostContent from '../../../components/PostContent';
+import PostContent from 'components/PostContent';
 
 export const unstable_getStaticPaths = gqlStaticPaths(
   gql`
