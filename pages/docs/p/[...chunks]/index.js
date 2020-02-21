@@ -6,9 +6,15 @@ import Link from 'next/link';
 import ActiveLink from 'components/ActiveLink';
 import s from '../../pageStyle.css';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
+import htmlToDOM from 'html-dom-parser';
+import { domToReact } from 'html-react-parser';
+import slugify from 'utils/slugify';
+import getInnerText from 'utils/getInnerText';
 
-export const unstable_getStaticProps = async function({ params: { chunks } }) {
-  console.log(chunks);
+var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
+
+export const unstable_getStaticProps = async function({ params: { chunks: rawChunks } }) {
+  const chunks = rawChunks.map(chunk => chunk.split(/\//g)).flat();
 
   const groupSlug = chunks.length >= 2 ? chunks[chunks.length - 2] : chunks[0];
   const pageSlug = chunks.length >= 2 ? chunks[chunks.length - 1] : 'index';
@@ -95,7 +101,7 @@ export const unstable_getStaticProps = async function({ params: { chunks } }) {
                 }
               }
             }
-            ...on CodeBlockRecord {
+            ... on CodeBlockRecord {
               _modelApiKey
               code
               language
@@ -114,6 +120,28 @@ export const unstable_getStaticProps = async function({ params: { chunks } }) {
 };
 
 export default function DocPage({ docGroup, page }) {
+  const tocEntries = page.content
+    .filter(b => b._modelApiKey === 'text')
+    .map(b => {
+      const dom = htmlToDOM(b.text, domParserOptions);
+
+      return dom
+        .filter(el => el.type === 'tag' && el.name.startsWith('h'))
+        .map(heading =>
+          domToReact([heading], {
+            replace: ({ children }) => {
+              const innerText = getInnerText(children);
+              return (
+                <a href={`#${slugify(innerText)}`} className={s.tocEntry}>
+                  {domToReact(children)}
+                </a>
+              );
+            },
+          }),
+        );
+    })
+    .flat();
+
   return (
     <DocsLayout
       sidebar={
@@ -129,20 +157,32 @@ export default function DocPage({ docGroup, page }) {
           {docGroup.pages.map(page => (
             <ActiveLink
               href="/docs/p/[...chunks]"
-              as={`/docs/p/${docGroup.slug}${page.slug === 'index' ? '' : `/${page.slug}`}`}
+              as={`/docs/p/${docGroup.slug}${
+                page.slug === 'index' ? '' : `/${page.slug}`
+              }`}
               activeClassName={s.activePage}
               key={page.slug}
             >
-              <a className={s.page}>
-                {page.title}
-              </a>
+              <a className={s.page}>{page.title}</a>
             </ActiveLink>
           ))}
         </>
       }
     >
-      <div className={s.title}>{page.title}</div>
-      <PostContent content={page.content} style={s} />
+      <div className={s.articleContainer}>
+        <div className={s.article}>
+          <div className={s.title}>{page.title}</div>
+          <PostContent content={page.content} style={s} />
+        </div>
+        {tocEntries.length > 0 && (
+          <div className={s.sidebar}>
+            <div className={s.toc}>
+              <div className={s.tocTitle}>In this page</div>
+              <div className={s.tocEntries}>{tocEntries}</div>
+            </div>
+          </div>
+        )}
+      </div>
     </DocsLayout>
   );
 }

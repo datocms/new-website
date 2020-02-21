@@ -35,6 +35,7 @@
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.2",
     "hls.js": "^0.13.1",
+    "html-dom-parser": "^0.2.3",
     "html-react-parser": "^0.10.1",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.2.1",
@@ -64,6 +65,7 @@
   },
   "devDependencies": {
     "now": "^16.7.3",
+    "url-loader": "^3.0.0",
     "webpack-filter-warnings-plugin": "^1.2.1"
   }
 }

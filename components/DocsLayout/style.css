@@ -74,14 +74,3 @@
 .mainHeader {
   height: 55px;
 }
-
-.articleContainer {
-  padding-top: 33px;
-  padding-left: 64px;
-  padding-bottom: 33px;
-  display: flex;
-}
-
-.article {
-  min-width: 738px;
-}

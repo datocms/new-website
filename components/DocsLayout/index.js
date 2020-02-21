@@ -20,9 +20,7 @@ export default function DocsLayout({ sidebar, children }) {
           <div className={s.mainHeader}>
             <SearchIcon />
           </div>
-          <div className={s.articleContainer}>
-            <div className={s.article}>{children}</div>
-          </div>
+          {children}
         </div>
       </div>
     </BaseLayout>
