@@ -4,12 +4,12 @@ import gql from 'graphql-tag';
 import PostContent from 'components/PostContent';
 import Link from 'next/link';
 import ActiveLink from 'components/ActiveLink';
-import s from '../../pageStyle.css';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 import htmlToDOM from 'html-dom-parser';
 import { domToReact } from 'html-react-parser';
 import slugify from 'utils/slugify';
 import getInnerText from 'utils/getInnerText';
+import s from '../../pageStyle.css';
 
 var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 
@@ -127,7 +127,7 @@ export const unstable_getStaticProps = async function({
   return { props: { docGroup, titleOverride, page: pageData } };
 };
 
-const Sidebar = () => (
+export const Sidebar = ({ docGroup }) => (
   <>
     <Link href="/docs">
       <a className={s.backHome}>
@@ -137,23 +137,31 @@ const Sidebar = () => (
 
     <div className={s.groupName}>{docGroup.name}</div>
 
-    {docGroup.pages.map(page => (
-      <ActiveLink
-        href="/docs/p/[...chunks]"
-        as={`/docs/p/${docGroup.slug}${
-          page.page.slug === 'index' ? '' : `/${page.page.slug}`
-        }`}
-        activeClassName={s.activePage}
-        key={page.page.slug}
-      >
-        <a className={s.page}>{page.titleOverride || page.page.title}</a>
-      </ActiveLink>
-    ))}
+    {docGroup.pages.map(page => {
+      const url = `/docs/p/${docGroup.slug}${
+        page.page.slug === 'index' ? '' : `/${page.page.slug}`
+      }`;
+
+      return (
+        <ActiveLink
+          href={
+            url === '/docs/p/content-delivery-api/filtering-records'
+              ? '/docs/p/content-delivery-api/filtering-records'
+              : '/docs/p/[...chunks]'
+          }
+          as={url}
+          activeClassName={s.activePage}
+          key={page.page.slug}
+        >
+          <a className={s.page}>{page.titleOverride || page.page.title}</a>
+        </ActiveLink>
+      );
+    })}
   </>
 );
 
-export default function DocPage({ docGroup, titleOverride, page }) {
-  const tocEntries = page.content
+export function Toc({ content }) {
+  const tocEntries = content
     .filter(b => b._modelApiKey === 'text')
     .map(b => {
       const dom = htmlToDOM(b.text, domParserOptions);
@@ -180,20 +188,26 @@ export default function DocPage({ docGroup, titleOverride, page }) {
     .flat();
 
   return (
-    <DocsLayout sidebar={<Sidebar />}>
+    tocEntries.length > 0 && (
+      <div className={s.sidebar}>
+        <div className={s.toc}>
+          <div className={s.tocTitle}>In this page</div>
+          <div className={s.tocEntries}>{tocEntries}</div>
+        </div>
+      </div>
+    )
+  );
+}
+
+export default function DocPage({ docGroup, titleOverride, page }) {
+  return (
+    <DocsLayout sidebar={<Sidebar docGroup={docGroup} />}>
       <div className={s.articleContainer}>
         <div className={s.article}>
           <div className={s.title}>{titleOverride || page.title}</div>
           <PostContent content={page.content} style={s} />
         </div>
-        {tocEntries.length > 0 && (
-          <div className={s.sidebar}>
-            <div className={s.toc}>
-              <div className={s.tocTitle}>In this page</div>
-              <div className={s.tocEntries}>{tocEntries}</div>
-            </div>
-          </div>
-        )}
+        <Toc content={page.content} />
       </div>
     </DocsLayout>
   );

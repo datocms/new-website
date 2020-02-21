@@ -39,6 +39,7 @@
     "hls.js": "^0.13.1",
     "html-dom-parser": "^0.2.3",
     "html-react-parser": "^0.10.1",
+    "humps": "^2.0.1",
     "isomorphic-unfetch": "^3.0.0",
     "keyword-highlighter": "^1.0.6",
     "next": "^9.2.1",

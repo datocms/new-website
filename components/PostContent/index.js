@@ -6,7 +6,7 @@ import theme from 'custom-prism-react-renderer/themes/dracula';
 import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 import defaultStyles from './style.css';
 
-export default function PostContent({ content, style }) {
+export default function PostContent({ content, style, children }) {
   const s = style || defaultStyles;
 
   return (
@@ -110,6 +110,7 @@ export default function PostContent({ content, style }) {
           )}
         </React.Fragment>
       ))}
+      {children}
     </div>
   );
 }

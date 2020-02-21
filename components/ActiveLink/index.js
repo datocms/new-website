@@ -8,7 +8,7 @@ export default function ActiveLink({ children, ...props }) {
 
   let className = child.props.className || "";
 
-  if (router.pathname === props.href && router.asPath === props.as && props.activeClassName) {
+  if ((props.as ? router.asPath === props.as : router.pathname === props.href) && props.activeClassName) {
     className = `${className} ${props.activeClassName}`.trim();
   }
 
