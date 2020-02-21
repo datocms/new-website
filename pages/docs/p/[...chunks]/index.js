@@ -126,7 +126,7 @@ export default function DocPage({ docGroup, page }) {
       const dom = htmlToDOM(b.text, domParserOptions);
 
       return dom
-        .filter(el => el.type === 'tag' && el.name.startsWith('h'))
+        .filter(el => el.type === 'tag' && el.name.match(/^h[1-6]$/))
         .map(heading =>
           domToReact([heading], {
             replace: ({ children }) => {

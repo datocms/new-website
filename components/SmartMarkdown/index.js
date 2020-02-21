@@ -9,7 +9,7 @@ export default function SmartMarkdown({ children, imageClassName }) {
   const parseOptions = useMemo(
     () => ({
       replace: ({ type, name, attribs, children }) => {
-        if (type === 'tag' && name.startsWith('h')) {
+        if (type === 'tag' && name.match(/^h[1-6]$/)) {
           const innerText = getInnerText(children);
           const Tag = name;
 
