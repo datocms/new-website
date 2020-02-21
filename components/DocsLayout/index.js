@@ -22,17 +22,17 @@ export default function DocsLayout({ sidebar, children }) {
             <ul>
               <li>
                 <Link href="/">
+                  <a>Forum</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <a>Slack</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
                   <a>Support</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <a>APIs &amp; SDK</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <a>Sign in</a>
                 </Link>
               </li>
             </ul>

@@ -1,5 +1,5 @@
 import parse, { domToReact } from 'html-react-parser';
-import theme from "custom-prism-react-renderer/themes/duotoneDark";
+import theme from "custom-prism-react-renderer/themes/dracula";
 import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 import ImageFigure from 'components/ImageFigure';
 import { useMemo } from 'react';

@@ -89,29 +89,6 @@ const Sidebar = ({ roots }) => (
         </div>
       ),
     )}
-    <div className={s.group}>
-      <div className={s.groupName}>API Reference</div>
-      <div className={s.guides}>
-        <Link href="/docs/reference/cda">
-          <a className={s.guide}>
-            Content Delivery API
-          </a>
-        </Link>
-        <Link href="/docs/reference/cma">
-          <a className={s.guide}>
-            Content Management API
-          </a>
-        </Link>
-      </div>
-    </div>
-    <div className={s.group}>
-      <div className={s.groupName}>Community</div>
-      <div className={s.guides}>
-        <a className={s.guide} href="https://community.datocms.com/">
-          DatoCMS Community
-        </a>
-      </div>
-    </div>
   </>
 );
 

@@ -12,6 +12,10 @@
 
 .group {
   margin-top: 30px;
+
+  &:first-child {
+    margin-top: 0px;
+  }
 }
 
 .groupName {

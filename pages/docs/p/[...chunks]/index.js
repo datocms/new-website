@@ -13,7 +13,9 @@ import getInnerText from 'utils/getInnerText';
 
 var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 
-export const unstable_getStaticProps = async function({ params: { chunks: rawChunks } }) {
+export const unstable_getStaticProps = async function({
+  params: { chunks: rawChunks },
+}) {
   const chunks = rawChunks.map(chunk => chunk.split(/\//g)).flat();
 
   console.log(chunks);
@@ -45,7 +47,8 @@ export const unstable_getStaticProps = async function({ params: { chunks: rawChu
     variables: { groupSlug },
   });
 
-  const page = docGroup && docGroup.pages.find(page => page.page.slug === pageSlug);
+  const page =
+    docGroup && docGroup.pages.find(page => page.page.slug === pageSlug);
   const titleOverride = page && page.titleOverride;
   const pageId = page && page.page.id;
 
@@ -124,6 +127,31 @@ export const unstable_getStaticProps = async function({ params: { chunks: rawChu
   return { props: { docGroup, titleOverride, page: pageData } };
 };
 
+const Sidebar = () => (
+  <>
+    <Link href="/docs">
+      <a className={s.backHome}>
+        <LeftIcon /> Home
+      </a>
+    </Link>
+
+    <div className={s.groupName}>{docGroup.name}</div>
+
+    {docGroup.pages.map(page => (
+      <ActiveLink
+        href="/docs/p/[...chunks]"
+        as={`/docs/p/${docGroup.slug}${
+          page.page.slug === 'index' ? '' : `/${page.page.slug}`
+        }`}
+        activeClassName={s.activePage}
+        key={page.page.slug}
+      >
+        <a className={s.page}>{page.titleOverride || page.page.title}</a>
+      </ActiveLink>
+    ))}
+  </>
+);
+
 export default function DocPage({ docGroup, titleOverride, page }) {
   const tocEntries = page.content
     .filter(b => b._modelApiKey === 'text')
@@ -137,7 +165,11 @@ export default function DocPage({ docGroup, titleOverride, page }) {
             replace: ({ children }) => {
               const innerText = getInnerText(children);
               return (
-                <a href={`#${slugify(innerText)}`} className={s.tocEntry} key={innerText}>
+                <a
+                  href={`#${slugify(innerText)}`}
+                  className={s.tocEntry}
+                  key={innerText}
+                >
                   {domToReact(children)}
                 </a>
               );
@@ -148,32 +180,7 @@ export default function DocPage({ docGroup, titleOverride, page }) {
     .flat();
 
   return (
-    <DocsLayout
-      sidebar={
-        <>
-          <Link href="/docs">
-            <a className={s.backHome}>
-              <LeftIcon /> Home
-            </a>
-          </Link>
-
-          <div className={s.groupName}>{docGroup.name}</div>
-
-          {docGroup.pages.map(page => (
-            <ActiveLink
-              href="/docs/p/[...chunks]"
-              as={`/docs/p/${docGroup.slug}${
-                page.page.slug === 'index' ? '' : `/${page.page.slug}`
-              }`}
-              activeClassName={s.activePage}
-              key={page.page.slug}
-            >
-              <a className={s.page}>{page.titleOverride || page.page.title}</a>
-            </ActiveLink>
-          ))}
-        </>
-      }
-    >
+    <DocsLayout sidebar={<Sidebar />}>
       <div className={s.articleContainer}>
         <div className={s.article}>
           <div className={s.title}>{titleOverride || page.title}</div>
