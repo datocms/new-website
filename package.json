@@ -29,6 +29,7 @@
     "classnames": "^2.2.6",
     "cssnano": "^4.1.10",
     "date-fns": "^2.9.0",
+    "datocms-search": "^0.1.7",
     "dotenv-load": "^2.0.0",
     "front-matter": "^3.1.0",
     "glob": "^7.1.6",
@@ -38,6 +39,7 @@
     "html-dom-parser": "^0.2.3",
     "html-react-parser": "^0.10.1",
     "isomorphic-unfetch": "^3.0.0",
+    "keyword-highlighter": "^1.0.6",
     "next": "^9.2.1",
     "next-env": "^1.1.0",
     "node-fetch": "^2.6.0",
@@ -61,7 +63,8 @@
     "react-use-gesture": "^7.0.2",
     "scroll-into-view-if-needed": "^2.2.24",
     "swr": "^0.1.16",
-    "unfetch": "^4.1.0"
+    "unfetch": "^4.1.0",
+    "use-debounce": "^3.3.0"
   },
   "devDependencies": {
     "now": "^16.7.3",

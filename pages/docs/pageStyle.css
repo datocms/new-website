@@ -44,7 +44,7 @@
 }
 
 .body {
-  font-size: 17px;
+  font-size: 18px;
   font-family: var(--font-serif);
   line-height: 1.6;
   letter-spacing: -0.02em;
@@ -63,7 +63,7 @@
   h6 {
     font-size: 130%;
     line-height: 1.25;
-    margin: 4em 0 1em;
+    margin: 3em 0 1em;
   }
 
   h3 {
@@ -171,6 +171,7 @@
 
 .article {
   min-width: 738px;
+  flex: 1;
 }
 
 .sidebar {
