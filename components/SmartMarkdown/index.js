@@ -4,18 +4,23 @@ import ImageFigure from 'components/ImageFigure';
 import { useMemo } from 'react';
 import slugify from 'utils/slugify';
 import getInnerText from 'utils/getInnerText';
+import emojify from 'utils/emojify';
 
 export default function SmartMarkdown({ children, imageClassName }) {
   const parseOptions = useMemo(
     () => ({
-      replace: ({ type, name, attribs, children }) => {
+      replace: ({ type, name, data, attribs, children }) => {
+        if (type === 'text') {
+          return <>{emojify(data)}</>;
+        }
+
         if (type === 'tag' && name.match(/^h[1-6]$/)) {
           const innerText = getInnerText(children);
           const Tag = name;
 
           return (
             <Tag {...attribs} data-with-anchor>
-              {domToReact(children)}{' '}
+              {domToReact(children, parseOptions)}{' '}
               <a data-anchor id={slugify(innerText)} />
               <a data-permalink href={`#${slugify(innerText)}`} />
             </Tag>
