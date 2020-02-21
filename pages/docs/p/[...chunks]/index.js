@@ -16,6 +16,8 @@ var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 export const unstable_getStaticProps = async function({ params: { chunks: rawChunks } }) {
   const chunks = rawChunks.map(chunk => chunk.split(/\//g)).flat();
 
+  console.log(chunks);
+
   const groupSlug = chunks.length >= 2 ? chunks[chunks.length - 2] : chunks[0];
   const pageSlug = chunks.length >= 2 ? chunks[chunks.length - 1] : 'index';
 
@@ -132,7 +134,7 @@ export default function DocPage({ docGroup, page }) {
             replace: ({ children }) => {
               const innerText = getInnerText(children);
               return (
-                <a href={`#${slugify(innerText)}`} className={s.tocEntry}>
+                <a href={`#${slugify(innerText)}`} className={s.tocEntry} key={innerText}>
                   {domToReact(children)}
                 </a>
               );
