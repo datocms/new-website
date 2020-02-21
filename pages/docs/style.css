@@ -21,3 +21,57 @@
   font-weight: 500;
   margin-bottom: 10px;
 }
+
+.blocks {
+  padding: 50px 0 50px 64px;
+  display: flex;
+}
+
+.block {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 20px;
+  flex: 1;
+}
+
+.blockItem {
+  display: flex;
+  align-items: center;
+}
+
+.blockItemMain {
+  flex: 1;
+}
+
+.blockItemCircle {
+  width: 10px;
+  height: 10px;
+  background-color: #888;
+  border-radius: 40px;
+  margin-right: 7px;
+  display: inline-block;
+}
+
+.DocsBlockItemDetail {
+  font-weight: 400;
+  box-shadow: none;
+  flex: 1;
+  text-align: right;
+  color: #888;
+}
+
+.upStatus {
+  color: #2fcc66;
+}
+
+.downStatus {
+  color: rgb(241, 196, 15);
+}
+
+.blockItemDetail {
+
+}
+
+.upStatus {
+
+}

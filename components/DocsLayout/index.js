@@ -9,7 +9,7 @@ export default function DocsLayout({ sidebar, children }) {
     <BaseLayout>
       <div className={s.root}>
         <div className={s.sidebar}>
-          <Link href="/">
+          <Link href="/docs">
             <a className={s.logo}>
               <FullLogo height={30} />
             </a>
