@@ -32,9 +32,12 @@ export const unstable_getStaticProps = async function({ params: { chunks: rawChu
           name
           slug
           pages {
-            id
-            title
-            slug
+            titleOverride
+            page {
+              id
+              title
+              slug
+            }
           }
         }
       }
@@ -42,9 +45,9 @@ export const unstable_getStaticProps = async function({ params: { chunks: rawChu
     variables: { groupSlug },
   });
 
-  const page = docGroup && docGroup.pages.find(page => page.slug === pageSlug);
-
-  const pageId = page && page.id;
+  const page = docGroup && docGroup.pages.find(page => page.page.slug === pageSlug);
+  const titleOverride = page && page.titleOverride;
+  const pageId = page && page.page.id;
 
   const {
     data: { page: pageData },
@@ -118,10 +121,10 @@ export const unstable_getStaticProps = async function({ params: { chunks: rawChu
     variables: { pageId },
   });
 
-  return { props: { docGroup, page: pageData } };
+  return { props: { docGroup, titleOverride, page: pageData } };
 };
 
-export default function DocPage({ docGroup, page }) {
+export default function DocPage({ docGroup, titleOverride, page }) {
   const tocEntries = page.content
     .filter(b => b._modelApiKey === 'text')
     .map(b => {
@@ -160,12 +163,12 @@ export default function DocPage({ docGroup, page }) {
             <ActiveLink
               href="/docs/p/[...chunks]"
               as={`/docs/p/${docGroup.slug}${
-                page.slug === 'index' ? '' : `/${page.slug}`
+                page.page.slug === 'index' ? '' : `/${page.page.slug}`
               }`}
               activeClassName={s.activePage}
-              key={page.slug}
+              key={page.page.slug}
             >
-              <a className={s.page}>{page.title}</a>
+              <a className={s.page}>{page.titleOverride || page.page.title}</a>
             </ActiveLink>
           ))}
         </>
@@ -173,7 +176,7 @@ export default function DocPage({ docGroup, page }) {
     >
       <div className={s.articleContainer}>
         <div className={s.article}>
-          <div className={s.title}>{page.title}</div>
+          <div className={s.title}>{titleOverride || page.title}</div>
           <PostContent content={page.content} style={s} />
         </div>
         {tocEntries.length > 0 && (

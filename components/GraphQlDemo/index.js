@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import s from './style.css';
 import cn from 'classnames';
-import Highlight, { defaultProps } from 'prism-react-renderer';
+import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 

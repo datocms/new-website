@@ -14,22 +14,25 @@ export const unstable_getStaticProps = gqlStaticProps(
         name
         slug
         pages {
-          title
-          slug
+          page {
+            slug
+          }
         }
         children {
           name
           slug
           pages {
-            title
-            slug
+            page {
+              slug
+            }
           }
           children {
             name
             slug
             pages {
-              title
-              slug
+              page {
+                slug
+              }
             }
           }
         }
@@ -60,7 +63,7 @@ const Sidebar = ({ roots }) => (
           key={root.slug}
           href="/docs/p/[...chunks]"
           as={`/docs/p/${root.slug}${
-            root.pages[0].slug === 'index' ? '' : `/${root.pages[0].slug}`
+            root.pages[0].slug === 'index' ? '' : `/${root.pages[0].page.slug}`
           }`}
         >
           <a className={s.topGuide} key={root.slug}>
@@ -75,7 +78,7 @@ const Sidebar = ({ roots }) => (
               <Link
                 href="/docs/p/[...chunks]"
                 as={`/docs/p/${sub.slug}${
-                  sub.pages[0].slug === 'index' ? '' : `/${sub.pages[0].slug}`
+                  sub.pages[0].slug === 'index' ? '' : `/${sub.pages[0].page.slug}`
                 }`}
                 key={sub.slug}
               >
@@ -86,6 +89,21 @@ const Sidebar = ({ roots }) => (
         </div>
       ),
     )}
+    <div className={s.group}>
+      <div className={s.groupName}>API Reference</div>
+      <div className={s.guides}>
+        <Link href="/docs/reference/cda">
+          <a className={s.guide}>
+            Content Delivery API
+          </a>
+        </Link>
+        <Link href="/docs/reference/cma">
+          <a className={s.guide}>
+            Content Management API
+          </a>
+        </Link>
+      </div>
+    </div>
     <div className={s.group}>
       <div className={s.groupName}>Community</div>
       <div className={s.guides}>
@@ -175,7 +193,11 @@ export default function Docs({ roots }) {
               return (
                 <div key={id} className={s.blockItem}>
                   <span className={s.blockItemMain}>{label}</span>
-                  <span className={cn(s.blockItemDetail, { [s[`${status}Status`]]: true })}>
+                  <span
+                    className={cn(s.blockItemDetail, {
+                      [s[`${status}Status`]]: true,
+                    })}
+                  >
                     {statusLabel[status]}
                   </span>
                 </div>

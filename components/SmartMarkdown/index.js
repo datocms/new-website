@@ -1,5 +1,6 @@
 import parse, { domToReact } from 'html-react-parser';
-import Highlight, { defaultProps } from 'prism-react-renderer';
+import theme from "custom-prism-react-renderer/themes/duotoneDark";
+import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 import ImageFigure from 'components/ImageFigure';
 import { useMemo } from 'react';
 import slugify from 'utils/slugify';
@@ -33,6 +34,7 @@ export default function SmartMarkdown({ children, imageClassName }) {
           return (
             <Highlight
               {...defaultProps}
+              theme={theme}
               code={code.children[0].data.replace(/\n$/, '')}
               language={code.attribs.class || 'unknown'}
             >
