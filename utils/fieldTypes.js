@@ -1,0 +1,22 @@
+export default {
+  boolean: 'Boolean',
+  color: 'Color',
+  date: 'Date',
+  date_time: 'DateTime',
+  file: 'Single file',
+  float: 'Floating-point number',
+  gallery: 'Multiple files',
+  image: 'Image',
+  integer: 'Integer number',
+  json: 'JSON',
+  lat_lon: 'Geolocation',
+  link: 'Single link',
+  links: 'Multiple links',
+  rich_text: 'Modular content',
+  seo: 'SEO meta tags',
+  slug: 'Slug',
+  string: 'Single-line string',
+  text: 'Multiple-paragraph text',
+  video: 'Video',
+};
+

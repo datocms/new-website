@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(272px, calc((100% - 1262px) / 2 + 300px)) 1010px 1fr;
+  grid-template-columns: minmax(270px, calc((100% - 1262px) / 2 + 270px)) 1010px 1fr;
   font-size: 16px;
   position: relative;
 }
@@ -42,7 +42,7 @@
 
 .logo {
   overflow: hidden;
-  width: 300px;
+  width: 270px;
   height: 55px;
   padding: 13px 0;
   flex: none;
@@ -54,7 +54,7 @@
   flex: 1;
   overflow-y: auto;
   z-index: 1;
-  width: 300px;
+  width: 270px;
   margin-top: 1px;
   padding: 55px 20px 55px 0;
 }

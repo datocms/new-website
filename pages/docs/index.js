@@ -6,6 +6,7 @@ import s from './style.css';
 import useSWR from 'swr';
 import fetch from 'unfetch';
 import cn from 'classnames';
+import docHref from 'utils/docHref';
 
 export const unstable_getStaticProps = gqlStaticProps(
   gql`
@@ -55,40 +56,30 @@ async function statusFetcher() {
   return body;
 }
 
+const normalize = slug => (slug === 'index' ? '' : `/${slug}`);
+
 const Sidebar = ({ roots }) => (
   <>
-    {roots.map(root =>
-      root.children.length === 0 ? (
-        <Link
-          key={root.slug}
-          href="/docs/p/[...chunks]"
-          as={`/docs/p/${root.slug}${
-            root.pages[0].slug === 'index' ? '' : `/${root.pages[0].page.slug}`
-          }`}
-        >
-          <a className={s.topGuide} key={root.slug}>
-            {root.name}
-          </a>
-        </Link>
-      ) : (
-        <div className={s.group} key={root.slug}>
-          <div className={s.groupName}>{root.name}</div>
-          <div className={s.guides}>
-            {root.children.map(sub => (
-              <Link
-                href="/docs/p/[...chunks]"
-                as={`/docs/p/${sub.slug}${
-                  sub.pages[0].slug === 'index' ? '' : `/${sub.pages[0].page.slug}`
-                }`}
-                key={sub.slug}
-              >
-                <a className={s.guide}>{sub.name}</a>
-              </Link>
-            ))}
-          </div>
+    {roots.map(root => (
+      <div className={s.group} key={root.slug}>
+        <div className={s.groupName}>{root.name}</div>
+        <div className={s.guides}>
+          {root.children.map(sub => (
+            <Link
+              href={docHref(
+                `/docs/p/${sub.slug}${normalize(sub.pages[0].page.slug)}`,
+              )}
+              as={`/docs/p/${sub.slug}${normalize(sub.pages[0].page.slug)}`}
+              key={sub.slug}
+            >
+              <a className={s.guide}>
+                {sub.name} (
+              </a>
+            </Link>
+          ))}
         </div>
-      ),
-    )}
+      </div>
+    ))}
   </>
 );
 

@@ -1,0 +1,35 @@
+.root {
+
+}
+
+.handles {
+  display: flex;
+  font-family: var(--font-mono);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.handle {
+  appearance: none;
+  border: 0;
+  font-family: inherit;
+  background: none;
+  font-size: 16px;
+  padding: 10px 26px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+}
+
+.handleCurrent {
+  border-bottom-color: var(--accent-color);
+}
+
+.content {
+  display: none;
+  padding: 30px;
+  background: var(--light-bg-color);
+  border-radius: 0 0 5px 5px;
+}
+
+.contentVisible {
+  display: block;
+}

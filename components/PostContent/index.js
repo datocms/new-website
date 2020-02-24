@@ -2,8 +2,7 @@ import ResponsiveEmbed from 'react-responsive-embed';
 import VideoPlayer from 'components/VideoPlayer';
 import SmartMarkdown from 'components/SmartMarkdown';
 import ImageFigure from 'components/ImageFigure';
-import theme from 'custom-prism-react-renderer/themes/dracula';
-import Highlight, { defaultProps } from 'custom-prism-react-renderer';
+import Prism from 'components/Prism';
 import defaultStyles from './style.css';
 
 export default function PostContent({ content, style, children }) {
@@ -56,24 +55,7 @@ export default function PostContent({ content, style, children }) {
             </div>
           )}
           {block._modelApiKey === 'code_block' && (
-            <Highlight
-              {...defaultProps}
-              theme={theme}
-              code={block.code}
-              language={block.language || 'unknown'}
-            >
-              {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={style}>
-                  {tokens.map((line, i) => (
-                    <div {...getLineProps({ line, key: i })}>
-                      {line.map((token, key) => (
-                        <span {...getTokenProps({ token, key })} />
-                      ))}
-                    </div>
-                  ))}
-                </pre>
-              )}
-            </Highlight>
+            <Prism code={block.code} language={block.language || 'unknown'} />
           )}
           {block._modelApiKey === 'quote' && (
             <div className={s.quote}>

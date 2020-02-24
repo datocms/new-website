@@ -1,11 +1,17 @@
 import parse, { domToReact } from 'html-react-parser';
-import theme from "custom-prism-react-renderer/themes/dracula";
-import Highlight, { defaultProps } from 'custom-prism-react-renderer';
+import Prism from 'components/Prism';
 import ImageFigure from 'components/ImageFigure';
 import { useMemo } from 'react';
 import slugify from 'utils/slugify';
 import getInnerText from 'utils/getInnerText';
 import emojify from 'utils/emojify';
+
+export const Heading = ({ as: Tag, anchor, children, ...other }) => (
+  <Tag {...other} data-with-anchor>
+    {children} <a data-anchor id={anchor} />
+    <a data-permalink href={`#${anchor}`} />
+  </Tag>
+);
 
 export default function SmartMarkdown({ children, imageClassName }) {
   const parseOptions = useMemo(
@@ -17,14 +23,16 @@ export default function SmartMarkdown({ children, imageClassName }) {
 
         if (type === 'tag' && name.match(/^h[1-6]$/)) {
           const innerText = getInnerText(children);
-          const Tag = name;
 
           return (
-            <Tag {...attribs} data-with-anchor>
-              {domToReact(children, parseOptions)}{' '}
-              <a data-anchor id={slugify(innerText)} />
-              <a data-permalink href={`#${slugify(innerText)}`} />
-            </Tag>
+            <Heading
+              {...attribs}
+              anchor={slugify(innerText)}
+              as={name}
+              data-with-anchor
+            >
+              {domToReact(children, parseOptions)}
+            </Heading>
           );
         }
 
@@ -32,24 +40,10 @@ export default function SmartMarkdown({ children, imageClassName }) {
           const code = children[0];
 
           return (
-            <Highlight
-              {...defaultProps}
-              theme={theme}
+            <Prism
               code={code.children[0].data.replace(/\n$/, '')}
               language={code.attribs.class || 'unknown'}
-            >
-              {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={style}>
-                  {tokens.map((line, i) => (
-                    <div {...getLineProps({ line, key: i })}>
-                      {line.map((token, key) => (
-                        <span {...getTokenProps({ token, key })} />
-                      ))}
-                    </div>
-                  ))}
-                </pre>
-              )}
-            </Highlight>
+            />
           );
         }
 
