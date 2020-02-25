@@ -1,12 +1,13 @@
 import React from 'react';
 import sortObject from 'sort-object';
-import Tabs, { Tab } from 'components/Tabs';
+import Heading from 'components/Heading';
 import HttpExample from './HttpExample';
 import JsExample from './JsExample';
 import RubyExample from './RubyExample';
 import ReactMarkdown from 'react-markdown';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
+import s from './style.css';
 
 export default class ResourceApiMethod extends React.Component {
   renderAttribute(name, schema) {
@@ -20,9 +21,9 @@ export default class ResourceApiMethod extends React.Component {
 
     return (
       <tr key={name}>
-        <td className={s['attribute-left']}>
-          <code className={s['attribute-name']}>{name}</code>
-          <code className={s['attribute-type']}>
+        <td className={s.attributeLeft}>
+          <code className={s.attributeName}>{name}</code>
+          <code className={s.attributeType}>
             {schemaType.sort().join(', ')}
           </code>
         </td>
@@ -36,7 +37,7 @@ export default class ResourceApiMethod extends React.Component {
                   .map(el => <code>{el}</code>)
                   .reduce((acc, curr) => [acc, ', ', curr])}
               </p>
-              <div className={s['attribute-required']}>
+              <div className={s.attributeRequired}>
                 These attributes are required
               </div>
             </>
@@ -47,52 +48,53 @@ export default class ResourceApiMethod extends React.Component {
   }
 
   render() {
-    const { resource, link } = this.props;
+    const { resource, link, language } = this.props;
     const path = link.href.replace(regexp, ':$1_id');
 
     return (
       <>
-        <h3 id={link.rel}>
+        <Heading as="h3" anchor={link.rel}>
           {link.title}
-        </h3>
+        </Heading>
         {link.description ? (
           <ReactMarkdown source={link.description} />
         ) : (
           <p>
             To {link.title.toLowerCase()}, send a <code>{link.method}</code>{' '}
             request to the <code>{path}</code> endpoint
-            {['POST', 'PUT'].includes(link.method) &&
-              ', passing the resource arguments in the request body'}
-            . The following table contains the list of all the possible
-            arguments, along with their type, description and examples values.
-            All the arguments marked as required must be present in the request.
+            {['POST', 'PUT'].includes(link.method) ? (
+              <>
+                , passing the resource arguments in the request body. The
+                following table contains the list of all the possible arguments,
+                along with their type, description and examples values. All the
+                arguments marked as required must be present in the request.
+              </>
+            ) : (
+              '.'
+            )}
           </p>
         )}
 
         {link.hrefSchema && (
           <>
             <h6>Arguments</h6>
-            <table className="ResourceAttributes">
+            <table>
               <tbody>
-                {Object.entries(sortObject(link.hrefSchema.properties)).map(
-                  ([name, schema]) => this.renderAttribute(name, schema),
-                )}
+                {Object.entries(
+                  sortObject(link.hrefSchema.properties),
+                ).map(([name, schema]) => this.renderAttribute(name, schema))}
               </tbody>
             </table>
           </>
         )}
 
-        <Tabs>
-          <Tab title="HTTP example">
-            <HttpExample resource={resource} link={link} />
-          </Tab>
-          <Tab title="Javascript example">
-            <JsExample resource={resource} link={link} />
-          </Tab>
-          <Tab title="Ruby example">
-            <RubyExample resource={resource} link={link} />
-          </Tab>
-        </Tabs>
+        {language === 'http' && <HttpExample resource={resource} link={link} />}
+
+        {language === 'javascript' && (
+          <JsExample resource={resource} link={link} />
+        )}
+
+        {language === 'ruby' && <RubyExample resource={resource} link={link} />}
       </>
     );
   }

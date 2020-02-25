@@ -11,6 +11,9 @@ import { useMemo } from 'react';
 import Head from 'next/head';
 import CmaResourceAttributes from 'components/CmaResourceAttributes';
 import CmaResourceMethod from 'components/CmaResourceMethod';
+import r from 'pages/docs/resourceStyle.css';
+import { useState } from 'react';
+import cn from 'classnames';
 
 export const unstable_getStaticProps = async ({ params: { resource } }) => {
   const { props } = await docPageUnstableGetStaticProps({
@@ -20,6 +23,43 @@ export const unstable_getStaticProps = async ({ params: { resource } }) => {
   const cma = await fetchCma(resource);
 
   return { props: { ...props, cma } };
+};
+
+const LanguagePicker = ({ children }) => {
+  const [language, setLanguage] = useState('http');
+
+  return (
+    <>
+      <div className={r.picker}>
+        <div className={r.pickerLabel}>Choose your language:</div>
+        <button
+          className={cn(r.pickerButton, {
+            [r.pickerButtonActive]: language === 'http',
+          })}
+          onClick={() => setLanguage('http')}
+        >
+          HTTP
+        </button>
+        <button
+          className={cn(r.pickerButton, {
+            [r.pickerButtonActive]: language === 'javascript',
+          })}
+          onClick={() => setLanguage('javascript')}
+        >
+          Javascript
+        </button>
+        <button
+          className={cn(r.pickerButton, {
+            [r.pickerButtonActive]: language === 'ruby',
+          })}
+          onClick={() => setLanguage('ruby')}
+        >
+          Ruby
+        </button>
+      </div>
+      {children(language)}
+    </>
+  );
 };
 
 export default function DocPage({ docGroup, titleOverride, page, cma }) {
@@ -47,25 +87,32 @@ export default function DocPage({ docGroup, titleOverride, page, cma }) {
       <div className={s.articleContainer}>
         <div className={s.article}>
           <div className={s.title}>{schema.title}</div>
-          {schema.description}
-          <CmaResourceAttributes resource={schema} />
-          {schema.links.map(link => (
-            <CmaResourceMethod key={link.title} resource={schema} link={link} />
-          ))}
+          <div className={s.body}>
+            {schema.description}
+            <CmaResourceAttributes resource={schema} />
+
+            <h4>Available endpoints</h4>
+            <ul>
+              {schema.links.map(link => (
+                <li key={link.rel}>
+                  <a href={`#${link.rel}`}>{link.title}</a>
+                </li>
+              ))}
+            </ul>
+            <LanguagePicker>
+              {language =>
+                schema.links.map(link => (
+                  <CmaResourceMethod
+                    language={language}
+                    key={link.title}
+                    resource={schema}
+                    link={link}
+                  />
+                ))
+              }
+            </LanguagePicker>
+          </div>
         </div>
-        <Toc
-          extraEntries={[
-            {
-              anchor: 'object-fields',
-              label: 'Attributes',
-            },
-          ].concat(
-            schema.links.map(link => ({
-              anchor: link.rel,
-              label: link.title,
-            })),
-          )}
-        />
       </div>
     </DocsLayout>
   );

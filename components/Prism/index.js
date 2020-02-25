@@ -1,4 +1,4 @@
-import theme from 'custom-prism-react-renderer/themes/dracula';
+import theme from 'custom-prism-react-renderer/themes/nightOwl';
 import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 
 export default ({ code, language }) => (

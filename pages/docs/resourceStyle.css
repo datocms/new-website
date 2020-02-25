@@ -1,0 +1,46 @@
+.picker {
+  position: sticky;
+  top: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  background: white;
+  margin-left: -64px;
+  padding-left: 64px;
+  z-index: 2;
+  margin-top: 60px;
+  border-bottom: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
+  top: -1px;
+  font-family: var(--font-sans);
+  font-size: 0.8em;
+}
+
+.pickerLabel {
+  color: var(--light-body-color);
+  margin-right: 20px;
+}
+
+.pickerButton {
+  appearance: none;
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  padding: 5px 10px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  margin-right: 5px;
+
+  &:hover {
+    border-bottom-color: var(--border-color);
+  }
+}
+
+.pickerButtonActive {
+  border-bottom-color: var(--accent-color);
+
+  &:hover {
+    border-bottom-color: var(--accent-color);
+  }
+}

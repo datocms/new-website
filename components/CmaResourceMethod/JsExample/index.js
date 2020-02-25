@@ -2,8 +2,7 @@ import React from 'react';
 import humps from 'humps';
 import sortObject from 'sort-object';
 import pluralize from 'pluralize';
-import Prism from 'components/Prism';
-import s from './style.css';
+import RequestResponse from '../RequestResponse';
 
 import schemaExampleFor from 'utils/schemaExampleFor';
 
@@ -131,15 +130,22 @@ ${returnCode}`;
 
 function renderExample(example, requestCode, responseCode) {
   return (
-    <div className={s.root}>
-      {example.title && <h6 className={s['title']}>{example.title}</h6>}
-      <div className={s['snippet']}>
-        <Prism code={example.request || requestCode} language="javascript" />
-      </div>
-      <div className={s['snippet']}>
-        <div className={s['snippet__title']}>Result</div>
-        <Prism code={example.response || responseCode} language="javascript" />
-      </div>
+    <div>
+      {example.title && <h6>{example.title}</h6>}
+      <RequestResponse
+        chunks={[
+          {
+            title: 'Example code:',
+            language: 'javascript',
+            code: example.request || requestCode,
+          },
+          {
+            title: 'Returned output:',
+            language: 'javascript',
+            code: example.response || responseCode,
+          },
+        ]}
+      />
     </div>
   );
 }

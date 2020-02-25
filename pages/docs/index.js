@@ -73,7 +73,7 @@ const Sidebar = ({ roots }) => (
               key={sub.slug}
             >
               <a className={s.guide}>
-                {sub.name} (
+                {sub.name}
               </a>
             </Link>
           ))}

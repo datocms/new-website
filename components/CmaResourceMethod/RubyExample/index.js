@@ -1,9 +1,8 @@
 import React from 'react';
 import sortObject from 'sort-object';
 import pluralize from 'pluralize';
-import Prism from 'components/Prism';
 import schemaExampleFor from 'utils/schemaExampleFor';
-import s from './style.css';
+import RequestResponse from '../RequestResponse';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 
@@ -128,20 +127,22 @@ ${
 
 function renderExample(example, requestCode, responseCode) {
   return (
-    <div className={s.root}>
-      {example.title &&
-        <h6 className={s['title']}>{example.title}</h6>
-      }
-      <div className={s['snippet']}>
-        <Prism code={example.request || requestCode} language="ruby" />
-        
-      </div>
-      <div className={s['snippet']}>
-        <div className={s['snippet__title']}>
-          Result
-        </div>
-        <Prism code={example.response || responseCode} language="ruby" />
-      </div>
+    <div>
+      {example.title && <h6>{example.title}</h6>}
+      <RequestResponse
+        chunks={[
+          {
+            title: 'Example code:',
+            code: (example.request || requestCode).trim(),
+            language: 'ruby',
+          },
+          responseCode && {
+            title: 'Returned output:',
+            code: (example.response || responseCode).trim(),
+            language: 'ruby',
+          },
+        ].filter(x => !!x)}
+      />
     </div>
   );
 }

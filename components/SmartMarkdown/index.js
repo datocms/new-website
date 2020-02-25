@@ -1,17 +1,11 @@
 import parse, { domToReact } from 'html-react-parser';
 import Prism from 'components/Prism';
 import ImageFigure from 'components/ImageFigure';
+import Heading from 'components/Heading';
 import { useMemo } from 'react';
 import slugify from 'utils/slugify';
 import getInnerText from 'utils/getInnerText';
 import emojify from 'utils/emojify';
-
-export const Heading = ({ as: Tag, anchor, children, ...other }) => (
-  <Tag {...other} data-with-anchor>
-    {children} <a data-anchor id={anchor} />
-    <a data-permalink href={`#${anchor}`} />
-  </Tag>
-);
 
 export default function SmartMarkdown({ children, imageClassName }) {
   const parseOptions = useMemo(

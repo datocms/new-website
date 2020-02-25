@@ -1,0 +1,25 @@
+.reqRes {
+  margin: 3em 0;
+}
+
+.chunk {
+  margin-top: 40px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  > pre {
+    margin: 0;
+    max-height: 400px;
+    overflow: auto;
+  }
+}
+
+.chunkTitle {
+  font-family: var(--font-sans);
+  padding-left: 30px;
+  margin-bottom: 20px;
+  color: var(--light-body-color);
+  font-size: 0.9em;
+}

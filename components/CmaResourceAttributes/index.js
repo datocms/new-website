@@ -1,4 +1,6 @@
 import sortObject from 'sort-object';
+import Heading from 'components/Heading';
+
 import s from './style.css';
 
 function joinAnd(a, and = 'and') {
@@ -23,18 +25,18 @@ export default class ResourceAttributes extends React.Component {
 
     return (
       <tr key={name}>
-        <td className={s['attribute-left']}>
-          <code className={s['attribute-name']}>{name}</code>
-          <code className={s['attribute-type']}>
+        <td className={s.attributeLeft}>
+          <code className={s.attributeName}>{name}</code>
+          <code className={s.attributeType}>
             {schemaType.sort().join(', ')}
           </code>
         </td>
         <td>
           {schema.description && (
             <>
-              <p>{schema.description}</p>
+              <div>{schema.description}</div>
               {!isOptional && (
-                <div className={s['attribute-required']}>
+                <div className={s.attributeRequired}>
                   This attribute is required
                 </div>
               )}
@@ -55,21 +57,20 @@ export default class ResourceAttributes extends React.Component {
 
     return (
       <>
-        <h3 id="object">
-          The {resource.title} object
-        </h3>
+        <Heading as="h3" anchor="attributes">
+          Attributes
+        </Heading>
         <p>
           A {resource.title} object is returned as part of the response body of
           each successful {joinAnd(links, 'or')} API call. The following table
           contains the list of all its fields along with their type, description
           and example values.
         </p>
-        <h6>Object fields:</h6>
-        <table className="ResourceAttributes">
+        <table>
           <tbody>
-            {Object.entries(sortObject(resource.attributes)).map(
-              ([name, schema]) => this.renderAttribute(name, schema),
-            )}
+            {Object.entries(
+              sortObject(resource.attributes),
+            ).map(([name, schema]) => this.renderAttribute(name, schema))}
           </tbody>
         </table>
       </>

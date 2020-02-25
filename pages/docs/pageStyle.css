@@ -89,7 +89,7 @@
 
     [data-anchor] {
       position: absolute;
-      top: -40px;
+      top: -70px;
     }
 
     &:hover {
@@ -195,6 +195,22 @@
     border-bottom: 1px solid var(--border-color);
     padding: 10px 20px;
     text-align: left;
+  }
+
+  tr:first-child {
+    td {
+      border-top: 1px solid var(--border-color);
+    }
+  }
+
+  th, td {
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
   }
 }
 
