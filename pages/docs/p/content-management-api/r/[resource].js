@@ -75,7 +75,7 @@ export default function DocPage({ docGroup, page, cma }) {
   return (
     <DocsLayout
       sidebar={
-        docGroup && (
+        docGroup && result && (
           <Sidebar
             title={docGroup.name}
             entries={[].concat(

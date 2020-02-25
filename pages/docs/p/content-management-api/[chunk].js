@@ -11,15 +11,31 @@ import { useMemo } from 'react';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from 'components/PostContent';
+import { gqlStaticPaths } from 'lib/datocms';
+import gql from 'graphql-tag';
 
-export const unstable_getStaticPaths = async () => {
-  return { paths: [] };
-};
+export const unstable_getStaticPaths = gqlStaticPaths(
+  gql`
+    query {
+      root: docGroup(filter: { slug: { eq: "content-management-api" } }) {
+        pages {
+          page {
+            slug
+          }
+        }
+      }
+    }
+  `,
+  'chunk',
+  ({ root }) => root.pages.map(p => p.page.slug),
+);
 
 export const unstable_getStaticProps = async ({ params: { chunk } }) => {
   const { props } = await docPageUnstableGetStaticProps({
     params: { chunks: ['content-management-api', chunk] },
   });
+
+  console.log(props);
 
   const cma = await fetchCma();
 
@@ -32,7 +48,8 @@ export default function DocPage({ docGroup, titleOverride, page, cma }) {
   return (
     <DocsLayout
       sidebar={
-        docGroup && (
+        docGroup &&
+        result && (
           <Sidebar
             title={docGroup.name}
             entries={[].concat(

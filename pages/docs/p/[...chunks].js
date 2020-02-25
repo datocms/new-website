@@ -19,7 +19,7 @@ var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 
 export const unstable_getStaticPaths = gqlStaticPaths(
   gql`
-    query {
+    {
       roots: allDocGroups(filter: { parent: { exists: false } }) {
         slug
         pages {
@@ -52,11 +52,13 @@ export const unstable_getStaticPaths = gqlStaticPaths(
   ({ roots }) =>
     roots
       .map(root =>
-        root.children.map(sub =>
-          sub.pages[0].page.slug === 'index'
-            ? [sub.slug]
-            : [sub.slug, sub.pages[0].page.slug],
-        ),
+        root.children
+          .filter(c => c.slug !== 'content-management-api')
+          .map(sub =>
+            sub.pages[0].page.slug === 'index'
+              ? [sub.slug]
+              : [sub.slug, sub.pages[0].page.slug],
+          ),
       )
       .flat(),
 );
