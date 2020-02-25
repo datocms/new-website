@@ -1,5 +1,6 @@
 import { initApolloClient, seoMetaTagsFields, imageFields } from 'lib/datocms';
 import { renderMetaTags } from 'react-datocms';
+import { gqlStaticPaths } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
 import gql from 'graphql-tag';
 import PostContent from 'components/PostContent';
@@ -15,6 +16,50 @@ import Head from 'next/head';
 import docHref from 'utils/docHref';
 
 var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
+
+export const unstable_getStaticPaths = gqlStaticPaths(
+  gql`
+    query {
+      roots: allDocGroups(filter: { parent: { exists: false } }) {
+        slug
+        pages {
+          page {
+            slug
+          }
+        }
+        children {
+          name
+          slug
+          pages {
+            page {
+              slug
+            }
+          }
+          children {
+            name
+            slug
+            pages {
+              page {
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+  'chunks',
+  ({ roots }) =>
+    roots
+      .map(root =>
+        root.children.map(sub =>
+          sub.pages[0].page.slug === 'index'
+            ? [sub.slug]
+            : [sub.slug, sub.pages[0].page.slug],
+        ),
+      )
+      .flat(),
+);
 
 export const unstable_getStaticProps = async function({
   params: { chunks: rawChunks },
@@ -145,9 +190,7 @@ export const Sidebar = ({ title, entries }) => {
           activeClassName={s.activePage}
           key={url}
         >
-          <a className={s.page}>
-            {label}
-          </a>
+          <a className={s.page}>{label}</a>
         </ActiveLink>
       ))}
     </>

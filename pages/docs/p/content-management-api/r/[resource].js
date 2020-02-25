@@ -16,6 +16,13 @@ import { useState } from 'react';
 import cn from 'classnames';
 import { renderMetaTags } from 'react-datocms';
 
+export const unstable_getStaticPaths = async () => {
+  const cma = await fetchCma();
+  const { toc } = parse(cma);
+
+  return toc.map(({ slug }) => ({ params: { resource: slug }}));
+}
+
 export const unstable_getStaticProps = async ({ params: { resource } }) => {
   const { props } = await docPageUnstableGetStaticProps({
     params: { chunks: ['content-management-api', 'overview'] },
