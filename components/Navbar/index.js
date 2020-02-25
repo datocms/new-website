@@ -132,12 +132,12 @@ export default function Navbar() {
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
-                            <a>Developers</a>
+                          <Link href="/docs">
+                            <a>Documentation</a>
                           </Link>
                         </div>
                         <div className={s.groupPaneLink}>
-                          <Link href="/">
+                          <Link href="/support">
                             <a>Help center</a>
                           </Link>
                         </div>

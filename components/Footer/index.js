@@ -94,39 +94,39 @@ export default function Footer() {
                     <div className={s.groupTitle}>Resources</div>
                     <div className={s.groupLinks}>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/blog">
                           <a>Blog</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/product-updates">
                           <a>Product updates</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/docs">
                           <a>Documentation</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
-                          <a>Community forum</a>
-                        </Link>
+                        <a href="https://community.datocms.com" target="_blank">
+                          Community forum
+                        </a>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/slack">
                           <a>Slack channel</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/support">
                           <a>Help center</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
-                          <a>Status page</a>
-                        </Link>
+                        <a href="https://status.datocms.com" target="_blank">
+                          Status page
+                        </a>
                       </div>
                     </div>
                   </div>

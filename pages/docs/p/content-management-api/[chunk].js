@@ -34,7 +34,7 @@ export const unstable_getStaticProps = async ({ params: { chunk } }) => {
   const { props } = await docPageUnstableGetStaticProps({
     params: { chunks: ['content-management-api', chunk] },
   });
-  
+
   const cma = await fetchCma();
 
   return { props: { ...props, cma } };
