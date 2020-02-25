@@ -11,7 +11,7 @@ import Prism from 'components/Prism';
 import s from 'pages/docs/pageStyle.css';
 import gqlExampleForField, { camelize } from 'utils/gqlExampleForField';
 import fieldTypes from 'utils/fieldTypes';
-import { Heading } from 'components/SmartMarkdown';
+import Heading from 'components/Heading';
 import Head from 'next/head';
 
 export const unstable_getStaticProps = async () => {
@@ -70,6 +70,7 @@ export default function DocPage({
         />
       }
     >
+      <Head>{renderMetaTags(page._seoMetaTags)}</Head>
       <div className={s.articleContainer}>
         <div className={s.article}>
           <div className={s.title}>{titleOverride || page.title}</div>

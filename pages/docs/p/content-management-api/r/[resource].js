@@ -14,6 +14,7 @@ import CmaResourceMethod from 'components/CmaResourceMethod';
 import r from 'pages/docs/resourceStyle.css';
 import { useState } from 'react';
 import cn from 'classnames';
+import { renderMetaTags } from 'react-datocms';
 
 export const unstable_getStaticProps = async ({ params: { resource } }) => {
   const { props } = await docPageUnstableGetStaticProps({
@@ -62,7 +63,7 @@ const LanguagePicker = ({ children }) => {
   );
 };
 
-export default function DocPage({ docGroup, titleOverride, page, cma }) {
+export default function DocPage({ docGroup, page, cma }) {
   const { toc, schema } = useMemo(() => parse(cma), [cma]);
 
   return (
@@ -84,6 +85,10 @@ export default function DocPage({ docGroup, titleOverride, page, cma }) {
         />
       }
     >
+      <Head>
+        {renderMetaTags(page._seoMetaTags)}
+        <title>{schema.title} - Content Management API</title>
+      </Head>
       <div className={s.articleContainer}>
         <div className={s.article}>
           <div className={s.title}>{schema.title}</div>
@@ -117,40 +122,3 @@ export default function DocPage({ docGroup, titleOverride, page, cma }) {
     </DocsLayout>
   );
 }
-
-// const resources = cmaResources.map((resource, i) => {
-//   slugs.reset();
-//   const headings = [
-//     {
-//       id: '#object',
-//       title: 'Object fields',
-//     },
-//   ].concat(
-
-//   );
-
-//   return {
-//     chapter,
-//     path: `/docs/content-management-api/resources/${resource.id.replace(
-//       /_/g,
-//       '-',
-//     )}`,
-//     title: resource.title,
-//     headings,
-//     template: 'CmaApiResourcePage',
-//     context: { resource: stringify(resource) },
-//   };
-// });
-
-// TOC
-// [
-//   {
-//     id: '#object',
-//     title: 'Object fields',
-//   },
-// ].concat(
-//   resource.links.map(link => ({
-//     id: `#${link.rel}`,
-//     title: link.title,
-//   })),
-// )
