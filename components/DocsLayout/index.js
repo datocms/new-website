@@ -3,6 +3,8 @@ import DocSearch from 'components/DocSearch';
 import FullLogo from 'public/images/full_logo.svg';
 import Link from 'next/link';
 import s from './style.css';
+import SupportIcon from 'public/icons/regular/headset.svg';
+import StatusIcon from 'public/icons/regular/tachometer.svg';
 
 export default function DocsLayout({ sidebar, children }) {
   return (
@@ -21,23 +23,47 @@ export default function DocsLayout({ sidebar, children }) {
           <div className={s.mainHeader}>
             <ul>
               <li>
-                <Link href="/">
-                  <a>Forum</a>
+                <Link href="/support">
+                  <a>
+                    <SupportIcon />
+                    Ask for help!
+                  </a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
-                  <a>Slack</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <a>Support</a>
-                </Link>
+                <a href="https://status.datocms.com" target="_blank">
+                  <StatusIcon />
+                  Status page
+                </a>
               </li>
             </ul>
           </div>
-          {children}
+          <div className={s.container}>
+            {children}
+            <div className={s.footer}>
+              <div className={s.footerTitle}>Questions?</div>
+              <div className={s.footerBody}>
+                We're always happy to help with code or other questions you
+                might have. Search our{' '}
+                <Link href="/docs">
+                  <a>documentation</a>
+                </Link>
+                , <a href="https://community.datocms.com">forum</a>,{' '}
+                <Link href="/support">
+                  <a>contact support</a>
+                </Link>
+                , or{' '}
+                <Link href="/enterprise#form">
+                  <a>connect with our sales team</a>
+                </Link>
+                . You can chat live with other developers in our{' '}
+                <Link href="/slack">
+                  <a>Slack channel</a>
+                </Link>
+                .
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </BaseLayout>

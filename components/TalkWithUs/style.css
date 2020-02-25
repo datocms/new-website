@@ -86,3 +86,8 @@
   padding: 20px 29px;
   text-align: right;
 }
+
+.anchor {
+  position: relative;
+  top: -80px;
+}

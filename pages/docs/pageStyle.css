@@ -36,9 +36,10 @@
 .title {
   font-size: 50px;
   margin-bottom: 40px;
-  font-family: var(--font-headline);
   line-height: 1;
   letter-spacing: -0.03em;
+  font-family: var(--font-sans);
+  font-weight: 500;
 }
 
 .body {
@@ -63,6 +64,8 @@
     font-size: 130%;
     line-height: 1.25;
     margin: 3em 0 1em;
+    font-weight: 500;
+    font-family: var(--font-sans);
   }
 
   h3 {
@@ -181,7 +184,6 @@
   }
 
   th {
-    font-family: var(--font-sans);
     font-weight: normal;
     border-bottom: 1px solid var(--border-color);
     padding: 10px 20px;
@@ -220,9 +222,6 @@
 }
 
 .articleContainer {
-  padding-top: 55px;
-  padding-left: 64px;
-  padding-bottom: 33px;
   display: flex;
 }
 

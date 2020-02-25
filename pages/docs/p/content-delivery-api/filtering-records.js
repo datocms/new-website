@@ -13,6 +13,7 @@ import gqlExampleForField, { camelize } from 'utils/gqlExampleForField';
 import fieldTypes from 'utils/fieldTypes';
 import Heading from 'components/Heading';
 import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
 
 export const unstable_getStaticProps = async () => {
   const { props } = await docPageUnstableGetStaticProps({

@@ -14,6 +14,7 @@ export default function TalkWithUs() {
   return (
     <div className={s.root}>
       <Wrapper>
+        <a id="form" className={s.anchor} />
         <div className={s.rootInner}>
           <div className={s.intro}>
             <div className={s.title}>Talk with us</div>

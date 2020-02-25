@@ -2,10 +2,9 @@ import { gqlStaticProps } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
 import gql from 'graphql-tag';
 import Link from 'next/link';
+import Head from 'next/head';
 import s from './style.css';
-import useSWR from 'swr';
-import fetch from 'unfetch';
-import cn from 'classnames';
+
 import docHref from 'utils/docHref';
 
 export const unstable_getStaticProps = gqlStaticProps(
@@ -42,20 +41,6 @@ export const unstable_getStaticProps = gqlStaticProps(
   `,
 );
 
-async function topicsFetcher() {
-  const response = await fetch('https://community.datocms.com/categories.json');
-  const body = await response.json();
-  return body.category_list.categories;
-}
-
-async function statusFetcher() {
-  const response = await fetch(
-    'https://status.datocms.com/.netlify/functions/componentsStatus?days=1',
-  );
-  const body = await response.json();
-  return body;
-}
-
 const normalize = slug => (slug === 'index' ? '' : `/${slug}`);
 
 const Sidebar = ({ roots }) => (
@@ -72,9 +57,7 @@ const Sidebar = ({ roots }) => (
               as={`/docs/p/${sub.slug}${normalize(sub.pages[0].page.slug)}`}
               key={sub.slug}
             >
-              <a className={s.guide}>
-                {sub.name}
-              </a>
+              <a className={s.guide}>{sub.name}</a>
             </Link>
           ))}
         </div>
@@ -84,94 +67,76 @@ const Sidebar = ({ roots }) => (
 );
 
 export default function Docs({ roots }) {
-  const { data: categories } = useSWR('topics', topicsFetcher);
-  const { data: components } = useSWR('components', statusFetcher);
-
   return (
     <DocsLayout sidebar={<Sidebar roots={roots} />}>
-      <div className={s.blocks}>
-        <div className={s.block}>
-          <a href="https://community.datocms.com/" className={s.blockBody}>
-            <div className={s.blockReadMore}>Ask a question</div>
-          </a>
+      <Head>
+        <title>DatoCMS Documentation</title>
+      </Head>
+      <div className={s.container}>
+        <h2 className={s.title}>Documentation</h2>
+        <p className={s.subtitle}>
+          Whether you’re a startup or a global enterprise, learn how to
+          integrate with Stripe to accept payments and manage your business
+          online.
+        </p>
 
-          <div className={s.blockItems}>
-            <div className={s.blockItemsTitle}>
-              Browse our forum channels...
-            </div>
-            {[
-              ['18', 'General channel'],
-              ['22', 'Suggest a new feature'],
-              ['13', 'REST and GraphQL APIs'],
-              ['5', 'Integrate with other tools'],
-              ['16', 'Propose & request plugins'],
-            ].map(([id, label]) => {
-              const category =
-                categories &&
-                categories.find(({ id: x }) => x.toString() === id);
-              return (
-                <a
-                  key={id}
-                  className={s.blockItem}
-                  href={`https://community.datocms.com/c/${category &&
-                    category.slug}`}
-                >
-                  <span className={s.blockItemMain}>
-                    <span
-                      className={s.blockItemCircle}
-                      style={
-                        category && {
-                          backgroundColor: `#${category.color}`,
-                        }
-                      }
-                    />
-                    {label}
-                  </span>
-                  {category && category.topics_all_time > 1 && (
-                    <span className={s.blockItemDetail}>
-                      {category.topics_all_time} discussions
-                    </span>
-                  )}
-                </a>
-              );
-            })}
-          </div>
+        <h6 className={s.introTitle}>Start with your use case</h6>
+        <div className={s.useCaseCards}>
+          <Link
+            href={docHref('/docs/p/general-concepts')}
+            as="/docs/p/general-concepts"
+          >
+            <a className={s.useCaseCard}>
+              <div className={s.useCaseCardTitle}>Getting started</div>
+              <p>Learn all the basic concepts and features behind DatoCMS.</p>
+            </a>
+          </Link>
+          <Link
+            href={docHref('/docs/p/content-modelling')}
+            as="/docs/p/content-modelling"
+          >
+            <a className={s.useCaseCard}>
+              <div className={s.useCaseCardTitle}>Model your schema</div>
+              <p>
+                Build your administrative area and define the structure of your
+                content.
+              </p>
+            </a>
+          </Link>
+          <Link
+            href={docHref('/docs/p/content-delivery-api/overview')}
+            as="/docs/p/content-delivery-api/overview"
+          >
+            <a className={s.useCaseCard}>
+              <div className={s.useCaseCardTitle}>GraphQL API</div>
+              <p>Learn how to fetch your content into any frontend project.</p>
+            </a>
+          </Link>
         </div>
-        <div className={s.block}>
-          <a href="https://status.datocms.com" className={s.blockBody}>
-            <div className={s.blockReadMore}>Visit Status page</div>
-          </a>
-          <div className={s.blockItems}>
-            <div className={s.blockItemsTitle}>System components</div>
-            {[
-              ['cda', 'Content Delivery API'],
-              ['cma', 'Content Management API'],
-              ['assets', 'Assets CDN'],
-              ['administrativeAreas', 'Administrative interface'],
-              ['dashboard', 'Dashboard interface'],
-            ].map(([id, label]) => {
-              const component =
-                components && components.find(({ id: x }) => x === id);
-              const status = component ? component.status : 'loading';
-              const statusLabel = {
-                up: 'Operational',
-                down: 'Down',
-                loading: 'Checking...',
-              };
-              return (
-                <div key={id} className={s.blockItem}>
-                  <span className={s.blockItemMain}>{label}</span>
-                  <span
-                    className={cn(s.blockItemDetail, {
-                      [s[`${status}Status`]]: true,
-                    })}
-                  >
-                    {statusLabel[status]}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+
+        <h6 className={s.introTitle}>Start from a template</h6>
+        <div className={s.useCaseCards}>
+          <Link href="/docs/p/general-concepts">
+            <a className={s.useCaseCard}>
+              <div className={s.useCaseCardTitle}>Gatsby website</div>
+              <p>Learn all the basic concepts and features behind DatoCMS.</p>
+            </a>
+          </Link>
+          <Link href="/docs/p/content-delivery-api/overview">
+            <a className={s.useCaseCard}>
+              <div className={s.useCaseCardTitle}>NextJS website</div>
+              <p>Learn how to fetch your content into any frontend project.</p>
+            </a>
+          </Link>
+          <Link href="/docs/p/content-modelling">
+            <a className={s.useCaseCard}>
+              <div className={s.useCaseCardTitle}>Hugo website</div>
+              <p>
+                Build your administrative area and define the structure of your
+                content.
+              </p>
+            </a>
+          </Link>
         </div>
       </div>
     </DocsLayout>
