@@ -252,27 +252,33 @@ export default function DocPage({ docGroup, titleOverride, page }) {
   return (
     <DocsLayout
       sidebar={
-        <Sidebar
-          title={docGroup.name}
-          entries={docGroup.pages.map(page => {
-            return {
-              url: `/docs/p/${docGroup.slug}${
-                page.page.slug === 'index' ? '' : `/${page.page.slug}`
-              }`,
-              label: page.titleOverride || page.page.title,
-            };
-          })}
-        />
+        docGroup && (
+          <Sidebar
+            title={docGroup.name}
+            entries={docGroup.pages.map(page => {
+              return {
+                url: `/docs/p/${docGroup.slug}${
+                  page.page.slug === 'index' ? '' : `/${page.page.slug}`
+                }`,
+                label: page.titleOverride || page.page.title,
+              };
+            })}
+          />
+        )
       }
     >
-      <Head>{renderMetaTags(page._seoMetaTags)}</Head>
-      <div className={s.articleContainer}>
-        <div className={s.article}>
-          <div className={s.title}>{titleOverride || page.title}</div>
-          <PostContent content={page.content} style={s} />
-        </div>
-        <Toc content={page.content} />
-      </div>
+      {page && (
+        <>
+          <Head>{renderMetaTags(page._seoMetaTags)}</Head>
+          <div className={s.articleContainer}>
+            <div className={s.article}>
+              <div className={s.title}>{titleOverride || page.title}</div>
+              <PostContent content={page.content} style={s} />
+            </div>
+            <Toc content={page.content} />
+          </div>
+        </>
+      )}
     </DocsLayout>
   );
 }

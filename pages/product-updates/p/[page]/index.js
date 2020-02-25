@@ -85,7 +85,7 @@ export default function Changelog({ posts, prevPage, nextPage }) {
         }
       />
       <Wrapper>
-        {posts.map(post => (
+        {posts && posts.map(post => (
           <div className={s.post}>
             <div className={s.info}>
               <FormattedDate date={post._firstPublishedAt} />

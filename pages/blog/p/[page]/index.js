@@ -89,7 +89,7 @@ export default function Blog({ posts, prevPage, nextPage }) {
           className={s.grid}
           columnClassName={s.column}
         >
-          {posts.map(post => (
+          {posts && posts.map(post => (
             <Link
               key={post.slug}
               href="/blog/a/[slug]"

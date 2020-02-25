@@ -1,7 +1,6 @@
 import DocsLayout from 'components/DocsLayout';
 import {
   Sidebar,
-  Toc,
   unstable_getStaticProps as docPageUnstableGetStaticProps,
 } from 'pages/docs/p/[...chunks]';
 import s from 'pages/docs/pageStyle.css';
@@ -20,8 +19,8 @@ export const unstable_getStaticPaths = async () => {
   const cma = await fetchCma();
   const { toc } = parse(cma);
 
-  return toc.map(({ slug }) => ({ params: { resource: slug }}));
-}
+  return { paths: toc.map(({ slug }) => ({ params: { resource: slug } })) };
+};
 
 export const unstable_getStaticProps = async ({ params: { resource } }) => {
   const { props } = await docPageUnstableGetStaticProps({
@@ -71,61 +70,67 @@ const LanguagePicker = ({ children }) => {
 };
 
 export default function DocPage({ docGroup, page, cma }) {
-  const { toc, schema } = useMemo(() => parse(cma), [cma]);
+  const result = useMemo(() => cma && parse(cma), [cma]);
 
   return (
     <DocsLayout
       sidebar={
-        <Sidebar
-          title={docGroup.name}
-          entries={[].concat(
-            docGroup.pages.map(page => {
-              return {
-                url: `/docs/p/${docGroup.slug}${
-                  page.page.slug === 'index' ? '' : `/${page.page.slug}`
-                }`,
-                label: page.titleOverride || page.page.title,
-              };
-            }),
-            toc,
-          )}
-        />
+        docGroup && (
+          <Sidebar
+            title={docGroup.name}
+            entries={[].concat(
+              docGroup.pages.map(page => {
+                return {
+                  url: `/docs/p/${docGroup.slug}${
+                    page.page.slug === 'index' ? '' : `/${page.page.slug}`
+                  }`,
+                  label: page.titleOverride || page.page.title,
+                };
+              }),
+              result.toc,
+            )}
+          />
+        )
       }
     >
-      <Head>
-        {renderMetaTags(page._seoMetaTags)}
-        <title>{schema.title} - Content Management API</title>
-      </Head>
-      <div className={s.articleContainer}>
-        <div className={s.article}>
-          <div className={s.title}>{schema.title}</div>
-          <div className={s.body}>
-            {schema.description}
-            <CmaResourceAttributes resource={schema} />
+      {page && (
+        <>
+          <Head>
+            {renderMetaTags(page._seoMetaTags)}
+            <title>{result.schema.title} - Content Management API</title>
+          </Head>
+          <div className={s.articleContainer}>
+            <div className={s.article}>
+              <div className={s.title}>{result.schema.title}</div>
+              <div className={s.body}>
+                {result.schema.description}
+                <CmaResourceAttributes resource={result.schema} />
 
-            <h4>Available endpoints</h4>
-            <ul>
-              {schema.links.map(link => (
-                <li key={link.rel}>
-                  <a href={`#${link.rel}`}>{link.title}</a>
-                </li>
-              ))}
-            </ul>
-            <LanguagePicker>
-              {language =>
-                schema.links.map(link => (
-                  <CmaResourceMethod
-                    language={language}
-                    key={link.title}
-                    resource={schema}
-                    link={link}
-                  />
-                ))
-              }
-            </LanguagePicker>
+                <h4>Available endpoints</h4>
+                <ul>
+                  {result.schema.links.map(link => (
+                    <li key={link.rel}>
+                      <a href={`#${link.rel}`}>{link.title}</a>
+                    </li>
+                  ))}
+                </ul>
+                <LanguagePicker>
+                  {language =>
+                    result.schema.links.map(link => (
+                      <CmaResourceMethod
+                        language={language}
+                        key={link.title}
+                        resource={result.schema}
+                        link={link}
+                      />
+                    ))
+                  }
+                </LanguagePicker>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </DocsLayout>
   );
 }

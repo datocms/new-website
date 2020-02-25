@@ -12,6 +12,10 @@ import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from 'components/PostContent';
 
+export const unstable_getStaticPaths = async () => {
+  return { paths: [] };
+};
+
 export const unstable_getStaticProps = async ({ params: { chunk } }) => {
   const { props } = await docPageUnstableGetStaticProps({
     params: { chunks: ['content-management-api', chunk] },
@@ -23,35 +27,41 @@ export const unstable_getStaticProps = async ({ params: { chunk } }) => {
 };
 
 export default function DocPage({ docGroup, titleOverride, page, cma }) {
-  const result = useMemo(() => parse(cma), [cma]);
+  const result = useMemo(() => cma && parse(cma), [cma]);
 
   return (
     <DocsLayout
       sidebar={
-        <Sidebar
-          title={docGroup.name}
-          entries={[].concat(
-            docGroup.pages.map(page => {
-              return {
-                url: `/docs/p/${docGroup.slug}${
-                  page.page.slug === 'index' ? '' : `/${page.page.slug}`
-                }`,
-                label: page.titleOverride || page.page.title,
-              };
-            }),
-            result.toc,
-          )}
-        />
+        docGroup && (
+          <Sidebar
+            title={docGroup.name}
+            entries={[].concat(
+              docGroup.pages.map(page => {
+                return {
+                  url: `/docs/p/${docGroup.slug}${
+                    page.page.slug === 'index' ? '' : `/${page.page.slug}`
+                  }`,
+                  label: page.titleOverride || page.page.title,
+                };
+              }),
+              result.toc,
+            )}
+          />
+        )
       }
     >
-      <Head>{renderMetaTags(page._seoMetaTags)}</Head>
-      <div className={s.articleContainer}>
-        <div className={s.article}>
-          <div className={s.title}>{titleOverride || page.title}</div>
-          <PostContent content={page.content} style={s} />
-        </div>
-        <Toc content={page.content} />
-      </div>
+      {page && (
+        <>
+          <Head>{renderMetaTags(page._seoMetaTags)}</Head>
+          <div className={s.articleContainer}>
+            <div className={s.article}>
+              <div className={s.title}>{titleOverride || page.title}</div>
+              <PostContent content={page.content} style={s} />
+            </div>
+            <Toc content={page.content} />
+          </div>
+        </>
+      )}
     </DocsLayout>
   );
 }

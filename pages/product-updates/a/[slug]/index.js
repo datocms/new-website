@@ -25,9 +25,7 @@ export const unstable_getStaticPaths = gqlStaticPaths(
 export const unstable_getStaticProps = gqlStaticProps(
   gql`
     query($slug: String!) {
-      post: changelogEntry(
-        filter: { slug: { eq: $slug } }
-      ) {
+      post: changelogEntry(filter: { slug: { eq: $slug } }) {
         title
         slug
         content(markdown: true)
@@ -40,7 +38,7 @@ export const unstable_getStaticProps = gqlStaticProps(
         }
       }
     }
-  `
+  `,
 );
 
 export default function Changelog({ post }) {
@@ -57,7 +55,7 @@ export default function Changelog({ post }) {
         }
       />
       <Wrapper>
-        
+        {post && (
           <div className={s.post}>
             <div className={s.info}>
               <FormattedDate date={post._firstPublishedAt} />
@@ -89,6 +87,7 @@ export default function Changelog({ post }) {
               </SmartMarkdown>
             </div>
           </div>
+        )}
       </Wrapper>
     </Layout>
   );

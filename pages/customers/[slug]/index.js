@@ -127,53 +127,56 @@ export const unstable_getStaticProps = gqlStaticProps(
 );
 
 export default function UseCase({ post }) {
-  const colors = [post.duotoneColor1.hex, post.duotoneColor2.hex]
+  const colors = post && [post.duotoneColor1.hex, post.duotoneColor2.hex]
     .map(x => x.replace(/#/, ''))
     .join(',');
   const duotone = `duotone=${colors}`;
 
   return (
     <Layout>
-      {renderMetaTags(post._seoMetaTags)}
+      {post && (
+        <>
+          {renderMetaTags(post._seoMetaTags)}
+          <div
+            style={{
+              '--gradient1': post.duotoneColor1.hex,
+              '--gradient2': post.duotoneColor2.hex,
+              '--useCaseAccent': post.accentColor.hex,
+            }}
+          >
+            <UseCaseHead
+              title={parse(post.title)}
+              logo={post.logo.url}
+              image={`${post.coverImage.url}?${duotone}`}
+            />
 
-      <div
-        style={{
-          '--gradient1': post.duotoneColor1.hex,
-          '--gradient2': post.duotoneColor2.hex,
-          '--useCaseAccent': post.accentColor.hex,
-        }}
-      >
-        <UseCaseHead
-          title={parse(post.title)}
-          logo={post.logo.url}
-          image={`${post.coverImage.url}?${duotone}`}
-        />
+            <UseCaseRecap
+              challenge={highlightHtml(post.challenge)}
+              result={highlightHtml(post.result)}
+            >
+              <Numbers>
+                {post.numbers.map(number => (
+                  <NumbersBlock key={number.label} title={number.number}>
+                    {number.label}
+                  </NumbersBlock>
+                ))}
+              </Numbers>
+            </UseCaseRecap>
 
-        <UseCaseRecap
-          challenge={highlightHtml(post.challenge)}
-          result={highlightHtml(post.result)}
-        >
-          <Numbers>
-            {post.numbers.map(number => (
-              <NumbersBlock key={number.label} title={number.number}>
-                {number.label}
-              </NumbersBlock>
-            ))}
-          </Numbers>
-        </UseCaseRecap>
+            <Results image={`${post.mainResultsImage.url}?${duotone}`}>
+              {post.mainResults.map(res => (
+                <ResultsBlock key={res.title} title={res.title}>
+                  {res.description}
+                </ResultsBlock>
+              ))}
+            </Results>
 
-        <Results image={`${post.mainResultsImage.url}?${duotone}`}>
-          {post.mainResults.map(res => (
-            <ResultsBlock key={res.title} title={res.title}>
-              {res.description}
-            </ResultsBlock>
-          ))}
-        </Results>
-
-        <div className={s.fullStory}>
-          <PostContent content={post.content} />
-        </div>
-      </div>
+            <div className={s.fullStory}>
+              <PostContent content={post.content} />
+            </div>
+          </div>
+        </>
+      )}
     </Layout>
   );
 }

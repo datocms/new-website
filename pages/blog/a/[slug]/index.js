@@ -117,29 +117,35 @@ export const unstable_getStaticProps = gqlStaticProps(
 export default function Article({ post }) {
   return (
     <Layout>
-      <Head>
-        {renderMetaTags(post._seoMetaTags)}
-        <meta
-          property="article:published_time"
-          content={new Date(post._firstPublishedAt).toISOString()}
-        />
-      </Head>
+      {post && (
+        <Head>
+          {renderMetaTags(post._seoMetaTags)}
+          <meta
+            property="article:published_time"
+            content={new Date(post._firstPublishedAt).toISOString()}
+          />
+        </Head>
+      )}
       <Wrapper>
         <div className={s.root}>
           <InterstitialTitle kicker="The DatoCMS Blog" style="two">
-            {post.title}
+            {post && post.title}
           </InterstitialTitle>
 
-          <div className={s.info}>
-            <Image
-              className={s.avatar}
-              data={post.author.avatar.responsiveImage}
-            />
-            Posted on <FormattedDate date={post._firstPublishedAt} /> by{' '}
-            {post.author.name}
-          </div>
+          {post && (
+            <>
+              <div className={s.info}>
+                <Image
+                  className={s.avatar}
+                  data={post.author.avatar.responsiveImage}
+                />
+                Posted on <FormattedDate date={post._firstPublishedAt} /> by{' '}
+                {post.author.name}
+              </div>
 
-          <PostContent content={post.content} />
+              <PostContent content={post.content} />
+            </>
+          )}
         </div>
       </Wrapper>
     </Layout>
