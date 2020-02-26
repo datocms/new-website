@@ -91,6 +91,7 @@ function VideoStreamingEncoding() {
 
       <Flag
         style="good"
+        image="video-player"
         title={
           <>
             Works with <FlagHighlight>any&nbsp;video&nbsp;player</FlagHighlight>

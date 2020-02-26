@@ -12,6 +12,12 @@
   border-radius: 5px;
   padding: 50px;
   background: white;
+
+  svg {
+    height: 60px;
+    margin-bottom: 40px;
+    display: inline-block;
+  }
 }
 
 .beforeAfterColTitle {
@@ -34,7 +40,7 @@
 }
 
 .beforeAfterInterstitial {
-  padding-top: 4.5em;
+  padding-top: 10em;
   text-align: center;
 }
 

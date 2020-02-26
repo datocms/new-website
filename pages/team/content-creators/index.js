@@ -9,6 +9,9 @@ import Bullets from 'components/Bullets';
 import Quote from 'components/Quote';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Arrow3 from 'public/images/illustrations/arrow-sketch-3.svg';
+import Crown from 'public/images/illustrations/corona2.svg';
+import Bugs from 'public/images/illustrations/bugs1.svg';
 
 import s from './style.css';
 
@@ -47,7 +50,8 @@ function ContentCreators() {
       >
         <div className={s.beforeAfter}>
           <div className={s.beforeAfterCol}>
-            <div className={s.beforeAfterColTitle}>Now</div>
+            <Bugs />
+            <div className={s.beforeAfterColTitle}>Current state</div>
             <div className={s.beforeAfterPoint}>
               <p>
                 Content and images are produced for a{' '}
@@ -68,11 +72,12 @@ function ContentCreators() {
             </div>
           </div>
           <div className={s.beforeAfterInterstitial}>
-            <div className={s.beforeAfterPoint}>X</div>
-            <div className={s.beforeAfterPoint}>X</div>
-            <div className={s.beforeAfterPoint}>X</div>
+            <div className={s.beforeAfterPoint}><Arrow3 /></div>
+            <div className={s.beforeAfterPoint}><Arrow3 /></div>
+            <div className={s.beforeAfterPoint}><Arrow3 /></div>
           </div>
           <div className={s.beforeAfterCol}>
+            <Crown />
             <div className={s.beforeAfterColTitle}>With DatoCMS</div>
 
             <div className={s.beforeAfterPoint}>
@@ -169,6 +174,7 @@ function ContentCreators() {
 
       <Flag
         style="good"
+        image="robot-ai"
         title={
           <>
             <FlagHighlight>AI-assisted</FlagHighlight> asset management

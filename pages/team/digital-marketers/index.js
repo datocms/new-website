@@ -59,7 +59,7 @@ function DigitalMarketers({ integrations }) {
       <OmnichannelIllustration />
 
       <TitleIllustrationStripWithContent
-        image="oniric-world"
+        image="onichannel-matters"
         title="Why omnichannel matters?"
         subtitle={
           <>

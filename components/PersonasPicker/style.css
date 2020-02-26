@@ -34,16 +34,17 @@
   color: inherit;
   text-decoration: none;
   display: block;
-  padding: 40px 50px;
+  padding: 40px 50px 40px 150px;
   border-bottom: 1px solid var(--border-color);
   transition: all 200ms ease-in-out;
-  
+  position: relative;
+
   &:last-child {
     border-bottom-width: 0;
   }
 
   &:hover {
-    padding-left: 60px;
+    padding-left: 160px;
   }
 }
 
@@ -60,5 +61,19 @@
 
 .personasLink {
   font-weight: 500;
-  font-size: 0.9em;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: var(--light-body-color);
+
+  svg {
+    height: 0.7em;
+    margin-left: 10px;
+    fill: var(--light-body-color);
+  }
+}
+
+.personasImage {
+  position: absolute;
+  left: 50px;
+  width: 60px;
 }

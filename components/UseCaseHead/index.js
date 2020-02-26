@@ -2,12 +2,17 @@ import Wrapper from 'components/Wrapper';
 import s from './style.css';
 import Dato from 'public/images/logos/datocms.svg';
 import cn from 'classnames';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import BackgroundImage from 'components/BackgroundImage';
 
-export default function UseCaseHead({ title, logo: logoUrl, image, children }) {
+export default function UseCaseHead({ title, logo: logoUrl, image }) {
   return (
     <div className={s.root}>
       <div className={cn(s.box, s.boxImage)}>
-        <div className={s.image} style={{ backgroundImage: `url(${image})` }} />
+        <BackgroundImage
+          className={s.image}
+          src={`${image}?fit=max&format=auto`}
+        />
       </div>
       <div className={cn(s.box, s.boxText)}>
         <div className={s.boxInner}>
@@ -19,7 +24,9 @@ export default function UseCaseHead({ title, logo: logoUrl, image, children }) {
                 <Dato />
               </div>
               <div className={s.title}>{title}</div>
-              <div className={s.cta}>Read the success case</div>
+              <a className={s.cta} href="#usecase">
+                Read the success case <ArrowIcon />
+              </a>
             </div>
           </Wrapper>
         </div>
@@ -34,7 +41,9 @@ export default function UseCaseHead({ title, logo: logoUrl, image, children }) {
                 <Dato />
               </div>
               <div className={s.title}>{title}</div>
-              <div className={s.cta}>Read the success case</div>
+              <a className={s.cta} href="#usecase">
+                Read the success case <ArrowIcon />
+              </a>
             </div>
           </Wrapper>
         </div>

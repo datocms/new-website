@@ -1,16 +1,20 @@
-import Wrapper from "components/Wrapper";
-import s from "./style.css";
+import Wrapper from 'components/Wrapper';
+import s from './style.css';
+import BackgroundImage from 'components/BackgroundImage';
 
 export default function Numbers({ children, image }) {
   return (
     <div className={s.root}>
-      <div className={s.image} style={{ backgroundImage: `url(${image})` }} />
+      <BackgroundImage
+        className={s.image}
+        src={`${image}?fit=max&format=auto`}
+      />
       <div className={s.inner}>
         <Wrapper>
           <div className={s.rootBlocks}>
             <div className={s.rootBlocksInner}>
-            <div className={s.title}>Biggest wins</div>
-            {children}
+              <div className={s.title}>Biggest wins</div>
+              {children}
             </div>
           </div>
         </Wrapper>

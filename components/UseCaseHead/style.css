@@ -81,4 +81,18 @@
   text-transform: uppercase;
   font-weight: bold;
   color: var(--useCaseAccent);
+  text-decoration: none;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    margin-left: 10px;
+  }
+
+  svg {
+    height: 0.7em;
+    margin-left: 10px;
+    fill: var(--useCaseAccent);
+    display: inline;
+    vertical-align: middle;
+  }
 }

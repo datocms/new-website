@@ -26,18 +26,25 @@
   text-decoration: none;
   box-shadow: var(--box-shadow);
   border-radius: 5px;
-  padding: 40px 50px;
+  padding: 40px 50px 40px 150px;
   border-bottom: 1px solid var(--border-color);
   position: relative;
   transition: all 200ms ease-in-out;
+  position: relative;
 
   &:hover {
     transform: translateY(-10px);
   }
-  
+
   &:last-child {
     border-bottom-width: 0;
   }
+}
+
+.personasImage {
+  position: absolute;
+  left: 50px;
+  width: 60px;
 }
 
 .personasTitle {
@@ -54,4 +61,12 @@
 .personasLink {
   font-weight: 500;
   font-size: 0.9em;
+  text-transform: uppercase;
+  color: var(--light-body-color);
+
+  svg {
+    height: 0.7em;
+    margin-left: 10px;
+    fill: var(--light-body-color);
+  }
 }

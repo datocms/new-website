@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Wrapper from 'components/Wrapper';
 import { highlightHtml } from 'components/Highlight';
 import LazyImage from 'components/LazyImage';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 
 export default function UseCaseExcerpts({ cases }) {
   const firstCase = cases[0];
@@ -20,7 +21,7 @@ export default function UseCaseExcerpts({ cases }) {
               <div className={s.mainStoryTitle}>
                 {highlightHtml(firstCase.title)}
               </div>
-              <div className={s.goto}>Read the story</div>
+              <div className={s.goto}>Read the story <ArrowIcon /></div>
             </a>
           </Link>
           {cases.slice(1).map(useCase => (
@@ -36,7 +37,7 @@ export default function UseCaseExcerpts({ cases }) {
                 <div className={s.otherUseCaseTitle}>
                   {highlightHtml(useCase.title)}
                 </div>
-                <div className={s.goto}>Read the story</div>
+                <div className={s.goto}>Read the story <ArrowIcon /></div>
               </a>
             </Link>
           ))}
