@@ -259,7 +259,7 @@ export default function DocPage({ docGroup, titleOverride, page }) {
             title={docGroup.name}
             entries={docGroup.pages.map(page => {
               return {
-                url: `/docs/p/${docGroup.slug}${
+                url: `/docs/${docGroup.slug}${
                   page.page.slug === 'index' ? '' : `/${page.page.slug}`
                 }`,
                 label: page.titleOverride || page.page.title,

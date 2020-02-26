@@ -5,7 +5,7 @@ import {
   Toc,
   Sidebar,
   unstable_getStaticProps as docPageUnstableGetStaticProps,
-} from 'pages/docs/p/[...chunks]';
+} from 'pages/docs/[...chunks]';
 import fetch from 'node-fetch';
 import Prism from 'components/Prism';
 import s from 'pages/docs/pageStyle.css';
@@ -62,7 +62,7 @@ export default function DocPage({
           title={docGroup.name}
           entries={docGroup.pages.map(page => {
             return {
-              url: `/docs/p/${docGroup.slug}${
+              url: `/docs/${docGroup.slug}${
                 page.page.slug === 'index' ? '' : `/${page.page.slug}`
               }`,
               label: page.titleOverride || page.page.title,

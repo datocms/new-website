@@ -52,9 +52,9 @@ const Sidebar = ({ roots }) => (
           {root.children.map(sub => (
             <Link
               href={docHref(
-                `/docs/p/${sub.slug}${normalize(sub.pages[0].page.slug)}`,
+                `/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`,
               )}
-              as={`/docs/p/${sub.slug}${normalize(sub.pages[0].page.slug)}`}
+              as={`/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`}
               key={sub.slug}
             >
               <a className={s.guide}>{sub.name}</a>
@@ -83,8 +83,8 @@ export default function Docs({ roots }) {
         <h6 className={s.introTitle}>Start with your use case</h6>
         <div className={s.useCaseCards}>
           <Link
-            href={docHref('/docs/p/general-concepts')}
-            as="/docs/p/general-concepts"
+            href={docHref('/docs/general-concepts')}
+            as="/docs/general-concepts"
           >
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Getting started</div>
@@ -92,8 +92,8 @@ export default function Docs({ roots }) {
             </a>
           </Link>
           <Link
-            href={docHref('/docs/p/content-modelling')}
-            as="/docs/p/content-modelling"
+            href={docHref('/docs/content-modelling')}
+            as="/docs/content-modelling"
           >
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Model your schema</div>
@@ -104,8 +104,8 @@ export default function Docs({ roots }) {
             </a>
           </Link>
           <Link
-            href={docHref('/docs/p/content-delivery-api/overview')}
-            as="/docs/p/content-delivery-api/overview"
+            href={docHref('/docs/content-delivery-api/overview')}
+            as="/docs/content-delivery-api/overview"
           >
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>GraphQL API</div>
@@ -116,19 +116,19 @@ export default function Docs({ roots }) {
 
         <h6 className={s.introTitle}>Start from a template</h6>
         <div className={s.useCaseCards}>
-          <Link href="/docs/p/general-concepts">
+          <Link href="/docs/general-concepts">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Gatsby website</div>
               <p>Learn all the basic concepts and features behind DatoCMS.</p>
             </a>
           </Link>
-          <Link href="/docs/p/content-delivery-api/overview">
+          <Link href="/docs/content-delivery-api/overview">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>NextJS website</div>
               <p>Learn how to fetch your content into any frontend project.</p>
             </a>
           </Link>
-          <Link href="/docs/p/content-modelling">
+          <Link href="/docs/content-modelling">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Hugo website</div>
               <p>

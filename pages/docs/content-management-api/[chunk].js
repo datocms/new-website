@@ -3,7 +3,7 @@ import {
   Sidebar,
   Toc,
   unstable_getStaticProps as docPageUnstableGetStaticProps,
-} from 'pages/docs/p/[...chunks]';
+} from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.css';
 import fetchCma from 'utils/fetchCma';
 import { parse } from 'flatted/cjs';
@@ -31,6 +31,8 @@ export const unstable_getStaticPaths = gqlStaticPaths(
 );
 
 export const unstable_getStaticProps = async ({ params: { chunk } }) => {
+  console.log(chunk);
+
   const { props } = await docPageUnstableGetStaticProps({
     params: { chunks: ['content-management-api', chunk] },
   });
@@ -53,7 +55,7 @@ export default function DocPage({ docGroup, titleOverride, page, cma }) {
             entries={[].concat(
               docGroup.pages.map(page => {
                 return {
-                  url: `/docs/p/${docGroup.slug}${
+                  url: `/docs/${docGroup.slug}${
                     page.page.slug === 'index' ? '' : `/${page.page.slug}`
                   }`,
                   label: page.titleOverride || page.page.title,

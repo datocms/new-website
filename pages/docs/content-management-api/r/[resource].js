@@ -2,7 +2,7 @@ import DocsLayout from 'components/DocsLayout';
 import {
   Sidebar,
   unstable_getStaticProps as docPageUnstableGetStaticProps,
-} from 'pages/docs/p/[...chunks]';
+} from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.css';
 import fetchCma from 'utils/fetchCma';
 import { parse } from 'flatted/cjs';
@@ -24,7 +24,7 @@ export const unstable_getStaticPaths = async () => {
 
 export const unstable_getStaticProps = async ({ params: { resource } }) => {
   const { props } = await docPageUnstableGetStaticProps({
-    params: { chunks: ['content-management-api', 'overview'] },
+    params: { chunks: ['content-management-api', 'index'] },
   });
 
   const cma = await fetchCma(resource);
@@ -81,7 +81,7 @@ export default function DocPage({ docGroup, page, cma }) {
             entries={[].concat(
               docGroup.pages.map(page => {
                 return {
-                  url: `/docs/p/${docGroup.slug}${
+                  url: `/docs/${docGroup.slug}${
                     page.page.slug === 'index' ? '' : `/${page.page.slug}`
                   }`,
                   label: page.titleOverride || page.page.title,
