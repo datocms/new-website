@@ -5,10 +5,6 @@ import s from './style.css';
 import useWindowScroll from '@react-hook/window-scroll';
 import classnames from 'classnames';
 
-import Developers from 'public/images/illustrations/developers-2.svg';
-import Marketers from 'public/images/illustrations/marketers.svg';
-import Editors from 'public/images/illustrations/content-editors2.svg';
-
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import Image from 'public/images/illustrations/image-api.svg';
@@ -16,7 +12,20 @@ import Video from 'public/images/illustrations/video-encoding.svg';
 import Languages from 'public/images/illustrations/multilanguage-2.svg';
 import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 
-export const Feature = ({ href, icon: Icon, title, description }) => (
+import External from 'public/icons/regular/external-link.svg';
+
+const LearnResource = ({ href, title, description }) => (
+  <Link href={href}>
+    <a className={s.learnRes}>
+      <div className={s.learnResBody}>
+        <div className={s.learnResTitle}>{title}</div>
+        <div className={s.learnResDescription}>{description}</div>
+      </div>
+    </a>
+  </Link>
+);
+
+const Feature = ({ href, icon: Icon, title, description }) => (
   <Link href={href}>
     <a className={s.feature}>
       <div className={s.featureIcon}>
@@ -28,6 +37,12 @@ export const Feature = ({ href, icon: Icon, title, description }) => (
       </div>
     </a>
   </Link>
+);
+
+const Pane = ({ children }) => (
+  <div className={s.groupPane}>
+    <div className={s.groupPaneInner}>{children}</div>
+  </div>
 );
 
 export default function Navbar() {
@@ -49,45 +64,27 @@ export default function Navbar() {
                 <div className={s.groupTitle}>
                   <span>Why DatoCMS</span>
                 </div>
-                <div className={s.groupPane}>
+                <Pane>
                   <div className={s.cols}>
-                  <div className={s.extraWhy}>
+                    <div className={s.extraWhy}>
                       <div className={s.sectionTitle}>Team</div>
-
                       <Link href="/team/developers">
-                        <a className={s.extraLink}>
-                          {/* <div className={s.icon}>
-                              <Developers />
-                            </div> */}
-                          For developers
-                        </a>
+                        <a className={s.extraLink}>For developers</a>
                       </Link>
-
                       <Link href="/team/digital-marketers">
-                        <a className={s.extraLink}>
-                          {/* <div className={s.icon}>
-                              <Marketers />
-                            </div> */}
-                          For digital marketers
-                        </a>
+                        <a className={s.extraLink}>For digital marketers</a>
                       </Link>
-
                       <Link href="/team/content-creators">
-                        <a className={s.extraLink}>
-                          {/* <div className={s.icon}>
-                              <Editors />
-                            </div> */}
-                          For content creators
-                        </a>
+                        <a className={s.extraLink}>For content creators</a>
                       </Link>
 
                       <div className={s.sectionTitle}>Enterprise</div>
-
                       <Link href="/enterprise">
                         <a className={s.extraLink}>DatoCMS for Enterprise</a>
                       </Link>
 
                       <div className={s.sectionTitle}>Success stories</div>
+
                       <Link href="/customers/[slug]" as="/customers/arduino">
                         <a className={s.extraLink}>Arduino</a>
                       </Link>
@@ -97,7 +94,7 @@ export default function Navbar() {
                       <Link href="/customers/[slug]" as="/customers/nike">
                         <a className={s.extraLink}>Nike</a>
                       </Link>
-                      <Link href="/customers/[slug]" as="/customers/chillys-bottles">
+                      <Link href="/customers/[slug]" as="/customers/chilly-s">
                         <a className={s.extraLink}>Chilly's Bottles</a>
                       </Link>
                     </div>
@@ -144,10 +141,8 @@ export default function Navbar() {
                         description="Easily build dynamic layouts for landing pages"
                       />
                     </div>
-
-                    
                   </div>
-                </div>
+                </Pane>
               </div>
 
               <Link href="/">
@@ -156,36 +151,57 @@ export default function Navbar() {
                 </a>
               </Link>
 
-              {/* <div className={s.group}>
-                <div className={s.groupTitle}><span>Learn</span></div>
-                <div className={s.groupPane}>
-                  <div className={s.cols}>
-                    <div className={s.groupPaneCol}>
-                      
-                        <div className={s.groupPaneLink}>
-                          <Link href="/blog">
-                            <a>Blog</a>
-                          </Link>
-                        </div>
-                        <div className={s.groupPaneLink}>
-                          <Link href="/product-updates">
-                            <a>Product updates</a>
-                          </Link>
-                        </div>
-                        <div className={s.groupPaneLink}>
-                          <Link href="/docs">
-                            <a>Documentation</a>
-                          </Link>
-                        </div>
-                        <div className={s.groupPaneLink}>
-                          <Link href="/support">
-                            <a>Help center</a>
-                          </Link>
-                        </div>
-                      </div>
-                  </div>
+              <div className={s.group}>
+                <div className={s.groupTitle}>
+                  <span>Learn</span>
                 </div>
-              </div> */}
+                <Pane>
+                  <div className={s.cols}>
+                    <div className={s.learnDocs}>
+                      <LearnResource
+                        title="Documentation"
+                        description="Guides, tutorials and API reference"
+                        href="/docs"
+                      />
+
+                      <LearnResource
+                        title="Blog"
+                        description="Culture, learnings, and announcements"
+                        href="/blog"
+                      />
+
+                      <LearnResource
+                        title="Product updates"
+                        description="Changelog for new features and improvements"
+                        href="/product-updates"
+                      />
+
+                      <LearnResource
+                        title="Success Stories"
+                        description="See how other teams use DatoCMS"
+                        href="/success-stories"
+                      />
+                    </div>
+                    <div className={s.help}>
+                      <LearnResource
+                        title={<>Community forum <External /></>}
+                        description="Ask questions and start discussions with your peers."
+                        href="https://community.datocms.com"
+                      />
+                      <LearnResource
+                        title={<>Slack channel <External /></>}
+                        description="Chat live with other developers in our Slack channel"
+                        href="/slack"
+                      />
+                      <LearnResource
+                        title="Contact Us"
+                        description="Get in touch with our team"
+                        href="/contact"
+                      />
+                    </div>
+                  </div>
+                </Pane>
+              </div>
 
               <Link href="/foo">
                 <a className={s.entry}>

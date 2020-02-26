@@ -4,24 +4,30 @@
   left: 0;
   right: 0;
   background: white;
-  z-index: 10;
+  z-index: 1000;
 }
 
 .placeholder {
   height: 110px;
 }
 
+.logo {
+  display: flex;
+  align-items: stretch;
+  padding: 40px 0;
+  transition: padding 0.2s ease-in-out;
+}
+
 .rootHover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  .entry,
-  .groupTitle {
-    padding: 20px 15px;
+  .logo {
+    padding: 10px 0;
   }
 }
 
 .innerRoot {
   display: flex;
-  align-items: stretch;
+  align-items: center;
 }
 
 .entries {
@@ -33,9 +39,9 @@
 
 .entry,
 .groupTitle {
-  padding: 45px 15px;
+  padding: 15px 15px;
   font-size: 17px;
-  transition: padding 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   span {
     position: relative;
@@ -50,13 +56,15 @@
     width: 0;
     height: 3px;
     background: var(--accent-color);
-    transition: width 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 }
 
 .entry,
 .group {
   &:hover {
+    color: var(--accent-color);
+
     span:after {
       width: 100%;
     }
@@ -66,11 +74,6 @@
 .entry {
   text-decoration: none;
   color: var(--base-body-color);
-}
-
-.logo {
-  display: flex;
-  align-items: stretch;
 }
 
 .group {
@@ -85,11 +88,16 @@
 
 .groupPane {
   opacity: 0;
+  color: var(--base-body-color);
   position: absolute;
   transition: opacity 0.2s ease-in-out;
   pointer-events: none;
+  left: -50px;
+  padding: 0 50px 50px 50px;
+}
+
+.groupPaneInner {
   border-radius: 4px;
-  left: 0;
   background: white;
   box-shadow: 0 0.9px 2.2px rgba(0, 0, 0, 0.02),
     0 2.2px 5.3px rgba(0, 0, 0, 0.028), 0 4.1px 10px rgba(0, 0, 0, 0.035),
@@ -107,7 +115,9 @@
   background: linear-gradient(45deg, #fefae4, #f9ecfe);
 }
 
-.features {
+.features,
+.learnDocs,
+.help {
   padding: 40px;
 }
 
@@ -183,5 +193,49 @@
 
   &:hover {
     opacity: 0.7;
+  }
+}
+
+.learnDocs,
+.help {
+  min-width: 280px;
+}
+
+.learnDocs {
+  border-right: 1px solid var(--border-color);
+}
+
+.learnRes {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+  margin-bottom: 25px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    text-decoration: none;
+
+    .learnResTitle {
+      color: var(--accent-color);
+    }
+  }
+}
+
+.learnResDescription {
+  font-size: 0.9em;
+  margin-top: 5px;
+  color: var(--light-body-color);
+}
+
+.learnResTitle {
+  font-weight: 500;
+
+  svg {
+    fill: var(--light-body-color);
+    margin-left: 5px;
   }
 }
