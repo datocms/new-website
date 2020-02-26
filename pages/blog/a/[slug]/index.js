@@ -120,10 +120,12 @@ export default function Article({ post }) {
       {post && (
         <Head>
           {renderMetaTags(post._seoMetaTags)}
-          <meta
-            property="article:published_time"
-            content={new Date(post._firstPublishedAt).toISOString()}
-          />
+          {post._firstPublishedAt && (
+            <meta
+              property="article:published_time"
+              content={new Date(post._firstPublishedAt).toISOString()}
+            />
+          )}
         </Head>
       )}
       <Wrapper>
