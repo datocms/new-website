@@ -4,6 +4,7 @@ import Highlight from 'components/Highlight';
 import Quote from 'components/Quote';
 import EnterpriseStrip, { Point } from 'components/EnterpriseStrip';
 import LogosBar from 'components/LogosBar';
+import Wrapper from 'components/Wrapper';
 import TalkWithUs from 'components/TalkWithUs';
 
 import Hashicorp from 'public/images/logos/hashicorp.svg';
@@ -11,6 +12,8 @@ import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
+
+import s from './style.css';
 
 function Enterprise() {
   return (
@@ -117,7 +120,21 @@ function Enterprise() {
         />
       </EnterpriseStrip>
 
-      <TalkWithUs />
+      <div className={s.talkWithUs}>
+        <Wrapper>
+          <a id="form" className={s.anchor} />
+          <div className={s.talkWithUsInner}>
+            <div className={s.talkWithUsIntro}>
+              <div className={s.talkWithUsTitle}>Talk with us</div>
+              <div className={s.talkWithUsDescription}>
+                Our experts are available to answer any of your questions. We’re
+                available in a number of ways, any time that you need us.
+              </div>
+            </div>
+            <TalkWithUs sales />
+          </div>
+        </Wrapper>
+      </div>
     </Layout>
   );
 }

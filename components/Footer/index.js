@@ -159,7 +159,7 @@ export default function Footer() {
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/">
+                        <Link href="/legal/security">
                           <a>Security</a>
                         </Link>
                       </div>
