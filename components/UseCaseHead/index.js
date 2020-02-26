@@ -11,7 +11,7 @@ export default function UseCaseHead({ title, logo: logoUrl, image }) {
       <div className={cn(s.box, s.boxImage)}>
         <BackgroundImage
           className={s.image}
-          src={`${image}?fit=max&format=auto`}
+          src={`${image}?fit=max&fm=png8&q=90`}
         />
       </div>
       <div className={cn(s.box, s.boxText)}>

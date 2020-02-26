@@ -1,0 +1,141 @@
+.root {
+  margin-bottom: 60px;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 7vw 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 40px;
+}
+
+.left, .center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backend {
+  box-shadow: var(--box-shadow);
+  padding: 40px;
+  width: 100%;
+  text-align: center;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 3vw;
+    height: 3vw;
+    margin-bottom: 1vw;
+  }
+}
+
+.backendTitle {
+  font-weight: 500;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.features {
+  line-height: 1.6;
+}
+
+.apis {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 1.5vw;
+}
+
+.api {
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  background: white;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  padding: 0 2vw;
+
+  svg {
+    width: 2vw;
+    height: 2vw;
+    margin-right: 1vw;
+  }
+}
+
+.lines {
+  stroke-dasharray: 8;
+  stroke: none;
+  stroke-width: 1;
+  fill: none;
+  fill-rule: evenodd;
+  animation: dash 20s linear infinite;
+
+  path,
+  line {
+    stroke: #c2c8d6;
+    stroke-width: 5;
+  }
+}
+
+.linesH {
+  margin: 1vw 0;
+  width: 7vw;
+  height: 17vw;
+}
+
+.linesVContainer {
+  padding: 0 3vw;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 400;
+  }
+}
+
+.apps,
+.people {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.people {
+  top: auto;
+  bottom: 0;
+}
+
+.app {
+  width: 100px;
+}
+
+.appLabel {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.appIcon svg {
+  height: 60px;
+  width: 60px;
+}
+
+.person {
+  width: 120px;
+}
+
+.personIcon img {
+  width: 60px;
+  border-radius: 50px;
+  background: linear-gradient(45deg, #fdece5, #fefae4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.personRole {
+  font-weight: bold;
+  margin-top: 15px;
+}

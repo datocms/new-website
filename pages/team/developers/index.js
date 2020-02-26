@@ -2,6 +2,7 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
+import DatoIllustration from 'components/DatoIllustration';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import IntegrationsBanner from 'components/IntegrationsBanner';
@@ -138,11 +139,11 @@ function Developers({ integrations }) {
         </p>
       </Flag>
 
-      <div style={{ margin: '30vh 0 10vh' }}>
-        <InterstitialTitle style="two">
-          Stop using monolithic CMSs. You need an Headless&nbsp;CMS
-        </InterstitialTitle>
-      </div>
+      <TitleStripWithContent
+        title={<>Stop the madness, try&nbsp;headless</>}
+      >
+        <DatoIllustration />
+      </TitleStripWithContent>
 
       <Flag
         style="good"

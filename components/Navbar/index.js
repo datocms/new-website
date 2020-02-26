@@ -14,16 +14,24 @@ import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 
 import External from 'public/icons/regular/external-link.svg';
 
-const LearnResource = ({ href, title, description }) => (
-  <Link href={href}>
-    <a className={s.learnRes}>
+const LearnResource = ({ href, title, description, target }) =>
+  target ? (
+    <a className={s.learnRes} href={href} target={target}>
       <div className={s.learnResBody}>
         <div className={s.learnResTitle}>{title}</div>
         <div className={s.learnResDescription}>{description}</div>
       </div>
     </a>
-  </Link>
-);
+  ) : (
+    <Link href={href}>
+      <a className={s.learnRes}>
+        <div className={s.learnResBody}>
+          <div className={s.learnResTitle}>{title}</div>
+          <div className={s.learnResDescription}>{description}</div>
+        </div>
+      </a>
+    </Link>
+  );
 
 const Feature = ({ href, icon: Icon, title, description }) => (
   <Link href={href}>
@@ -175,21 +183,20 @@ export default function Navbar() {
                         description="Changelog for new features and improvements"
                         href="/product-updates"
                       />
-
-                      <LearnResource
-                        title="Success Stories"
-                        description="See how other teams use DatoCMS"
-                        href="/success-stories"
-                      />
                     </div>
                     <div className={s.help}>
                       <LearnResource
-                        title={<>Community forum <External /></>}
+                        title={
+                          <>
+                            Community forum <External />
+                          </>
+                        }
                         description="Ask questions and start discussions with your peers."
                         href="https://community.datocms.com"
+                        target="_blank"
                       />
                       <LearnResource
-                        title={<>Slack channel <External /></>}
+                        title="Slack channel"
                         description="Chat live with other developers in our Slack channel"
                         href="/slack"
                       />

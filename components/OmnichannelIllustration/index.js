@@ -1,5 +1,6 @@
 import s from './style.css';
 import Wrapper from 'components/Wrapper';
+import LazyImage from 'components/LazyImage';
 
 import Website from 'public/images/illustrations/website.svg';
 import Chatbot from 'public/images/illustrations/chatbot.svg';
@@ -100,7 +101,7 @@ export default function OmnichannelIllustration() {
           {people.map(person => (
             <div className={s.person} key={person.name}>
               <div className={s.personIcon}>
-                <img src={`/images/faces/${person.image}`} />
+                <LazyImage src={`/images/faces/${person.image}`} />
               </div>
               <div className={s.personName}>{person.name}</div>
               <div className={s.personRole}>{person.role}</div>

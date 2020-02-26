@@ -9,4 +9,3 @@ export default function MaybeLink({ href, children, ...other }) {
     <div {...other}>{children}</div>
   );
 }
-  
