@@ -9,7 +9,7 @@ const pClassNames = {
   big: style.pBig,
 };
 
-export default function Button({ as: Component = 'div', children, fs, p, disabled, ...other }) {
+export default function Button({ as: Component = 'div', children, fs, p, block, disabled, ...other }) {
   return (
     <Component
       {...other}
@@ -18,6 +18,7 @@ export default function Button({ as: Component = 'div', children, fs, p, disable
           style.root,
           {
             [style.disabled]: disabled,
+            [style.block]: block,
           },
           fs && fsClassNames[fs],
           p && pClassNames[p],

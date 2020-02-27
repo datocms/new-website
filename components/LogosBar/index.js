@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/react-hooks";
 import Wrapper from "components/Wrapper";
 import s from "./style.css";
 

@@ -2,20 +2,16 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Legal from 'components/Legal';
-import fetch from 'isomorphic-unfetch';
+import tiny from 'tiny-json-http';
 
 export async function unstable_getStaticProps() {
-  const res = await fetch(
-    'https://www.iubenda.com/api/privacy-policy/64648824/cookie-policy',
-    {
-      headers: { Accept: 'application/json' },
-    },
-  );
-  const page = await res.json();
+  const { body: { content: body } } = await tiny.get({
+    url: 'https://www.iubenda.com/api/privacy-policy/64648824/cookie-policy',
+  });
 
   return {
     props: {
-      body: page.content,
+      body,
     },
   };
 }

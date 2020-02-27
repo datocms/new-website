@@ -1,7 +1,8 @@
-const fetch = require('node-fetch');
+import tiny from 'tiny-json-http';
 const sortBy = require('sort-by');
 const parser = require('json-schema-ref-parser');
 const { stringify } = require('flatted/cjs');
+import tiny from 'tiny-json-http';
 
 const defaultLinksOrder = ['instances', 'self', 'create', 'update', 'destroy'];
 
@@ -39,11 +40,10 @@ const normalizeSchema = (resource, resourceSchema) => ({
 });
 
 module.exports = async function buildCmaResources(resource) {
-  const response = await fetch(
-    'https://site-api.datocms.com/docs/site-api-hyperschema.json',
-  );
+  const { body: unreferencedSchema } = await tiny.get({
+    url: 'https://site-api.datocms.com/docs/site-api-hyperschema.json',
+  });
 
-  const unreferencedSchema = await response.json();
   const schema = await parser.dereference(unreferencedSchema);
   const resources = Object.keys(schema.properties);
   const resourceId = resource && resource.replace(/\-/g, '_');

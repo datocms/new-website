@@ -1,16 +1,13 @@
 import World from 'public/images/world.svg';
 import s from './style.css';
 import useSWR from 'swr';
-import fetch from 'unfetch';
+import wretch from 'wretch';
 import cn from 'classnames';
 import Wrapper from 'components/Wrapper';
 import { useState } from 'react';
 import useInterval from '@use-it/interval';
 
-const fetcher = async url => {
-  const response = await fetch(url);
-  return response.json();
-};
+const fetcher = url => wretch(url).get().json();
 
 function convLatLongToStyle(latitude, longitude) {
   const x = (longitude + 180.0) * (100.0 / 360.0);

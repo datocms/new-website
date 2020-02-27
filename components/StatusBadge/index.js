@@ -1,12 +1,9 @@
 import useSWR from 'swr';
-import fetch from 'unfetch';
 import cn from 'classnames';
 import s from './style.css';
+import wretch from 'wretch';
 
-const fetcher = async url => {
-  const response = await fetch(url);
-  return response.json();
-};
+const fetcher =  url => wretch(url).get().json();
 
 const statusLabel = {
   down: 'Down',

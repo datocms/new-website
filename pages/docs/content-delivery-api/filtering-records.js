@@ -6,7 +6,7 @@ import {
   Sidebar,
   unstable_getStaticProps as docPageUnstableGetStaticProps,
 } from 'pages/docs/[...chunks]';
-import fetch from 'node-fetch';
+import tiny from 'tiny-json-http';
 import Prism from 'components/Prism';
 import s from 'pages/docs/pageStyle.css';
 import gqlExampleForField, { camelize } from 'utils/gqlExampleForField';
@@ -20,14 +20,11 @@ export const unstable_getStaticProps = async () => {
     params: { chunks: ['content-delivery-api', 'filtering-records'] },
   });
 
-  const response = await fetch(
-    'https://internal.datocms.com/introspection/field-filters',
-  );
-
   const {
-    meta: fieldsMetaInfo,
-    field_types: fieldTypesInfo,
-  } = await response.json();
+    body: { meta: fieldsMetaInfo, field_types: fieldTypesInfo },
+  } = await tiny.get({
+    url: 'https://internal.datocms.com/introspection/field-filters',
+  });
 
   return { props: { ...props, fieldsMetaInfo, fieldTypesInfo } };
 };

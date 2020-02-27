@@ -19,6 +19,7 @@
 
 .boxImage {
   clip-path: polygon(calc(var(--half) + 3vw) 3vh, 100% 0, 100% 100%, calc(var(--half) - 3vw) 93%);
+  background: var(--gradient2);
 }
 
 .boxText, .boxCut {

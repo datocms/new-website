@@ -2,22 +2,23 @@ import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import cn from 'classnames';
 import useSWR from 'swr';
-import fetch from 'unfetch';
 import s from './style.css';
 import TalkWithUs from 'components/TalkWithUs';
+import wretch from 'wretch';
 
 async function topicsFetcher() {
-  const response = await fetch('https://community.datocms.com/categories.json');
-  const body = await response.json();
+  const body = await ky
+    .get('https://community.datocms.com/categories.json')
+    .json();
   return body.category_list.categories;
 }
 
 async function statusFetcher() {
-  const response = await fetch(
-    'https://status.datocms.com/.netlify/functions/componentsStatus?days=1',
-  );
-  const body = await response.json();
-  return body;
+  return ky
+    .get(
+      'https://status.datocms.com/.netlify/functions/componentsStatus?days=1',
+    )
+    .json();
 }
 
 export default function Support() {
