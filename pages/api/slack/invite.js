@@ -10,52 +10,40 @@ export default async ({ method, body }, res) => {
 
   const { email, token } = body;
 
-  console.log(body);
+  if (!email || !token) {
+    return res.status(422).send('Invalid request!');
+  }
 
   try {
-    const result = await web.apiCall(
-      'users.admin.invite',
-      {
-        email,
-        set_active: true,
-        channels: [
-          "C7SS10UUW", // general
-          "CDP0ERYJE", // graphql
-          "CDQC7RHPG", // help
-          "CDN843R1N", // javascript
-          "CDN83VAQG", // plugins
-        ]
-      }
-    );
+    const { body: recaptcha } = await tiny.post({
+      url: `https://www.google.com/recaptcha/api/siteverify`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: {
+        secret: process.env.RECAPTCHA_SECRET_KEY,
+        response: token,
+      },
+    });
 
-    console.log(result);
+    if (!recaptcha.success) {
+      return res.status(401).send('Invalid RECAPTCHA!');
+    }
+
+    const result = await web.apiCall('users.admin.invite', {
+      email,
+      set_active: true,
+      channels: [
+        'C7SS10UUW', // general
+        'CDP0ERYJE', // graphql
+        'CDQC7RHPG', // help
+        'CDN843R1N', // javascript
+        'CDN83VAQG', // plugins
+      ],
+    });
 
     res.status(200).json({ success: true });
-  } catch(e) {
-    res.status(400).json({ success: false, error: e.code });
+  } catch (e) {
+    res.status(422).json({ success: false, error: e.data.error });
   }
 };
-
-// result = JSON.parse(Faraday.post(
-//   "https://www.google.com/recaptcha/api/siteverify",
-//   secret: ENV.fetch("RECAPTCHA_SECRET_KEY"),
-//   response: params["g-recaptcha-response"],
-// ).body)
-
-// if result["success"]
-//   client.users_admin_invite(
-//     email: params[:email],
-//     set_active: true,
-//     channels: [
-
-//     ].join(","),
-//   )
-//   response = { success: true }
-//   render json: response
-// else
-//   response = { success: false, error: "recaptcha" }
-//   render json: response, status: 422
-// end
-// rescue Slack::Web::Api::Errors::SlackError => e
-// response = { success: false, error: e.message }
-// render json: response, status: 422

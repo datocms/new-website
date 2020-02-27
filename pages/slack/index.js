@@ -8,30 +8,52 @@ import { useForm } from 'react-hook-form';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import wretch from 'wretch';
+import { useState } from 'react';
 import { useRecaptcha } from 'react-recaptcha-hook';
+
+wretch().errorType('json');
 
 const fetcher = url =>
   wretch(url)
     .get()
     .json();
 
+const errorLabels = {
+  already_invited: 'You have already been invited! Check for an email from feedback@slack.com.',
+};
+
 export default function Support() {
   const { data: stats } = useSWR('/api/slack/info', fetcher);
   const execute = useRecaptcha({
-    sitekey: '6LfYOFUUAAAAALO-ClvqdaiXmTfzxpcOkDzlYrHH',
+    sitekey: '6LcU1dwUAAAAADe2gkTfPNlG3xoybrgx_ulxVbF3',
     hideDefaultBadge: true,
   });
 
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = async ({ email }) => {
-    const token = await execute('slack');
-    const response = await wretch('/api/slack/invite')
-      .json({ email, token })
-      .post();
-    console.log(response);
-  };
+  const [success, setSuccess] = useState(false);
+  const {
+    register,
+    reset,
+    setError,
+    handleSubmit,
+    formState,
+    errors,
+  } = useForm();
 
-  console.log(errors);
+  const onSubmit = async ({ email }) => {
+    try {
+      const token = await execute('slack');
+      const result = await wretch('/api/slack/invite')
+        .post({ email, token })
+        .json();
+
+      console.log(result);
+
+      reset();
+      setSuccess(true);
+    } catch (e) {
+      setError('email', e.json.error, errorLabels[e.json.error] || `Slack error: ${e.json.error}`);
+    }
+  };
 
   return (
     <Layout>
@@ -47,6 +69,14 @@ export default function Support() {
         }
       />
       <Wrapper>
+        {success && (
+          <div className={s.success}>
+            <div className={s.successTitle}>
+              Awesome, welcome on board! <span>🎉</span>
+            </div>
+            Check your email for the invitation!
+          </div>
+        )}
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <input
             name="email"
@@ -62,8 +92,8 @@ export default function Support() {
           {errors.email && (
             <span className={s.error}>{errors.email.message}</span>
           )}
-          <Button as="button" block>
-            Get my invite!
+          <Button as="button" block disabled={formState.isSubmitting}>
+            {formState.isSubmitting ? 'Submitting...' : 'Get my invite!'}
           </Button>
           {stats && (
             <div className={s.stats}>
