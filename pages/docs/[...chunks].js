@@ -1,4 +1,4 @@
-import { initApolloClient, seoMetaTagsFields, imageFields } from 'lib/datocms';
+import { request, seoMetaTagsFields, imageFields } from 'lib/datocms';
 import { renderMetaTags } from 'react-datocms';
 import { gqlStaticPaths } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
@@ -70,11 +70,9 @@ export const unstable_getStaticProps = async function({
   const groupSlug = chunks.length >= 2 ? chunks[chunks.length - 2] : chunks[0];
   const pageSlug = chunks.length >= 2 ? chunks[chunks.length - 1] : 'index';
 
-  const apolloClient = initApolloClient();
-
   const {
     data: { docGroup },
-  } = await apolloClient.query({
+  } = await request({
     query: gql`
       query($groupSlug: String!) {
         docGroup(filter: { slug: { eq: $groupSlug } }) {
@@ -101,7 +99,7 @@ export const unstable_getStaticProps = async function({
 
   const {
     data: { page: pageData },
-  } = await apolloClient.query({
+  } = await request({
     query: gql`
       query($pageId: ItemId!) {
         page: docPage(filter: { id: { eq: $pageId } }) {
