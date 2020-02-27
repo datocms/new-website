@@ -2,7 +2,6 @@ import tiny from 'tiny-json-http';
 const sortBy = require('sort-by');
 const parser = require('json-schema-ref-parser');
 const { stringify } = require('flatted/cjs');
-import tiny from 'tiny-json-http';
 
 const defaultLinksOrder = ['instances', 'self', 'create', 'update', 'destroy'];
 
