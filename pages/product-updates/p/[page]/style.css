@@ -90,6 +90,7 @@
     margin: 30px 0;
     width: 100%;
     overflow: auto;
+    tab-size: 2;
     line-height: 1.3;
   }
 

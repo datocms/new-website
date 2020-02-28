@@ -71,6 +71,7 @@
     font-size: 0.8em;
     margin: 40px 0;
     width: 100%;
+    tab-size: 2;
     overflow: auto;
     line-height: 1.3;
   }
