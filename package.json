@@ -60,6 +60,7 @@
     "react-responsive-embed": "^2.1.0",
     "react-spring": "^9.0.0-beta.34",
     "react-textfit": "^1.1.0",
+    "react-toast-notifications": "^2.4.0",
     "react-use-gesture": "^7.0.2",
     "scroll-into-view-if-needed": "^2.2.24",
     "sort-by": "^1.2.0",

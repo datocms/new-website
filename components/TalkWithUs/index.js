@@ -1,5 +1,4 @@
 import s from './style.css';
-import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import Link from 'next/link';
 import {
@@ -11,6 +10,8 @@ import {
 import Textarea from 'react-autosize-textarea';
 import { getData } from 'country-list';
 import cn from 'classnames';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
+import { useEffect } from 'react';
 
 const Field = ({ name, label, placeholder, validations, options, as }) => {
   const { register, control, watch, errors } = useFormContext();
@@ -18,13 +19,7 @@ const Field = ({ name, label, placeholder, validations, options, as }) => {
   const value = watch(name);
 
   let input = (
-    <input
-      name={name}
-      value={value}
-      id={name}
-      placeholder={placeholder}
-      ref={ref}
-    />
+    <input name={name} id={name} placeholder={placeholder} ref={ref} />
   );
 
   if (options) {
@@ -34,7 +29,7 @@ const Field = ({ name, label, placeholder, validations, options, as }) => {
           <div className={s.selectPlaceholder}>Please select one...</div>
         )}
         <select name={name} id={name} ref={ref}>
-          <option value="" selected></option>
+          <option value=""></option>
           {options.map(option => {
             const value = typeof option === 'string' ? option : option.value;
             const label = typeof option === 'string' ? option : option.label;
@@ -76,19 +71,57 @@ const Field = ({ name, label, placeholder, validations, options, as }) => {
   );
 };
 
-export default function TalkWithUs() {
+function TalkWithUs() {
+  const { addToast } = useToasts();
+
+  useEffect(() => {
+    var urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.has('code')) {
+      const code = urlParams.get('code');
+
+      if (code === 'ok') {
+        addToast('Thank you! We will get in touch as soon as possible.', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+      } else {
+        addToast('Ouch! There was an error submitting the form!', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      }
+    }
+  }, []);
+
   const methods = useForm({
-    defaultValues: {},
+    defaultValues: {
+      name: '',
+      email: '',
+      phoneNumber: '',
+      companyName: '',
+      country: '',
+      jobTitle: '',
+      jobFunction: '',
+      body: '',
+    },
   });
   const { handleSubmit } = methods;
 
-  const onSubmit = values => {
-    console.log(values);
+  const onSubmit = (values, event) => {
+    event.nativeEvent.currentTarget.submit();
   };
 
   return (
     <FormContext {...methods}>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={s.form}
+        onSubmit={handleSubmit(onSubmit)}
+        method="POST"
+        action="https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/4GuYjvVpHX6Xqau-2EggC1eKeg0Iw_fMbehg2EbuLpRQARK6OetUIsAzCTs5-NdwQS_X02Qo1vdMMh6aNGLiySEIPM3EqvAkgNvPW-dQ6BdvbK4bXw1qwh3D2i5j"
+        encType="multipart/form-data"
+        acceptCharset="utf-8"
+      >
         <Field
           name="name"
           label="Full name"
@@ -169,7 +202,7 @@ export default function TalkWithUs() {
         </div>
 
         <Field
-          name="message"
+          name="body"
           label="What's your question?"
           placeholder="Please tell us how we can help"
           validations={{ required: 'Required' }}
@@ -193,5 +226,13 @@ export default function TalkWithUs() {
         </div>
       </form>
     </FormContext>
+  );
+}
+
+export default function OuterTalkWithUs() {
+  return (
+    <ToastProvider>
+      <TalkWithUs />
+    </ToastProvider>
   );
 }
