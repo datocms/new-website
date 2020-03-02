@@ -1,53 +1,60 @@
+.root {
+  margin: 50px 0;
+  position: relative;
+}
 
-.blocks {
-  padding: 50px 0 50px 64px;
+.rootInner {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.block {
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 20px;
+.intro,
+.picker {
   flex: 1;
 }
 
-.blockItem {
-  display: flex;
-  align-items: center;
+.intro {
+  margin: 0 70px 0;
 }
 
-.blockItemMain {
-  flex: 1;
+.introSub {
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
-.blockItemCircle {
-  width: 10px;
-  height: 10px;
-  background-color: #888;
-  border-radius: 40px;
-  margin-right: 7px;
-  display: inline-block;
+.introTitle {
+  font-family: var(--font-headline);
+  line-height: 1;
+  font-size: 55px;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
 }
 
-.DocsBlockItemDetail {
-  font-weight: 400;
-  box-shadow: none;
-  flex: 1;
-  text-align: right;
-  color: #888;
+.introKicker {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: var(--extra-light-body-color);
+  text-transform: uppercase;
 }
 
-.upStatus {
-  color: #2fcc66;
+.introBody {
+  font-size: 17px;
+  margin-right: 40px;
+  line-height: 1.4;
 }
 
-.downStatus {
-  color: rgb(241, 196, 15);
-}
+.support {
+  color: var(--light-body-color);
+  font-weight: 500;
+  margin-top: 50px;
 
-.blockItemDetail {
-}
+  a {
+    color: inherit;
 
-.upStatus {
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
-

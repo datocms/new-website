@@ -1,4 +1,4 @@
-.footerBg {
+.cta {
   position: relative;
   margin-top: 15vh;
 
@@ -13,6 +13,13 @@
     bottom: 0;
     z-index: -1;
   }
+}
+
+.noCta {
+  margin-top: 15vh;
+  padding-top: 50px;
+  clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
+  background: #2e343f;
 }
 
 .footerRoot {

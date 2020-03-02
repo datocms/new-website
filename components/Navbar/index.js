@@ -201,18 +201,26 @@ export default function Navbar() {
                         href="/slack"
                       />
                       <LearnResource
-                        title="Contact Us"
+                        title="Support"
                         description="Get in touch with our team"
-                        href="/contact"
+                        href="/support"
                       />
                     </div>
                   </div>
                 </Pane>
               </div>
 
-              <Link href="/foo">
+              <Link href="/pricing">
                 <a className={s.entry}>
                   <span>Pricing</span>
+                </a>
+              </Link>
+            </div>
+
+            <div className={s.actions}>
+              <Link href="/contact" className={s.actions}>
+                <a className={s.entry}>
+                  <span>Contact sales</span>
                 </a>
               </Link>
             </div>

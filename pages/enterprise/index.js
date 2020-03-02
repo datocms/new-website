@@ -131,7 +131,7 @@ function Enterprise() {
                 available in a number of ways, any time that you need us.
               </div>
             </div>
-            <TalkWithUs sales />
+            <TalkWithUs />
           </div>
         </Wrapper>
       </div>

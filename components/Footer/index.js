@@ -1,14 +1,15 @@
 import Wrapper from 'components/Wrapper';
 import FinalCta from 'components/FinalCta';
 import StatusBadge from 'components/StatusBadge';
+import cn from 'classnames';
 import Link from 'next/link';
 import s from './style.css';
 
-export default function Footer() {
+export default function Footer({ noCta }) {
   return (
     <>
-      <div className={s.footerBg}>
-        <FinalCta />
+      <div className={cn(s.footerBg, { [s.noCta]: noCta, [s.cta]: !noCta })}>
+        {!noCta && <FinalCta />}
         <div className={s.footerRoot}>
           <Wrapper>
             <div className={s.footerInnerRoot}>
