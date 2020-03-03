@@ -7,6 +7,7 @@ const fsClassNames = {
 
 const pClassNames = {
   big: style.pBig,
+  small: style.pSmall,
 };
 
 export default function Button({ as: Component = 'div', children, fs, p, block, disabled, ...other }) {

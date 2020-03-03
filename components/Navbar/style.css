@@ -39,7 +39,7 @@
 
 .entry,
 .groupTitle {
-  padding: 15px 15px;
+  padding: 13px 15px;
   font-size: 17px;
   transition: all 0.2s ease-in-out;
 
@@ -238,4 +238,9 @@
     fill: var(--light-body-color);
     margin-left: 5px;
   }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
 }

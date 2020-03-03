@@ -4,13 +4,14 @@
   display: inline-block;
   padding: 1em 1.5em;
   font-family: var(--font-sans);
-  font-weight: bold;
+  font-weight: 500;
   white-space: nowrap;
   border-radius: 3px;
   border: 0;
   font-size: inherit;
   transition: all 150ms ease-in-out;
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     opacity: 0.8;
@@ -19,6 +20,10 @@
 
 .disabled {
   opacity: 0.7;
+}
+
+.pSmall {
+  padding: 0.8em 1.1em;
 }
 
 .pBig {

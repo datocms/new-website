@@ -120,14 +120,14 @@ export default function Footer({ noCta }) {
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/support">
-                          <a>Help center</a>
-                        </Link>
-                      </div>
-                      <div className={s.groupLink}>
                         <a href="https://status.datocms.com" target="_blank">
                           Status page
                         </a>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/support">
+                          <a>Support</a>
+                        </Link>
                       </div>
                     </div>
                   </div>

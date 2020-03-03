@@ -22,8 +22,8 @@ export default function StatusBadge() {
   const firstDownStatus = firstDownComponent && firstDownComponent.status;
 
   return (
-    <div className={cn(s.status, { [s.ok]: !firstDownStatus })}>
+    <a href="https://support.datocms.com" target="_blank" className={cn(s.status, { [s.ok]: !firstDownStatus })}>
       {firstDownStatus ? statusLabel[firstDownStatus] : 'All systems normal'}
-    </div>
+    </a>
   );
 }

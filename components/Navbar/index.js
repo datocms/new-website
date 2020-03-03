@@ -4,6 +4,7 @@ import Link from 'next/link';
 import s from './style.css';
 import useWindowScroll from '@react-hook/window-scroll';
 import classnames from 'classnames';
+import Button from 'components/Button';
 
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
@@ -223,6 +224,12 @@ export default function Navbar() {
                   <span>Contact sales</span>
                 </a>
               </Link>
+
+              <div className={s.entry}>
+                <Button as="a" p="small" href="https://dashboard.datocms.com/signup">
+                  Try for free!
+                </Button>
+              </div>
             </div>
           </div>
         </Wrapper>
