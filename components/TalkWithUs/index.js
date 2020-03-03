@@ -102,7 +102,8 @@ function TalkWithUs() {
       companyName: '',
       country: '',
       jobTitle: '',
-      jobFunction: '',
+      companyRevenue: '',
+      numberEmployees: '',
       body: '',
     },
   });
@@ -122,13 +123,13 @@ function TalkWithUs() {
         encType="multipart/form-data"
         acceptCharset="utf-8"
       >
-        <Field
-          name="name"
-          label="Full name"
-          placeholder="Your full name"
-          validations={{ required: 'Required' }}
-        />
         <div className={s.formCols}>
+          <Field
+            name="name"
+            label="Full name"
+            placeholder="Your full name"
+            validations={{ required: 'Required' }}
+          />
           <Field
             name="email"
             label="Work email"
@@ -141,7 +142,24 @@ function TalkWithUs() {
               },
             }}
           />
+        </div>
 
+        <div className={s.formCols}>
+          <Field
+            name="jobTitle"
+            label="Job title"
+            validations={{ required: 'Required' }}
+            options={[
+              'Owner',
+              'C-Level',
+              'Vice President',
+              'Director',
+              'Manager',
+              'Individual Contributor',
+              'Consultant',
+              'Other',
+            ]}
+          />
           <Field
             name="phoneNumber"
             label="Phone number"
@@ -168,35 +186,25 @@ function TalkWithUs() {
         </div>
         <div className={s.formCols}>
           <Field
-            name="jobTitle"
-            label="Job title"
+            name="numberEmployees"
+            label="# of employees"
             validations={{ required: 'Required' }}
             options={[
-              'C-Level',
-              'Vice President',
-              'Director',
-              'Manager',
-              'Individual Contributor',
-              'Consultant',
-              'Other',
+              '1-20',
+              '21-100',
+              '101-1000',
+              '1000+',
             ]}
           />
           <Field
-            name="jobFunction"
-            label="Job function"
+            name="companyRevenue"
+            label="Company revenue"
             validations={{ required: 'Required' }}
             options={[
-              'Customer Experience',
-              'Developer/Engineering',
-              'Digital',
-              'HR',
-              'Information Technology',
-              'Marketing',
-              'Procurement',
-              'Product',
-              'Sales',
-              'Security',
-              'Other',
+              'under $100M',
+              '$100M - $500M',
+              '$500M - $1B',
+              'over $1B',
             ]}
           />
         </div>
