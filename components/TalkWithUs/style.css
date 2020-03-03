@@ -1,4 +1,4 @@
-.form {
+.root {
   box-shadow: var(--box-shadow);
   border-radius: 5px;
   overflow: hidden;
@@ -8,101 +8,11 @@
 .formCols {
   display: flex;
 
-  > .field {
+  > * {
     flex: 1;
 
     &:first-child {
       border-right: 1px solid var(--border-color);
     }
-  }
-}
-
-.field {
-  position: relative;
-  border-bottom: 1px solid var(--border-color);
-  background: white;
-
-  .selectPlaceholder {
-    position: absolute;
-    top: 45px;
-    left: 32px;
-    right: 30px;
-    font-size: 17px;
-    color: var(--extra-light-body-color);
-    opacity: 0.6;
-    pointer-events: none;
-  }
-
-  select,
-  input,
-  textarea {
-    border: 0;
-    margin: 0;
-    padding: 45px 29px 20px;
-    font-family: inherit;
-    font-size: 17px;
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    border-left: 4px solid transparent;
-    appearance: none;
-
-    &:focus {
-      border-left-color: var(--azure-color);
-    }
-
-    &::placeholder {
-      color: var(--extra-light-body-color);
-    }
-  }
-
-  textarea {
-    min-height: 150px;
-    max-height: 300px;
-  }
-
-  label,
-  .error {
-    position: absolute;
-    top: 25px;
-    left: 33px;
-    width: 50%;
-    font-size: 12px;
-    line-height: 1;
-  }
-
-  label {
-    color: var(--light-body-color);
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .error {
-    right: 29px;
-    left: auto;
-    text-align: right;
-    color: var(--accent-color);
-  }
-}
-
-.submit {
-  padding: 20px 29px;
-  display: flex;
-  align-items: center;
-}
-
-.anchor {
-  position: relative;
-  top: -80px;
-}
-
-.agree {
-  flex: 1;
-  font-size: 13px;
-  color: var(--light-body-color);
-  margin-right: 50px;
-
-  a {
-    color: inherit;
   }
 }
