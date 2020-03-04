@@ -30,10 +30,9 @@ export const getStaticPaths = gqlStaticPaths(
   ({ root }) => root.pages.map(p => p.page.slug),
 );
 
-export const getStaticProps = async ({ params: { chunk } }) => {
-  console.log(chunk);
-
+export const getStaticProps = async ({ params: { chunk }, ...other }) => {
   const { props } = await docPageUnstableGetStaticProps({
+    ...other,
     params: { chunks: ['content-management-api', chunk] },
   });
 
@@ -42,11 +41,13 @@ export const getStaticProps = async ({ params: { chunk } }) => {
   return { props: { ...props, cma } };
 };
 
-export default function DocPage({ docGroup, titleOverride, page, cma }) {
+export default function DocPage(props) {
+  const { docGroup, titleOverride, page, cma, preview } = props;
   const result = useMemo(() => cma && parse(cma), [cma]);
 
   return (
     <DocsLayout
+      preview={preview}
       sidebar={
         docGroup &&
         result && (

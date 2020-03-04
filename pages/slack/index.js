@@ -46,8 +46,6 @@ export default function Support() {
         .post({ email, token })
         .json();
 
-      console.log(result);
-
       reset();
       setSuccess(true);
     } catch (e) {

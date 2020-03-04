@@ -13,18 +13,21 @@ import CmaResourceMethod from 'components/CmaResourceMethod';
 import r from 'pages/docs/resourceStyle.css';
 import { useState } from 'react';
 import cn from 'classnames';
-import { renderMetaTags } from 'react-datocms';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
   const { toc } = parse(cma);
 
-  return { fallback: true, paths: toc.map(({ slug }) => ({ params: { resource: slug } })) };
+  return {
+    fallback: true,
+    paths: toc.map(({ slug }) => ({ params: { resource: slug } })),
+  };
 };
 
-export const getStaticProps = async ({ params: { resource } }) => {
+export const getStaticProps = async ({ params: { resource }, ...other }) => {
   const { props } = await docPageUnstableGetStaticProps({
-    params: { chunks: ['content-management-api', 'index'] },
+    ...other,
+    params: { chunks: ['content-management-api', ''] },
   });
 
   const cma = await fetchCma(resource);
@@ -69,13 +72,15 @@ const LanguagePicker = ({ children }) => {
   );
 };
 
-export default function DocPage({ docGroup, page, cma }) {
+export default function DocPage({ docGroup, cma, preview }) {
   const result = useMemo(() => cma && parse(cma), [cma]);
 
   return (
     <DocsLayout
+      preview={preview}
       sidebar={
-        docGroup && result && (
+        docGroup &&
+        result && (
           <Sidebar
             title={docGroup.name}
             entries={[].concat(
@@ -93,10 +98,9 @@ export default function DocPage({ docGroup, page, cma }) {
         )
       }
     >
-      {page && (
+      {result && (
         <>
           <Head>
-            {renderMetaTags(page._seoMetaTags)}
             <title>{result.schema.title} - Content Management API</title>
           </Head>
           <div className={s.articleContainer}>

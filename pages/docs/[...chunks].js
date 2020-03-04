@@ -65,6 +65,7 @@ export const getStaticPaths = gqlStaticPaths(
 
 export const getStaticProps = async function({
   params: { chunks: rawChunks },
+  preview,
 }) {
   const chunks = rawChunks.map(chunk => chunk.split(/\//g)).flat();
   const groupSlug = chunks.length >= 2 ? chunks[chunks.length - 2] : chunks[0];
@@ -90,6 +91,7 @@ export const getStaticProps = async function({
       }
     `,
     variables: { groupSlug },
+    preview,
   });
 
   const page =
@@ -97,79 +99,84 @@ export const getStaticProps = async function({
   const titleOverride = page && page.titleOverride;
   const pageId = page && page.page.id;
 
-  const {
-    data: { page: pageData },
-  } = await request({
-    query: gql`
-      query($pageId: ItemId!) {
-        page: docPage(filter: { id: { eq: $pageId } }) {
-          title
-          _seoMetaTags {
-            ...seoMetaTagsFields
-          }
-          content {
-            ... on TextRecord {
-              id
-              _modelApiKey
-              text(markdown: true)
+  let pageData = null;
+
+  if (pageId) {
+    const { data } = await request({
+      query: gql`
+        query($pageId: ItemId!) {
+          page: docPage(filter: { id: { eq: $pageId } }) {
+            title
+            _seoMetaTags {
+              ...seoMetaTagsFields
             }
-            ... on ImageRecord {
-              id
-              _modelApiKey
-              image {
-                format
-                width
-                responsiveImage(imgixParams: { w: 810 }) {
-                  ...imageFields
+            content {
+              ... on TextRecord {
+                id
+                _modelApiKey
+                text(markdown: true)
+              }
+              ... on ImageRecord {
+                id
+                _modelApiKey
+                image {
+                  format
+                  width
+                  responsiveImage(imgixParams: { w: 810 }) {
+                    ...imageFields
+                  }
+                  url
                 }
-                url
               }
-            }
-            ... on VideoRecord {
-              id
-              _modelApiKey
-              video {
-                url
-                title
-                provider
-                width
-                height
-                providerUid
-              }
-            }
-            ... on InternalVideoRecord {
-              id
-              _modelApiKey
-              autoplay
-              loop
-              thumbTimeSeconds
-              video {
-                title
-                width
-                height
+              ... on VideoRecord {
+                id
+                _modelApiKey
                 video {
-                  duration
-                  streamingUrl
-                  thumbnailUrl
+                  url
+                  title
+                  provider
+                  width
+                  height
+                  providerUid
                 }
               }
-            }
-            ... on CodeBlockRecord {
-              _modelApiKey
-              code
-              language
+              ... on InternalVideoRecord {
+                id
+                _modelApiKey
+                autoplay
+                loop
+                thumbTimeSeconds
+                video {
+                  title
+                  width
+                  height
+                  video {
+                    duration
+                    streamingUrl
+                    thumbnailUrl
+                  }
+                }
+              }
+              ... on CodeBlockRecord {
+                _modelApiKey
+                code
+                language
+              }
             }
           }
         }
-      }
 
-      ${seoMetaTagsFields}
-      ${imageFields}
-    `,
-    variables: { pageId },
-  });
+        ${seoMetaTagsFields}
+        ${imageFields}
+      `,
+      variables: { pageId },
+      preview,
+    });
 
-  return { props: { docGroup, titleOverride, page: pageData } };
+    pageData = data.page;
+  }
+
+  return { props: { docGroup, titleOverride, page: pageData, preview } };
 };
 
 export const Sidebar = ({ title, entries }) => {
