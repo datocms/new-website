@@ -7,7 +7,7 @@ import s from './style.css';
 
 import docHref from 'utils/docHref';
 
-export const unstable_getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticProps(
   gql`
     query {
       roots: allDocGroups(filter: { parent: { exists: false } }) {

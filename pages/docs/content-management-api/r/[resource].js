@@ -1,7 +1,7 @@
 import DocsLayout from 'components/DocsLayout';
 import {
   Sidebar,
-  unstable_getStaticProps as docPageUnstableGetStaticProps,
+  getStaticProps as docPageUnstableGetStaticProps,
 } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.css';
 import fetchCma from 'utils/fetchCma';
@@ -15,14 +15,14 @@ import { useState } from 'react';
 import cn from 'classnames';
 import { renderMetaTags } from 'react-datocms';
 
-export const unstable_getStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const cma = await fetchCma();
   const { toc } = parse(cma);
 
   return { paths: toc.map(({ slug }) => ({ params: { resource: slug } })) };
 };
 
-export const unstable_getStaticProps = async ({ params: { resource } }) => {
+export const getStaticProps = async ({ params: { resource } }) => {
   const { props } = await docPageUnstableGetStaticProps({
     params: { chunks: ['content-management-api', 'index'] },
   });

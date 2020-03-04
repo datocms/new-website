@@ -18,7 +18,7 @@ import SuccessIcon from 'public/icons/regular/check.svg';
 
 import styles from './style.css';
 
-export const unstable_getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticProps(
   gql`
     query {
       integrations: allIntegrations(

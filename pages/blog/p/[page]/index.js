@@ -15,7 +15,7 @@ import s from './style.css';
 
 const POSTS_PER_PAGE = 16;
 
-export const unstable_getStaticPaths = gqlStaticPaths(
+export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
       meta: _allBlogPostsMeta {
@@ -27,7 +27,7 @@ export const unstable_getStaticPaths = gqlStaticPaths(
   ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE))),
 );
 
-export const unstable_getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticProps(
   gql`
     query($first: IntType!, $skip: IntType!) {
       posts: allBlogPosts(

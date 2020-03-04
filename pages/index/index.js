@@ -28,7 +28,7 @@ import Arduino from 'public/images/logos/arduino.svg';
 
 import styles from './style.css';
 
-export const unstable_getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticProps(
   gql`
     query {
       successStories: allSuccessStories(
@@ -291,20 +291,35 @@ function Homepage({ successStories }) {
       </Flag>
 
       <Numbers title="Why you should use DatoCMS">
-        <NumbersBlock href="href=/customers/[slug]" as="/customers/hashicorp" title="-79%" logo={Hashicorp}>
+        <NumbersBlock
+          href="href=/customers/[slug]"
+          as="/customers/hashicorp"
+          title="-79%"
+          logo={Hashicorp}
+        >
           In operational costs
         </NumbersBlock>
-        <NumbersBlock href="href=/customers/[slug]" as="/customers/nike" title="2x" logo={Nike}>
+        <NumbersBlock
+          href="href=/customers/[slug]"
+          as="/customers/nike"
+          title="2x"
+          logo={Nike}
+        >
           Faster time to market
         </NumbersBlock>
-        <NumbersBlock href="href=/customers/[slug]" as="/customers/arduino" title="8x" logo={Arduino}>
+        <NumbersBlock
+          href="href=/customers/[slug]"
+          as="/customers/arduino"
+          title="8x"
+          logo={Arduino}
+        >
           Faster loading times
         </NumbersBlock>
       </Numbers>
 
       <PersonasPicker />
 
-      <UseCaseExcerpts cases={successStories} />
+      {successStories && <UseCaseExcerpts cases={successStories} />}
     </Layout>
   );
 }

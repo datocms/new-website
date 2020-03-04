@@ -10,7 +10,7 @@ import gql from 'graphql-tag';
 
 import s from 'pages/product-updates/p/[page]/style.css';
 
-export const unstable_getStaticPaths = gqlStaticPaths(
+export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
       posts: allChangelogEntries(first: 15, orderBy: _firstPublishedAt_DESC) {
@@ -22,7 +22,7 @@ export const unstable_getStaticPaths = gqlStaticPaths(
   ({ posts }) => posts.map(p => p.slug),
 );
 
-export const unstable_getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticProps(
   gql`
     query($slug: String!) {
       post: changelogEntry(filter: { slug: { eq: $slug } }) {

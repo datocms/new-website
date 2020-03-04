@@ -2,7 +2,7 @@ import DocsLayout from 'components/DocsLayout';
 import {
   Sidebar,
   Toc,
-  unstable_getStaticProps as docPageUnstableGetStaticProps,
+  getStaticProps as docPageUnstableGetStaticProps,
 } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.css';
 import fetchCma from 'utils/fetchCma';
@@ -14,7 +14,7 @@ import PostContent from 'components/PostContent';
 import { gqlStaticPaths } from 'lib/datocms';
 import gql from 'graphql-tag';
 
-export const unstable_getStaticPaths = gqlStaticPaths(
+export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
       root: docGroup(filter: { slug: { eq: "content-management-api" } }) {
@@ -30,7 +30,7 @@ export const unstable_getStaticPaths = gqlStaticPaths(
   ({ root }) => root.pages.map(p => p.page.slug),
 );
 
-export const unstable_getStaticProps = async ({ params: { chunk } }) => {
+export const getStaticProps = async ({ params: { chunk } }) => {
   console.log(chunk);
 
   const { props } = await docPageUnstableGetStaticProps({

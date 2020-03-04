@@ -4,7 +4,7 @@ import Highlight from 'components/Highlight';
 import Legal from 'components/Legal';
 import tiny from 'tiny-json-http';
 
-export async function unstable_getStaticProps() {
+export async function getStaticProps() {
   const { body: { content: body } } = await tiny.get({
     url: 'https://www.iubenda.com/api/privacy-policy/64648824/cookie-policy',
   });

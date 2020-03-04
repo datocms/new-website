@@ -9,7 +9,7 @@ import util from 'util';
 
 const readFile = util.promisify(fs.readFile);
 
-export async function unstable_getStaticProps() {
+export async function getStaticProps() {
   const body = await readFile('pages/legal/docs/security.md', 'utf8');
 
   return {

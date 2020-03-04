@@ -15,7 +15,7 @@ import { gqlStaticProps } from 'lib/datocms';
 
 import styles from './style.css';
 
-export const unstable_getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticProps(
   gql`
     query {
       integrations: allIntegrations(

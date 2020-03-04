@@ -22,8 +22,6 @@ export default function PostContent({ content, style, children }) {
               <VideoPlayer
                 controls
                 autoplay={block.autoplay}
-                autoload
-                aspectRatio={`${block.video.width}:${block.video.height}`}
                 loop={block.loop}
                 src={block.video.video.streamingUrl}
                 poster={`${

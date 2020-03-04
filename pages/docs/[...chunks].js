@@ -17,7 +17,7 @@ import docHref from 'utils/docHref';
 
 var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 
-export const unstable_getStaticPaths = gqlStaticPaths(
+export const getStaticPaths = gqlStaticPaths(
   gql`
     {
       roots: allDocGroups(filter: { parent: { exists: false } }) {
@@ -63,7 +63,7 @@ export const unstable_getStaticPaths = gqlStaticPaths(
       .flat(),
 );
 
-export const unstable_getStaticProps = async function({
+export const getStaticProps = async function({
   params: { chunks: rawChunks },
 }) {
   const chunks = rawChunks.map(chunk => chunk.split(/\//g)).flat();

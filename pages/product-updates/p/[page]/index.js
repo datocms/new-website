@@ -6,7 +6,6 @@ import { gqlStaticPaths, gqlStaticProps } from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import SmartMarkdown from 'components/SmartMarkdown';
-import InterstitialTitle from 'components/InterstitialTitle';
 
 import { range } from 'range';
 import gql from 'graphql-tag';
@@ -15,7 +14,7 @@ import s from './style.css';
 
 const POSTS_PER_PAGE = 10;
 
-export const unstable_getStaticPaths = gqlStaticPaths(
+export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
       meta: _allChangelogEntriesMeta {
@@ -27,7 +26,7 @@ export const unstable_getStaticPaths = gqlStaticPaths(
   ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE))),
 );
 
-export const unstable_getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticProps(
   gql`
     query($first: IntType!, $skip: IntType!) {
       posts: allChangelogEntries(
@@ -86,7 +85,7 @@ export default function Changelog({ posts, prevPage, nextPage }) {
       />
       <Wrapper>
         {posts && posts.map(post => (
-          <div className={s.post}>
+          <div key={post.slug} className={s.post}>
             <div className={s.info}>
               <FormattedDate date={post._firstPublishedAt} />
             </div>

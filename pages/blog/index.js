@@ -1,9 +1,9 @@
 import Blog, {
-  unstable_getStaticProps as paginatedGetStaticProps,
+  getStaticProps as paginatedGetStaticProps,
 } from 'pages/blog/p/[page]';
 
-export const unstable_getStaticProps = paginatedGetStaticProps.bind(null, {
-  params: { page: '0' },
-});
+export const getStaticProps = async ({ params, ...other }) => (
+  paginatedGetStaticProps({ ...other, params: { page: '0' }})
+);
 
 export default Blog;
