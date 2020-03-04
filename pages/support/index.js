@@ -3,6 +3,7 @@ import Wrapper from 'components/Wrapper';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import { gqlStaticProps } from 'lib/datocms';
+import gql from 'graphql-tag';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -32,9 +33,9 @@ export const getStaticProps = gqlStaticProps(
   `
 );
 
-export default function Support() {
+export default function Support({ preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Wrapper>
         <Hero
           title={

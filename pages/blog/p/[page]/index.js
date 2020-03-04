@@ -72,9 +72,9 @@ export const getStaticProps = gqlStaticProps(
   }),
 );
 
-export default function Blog({ posts, prevPage, nextPage }) {
+export default function Blog({ posts, prevPage, nextPage, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Hero
         title={
           <>

@@ -114,9 +114,9 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-export default function Article({ post }) {
+export default function Article({ post, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
       {post && (
         <Head>
           {renderMetaTags(post._seoMetaTags)}

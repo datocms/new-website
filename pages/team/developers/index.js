@@ -38,9 +38,9 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-function Developers({ integrations }) {
+function Developers({ integrations, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Hero
         over="DatoCMS for Developers"
         title={

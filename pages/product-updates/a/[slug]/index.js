@@ -41,9 +41,9 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-export default function Changelog({ post }) {
+export default function Changelog({ post, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Hero
         title={
           <>

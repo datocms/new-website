@@ -66,9 +66,9 @@ const Sidebar = ({ roots }) => (
   </>
 );
 
-export default function Docs({ roots }) {
+export default function Docs({ roots, preview }) {
   return (
-    <DocsLayout sidebar={<Sidebar roots={roots} />}>
+    <DocsLayout preview={preview} sidebar={<Sidebar roots={roots} />}>
       <Head>
         <title>DatoCMS Documentation</title>
       </Head>

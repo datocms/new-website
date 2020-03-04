@@ -126,14 +126,14 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-export default function UseCase({ post }) {
+export default function UseCase({ post, preview }) {
   const colors = post && [post.duotoneColor1.hex, post.duotoneColor2.hex]
     .map(x => x.replace(/#/, ''))
     .join(',');
   const duotone = `duotone=${colors}`;
 
   return (
-    <Layout>
+    <Layout preview={preview}>
       {post && (
         <>
           {renderMetaTags(post._seoMetaTags)}

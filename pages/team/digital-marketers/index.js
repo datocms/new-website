@@ -37,9 +37,9 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-function DigitalMarketers({ integrations }) {
+function DigitalMarketers({ integrations, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Hero
         over="DatoCMS for Digital Marketers"
         title={

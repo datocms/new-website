@@ -54,9 +54,9 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-function Homepage({ successStories }) {
+function Homepage({ successStories, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Hero
         title={
           <>

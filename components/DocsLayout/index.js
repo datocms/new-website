@@ -6,9 +6,9 @@ import s from './style.css';
 import SupportIcon from 'public/icons/regular/headset.svg';
 import StatusIcon from 'public/icons/regular/tachometer.svg';
 
-export default function DocsLayout({ sidebar, children }) {
+export default function DocsLayout({ sidebar, children, preview }) {
   return (
-    <BaseLayout>
+    <BaseLayout preview={preview}>
       <div className={s.root}>
         <div className={s.sidebar}>
           <Link href="/docs">
