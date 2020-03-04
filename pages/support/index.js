@@ -2,8 +2,11 @@ import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import { gqlStaticProps } from 'lib/datocms';
 import gql from 'graphql-tag';
+import {
+  gqlStaticProps,
+  imageFields,
+} from 'lib/datocms';
 
 export const getStaticProps = gqlStaticProps(
   gql`

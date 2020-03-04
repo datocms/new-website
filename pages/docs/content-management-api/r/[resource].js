@@ -19,7 +19,7 @@ export const getStaticPaths = async () => {
   const cma = await fetchCma();
   const { toc } = parse(cma);
 
-  return { paths: toc.map(({ slug }) => ({ params: { resource: slug } })) };
+  return { fallback: true, paths: toc.map(({ slug }) => ({ params: { resource: slug } })) };
 };
 
 export const getStaticProps = async ({ params: { resource } }) => {
