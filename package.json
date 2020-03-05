@@ -41,6 +41,7 @@
     "keyword-highlighter": "^1.0.6",
     "next": "^9.2.3-canary.23",
     "next-env": "^1.1.0",
+    "nprogress": "^0.2.0",
     "pluralize": "^8.0.0",
     "postcss-advanced-variables": "^3.0.0",
     "postcss-nested": "^4.2.1",
