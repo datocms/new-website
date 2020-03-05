@@ -8,7 +8,7 @@ import {
 } from 'pages/docs/[...chunks]';
 import tiny from 'tiny-json-http';
 import Prism from 'components/Prism';
-import s from 'pages/docs/pageStyle.css';
+import s from 'pages/docs/pageStyle.module.css';
 import gqlExampleForField, { camelize } from 'utils/gqlExampleForField';
 import fieldTypes from 'utils/fieldTypes';
 import Heading from 'components/Heading';
@@ -109,7 +109,7 @@ export default function DocPage({
             Object.keys(fieldTypesInfo).map(name => ({
               anchor: name,
               label: `${fieldTypes[name]} fields`,
-            })),
+            }))
           )}
         />
       </div>

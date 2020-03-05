@@ -11,7 +11,7 @@ import FormattedDate from 'components/FormattedDate';
 import { range } from 'range';
 import gql from 'graphql-tag';
 
-import s from './style.css';
+import s from './style.module.css';
 
 const POSTS_PER_PAGE = 16;
 
@@ -24,7 +24,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'page',
-  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE))),
+  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE)))
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -69,7 +69,7 @@ export const getStaticProps = gqlStaticProps(
       (parseInt(page) + 1) * POSTS_PER_PAGE < meta.count
         ? `/blog/p/${parseInt(page) + 1}`
         : null,
-  }),
+  })
 );
 
 export default function Blog({ posts, prevPage, nextPage, preview }) {
@@ -89,31 +89,33 @@ export default function Blog({ posts, prevPage, nextPage, preview }) {
           className={s.grid}
           columnClassName={s.column}
         >
-          {posts && posts.map(post => (
-            <Link
-              key={post.slug}
-              href="/blog/[slug]"
-              as={`/blog/${post.slug}`}
-            >
-              <a className={s.post}>
-                {post.coverImage && (
-                  <Image data={post.coverImage.responsiveImage} />
-                )}
-                <div className={s.postBody}>
-                  <h6 className={s.title}>{post.title}</h6>
-                  <div
-                    className={s.excerpt}
-                    dangerouslySetInnerHTML={{ __html: post.excerpt }}
-                  />
-                  <div className={s.footer}>
-                    <div className={s.date}>
-                      Posted on <FormattedDate date={post._firstPublishedAt} />
+          {posts &&
+            posts.map(post => (
+              <Link
+                key={post.slug}
+                href="/blog/[slug]"
+                as={`/blog/${post.slug}`}
+              >
+                <a className={s.post}>
+                  {post.coverImage && (
+                    <Image data={post.coverImage.responsiveImage} />
+                  )}
+                  <div className={s.postBody}>
+                    <h6 className={s.title}>{post.title}</h6>
+                    <div
+                      className={s.excerpt}
+                      dangerouslySetInnerHTML={{ __html: post.excerpt }}
+                    />
+                    <div className={s.footer}>
+                      <div className={s.date}>
+                        Posted on{' '}
+                        <FormattedDate date={post._firstPublishedAt} />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            </Link>
-          ))}
+                </a>
+              </Link>
+            ))}
         </Masonry>
         {prevPage && (
           <Link

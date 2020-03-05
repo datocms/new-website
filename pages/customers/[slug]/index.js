@@ -5,7 +5,7 @@ import parse from 'html-react-parser';
 import UseCaseHead from 'components/UseCaseHead';
 import Numbers, { Block as NumbersBlock } from 'components/UseCaseNumbers';
 import Results, { Block as ResultsBlock } from 'components/UseCaseResults';
-import s from './style.css';
+import s from './style.module.css';
 import {
   gqlStaticPaths,
   gqlStaticProps,
@@ -25,7 +25,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'slug',
-  ({ posts }) => posts.map(p => p.slug),
+  ({ posts }) => posts.map(p => p.slug)
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -123,13 +123,15 @@ export const getStaticProps = gqlStaticProps(
 
     ${seoMetaTagsFields}
     ${imageFields}
-  `,
+  `
 );
 
 export default function UseCase({ post, preview }) {
-  const colors = post && [post.duotoneColor1.hex, post.duotoneColor2.hex]
-    .map(x => x.replace(/#/, ''))
-    .join(',');
+  const colors =
+    post &&
+    [post.duotoneColor1.hex, post.duotoneColor2.hex]
+      .map(x => x.replace(/#/, ''))
+      .join(',');
   const duotone = `duotone=${colors}`;
 
   return (

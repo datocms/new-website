@@ -6,7 +6,7 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import VideoPlayer from 'components/VideoPlayer';
 import Quote from 'components/Quote';
 
-import s from './style.css';
+import s from './style.module.css';
 
 function GraphQlContentApi() {
   return (
@@ -127,7 +127,13 @@ function GraphQlContentApi() {
         }
       >
         <div className={s.video}>
-          <VideoPlayer controls autoPlay muted loop src="https://stream.mux.com/dRjI3lukuQDwksXF1sgLQ7Kj4GbAFzUq.m3u8" />
+          <VideoPlayer
+            controls
+            autoPlay
+            muted
+            loop
+            src="https://stream.mux.com/dRjI3lukuQDwksXF1sgLQ7Kj4GbAFzUq.m3u8"
+          />
         </div>
       </TitleStripWithContent>
 

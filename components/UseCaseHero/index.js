@@ -1,5 +1,5 @@
 import Wrapper from 'components/Wrapper';
-import s from './style.css';
+import s from './style.module.css';
 import { useSpring, animated } from 'react-spring';
 import { useCallback, useEffect } from 'react';
 
@@ -31,15 +31,18 @@ export default function UseCase({ title, subtitle, image, gradient }) {
   }, []);
 
   return (
-    <div className={s.hero} style={{ background: `linear-gradient(45deg, ${gradient[0]}, ${gradient[1]})`}}>
+    <div
+      className={s.hero}
+      style={{
+        background: `linear-gradient(45deg, ${gradient[0]}, ${gradient[1]})`,
+      }}
+    >
       <Wrapper>
         <div className={s.heroInner}>
           <div className={s.heroBody}>
             <div className={s.heroKicker}>Customer success story</div>
             <div className={s.heroTitle}>{title}</div>
-            <div className={s.heroSubtitle}>
-              {subtitle}
-            </div>
+            <div className={s.heroSubtitle}>{subtitle}</div>
           </div>
           <animated.img
             className={s.image}

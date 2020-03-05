@@ -1,5 +1,5 @@
 import MaybeLink from 'components/MaybeLink';
-import s from './style.css';
+import s from './style.module.css';
 
 export default function Result({ number, href, as, title, label, children }) {
   return (

@@ -1,7 +1,7 @@
 import sortObject from 'sort-object';
 import Heading from 'components/Heading';
 
-import s from './style.css';
+import s from './style.module.css';
 
 function joinAnd(a, and = 'and') {
   if (a.length === 1) {
@@ -69,7 +69,7 @@ export default class ResourceAttributes extends React.Component {
         <table>
           <tbody>
             {Object.entries(
-              sortObject(resource.attributes),
+              sortObject(resource.attributes)
             ).map(([name, schema]) => this.renderAttribute(name, schema))}
           </tbody>
         </table>

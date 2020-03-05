@@ -13,7 +13,7 @@ import LazyImage from 'components/LazyImage';
 import gql from 'graphql-tag';
 import { gqlStaticProps } from 'lib/datocms';
 
-import styles from './style.css';
+import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -35,7 +35,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `,
+  `
 );
 
 function Developers({ integrations, preview }) {
@@ -139,9 +139,7 @@ function Developers({ integrations, preview }) {
         </p>
       </Flag>
 
-      <TitleStripWithContent
-        title={<>Stop the madness, try&nbsp;headless</>}
-      >
+      <TitleStripWithContent title={<>Stop the madness, try&nbsp;headless</>}>
         <DatoIllustration />
       </TitleStripWithContent>
 

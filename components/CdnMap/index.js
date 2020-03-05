@@ -1,5 +1,5 @@
 import World from 'public/images/world.svg';
-import s from './style.css';
+import s from './style.module.css';
 import useSWR from 'swr';
 import wretch from 'wretch';
 import cn from 'classnames';
@@ -7,7 +7,10 @@ import Wrapper from 'components/Wrapper';
 import { useState } from 'react';
 import useInterval from '@use-it/interval';
 
-const fetcher = url => wretch(url).get().json();
+const fetcher = url =>
+  wretch(url)
+    .get()
+    .json();
 
 function convLatLongToStyle(latitude, longitude) {
   const x = (longitude + 180.0) * (100.0 / 360.0);
@@ -55,7 +58,7 @@ export default function CdnMap() {
 
   const { data: location } = useSWR(
     'https://api-geolocation.zeit.sh/',
-    fetcher,
+    fetcher
   );
 
   const setAndScroll = code => {
@@ -68,7 +71,7 @@ export default function CdnMap() {
       el.parentElement.parentElement.scroll({
         top: 0,
         left: el.offsetLeft - (window.innerWidth - rect.width) / 2,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
@@ -102,27 +105,26 @@ export default function CdnMap() {
             </div>
           )}
           {datacenters &&
-            datacenters
-              .map(dc => (
-                <div
-                  key={dc.code}
-                  className={cn(s.datacenter, {
-                    [s.activePoint]: ping && ping.datacenter === dc.code,
-                  })}
-                  style={{
-                    ...convLatLongToStyle(
-                      dc.coordinates.latitude,
-                      dc.coordinates.longitude,
-                    ),
-                    zIndex: ping && ping.datacenter == dc.code ? 100 : 1,
-                  }}
-                  onClick={() => {
-                    setAndScroll(dc.code);
-                  }}
-                >
-                  <div className={s.pin} />
-                </div>
-              ))}
+            datacenters.map(dc => (
+              <div
+                key={dc.code}
+                className={cn(s.datacenter, {
+                  [s.activePoint]: ping && ping.datacenter === dc.code,
+                })}
+                style={{
+                  ...convLatLongToStyle(
+                    dc.coordinates.latitude,
+                    dc.coordinates.longitude
+                  ),
+                  zIndex: ping && ping.datacenter == dc.code ? 100 : 1,
+                }}
+                onClick={() => {
+                  setAndScroll(dc.code);
+                }}
+              >
+                <div className={s.pin} />
+              </div>
+            ))}
         </div>
       </Wrapper>
       <div className={s.list}>
@@ -159,9 +161,9 @@ export default function CdnMap() {
                                   dc.coordinates.latitude,
                                   dc.coordinates.longitude,
                                   location.lat,
-                                  location.lon,
-                                ),
-                              ),
+                                  location.lon
+                                )
+                              )
                             )}{' '}
                             km
                           </>

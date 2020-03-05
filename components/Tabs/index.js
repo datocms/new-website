@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import cn from 'classnames';
-import s from './style.css';
+import s from './style.module.css';
 
 export default function Tabs({ children }) {
   const [activeTab, setActiveTab] = useState(0);

@@ -1,5 +1,5 @@
 import Wrapper from 'components/Wrapper';
-import styles from './style.css';
+import styles from './style.module.css';
 import { animated, useSpring } from 'react-spring';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { useRef, useState } from 'react';
@@ -26,8 +26,10 @@ export default function Flag({
   const imageEl =
     typeof image === 'string' ? (
       <LazyImage src={`/images/illustrations/${image}.svg`} />
+    ) : image ? (
+      React.createElement(image)
     ) : (
-      image ? React.createElement(image) : <span />
+      <span />
     );
 
   useScrollPosition(
@@ -40,7 +42,7 @@ export default function Flag({
     },
     [],
     elementRef,
-    false,
+    false
   );
 
   return (
@@ -57,9 +59,7 @@ export default function Flag({
               width: `${size}vh`,
             }}
           />
-          <animated.div className={styles.image}>
-            {imageEl}
-          </animated.div>
+          <animated.div className={styles.image}>{imageEl}</animated.div>
         </div>
         <div className={styles.content}>
           <div className={styles.title}>{title}</div>

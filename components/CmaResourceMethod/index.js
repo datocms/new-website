@@ -7,7 +7,7 @@ import RubyExample from './RubyExample';
 import ReactMarkdown from 'react-markdown';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
-import s from './style.css';
+import s from './style.module.css';
 
 export default class ResourceApiMethod extends React.Component {
   renderAttribute(name, schema) {
@@ -81,7 +81,7 @@ export default class ResourceApiMethod extends React.Component {
             <table>
               <tbody>
                 {Object.entries(
-                  sortObject(link.hrefSchema.properties),
+                  sortObject(link.hrefSchema.properties)
                 ).map(([name, schema]) => this.renderAttribute(name, schema))}
               </tbody>
             </table>

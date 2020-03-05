@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import style from './style.css';
+import style from './style.module.css';
 import CheckIcon from 'public/icons/regular/check.svg';
 
 const fsClassNames = {
@@ -12,12 +12,14 @@ const pClassNames = {
 
 export default function Checks({ as: Component = 'div', checks, children }) {
   return (
-    <Component
-      className={cn(style.root)}
-    >
+    <Component className={cn(style.root)}>
       {children}
       <ul className={style.list}>
-        {checks.map(check => <li key={check} className={style.check}><CheckIcon /> {check}</li>)}
+        {checks.map(check => (
+          <li key={check} className={style.check}>
+            <CheckIcon /> {check}
+          </li>
+        ))}
       </ul>
     </Component>
   );

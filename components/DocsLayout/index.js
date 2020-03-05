@@ -2,7 +2,7 @@ import BaseLayout from 'components/BaseLayout';
 import DocSearch from 'components/DocSearch';
 import FullLogo from 'public/images/full_logo.svg';
 import Link from 'next/link';
-import s from './style.css';
+import s from './style.module.css';
 import SupportIcon from 'public/icons/regular/headset.svg';
 import StatusIcon from 'public/icons/regular/tachometer.svg';
 

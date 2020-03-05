@@ -10,7 +10,7 @@ import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import { Line, Copy, Image } from 'components/FakeContent';
 
-import s from 'pages/product-updates/p/[page]/style.css';
+import s from 'pages/product-updates/p/[page]/style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -21,7 +21,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'slug',
-  ({ posts }) => posts.map(p => p.slug),
+  ({ posts }) => posts.map(p => p.slug)
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -40,7 +40,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `,
+  `
 );
 
 export default function Changelog({ post, preview }) {

@@ -1,6 +1,6 @@
 import Wrapper from 'components/Wrapper';
 import LazyImage from 'components/LazyImage';
-import s from './style.css';
+import s from './style.module.css';
 
 export default function TitleIllustrationStripWithContent({
   title,

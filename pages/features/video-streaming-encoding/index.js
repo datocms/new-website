@@ -7,7 +7,7 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 
-import s from './style.css';
+import s from './style.module.css';
 import { range } from 'range';
 
 function VideoStreamingEncoding() {
@@ -39,7 +39,13 @@ function VideoStreamingEncoding() {
         }
       >
         <div className={s.video}>
-          <VideoPlayer controls autoPlay muted loop src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8" />
+          <VideoPlayer
+            controls
+            autoPlay
+            muted
+            loop
+            src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8"
+          />
         </div>
       </TitleStripWithContent>
 

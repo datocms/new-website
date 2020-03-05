@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import Wrapper from 'components/Wrapper';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import cn from 'classnames';
-import s from './style.css';
+import s from './style.module.css';
 
 // task fux: :environment do
 //   transforms = [
@@ -263,7 +263,7 @@ export default function InterstitialTitle() {
 
     for (let i = 0; i < steps.length; i++) {
       const colorTransform = steps[i].transforms.find(t =>
-        t.match(/(sepia|duotone|blur|htn)/),
+        t.match(/(sepia|duotone|blur|htn)/)
       );
 
       const isEllipse = !!steps[i].transforms.find(t => t.match(/mask/));
@@ -279,7 +279,7 @@ export default function InterstitialTitle() {
           setEllipse(isEllipse);
           setParams(steps[i].transforms);
           setResult(steps[i].result);
-        }, i * stepTime),
+        }, i * stepTime)
       );
     }
   }, []);
@@ -292,7 +292,6 @@ export default function InterstitialTitle() {
   return (
     <Wrapper>
       <div className={s.root} style={{ height: `calc(${maxWidth} / ${ar})` }}>
-
         <div
           className={cn(s.imageFrame, { [s.ellipseFrame]: ellipse })}
           style={{

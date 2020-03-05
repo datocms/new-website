@@ -8,7 +8,7 @@ import LandingPagesGenerator from 'components/LandingPagesGenerator';
 import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 
-import s from './style.css';
+import s from './style.module.css';
 
 function DynamicLayouts() {
   return (

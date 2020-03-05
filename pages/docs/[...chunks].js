@@ -11,7 +11,7 @@ import htmlToDOM from 'html-dom-parser';
 import { domToReact } from 'html-react-parser';
 import slugify from 'utils/slugify';
 import getInnerText from 'utils/getInnerText';
-import s from 'pages/docs/pageStyle.css';
+import s from 'pages/docs/pageStyle.module.css';
 import Head from 'next/head';
 import docHref from 'utils/docHref';
 import emojify from 'utils/emojify';
@@ -60,10 +60,10 @@ export const getStaticPaths = gqlStaticPaths(
           .map(sub =>
             sub.pages[0].page.slug === 'index'
               ? [sub.slug]
-              : [sub.slug, sub.pages[0].page.slug],
-          ),
+              : [sub.slug, sub.pages[0].page.slug]
+          )
       )
-      .flat(),
+      .flat()
 );
 
 export const getStaticProps = async function({
@@ -238,7 +238,7 @@ export function Toc({ content, extraEntries: extra }) {
                   </a>
                 );
               },
-            }),
+            })
           );
       })
       .flat();
@@ -292,11 +292,7 @@ export default function DocPage({ docGroup, titleOverride, page }) {
       <div className={s.articleContainer}>
         <div className={s.article}>
           <div className={s.title}>
-            {isFallback ? (
-              <Line />
-            ) : (
-              titleOverride || (page && page.title)
-            )}
+            {isFallback ? <Line /> : titleOverride || (page && page.title)}
           </div>
           <PostContent
             isFallback={isFallback}

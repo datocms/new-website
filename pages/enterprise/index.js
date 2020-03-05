@@ -13,7 +13,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 
-import s from './style.css';
+import s from './style.module.css';
 
 function Enterprise() {
   return (

@@ -3,7 +3,7 @@ import DocsLayout from 'components/DocsLayout';
 import gql from 'graphql-tag';
 import Link from 'next/link';
 import Head from 'next/head';
-import s from './style.css';
+import s from './style.module.css';
 
 import docHref from 'utils/docHref';
 
@@ -38,7 +38,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `,
+  `
 );
 
 const normalize = slug => (slug === 'index' ? '' : `/${slug}`);
@@ -52,7 +52,7 @@ const Sidebar = ({ roots }) => (
           {root.children.map(sub => (
             <Link
               href={docHref(
-                `/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`,
+                `/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`
               )}
               as={`/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`}
               key={sub.slug}

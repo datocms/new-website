@@ -1,4 +1,4 @@
-import s from './style.css';
+import s from './style.module.css';
 import Link from 'next/link';
 import Wrapper from 'components/Wrapper';
 import { highlightHtml } from 'components/Highlight';
@@ -21,7 +21,9 @@ export default function UseCaseExcerpts({ cases }) {
               <div className={s.mainStoryTitle}>
                 {highlightHtml(firstCase.title)}
               </div>
-              <div className={s.goto}>Read the story <ArrowIcon /></div>
+              <div className={s.goto}>
+                Read the story <ArrowIcon />
+              </div>
             </a>
           </Link>
           {cases.slice(1).map(useCase => (
@@ -37,7 +39,9 @@ export default function UseCaseExcerpts({ cases }) {
                 <div className={s.otherUseCaseTitle}>
                   {highlightHtml(useCase.title)}
                 </div>
-                <div className={s.goto}>Read the story <ArrowIcon /></div>
+                <div className={s.goto}>
+                  Read the story <ArrowIcon />
+                </div>
               </a>
             </Link>
           ))}

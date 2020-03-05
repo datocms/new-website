@@ -1,5 +1,5 @@
 import UIChrome from 'components/UiChrome';
-import s from './style.css';
+import s from './style.module.css';
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -13,7 +13,6 @@ const locales = [
 ];
 
 export default function ProjectSettings() {
-
   const [blockCount, setBlockCount] = useState(0);
 
   useEffect(() => {
@@ -39,7 +38,14 @@ export default function ProjectSettings() {
             <div className={s.label}>Languages</div>
             <div className={s.multiInput}>
               {locales.map((locale, i) => (
-                <div className={cn(s.multiInputVal, {[s.multiInputValHidden]: i > blockCount })} key={locale}>{locale}</div>
+                <div
+                  className={cn(s.multiInputVal, {
+                    [s.multiInputValHidden]: i > blockCount,
+                  })}
+                  key={locale}
+                >
+                  {locale}
+                </div>
               ))}
             </div>
           </div>

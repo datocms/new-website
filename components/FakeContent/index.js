@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import s from './style.css';
+import s from './style.module.css';
 import { range } from 'range';
 
 export const Text = ({ width = 100, style }) => (

@@ -64,8 +64,12 @@
 }
 
 @keyframes hideUrl {
-  0% { left: 15px; }
-  100% { left: -250px; }
+  0% {
+    left: 15px;
+  }
+  100% {
+    left: -250px;
+  }
 }
 
 .paramContainer {
@@ -77,7 +81,7 @@
   white-space: nowrap;
   cursor: pointer;
   line-height: 30px;
-  width: var(--content-length)
+  width: var(--content-length);
 }
 
 .param {
@@ -110,7 +114,6 @@
   transition: all 250ms 800ms ease-in-out;
 }
 
-
 .valueAnimationEnter {
   opacity: 0.01;
   top: -30px;
@@ -131,24 +134,21 @@
   top: 30px;
 }
 
-
-
-
 .paramAnimationEnter {
   transition: all 400ms 500ms ease-in-out;
   opacity: 0.01;
-  width: 0
+  width: 0;
 }
 
 .paramAnimationEnterActive {
   opacity: 1;
-  width: var(--content-length)
+  width: var(--content-length);
 }
 
 .paramAnimationLeave {
   transition: all 400ms ease-in-out;
   opacity: 1;
-  width: var(--content-length)
+  width: var(--content-length);
 }
 
 .paramAnimationLeaveActive {
@@ -156,12 +156,6 @@
   opacity: 0.01;
   width: 0px;
 }
-
-
-
-
-
-
 
 .imageAnimationEnter {
   opacity: 0.01;
