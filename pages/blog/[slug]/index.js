@@ -13,6 +13,8 @@ import InterstitialTitle from 'components/InterstitialTitle';
 import PostContent from 'components/PostContent';
 import Head from 'next/head';
 import s from './style.css';
+import { Line, Copy, Rect } from 'components/FakeContent';
+import { useRouter } from 'next/router';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -115,9 +117,11 @@ export const getStaticProps = gqlStaticProps(
 );
 
 export default function Article({ post, preview }) {
+  const { isFallback } = useRouter();
+
   return (
     <Layout preview={preview}>
-      {post && (
+      {!isFallback && (
         <Head>
           {renderMetaTags(post._seoMetaTags)}
           {post._firstPublishedAt && (
@@ -131,23 +135,29 @@ export default function Article({ post, preview }) {
       <Wrapper>
         <div className={s.root}>
           <InterstitialTitle kicker="The DatoCMS Blog" style="two">
-            {post && post.title}
+            {isFallback ? <Copy lines={2} /> : post.title}
           </InterstitialTitle>
 
-          {post && (
-            <>
-              <div className={s.info}>
-                <Image
-                  className={s.avatar}
-                  data={post.author.avatar.responsiveImage}
-                />
+          <div className={s.info}>
+            {isFallback ? (
+              <Rect className={s.avatar} />
+            ) : (
+              <Image
+                className={s.avatar}
+                data={post.author.avatar.responsiveImage}
+              />
+            )}
+            {isFallback ? (
+              <Line />
+            ) : (
+              <>
                 Posted on <FormattedDate date={post._firstPublishedAt} /> by{' '}
                 {post.author.name}
-              </div>
+              </>
+            )}
+          </div>
 
-              <PostContent content={post.content} />
-            </>
-          )}
+          <PostContent isFallback={isFallback} content={post && post.content} />
         </div>
       </Wrapper>
     </Layout>

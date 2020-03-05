@@ -14,6 +14,9 @@ import getInnerText from 'utils/getInnerText';
 import s from 'pages/docs/pageStyle.css';
 import Head from 'next/head';
 import docHref from 'utils/docHref';
+import emojify from 'utils/emojify';
+import { useRouter } from 'next/router';
+import { Line } from 'components/FakeContent';
 
 var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 
@@ -158,6 +161,7 @@ export const getStaticProps = async function({
                 }
               }
               ... on CodeBlockRecord {
+                id
                 _modelApiKey
                 code
                 language
@@ -224,7 +228,13 @@ export function Toc({ content, extraEntries: extra }) {
                     className={s.tocEntry}
                     key={innerText}
                   >
-                    {domToReact(children)}
+                    {domToReact(children, {
+                      replace: ({ type, data }) => {
+                        if (type === 'text') {
+                          return <>{emojify(data)}</>;
+                        }
+                      },
+                    })}
                   </a>
                 );
               },
@@ -245,10 +255,12 @@ export function Toc({ content, extraEntries: extra }) {
     (extraEntries && extraEntries.length > 0) ? (
     <div className={s.sidebar}>
       <div className={s.toc}>
-        <div className={s.tocTitle}>In this page</div>
-        <div className={s.entries}>
-          {contentEntries}
-          {extraEntries}
+        <div className={s.tocInner}>
+          <div className={s.tocTitle}>In this page</div>
+          <div className={s.entries}>
+            {contentEntries}
+            {extraEntries}
+          </div>
         </div>
       </div>
     </div>
@@ -256,6 +268,8 @@ export function Toc({ content, extraEntries: extra }) {
 }
 
 export default function DocPage({ docGroup, titleOverride, page }) {
+  const { isFallback } = useRouter();
+
   return (
     <DocsLayout
       sidebar={
@@ -274,18 +288,24 @@ export default function DocPage({ docGroup, titleOverride, page }) {
         )
       }
     >
-      {page && (
-        <>
-          <Head>{renderMetaTags(page._seoMetaTags)}</Head>
-          <div className={s.articleContainer}>
-            <div className={s.article}>
-              <div className={s.title}>{titleOverride || page.title}</div>
-              <PostContent content={page.content} style={s} />
-            </div>
-            <Toc content={page.content} />
+      <Head>{!isFallback && renderMetaTags(page._seoMetaTags)}</Head>
+      <div className={s.articleContainer}>
+        <div className={s.article}>
+          <div className={s.title}>
+            {isFallback ? (
+              <Line />
+            ) : (
+              titleOverride || (page && page.title)
+            )}
           </div>
-        </>
-      )}
+          <PostContent
+            isFallback={isFallback}
+            content={page && page.content}
+            style={s}
+          />
+        </div>
+        <Toc content={page && page.content} />
+      </div>
     </DocsLayout>
   );
 }

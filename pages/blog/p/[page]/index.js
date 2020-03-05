@@ -92,8 +92,8 @@ export default function Blog({ posts, prevPage, nextPage, preview }) {
           {posts && posts.map(post => (
             <Link
               key={post.slug}
-              href="/blog/a/[slug]"
-              as={`/blog/a/${post.slug}`}
+              href="/blog/[slug]"
+              as={`/blog/${post.slug}`}
             >
               <a className={s.post}>
                 {post.coverImage && (

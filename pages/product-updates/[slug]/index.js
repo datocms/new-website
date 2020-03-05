@@ -7,6 +7,8 @@ import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import SmartMarkdown from 'components/SmartMarkdown';
 import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
+import { Line, Copy, Image } from 'components/FakeContent';
 
 import s from 'pages/product-updates/p/[page]/style.css';
 
@@ -42,6 +44,8 @@ export const getStaticProps = gqlStaticProps(
 );
 
 export default function Changelog({ post, preview }) {
+  const { isFallback } = useRouter();
+
   return (
     <Layout preview={preview}>
       <Hero
@@ -55,22 +59,30 @@ export default function Changelog({ post, preview }) {
         }
       />
       <Wrapper>
-        {post && (
-          <div className={s.post}>
-            <div className={s.info}>
+        <div className={s.post}>
+          <div className={s.info}>
+            {isFallback ? (
+              <Line />
+            ) : (
               <FormattedDate date={post._firstPublishedAt} />
-            </div>
-            <h6 className={s.title}>
+            )}
+          </div>
+          <h6 className={s.title}>
+            {isFallback ? (
+              <Copy lines={2} />
+            ) : (
               <Link
                 key={post.slug}
-                href="/product-updates/a/[slug]"
-                as={`/product-updates/a/${post.slug}`}
+                href="/product-updates/[slug]"
+                as={`/product-updates/${post.slug}`}
               >
                 <a>{post.title}</a>
               </Link>
-            </h6>
-            <div className={s.categories}>
-              {post.categories.map(cat => (
+            )}
+          </h6>
+          <div className={s.categories}>
+            {post &&
+              post.categories.map(cat => (
                 <span
                   key={cat.name}
                   className={s.category}
@@ -79,15 +91,23 @@ export default function Changelog({ post, preview }) {
                   {cat.name}
                 </span>
               ))}
-            </div>
+          </div>
 
-            <div className={s.body}>
+          <div className={s.body}>
+            {isFallback ? (
+              <>
+                <Copy />
+                <figure>
+                  <Image />
+                </figure>
+              </>
+            ) : (
               <SmartMarkdown imageClassName={s.responsiveImage}>
                 {post.content}
               </SmartMarkdown>
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </Wrapper>
     </Layout>
   );

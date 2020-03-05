@@ -92,8 +92,8 @@ export default function Changelog({ posts, prevPage, nextPage, preview }) {
             <h6 className={s.title}>
               <Link
                 key={post.slug}
-                href="/product-updates/a/[slug]"
-                as={`/product-updates/a/${post.slug}`}
+                href="/product-updates/[slug]"
+                as={`/product-updates/${post.slug}`}
               >
                 <a>{post.title}</a>
               </Link>

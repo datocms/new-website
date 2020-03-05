@@ -4,7 +4,7 @@ import Tabs, { Tab } from 'components/Tabs';
 import {
   Toc,
   Sidebar,
-  getStaticProps as docPageUnstableGetStaticProps,
+  getStaticProps as docPageGetStaticProps,
 } from 'pages/docs/[...chunks]';
 import tiny from 'tiny-json-http';
 import Prism from 'components/Prism';
@@ -16,7 +16,7 @@ import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 
 export const getStaticProps = async () => {
-  const { props } = await docPageUnstableGetStaticProps({
+  const { props } = await docPageGetStaticProps({
     params: { chunks: ['content-delivery-api', 'filtering-records'] },
   });
 
