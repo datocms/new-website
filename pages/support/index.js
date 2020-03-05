@@ -4,7 +4,7 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import gql from 'graphql-tag';
 import { gqlStaticProps } from 'lib/datocms';
-import { useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import s from './style.css';
 import SmartMarkdown from 'components/SmartMarkdown';
 import TalkWithUs from 'components/TalkWithUs';
@@ -15,6 +15,7 @@ import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
 import { useRouter } from 'next/router';
+import scrollIntoView from 'scroll-into-view-if-needed';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -42,6 +43,7 @@ export const getStaticProps = gqlStaticProps(
 
 export default function Support({ preview, topics }) {
   const router = useRouter();
+  const [formVisible, setFormVisible] = useState(false);
 
   const selectedTopicSlugs = (router.query.topics || '').split('/');
 
@@ -50,7 +52,6 @@ export default function Support({ preview, topics }) {
     router.push(url, url, {
       shallow: true,
     });
-
   };
 
   const rootTopicSlug = selectedTopicSlugs[0];
@@ -68,6 +69,8 @@ export default function Support({ preview, topics }) {
   const handleChange = (level, event) => {
     const topicSlug = event.target.value;
 
+    setFormVisible(false);
+
     if (level === 0) {
       setSelectedTopicSlugs([topicSlug]);
     }
@@ -75,6 +78,16 @@ export default function Support({ preview, topics }) {
       setSelectedTopicSlugs([selectedTopicSlugs[0], topicSlug]);
     }
   };
+
+  useEffect(() => {
+    if (formVisible) {
+      scrollIntoView(document.getElementById('form'), {
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'start',
+      });
+    }
+  }, [formVisible]);
 
   return (
     <Layout noCta preview={preview}>
@@ -153,7 +166,23 @@ export default function Support({ preview, topics }) {
                     <h3>Didn't find what you're looking for?</h3>
                     <ul>
                       <li>
-                        <a href="#form">Access our contact form</a>
+                        <a
+                          href="#form"
+                          onClick={e => {
+                            e.preventDefault();
+                            setFormVisible(true);
+                            const el = document.getElementById('form');
+                            if (el) {
+                              scrollIntoView(el, {
+                                behavior: 'smooth',
+                                block: 'start',
+                                inline: 'start',
+                              });
+                            }
+                          }}
+                        >
+                          Access our contact form
+                        </a>
                       </li>
                     </ul>
                   </>
@@ -162,12 +191,13 @@ export default function Support({ preview, topics }) {
           )}
           {leafTopic &&
             leafTopic.children.length === 0 &&
-            !leafTopic.disableContactForm && (
-              <div className={s.form}>
-                <a id="form" className={s.anchor} />
+            ((leafTopic.commonQuestions.length === 0 &&
+              !leafTopic.disableContactForm) ||
+              (leafTopic.commonQuestions.length > 0 && formVisible)) && (
+              <div className={s.talkWithUs} id="form">
                 <div className={s.talkWithUsInner}>
                   <div className={s.talkWithUsIntro}>
-                    <div className={s.talkWithUsTitle}>Talk with us</div>
+                    <div className={s.talkWithUsTitle}>Talk with us!</div>
                     <div className={s.talkWithUsDescription}>
                       Our experts are available to answer any of your questions.
                       We’re available in a number of ways, any time that you
