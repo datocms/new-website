@@ -1,15 +1,14 @@
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
-import cn from 'classnames';
 import useSWR from 'swr';
 import s from './style.module.css';
 import { useForm } from 'react-hook-form';
 import Hero from 'components/Hero';
-import Highlight from 'components/Highlight';
 import wretch from 'wretch';
 import { useState } from 'react';
 import { useRecaptcha } from 'react-recaptcha-hook';
+import Head from 'next/head';
 
 wretch().errorType('json');
 
@@ -23,7 +22,7 @@ const errorLabels = {
     'You have already been invited! Check for an email from feedback@slack.com.',
 };
 
-export default function Support() {
+export default function Slack() {
   const { data: stats } = useSWR('/api/slack/info', fetcher);
   const execute = useRecaptcha({
     sitekey: '6LcU1dwUAAAAADe2gkTfPNlG3xoybrgx_ulxVbF3',
@@ -60,6 +59,9 @@ export default function Support() {
 
   return (
     <Layout>
+      <Head>
+        <title>Join DatoCMS Slack channel</title>
+      </Head>
       <Hero
         over="DatoCMS Slack channel"
         title={<>Join our Community!</>}

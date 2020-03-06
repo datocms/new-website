@@ -3,6 +3,7 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Legal from 'components/Legal';
 import ReactMarkdown from 'react-markdown';
+import Head from 'next/head';
 
 import fs from 'fs';
 import util from 'util';
@@ -22,6 +23,9 @@ export async function getStaticProps() {
 export default function Gdpr({ body }) {
   return (
     <Layout>
+      <Head>
+        <title>GDPR Compliance</title>
+      </Head>
       <Hero
         over="Legal"
         title={

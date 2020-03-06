@@ -10,10 +10,14 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
+import Head from 'next/head';
 
 export default function Support() {
   return (
     <Layout noCta>
+      <Head>
+        <title>Contact our Sales team</title>
+      </Head>
       <div className={s.root}>
         <Wrapper>
           <div className={s.rootInner}>

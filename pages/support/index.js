@@ -16,6 +16,7 @@ import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
 import { useRouter } from 'next/router';
 import scrollIntoView from 'scroll-into-view-if-needed';
+import Head from 'next/head';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -91,6 +92,10 @@ export default function Support({ preview, topics }) {
 
   return (
     <Layout noCta preview={preview}>
+      <Head>
+        <title>Support page</title>
+      </Head>
+
       <Wrapper>
         <Hero
           title={

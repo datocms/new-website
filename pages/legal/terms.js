@@ -5,6 +5,7 @@ import Legal from 'components/Legal';
 import ReactMarkdown from 'react-markdown';
 import fs from 'fs';
 import util from 'util';
+import Head from 'next/head';
 
 export async function getStaticProps() {
   const readFile = util.promisify(fs.readFile);
@@ -20,6 +21,9 @@ export async function getStaticProps() {
 export default function Terms({ body }) {
   return (
     <Layout>
+      <Head>
+        <title>Terms of Service</title>
+      </Head>
       <Hero
         over="Legal"
         title={

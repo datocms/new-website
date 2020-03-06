@@ -5,10 +5,14 @@ import Button from 'components/Button';
 import Legal from 'components/Legal';
 import s from './style.module.css';
 import cn from 'classnames';
+import Head from 'next/head';
 
 export default function BrandAssets() {
   return (
     <Layout>
+      <Head>
+        <title>Brand assets</title>
+      </Head>
       <Hero
         over="Our Company"
         title={
