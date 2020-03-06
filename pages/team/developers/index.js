@@ -1,4 +1,7 @@
 import Layout from 'components/Layout';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
@@ -11,13 +14,17 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import Result from 'components/Result';
 import LazyImage from 'components/LazyImage';
 import gql from 'graphql-tag';
-import { gqlStaticProps } from 'lib/datocms';
 
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   gql`
     query {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
       integrations: allIntegrations(
         first: 30
         filter: {
@@ -35,12 +42,17 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
+    ${seoMetaTagsFields}
   `,
 );
 
-function Developers({ integrations, preview }) {
+function Developers({ integrations, preview, page }) {
   return (
     <Layout preview={preview}>
+      <Head>
+        {renderMetaTags(page.seo)}
+        <title>DatoCMS for Developers - Team</title>
+      </Head>
       <Hero
         over="DatoCMS for Developers"
         title={

@@ -12,8 +12,10 @@ import Result from 'components/Result';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
 import LogosBar from 'components/LogosBar';
-import { gqlStaticProps } from 'lib/datocms';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import gql from 'graphql-tag';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
 
 import WarningIcon from 'public/icons/regular/times.svg';
 import SuccessIcon from 'public/icons/regular/check.svg';
@@ -31,6 +33,11 @@ import styles from './style.module.css';
 export const getStaticProps = gqlStaticProps(
   gql`
     query {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
       successStories: allSuccessStories(
         first: 4
         orderBy: _firstPublishedAt_DESC
@@ -51,12 +58,15 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
+
+    ${seoMetaTagsFields}
   `,
 );
 
-function Homepage({ successStories, preview }) {
+function Homepage({ successStories, preview, page }) {
   return (
     <Layout preview={preview}>
+      <Head>{renderMetaTags(page.seo)}</Head>
       <Hero
         title={
           <>

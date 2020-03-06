@@ -15,6 +15,7 @@ import {
 import gql from 'graphql-tag';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from 'components/PostContent';
+import Head from 'next/head';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -32,7 +33,7 @@ export const getStaticProps = gqlStaticProps(
   gql`
     query($slug: String!) {
       post: successStory(filter: { slug: { eq: $slug } }) {
-        _seoMetaTags {
+        seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
         accentColor {
@@ -138,7 +139,7 @@ export default function UseCase({ post, preview }) {
     <Layout preview={preview}>
       {post && (
         <>
-          {renderMetaTags(post._seoMetaTags)}
+          <Head>{renderMetaTags(post.seo)}</Head>
           <div
             style={{
               '--gradient1': post.duotoneColor1.hex,

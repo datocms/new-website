@@ -1,4 +1,8 @@
 import Layout from 'components/Layout';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
+import gql from 'graphql-tag';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import ImgixTransformations from 'components/ImgixTransformations';
@@ -7,9 +11,27 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 
-function ImagesApi() {
+export const getStaticProps = gqlStaticProps(
+  gql`
+    {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
+    }
+    ${seoMetaTagsFields}
+  `,
+);
+
+function ImagesApi({ page, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
+      <Head>
+        {renderMetaTags(page.seo)}
+        <title>Images API - Features</title>
+      </Head>
+
       <Hero
         over="Images API"
         title={

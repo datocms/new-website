@@ -1,4 +1,8 @@
 import Layout from 'components/Layout';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
+import gql from 'graphql-tag';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import CdnMap from 'components/CdnMap';
@@ -10,9 +14,27 @@ import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 
-function WorldwideCdn() {
+export const getStaticProps = gqlStaticProps(
+  gql`
+    {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
+    }
+    ${seoMetaTagsFields}
+  `,
+);
+
+function WorldwideCdn({ page, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
+      <Head>
+        {renderMetaTags(page.seo)}
+        <title>Worldwide smart CDN - Features</title>
+      </Head>
+
       <Hero
         over="Worldwide smart CDN"
         title={

@@ -1,4 +1,8 @@
 import Layout from 'components/Layout';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
+import gql from 'graphql-tag';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import IntegrationsBanner from 'components/IntegrationsBanner';
@@ -38,9 +42,27 @@ const icons = [
   '/images/flags/united-states-of-america.svg',
 ];
 
-function MultiLanguage() {
+export const getStaticProps = gqlStaticProps(
+  gql`
+    {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
+    }
+    ${seoMetaTagsFields}
+  `,
+);
+
+function MultiLanguage({ page, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
+      <Head>
+        {renderMetaTags(page.seo)}
+        <title>Multi-language - Features</title>
+      </Head>
+
       <Hero
         over="Multi-language"
         title={

@@ -2,13 +2,15 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
-import { gqlStaticPaths, gqlStaticProps } from 'lib/datocms';
+import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import SmartMarkdown from 'components/SmartMarkdown';
 import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import { Line, Copy, Image } from 'components/FakeContent';
+import { renderMetaTags } from 'react-datocms';
+import Head from 'next/head';
 
 import s from 'pages/product-updates/p/[page]/style.module.css';
 
@@ -28,6 +30,9 @@ export const getStaticProps = gqlStaticProps(
   gql`
     query($slug: String!) {
       post: changelogEntry(filter: { slug: { eq: $slug } }) {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
         title
         slug
         content(markdown: true)
@@ -40,6 +45,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
+    ${seoMetaTagsFields}
   `,
 );
 
@@ -48,6 +54,8 @@ export default function Changelog({ post, preview }) {
 
   return (
     <Layout preview={preview}>
+      {!isFallback && <Head>{renderMetaTags(post.seo)}</Head>}
+
       <Hero
         title={
           <>
@@ -58,6 +66,7 @@ export default function Changelog({ post, preview }) {
           <>DatoCMS changelog for new features and general improvements</>
         }
       />
+
       <Wrapper>
         <div className={s.post}>
           <div className={s.info}>

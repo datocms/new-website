@@ -2,11 +2,15 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
-import { gqlStaticPaths, gqlStaticProps } from 'lib/datocms';
+import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import SmartMarkdown from 'components/SmartMarkdown';
 import { CHANGELOG_POSTS_PER_PAGE } from 'lib/sitemap';
+import Paginator from 'components/Paginator';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
 
 import { range } from 'range';
 import gql from 'graphql-tag';
@@ -29,6 +33,11 @@ export const getStaticPaths = gqlStaticPaths(
 export const getStaticProps = gqlStaticProps(
   gql`
     query($first: IntType!, $skip: IntType!) {
+      changelog {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
       posts: allChangelogEntries(
         first: $first
         skip: $skip
@@ -50,29 +59,32 @@ export const getStaticProps = gqlStaticProps(
         count
       }
     }
+
+    ${seoMetaTagsFields}
   `,
   ({ page }) => ({
     first: CHANGELOG_POSTS_PER_PAGE,
     skip: CHANGELOG_POSTS_PER_PAGE * parseInt(page),
   }),
-  ({ posts, meta }, { params: { page } }) => ({
-    posts,
-    prevPage:
-      parseInt(page) > 1
-        ? `/product-updates/p/${parseInt(page) - 1}`
-        : parseInt(page) === 1
-        ? `/product-updates`
-        : null,
-    nextPage:
-      (parseInt(page) + 1) * CHANGELOG_POSTS_PER_PAGE < meta.count
-        ? `/product-updates/p/${parseInt(page) + 1}`
-        : null,
+  data => ({
+    ...data,
+    perPage: CHANGELOG_POSTS_PER_PAGE,
   }),
 );
 
-export default function Changelog({ posts, prevPage, nextPage, preview }) {
+export default function Changelog({
+  posts,
+  changelog,
+  perPage,
+  preview,
+  meta,
+}) {
+  const router = useRouter();
+
   return (
     <Layout preview={preview}>
+      <Head>{!router.isFallback && renderMetaTags(changelog.seo)}</Head>
+
       <Hero
         title={
           <>
@@ -84,57 +96,54 @@ export default function Changelog({ posts, prevPage, nextPage, preview }) {
         }
       />
       <Wrapper>
-        {posts &&
-          posts.map(post => (
-            <div key={post.slug} className={s.post}>
-              <div className={s.info}>
-                <FormattedDate date={post._firstPublishedAt} />
-              </div>
-              <h6 className={s.title}>
-                <Link
-                  key={post.slug}
-                  href="/product-updates/[slug]"
-                  as={`/product-updates/${post.slug}`}
-                >
-                  <a>{post.title}</a>
-                </Link>
-              </h6>
-              <div className={s.categories}>
-                {post.categories.map(cat => (
-                  <span
-                    key={cat.name}
-                    className={s.category}
-                    style={{ backgroundColor: cat.color.hex }}
+        <div>
+          {posts &&
+            posts.map(post => (
+              <div key={post.slug} className={s.post}>
+                <div className={s.info}>
+                  <FormattedDate date={post._firstPublishedAt} />
+                </div>
+                <h6 className={s.title}>
+                  <Link
+                    key={post.slug}
+                    href="/product-updates/[slug]"
+                    as={`/product-updates/${post.slug}`}
                   >
-                    {cat.name}
-                  </span>
-                ))}
-              </div>
+                    <a>{post.title}</a>
+                  </Link>
+                </h6>
+                <div className={s.categories}>
+                  {post.categories.map(cat => (
+                    <span
+                      key={cat.name}
+                      className={s.category}
+                      style={{ backgroundColor: cat.color.hex }}
+                    >
+                      {cat.name}
+                    </span>
+                  ))}
+                </div>
 
-              <div className={s.body}>
-                <SmartMarkdown imageClassName={s.responsiveImage}>
-                  {post.content}
-                </SmartMarkdown>
+                <div className={s.body}>
+                  <SmartMarkdown imageClassName={s.responsiveImage}>
+                    {post.content}
+                  </SmartMarkdown>
+                </div>
               </div>
-            </div>
-          ))}
-
-        {prevPage && (
-          <Link
-            href={
-              prevPage === '/product-updates'
-                ? prevPage
-                : '/product-updates/p/[page]'
+            ))}
+        </div>
+        {!router.isFallback && (
+          <Paginator
+            perPage={perPage}
+            currentPage={router.query ? parseInt(router.query.page) : 0}
+            totalEntries={meta.count}
+            href={index =>
+              index === 0 ? '/product-updates' : '/product-updates/p/[page]'
             }
-            as={prevPage !== '/product-updates' && prevPage}
-          >
-            <a>Read more recent posts..</a>
-          </Link>
-        )}
-        {nextPage && (
-          <Link href="/product-updates/p/[page]" as={nextPage}>
-            <a>Read older posts..</a>
-          </Link>
+            as={index =>
+              index === 0 ? '/product-updates' : `/product-updates/p/${index}`
+            }
+          />
         )}
       </Wrapper>
     </Layout>

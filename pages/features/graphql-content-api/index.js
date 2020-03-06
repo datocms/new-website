@@ -1,4 +1,8 @@
 import Layout from 'components/Layout';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
+import gql from 'graphql-tag';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import GraphQlDemo from 'components/GraphQlDemo';
@@ -8,9 +12,27 @@ import Quote from 'components/Quote';
 
 import s from './style.module.css';
 
-function GraphQlContentApi() {
+export const getStaticProps = gqlStaticProps(
+  gql`
+    {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
+    }
+    ${seoMetaTagsFields}
+  `,
+);
+
+function GraphQlContentApi({ page, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
+      <Head>
+        {renderMetaTags(page.seo)}
+        <title>GraphQL Content API - Features</title>
+      </Head>
+
       <Hero
         over="GraphQL Content API"
         title={
@@ -20,10 +42,9 @@ function GraphQlContentApi() {
         }
         subtitle={
           <>
-            GraphQL provides a complete and understandable description of the
-            data in your API, gives clients the power to ask for exactly what
-            they need and nothing more, makes it easier to evolve APIs over
-            time, and enables powerful developer tools.
+            GraphQL provides a complete and understandable description of your
+            API, gives clients the power to ask for exactly what they need and
+            nothing more, and enables powerful developer tools.
           </>
         }
       />

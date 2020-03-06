@@ -10,6 +10,12 @@
   &:first-child {
     margin-top: 0;
   }
+
+  &:last-child {
+    margin-bottom: 90px;
+    padding-bottom: 90px;
+    border-bottom: 2px solid var(--border-color);
+  }
 }
 
 .info {

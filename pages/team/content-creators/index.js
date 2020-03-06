@@ -1,4 +1,8 @@
 import Layout from 'components/Layout';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
+import gql from 'graphql-tag';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
@@ -15,9 +19,26 @@ import Bugs from 'public/images/illustrations/bugs1.svg';
 
 import s from './style.module.css';
 
-function ContentCreators() {
+export const getStaticProps = gqlStaticProps(
+  gql`
+    query {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
+    }
+    ${seoMetaTagsFields}
+  `,
+);
+
+function ContentCreators({ page, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
+      <Head>
+        {renderMetaTags(page.seo)}
+        <title>DatoCMS for Content Creators - Team</title>
+      </Head>
       <Hero
         over="DatoCMS for Content Creators"
         title={
@@ -33,16 +54,6 @@ function ContentCreators() {
             on every channel.
           </>
         }
-      />
-
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
       />
 
       <TitleStripWithContent
@@ -107,6 +118,16 @@ function ContentCreators() {
           </div>
         </div>
       </TitleStripWithContent>
+
+      <Quote
+        quote={
+          <>
+            With DatoCMS we made the impossibile: we launched a successful
+            omnichannel campaign in <Highlight>less than a month</Highlight>.
+          </>
+        }
+        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
+      />
 
       <div style={{ margin: '20vh 0 15vh' }}>
         <InterstitialTitle>

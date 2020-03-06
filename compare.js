@@ -24,11 +24,8 @@ async function start() {
     const redirect = liveRedirects.find(r => r.match(realUrl));
 
     if (redirect) {
-      console.log('/////');
-      console.log(realUrl);
       const { params } = redirect.match(realUrl);
       realUrl = redirect.toPath(params);
-      console.log(realUrl);
     }
 
     return !s2Sites.includes(realUrl);

@@ -1,4 +1,6 @@
 import Layout from 'components/Layout';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
@@ -12,7 +14,7 @@ import OmnichannelIllustration from 'components/OmnichannelIllustration';
 import Quote from 'components/Quote';
 import LazyImage from 'components/LazyImage';
 import gql from 'graphql-tag';
-import { gqlStaticProps } from 'lib/datocms';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 
 import SuccessIcon from 'public/icons/regular/check.svg';
 
@@ -21,6 +23,11 @@ import styles from './style.module.css';
 export const getStaticProps = gqlStaticProps(
   gql`
     query {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
       integrations: allIntegrations(
         first: 30
         filter: { integrationType: { eq: "2427498" } }
@@ -34,12 +41,17 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
+    ${seoMetaTagsFields}
   `,
 );
 
-function DigitalMarketers({ integrations, preview }) {
+function DigitalMarketers({ integrations, preview, page }) {
   return (
     <Layout preview={preview}>
+      <Head>
+        {renderMetaTags(page.seo)}
+        <title>DatoCMS for Digital Marketers - Team</title>
+      </Head>
       <Hero
         over="DatoCMS for Digital Marketers"
         title={

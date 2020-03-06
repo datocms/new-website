@@ -2,16 +2,23 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
-import { gqlStaticPaths, gqlStaticProps, imageFields } from 'lib/datocms';
+import {
+  gqlStaticPaths,
+  gqlStaticProps,
+  imageFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Link from 'next/link';
 import { Image } from 'react-datocms';
 import Masonry from 'react-masonry-css';
 import FormattedDate from 'components/FormattedDate';
 import { BLOG_POSTS_PER_PAGE } from 'lib/sitemap';
-
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
+import Paginator from 'components/Paginator';
 import { range } from 'range';
 import gql from 'graphql-tag';
-
+import { useRouter } from 'next/router';
 import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
@@ -30,6 +37,11 @@ export const getStaticPaths = gqlStaticPaths(
 export const getStaticProps = gqlStaticProps(
   gql`
     query($first: IntType!, $skip: IntType!) {
+      blog {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
       posts: allBlogPosts(
         first: $first
         skip: $skip
@@ -52,29 +64,24 @@ export const getStaticProps = gqlStaticProps(
     }
 
     ${imageFields}
+    ${seoMetaTagsFields}
   `,
   ({ page }) => ({
     first: BLOG_POSTS_PER_PAGE,
     skip: BLOG_POSTS_PER_PAGE * parseInt(page),
   }),
-  ({ posts, meta }, { params: { page } }) => ({
-    posts,
-    prevPage:
-      parseInt(page) > 1
-        ? `/blog/p/${parseInt(page) - 1}`
-        : parseInt(page) === 1
-        ? `/blog`
-        : null,
-    nextPage:
-      (parseInt(page) + 1) * BLOG_POSTS_PER_PAGE < meta.count
-        ? `/blog/p/${parseInt(page) + 1}`
-        : null,
+  data => ({
+    ...data,
+    perPage: BLOG_POSTS_PER_PAGE,
   }),
 );
 
-export default function Blog({ posts, prevPage, nextPage, preview }) {
+export default function Blog({ posts, preview, meta, blog, perPage }) {
+  const router = useRouter();
+
   return (
     <Layout preview={preview}>
+      {!router.isFallback && <Head>{renderMetaTags(blog.seo)}</Head>}
       <Hero
         title={
           <>
@@ -117,18 +124,14 @@ export default function Blog({ posts, prevPage, nextPage, preview }) {
               </Link>
             ))}
         </Masonry>
-        {prevPage && (
-          <Link
-            href={prevPage === '/blog' ? prevPage : '/blog/p/[page]'}
-            as={prevPage !== '/blog' && prevPage}
-          >
-            <a>Read more recent posts..</a>
-          </Link>
-        )}
-        {nextPage && (
-          <Link href="/blog/p/[page]" as={nextPage}>
-            <a>Read older posts..</a>
-          </Link>
+        {!router.isFallback && (
+          <Paginator
+            perPage={perPage}
+            currentPage={router.query ? parseInt(router.query.page) : 0}
+            totalEntries={meta.count}
+            href={index => (index === 0 ? '/blog' : '/blog/p/[page]')}
+            as={index => (index === 0 ? '/blog' : `/blog/p/${index}`)}
+          />
         )}
       </Wrapper>
     </Layout>

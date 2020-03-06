@@ -1,15 +1,21 @@
-import { gqlStaticProps } from 'lib/datocms';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
 import gql from 'graphql-tag';
 import Link from 'next/link';
 import Head from 'next/head';
 import s from './style.module.css';
+import { renderMetaTags } from 'react-datocms';
 
 import docHref from 'utils/docHref';
 
 export const getStaticProps = gqlStaticProps(
   gql`
     query {
+      page: docsPage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
       roots: allDocGroups(filter: { parent: { exists: false } }) {
         name
         children {
@@ -34,6 +40,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
+    ${seoMetaTagsFields}
   `,
 );
 
@@ -74,12 +81,10 @@ const Sidebar = ({ roots }) => (
   </>
 );
 
-export default function Docs({ roots, preview }) {
+export default function Docs({ roots, preview, page }) {
   return (
     <DocsLayout preview={preview} sidebar={<Sidebar roots={roots} />}>
-      <Head>
-        <title>DatoCMS Documentation</title>
-      </Head>
+      <Head>{renderMetaTags(page.seo)}</Head>
       <div className={s.container}>
         <h2 className={s.title}>Documentation</h2>
         <p className={s.subtitle}>

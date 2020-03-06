@@ -6,6 +6,10 @@ import EnterpriseStrip, { Point } from 'components/EnterpriseStrip';
 import LogosBar from 'components/LogosBar';
 import Wrapper from 'components/Wrapper';
 import TalkWithUs from 'components/TalkWithUs';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import gql from 'graphql-tag';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
 
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
@@ -15,9 +19,23 @@ import Linkedin from 'public/images/logos/linkedin.svg';
 
 import s from './style.module.css';
 
-function Enterprise() {
+export const getStaticProps = gqlStaticProps(
+  gql`
+    {
+      page: enterprisePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
+    }
+    ${seoMetaTagsFields}
+  `,
+);
+
+function Enterprise({ page }) {
   return (
     <Layout>
+      <Head>{renderMetaTags(page.seo)}</Head>
       <Hero
         over="DatoCMS for Enterprise"
         title={

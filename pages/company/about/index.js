@@ -10,15 +10,22 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
-import { gqlStaticProps, imageFields } from 'lib/datocms';
+import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
 import { Image } from 'react-datocms';
 import gql from 'graphql-tag';
 import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
 
 export const getStaticProps = gqlStaticProps(
   gql`
     {
+      page: aboutPage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
       members: allTeamMembers {
         bio
         name
@@ -34,12 +41,14 @@ export const getStaticProps = gqlStaticProps(
     }
 
     ${imageFields}
+    ${seoMetaTagsFields}
   `,
 );
 
-export default function About({ members }) {
+export default function About({ members, page }) {
   return (
     <Layout>
+      <Head>{renderMetaTags(page.seo)}</Head>
       <Hero
         over="Meet our team"
         title={

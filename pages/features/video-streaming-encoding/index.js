@@ -1,4 +1,8 @@
 import Layout from 'components/Layout';
+import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
+import gql from 'graphql-tag';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import VideoPlayer from 'components/VideoPlayer';
@@ -10,9 +14,27 @@ import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 import s from './style.module.css';
 import { range } from 'range';
 
-function VideoStreamingEncoding() {
+export const getStaticProps = gqlStaticProps(
+  gql`
+    {
+      page: homePage {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
+        }
+      }
+    }
+    ${seoMetaTagsFields}
+  `,
+);
+
+function VideoStreamingEncoding({ page, preview }) {
   return (
-    <Layout>
+    <Layout preview={preview}>
+      <Head>
+        {renderMetaTags(page.seo)}
+        <title>Video encoding and streaming - Features</title>
+      </Head>
+
       <Hero
         over="Video encoding and streaming"
         title={
