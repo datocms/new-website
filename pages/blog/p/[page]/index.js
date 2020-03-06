@@ -54,8 +54,8 @@ export const getStaticProps = gqlStaticProps(
     ${imageFields}
   `,
   ({ page }) => ({
-    first: POSTS_PER_PAGE,
-    skip: POSTS_PER_PAGE * parseInt(page),
+    first: BLOG_POSTS_PER_PAGE,
+    skip: BLOG_POSTS_PER_PAGE * parseInt(page),
   }),
   ({ posts, meta }, { params: { page } }) => ({
     posts,
@@ -66,7 +66,7 @@ export const getStaticProps = gqlStaticProps(
         ? `/blog`
         : null,
     nextPage:
-      (parseInt(page) + 1) * POSTS_PER_PAGE < meta.count
+      (parseInt(page) + 1) * BLOG_POSTS_PER_PAGE < meta.count
         ? `/blog/p/${parseInt(page) + 1}`
         : null,
   }),

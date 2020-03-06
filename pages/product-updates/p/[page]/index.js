@@ -52,8 +52,8 @@ export const getStaticProps = gqlStaticProps(
     }
   `,
   ({ page }) => ({
-    first: POSTS_PER_PAGE,
-    skip: POSTS_PER_PAGE * parseInt(page),
+    first: CHANGELOG_POSTS_PER_PAGE,
+    skip: CHANGELOG_POSTS_PER_PAGE * parseInt(page),
   }),
   ({ posts, meta }, { params: { page } }) => ({
     posts,
@@ -64,7 +64,7 @@ export const getStaticProps = gqlStaticProps(
         ? `/product-updates`
         : null,
     nextPage:
-      (parseInt(page) + 1) * POSTS_PER_PAGE < meta.count
+      (parseInt(page) + 1) * CHANGELOG_POSTS_PER_PAGE < meta.count
         ? `/product-updates/p/${parseInt(page) + 1}`
         : null,
   }),
