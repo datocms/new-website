@@ -4,7 +4,7 @@ export default url =>
     : !url.startsWith('/docs/content-management-api')
     ? '/docs/[...chunks]'
     : url.startsWith('/docs/content-management-api/r/')
-    ? '/docs/content-management-api/r/[resource]'
+    ? '/docs/content-management-api/resources/[resource]'
     : url === '/docs/content-management-api'
     ? '/docs/content-management-api'
     : '/docs/content-management-api/[...chunks]';

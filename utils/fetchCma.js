@@ -10,7 +10,10 @@ const buildToc = schema => {
     .map(([resource, resourceSchema]) => {
       return {
         slug: resource.replace(/\_/g, '-'),
-        url: `/docs/content-management-api/r/${resource.replace(/\_/g, '-')}`,
+        url: `/docs/content-management-api/resources/${resource.replace(
+          /\_/g,
+          '-',
+        )}`,
         label: resourceSchema.title,
         position: resourceSchema.position || 99,
         links: resourceSchema.links.filter(l => !l.private),
