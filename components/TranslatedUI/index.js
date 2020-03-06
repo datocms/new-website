@@ -1,5 +1,5 @@
 import UIChrome from 'components/UiChrome';
-import s from './style.css';
+import s from './style.module.css';
 import { useEffect, useState } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -377,9 +377,7 @@ export default function TranslatedUI() {
               <Flag />
             </span>
           </ReactCSSTransitionGroup>
-          <div className={s.hey}>
-            We speak {name[localeString]}!
-          </div>
+          <div className={s.hey}>We speak {name[localeString]}!</div>
         </div>
       </div>
     </UIChrome>

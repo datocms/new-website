@@ -3,7 +3,7 @@ import VideoPlayer from 'components/VideoPlayer';
 import SmartMarkdown from 'components/SmartMarkdown';
 import ImageFigure from 'components/ImageFigure';
 import Prism from 'components/Prism';
-import defaultStyles from './style.css';
+import defaultStyles from './style.module.css';
 import { Copy, Image } from 'components/FakeContent';
 
 export default function PostContent({ isFallback, content, style, children }) {

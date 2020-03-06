@@ -1,5 +1,5 @@
 import UIChrome from 'components/UiChrome';
-import s from './style.css';
+import s from './style.module.css';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { useTransition, animated } from 'react-spring';
@@ -39,7 +39,7 @@ export default function UseModularBlocks() {
       leave: { height: 0, opacity: 0 },
       enter: ({ y, height }) => ({ y, height, opacity: 1 }),
       update: ({ y, height }) => ({ y, height }),
-    },
+    }
   );
 
   return (

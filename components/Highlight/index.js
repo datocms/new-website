@@ -1,4 +1,4 @@
-import styles from './style.css';
+import styles from './style.module.css';
 import parse, { domToReact } from 'html-react-parser';
 
 export default function Highlight({ style = 'neutral', children }) {
@@ -16,7 +16,9 @@ const parseOptions = {
 const parseOptionsNoWrappers = {
   replace: ({ name, children }) => {
     if (name === 'p') {
-      return <React.Fragment>{domToReact(children, parseOptions)}</React.Fragment>;
+      return (
+        <React.Fragment>{domToReact(children, parseOptions)}</React.Fragment>
+      );
     }
 
     if (name === 'strong') {

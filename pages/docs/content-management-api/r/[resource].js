@@ -3,14 +3,14 @@ import {
   Sidebar,
   getStaticProps as docPageUnstableGetStaticProps,
 } from 'pages/docs/[...chunks]';
-import s from 'pages/docs/pageStyle.css';
+import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
 import { parse } from 'flatted/cjs';
 import { useMemo } from 'react';
 import Head from 'next/head';
 import CmaResourceAttributes from 'components/CmaResourceAttributes';
 import CmaResourceMethod from 'components/CmaResourceMethod';
-import r from 'pages/docs/resourceStyle.css';
+import r from 'pages/docs/resourceStyle.module.css';
 import { useState } from 'react';
 import cn from 'classnames';
 
@@ -92,7 +92,7 @@ export default function DocPage({ docGroup, cma, preview }) {
                   label: page.titleOverride || page.page.title,
                 };
               }),
-              result.toc,
+              result.toc
             )}
           />
         )

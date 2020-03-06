@@ -4,7 +4,7 @@ import {
   Toc,
   getStaticProps as docPageUnstableGetStaticProps,
 } from 'pages/docs/[...chunks]';
-import s from 'pages/docs/pageStyle.css';
+import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
 import { parse } from 'flatted/cjs';
 import { useMemo } from 'react';
@@ -27,7 +27,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'chunk',
-  ({ root }) => root.pages.map(p => p.page.slug),
+  ({ root }) => root.pages.map(p => p.page.slug)
 );
 
 export const getStaticProps = async ({ params: { chunk }, ...other }) => {
@@ -62,7 +62,7 @@ export default function DocPage(props) {
                   label: page.titleOverride || page.page.title,
                 };
               }),
-              result.toc,
+              result.toc
             )}
           />
         )

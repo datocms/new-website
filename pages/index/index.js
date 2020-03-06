@@ -26,7 +26,7 @@ import Linkedin from 'public/images/logos/linkedin.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Arduino from 'public/images/logos/arduino.svg';
 
-import styles from './style.css';
+import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -51,7 +51,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `,
+  `
 );
 
 function Homepage({ successStories, preview }) {

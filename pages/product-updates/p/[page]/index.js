@@ -10,7 +10,7 @@ import SmartMarkdown from 'components/SmartMarkdown';
 import { range } from 'range';
 import gql from 'graphql-tag';
 
-import s from './style.css';
+import s from './style.module.css';
 
 const POSTS_PER_PAGE = 10;
 
@@ -23,7 +23,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'page',
-  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE))),
+  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE)))
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -67,7 +67,7 @@ export const getStaticProps = gqlStaticProps(
       (parseInt(page) + 1) * POSTS_PER_PAGE < meta.count
         ? `/product-updates/p/${parseInt(page) + 1}`
         : null,
-  }),
+  })
 );
 
 export default function Changelog({ posts, prevPage, nextPage, preview }) {
@@ -84,39 +84,40 @@ export default function Changelog({ posts, prevPage, nextPage, preview }) {
         }
       />
       <Wrapper>
-        {posts && posts.map(post => (
-          <div key={post.slug} className={s.post}>
-            <div className={s.info}>
-              <FormattedDate date={post._firstPublishedAt} />
-            </div>
-            <h6 className={s.title}>
-              <Link
-                key={post.slug}
-                href="/product-updates/[slug]"
-                as={`/product-updates/${post.slug}`}
-              >
-                <a>{post.title}</a>
-              </Link>
-            </h6>
-            <div className={s.categories}>
-              {post.categories.map(cat => (
-                <span
-                  key={cat.name}
-                  className={s.category}
-                  style={{ backgroundColor: cat.color.hex }}
+        {posts &&
+          posts.map(post => (
+            <div key={post.slug} className={s.post}>
+              <div className={s.info}>
+                <FormattedDate date={post._firstPublishedAt} />
+              </div>
+              <h6 className={s.title}>
+                <Link
+                  key={post.slug}
+                  href="/product-updates/[slug]"
+                  as={`/product-updates/${post.slug}`}
                 >
-                  {cat.name}
-                </span>
-              ))}
-            </div>
+                  <a>{post.title}</a>
+                </Link>
+              </h6>
+              <div className={s.categories}>
+                {post.categories.map(cat => (
+                  <span
+                    key={cat.name}
+                    className={s.category}
+                    style={{ backgroundColor: cat.color.hex }}
+                  >
+                    {cat.name}
+                  </span>
+                ))}
+              </div>
 
-            <div className={s.body}>
-              <SmartMarkdown imageClassName={s.responsiveImage}>
-                {post.content}
-              </SmartMarkdown>
+              <div className={s.body}>
+                <SmartMarkdown imageClassName={s.responsiveImage}>
+                  {post.content}
+                </SmartMarkdown>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
         {prevPage && (
           <Link

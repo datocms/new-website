@@ -12,8 +12,16 @@
   pointer-events: none;
   white-space: nowrap;
   overflow: hidden;
-  animation: 400ms ease-in 1.5s 1 normal forwards running fade-jsx-339728620;
   z-index: -1;
+
+  animation-duration: 400ms;
+  animation-timing-function: ease-in;
+  animation-delay: 1.5s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-name: fade-jsx-339728620;
 }
 
 .backgroundInner {
@@ -37,7 +45,7 @@
 
 .backgroundImage {
   position: absolute;
-  
+
   .backgroundImageInner {
     border-radius: 50%;
     padding: 4vh;

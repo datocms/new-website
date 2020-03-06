@@ -3,7 +3,7 @@ import FinalCta from 'components/FinalCta';
 import StatusBadge from 'components/StatusBadge';
 import cn from 'classnames';
 import Link from 'next/link';
-import s from './style.css';
+import s from './style.module.css';
 
 export default function Footer({ noCta }) {
   return (

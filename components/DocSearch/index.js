@@ -6,16 +6,16 @@ import cn from 'classnames';
 import parse from 'html-react-parser';
 import wretch from 'wretch';
 
-import s from './style.css';
+import s from './style.module.css';
 
 const client = new DatoCmsSearch('d46fe8134ea916b42af4eaa0d06109');
 
 const fetchCommunity = async query => {
   const endpoint = 'https://community.datocms.com/search/query.json';
 
-  const { topics, posts } = await ky.get(
-    `${endpoint}?include_blurbs=true&term=${encodeURIComponent(query)}`,
-  ).json();
+  const { topics, posts } = await ky
+    .get(`${endpoint}?include_blurbs=true&term=${encodeURIComponent(query)}`)
+    .json();
 
   if (!posts) {
     return [];
@@ -67,7 +67,12 @@ export default function DocSearch() {
         onClick={() => setSearchTerm('')}
       />
       <div className={cn(s.searchResults, { [s.visible]: !!searchTerm })}>
-        {isSearching  && <div className={s.spinning}><div /><div /></div>}
+        {isSearching && (
+          <div className={s.spinning}>
+            <div />
+            <div />
+          </div>
+        )}
         <ul className={s.results}>
           {results.map(result => (
             <li key={result.url} className={s.result}>

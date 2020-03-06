@@ -1,5 +1,5 @@
 import UIChrome from 'components/UiChrome';
-import s from './style.css';
+import s from './style.module.css';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 

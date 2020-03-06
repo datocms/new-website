@@ -1,4 +1,4 @@
-import s from './style.css';
+import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
 
 export default function IntegrationsBanner({ title, bubbles, children }) {
@@ -8,9 +8,7 @@ export default function IntegrationsBanner({ title, bubbles, children }) {
         <div className={s.backgroundInner}>
           {React.Children.map(bubbles, (child, key) => (
             <div className={s.backgroundImage} key={key}>
-              <div className={s.backgroundImageInner}>
-                {child}
-              </div>
+              <div className={s.backgroundImageInner}>{child}</div>
             </div>
           ))}
         </div>

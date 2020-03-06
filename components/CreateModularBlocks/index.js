@@ -1,5 +1,5 @@
 import UIChrome from 'components/UiChrome';
-import s from './style.css';
+import s from './style.module.css';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 
@@ -59,7 +59,9 @@ export default function FieldSettings() {
           <div className={s.blocks}>
             {allBlocks.map((block, i) => (
               <div
-                className={cn(s.fieldInner, { [s.fieldInnerHidden]: i > blockCount })}
+                className={cn(s.fieldInner, {
+                  [s.fieldInnerHidden]: i > blockCount,
+                })}
                 key={block}
               >
                 <div className={s.fieldDrag} />

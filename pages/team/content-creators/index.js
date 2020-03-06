@@ -13,7 +13,7 @@ import Arrow3 from 'public/images/illustrations/arrow-sketch-3.svg';
 import Crown from 'public/images/illustrations/corona2.svg';
 import Bugs from 'public/images/illustrations/bugs1.svg';
 
-import s from './style.css';
+import s from './style.module.css';
 
 function ContentCreators() {
   return (
@@ -72,9 +72,15 @@ function ContentCreators() {
             </div>
           </div>
           <div className={s.beforeAfterInterstitial}>
-            <div className={s.beforeAfterPoint}><Arrow3 /></div>
-            <div className={s.beforeAfterPoint}><Arrow3 /></div>
-            <div className={s.beforeAfterPoint}><Arrow3 /></div>
+            <div className={s.beforeAfterPoint}>
+              <Arrow3 />
+            </div>
+            <div className={s.beforeAfterPoint}>
+              <Arrow3 />
+            </div>
+            <div className={s.beforeAfterPoint}>
+              <Arrow3 />
+            </div>
           </div>
           <div className={s.beforeAfterCol}>
             <Crown />
@@ -228,9 +234,10 @@ function ContentCreators() {
         subtitle={
           <>
             Everything in DatoCMS is focused on helping you create great
-            content. Forget cluttered interfaces, <strong>everything is right where you
-            need it</strong>. And you can always change the defaults and personalize the
-            experience if you want.
+            content. Forget cluttered interfaces,{' '}
+            <strong>everything is right where you need it</strong>. And you can
+            always change the defaults and personalize the experience if you
+            want.
           </>
         }
       >

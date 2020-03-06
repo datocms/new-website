@@ -1,0 +1,19 @@
+.preview {
+  background-color: var(--light-bg-color);
+  color: var(--light-body-color);
+  position: fixed;
+  bottom: 30px;
+  right: 55px;
+  padding: 8px 20px;
+  font-size: 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500px;
+  box-shadow: var(--box-shadow);
+  z-index: 10000;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

@@ -3,7 +3,7 @@ import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import cn from 'classnames';
 import useSWR from 'swr';
-import s from './style.css';
+import s from './style.module.css';
 import { useForm } from 'react-hook-form';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
@@ -19,7 +19,8 @@ const fetcher = url =>
     .json();
 
 const errorLabels = {
-  already_invited: 'You have already been invited! Check for an email from feedback@slack.com.',
+  already_invited:
+    'You have already been invited! Check for an email from feedback@slack.com.',
 };
 
 export default function Support() {
@@ -49,7 +50,11 @@ export default function Support() {
       reset();
       setSuccess(true);
     } catch (e) {
-      setError('email', e.json.error, errorLabels[e.json.error] || `Slack error: ${e.json.error}`);
+      setError(
+        'email',
+        e.json.error,
+        errorLabels[e.json.error] || `Slack error: ${e.json.error}`
+      );
     }
   };
 

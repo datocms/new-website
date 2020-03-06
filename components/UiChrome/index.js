@@ -1,4 +1,4 @@
-import s from './style.css';
+import s from './style.module.css';
 
 export default function UiChrome({ title = 'Acme Inc. - DatoCMS', children }) {
   return (

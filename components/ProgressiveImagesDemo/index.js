@@ -1,4 +1,4 @@
-import s from './style.css';
+import s from './style.module.css';
 import { range } from 'range';
 import { useState, useCallback, useEffect } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';

@@ -1,4 +1,4 @@
-import s from './style.css';
+import s from './style.module.css';
 import Button from 'components/Button';
 import Link from 'next/link';
 import {

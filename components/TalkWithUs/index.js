@@ -1,4 +1,4 @@
-import s from './style.css';
+import s from './style.module.css';
 import Textarea from 'react-autosize-textarea';
 import { getData } from 'country-list';
 import { Form, Field } from 'components/Form';

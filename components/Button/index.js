@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import style from './style.css';
+import style from './style.module.css';
 
 const fsClassNames = {
   big: style.fsBig,
@@ -10,21 +10,27 @@ const pClassNames = {
   small: style.pSmall,
 };
 
-export default function Button({ as: Component = 'div', children, fs, p, block, disabled, ...other }) {
+export default function Button({
+  as: Component = 'div',
+  children,
+  fs,
+  p,
+  block,
+  disabled,
+  ...other
+}) {
   return (
     <Component
       {...other}
-      className={
-        cn(
-          style.root,
-          {
-            [style.disabled]: disabled,
-            [style.block]: block,
-          },
-          fs && fsClassNames[fs],
-          p && pClassNames[p],
-        )
-      }
+      className={cn(
+        style.root,
+        {
+          [style.disabled]: disabled,
+          [style.block]: block,
+        },
+        fs && fsClassNames[fs],
+        p && pClassNames[p]
+      )}
     >
       {children}
     </Component>

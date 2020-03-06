@@ -1,11 +1,10 @@
-import React from "react";
-import NProgress from "nprogress";
-import Router from "next/router";
-import './style.css';
+import React from 'react';
+import NProgress from 'nprogress';
+import Router from 'next/router';
 
 class NProgressContainer extends React.Component {
   static defaultProps = {
-    showAfterMs: 300
+    showAfterMs: 300,
   };
 
   timer = null;
@@ -14,12 +13,12 @@ class NProgressContainer extends React.Component {
     const { showAfterMs } = this.props;
     clearTimeout(this.timer);
     this.timer = setTimeout(NProgress.start, showAfterMs);
-  }
+  };
 
   routeChangeEnd = () => {
     clearTimeout(this.timer);
     NProgress.done();
-  }
+  };
 
   componentDidMount() {
     const { options } = this.props;

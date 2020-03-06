@@ -16,7 +16,7 @@ import { gqlStaticProps } from 'lib/datocms';
 
 import SuccessIcon from 'public/icons/regular/check.svg';
 
-import styles from './style.css';
+import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -34,7 +34,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `,
+  `
 );
 
 function DigitalMarketers({ integrations, preview }) {

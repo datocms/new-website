@@ -104,7 +104,7 @@
     [data-permalink] {
       transition: all 100ms ease-in-out;
       opacity: 0;
-      background: url('public/icons/regular/link.svg');
+      background: url('../../public/icons/regular/link.svg');
       background-size: contain;
       height: 0.7em;
       width: 0.7em;

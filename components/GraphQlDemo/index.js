@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import s from './style.css';
+import s from './style.module.css';
 import cn from 'classnames';
 import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 
@@ -137,7 +137,10 @@ export default function GraphQlDemo({ height, children }) {
 
       <Highlight {...defaultProps} code={result} language="json">
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={cn(className, s.code, s.result)} style={{ ...style, height: `${1.3 * height}em` }}>
+          <pre
+            className={cn(className, s.code, s.result)}
+            style={{ ...style, height: `${1.3 * height}em` }}
+          >
             {tokens.map((line, i) => (
               <div {...getLineProps({ line, key: i })}>
                 {line.map((token, key) => (

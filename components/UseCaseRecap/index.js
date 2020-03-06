@@ -1,5 +1,5 @@
 import Wrapper from 'components/Wrapper';
-import s from './style.css';
+import s from './style.module.css';
 
 export default function UseCaseRecap({ challenge, result, children }) {
   return (

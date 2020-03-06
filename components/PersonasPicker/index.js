@@ -1,4 +1,4 @@
-import s from './style.css';
+import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';

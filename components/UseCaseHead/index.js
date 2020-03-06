@@ -1,5 +1,5 @@
 import Wrapper from 'components/Wrapper';
-import s from './style.css';
+import s from './style.module.css';
 import Dato from 'public/images/logos/datocms.svg';
 import cn from 'classnames';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';

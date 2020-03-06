@@ -2,7 +2,7 @@ import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
 import Button from 'components/Button';
 import Checks from 'components/Checks';
-import s from './style.css';
+import s from './style.module.css';
 
 export default function FinalCta() {
   return (

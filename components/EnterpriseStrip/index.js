@@ -1,4 +1,4 @@
-import s from './style.css';
+import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
 
 export default function EnterpriseStrip({ title, description, children }) {

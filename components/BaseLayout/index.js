@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import s from './style.css';
+import s from './style.module.css';
 import { useRouter } from 'next/router';
 import NProgress from 'components/NProgress';
 
@@ -17,7 +17,10 @@ export default function Layout({ preview, children }) {
       </Head>
       <NProgress />
       {preview && (
-        <a href={`/api/preview/stop?page=${router.pathname}`} className={s.preview}>
+        <a
+          href={`/api/preview/stop?page=${router.pathname}`}
+          className={s.preview}
+        >
           Exit preview mode
         </a>
       )}

@@ -24,7 +24,7 @@
   appearance: none;
   border-bottom: 1px solid var(--border-color);
   font-family: var(--font-serif);
-  background-image: url('public/icons/regular/chevron-down.svg');
+  background-image: url('../../public/icons/regular/chevron-down.svg');
   background-repeat: no-repeat;
   background-position: right center;
   background-size: 30px;
