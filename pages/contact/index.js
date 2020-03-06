@@ -38,34 +38,6 @@ export default function Support() {
                   in touch as soon as possible.
                 </p>
 
-                {/* <p>
-                  Please select a topic below related to your inquiry. If you
-                  don’t find what you need, fill out our contact form.
-                </p>
-
-                <ul className={s.inquiries}>
-                  <li>
-                    <Link href="/book-demo">
-                      <a className={s.inquiry}>
-                        <div className={s.inquiryTitle}>Book a demo</div>
-                        <div className={s.inquiryDesc}>
-                          Request a demo from one of our conversion specialists
-                        </div>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/customers">
-                      <a className={s.inquiry}>
-                        <div className={s.inquiryTitle}>Get inspired</div>
-                        <div className={s.inquiryDesc}>
-                          Discover how our customers use DatoCMS
-                        </div>
-                      </a>
-                    </Link>
-                  </li>
-                </ul> */}
-
                 <p className={s.support}>
                   Need support? Please visit our{' '}
                   <Link href="/support">
