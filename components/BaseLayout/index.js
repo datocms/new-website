@@ -14,6 +14,18 @@ export default function Layout({ preview, children }) {
         <link rel="preload" href="/fonts/tiempos-text-web-regular.woff2" />
         <link rel="preload" href="/fonts/tiempos-headline-web-semibold.woff2" />
         <link rel="preload" href="/fonts/colfax-web-regular.woff2" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="DatoCMS Blog"
+          href="/blog.xml"
+        />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="DatoCMS Product Changelog"
+          href="/product-changelog.xml"
+        />
       </Head>
       <NProgress />
       {preview && (

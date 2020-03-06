@@ -6,7 +6,7 @@
   "scripts": {
     "prettier": "prettier --write \"{pages,lib,utils,components}/**/*.{js,css}\"",
     "dev": "next",
-    "build": "next build",
+    "build": "node -r esm lib/writeFeeds.js && next build",
     "start": "next start"
   },
   "keywords": [],
@@ -72,10 +72,13 @@
     "wretch": "^1.7.1"
   },
   "devDependencies": {
+    "esm": "^3.2.25",
     "husky": "^4.2.3",
     "now": "^17.0.4",
     "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "rss": "^1.2.2",
+    "striptags": "^3.1.1"
   },
   "husky": {
     "hooks": {

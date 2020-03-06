@@ -1,0 +1,12 @@
+.lazyImage {
+  animation: fadein 500ms ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -11,7 +11,7 @@ export default function DocsLayout({ sidebar, children, preview }) {
     <BaseLayout preview={preview}>
       <div className={s.root}>
         <div className={s.sidebar}>
-          <Link href="/docs">
+          <Link href="/">
             <a className={s.logo}>
               <FullLogo height={30} />
             </a>

@@ -4,7 +4,6 @@ import DatoCmsSearch from 'datocms-search/dist/datocms-search.base';
 import highlighter from 'keyword-highlighter';
 import cn from 'classnames';
 import parse from 'html-react-parser';
-import wretch from 'wretch';
 
 import s from './style.module.css';
 

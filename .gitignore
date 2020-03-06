@@ -1,3 +1,5 @@
 .next
 .env
 node_modules
+public/blog.xml
+public/product-changelog.xml
