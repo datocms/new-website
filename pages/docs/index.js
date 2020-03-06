@@ -12,16 +12,11 @@ export const getStaticProps = gqlStaticProps(
     query {
       roots: allDocGroups(filter: { parent: { exists: false } }) {
         name
-        slug
-        pages {
-          page {
-            slug
-          }
-        }
         children {
           name
           slug
           pages {
+            slugOverride
             page {
               slug
             }
@@ -30,6 +25,7 @@ export const getStaticProps = gqlStaticProps(
             name
             slug
             pages {
+              slugOverride
               page {
                 slug
               }
@@ -52,9 +48,13 @@ const Sidebar = ({ roots }) => (
           {root.children.map(sub => (
             <Link
               href={docHref(
-                `/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`,
+                `/docs/${sub.slug}${normalize(
+                  sub.pages[0].slugOverride || sub.pages[0].page.slug,
+                )}`,
               )}
-              as={`/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`}
+              as={`/docs/${sub.slug}${normalize(
+                sub.pages[0].slugOverride || sub.pages[0].page.slug,
+              )}`}
               key={sub.slug}
             >
               <a className={s.guide}>{sub.name}</a>

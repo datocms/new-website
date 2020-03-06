@@ -26,7 +26,6 @@ export const getStaticPaths = gqlStaticPaths(
       roots: allDocGroups(filter: { parent: { exists: false } }) {
         slug
         children {
-          name
           slug
           pages {
             slugOverride
@@ -71,6 +70,7 @@ export const getStaticProps = async function({
           slug
           pages {
             titleOverride
+            slugOverride
             page {
               id
               title
@@ -85,7 +85,10 @@ export const getStaticProps = async function({
   });
 
   const page =
-    docGroup && docGroup.pages.find(page => page.page.slug === pageSlug);
+    docGroup &&
+    docGroup.pages.find(
+      page => (page.slugOverride || page.page.slug) === pageSlug,
+    );
   const titleOverride = page && page.titleOverride;
   const pageId = page && page.page.id;
 
@@ -266,7 +269,9 @@ export default function DocPage({ docGroup, titleOverride, page }) {
             entries={docGroup.pages.map(page => {
               return {
                 url: `/docs/${docGroup.slug}${
-                  page.page.slug === 'index' ? '' : `/${page.page.slug}`
+                  (page.slugOverride || page.page.slug) === 'index'
+                    ? ''
+                    : `/${page.slugOverride || page.page.slug}`
                 }`,
                 label: page.titleOverride || page.page.title,
               };

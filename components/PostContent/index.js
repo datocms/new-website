@@ -37,7 +37,7 @@ export default function PostContent({ isFallback, content, style, children }) {
                   <figure>
                     <VideoPlayer
                       controls
-                      autoplay={block.autoplay}
+                      autoPlay={block.autoplay}
                       loop={block.loop}
                       src={block.video.video.streamingUrl}
                       poster={`${
