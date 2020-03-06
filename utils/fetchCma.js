@@ -1,7 +1,7 @@
 import tiny from 'tiny-json-http';
-const sortBy = require('sort-by');
-const parser = require('json-schema-ref-parser');
-const { stringify } = require('flatted/cjs');
+import sortBy from 'sort-by';
+import parser from 'json-schema-ref-parser';
+import { stringify } from 'flatted/cjs';
 
 const defaultLinksOrder = ['instances', 'self', 'create', 'update', 'destroy'];
 
@@ -38,7 +38,7 @@ const normalizeSchema = (resource, resourceSchema) => ({
     .sort(sortBy('position')),
 });
 
-module.exports = async function buildCmaResources(resource) {
+export default async function buildCmaResources(resource) {
   const { body: unreferencedSchema } = await tiny.get({
     url: 'https://site-api.datocms.com/docs/site-api-hyperschema.json',
   });
@@ -59,4 +59,4 @@ module.exports = async function buildCmaResources(resource) {
   };
 
   return stringify(result);
-};
+}

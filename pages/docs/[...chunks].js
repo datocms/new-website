@@ -25,26 +25,13 @@ export const getStaticPaths = gqlStaticPaths(
     {
       roots: allDocGroups(filter: { parent: { exists: false } }) {
         slug
-        pages {
-          page {
-            slug
-          }
-        }
         children {
           name
           slug
           pages {
+            slugOverride
             page {
               slug
-            }
-          }
-          children {
-            name
-            slug
-            pages {
-              page {
-                slug
-              }
             }
           }
         }
@@ -58,9 +45,9 @@ export const getStaticPaths = gqlStaticPaths(
         root.children
           .filter(c => c.slug !== 'content-management-api')
           .map(sub =>
-            sub.pages[0].page.slug === 'index'
+            (sub.pages[0].slugOverride || sub.pages[0].page.slug) === 'index'
               ? [sub.slug]
-              : [sub.slug, sub.pages[0].page.slug],
+              : [sub.slug, sub.pages[0].slugOverride || sub.pages[0].page.slug],
           ),
       )
       .flat(),

@@ -6,7 +6,7 @@
   "scripts": {
     "prettier": "prettier --write \"{pages,lib,utils,components}/**/*.{js,css}\"",
     "dev": "next",
-    "build": "node -r esm lib/writeFeeds.js && next build",
+    "build": "node -r esm lib/writeFeedsAndSitemap.js && next build",
     "start": "next start"
   },
   "keywords": [],
@@ -64,6 +64,7 @@
     "react-toast-notifications": "^2.4.0",
     "react-use-gesture": "^7.0.2",
     "scroll-into-view-if-needed": "^2.2.24",
+    "sitemap": "^5.1.0",
     "sort-by": "^1.2.0",
     "sort-object": "^3.0.3",
     "swr": "^0.1.16",

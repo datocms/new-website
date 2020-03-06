@@ -9,7 +9,7 @@ const withNextEnv = nextEnv();
 const svgTemplate = (
   { template },
   opts,
-  { imports, componentName, props, jsx }
+  { imports, componentName, props, jsx },
 ) => {
   return template.ast`${imports}
     const ${componentName} = (${props}) => ${jsx};
@@ -18,6 +18,17 @@ const svgTemplate = (
 };
 
 module.exports = withNextEnv({
+  experimental: {
+    async rewrites() {
+      return [
+        {
+          source: '/s/:snapshotId',
+          destination: '/api/sameorigin/:snapshotId',
+        },
+        { source: '/r/:snapshotId', destination: '/api/share/:snapshotId' },
+      ];
+    },
+  },
   webpack(config) {
     config.resolve.modules.push(path.resolve('./'));
 

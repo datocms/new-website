@@ -7,13 +7,12 @@ import Link from 'next/link';
 import { Image } from 'react-datocms';
 import Masonry from 'react-masonry-css';
 import FormattedDate from 'components/FormattedDate';
+import { BLOG_POSTS_PER_PAGE } from 'lib/sitemap';
 
 import { range } from 'range';
 import gql from 'graphql-tag';
 
 import s from './style.module.css';
-
-const POSTS_PER_PAGE = 16;
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -24,7 +23,8 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'page',
-  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE))),
+  ({ meta }) =>
+    range(1, Math.ceil(meta.count / parseFloat(BLOG_POSTS_PER_PAGE))),
 );
 
 export const getStaticProps = gqlStaticProps(
