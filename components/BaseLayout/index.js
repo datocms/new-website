@@ -30,7 +30,7 @@ export default function Layout({ preview, children }) {
       <NProgress />
       {preview && (
         <a
-          href={`/api/preview/stop?page=${router.pathname}`}
+          href={`/api/preview/stop?page=${router.asPath}`}
           className={s.preview}
         >
           Exit preview mode
