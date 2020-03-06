@@ -12,11 +12,7 @@
 }
 
 .group {
-  margin-top: 30px;
-
-  &:first-child {
-    margin-top: 0px;
-  }
+  margin-bottom: 30px;
 }
 
 .groupName {

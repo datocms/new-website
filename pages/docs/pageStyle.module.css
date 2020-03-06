@@ -277,3 +277,35 @@
     color: var(--base-body-color);
   }
 }
+
+.tutorial {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  margin-bottom: 40px;
+
+  &:hover .tutorialTitle {
+    text-decoration: underline;
+  }
+}
+
+.tutorialTitle {
+  font-size: 25px;
+  margin: 0;
+  margin-bottom: 10px;
+
+  svg {
+    opacity: 0.6;
+    font-size: 0.7em;
+  }
+}
+
+.tutorialDescription {
+  p {
+    margin: 0 0 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

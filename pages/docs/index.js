@@ -63,6 +63,14 @@ const Sidebar = ({ roots }) => (
         </div>
       </div>
     ))}
+    <div className={s.group}>
+      <div className={s.groupName}>Community</div>
+      <div className={s.guides}>
+        <Link href="/docs/community-tutorials">
+          <a className={s.guide}>Community tutorials</a>
+        </Link>
+      </div>
+    </div>
   </>
 );
 
