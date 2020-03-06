@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prettier": "prettier --write \"{pages,lib,utils,components}/**/*.{js,css}\"",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -71,10 +72,14 @@
     "wretch": "^1.7.1"
   },
   "devDependencies": {
-    "now": "^17.0.4"
+    "husky": "^4.2.3",
+    "now": "^17.0.4",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1"
   },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "es5"
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

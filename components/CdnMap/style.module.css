@@ -102,11 +102,9 @@
   border-radius: 5px;
   padding: 25px;
   background: white;
-  box-shadow:
-  0 1.2px 1.1px rgba(0, 0, 0, 0.014),
-  0 3.3px 3.1px rgba(0, 0, 0, 0.02),
-  0 7.8px 7.5px rgba(0, 0, 0, 0.026),
-  0 26px 25px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1.2px 1.1px rgba(0, 0, 0, 0.014),
+    0 3.3px 3.1px rgba(0, 0, 0, 0.02), 0 7.8px 7.5px rgba(0, 0, 0, 0.026),
+    0 26px 25px rgba(0, 0, 0, 0.04);
   position: relative;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -115,14 +113,10 @@
 .activeItem {
   top: -20px;
   transform: scale(1.1);
-  box-shadow:
-  0 1.2px 1.2px rgba(0, 0, 0, 0.022),
-  0 2.8px 2.9px rgba(0, 0, 0, 0.032),
-  0 5.3px 5.5px rgba(0, 0, 0, 0.04),
-  0 9.4px 9.8px rgba(0, 0, 0, 0.048),
-  0 17.5px 18.4px rgba(0, 0, 0, 0.058),
-  0 42px 44px rgba(0, 0, 0, 0.08);
-;
+  box-shadow: 0 1.2px 1.2px rgba(0, 0, 0, 0.022),
+    0 2.8px 2.9px rgba(0, 0, 0, 0.032), 0 5.3px 5.5px rgba(0, 0, 0, 0.04),
+    0 9.4px 9.8px rgba(0, 0, 0, 0.048), 0 17.5px 18.4px rgba(0, 0, 0, 0.058),
+    0 42px 44px rgba(0, 0, 0, 0.08);
 }
 
 .nearestItem {

@@ -14,21 +14,37 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  clip-path: polygon(calc(var(--half) + 3vw) 0, 100% 0, 100% 100%, calc(var(--half) - 3vw) 100%);
+  clip-path: polygon(
+    calc(var(--half) + 3vw) 0,
+    100% 0,
+    100% 100%,
+    calc(var(--half) - 3vw) 100%
+  );
 }
 
 .boxImage {
-  clip-path: polygon(calc(var(--half) + 3vw) 3vh, 100% 0, 100% 100%, calc(var(--half) - 3vw) 93%);
+  clip-path: polygon(
+    calc(var(--half) + 3vw) 3vh,
+    100% 0,
+    100% 100%,
+    calc(var(--half) - 3vw) 93%
+  );
   background: var(--gradient2);
 }
 
-.boxText, .boxCut {
+.boxText,
+.boxCut {
   color: white;
 }
 
 .boxCut {
   color: var(--gradient2);
-  clip-path: polygon(0 0, calc(var(--half) + 3vw) 0, calc(var(--half) - 3vw) 100%, 0 100%);
+  clip-path: polygon(
+    0 0,
+    calc(var(--half) + 3vw) 0,
+    calc(var(--half) - 3vw) 100%,
+    0 100%
+  );
 }
 
 .image {
@@ -56,7 +72,8 @@
   align-items: center;
   color: var(--base-body-color);
 
-  img, svg {
+  img,
+  svg {
     height: 30px;
   }
 }

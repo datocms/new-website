@@ -24,7 +24,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'page',
-  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE)))
+  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(POSTS_PER_PAGE))),
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -69,7 +69,7 @@ export const getStaticProps = gqlStaticProps(
       (parseInt(page) + 1) * POSTS_PER_PAGE < meta.count
         ? `/blog/p/${parseInt(page) + 1}`
         : null,
-  })
+  }),
 );
 
 export default function Blog({ posts, prevPage, nextPage, preview }) {

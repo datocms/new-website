@@ -7,7 +7,7 @@
   text-decoration: none;
   color: var(--base-body-color);
   transition: background 0.2s ease-in-out;
-  background: linear-gradient(-30deg, #FAEDFF 30%, #e9fcff 45%, white 60%);
+  background: linear-gradient(-30deg, #faedff 30%, #e9fcff 45%, white 60%);
   background-position: 0 0;
   background-size: 200vw 100%;
 

@@ -68,7 +68,7 @@
 
 .switchOn {
   background: var(--azure-color);
-  
+
   &:before {
     left: 20px;
   }
@@ -84,7 +84,6 @@
   font-weight: bold;
   border-radius: 4px;
 }
-
 
 .body {
   padding: 40px 30px;

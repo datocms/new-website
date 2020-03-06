@@ -92,7 +92,7 @@ export default function DocPage({ docGroup, cma, preview }) {
                   label: page.titleOverride || page.page.title,
                 };
               }),
-              result.toc
+              result.toc,
             )}
           />
         )

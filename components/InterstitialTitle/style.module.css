@@ -10,7 +10,7 @@
   composes: root;
 
   &:before {
-    content: "";
+    content: '';
     display: block;
     background-color: #eee;
     width: 60vw;
@@ -21,7 +21,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) skew(0deg, -15deg);
-    background: linear-gradient(45deg, #F9ECFE, #FEFAE4);
+    background: linear-gradient(45deg, #f9ecfe, #fefae4);
   }
 }
 
@@ -29,7 +29,7 @@
   composes: root;
 
   &:before {
-    content: "";
+    content: '';
     display: block;
     background-color: #eee;
     width: 25vw;
@@ -40,11 +40,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-20%, -50%) skew(0deg, -15deg);
-    background: linear-gradient(45deg, #FEFAE4, #F9ECFE);
+    background: linear-gradient(45deg, #fefae4, #f9ecfe);
   }
 
   &:after {
-    content: "";
+    content: '';
     display: block;
     background-color: #eee;
     width: 25vw;
@@ -55,11 +55,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-80%, -50%) skew(0deg, -15deg);
-    background: linear-gradient(45deg, #FEFAE4, #F9ECFE);
+    background: linear-gradient(45deg, #fefae4, #f9ecfe);
   }
 }
 
-.kicker, .subtitle {
+.kicker,
+.subtitle {
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 0.05em;

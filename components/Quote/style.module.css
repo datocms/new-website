@@ -26,10 +26,10 @@
   line-height: 1.2;
 
   &:before {
-    content: '\201C'
+    content: '\201C';
   }
 
   &:after {
-    content: '\201D'
+    content: '\201D';
   }
 }

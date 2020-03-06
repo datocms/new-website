@@ -39,7 +39,7 @@ export default function UseModularBlocks() {
       leave: { height: 0, opacity: 0 },
       enter: ({ y, height }) => ({ y, height, opacity: 1 }),
       update: ({ y, height }) => ({ y, height }),
-    }
+    },
   );
 
   return (

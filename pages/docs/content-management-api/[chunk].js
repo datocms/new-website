@@ -27,7 +27,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'chunk',
-  ({ root }) => root.pages.map(p => p.page.slug)
+  ({ root }) => root.pages.map(p => p.page.slug),
 );
 
 export const getStaticProps = async ({ params: { chunk }, ...other }) => {
@@ -62,7 +62,7 @@ export default function DocPage(props) {
                   label: page.titleOverride || page.page.title,
                 };
               }),
-              result.toc
+              result.toc,
             )}
           />
         )

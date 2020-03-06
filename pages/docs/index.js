@@ -38,7 +38,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `
+  `,
 );
 
 const normalize = slug => (slug === 'index' ? '' : `/${slug}`);
@@ -52,7 +52,7 @@ const Sidebar = ({ roots }) => (
           {root.children.map(sub => (
             <Link
               href={docHref(
-                `/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`
+                `/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`,
               )}
               as={`/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`}
               key={sub.slug}

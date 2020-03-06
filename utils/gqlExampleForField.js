@@ -1,13 +1,12 @@
 import humps from 'humps';
 
-export const camelize = (name) => {
+export const camelize = name => {
   if (name.startsWith('_')) {
     return `_${humps.camelize(name)}`;
   }
 
   return humps.camelize(name);
-}
-
+};
 
 const exampleForType = (queryFieldName, field) => {
   let exampleData = '';
@@ -68,4 +67,4 @@ export default function exampleForField(fieldName, queryFieldName, field) {
     title
   }
 }`;
-};
+}

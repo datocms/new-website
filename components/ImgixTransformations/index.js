@@ -263,7 +263,7 @@ export default function InterstitialTitle() {
 
     for (let i = 0; i < steps.length; i++) {
       const colorTransform = steps[i].transforms.find(t =>
-        t.match(/(sepia|duotone|blur|htn)/)
+        t.match(/(sepia|duotone|blur|htn)/),
       );
 
       const isEllipse = !!steps[i].transforms.find(t => t.match(/mask/));
@@ -279,7 +279,7 @@ export default function InterstitialTitle() {
           setEllipse(isEllipse);
           setParams(steps[i].transforms);
           setResult(steps[i].result);
-        }, i * stepTime)
+        }, i * stepTime),
       );
     }
   }, []);

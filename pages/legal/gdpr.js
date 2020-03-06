@@ -30,8 +30,9 @@ export default function Gdpr({ body }) {
           </>
         }
       />
-      <Legal><ReactMarkdown>{body}</ReactMarkdown></Legal>
+      <Legal>
+        <ReactMarkdown>{body}</ReactMarkdown>
+      </Legal>
     </Layout>
   );
 }
-

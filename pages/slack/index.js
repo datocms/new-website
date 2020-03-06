@@ -53,7 +53,7 @@ export default function Support() {
       setError(
         'email',
         e.json.error,
-        errorLabels[e.json.error] || `Slack error: ${e.json.error}`
+        errorLabels[e.json.error] || `Slack error: ${e.json.error}`,
       );
     }
   };

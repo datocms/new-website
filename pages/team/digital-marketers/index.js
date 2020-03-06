@@ -34,7 +34,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `
+  `,
 );
 
 function DigitalMarketers({ integrations, preview }) {

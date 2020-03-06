@@ -29,7 +29,7 @@ export default function Button({
           [style.block]: block,
         },
         fs && fsClassNames[fs],
-        p && pClassNames[p]
+        p && pClassNames[p],
       )}
     >
       {children}

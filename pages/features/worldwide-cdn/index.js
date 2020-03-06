@@ -17,7 +17,8 @@ function WorldwideCdn() {
         over="Worldwide smart CDN"
         title={
           <>
-            Content, images and videos, <Highlight>all&nbsp;on&nbsp;the&nbsp;edge</Highlight>
+            Content, images and videos,{' '}
+            <Highlight>all&nbsp;on&nbsp;the&nbsp;edge</Highlight>
           </>
         }
         subtitle={
@@ -56,7 +57,6 @@ function WorldwideCdn() {
           journey, with no upfront costs.
         </p>
       </Flag>
-
 
       <Quote
         quote={

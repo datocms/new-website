@@ -2,18 +2,20 @@
   font-family: 'tiempos-headline';
   font-display: swap;
   src: url('/fonts/tiempos-headline-web-semibold.eot');
-  src: url('/fonts/tiempos-headline-web-semibold.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/tiempos-headline-web-semibold.woff2') format('woff2'),
-       url('/fonts/tiempos-headline-web-semibold.woff') format('woff');
+  src: url('/fonts/tiempos-headline-web-semibold.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/tiempos-headline-web-semibold.woff2') format('woff2'),
+    url('/fonts/tiempos-headline-web-semibold.woff') format('woff');
 }
 
 @font-face {
   font-family: 'tiempos-text';
   font-display: swap;
   src: url('/fonts/tiempos-text-web-regular.eot');
-  src: url('/fonts/tiempos-text-web-regular.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/tiempos-text-web-regular.woff2') format('woff2'),
-       url('/fonts/tiempos-text-web-regular.woff') format('woff');
+  src: url('/fonts/tiempos-text-web-regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/tiempos-text-web-regular.woff2') format('woff2'),
+    url('/fonts/tiempos-text-web-regular.woff') format('woff');
 }
 
 @font-face {
@@ -21,9 +23,10 @@
   font-display: swap;
   font-style: italic;
   src: url('/fonts/tiempos-text-web-regular-italic.eot');
-  src: url('/fonts/tiempos-text-web-regular-italic.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/tiempos-text-web-regular-italic.woff2') format('woff2'),
-       url('/fonts/tiempos-text-web-regular-italic.woff') format('woff');
+  src: url('/fonts/tiempos-text-web-regular-italic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/tiempos-text-web-regular-italic.woff2') format('woff2'),
+    url('/fonts/tiempos-text-web-regular-italic.woff') format('woff');
 }
 
 @font-face {
@@ -31,9 +34,10 @@
   font-display: swap;
   font-weight: bold;
   src: url('/fonts/tiempos-text-web-semibold.eot');
-  src: url('/fonts/tiempos-text-web-semibold.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/tiempos-text-web-semibold.woff2') format('woff2'),
-       url('/fonts/tiempos-text-web-semibold.woff') format('woff');
+  src: url('/fonts/tiempos-text-web-semibold.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/tiempos-text-web-semibold.woff2') format('woff2'),
+    url('/fonts/tiempos-text-web-semibold.woff') format('woff');
 }
 
 @font-face {
@@ -42,9 +46,10 @@
   font-weight: bold;
   font-style: italic;
   src: url('/fonts/tiempos-text-web-semibold-italic.eot');
-  src: url('/fonts/tiempos-text-web-semibold-italic.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/tiempos-text-web-semibold-italic.woff2') format('woff2'),
-       url('/fonts/tiempos-text-web-semibold-italic.woff') format('woff');
+  src: url('/fonts/tiempos-text-web-semibold-italic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/tiempos-text-web-semibold-italic.woff2') format('woff2'),
+    url('/fonts/tiempos-text-web-semibold-italic.woff') format('woff');
 }
 
 @font-face {
@@ -52,16 +57,16 @@
   font-display: swap;
   font-weight: 300;
   src: url('/fonts/colfax-web-light.woff2') format('woff2'),
-       url('/fonts/colfax-web-light.woff') format('woff'),
-       url('/fonts/colfax-web-light.otf') format('opentype');
+    url('/fonts/colfax-web-light.woff') format('woff'),
+    url('/fonts/colfax-web-light.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'colfax';
   font-display: swap;
   src: url('/fonts/colfax-web-regular.woff2') format('woff2'),
-       url('/fonts/colfax-web-regular.woff') format('woff'),
-       url('/fonts/colfax-web-regular.otf') format('opentype');
+    url('/fonts/colfax-web-regular.woff') format('woff'),
+    url('/fonts/colfax-web-regular.otf') format('opentype');
 }
 
 @font-face {
@@ -69,8 +74,8 @@
   font-display: swap;
   font-weight: 500;
   src: url('/fonts/colfax-web-bold.woff2') format('woff2'),
-       url('/fonts/colfax-web-bold.woff') format('woff'),
-       url('/fonts/colfax-web-bold.otf') format('opentype');
+    url('/fonts/colfax-web-bold.woff') format('woff'),
+    url('/fonts/colfax-web-bold.otf') format('opentype');
 }
 
 @font-face {
@@ -78,6 +83,6 @@
   font-display: swap;
   font-weight: 700;
   src: url('/fonts/colfax-web-700.woff2') format('woff2'),
-       url('/fonts/colfax-web-700.woff') format('woff'),
-       url('/fonts/colfax-web-700.otf') format('opentype');
+    url('/fonts/colfax-web-700.woff') format('woff'),
+    url('/fonts/colfax-web-700.otf') format('opentype');
 }

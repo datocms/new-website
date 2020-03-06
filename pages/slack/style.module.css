@@ -39,7 +39,8 @@
   white-space: nowrap;
 }
 
-.stats, .info {
+.stats,
+.info {
   text-align: center;
   margin-top: 20px;
   font-size: 15px;

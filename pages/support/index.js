@@ -38,7 +38,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `
+  `,
 );
 
 export default function Support({ preview, topics }) {
@@ -63,7 +63,7 @@ export default function Support({ preview, topics }) {
   const leafTopic =
     selectedTopicSlugs.length > 0 &&
     topics.find(
-      t => t.slug === selectedTopicSlugs[selectedTopicSlugs.length - 1]
+      t => t.slug === selectedTopicSlugs[selectedTopicSlugs.length - 1],
     );
 
   const handleChange = (level, event) => {

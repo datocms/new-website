@@ -60,10 +60,10 @@ export const getStaticPaths = gqlStaticPaths(
           .map(sub =>
             sub.pages[0].page.slug === 'index'
               ? [sub.slug]
-              : [sub.slug, sub.pages[0].page.slug]
-          )
+              : [sub.slug, sub.pages[0].page.slug],
+          ),
       )
-      .flat()
+      .flat(),
 );
 
 export const getStaticProps = async function({
@@ -238,7 +238,7 @@ export function Toc({ content, extraEntries: extra }) {
                   </a>
                 );
               },
-            })
+            }),
           );
       })
       .flat();

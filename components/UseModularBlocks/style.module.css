@@ -58,7 +58,7 @@
   left: 0;
   right: 0;
   top: 0;
-  animation: scroll 17.9s cubic-bezier(.46,0,.77,.98) infinite;
+  animation: scroll 17.9s cubic-bezier(0.46, 0, 0.77, 0.98) infinite;
 }
 
 @keyframes scroll {
@@ -144,7 +144,7 @@
   &:after {
     content: '';
     position: absolute;
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.1);
     opacity: 0;
     width: 20px;
     height: 3px;

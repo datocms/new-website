@@ -9,7 +9,8 @@
   grid-gap: 40px;
 }
 
-.left, .center {
+.left,
+.center {
   display: flex;
   align-items: center;
   justify-content: center;

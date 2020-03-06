@@ -28,7 +28,9 @@ export default function Terms({ body }) {
           </>
         }
       />
-      <Legal><ReactMarkdown>{body}</ReactMarkdown></Legal>
+      <Legal>
+        <ReactMarkdown>{body}</ReactMarkdown>
+      </Legal>
     </Layout>
   );
 }

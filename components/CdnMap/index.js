@@ -58,7 +58,7 @@ export default function CdnMap() {
 
   const { data: location } = useSWR(
     'https://api-geolocation.zeit.sh/',
-    fetcher
+    fetcher,
   );
 
   const setAndScroll = code => {
@@ -114,7 +114,7 @@ export default function CdnMap() {
                 style={{
                   ...convLatLongToStyle(
                     dc.coordinates.latitude,
-                    dc.coordinates.longitude
+                    dc.coordinates.longitude,
                   ),
                   zIndex: ping && ping.datacenter == dc.code ? 100 : 1,
                 }}
@@ -161,9 +161,9 @@ export default function CdnMap() {
                                   dc.coordinates.latitude,
                                   dc.coordinates.longitude,
                                   location.lat,
-                                  location.lon
-                                )
-                              )
+                                  location.lon,
+                                ),
+                              ),
                             )}{' '}
                             km
                           </>

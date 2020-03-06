@@ -42,7 +42,7 @@ export default function Flag({
     },
     [],
     elementRef,
-    false
+    false,
   );
 
   return (

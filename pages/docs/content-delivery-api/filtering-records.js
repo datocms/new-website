@@ -109,7 +109,7 @@ export default function DocPage({
             Object.keys(fieldTypesInfo).map(name => ({
               anchor: name,
               label: `${fieldTypes[name]} fields`,
-            }))
+            })),
           )}
         />
       </div>

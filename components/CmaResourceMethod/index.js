@@ -81,7 +81,7 @@ export default class ResourceApiMethod extends React.Component {
             <table>
               <tbody>
                 {Object.entries(
-                  sortObject(link.hrefSchema.properties)
+                  sortObject(link.hrefSchema.properties),
                 ).map(([name, schema]) => this.renderAttribute(name, schema))}
               </tbody>
             </table>

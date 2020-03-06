@@ -16,7 +16,7 @@ const statusLabel = {
 export default function StatusBadge() {
   const { data: components } = useSWR(
     'https://status.datocms.com/.netlify/functions/componentsStatus?days=1',
-    fetcher
+    fetcher,
   );
 
   const firstDownComponent =

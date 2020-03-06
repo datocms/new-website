@@ -51,7 +51,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-  `
+  `,
 );
 
 function Homepage({ successStories, preview }) {

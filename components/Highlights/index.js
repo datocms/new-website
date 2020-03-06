@@ -1,15 +1,14 @@
-import Wrapper from "components/Wrapper";
-import s from "./style.css";
+import Wrapper from 'components/Wrapper';
+import s from './style.css';
 
 export default function Highlights({ title, children }) {
   return (
     <Wrapper>
-    <div className={s.root}>
-      <div className={s.rootTitle}>{title}</div>
-      <div className={s.rootBlocks}>{children}</div>
-    </div>
+      <div className={s.root}>
+        <div className={s.rootTitle}>{title}</div>
+        <div className={s.rootBlocks}>{children}</div>
+      </div>
     </Wrapper>
-
   );
 }
 

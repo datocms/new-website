@@ -15,10 +15,7 @@ export default function ImageFigure({ data, imageClassName }) {
         </video>
       )}
       {data.format !== 'gif' && data.responsiveImage && (
-        <Image
-          className={imageClassName}
-          data={data.responsiveImage}
-        />
+        <Image className={imageClassName} data={data.responsiveImage} />
       )}
       {data.format !== 'gif' && !data.responsiveImage && (
         <img

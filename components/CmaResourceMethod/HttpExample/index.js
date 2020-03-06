@@ -92,7 +92,11 @@ function renderExample(example, resource) {
       responseCode +=
         response && response.body !== undefined
           ? response.body.trim()
-          : JSON.stringify(schemaExampleFor(resource.targetSchema), null, 2).trim();
+          : JSON.stringify(
+              schemaExampleFor(resource.targetSchema),
+              null,
+              2,
+            ).trim();
     }
   }
 

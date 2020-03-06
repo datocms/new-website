@@ -31,8 +31,9 @@ export default function Gdpr({ body }) {
         }
         subtitle="We care about protecting your work, from the ground up"
       />
-      <Legal><ReactMarkdown>{body}</ReactMarkdown></Legal>
+      <Legal>
+        <ReactMarkdown>{body}</ReactMarkdown>
+      </Legal>
     </Layout>
   );
 }
-

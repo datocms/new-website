@@ -69,7 +69,7 @@ export default class ResourceAttributes extends React.Component {
         <table>
           <tbody>
             {Object.entries(
-              sortObject(resource.attributes)
+              sortObject(resource.attributes),
             ).map(([name, schema]) => this.renderAttribute(name, schema))}
           </tbody>
         </table>
