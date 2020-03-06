@@ -28,6 +28,7 @@
     "datocms-search": "^0.1.7",
     "dotenv-load": "^2.0.0",
     "flatted": "^2.0.1",
+    "fontfaceobserver": "^2.1.0",
     "front-matter": "^3.1.0",
     "glob": "^7.1.6",
     "graphql": "^14.6.0",

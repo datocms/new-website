@@ -22,8 +22,8 @@
 
 .subtitle {
   font-size: 25px;
-  padding: 0 10vw;
   margin: 60px auto 0 auto;
+  max-width: 700px;
 }
 
 .children {

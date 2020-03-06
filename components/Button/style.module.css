@@ -9,7 +9,7 @@
   border-radius: 3px;
   border: 0;
   font-size: inherit;
-  transition: all 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
   cursor: pointer;
   text-decoration: none;
 

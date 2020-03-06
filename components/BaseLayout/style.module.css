@@ -17,3 +17,8 @@
     opacity: 0.7;
   }
 }
+
+.overlay {
+  opacity: 0;
+  pointer-events: none;
+}

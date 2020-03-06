@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import useComponentSize from '@rehooks/component-size';
 import { useDebounce } from 'use-debounce';
 
-const BackgroundImage = ({ src, ...other }) => {
+const BackgroundImage = ({ src, scale = 1.0, ...other }) => {
   const imageLoader = useRef(typeof Image === 'function' ? new Image() : null);
   const [dpr, setDpr] = useState(null);
   const [url, setUrl] = useState(null);
@@ -21,8 +21,8 @@ const BackgroundImage = ({ src, ...other }) => {
     let params = new URLSearchParams(parsedSrc.search.slice(1));
 
     if (dpr && size) {
-      params.set('w', width);
-      params.set('h', height);
+      params.set('w', parseInt(width * scale));
+      params.set('h', parseInt(height * scale));
       params.set('dpr', dpr);
       parsedSrc.search = params.toString();
 
@@ -31,7 +31,7 @@ const BackgroundImage = ({ src, ...other }) => {
         setUrl(parsedSrc.toString());
       };
     }
-  }, [dpr, width, height]);
+  }, [src, dpr, width, height]);
 
   return (
     <div

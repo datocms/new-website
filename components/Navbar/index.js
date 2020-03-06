@@ -55,12 +55,10 @@ const Pane = ({ children }) => (
 );
 
 export default function Navbar() {
-  const scrollY = useWindowScroll(60);
-
   return (
     <>
       <div className={s.placeholder} />
-      <div className={classnames(s.root, { [s.rootHover]: scrollY > 10 })}>
+      <div className={classnames(s.root)}>
         <Wrapper>
           <div className={s.innerRoot}>
             <Link href="/">
