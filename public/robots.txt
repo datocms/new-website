@@ -1,0 +1,6 @@
+User-Agent: DatoCmsSearchBot
+Disallow: /pricing
+
+User-agent: *
+Sitemap: https://www.datocms.com/sitemap.xml
+Disallow:
