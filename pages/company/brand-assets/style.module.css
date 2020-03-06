@@ -1,0 +1,38 @@
+.grid {
+  display: flex;
+  margin-right: -30px;
+
+  > div {
+    flex: 1;
+    margin-right: 30px;
+  }
+}
+
+.intro {
+  margin-bottom: 15vh;
+}
+
+.color {
+  height: 200px;
+  position: relative;
+  font-family: var(--font-sans);
+  margin: 5vh 0;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.colorCaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 30px;
+  color: white;
+  line-height: 1.2;
+}
+
+.colorCaptionRight {
+  left: auto;
+  text-align: right;
+  right: 0;
+}

@@ -42,6 +42,10 @@
   p {
     margin-bottom: 40px;
   }
+
+  a {
+    color: inherit;
+  }
 }
 
 .title {
@@ -70,4 +74,20 @@
 
 .badHighlight {
   color: var(--accent-color);
+}
+
+.badRoot {
+  .content a {
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+}
+
+.goodRoot {
+  .content a {
+    &:hover {
+      color: var(--azure-color);
+    }
+  }
 }

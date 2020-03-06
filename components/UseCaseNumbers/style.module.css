@@ -12,7 +12,7 @@
 }
 
 .blockTitle {
-  font-weight: 500;
+  font-weight: bold;
   font-size: 110px;
   letter-spacing: -0.05em;
   color: var(--useCaseAccent);

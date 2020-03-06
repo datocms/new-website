@@ -37,7 +37,7 @@
 
 .introKicker {
   margin-bottom: 20px;
-  font-weight: 500;
+  font-weight: bold;
   color: var(--extra-light-body-color);
   text-transform: uppercase;
 }
@@ -48,7 +48,7 @@
 
 .support {
   color: var(--light-body-color);
-  font-weight: 500;
+  font-weight: bold;
   margin-top: 50px;
 
   a {
@@ -81,7 +81,7 @@
 }
 
 .inquiryTitle {
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .inquiryDesc {

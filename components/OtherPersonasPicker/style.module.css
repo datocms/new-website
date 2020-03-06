@@ -48,7 +48,7 @@
 }
 
 .personasTitle {
-  font-weight: 500;
+  font-weight: bold;
   font-size: 25px;
   margin-bottom: 10px;
 }
@@ -59,7 +59,7 @@
 }
 
 .personasLink {
-  font-weight: 500;
+  font-weight: bold;
   font-size: 0.9em;
   text-transform: uppercase;
   color: var(--light-body-color);

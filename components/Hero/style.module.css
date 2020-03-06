@@ -9,7 +9,7 @@
 .over {
   font-size: 20px;
   margin-bottom: 30px;
-  font-weight: 500;
+  font-weight: bold;
   color: var(--extra-light-body-color);
   text-transform: uppercase;
 }

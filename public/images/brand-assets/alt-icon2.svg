@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="165px" height="165px" viewBox="0 0 165 165" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Group 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="87.9705015%" y1="9.95938288%" x2="10.2861077%" y2="89.8144957%" id="linearGradient-1">
+            <stop stop-color="#378BCF" offset="0%"></stop>
+            <stop stop-color="#992CA4" offset="51.459565%"></stop>
+            <stop stop-color="#F87B5D" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Branding-assets" transform="translate(-1093.000000, -1436.000000)">
+            <g id="Group-7" transform="translate(1093.000000, 1436.000000)">
+                <rect id="Rectangle-Copy-7" fill="url(#linearGradient-1)" x="0" y="0" width="165" height="165"></rect>
+                <g id="d_icon-copy" transform="translate(51.000000, 49.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <path d="M33.5,0 L0,0 L0,68 L33.5,68 C50.254955,68 67,52.7768972 67,34.0046399 C67,15.2323826 50.2577864,0 33.5,0 Z M33.5,49.4497433 C27.3032352,49.4480107 21.7176921,45.6820756 19.3479463,39.9080186 C16.9782004,34.1339615 18.2909429,27.4889089 22.6740332,23.0714925 C27.0571235,18.6540762 33.6473682,17.3342497 39.3716928,19.7274568 C45.0960173,22.1206639 48.8270895,27.7555931 48.8250856,34.0046399 C48.8254622,38.1026606 47.2106867,42.0328104 44.3363292,44.9296782 C41.4619718,47.8265461 37.563734,49.4525846 33.5,49.4497433 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -43,6 +43,14 @@
     content: '';
     margin-top: 5px;
   }
+
+  img {
+    margin: 5vh 0;
+    width: 100%;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    overflow: hidden;
+  }
 }
 
 .body :global(.for_boxes) {

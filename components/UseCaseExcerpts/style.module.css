@@ -90,7 +90,7 @@
 .goto {
   margin-top: 30px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: bold;
 
   svg {
     height: 0.7em;

@@ -62,7 +62,7 @@
 .kicker,
 .subtitle {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: bold;
   letter-spacing: 0.05em;
   color: var(--extra-light-body-color);
   text-transform: uppercase;

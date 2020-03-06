@@ -27,7 +27,7 @@
 }
 
 .groupName {
-  font-weight: 500;
+  font-weight: bold;
   font-size: 20px;
   letter-spacing: -0.03em;
   margin-bottom: 20px;
@@ -39,7 +39,7 @@
   line-height: 1;
   letter-spacing: -0.03em;
   font-family: var(--font-sans);
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .body {
@@ -64,7 +64,7 @@
     font-size: 130%;
     line-height: 1.25;
     margin: 3em 0 1em;
-    font-weight: 500;
+    font-weight: bold;
     font-family: var(--font-sans);
   }
 
@@ -256,7 +256,7 @@
   color: var(--light-body-color);
   text-transform: uppercase;
   font-size: 0.8em;
-  font-weight: 500;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 

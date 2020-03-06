@@ -9,7 +9,7 @@
   border-radius: 50px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
-  font-weight: 500px;
+  font-weight: bold;
   box-shadow: var(--box-shadow);
   z-index: 10000;
 

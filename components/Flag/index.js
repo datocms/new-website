@@ -1,10 +1,11 @@
 import Wrapper from 'components/Wrapper';
-import styles from './style.module.css';
+import s from './style.module.css';
 import { animated, useSpring } from 'react-spring';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { useRef, useState } from 'react';
 import LazyImage from 'components/LazyImage';
 import clamp from 'clamp';
+import cn from 'classnames';
 
 export default function Flag({
   style = 'neutral',
@@ -47,10 +48,10 @@ export default function Flag({
 
   return (
     <Wrapper>
-      <div ref={elementRef} className={styles.root}>
-        <div className={styles.imageContainer}>
+      <div ref={elementRef} className={cn(s.root, s[`${style}Root`])}>
+        <div className={s.imageContainer}>
           <animated.div
-            className={styles[`${style}Dot`]}
+            className={s[`${style}Dot`]}
             style={{
               ...dotAnimStyle,
               left: `${x}%`,
@@ -59,12 +60,12 @@ export default function Flag({
               width: `${size}vh`,
             }}
           />
-          <animated.div className={styles.image}>{imageEl}</animated.div>
+          <animated.div className={s.image}>{imageEl}</animated.div>
         </div>
-        <div className={styles.content}>
-          <div className={styles.title}>{title}</div>
-          {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
-          <div className={styles.body}>{children}</div>
+        <div className={s.content}>
+          <div className={s.title}>{title}</div>
+          {subtitle && <div className={s.subtitle}>{subtitle}</div>}
+          <div className={s.body}>{children}</div>
         </div>
       </div>
     </Wrapper>
@@ -72,5 +73,5 @@ export default function Flag({
 }
 
 export function Highlight({ style = 'good', children }) {
-  return <strong className={styles[`${style}Highlight`]}>{children}</strong>;
+  return <strong className={s[`${style}Highlight`]}>{children}</strong>;
 }

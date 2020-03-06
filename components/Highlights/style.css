@@ -13,7 +13,7 @@
   font-family: var(--font-sans);
   font-size: 20px;
   margin-bottom: 70px;
-  font-weight: 500;
+  font-weight: bold;
   letter-spacing: 0.05em;
   color: var(--extra-light-body-color);
   text-transform: uppercase;

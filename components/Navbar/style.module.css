@@ -124,7 +124,7 @@
 .sectionTitle {
   color: #805b7d;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 13px;
   margin-bottom: 20px;
   margin-top: 40px;
@@ -180,7 +180,7 @@
 }
 
 .featureTitle {
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .extraLink {
@@ -232,7 +232,7 @@
 }
 
 .learnResTitle {
-  font-weight: 500;
+  font-weight: bold;
 
   svg {
     fill: var(--light-body-color);

@@ -25,7 +25,7 @@ a.block:hover {
 }
 
 .blockTitle {
-  font-weight: 500;
+  font-weight: bold;
   font-size: 90px;
   letter-spacing: -0.05em;
 }

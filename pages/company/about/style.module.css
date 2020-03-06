@@ -1,0 +1,27 @@
+.members {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  grid-auto-rows: auto;
+  grid-gap: 30px;
+}
+
+.member {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.memberImage {
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+}
+
+.memberName {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.memberRole {
+  color: var(--light-body-color);
+  font-size: 0.9em;
+}

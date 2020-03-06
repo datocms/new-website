@@ -18,7 +18,7 @@
 
 .title {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: bold;
   letter-spacing: 0.05em;
   color: var(--useCaseAccent);
   text-transform: uppercase;

@@ -23,7 +23,7 @@
   color: var(--light-body-color);
   text-transform: uppercase;
   font-size: 0.8em;
-  font-weight: 500;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
@@ -32,7 +32,7 @@
   margin: 0;
   margin-bottom: 20px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: bold;
   letter-spacing: -0.03em;
 }
 
@@ -49,7 +49,7 @@
   color: var(--light-body-color);
   text-transform: uppercase;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
   margin: 0;
   margin-top: 50px;
 }
@@ -84,7 +84,7 @@
 }
 
 .useCaseCardTitle {
-  font-weight: 500;
+  font-weight: bold;
   font-size: 20px;
   color: var(--accent-color);
 }
