@@ -31,7 +31,7 @@ async function start() {
     return !s2Sites.includes(realUrl);
   });
 
-  console.log(notFound);
+  console.log(JSON.stringify(notFound, null, 2));
 }
 
 start();

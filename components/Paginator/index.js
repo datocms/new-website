@@ -34,6 +34,10 @@ export default function Pagination({
     next_page: nextPage,
   } = paginator.build(totalEntries, currentPage + 1);
 
+  if (pageCount === 1) {
+    return null;
+  }
+
   return (
     <div className={s.root}>
       <GoTo

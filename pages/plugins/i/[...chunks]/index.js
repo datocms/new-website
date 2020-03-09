@@ -189,7 +189,7 @@ export default function Plugin({ plugin, preview }) {
                   )}
                 </div>
                 <div className={s.infoBlock}>
-                  <div className={s.infoBlockTitle}>Tags</div>
+                  {/* <div className={s.infoBlockTitle}>Tags</div>
                   {isFallback ? (
                     <Copy />
                   ) : (
@@ -198,7 +198,7 @@ export default function Plugin({ plugin, preview }) {
                         #{item.tag}
                       </div>
                     ))
-                  )}
+                  )} */}
                 </div>
                 <dl>
                   <dt>Homepage</dt>

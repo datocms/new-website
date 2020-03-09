@@ -1,5 +1,33 @@
 module.exports = [
   {
+    source: '/search',
+    destination: '/docs',
+  },
+  {
+    source: '/about',
+    destination: '/company/about',
+  },
+  {
+    source: '/brand-assets',
+    destination: '/company/brand-assets',
+  },
+  {
+    source: '/features',
+    destination: '/team/developers',
+  },
+  {
+    source: '/plugins/i/@stackbitdatocms-plugin-typed-list/',
+    destination: '/plugins/i/@stackbit/datocms-plugin-typed-list',
+  },
+  {
+    source: '/plugins/i/@ecologicdatocms-plugin-multiselect/',
+    destination: '/plugins/i/@ecologic/datocms-plugin-multiselect',
+  },
+  {
+    source: '/plugins/i/@ecologicdatocms-plugin-ordered-tag-editor/',
+    destination: '/plugins/i/@ecologicdatocms/plugin-ordered-tag-editor',
+  },
+  {
     source: '/docs/guides/offline-backups',
     destination: '/docs/import-and-export/export-data',
   },
