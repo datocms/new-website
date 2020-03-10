@@ -152,7 +152,7 @@ export default function Navbar() {
                 </Pane>
               </div>
 
-              <Link href="/">
+              <Link href="/integrations">
                 <a className={s.entry}>
                   <span>Integrations</span>
                 </a>

@@ -188,18 +188,6 @@ export default function Plugin({ plugin, preview }) {
                     </>
                   )}
                 </div>
-                <div className={s.infoBlock}>
-                  {/* <div className={s.infoBlockTitle}>Tags</div>
-                  {isFallback ? (
-                    <Copy />
-                  ) : (
-                    plugin.tags.map(item => (
-                      <div className={s.tag} key={item.tag}>
-                        #{item.tag}
-                      </div>
-                    ))
-                  )} */}
-                </div>
                 <dl>
                   <dt>Homepage</dt>
                   <dd>
