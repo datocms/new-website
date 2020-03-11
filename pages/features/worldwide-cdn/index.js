@@ -8,7 +8,6 @@ import Highlight from 'components/Highlight';
 import CdnMap from 'components/CdnMap';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
 import Quote from 'components/Quote';
 import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';

@@ -140,7 +140,7 @@ export default function ProgressiveImagesDemo() {
 
   useInterval(() => {
     next();
-  }, 7000);
+  }, 5500);
 
   useEffect(() => {
     images.forEach(image => {

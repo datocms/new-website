@@ -26,6 +26,16 @@
   letter-spacing: -0.02em;
 }
 
+.kicker {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--light-body-color);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 40px auto 20px;
+  max-width: 700px;
+}
+
 .subtitle {
   margin: 20px auto 0;
   max-width: 800px;

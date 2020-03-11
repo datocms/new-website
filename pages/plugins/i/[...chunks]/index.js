@@ -162,7 +162,7 @@ export default function Plugin({ plugin, preview }) {
               </div>
             </div>
             <div className={s.sidebar}>
-              <Link href="/docs/building-plugins" as="/docs/[...chunks]">
+              <Link as="/docs/building-plugins" href="/docs/[...chunks]">
                 <a className={s.announce}>
                   <MegaphoneIcon /> <strong>This is a Community Plugin!</strong>{' '}
                   Learn how create your own plugin, or copy and remix existing
