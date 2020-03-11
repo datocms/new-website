@@ -1,6 +1,6 @@
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
-import UIChrome from 'components/UIChrome';
+import UiChrome from 'components/UiChrome';
 import { Image } from 'react-datocms';
 import s from './style.module.css';
 
@@ -10,14 +10,14 @@ export default function TryDemoCta({ image, title, description, href }) {
       <div className={s.root}>
         <div className={s.left}>
           <div className={s.chrometop}>
-            <UIChrome title="Next.js + DatoCMS demo">
+            <UiChrome title="Next.js + DatoCMS demo">
               <Image data={image} className={s.screenshot} />
-            </UIChrome>
+            </UiChrome>
           </div>
           <div className={s.chromebottom}>
-            <UIChrome title="pages/homepage.js - Visual Studio Code">
+            <UiChrome title="pages/homepage.js - Visual Studio Code">
               <div className={s.code} />
-            </UIChrome>
+            </UiChrome>
           </div>
         </div>
         <div className={s.box}>

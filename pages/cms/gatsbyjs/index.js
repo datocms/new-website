@@ -3,7 +3,7 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Wrapper from 'components/Wrapper';
 import Head from 'next/head';
-import Logo from 'public/images/logos/next.svg';
+import Logo from 'public/images/logos/gatsbyjs.svg';
 import Button from 'components/Button';
 import Checks from 'components/Checks';
 import CdnMap from 'components/CdnMap';
@@ -77,21 +77,21 @@ export default function IntegrationsPage({ upload }) {
   return (
     <Layout noCta>
       <Head>
-        <title>CMS for Next.js - Admin interface for Next.js sites</title>
+        <title>CMS for GatsbyJS - Admin interface for GatsbyJS sites</title>
       </Head>
       <Hero
-        over={<Logo />}
+        over={<Logo className={s.logo} />}
         title={
           <>
             The <Highlight>easiest way</Highlight> to manage content with
-            Next.js
+            GatsbyJS
           </>
         }
         subtitle={
           <>
-            Next.js makes it trivial to build scalable and fast React apps with
-            server-side SEO. When it comes to authoring content, pair it with a
-            CMS that’s been built for this use-case.
+            GatsbyJS makes it trivial to build scalable and fast React static
+            websites. When it comes to authoring content, pair it with a CMS
+            that’s been built for this use-case.
           </>
         }
       >
@@ -101,7 +101,7 @@ export default function IntegrationsPage({ upload }) {
             as="a"
             href="https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo"
           >
-            Try our Next.js demo
+            Try our Gatsby demo
           </Button>
         </Checks>
       </Hero>
@@ -115,7 +115,7 @@ export default function IntegrationsPage({ upload }) {
 
       <div style={{ margin: '5vh 0 5vh' }}>
         <InterstitialTitle style="two">
-          If Next.js is serverless,{' '}
+          If Gatsby is serverless,{' '}
           <Highlight>so&nbsp;your&nbsp;CMS should be</Highlight>
         </InterstitialTitle>
       </div>
@@ -246,13 +246,13 @@ export default function IntegrationsPage({ upload }) {
         <TitleStripWithContent
           title={
             <>
-              Next.js preview mode + DatoCMS Preview API ={' '}
+              Gatsby preview mode + DatoCMS Preview API ={' '}
               <Highlight>Content editors happiness</Highlight>
             </>
           }
           subtitle={
             <>
-              Since Next.js 9.3 you can take advantage of Preview Mode: that
+              Since Gatsby 9.3 you can take advantage of Preview Mode: that
               means now you can go static (and hyper-fast) with visitors and
               dynamic with content editors,{' '}
               <strong>giving them instant previews for their edits</strong>.
@@ -276,7 +276,7 @@ export default function IntegrationsPage({ upload }) {
         image={UseModularBlocks}
       >
         <p>
-          Thanks to React, Next.js makes using components easy right from the
+          Thanks to React, Gatsby makes using components easy right from the
           get-go, and you should expect the same from your CMS. A
           component-based approach allows developers to clearly divide work
           amongst themselves and progress without having to rely on each other
@@ -298,7 +298,7 @@ export default function IntegrationsPage({ upload }) {
 
       <TryDemoCta
         image={upload.responsiveImage}
-        title="Start your new Next.js project in minutes"
+        title="Start your new Gatsby project in minutes"
         description="Best-practice project. Fully configured and deployed on ZEIT. Source included."
         href="https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo"
       />
