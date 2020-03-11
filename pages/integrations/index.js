@@ -12,6 +12,7 @@ import truncate from 'truncate';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import Link from 'next/link';
 import cn from 'classnames';
+import docHref from 'utils/docHref';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -48,6 +49,8 @@ export const getStaticProps = gqlStaticProps(
       integrationType {
         slug
       }
+      documentationUrl
+      landingUrl
       logo {
         url
         width
@@ -122,7 +125,8 @@ export default function IntegrationsPage({ page }) {
             <Box
               key={item.slug}
               title={item.name}
-              href="#"
+              as={item.landingUrl || item.documentationUrl}
+              href={item.landingUrl || docHref(item.documentationUrl)}
               description={`Use DatoCMS into your ${item.name} website`}
               image={<LogoImage logo={item.logo} />}
             />
@@ -165,7 +169,8 @@ export default function IntegrationsPage({ page }) {
           {page.hostingBuilding.map(item => (
             <Box
               key={item.slug}
-              href="#"
+              as={item.landingUrl || item.documentationUrl}
+              href={item.landingUrl || docHref(item.documentationUrl)}
               title={item.name}
               description={`Trigger a build of your website on ${item.name}`}
               image={<LogoImage logo={item.logo} />}
@@ -186,7 +191,8 @@ export default function IntegrationsPage({ page }) {
             {page.assetsStorage.map(item => (
               <Box
                 key={item.slug}
-                href="#"
+                as={item.landingUrl || item.documentationUrl}
+                href={item.landingUrl || docHref(item.documentationUrl)}
                 title={item.name}
                 description={`Store your DatoCMS assets in ${item.name}`}
                 image={<LogoImage logo={item.logo} />}
@@ -205,7 +211,8 @@ export default function IntegrationsPage({ page }) {
             {page.singleSignOn.map(item => (
               <Box
                 key={item.slug}
-                href="#"
+                as={item.landingUrl || item.documentationUrl}
+                href={item.landingUrl || docHref(item.documentationUrl)}
                 title={item.name}
                 description={`Provision/deprovision users using your ${item.name} account`}
                 image={<LogoImage logo={item.logo} />}
