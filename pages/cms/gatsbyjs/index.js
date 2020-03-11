@@ -225,6 +225,7 @@ export default function IntegrationsPage({ upload }) {
       <TryDemoCta
         image={upload.responsiveImage}
         title="Start your new Gatsby project in minutes"
+        windowTitle="Gatsby + DatoCMS demo"
         description="Learn from our best-practice project. Fully configured and deployed on Netlify/ZEIT. Source included."
         href="https://dashboard.datocms.com/projects/new-from-template/static-website/gatsby-portfolio"
         docsAs="/docs/gatsby"

@@ -10,6 +10,7 @@ export default function TryDemoCta({
   image,
   title,
   description,
+  windowTitle,
   href,
   docsAs,
 }) {
@@ -18,7 +19,7 @@ export default function TryDemoCta({
       <div className={s.root}>
         <div className={s.left}>
           <div className={s.chrometop}>
-            <UiChrome title="Next.js + DatoCMS demo">
+            <UiChrome title={windowTitle}>
               <Image data={image} className={s.screenshot} />
             </UiChrome>
           </div>

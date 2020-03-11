@@ -302,6 +302,7 @@ export default function IntegrationsPage({ upload }) {
       <TryDemoCta
         image={upload.responsiveImage}
         title="Start your new Next.js project in minutes"
+        windowTitle="Next.js + DatoCMS demo"
         description="Learn from our best-practice project. Fully configured and deployed on ZEIT. Source included."
         href="https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo"
       />
