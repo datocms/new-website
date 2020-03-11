@@ -24,6 +24,10 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
+import TryDemoCta from 'components/TryDemoCta';
+import { gqlStaticProps, imageFields } from 'lib/datocms';
+import gql from 'graphql-tag';
+
 const code = `// pages/movie.js
 
 import { request } from 'graphql-request'
@@ -56,7 +60,20 @@ export default MoviePage({ movie }) {
   ...
 }`;
 
-export default function IntegrationsPage({ page }) {
+export const getStaticProps = gqlStaticProps(
+  gql`
+    {
+      upload(filter: { id: { eq: "1428425" } }) {
+        responsiveImage(imgixParams: { w: 600, h: 400, fit: crop, crop: top }) {
+          ...imageFields
+        }
+      }
+    }
+    ${imageFields}
+  `,
+);
+
+export default function IntegrationsPage({ upload }) {
   return (
     <Layout noCta>
       <Head>
@@ -242,18 +259,6 @@ export default function IntegrationsPage({ page }) {
         </TitleStripWithContent>
       </div>
 
-      <Quote
-        quote={
-          <>
-            I do heart Dato, my first choice CMS,{' '}
-            <Highlight>
-              always advocate my clients to treat CMS flexibility seriously.
-            </Highlight>
-          </>
-        }
-        author="Callum Flack, Owner at Callum Flack Design"
-      />
-
       <Flag
         style="good"
         title={
@@ -272,6 +277,25 @@ export default function IntegrationsPage({ page }) {
           every step of the way.
         </p>
       </Flag>
+
+      <Quote
+        quote={
+          <>
+            I do heart Dato, my first choice CMS,{' '}
+            <Highlight>
+              always advocate my clients to treat CMS flexibility seriously.
+            </Highlight>
+          </>
+        }
+        author="Callum Flack, Owner at Callum Flack Design"
+      />
+
+      <TryDemoCta
+        image={upload.responsiveImage}
+        title="Start your new Next.js project in minutes"
+        description="Best-practice project. Fully configured and deployed on ZEIT. Source included."
+        href="https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo"
+      />
     </Layout>
   );
 }
