@@ -59,3 +59,13 @@
 .description {
   margin-bottom: 20px;
 }
+
+.actions {
+  span {
+    padding-left: 15px;
+  }
+
+  .docs {
+    color: inherit;
+  }
+}

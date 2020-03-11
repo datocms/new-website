@@ -2,9 +2,17 @@ import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import UiChrome from 'components/UiChrome';
 import { Image } from 'react-datocms';
+import docHref from 'utils/docHref';
 import s from './style.module.css';
+import Link from 'next/link';
 
-export default function TryDemoCta({ image, title, description, href }) {
+export default function TryDemoCta({
+  image,
+  title,
+  description,
+  href,
+  docsAs,
+}) {
   return (
     <Wrapper>
       <div className={s.root}>
@@ -21,12 +29,20 @@ export default function TryDemoCta({ image, title, description, href }) {
           </div>
         </div>
         <div className={s.box}>
-          <div className={s.kicker}>Give DatoCMS a spin</div>
+          <div className={s.kicker}>Try our Project starter</div>
           <div className={s.title}>{title}</div>
           <div className={s.description}>{description}</div>
-          <Button as="a" href={href}>
-            Start project
-          </Button>
+          <div className={s.actions}>
+            <Button as="a" href={href}>
+              Start new project
+            </Button>
+            <span> or </span>
+            {docsAs && (
+              <Link as={docsAs} href={docHref(docsAs)}>
+                <a className={s.docs}>Read our docs</a>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </Wrapper>

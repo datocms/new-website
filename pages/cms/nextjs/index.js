@@ -252,9 +252,12 @@ export default function IntegrationsPage({ upload }) {
           }
           subtitle={
             <>
-              Since Next.js 9.3 you can take advantage of Preview Mode: that
-              means now you can go static (and hyper-fast) with visitors and
-              dynamic with content editors,{' '}
+              Since Next.js 9.3 you can take advantage of{' '}
+              <a href="https://nextjs.org/docs/advanced-features/preview-mode">
+                Preview Mode
+              </a>
+              : that means now you can go static (and hyper-fast) with visitors
+              and dynamic with content editors,{' '}
               <strong>giving them instant previews for their edits</strong>.
               That’s the best of both worlds, and pairs wonderfully with our
               GraphQL Preview endpoint.
@@ -299,7 +302,7 @@ export default function IntegrationsPage({ upload }) {
       <TryDemoCta
         image={upload.responsiveImage}
         title="Start your new Next.js project in minutes"
-        description="Best-practice project. Fully configured and deployed on ZEIT. Source included."
+        description="Learn from our best-practice project. Fully configured and deployed on ZEIT. Source included."
         href="https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo"
       />
     </Layout>

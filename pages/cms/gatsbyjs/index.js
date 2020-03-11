@@ -8,11 +8,8 @@ import Button from 'components/Button';
 import Checks from 'components/Checks';
 import CdnMap from 'components/CdnMap';
 import GitHubButton from 'components/GitHubButton';
-import InterstitialTitle from 'components/InterstitialTitle';
 import s from './style.module.css';
 import TitleStripWithContent from 'components/TitleStripWithContent';
-import GraphQlDemo from 'components/GraphQlDemo';
-import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
 import Arrow3 from 'public/images/illustrations/arrow-sketch-1.svg';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import UseModularBlocks from 'components/UseModularBlocks';
@@ -25,45 +22,47 @@ import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
 import TryDemoCta from 'components/TryDemoCta';
+import ImgixTransformations from 'components/ImgixTransformations';
 import { gqlStaticProps, imageFields } from 'lib/datocms';
 import gql from 'graphql-tag';
+import VideoPlayer from 'components/VideoPlayer';
 
-const code = `// pages/movie.js
+const code = `import React from 'react';
+import { graphql, Link } from 'gatsby';
+import { HelmetDatoCms } from 'gatsby-source-datocms';
 
-import { request } from 'graphql-request'
-
-const query = \`{
-  movie(filter: { title: { eq: "Inception" } }) {
-    releaseDate
-    actors {
-      name
+export const query = graphql\`
+  query MoviePageQuery($title: String!) {
+    movie: datoCmsMovie(title: { eq: $title }) {
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
+      releaseDate
+      actors {
+        name
+      }
+      excerpt: excerptNode {
+        md: childMarkdownRemark {
+          html
+        }
+      }
     }
   }
-}\`
+\`;
 
-export async function getStaticProps({ preview }) {
-  // If context.preview is true, append "/preview" to the API endpoint
-  // to request draft data instead of published data.
-
-  const endpoint = preview ?
-    'https://graphql.datocms.com/preview' :
-    'https://graphql.datocms.com/'
-
-  const { movie } = await request(endpoint, query);
-
-  return {
-    props: { movie };
-  }
-}
-
-export default MoviePage({ movie }) {
-  ...
+export default function MoviePage({ data: { movie } }) {
+  return (
+    <Layout>
+      <HelmetDatoCms seo={movie.seoMetaTags} />
+      {/* .. */}
+    <Layout>
+  );
 }`;
 
 export const getStaticProps = gqlStaticProps(
   gql`
     {
-      upload(filter: { id: { eq: "1428425" } }) {
+      upload(filter: { id: { eq: "1428898" } }) {
         responsiveImage(imgixParams: { w: 600, h: 400, fit: crop, crop: top }) {
           ...imageFields
         }
@@ -89,17 +88,16 @@ export default function IntegrationsPage({ upload }) {
         }
         subtitle={
           <>
-            GatsbyJS makes it trivial to build scalable and fast React static
-            websites. When it comes to authoring content, pair it with a CMS
-            that’s been built for this use-case.
+            You've got your high performance website, now you need blazing fast
+            content. Well, we've got you covered.
           </>
         }
       >
-        <Checks checks={['Deploy on ZEIT', '30s setup']}>
+        <Checks checks={['Deploy on Netlify/ZEIT', '30s setup']}>
           <Button
             fs="big"
             as="a"
-            href="https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo"
+            href="https://dashboard.datocms.com/projects/new-from-template/static-website/gatsby-portfolio"
           >
             Try our Gatsby demo
           </Button>
@@ -113,155 +111,83 @@ export default function IntegrationsPage({ upload }) {
         />
       </div>
 
-      <div style={{ margin: '5vh 0 5vh' }}>
-        <InterstitialTitle style="two">
-          If Gatsby is serverless,{' '}
-          <Highlight>so&nbsp;your&nbsp;CMS should be</Highlight>
-        </InterstitialTitle>
-      </div>
-      <Wrapper>
-        <div className={s.copy}>
-          <p>
-            If your content is always fetched from a single geographical
-            location, there’s no point in building a website with a serverless
-            architecture.
-          </p>
-          <p>
-            <strong>
-              DatoCMS offers your content from a CDN with edges all around the
-              globe, minimizing latency.
-            </strong>
-          </p>
-        </div>
-      </Wrapper>
-      <div style={{ marginBottom: '10vh' }}>
-        <CdnMap />
-      </div>
-      <TitleStripWithContent
-        kicker={<>GraphQL Content API</>}
-        title={<>Ask for what you need, get exactly that</>}
-        subtitle={
-          <>
-            Our Content Delivery API is built with GraphQL. That means powerful
-            developer tools, multiple resources in a single request and complete
-            control over the data your website downloads.
-          </>
-        }
-      >
-        <GraphQlDemo height={11}>
-          {async (typer, setResult) => {
-            typer.insert('{\n  blogPost {}\n}');
-            typer.moveTo(-3);
-
-            await typer.wait(1000);
-
-            typer.insert('\n');
-            typer.insert('\n  ', { moveCursor: false });
-            typer.indent(2);
-            await typer.type('title');
-            setResult({ blogPost: { title: 'Awesome post!' } });
-
-            await typer.wait(800);
-            typer.insert('\n');
-            typer.indent(2);
-
-            await typer.type('coverImage {');
-            typer.insert('}', { moveCursor: false });
-            await typer.wait(300);
-            typer.insert('\n');
-            typer.insert('\n    ', { moveCursor: false });
-            typer.indent(3);
-            await typer.wait(150);
-            await typer.type('url');
-            setResult({
-              blogPost: {
-                title: 'Awesome post!',
-                coverImage: { url: 'https://datocms-assets.com/cover.png' },
-              },
-            });
-            await typer.wait(1000);
-
-            await typer.moveTo(6, { animate: true });
-
-            await typer.type('\n');
-            typer.indent(2);
-
-            await typer.type('author {');
-            typer.insert('}', { moveCursor: false });
-            await typer.wait(300);
-            typer.insert('\n');
-            typer.indent(3);
-            typer.insert('\n    ', { moveCursor: false });
-            await typer.wait(150);
-            await typer.type('name');
-            setResult({
-              blogPost: {
-                title: 'Awesome post!',
-                coverImage: { url: 'https://datocms-assets.com/cover.png' },
-                author: { name: 'Mark Smith' },
-              },
-            });
-            await typer.wait(2000);
-
-            await typer.typeBackspace(12);
-            await typer.deleteForward(6);
-            await typer.typeBackspace(55);
-            await typer.deleteForward(3);
-
-            typer.reset();
-          }}
-        </GraphQlDemo>
-      </TitleStripWithContent>
-      <div style={{ marginTop: '15vh' }}>
+      <div style={{ margin: '15vh 0' }}>
         <TitleStripWithContent
-          title={<>State of the art for responsive and progressive images</>}
+          title={
+            <>
+              The <Highlight>best&nbsp;integration</Highlight> with GatsbyJS you
+              can get
+            </>
+          }
           subtitle={
             <>
               <p>
-                Serving optimized images is incredibly hard, but using our
-                GraphQL Content API and our React component, you can implement
-                lazy loaded, responsive images in one line of code. Avoid any
-                layout jumping, offer instant previews of images while they
-                load. It’s like magic.
+                We work closely with our friends of the Gatsby team to always
+                provide you best-in-class integration. Enjoy an awesome
+                developer experience: live reloading of content as it gets
+                saved, drop-in SEO, state-of-the-art integration with Gatsby's
+                GraphQL API.
               </p>
               <p>
                 <div className={s.readMore}>
-                  Read more about our React components!
+                  Read more about our Gatsby source plugin!
                 </div>
                 <div className={s.button}>
                   <Arrow3 />
-                  <GitHubButton href="https://github.com/datocms/react-datocms">
-                    react-datocms
+                  <GitHubButton href="https://github.com/datocms/gatsby-source-datocms">
+                    gatsby-source-datocms
                   </GitHubButton>
                 </div>
               </p>
             </>
           }
         >
-          <ProgressiveImagesDemo />
+          <CodeExcerpt code={code} language="javascript" />
         </TitleStripWithContent>
       </div>
+
+      <TitleStripWithContent
+        title={<>Endless image transformations at your disposal</>}
+        subtitle={
+          <>
+            DatoCMS, togheter with <code className={s.code}>gatsby-image</code>,
+            offers best-in-class image processing and image CDN. Optimize,
+            resize, crop, rotate and watermark images on-the-fly simply adding
+            custom parameters to the URL of your image. Serve lazy loaded,
+            responsive images in one line of code.
+          </>
+        }
+      >
+        <ImgixTransformations />
+      </TitleStripWithContent>
 
       <div style={{ marginTop: '15vh' }}>
         <TitleStripWithContent
           title={
             <>
-              Gatsby preview mode + DatoCMS Preview API ={' '}
-              <Highlight>Content editors happiness</Highlight>
+              Real-time previews with&nbsp;
+              <Highlight>Gatsby&nbsp;Cloud</Highlight>
             </>
           }
           subtitle={
             <>
-              Since Gatsby 9.3 you can take advantage of Preview Mode: that
-              means now you can go static (and hyper-fast) with visitors and
-              dynamic with content editors,{' '}
-              <strong>giving them instant previews for their edits</strong>.
-              That’s the best of both worlds, and pairs wonderfully with our
-              GraphQL Preview endpoint.
+              DatoCMS is fully compatible with{' '}
+              <a href="https://www.gatsbyjs.com/cloud/">Gatsby Cloud</a>. Share
+              temporary URLs for viewing changes immediately and in context, so
+              you can make sure that new header plays nicely with the rest of
+              the page before hitting “publish.”
             </>
           }
         >
-          <CodeExcerpt code={code} language="javascript" />
+          <div className={s.video}>
+            <VideoPlayer
+              controls
+              autoPlay
+              muted
+              loop
+              src="https://stream.mux.com/nIdnfyJSHXvSNNHChI01ffktHwLZ016AzK.m3u8"
+            />
+          </div>
         </TitleStripWithContent>
       </div>
 
@@ -270,7 +196,7 @@ export default function IntegrationsPage({ upload }) {
         title={
           <>
             <FlagHighlight>A component-centric CMS</FlagHighlight>, just like
-            React
+            Gatsby
           </>
         }
         image={UseModularBlocks}
@@ -299,8 +225,9 @@ export default function IntegrationsPage({ upload }) {
       <TryDemoCta
         image={upload.responsiveImage}
         title="Start your new Gatsby project in minutes"
-        description="Best-practice project. Fully configured and deployed on ZEIT. Source included."
-        href="https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo"
+        description="Learn from our best-practice project. Fully configured and deployed on Netlify/ZEIT. Source included."
+        href="https://dashboard.datocms.com/projects/new-from-template/static-website/gatsby-portfolio"
+        docsAs="/docs/gatsby"
       />
     </Layout>
   );
