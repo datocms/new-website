@@ -1,47 +1,64 @@
-.beforeAfter {
-  margin: 40px;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr 90px 1fr;
-  grid-column-gap: 30px;
+.ba {
+  max-width: 1100px;
+  margin: 0 auto;
   text-align: center;
+
+  @media (width > 900px) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr 90px 1fr;
+    grid-column-gap: 30px;
+  }
 }
 
-.beforeAfterCol {
+.baCol {
   box-shadow: var(--box-shadow);
   border-radius: 5px;
-  padding: 50px;
+  padding: rfs(50px);
   background: white;
+  margin-bottom: rfs(70px);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (width > 900px) {
+    margin-bottom: 0;
+  }
 
   svg {
-    height: 60px;
-    margin-bottom: 40px;
+    height: rfs(60px);
+    margin-bottom: rfs(40px);
     display: inline-block;
   }
 }
 
-.beforeAfterColTitle {
+.baColTitle {
   font-weight: bold;
-  font-size: 30px;
-  margin-bottom: 30px;
+  font-size: rfs(30px);
+  margin-bottom: rfs(30px);
 }
 
-.beforeAfterPoint {
+.baPoint {
   margin: 30px 0;
-  height: 5em;
-  font-size: 19px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @media (width > 900px) {
+    height: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 
-.beforeAfterInterstitial {
-  padding-top: 10em;
-  text-align: center;
+.baInterstitial {
+  display: none;
+  @media (width > 900px) {
+    padding-top: 10em;
+    text-align: center;
+  }
 }
 
 .boxPros {

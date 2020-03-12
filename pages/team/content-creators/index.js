@@ -45,7 +45,7 @@ function ContentCreators({ page, preview }) {
         title={
           <>
             Are you working in the{' '}
-            <Highlight>most&nbsp;efficient&nbsp;way</Highlight>?
+            <Highlight>most efficient&nbsp;way</Highlight>?
           </>
         }
         subtitle={
@@ -60,57 +60,57 @@ function ContentCreators({ page, preview }) {
       <TitleStripWithContent
         title={<>How DatoCMS helps you win the customer experience challenge</>}
       >
-        <div className={s.beforeAfter}>
-          <div className={s.beforeAfterCol}>
+        <div className={s.ba}>
+          <div className={s.baCol}>
             <Bugs />
-            <div className={s.beforeAfterColTitle}>Current state</div>
-            <div className={s.beforeAfterPoint}>
+            <div className={s.baColTitle}>Current state</div>
+            <div className={s.baPoint}>
               <p>
                 Content and images are produced for a{' '}
                 <strong>single use</strong>, often in a single language
               </p>
             </div>
-            <div className={s.beforeAfterPoint}>
+            <div className={s.baPoint}>
               <p>
                 You publish content on traditional websites or mobile apps,{' '}
                 <strong>independently</strong>
               </p>
             </div>
-            <div className={s.beforeAfterPoint}>
+            <div className={s.baPoint}>
               <p>
                 Once published, single projects <strong>become stale</strong>,
                 hurting brand perception
               </p>
             </div>
           </div>
-          <div className={s.beforeAfterInterstitial}>
-            <div className={s.beforeAfterPoint}>
+          <div className={s.baInterstitial}>
+            <div className={s.baPoint}>
               <Arrow3 />
             </div>
-            <div className={s.beforeAfterPoint}>
+            <div className={s.baPoint}>
               <Arrow3 />
             </div>
-            <div className={s.beforeAfterPoint}>
+            <div className={s.baPoint}>
               <Arrow3 />
             </div>
           </div>
-          <div className={s.beforeAfterCol}>
+          <div className={s.baCol}>
             <Crown />
-            <div className={s.beforeAfterColTitle}>With DatoCMS</div>
+            <div className={s.baColTitle}>With DatoCMS</div>
 
-            <div className={s.beforeAfterPoint}>
+            <div className={s.baPoint}>
               <p>
                 Content is a building block: stored in libraries, localized,{' '}
                 <strong>available for use everywhere</strong>
               </p>
             </div>
-            <div className={s.beforeAfterPoint}>
+            <div className={s.baPoint}>
               <p>
                 <strong>Publish anywhere:</strong> websites, mobile, digital
                 display, wearables, conversational interfaces, etc.
               </p>
             </div>
-            <div className={s.beforeAfterPoint}>
+            <div className={s.baPoint}>
               <p>
                 Content is <strong>continuously delivered</strong>, updated and
                 improved, kept in-sync between products
@@ -132,7 +132,7 @@ function ContentCreators({ page, preview }) {
 
       <Space top={4} bottom={3}>
         <InterstitialTitle>
-          Everything you need, <Highlight>without&nbsp;compromises</Highlight>
+          Everything you&nbsp;need, <Highlight>no&nbsp;compromises</Highlight>
         </InterstitialTitle>
       </Space>
 

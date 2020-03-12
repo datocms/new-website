@@ -53,7 +53,7 @@
   svg {
     width: 60px;
     height: 60px;
-    margin-bottom: 1vw;
+    margin-bottom: rfs(30px);
   }
 }
 
@@ -88,7 +88,7 @@
   background: white;
   border-radius: 5px;
   font-weight: bold;
-  font-size: rfs(25px);
+  font-size: rfs(20px);
   padding: rfs(20px);
   display: flex;
   align-items: center;

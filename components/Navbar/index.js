@@ -2,7 +2,6 @@ import Wrapper from 'components/Wrapper';
 import FullLogo from 'public/images/full_logo.svg';
 import Link from 'next/link';
 import s from './style.module.css';
-import useWindowScroll from '@react-hook/window-scroll';
 import classnames from 'classnames';
 import Button from 'components/Button';
 

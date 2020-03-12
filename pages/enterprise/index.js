@@ -40,7 +40,7 @@ function Enterprise({ page }) {
         over="DatoCMS for Enterprise"
         title={
           <>
-            Enterprise grade <Highlight>content&nbsp;infrastructure</Highlight>
+            Enterprise&nbsp;grade <Highlight>content infrastructure</Highlight>
           </>
         }
         subtitle={

@@ -1,5 +1,5 @@
 .root {
-  margin: 100px 0;
+  margin: rfs(100px) 0;
   position: relative;
 
   &:before {
@@ -10,16 +10,22 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 40%;
     bottom: 0;
     z-index: -1;
+
+    @media (width > 900px) {
+      top: 0;
+    }
   }
 }
 
 .rootInner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @media (width > 900px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .intro,
@@ -28,7 +34,11 @@
 }
 
 .intro {
-  margin: 120px 70px 100px 0;
+  margin: 0 0 rfs(80px);
+
+  @media (width > 900px) {
+    margin: 120px 70px 100px 0;
+  }
 }
 
 .introSub {
@@ -39,8 +49,8 @@
 .introTitle {
   font-family: var(--font-headline);
   line-height: 1;
-  font-size: 60px;
-  margin-bottom: 40px;
+  font-size: rfs(60px);
+  margin-bottom: rfs(40px);
 }
 
 .picker {
@@ -50,7 +60,7 @@
 }
 
 .personas {
-  padding: 40px 50px;
+  padding: rfs(40px);
   border-bottom: 1px solid var(--border-color);
   &:last-child {
     border-bottom-width: 0;
@@ -59,7 +69,8 @@
 
 .personasTitle {
   font-weight: bold;
-  font-size: 25px;
+  line-height: 1;
+  font-size: rfs(25px);
   margin-bottom: 10px;
 }
 

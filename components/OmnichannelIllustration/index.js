@@ -19,17 +19,32 @@ const apps = [
 ];
 
 const people = [
-  { name: 'Dennis', role: 'Programmer', image: 'p1.png' },
-  { name: 'Anthony', role: 'Frontend developer', image: 'p2.png' },
-  { name: 'Bradley', role: 'Marketer', image: 'p3.png' },
-  { name: 'Barbara', role: 'Shop manager', image: 'p4.png' },
-  { name: 'Lana', role: 'Copywriter', image: 'p5.png' },
+  { name: 'Dennis', roleMobile: 'Dev', role: 'Programmer', image: 'p1.png' },
+  {
+    name: 'Anthony',
+    roleMobile: 'Design',
+    role: 'Frontend dev',
+    image: 'p2.png',
+  },
+  {
+    name: 'Bradley',
+    roleMobile: 'Marketer',
+    role: 'Marketer',
+    image: 'p3.png',
+  },
+  {
+    name: 'Barbara',
+    roleMobile: 'Manager',
+    role: 'Store manager',
+    image: 'p4.png',
+  },
+  { name: 'Lana', roleMobile: 'Copy', role: 'Copywriter', image: 'p5.png' },
 ];
 
 export default function OmnichannelIllustration() {
   return (
-    <div className={s.root}>
-      <Wrapper>
+    <Wrapper>
+      <div className={s.root}>
         <div className={s.apps}>
           {apps.map(app => (
             <div className={s.app} key={app.id}>
@@ -105,10 +120,11 @@ export default function OmnichannelIllustration() {
               </div>
               <div className={s.personName}>{person.name}</div>
               <div className={s.personRole}>{person.role}</div>
+              <div className={s.personRoleMobile}>{person.roleMobile}</div>
             </div>
           ))}
         </div>
-      </Wrapper>
-    </div>
+      </div>
+    </Wrapper>
   );
 }

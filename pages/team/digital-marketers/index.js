@@ -68,7 +68,9 @@ function DigitalMarketers({ integrations, preview, page }) {
         }
       />
 
-      <OmnichannelIllustration />
+      <Space bottom={3}>
+        <OmnichannelIllustration />
+      </Space>
 
       <TitleIllustrationStripWithContent
         image="onichannel-matters"

@@ -15,7 +15,7 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: rfs(20px);
   font-weight: bold;
   color: var(--extra-light-body-color);
   text-transform: uppercase;

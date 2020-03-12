@@ -87,7 +87,8 @@
 
 .body {
   line-height: 1.4;
-  @media screen and (width > 650px) {
+
+  @media screen and (width > 1000px) {
     padding-right: 50px;
   }
 }

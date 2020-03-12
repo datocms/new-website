@@ -1,9 +1,9 @@
 .root {
   text-align: left;
-  padding-top: 70px;
+  padding-top: rfs(70px);
   position: relative;
   max-width: 800px;
-  margin: 20vh auto;
+  margin: rfs(200px) auto;
 
   &:before {
     position: absolute;
@@ -20,9 +20,9 @@
 
 .quote {
   font-family: var(--font-serif);
-  font-size: 40px;
-  font-style: italic;
+  font-size: rfs(40px);
   margin-bottom: 40px;
+  letter-spacing: -0.03em;
   line-height: 1.2;
 
   &:before {

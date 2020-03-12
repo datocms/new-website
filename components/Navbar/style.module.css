@@ -1,6 +1,7 @@
 @media screen and (width <= 900px) {
   .root {
-    display: none;
+    visibility: hidden;
+    height: 0;
   }
 }
 

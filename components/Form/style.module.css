@@ -47,7 +47,7 @@
     position: absolute;
     top: 25px;
     left: 33px;
-    width: 50%;
+    width: 40%;
     font-size: 12px;
     line-height: 1;
   }
@@ -56,6 +56,7 @@
     color: var(--light-body-color);
     text-transform: uppercase;
     font-weight: bold;
+    width: 60%;
   }
 
   .error {
@@ -68,8 +69,11 @@
 
 .submit {
   padding: 20px 29px;
-  display: flex;
-  align-items: center;
+
+  @media (width > 900px) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .anchor {
@@ -81,7 +85,15 @@
   flex: 1;
   font-size: 13px;
   color: var(--light-body-color);
-  margin-right: 50px;
+
+  @media (width <= 900px) {
+    margin-bottom: 15px;
+  }
+
+  @media (width > 900px) {
+    margin-right: 50px;
+    margin-bottom: 0;
+  }
 
   a {
     color: inherit;

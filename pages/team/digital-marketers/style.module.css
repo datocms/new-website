@@ -1,11 +1,24 @@
 .grid {
-  margin-top: 10vh;
   box-shadow: var(--box-shadow);
   border-radius: 5px;
-  padding: 70px;
+  padding: rfs(70px);
   background: white;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  grid-column-gap: 50px;
+
+  @media screen and (width <= 900px) {
+    > * {
+      margin-bottom: rfs(70px) !important;
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  @media screen and (width > 900px) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 50px;
+    margin: 40px;
+  }
 }

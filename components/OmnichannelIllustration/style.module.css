@@ -1,5 +1,9 @@
 .root {
-  margin-bottom: 60px;
+  margin: 0 -30px;
+
+  @media (width > 600px) {
+    margin: 0;
+  }
 }
 
 .center {
@@ -7,18 +11,21 @@
 }
 
 .lines {
-  margin: 15px 40px;
+  margin: 15px 20px;
   stroke-dasharray: 8;
   stroke: none;
   stroke-width: 1;
   fill: none;
   fill-rule: evenodd;
   animation: dash 20s linear infinite;
+  stroke: #c2c8d6;
+  stroke-width: 15;
+  stroke-dasharray: 14;
 
-  path,
-  line {
-    stroke: #c2c8d6;
+  @media (width > 600px) {
     stroke-width: 5;
+    stroke-dasharray: 5;
+    margin: 15px 40px;
   }
 }
 
@@ -47,11 +54,16 @@
 .appLabel {
   font-weight: bold;
   margin-top: 10px;
+  font-size: 0.8em;
+
+  @media (width > 600px) {
+    font-size: 1em;
+  }
 }
 
 .appIcon svg {
-  height: 75px;
-  width: 75px;
+  height: rfs(65px);
+  width: rfs(65px);
 }
 
 .dato {
@@ -59,36 +71,60 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 40px;
-  min-width: 600px;
-  border-radius: 50px;
+  padding: rfs(50px);
+  border-radius: rfs(50px);
   background: linear-gradient(145deg, #e6e6e6, #ffffff);
-  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+  box-shadow: 20px 20px 40px #d9d9d9, -20px -20px 40px #ffffff;
+  min-width: rfs(600px);
+
+  @media (width > 600px) {
+    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+  }
 
   svg {
     margin: 0 auto;
     display: block;
-    width: 200px;
+    width: rfs(250px);
   }
 }
 
 .person {
-  width: 120px;
+  width: 150px;
 }
 
 .personIcon img {
-  width: 60px;
+  height: rfs(65px);
+  width: rfs(65px);
   border-radius: 50px;
   background: linear-gradient(45deg, #fdece5, #fefae4);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .personName {
-  font-size: 14px;
+  font-size: 0.8em;
   margin-top: 5px;
 }
 
+.personRoleMobile,
 .personRole {
   font-weight: bold;
+
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.personRoleMobile {
+  font-size: 0.8em;
+  margin-top: 5px;
+  @media (width > 600px) {
+    display: none;
+  }
+}
+
+.personRole {
+  font-size: 1em;
   margin-top: 15px;
+  @media (width <= 600px) {
+    display: none;
+  }
 }
