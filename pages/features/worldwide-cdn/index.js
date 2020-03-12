@@ -12,6 +12,7 @@ import Quote from 'components/Quote';
 import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
+import Space from 'components/Space';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -53,12 +54,12 @@ function WorldwideCdn({ page, preview }) {
 
       <CdnMap />
 
-      <div style={{ margin: '10vh 0 5vh' }}>
+      <Space top={2} bottom={1}>
         <InterstitialTitle style="two">
           Delight your customers with{' '}
           <Highlight>lightning fast responses</Highlight>
         </InterstitialTitle>
-      </div>
+      </Space>
 
       <Flag
         style="good"

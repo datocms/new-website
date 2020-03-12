@@ -1,6 +1,6 @@
 .cta {
   position: relative;
-  margin-top: 15vh;
+  margin-top: rfs(150px);
 
   &:before {
     content: '';
@@ -16,15 +16,15 @@
 }
 
 .noCta {
-  margin-top: 15vh;
-  padding-top: 50px;
+  margin-top: rfs(150px);
+  padding-top: rfs(50px);
   clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
   background: #2e343f;
 }
 
 .footerRoot {
   color: white;
-  padding: 60px 0;
+  padding: rfs(60px) 0;
 
   a {
     color: white;
@@ -37,21 +37,31 @@
 }
 
 .cols {
-  display: flex;
+  @media (width > 900px) {
+    display: flex;
+  }
 }
 
 .col {
-  margin-right: 50px;
-  flex: 1;
-
+  margin-bottom: rfs(40px);
   &:last-child {
-    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  @media (width > 900px) {
+    margin-bottom: 0;
+    margin-right: 50px;
+    flex: 1;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 
 .group,
 .monoLink {
-  margin-bottom: 40px;
+  margin-bottom: rfs(40px);
 
   &:last-child {
     margin-bottom: 0;
@@ -75,7 +85,7 @@
 
 .finalFooter {
   background: #13151b;
-  padding: 50px 0;
+  padding: rfs(50px) 0;
   color: #ddd;
 
   a {
@@ -89,16 +99,38 @@
 }
 
 .finalLinks {
-  display: flex;
-  justify-content: center;
+  @media (width > 900px) {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .finalLink {
-  margin: 0 30px;
+  display: block;
+  font-size: 0.9em;
+
+  @media (width > 900px) {
+    font-size: 1em;
+    margin: 0 30px;
+  }
 }
 
 .finalLine {
   margin-top: 30px;
-  text-align: center;
   font-size: 0.8em;
+  line-height: 1.4;
+
+  a,
+  span {
+    display: block;
+  }
+
+  @media (width > 900px) {
+    text-align: center;
+
+    a,
+    span {
+      display: inline;
+    }
+  }
 }

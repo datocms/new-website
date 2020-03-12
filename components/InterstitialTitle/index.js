@@ -9,9 +9,11 @@ export default function InterstitialTitle({
 }) {
   return (
     <Wrapper>
-      <div className={styles[style]}>
+      <div className={styles.root}>
         {kicker && <div className={styles.kicker}>{kicker}</div>}
-        <div className={styles.title}>{children}</div>
+        <div className={styles[style]}>
+          <div className={styles.title}>{children}</div>
+        </div>
         {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
       </div>
     </Wrapper>

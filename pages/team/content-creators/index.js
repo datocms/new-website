@@ -16,6 +16,7 @@ import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import Arrow3 from 'public/images/illustrations/arrow-sketch-3.svg';
 import Crown from 'public/images/illustrations/corona2.svg';
 import Bugs from 'public/images/illustrations/bugs1.svg';
+import Space from 'components/Space';
 
 import s from './style.module.css';
 
@@ -129,11 +130,11 @@ function ContentCreators({ page, preview }) {
         author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
       />
 
-      <div style={{ margin: '20vh 0 15vh' }}>
+      <Space top={4} bottom={3}>
         <InterstitialTitle>
           Everything you need, <Highlight>without&nbsp;compromises</Highlight>
         </InterstitialTitle>
-      </div>
+      </Space>
 
       <Flag
         style="good"

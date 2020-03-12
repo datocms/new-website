@@ -15,8 +15,9 @@ import Quote from 'components/Quote';
 import LazyImage from 'components/LazyImage';
 import gql from 'graphql-tag';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
-
+import Space from 'components/Space';
 import SuccessIcon from 'public/icons/regular/check.svg';
+import Space from 'components/Space';
 
 import styles from './style.module.css';
 
@@ -108,12 +109,12 @@ function DigitalMarketers({ integrations, preview, page }) {
         </div>
       </TitleIllustrationStripWithContent>
 
-      <div style={{ margin: '20vh 0 15vh' }}>
+      <Space top={4} bottom={3}>
         <InterstitialTitle style="two">
           Here's DatoCMS helps you build better{' '}
           <Highlight>digital&nbsp;experiences</Highlight>
         </InterstitialTitle>
-      </div>
+      </Space>
 
       <Flag
         style="good"

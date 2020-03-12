@@ -26,6 +26,7 @@ import ImgixTransformations from 'components/ImgixTransformations';
 import { gqlStaticProps, imageFields } from 'lib/datocms';
 import gql from 'graphql-tag';
 import VideoPlayer from 'components/VideoPlayer';
+import Space from 'components/Space';
 
 const code = `import React from 'react';
 import { graphql, Link } from 'gatsby';
@@ -104,14 +105,14 @@ export default function IntegrationsPage({ upload }) {
         </Checks>
       </Hero>
 
-      <div style={{ margin: '10vh 0' }}>
+      <Space top={2} bottom={2}>
         <LogosBar
           title="We power experiences for over half a billion users"
           clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
         />
-      </div>
+      </Space>
 
-      <div style={{ margin: '15vh 0' }}>
+      <Space top={3} bottom={3}>
         <TitleStripWithContent
           title={
             <>
@@ -144,7 +145,7 @@ export default function IntegrationsPage({ upload }) {
         >
           <CodeExcerpt code={code} language="javascript" />
         </TitleStripWithContent>
-      </div>
+      </Space>
 
       <TitleStripWithContent
         title={<>Endless image transformations at your disposal</>}
@@ -161,7 +162,7 @@ export default function IntegrationsPage({ upload }) {
         <ImgixTransformations />
       </TitleStripWithContent>
 
-      <div style={{ marginTop: '15vh' }}>
+      <Space top={3}>
         <TitleStripWithContent
           title={
             <>
@@ -189,7 +190,7 @@ export default function IntegrationsPage({ upload }) {
             />
           </div>
         </TitleStripWithContent>
-      </div>
+      </Space>
 
       <Flag
         style="good"

@@ -27,6 +27,7 @@ import LogosBar from 'components/LogosBar';
 import TryDemoCta from 'components/TryDemoCta';
 import { gqlStaticProps, imageFields } from 'lib/datocms';
 import gql from 'graphql-tag';
+import Space from 'components/Space';
 
 const code = `// pages/movie.js
 
@@ -106,19 +107,19 @@ export default function IntegrationsPage({ upload }) {
         </Checks>
       </Hero>
 
-      <div style={{ margin: '10vh 0' }}>
+      <Space top={2} bottom={2}>
         <LogosBar
           title="We power experiences for over half a billion users"
           clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
         />
-      </div>
+      </Space>
 
-      <div style={{ margin: '5vh 0 5vh' }}>
+      <Space top={1} bottom={1}>
         <InterstitialTitle style="two">
           If Next.js is serverless,{' '}
           <Highlight>so&nbsp;your&nbsp;CMS should be</Highlight>
         </InterstitialTitle>
-      </div>
+      </Space>
       <Wrapper>
         <div className={s.copy}>
           <p>
@@ -134,9 +135,9 @@ export default function IntegrationsPage({ upload }) {
           </p>
         </div>
       </Wrapper>
-      <div style={{ marginBottom: '10vh' }}>
+      <Space bottom={2}>
         <CdnMap />
-      </div>
+      </Space>
       <TitleStripWithContent
         kicker={<>GraphQL Content API</>}
         title={<>Ask for what you need, get exactly that</>}
@@ -212,7 +213,7 @@ export default function IntegrationsPage({ upload }) {
           }}
         </GraphQlDemo>
       </TitleStripWithContent>
-      <div style={{ marginTop: '15vh' }}>
+      <Space top={3}>
         <TitleStripWithContent
           title={<>State of the art for responsive and progressive images</>}
           subtitle={
@@ -240,9 +241,9 @@ export default function IntegrationsPage({ upload }) {
         >
           <ProgressiveImagesDemo />
         </TitleStripWithContent>
-      </div>
+      </Space>
 
-      <div style={{ marginTop: '15vh' }}>
+      <Space top={3}>
         <TitleStripWithContent
           title={
             <>
@@ -266,7 +267,7 @@ export default function IntegrationsPage({ upload }) {
         >
           <CodeExcerpt code={code} language="javascript" />
         </TitleStripWithContent>
-      </div>
+      </Space>
 
       <Flag
         style="good"

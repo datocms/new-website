@@ -14,6 +14,7 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import Result from 'components/Result';
 import LazyImage from 'components/LazyImage';
 import gql from 'graphql-tag';
+import Space from 'components/Space';
 
 import styles from './style.module.css';
 
@@ -70,11 +71,11 @@ function Developers({ integrations, preview, page }) {
         }
       />
 
-      <div style={{ margin: '10vh 0 10vh' }}>
+      <Space top={2} bottom={2}>
         <InterstitialTitle style="two">
           Does any of this sounds painfully&nbsp;familiar?
         </InterstitialTitle>
-      </div>
+      </Space>
 
       <Flag
         style="bad"

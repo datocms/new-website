@@ -17,6 +17,7 @@ import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
+import Space from 'components/Space';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -146,12 +147,12 @@ export default function About({ members, page }) {
         <NumbersBlock title="2M">Monthly API calls</NumbersBlock>
       </Numbers>
 
-      <div style={{ margin: '10vh 0' }}>
+      <Space top={2} bottom={2}>
         <LogosBar
           title="We power experiences for over half a billion users"
           clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
         />
-      </div>
+      </Space>
 
       <Wrapper>
         <div className={s.members}>

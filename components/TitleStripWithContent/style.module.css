@@ -1,5 +1,5 @@
 .root {
-  padding: 10vh 0 0;
+  padding: rfs(100px) 0 0;
   position: relative;
 
   &:before {
@@ -18,10 +18,10 @@
 
 .title {
   font-family: var(--font-headline);
-  font-size: 60px;
+  font-size: rfs(60px);
   max-width: 70%;
   text-align: center;
-  margin: 40px auto;
+  margin: rfs(40px) auto;
   line-height: 1;
   letter-spacing: -0.02em;
 }
@@ -48,5 +48,5 @@
 }
 
 .content {
-  margin-top: 70px;
+  margin-top: rfs(70px);
 }

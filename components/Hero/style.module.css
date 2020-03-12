@@ -7,7 +7,7 @@
 }
 
 .over {
-  font-size: 20px;
+  font-size: rfs(20px);
   margin-bottom: 30px;
   font-weight: bold;
   color: var(--extra-light-body-color);
@@ -16,12 +16,12 @@
 
 .title {
   font-family: var(--font-headline);
-  font-size: 80px;
+  font-size: rfs(80px);
   letter-spacing: -0.02em;
 }
 
 .subtitle {
-  font-size: 25px;
+  font-size: rfs(22px);
   margin: 60px auto 0 auto;
   max-width: 700px;
 }

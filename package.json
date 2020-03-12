@@ -80,8 +80,11 @@
     "esm": "^3.2.25",
     "husky": "^4.2.3",
     "now": "^17.0.4",
+    "postcss-custom-media": "^7.0.8",
+    "postcss-media-minmax": "^4.0.0",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
+    "rfs": "^9.0.2",
     "rss": "^1.2.2",
     "sitemapper": "^3.0.5",
     "striptags": "^3.1.1"

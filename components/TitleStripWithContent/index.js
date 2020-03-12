@@ -15,7 +15,7 @@ export default function TitleStripWithContent({
           <div className={s.title}>{title}</div>
           {subtitle && <div className={s.subtitle}>{subtitle}</div>}
         </div>
-        <div className={s.content}>{children}</div>
+        {children && <div className={s.content}>{children}</div>}
       </Wrapper>
     </div>
   );

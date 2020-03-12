@@ -17,16 +17,15 @@ a.root {
 
 .number {
   font-weight: bold;
-  font-size: 50px;
-  line-height: 1;
-  margin-bottom: 10px;
+  font-size: rfs(50px);
+  line-height: 1.4;
 }
 
 .label {
   font-weight: bold;
-  font-size: 25px;
+  font-size: rfs(25px);
   line-height: 1;
-  margin-bottom: 30px;
+  margin-bottom: rfs(30px);
 }
 
 .title {
@@ -42,7 +41,7 @@ a.root {
 }
 
 .goto {
-  margin-top: 25px;
+  margin-top: rfs(25px);
   font-size: 0.8em;
   font-weight: bold;
   text-transform: uppercase;

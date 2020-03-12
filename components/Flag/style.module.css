@@ -1,9 +1,16 @@
 .root {
-  margin: 15vh 0;
-  display: grid;
-  grid-template-columns: 45% 1fr;
-  grid-column-gap: 10%;
-  align-items: center;
+  margin: rfs(150px) 0;
+  --dotBaseUnit: 10vh;
+}
+
+@media screen and (width > 650px) {
+  .root {
+    display: grid;
+    grid-template-columns: 45% 1fr;
+    grid-column-gap: 10%;
+    align-items: center;
+    --dotBaseUnit: 15vh;
+  }
 }
 
 .imageContainer {
@@ -11,11 +18,27 @@
 }
 
 .image {
+  margin-bottom: 40px;
+
+  @media screen and (width > 650px) {
+    margin-bottom: 0;
+  }
+
   > svg,
   > img {
-    height: 50vh;
-    min-height: 100%;
-    width: 100%;
+    @media screen and (width < 400px) {
+      width: 100%;
+    }
+
+    @media screen and (401px < width < 650px) {
+      height: 30vh;
+    }
+
+    @media screen and (width >= 650px) {
+      width: 100%;
+      height: 50vh;
+      min-height: 100%;
+    }
   }
 }
 
@@ -28,19 +51,18 @@
 
 .goodDot {
   composes: neutralDot;
-  background: var(--azure-color);
+  background: linear-gradient(#c3f4fa, #9be0e8);
 }
 
 .badDot {
   composes: neutralDot;
-  background: var(--accent-color);
+  background: linear-gradient(#fca597, #f78a79);
 }
 
 .content {
-  font-size: 0.9em;
-
   p {
-    margin-bottom: 40px;
+    margin: 0;
+    margin-bottom: rfs(40px);
   }
 
   a {
@@ -49,23 +71,25 @@
 }
 
 .title {
-  font-size: 45px;
+  font-size: rfs(45px);
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: rfs(30px);
   line-height: 1;
   letter-spacing: -0.02em;
 }
 
 .subtitle {
-  font-size: 25px;
+  font-size: rfs(25px);
   font-weight: bold;
-  margin-bottom: 20px;
-  margin-top: 50px;
+  margin-bottom: rfs(20px);
+  margin-top: rfs(50px);
 }
 
 .body {
   line-height: 1.4;
-  padding-right: 50px;
+  @media screen and (width > 650px) {
+    padding-right: 50px;
+  }
 }
 
 .goodHighlight {

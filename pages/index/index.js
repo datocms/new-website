@@ -16,6 +16,7 @@ import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
+import Space from 'components/Space';
 
 import WarningIcon from 'public/icons/regular/times.svg';
 import SuccessIcon from 'public/icons/regular/check.svg';
@@ -89,12 +90,12 @@ function Homepage({ successStories, preview, page }) {
 
       <LogosBar clients={[Dropbox, Hashicorp, Verizon, Vmware, Linkedin]} />
 
-      <div style={{ margin: '15vh 0' }}>
-        <InterstitialTitle subtitle="Here’s 3 symptoms to watch out">
+      <Space top={2} bottom={2}>
+        <InterstitialTitle subtitle="Here’s 3 symptoms to&nbsp;watch&nbsp;out">
           Are you losing money because of{' '}
-          <Highlight>legacy content&nbsp;infrastructure</Highlight>?
+          <Highlight>legacy&nbsp;content infrastructure</Highlight>?
         </InterstitialTitle>
-      </div>
+      </Space>
 
       <Flag
         style="bad"
@@ -216,11 +217,11 @@ function Homepage({ successStories, preview, page }) {
         </div>
       </TitleStripWithContent>
 
-      <div style={{ margin: '20vh 0 15vh' }}>
+      <Space top={4} bottom={2}>
         <InterstitialTitle style="two">
           Here's how an Headless&nbsp;CMS can&nbsp;help&nbsp;your company
         </InterstitialTitle>
-      </div>
+      </Space>
 
       <Flag
         style="good"

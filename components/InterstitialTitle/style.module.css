@@ -1,5 +1,5 @@
 .root {
-  padding: 10vh 0;
+  padding: rfs(100px) 0;
   margin: 0 auto;
   max-width: 800px;
   text-align: center;
@@ -7,7 +7,7 @@
 }
 
 .one {
-  composes: root;
+  position: relative;
 
   &:before {
     content: '';
@@ -26,14 +26,14 @@
 }
 
 .two {
-  composes: root;
+  position: relative;
 
   &:before {
     content: '';
     display: block;
     background-color: #eee;
-    width: 25vw;
-    max-width: 600px;
+    width: 40vw;
+    max-width: 400px;
     height: 25vh;
     z-index: -1;
     position: absolute;
@@ -47,8 +47,8 @@
     content: '';
     display: block;
     background-color: #eee;
-    width: 25vw;
-    max-width: 600px;
+    width: 40vw;
+    max-width: 400px;
     height: 25vh;
     z-index: -1;
     position: absolute;
@@ -61,16 +61,15 @@
 
 .kicker,
 .subtitle {
-  font-size: 20px;
+  font-size: rfs(20px);
   font-weight: bold;
-  letter-spacing: 0.05em;
   color: var(--extra-light-body-color);
   text-transform: uppercase;
 }
 
 .title {
   font-family: var(--font-headline);
-  font-size: 60px;
+  font-size: rfs(60px);
   align-items: center;
 }
 

@@ -14,9 +14,9 @@ export default function Flag({
   image,
   children,
 }) {
-  const [size] = useState(Math.floor(Math.random() * 30) + 20);
-  const [x] = useState(Math.floor(Math.random() * 40) + 20);
-  const [y] = useState(Math.floor(Math.random() * 40) + 20);
+  const [size] = useState(Math.random() * 1.5 + 2);
+  const [x] = useState(Math.floor(Math.random() * 30));
+  const [y] = useState(Math.floor(Math.random() * 30) + 20);
 
   const elementRef = useRef(null);
 
@@ -56,11 +56,11 @@ export default function Flag({
               ...dotAnimStyle,
               left: `${x}%`,
               top: `${y}%`,
-              height: `${size}vh`,
-              width: `${size}vh`,
+              height: `calc(var(--dotBaseUnit) * ${size})`,
+              width: `calc(var(--dotBaseUnit) * ${size})`,
             }}
           />
-          <animated.div className={s.image}>{imageEl}</animated.div>
+          <div className={s.image}>{imageEl}</div>
         </div>
         <div className={s.content}>
           <div className={s.title}>{title}</div>
