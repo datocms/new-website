@@ -17,7 +17,6 @@ import gql from 'graphql-tag';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Space from 'components/Space';
 import SuccessIcon from 'public/icons/regular/check.svg';
-import Space from 'components/Space';
 
 import styles from './style.module.css';
 
