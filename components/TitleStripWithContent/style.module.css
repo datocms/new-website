@@ -19,11 +19,14 @@
 .title {
   font-family: var(--font-headline);
   font-size: rfs(60px);
-  max-width: 70%;
   text-align: center;
   margin: rfs(40px) auto;
   line-height: 1;
   letter-spacing: -0.02em;
+
+  @media (width > 800px) {
+    max-width: 70%;
+  }
 }
 
 .kicker {

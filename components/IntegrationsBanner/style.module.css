@@ -1,6 +1,6 @@
 .root {
   position: relative;
-  padding: 15vh 0 12vh;
+  padding: rfs(150px) 0;
 }
 
 .background {
@@ -48,7 +48,7 @@
 
   .backgroundImageInner {
     border-radius: 50%;
-    padding: 4vh;
+    padding: rfs(20px);
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
@@ -57,7 +57,7 @@
   }
 
   img {
-    max-width: 100%;
+    width: 100%;
   }
 
   @for $i from 1 to 5 {
@@ -88,9 +88,18 @@
     }
   }
 
-  @for $i from 1 to 30 {
-    &:nth-child(20n + $i) {
-      left: calc(#{$i} * 7vw);
+  @media (width < 900px) {
+    @for $i from 1 to 30 {
+      &:nth-child(20n + $i) {
+        left: calc(#{$i} * 13vw);
+      }
+    }
+  }
+  @media (width >= 900px) {
+    @for $i from 1 to 30 {
+      &:nth-child(20n + $i) {
+        left: calc(#{$i} * 7vw);
+      }
     }
   }
 
@@ -108,7 +117,7 @@
 .foreground {
   box-shadow: var(--box-shadow);
   border-radius: 5px;
-  padding: 70px;
+  padding: rfs(70px);
   background: white;
   max-width: 800px;
   margin: 0 auto;
@@ -118,9 +127,9 @@
 .title {
   font-family: var(--font-headline);
   margin-bottom: 30px;
-  font-size: 50px;
+  font-size: rfs(50px);
 }
 
 .content {
-  line-height: 1.4;
+  line-height: 1.3;
 }

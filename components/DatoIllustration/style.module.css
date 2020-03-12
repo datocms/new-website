@@ -1,25 +1,48 @@
 .root {
   margin-bottom: 60px;
+  --width: calc(100vw - var(--page-margin) * 2);
+
+  @media (width > 1200px) {
+    --width: 1120px;
+  }
 }
 
 .inner {
   display: grid;
-  grid-template-columns: 1fr 7vw 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
-  grid-gap: 40px;
+  grid-gap: 5vw;
+  margin: 0 -25px;
+
+  @media (width > 700px) {
+    margin: 0;
+    grid-template-columns: 1fr 7vw 1fr;
+    grid-gap: 2vw;
+  }
 }
 
-.left,
 .center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  display: none;
+
+  @media (width > 700px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.backend,
+.apis,
+.people,
+.apps,
+.linesVContainer {
+  box-sizing: border-box;
 }
 
 .backend {
   box-shadow: var(--box-shadow);
-  padding: 40px;
-  width: 100%;
+  padding: rfs(30px);
   text-align: center;
   background: white;
   border-radius: 5px;
@@ -28,20 +51,29 @@
   justify-content: center;
 
   svg {
-    width: 3vw;
-    height: 3vw;
+    width: 60px;
+    height: 60px;
     margin-bottom: 1vw;
   }
 }
 
 .backendTitle {
   font-weight: bold;
-  font-size: 30px;
+  font-size: rfs(25px);
   margin-bottom: 20px;
 }
 
-.features {
-  line-height: 1.6;
+.feature {
+  margin-bottom: 15px;
+  font-size: 0.8em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (width > 700px) {
+    font-size: 1em;
+  }
 }
 
 .apis {
@@ -56,15 +88,34 @@
   background: white;
   border-radius: 5px;
   font-weight: bold;
-  font-size: 25px;
+  font-size: rfs(25px);
+  padding: rfs(20px);
   display: flex;
   align-items: center;
-  padding: 0 2vw;
+  justify-content: center;
+
+  .apiInner {
+    text-align: center;
+  }
 
   svg {
-    width: 2vw;
-    height: 2vw;
-    margin-right: 1vw;
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto 10px;
+  }
+
+  @media (width > 950px) {
+    .apiInner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg {
+      margin-right: 30px;
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -86,7 +137,6 @@
 .linesH {
   margin: 1vw 0;
   width: 7vw;
-  height: 17vw;
 }
 
 .linesVContainer {
@@ -112,25 +162,30 @@
 }
 
 .app {
-  width: 100px;
+  margin: 0 5px;
 }
 
 .appLabel {
   font-weight: bold;
-  margin-top: 15px;
+  font-size: 0.6em;
+  margin-top: 6px;
+
+  @media (width > 700px) {
+    font-size: 1em;
+    margin-top: 15px;
+  }
 }
 
 .appIcon svg {
-  height: 60px;
-  width: 60px;
-}
-
-.person {
-  width: 120px;
+  width: calc(var(--width) * 0.43 / 4);
+  max-width: 60px;
+  height: calc(var(--width) * 0.43 / 4);
+  max-height: 60px;
 }
 
 .personIcon img {
-  width: 60px;
+  width: calc(var(--width) * 0.43 / 4);
+  max-width: 60px;
   border-radius: 50px;
   background: linear-gradient(45deg, #fdece5, #fefae4);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -138,5 +193,11 @@
 
 .personRole {
   font-weight: bold;
-  margin-top: 15px;
+  margin-top: 6px;
+  font-size: 0.6em;
+
+  @media (width > 700px) {
+    margin-top: 15px;
+    font-size: 1em;
+  }
 }
