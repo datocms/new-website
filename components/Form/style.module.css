@@ -8,7 +8,7 @@
     top: 45px;
     left: 32px;
     right: 30px;
-    font-size: 17px;
+    font-size: rfs(17px);
     color: var(--extra-light-body-color);
     opacity: 0.6;
     pointer-events: none;
@@ -19,9 +19,9 @@
   textarea {
     border: 0;
     margin: 0;
-    padding: 45px 29px 20px;
+    padding: 45px rfs(29px) 20px;
     font-family: inherit;
-    font-size: 17px;
+    font-size: rfs(17px);
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -46,7 +46,7 @@
   .error {
     position: absolute;
     top: 25px;
-    left: 33px;
+    left: rfs(33px);
     width: 40%;
     font-size: 12px;
     line-height: 1;
@@ -60,7 +60,7 @@
   }
 
   .error {
-    right: 29px;
+    right: rfs(29px);
     left: auto;
     text-align: right;
     color: var(--accent-color);

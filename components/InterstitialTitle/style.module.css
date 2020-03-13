@@ -74,9 +74,9 @@
 }
 
 .kicker {
-  margin-bottom: 60px;
+  margin-bottom: rfs(60px);
 }
 
 .subtitle {
-  margin-top: 60px;
+  margin-top: rfs(60px);
 }

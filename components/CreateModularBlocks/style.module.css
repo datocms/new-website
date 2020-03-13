@@ -5,7 +5,7 @@
 }
 
 .body {
-  padding: 40px 30px;
+  padding: rfs(40px) 30px;
   background: #f3f3f3;
 }
 
@@ -79,6 +79,7 @@
   margin-left: 10px;
   color: var(--extra-light-body-color);
   font-size: 0.9em;
+  white-space: nowrap;
 }
 
 .blocks {

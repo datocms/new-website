@@ -80,7 +80,7 @@ export default function IntegrationsPage({ upload }) {
         <title>CMS for GatsbyJS - Admin interface for GatsbyJS sites</title>
       </Head>
       <Hero
-        over={<Logo className={s.logo} />}
+        kicker={<Logo className={s.logo} />}
         title={
           <>
             The <Highlight>easiest way</Highlight> to manage content with

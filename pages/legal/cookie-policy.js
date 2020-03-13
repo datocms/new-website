@@ -26,7 +26,7 @@ export default function Gdpr({ body }) {
         <title>Cookie Policy</title>
       </Head>
       <Hero
-        over="Legal"
+        kicker="Legal"
         title={
           <>
             <Highlight>Cookie Policy</Highlight>

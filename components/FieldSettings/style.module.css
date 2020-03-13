@@ -70,7 +70,7 @@
   background: var(--azure-color);
 
   &:before {
-    left: 20px;
+    left: calc(100% - 14px);
   }
 }
 

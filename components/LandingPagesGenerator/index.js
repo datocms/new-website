@@ -28,7 +28,7 @@ const blocks = [
 
 export default function UseModularBlocks() {
   const [rows, set] = useState(blocks);
-  useEffect(() => void setInterval(() => set(shuffle), 2000), []);
+  useEffect(() => void setInterval(() => set(shuffle), 800), []);
 
   let height = 0;
   const transitions = useTransition(

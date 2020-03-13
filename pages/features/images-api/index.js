@@ -33,11 +33,11 @@ function ImagesApi({ page, preview }) {
       </Head>
 
       <Hero
-        over="Images API"
+        kicker="Images API"
         title={
           <>
             The easiest way to deliver{' '}
-            <Highlight>fast,&nbsp;optimized&nbsp;images</Highlight>
+            <Highlight>fast, optimized&nbsp;images</Highlight>
           </>
         }
         subtitle={

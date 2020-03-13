@@ -132,33 +132,30 @@ export default function Article({ post, preview }) {
           )}
         </Head>
       )}
+      <InterstitialTitle kicker="The DatoCMS Blog" style="two">
+        {isFallback ? <Copy lines={2} /> : post.title}
+      </InterstitialTitle>
       <Wrapper>
-        <div className={s.root}>
-          <InterstitialTitle kicker="The DatoCMS Blog" style="two">
-            {isFallback ? <Copy lines={2} /> : post.title}
-          </InterstitialTitle>
-
-          <div className={s.info}>
-            {isFallback ? (
-              <Rect className={s.avatar} />
-            ) : (
-              <Image
-                className={s.avatar}
-                data={post.author.avatar.responsiveImage}
-              />
-            )}
-            {isFallback ? (
-              <Line />
-            ) : (
-              <>
-                Posted on <FormattedDate date={post._firstPublishedAt} /> by{' '}
-                {post.author.name}
-              </>
-            )}
-          </div>
-
-          <PostContent isFallback={isFallback} content={post && post.content} />
+        <div className={s.info}>
+          {isFallback ? (
+            <Rect className={s.avatar} />
+          ) : (
+            <Image
+              className={s.avatar}
+              data={post.author.avatar.responsiveImage}
+            />
+          )}
+          {isFallback ? (
+            <Line />
+          ) : (
+            <>
+              Posted on <FormattedDate date={post._firstPublishedAt} /> by{' '}
+              {post.author.name}
+            </>
+          )}
         </div>
+
+        <PostContent isFallback={isFallback} content={post && post.content} />
       </Wrapper>
     </Layout>
   );

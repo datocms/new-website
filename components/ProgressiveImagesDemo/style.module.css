@@ -1,16 +1,26 @@
 .root {
   display: flex;
   justify-content: center;
+  margin: 0 -25px;
+
+  @media (width > 900px) {
+    margin: 0;
+  }
 }
 
 .container {
-  width: 22vw;
-  margin: 0 40px;
+  width: 45vw;
+  margin: 0 5px;
+
+  @media (width > 900px) {
+    width: 22vw;
+    margin: 0 rfs(40px);
+  }
 }
 
 .label {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: rfs(30px);
   font-weight: bold;
 }
 
@@ -22,7 +32,7 @@
 
 .windowBar {
   position: relative;
-  height: 2vh;
+  height: 2vw;
   padding: 0.2vw 0.5vw;
   display: flex;
   align-items: center;
@@ -107,19 +117,21 @@
 }
 
 .page {
-  height: 30vw;
+  height: 50vw;
   position: relative;
   overflow: hidden;
   display: block;
   background: white;
+
+  @media (width > 900px) {
+    height: 30vw;
+  }
 }
 
 .pageInner {
   position: absolute;
   left: 0;
   right: 0;
-  width: 22vw;
-  height: 30vw;
   padding: 4vw 3vw;
   transition: all 1400ms ease-in-out;
 }
@@ -146,6 +158,7 @@
 
 .title {
   height: 1vw;
+  min-height: 10px;
   background: #bbb;
   margin-bottom: 0.3vw;
 }
@@ -153,6 +166,7 @@
 .copy,
 .kicker {
   height: 0.4vw;
+  min-height: 5px;
   background: #ddd;
   margin-bottom: 0.2vw;
 }
@@ -187,8 +201,12 @@
 }
 
 .imageLoaded {
-  height: 5vw;
+  height: 12vw;
   margin: 0.7vw 0;
+
+  @media (width > 900px) {
+    height: 7vw;
+  }
 }
 
 .progressiveEnter {

@@ -34,7 +34,7 @@ function GraphQlContentApi({ page, preview }) {
       </Head>
 
       <Hero
-        over="GraphQL Content API"
+        kicker="GraphQL Content API"
         title={
           <>
             GraphQL means <Highlight>superior developer experience</Highlight>
@@ -153,7 +153,7 @@ function GraphQlContentApi({ page, preview }) {
             autoPlay
             muted
             loop
-            src="https://stream.mux.com/dRjI3lukuQDwksXF1sgLQ7Kj4GbAFzUq.m3u8"
+            src="https://stream.mux.com/41n005I01cshC02vPeSunBhVOYGomfIUOd02.m3u8"
           />
         </div>
       </TitleStripWithContent>

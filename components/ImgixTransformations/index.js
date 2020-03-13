@@ -245,7 +245,7 @@ const width = 1000;
 const height = 631;
 const ar = width / height;
 const url = 'https://assets.imgix.net/hp/snowshoe.jpg?w=1000';
-const maxWidth = '60vw';
+
 export default function InterstitialTitle() {
   const ref = useRef([]);
 
@@ -253,8 +253,8 @@ export default function InterstitialTitle() {
   const [ellipse, setEllipse] = useState(false);
   const [params, setParams] = useState([]);
   const [result, setResult] = useState({
-    width: `calc(${maxWidth} * ${width})`,
-    height: `calc(${maxWidth} / ${ar} * ${width})`,
+    width: `calc(var(--max-width) * ${width})`,
+    height: `calc(var(--max-width) / ${ar} * ${width})`,
     transform: 'scale(1)',
   });
 
@@ -291,12 +291,15 @@ export default function InterstitialTitle() {
 
   return (
     <Wrapper>
-      <div className={s.root} style={{ height: `calc(${maxWidth} / ${ar})` }}>
+      <div
+        className={s.root}
+        style={{ height: `calc(var(--max-width) / ${ar})` }}
+      >
         <div
           className={cn(s.imageFrame, { [s.ellipseFrame]: ellipse })}
           style={{
-            width: `calc(${maxWidth} * ${result.width})`,
-            height: `calc(${maxWidth} / ${ar} * ${result.height})`,
+            width: `calc(var(--max-width) * ${result.width})`,
+            height: `calc(var(--max-width) / ${ar} * ${result.height})`,
           }}
         >
           <ReactCSSTransitionGroup
@@ -314,8 +317,8 @@ export default function InterstitialTitle() {
               src={image}
               className={s.image}
               style={{
-                width: `calc(${maxWidth})`,
-                height: `calc(${maxWidth} / ${ar})`,
+                width: `calc(var(--max-width))`,
+                height: `calc(var(--max-width) / ${ar})`,
                 transform: result.transform,
               }}
             />

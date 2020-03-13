@@ -1,5 +1,5 @@
 .video {
-  margin: 0 0 20vh;
+  margin: 0 0 rfs(200px);
   box-shadow: var(--box-shadow);
   border-radius: 3px;
   overflow: hidden;
@@ -13,9 +13,12 @@
 
 .frames {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: 30px;
+  grid-gap: rfs(30px);
+  grid-template-rows: 1fr;
+
+  @media (width > 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .frame {
@@ -27,6 +30,12 @@
 
   img {
     display: block;
+  }
+
+  @media (width <= 900px) {
+    &:nth-child(2n) {
+      display: none;
+    }
   }
 }
 

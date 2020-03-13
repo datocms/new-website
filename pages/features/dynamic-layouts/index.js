@@ -34,7 +34,7 @@ function DynamicLayouts({ page, preview }) {
       </Head>
 
       <Hero
-        over="Dynamic layouts"
+        kicker="Dynamic layouts"
         title={
           <>
             Build dynamic layouts with{' '}

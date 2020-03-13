@@ -7,7 +7,7 @@ export default function FieldSettings() {
   const [on, setOn] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => setOn(on => !on), 2000);
+    const interval = setInterval(() => setOn(on => !on), 1000);
     () => clearInterval(interval);
   }, []);
 

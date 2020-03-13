@@ -55,7 +55,7 @@ function Developers({ integrations, preview, page }) {
         <title>DatoCMS for Developers - Team</title>
       </Head>
       <Hero
-        over="DatoCMS for Developers"
+        kicker="DatoCMS for Developers"
         title={
           <>
             Your tech stack is literally{' '}

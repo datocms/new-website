@@ -16,7 +16,7 @@ export default function FieldSettings() {
           await wait(100);
           setBlockCount(i => i + 1);
         }
-        await wait(2000);
+        await wait(800);
         setBlockCount(-1);
         await wait(500);
       }

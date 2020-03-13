@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import s from './style.module.css';
 import { useForm } from 'react-hook-form';
 import Hero from 'components/Hero';
+import Highlight from 'components/Highlight';
 import wretch from 'wretch';
 import { useState } from 'react';
 import { useRecaptcha } from 'react-recaptcha-hook';
@@ -63,8 +64,12 @@ export default function Slack() {
         <title>Join DatoCMS Slack channel</title>
       </Head>
       <Hero
-        over="DatoCMS Slack channel"
-        title={<>Join our Community!</>}
+        kicker="DatoCMS Slack channel"
+        title={
+          <>
+            Join our <Highlight>Community</Highlight>!
+          </>
+        }
         subtitle={
           <>
             Become a part of DatoCMS community, try out new product updates

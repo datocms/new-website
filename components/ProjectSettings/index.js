@@ -22,7 +22,7 @@ export default function ProjectSettings() {
           await wait(200);
           setBlockCount(i => i + 1);
         }
-        await wait(2000);
+        await wait(800);
         setBlockCount(0);
         await wait(500);
       }

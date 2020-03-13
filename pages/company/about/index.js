@@ -51,7 +51,7 @@ export default function About({ members, page }) {
     <Layout>
       <Head>{renderMetaTags(page.seo)}</Head>
       <Hero
-        over="Meet our team"
+        kicker="Meet our team"
         title={
           <>
             We build tools that work{' '}

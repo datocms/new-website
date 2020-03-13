@@ -53,7 +53,7 @@ function DigitalMarketers({ integrations, preview, page }) {
         <title>DatoCMS for Digital Marketers - Team</title>
       </Head>
       <Hero
-        over="DatoCMS for Digital Marketers"
+        kicker="DatoCMS for Digital Marketers"
         title={
           <>
             Win the <Highlight>omnichannel</Highlight> marketing challenge

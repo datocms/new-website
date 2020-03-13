@@ -36,10 +36,10 @@ function VideoStreamingEncoding({ page, preview }) {
       </Head>
 
       <Hero
-        over="Video encoding and streaming"
+        kicker="Video encoding and streaming"
         title={
           <>
-            Stream&nbsp;beautifully, <Highlight>everywhere</Highlight>
+            Stream beautifully, <Highlight>everywhere</Highlight>
           </>
         }
         subtitle={
@@ -106,7 +106,7 @@ function VideoStreamingEncoding({ page, preview }) {
                 src={`https://image.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i/thumbnail.jpg?width=400&amp;time=${t}`}
               />
               <div className={s.frameLabel}>
-                /video/15831/thumb.jpg?
+                /video/thumb.jpg?
                 <span className={s.paramName}>width</span>=
                 <span className={s.paramValue}>400</span>&amp;
                 <span className={s.paramName}>time</span>=

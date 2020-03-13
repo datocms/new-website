@@ -3,8 +3,8 @@
   margin: 0 auto;
   font-family: var(--font-serif);
   letter-spacing: -0.02em;
-  margin-top: 90px;
-  padding-top: 90px;
+  margin-top: rfs(90px);
+  padding-top: rfs(90px);
   border-top: 2px solid var(--border-color);
 
   &:first-child {
@@ -12,8 +12,8 @@
   }
 
   &:last-child {
-    margin-bottom: 90px;
-    padding-bottom: 90px;
+    margin-bottom: rfs(90px);
+    padding-bottom: rfs(90px);
     border-bottom: 2px solid var(--border-color);
   }
 }
@@ -25,8 +25,8 @@
 }
 
 .body {
-  font-size: 19px;
-  line-height: 1.6;
+  font-size: rfs(19px);
+  line-height: rfs(1.6);
 
   a {
     color: inherit;
@@ -53,6 +53,11 @@
   ul,
   ol {
     margin: 0 0 15px;
+  }
+
+  ul,
+  ol {
+    padding-left: rfs(40px);
   }
 
   li {
@@ -90,7 +95,7 @@
   }
 
   pre {
-    padding: 30px;
+    padding: rfs(30px);
     font-family: var(--font-mono);
     font-size: 0.8em;
     margin: 30px 0;
@@ -106,7 +111,8 @@
 }
 
 .title {
-  font-size: 40px;
+  font-size: rfs(40px);
+  font-family: var(--font-sans);
   line-height: 1.2;
   margin: 0;
 

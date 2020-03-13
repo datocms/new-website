@@ -1,5 +1,5 @@
 .body {
-  font-size: 21px;
+  font-size: rfs(21px);
   font-family: var(--font-serif);
   line-height: 1.6;
   letter-spacing: -0.02em;
@@ -16,9 +16,10 @@
   h4,
   h5,
   h6 {
+    font-family: var(--font-headline);
     font-size: 130%;
     line-height: 1.25;
-    margin: 70px 0 40px;
+    margin: rfs(70px) 0 rfs(40px);
   }
 
   h3 {
@@ -28,7 +29,12 @@
   p,
   ul,
   ol {
-    margin: 0 0 40px;
+    margin: 0 0 rfs(40px);
+  }
+
+  ul,
+  ol {
+    padding-left: rfs(40px);
   }
 
   li {
@@ -37,7 +43,7 @@
 
   figure {
     text-align: center;
-    margin: 80px 0;
+    margin: rfs(80px) 0;
   }
 
   figcaption {
@@ -66,10 +72,10 @@
   }
 
   pre {
-    padding: 30px;
+    padding: rfs(30px);
     font-family: var(--font-mono);
     font-size: 0.8em;
-    margin: 40px 0;
+    margin: rfs(40px) 0;
     width: 100%;
     tab-size: 2;
     overflow: auto;

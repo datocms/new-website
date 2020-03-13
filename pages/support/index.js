@@ -98,12 +98,12 @@ export default function Support({ preview, topics }) {
 
       <Wrapper>
         <Hero
+          kicker="Support page"
           title={
             <>
-              <Highlight>Support page</Highlight>
+              Got issues? <Highlight>We're here to help!</Highlight>
             </>
           }
-          subtitle="Got issues? We're here to help!"
         />
         <div className={s.root}>
           <div className={s.picker}>
@@ -209,7 +209,9 @@ export default function Support({ preview, topics }) {
                       need us.
                     </div>
                   </div>
-                  <TalkWithUs />
+                  <div className={s.form}>
+                    <TalkWithUs />
+                  </div>
                 </div>
               </div>
             )}

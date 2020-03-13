@@ -27,7 +27,7 @@ export default function Gdpr({ body }) {
         <title>DatoCMS Security</title>
       </Head>
       <Hero
-        over="Legal"
+        kicker="Legal"
         title={
           <>
             <Highlight>DatoCMS Security</Highlight>

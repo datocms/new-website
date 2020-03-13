@@ -14,13 +14,13 @@
 }
 
 .postBody {
-  padding: 30px;
+  padding: rfs(30px);
 }
 
 .title {
   margin: 0 0 20px;
   font-weight: bold;
-  font-size: 25px;
+  font-size: rfs(25px);
   letter-spacing: -0.04em;
 }
 
@@ -40,11 +40,11 @@
 
 .grid {
   display: flex;
-  margin-left: -50px; /* gutter size offset */
+  margin-left: rfs(-50px); /* gutter size offset */
   width: auto;
 }
 
 .column {
-  padding-left: 50px; /* gutter size */
+  padding-left: rfs(50px); /* gutter size */
   background-clip: padding-box;
 }

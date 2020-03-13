@@ -109,7 +109,9 @@ export default function GraphQlDemo({ height, children }) {
 
   useEffect(() => {
     (async () => {
-      const setter = res => setResult(JSON.stringify(res, null, 2));
+      const setter = res => {
+        setResult(JSON.stringify(res, null, 2));
+      };
 
       while (true) {
         await children(typer, setter);
@@ -117,29 +119,46 @@ export default function GraphQlDemo({ height, children }) {
     })();
   }, []);
 
+  const difference =
+    text.slice(0, cursor).length -
+    text.slice(0, cursor).replace(/  /g, '\t').length;
+
   return (
     <div className={s.root}>
-      <div className={s.code} style={{ height: `${1.3 * height}em` }}>
+      <div
+        className={s.code}
+        style={{ height: `calc(${1.3 * height}em + var(--padding) * 2)` }}
+      >
         {text
-          .slice(0, cursor)
+          .replace(/  /g, '\t')
+          .slice(0, cursor - difference)
           .split('')
           .map((c, i) => (
             <Char key={i} char={c} />
           ))}
         <div className={s.cursor} />
         {text
-          .slice(cursor)
+          .replace(/  /g, '\t')
+          .slice(cursor - difference)
           .split('')
           .map((c, i) => (
             <Char key={i} char={c} />
           ))}
       </div>
 
-      <Highlight {...defaultProps} code={result} language="json">
+      <Highlight
+        {...defaultProps}
+        code={result.replace(/  /g, '\t')}
+        language="json"
+      >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
             className={cn(className, s.code, s.result)}
-            style={{ ...style, height: `${1.3 * height}em` }}
+            key={result}
+            style={{
+              ...style,
+              height: `calc(${1.3 * height}em + var(--padding) * 2)`,
+            }}
           >
             {tokens.map((line, i) => (
               <div {...getLineProps({ line, key: i })}>

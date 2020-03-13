@@ -36,7 +36,7 @@ function WorldwideCdn({ page, preview }) {
       </Head>
 
       <Hero
-        over="Worldwide smart CDN"
+        kicker="Worldwide smart CDN"
         title={
           <>
             Content, images and videos,{' '}

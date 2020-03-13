@@ -25,7 +25,7 @@ export default function Terms({ body }) {
         <title>Terms of Service</title>
       </Head>
       <Hero
-        over="Legal"
+        kicker="Legal"
         title={
           <>
             <Highlight>Terms of Service</Highlight>

@@ -69,8 +69,8 @@ export default function UseModularBlocks() {
       while (true) {
         const c = new Date();
         for (let x = 0; x <= blocksSequence.length; x++) {
-          await wait(2500);
           setBlockCount(i => i + 1);
+          await wait(2500);
         }
         await wait(3500);
         setBlockCount(-1);

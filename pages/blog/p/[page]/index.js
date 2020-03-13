@@ -92,7 +92,10 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
       />
       <Wrapper>
         <Masonry
-          breakpointCols={2}
+          breakpointCols={{
+            default: 2,
+            650: 1,
+          }}
           className={s.grid}
           columnClassName={s.column}
         >

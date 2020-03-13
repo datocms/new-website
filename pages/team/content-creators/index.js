@@ -41,7 +41,7 @@ function ContentCreators({ page, preview }) {
         <title>DatoCMS for Content Creators - Team</title>
       </Head>
       <Hero
-        over="DatoCMS for Content Creators"
+        kicker="DatoCMS for Content Creators"
         title={
           <>
             Are you working in the{' '}

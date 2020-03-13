@@ -37,7 +37,7 @@ function Enterprise({ page }) {
     <Layout>
       <Head>{renderMetaTags(page.seo)}</Head>
       <Hero
-        over="DatoCMS for Enterprise"
+        kicker="DatoCMS for Enterprise"
         title={
           <>
             Enterprise&nbsp;grade <Highlight>content infrastructure</Highlight>

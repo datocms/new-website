@@ -14,7 +14,7 @@ export default function BrandAssets() {
         <title>Brand assets</title>
       </Head>
       <Hero
-        over="Our Company"
+        kicker="Our Company"
         title={
           <>
             <Highlight>Brand assets</Highlight>

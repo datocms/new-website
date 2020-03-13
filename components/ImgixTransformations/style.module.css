@@ -1,6 +1,11 @@
 .root {
   margin: 0 auto;
   position: relative;
+  --max-width: 95vw;
+
+  @media (width > 900px) {
+    --max-width: 60vw;
+  }
 }
 
 .imageFrame {
@@ -34,7 +39,7 @@
   position: absolute;
   bottom: 20%;
   left: 50%;
-  width: 100%;
+  width: 90vw;
   max-width: 950px;
   transform: translateX(-50%);
   box-sizing: border-box;
@@ -44,6 +49,11 @@
   padding: 15px;
   background: white;
   height: 60px;
+  text-align: right;
+
+  @media (width > 900px) {
+    width: 70vw;
+  }
 }
 
 .paramsInner {
@@ -52,15 +62,18 @@
   font-size: 15px;
   font-weight: bold;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   position: absolute;
-  left: 15px;
+  height: 30px;
+  white-space: nowrap;
   right: 15px;
   top: 15px;
-  height: 30px;
-  /* animation: hideUrl 0.5s 4s ease-in-out;
-  animation-fill-mode: both; */
+
+  @media (width > 900px) {
+    justify-content: center;
+    left: 15px;
+  }
 }
 
 @keyframes hideUrl {
@@ -112,6 +125,7 @@
 .paramValue {
   position: absolute;
   transition: all 250ms 800ms ease-in-out;
+  left: 0;
 }
 
 .valueAnimationEnter {

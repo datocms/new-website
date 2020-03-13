@@ -21,7 +21,7 @@ export default function Pagination({
   totalEntries,
   href,
   as,
-  maxPagesToBeShown = 7,
+  maxPagesToBeShown = 4,
 }) {
   const paginator = new Paginator(perPage, maxPagesToBeShown);
 

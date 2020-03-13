@@ -27,7 +27,7 @@
   > svg,
   > img {
     @media screen and (width < 400px) {
-      width: 100%;
+      width: 80%;
     }
 
     @media screen and (401px < width < 650px) {

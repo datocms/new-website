@@ -20,7 +20,7 @@ const images = [
   },
   {
     url:
-      'https://www.datocms-assets.com/205/1581080728-niklas-liniger-bzpt3qn09wq-unsplash.jpg?ar=2.5&fit=crop&w=500',
+      'https://www.datocms-assets.com/205/1581080728-niklas-liniger-bzpt3qn09wq-unsplash.jpg?ar=2.5&fit=crop&w=500&crop=bottom',
     blurUpThumb:
       'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoIDQgLCA0NDhYQBxIGGh0JFhENFxUZGBYfFhUaKysjGh0oHSEWJDUlKC0vMjIyGSI4PTcwPCsxMi8BCgsLDg0OHBANHC8oFh4vLy8vLy8vNS8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vL//AABEIAA8AGAMBIgACEQEDEQH/xAAYAAACAwAAAAAAAAAAAAAAAAAABgECBf/EABsQAAIDAAMAAAAAAAAAAAAAAAACAQNRBRVB/8QAFQEBAQAAAAAAAAAAAAAAAAAAAwD/xAAYEQADAQEAAAAAAAAAAAAAAAAAAQMCEv/aAAwDAQACEQMRAD8AcZrXSyoui5PONOk940R6O9sTMJm5dWugL1nONOgXbJymmf/Z',
   },

@@ -64,11 +64,11 @@ function MultiLanguage({ page, preview }) {
       </Head>
 
       <Hero
-        over="Multi-language"
+        kicker="Multi-language"
         title={
           <>
             Easily localize <Highlight>all&nbsp;your&nbsp;content</Highlight>,
-            from&nbsp;start&nbsp;to&nbsp;finish
+            from start&nbsp;to&nbsp;finish
           </>
         }
         subtitle={

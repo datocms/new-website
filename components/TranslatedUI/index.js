@@ -235,7 +235,7 @@ export default function TranslatedUI() {
   return (
     <UIChrome>
       <div className={s.navbar}>
-        <div className={s.title}>Acme Inc.</div>
+        <div className={s.title}>Acme</div>
         <div className={s.navbutton}>
           <Label locale={locale} label={t['nav.manageItemTypes']} />
         </div>

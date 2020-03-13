@@ -81,7 +81,7 @@ export default function IntegrationsPage({ upload }) {
         <title>CMS for Next.js - Admin interface for Next.js sites</title>
       </Head>
       <Hero
-        over={<Logo />}
+        kicker={<Logo />}
         title={
           <>
             The <Highlight>easiest way</Highlight> to manage content with
