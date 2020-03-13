@@ -1,12 +1,14 @@
 .root {
-  margin: 50px 0 100px;
+  margin: rfs(50px) 0 rfs(100px);
   position: relative;
 }
 
 .rootInner {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  @media (width > 900px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 }
 
 .intro,
@@ -15,11 +17,20 @@
 }
 
 .picker {
-  min-width: 540px;
+  margin: 0 -25px;
+  @media (width > 900px) {
+    margin: 0;
+    min-width: 540px;
+  }
 }
 
 .intro {
-  margin: 0 70px 0;
+  margin-bottom: rfs(70px);
+
+  @media (width > 900px) {
+    margin-right: 70px;
+    margin-bottom: 0;
+  }
 }
 
 .introSub {
@@ -30,7 +41,7 @@
 .introTitle {
   font-family: var(--font-headline);
   line-height: 1;
-  font-size: 80px;
+  font-size: rfs(80px);
   letter-spacing: -0.02em;
   margin-bottom: 50px;
 }

@@ -49,11 +49,6 @@ export default function Footer({ noCta }) {
                   </div>
                 </div>
                 <div className={s.col}>
-                  <div className={s.monoLink}>
-                    <Link href="/">
-                      <a>Success stories</a>
-                    </Link>
-                  </div>
                   <div className={s.group}>
                     <div className={s.groupTitle}>Features</div>
                     <div className={s.groupLinks}>

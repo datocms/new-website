@@ -4,16 +4,18 @@
 
 .rootBlocks {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
 }
 
 .block {
-  padding-right: 80px;
+  padding-right: rfs(80px);
+  margin-bottom: 30px;
 }
 
 .blockTitle {
   font-weight: bold;
-  font-size: 110px;
+  font-size: rfs(110px);
   letter-spacing: -0.05em;
   color: var(--useCaseAccent);
   padding-right: 10px;

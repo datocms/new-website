@@ -81,7 +81,7 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
 
   return (
     <Layout preview={preview}>
-      {!router.isFallback && blog && <Head>{renderMetaTags(blog.seo)}</Head>}
+      {!router.isFallback && <Head>{renderMetaTags(blog.seo)}</Head>}
       <Hero
         title={
           <>

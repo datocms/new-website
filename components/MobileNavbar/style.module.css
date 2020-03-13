@@ -1,0 +1,163 @@
+.root {
+  position: relative;
+}
+
+.innerRoot {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  padding: var(--page-margin) 0;
+  flex-shrink: 0;
+  svg {
+    height: 30px;
+  }
+}
+
+.space {
+  flex: 1;
+}
+
+.hamburger {
+  background: transparent;
+  padding: 10px;
+  border: 0;
+  font-size: inherit;
+  text-decoration: none;
+
+  svg {
+    width: 25px;
+    height: 25px;
+    fill: var(--base-body-color);
+  }
+}
+
+.pane {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  box-shadow: var(--box-shadow);
+  padding: var(--page-margin) 0;
+}
+
+.group {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.groupTitle {
+  font-family: var(--font-headline);
+  font-size: 26px;
+  padding: 15px 0;
+  background: transparent;
+  border: 0;
+  display: block;
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
+.groupTitleHandle {
+  background-image: url('../../public/icons/regular/chevron-down.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 15px;
+}
+
+.handleOpen {
+  background-image: url('../../public/icons/regular/chevron-up.svg');
+}
+
+.groupContent {
+  padding: 20px 0;
+}
+
+.sectionTitle {
+  color: var(--light-body-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+
+  &:first-child {
+    margin-top: 0px;
+  }
+}
+
+.feature {
+  margin-bottom: 10px;
+  font-size: 16px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--base-body-color);
+  display: flex;
+  align-items: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.featureIcon {
+  width: 40px;
+  height: 40px;
+  background: #e4faff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+
+  svg {
+    width: 25px;
+    height: 25px;
+    fill: var(--base-body-color);
+  }
+}
+
+.featureTitle {
+  font-weight: bold;
+}
+
+.extraLink {
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  color: black;
+  white-space: nowrap;
+  margin-bottom: 5px;
+
+  svg {
+    height: 0.8em;
+    fill: var(--light-body-color);
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.sales {
+  flex: 1;
+  color: inherit;
+}
+
+@media screen and (width > 900px) {
+  .root {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+}

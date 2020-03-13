@@ -9,8 +9,10 @@ const BackgroundImage = ({ src, scale = 1.0, ...other }) => {
   const ref = useRef(null);
   const size = useComponentSize(ref);
 
-  const [width] = useDebounce(size.width, 1000);
-  const [height] = useDebounce(size.width, 1000);
+  const { width, height } = size;
+
+  // const [width] = useDebounce(size.width, 1000);
+  // const [height] = useDebounce(size.height, 1000);
 
   useEffect(() => {
     setDpr(window.devicePixelRatio);

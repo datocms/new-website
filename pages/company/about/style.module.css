@@ -1,13 +1,14 @@
 .members {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto;
-  grid-auto-rows: auto;
   grid-gap: 30px;
+  @media (width > 900px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    grid-auto-rows: auto;
+  }
 }
 
 .member {
-  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -19,6 +20,7 @@
 .memberName {
   margin-top: 20px;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .memberRole {

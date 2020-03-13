@@ -8,12 +8,6 @@ import BackgroundImage from 'components/BackgroundImage';
 export default function UseCaseHead({ title, logo: logoUrl, image }) {
   return (
     <div className={s.root}>
-      <div className={cn(s.box, s.boxImage)}>
-        <BackgroundImage
-          className={s.image}
-          src={`${image}?fit=max&fm=png8&q=90`}
-        />
-      </div>
       <div className={cn(s.box, s.boxText)}>
         <div className={s.boxInner}>
           <Wrapper>
@@ -47,6 +41,12 @@ export default function UseCaseHead({ title, logo: logoUrl, image }) {
             </div>
           </Wrapper>
         </div>
+      </div>
+      <div className={cn(s.box, s.boxImage)}>
+        <BackgroundImage
+          className={s.image}
+          src={`${image}&fit=min&fm=png8&q=90&crop=center`}
+        />
       </div>
     </div>
   );

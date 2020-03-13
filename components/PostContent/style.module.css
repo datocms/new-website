@@ -105,28 +105,27 @@
 
 .quote {
   text-align: left;
-  padding-top: 90px;
+  padding-top: rfs(90px);
   position: relative;
   max-width: 800px;
-  margin: 50px auto;
+  margin: rfs(50px) auto;
 
   &:before {
     position: absolute;
     left: 0;
     right: 0;
-    top: 60px;
+    top: rfs(60px);
     font-family: var(--font-serif);
     content: '\201C';
     color: var(--accent-color);
-    font-size: 200px;
+    font-size: rfs(200px);
     line-height: 0.3;
   }
 }
 
 .quoteQuote {
   font-family: var(--font-serif);
-  font-size: 35px;
-  font-style: italic;
+  font-size: rfs(35px);
   line-height: 1.2;
-  margin-left: 80px;
+  margin-left: rfs(80px);
 }

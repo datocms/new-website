@@ -3,6 +3,7 @@ import UseCaseRecap from 'components/UseCaseRecap';
 import { highlightHtml } from 'components/Highlight';
 import parse from 'html-react-parser';
 import UseCaseHead from 'components/UseCaseHead';
+import Wrapper from 'components/Wrapper';
 import Numbers, { Block as NumbersBlock } from 'components/UseCaseNumbers';
 import Results, { Block as ResultsBlock } from 'components/UseCaseResults';
 import s from './style.module.css';
@@ -153,6 +154,8 @@ export default function UseCase({ post, preview }) {
               image={`${post.coverImage.url}?${duotone}`}
             />
 
+            <div id="usecase" />
+
             <UseCaseRecap
               challenge={highlightHtml(post.challenge)}
               result={highlightHtml(post.result)}
@@ -174,9 +177,11 @@ export default function UseCase({ post, preview }) {
               ))}
             </Results>
 
-            <div className={s.fullStory}>
-              <PostContent content={post.content} />
-            </div>
+            <Wrapper>
+              <div className={s.fullStory}>
+                <PostContent content={post.content} />
+              </div>
+            </Wrapper>
           </div>
         </>
       )}
