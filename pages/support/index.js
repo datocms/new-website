@@ -101,7 +101,9 @@ export default function Support({ preview, topics }) {
           kicker="Support page"
           title={
             <>
-              Got issues? <Highlight>We're here to help!</Highlight>
+              Got&nbsp;issues?
+              <br />
+              <Highlight>We're&nbsp;here to&nbsp;help!</Highlight>
             </>
           }
         />
