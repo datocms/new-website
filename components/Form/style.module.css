@@ -30,6 +30,7 @@
     appearance: none;
 
     &:focus {
+      outline: none;
       border-left-color: var(--azure-color);
     }
 

@@ -45,7 +45,7 @@ const BigLink = ({ children, href }) => {
   );
 };
 
-const LearnResource = ({ href, title, description, target }) =>
+const LearnResource = ({ href, title, target }) =>
   target ? (
     <a className={s.extraLink} href={href} target={target}>
       {title}
