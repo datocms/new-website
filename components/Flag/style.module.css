@@ -4,11 +4,8 @@
 }
 
 .root {
-  text-align: center;
-
   @media screen and (width > 650px) {
     display: grid;
-    text-align: left;
     grid-template-columns: 45% 1fr;
     grid-column-gap: 10%;
     align-items: center;
@@ -70,6 +67,12 @@
 }
 
 .content {
+  text-align: center;
+
+  @media screen and (width > 650px) {
+    text-align: left;
+  }
+
   p {
     margin: 0;
     margin-bottom: rfs(40px);
