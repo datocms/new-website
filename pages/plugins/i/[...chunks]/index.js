@@ -103,7 +103,7 @@ export default function Plugin({ plugin, preview }) {
     query: { chunks },
   } = useRouter();
 
-  const { data } = useSWR(chunks.join('/'), fetcher);
+  const { data } = useSWR(isFallback ? null : chunks.join('/'), fetcher);
   const info = data && data.data.plugin;
 
   return (

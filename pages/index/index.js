@@ -67,7 +67,7 @@ export const getStaticProps = gqlStaticProps(
 function Homepage({ successStories, preview, page }) {
   return (
     <Layout preview={preview}>
-      <Head>{renderMetaTags(page.seo)}</Head>
+      <Head>{page && renderMetaTags(page.seo)}</Head>
       <Hero
         title={
           <>

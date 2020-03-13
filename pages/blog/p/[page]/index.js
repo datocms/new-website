@@ -81,7 +81,7 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
 
   return (
     <Layout preview={preview}>
-      {!router.isFallback && <Head>{renderMetaTags(blog.seo)}</Head>}
+      {!router.isFallback && blog && <Head>{renderMetaTags(blog.seo)}</Head>}
       <Hero
         title={
           <>
@@ -127,7 +127,7 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
               </Link>
             ))}
         </Masonry>
-        {!router.isFallback && (
+        {!router.isFallback && meta && (
           <Paginator
             perPage={perPage}
             currentPage={router.query ? parseInt(router.query.page) : 0}

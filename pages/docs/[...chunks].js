@@ -89,7 +89,7 @@ export const getStaticProps = async function({
     docGroup.pages.find(
       page => (page.slugOverride || page.page.slug) === pageSlug,
     );
-  const titleOverride = page && page.titleOverride;
+  const titleOverride = page ? page.titleOverride : null;
   const pageId = page && page.page.id;
 
   let pageData = null;
@@ -170,7 +170,14 @@ export const getStaticProps = async function({
     pageData = data.page;
   }
 
-  return { props: { docGroup, titleOverride, page: pageData, preview } };
+  return {
+    props: {
+      docGroup,
+      titleOverride,
+      page: pageData,
+      preview: preview ? true : false,
+    },
+  };
 };
 
 export const Sidebar = ({ title, entries }) => {

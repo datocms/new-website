@@ -85,9 +85,9 @@
 }
 
 .title {
-  font-size: 85px;
+  font-size: rfs(85px);
   line-height: 1;
-  margin-bottom: 30px;
+  margin-bottom: rfs(30px);
   font-weight: 600;
   letter-spacing: -0.03em;
   background-clip: text;
