@@ -1,15 +1,18 @@
 .root {
   margin: rfs(150px) 0;
-  --dotBaseUnit: 10vh;
+  --dotBaseUnit: 70px;
 }
 
-@media screen and (width > 650px) {
-  .root {
+.root {
+  text-align: center;
+
+  @media screen and (width > 650px) {
     display: grid;
+    text-align: left;
     grid-template-columns: 45% 1fr;
     grid-column-gap: 10%;
     align-items: center;
-    --dotBaseUnit: 15vh;
+    --dotBaseUnit: 120px;
   }
 }
 
@@ -26,12 +29,8 @@
 
   > svg,
   > img {
-    @media screen and (width < 400px) {
-      width: 80%;
-    }
-
-    @media screen and (401px < width < 650px) {
-      height: 30vh;
+    @media screen and (width < 650px) {
+      width: 50vw;
     }
 
     @media screen and (width >= 650px) {
@@ -46,7 +45,18 @@
   content: '';
   position: absolute;
   z-index: -1;
-  border-radius: 100vh;
+  border-radius: 1000px;
+  animation: move 2s infinite alternate ease-in-out;
+}
+
+@keyframes move {
+  0% {
+    transform: perspective(500px) rotateX(-3deg) translateZ(-500px);
+  }
+
+  100% {
+    transform: perspective(500px) rotateX(3deg) translateZ(-500px);
+  }
 }
 
 .goodDot {

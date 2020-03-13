@@ -1,5 +1,5 @@
 .root {
-  padding: rfs(100px) 0;
+  padding: rfs(50px) 0;
   margin: 0 auto;
   max-width: 800px;
   text-align: center;
@@ -15,7 +15,8 @@
     background-color: #eee;
     width: 60vw;
     max-width: 600px;
-    height: 30vh;
+    height: 30vw;
+    max-height: 200px;
     z-index: -1;
     position: absolute;
     top: 50%;
@@ -34,7 +35,8 @@
     background-color: #eee;
     width: 40vw;
     max-width: 400px;
-    height: 25vh;
+    height: 25vw;
+    max-height: 250px;
     z-index: -1;
     position: absolute;
     top: 50%;
@@ -49,7 +51,8 @@
     background-color: #eee;
     width: 40vw;
     max-width: 400px;
-    height: 25vh;
+    height: 25vw;
+    max-height: 250px;
     z-index: -1;
     position: absolute;
     top: 50%;

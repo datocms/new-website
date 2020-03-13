@@ -1,4 +1,4 @@
-@media (min-aspect-ratio: 4/4) and (width > 900px) {
+@media (width > 900px) {
   .root {
     position: relative;
     --half: 50vw;
@@ -68,7 +68,7 @@
   }
 }
 
-@media (max-aspect-ratio: 4/4) and (width <= 900px) {
+@media (width <= 900px) {
   .root {
     margin: rfs(150px) 0;
   }

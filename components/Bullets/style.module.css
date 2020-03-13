@@ -1,23 +1,33 @@
 .bullet {
   margin-bottom: 12px;
-  display: flex;
   align-items: center;
   font-weight: bold;
   font-size: 17px;
 
-  span {
-    flex: 1;
-  }
-
   &:last-child {
     margin-bottom: 0;
+  }
+
+  @media screen and (width > 650px) {
+    display: flex;
+    align-items: flex-start;
+
+    span {
+      flex: 1;
+    }
   }
 }
 
 .icon {
   width: 30px;
-  display: flex;
-  align-items: center;
+  height: 1.3em;
+  display: block;
+  margin: 0 auto 2px;
+
+  @media screen and (width > 650px) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .bad {

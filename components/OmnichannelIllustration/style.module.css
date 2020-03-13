@@ -23,8 +23,8 @@
   stroke-dasharray: 14;
 
   @media (width > 600px) {
-    stroke-width: 5;
-    stroke-dasharray: 5;
+    stroke-width: 8;
+    stroke-dasharray: 8;
     margin: 15px 40px;
   }
 }

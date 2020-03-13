@@ -1,5 +1,5 @@
 .grid {
-  margin-top: 10vh;
+  margin-top: rfs(100px);
   box-shadow: var(--box-shadow);
   border-radius: 5px;
   padding: 70px;

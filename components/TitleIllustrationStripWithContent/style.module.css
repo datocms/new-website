@@ -23,6 +23,8 @@
 }
 
 .rootInner {
+  text-align: center;
+
   @media (width > 900px) {
     height: 60vh;
     display: flex;
@@ -30,11 +32,12 @@
     overflow: hidden;
     width: 100%;
     position: relative;
+    text-align: left;
   }
 }
 
 .body {
-  margin-bottom: 5vh;
+  margin-bottom: rfs(70px);
 
   @media (width > 800px) {
     width: 45%;

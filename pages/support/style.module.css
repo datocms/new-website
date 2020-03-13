@@ -31,6 +31,10 @@
   background-size: rfs(30px);
   color: inherit;
 
+  &:focus {
+    outline: none;
+  }
+
   option {
     font-family: var(--font-sans);
     font-size: 25px;
@@ -43,7 +47,7 @@
   box-shadow: var(--box-shadow);
   border-radius: 5px;
   max-width: 700px;
-  margin: 0 -25px;
+  margin: 0 calc(var(--page-margin) * -0.5);
   font-size: rfs(18px);
   line-height: 1.4;
 
@@ -140,8 +144,8 @@
 }
 
 .form {
-  margin-left: -25px;
-  margin-right: -25px;
+  margin-left: calc(var(--page-margin) * -0.5);
+  margin-right: calc(var(--page-margin) * -0.5);
 
   @media (width > 900px) {
     margin-left: 0;
@@ -171,7 +175,7 @@
 }
 
 .root {
-  min-height: 80vh;
+  min-height: rfs(800px);
 }
 
 .footer {

@@ -12,7 +12,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   grid-gap: 5vw;
-  margin: 0 -25px;
+  margin: 0 calc(var(--page-margin) * -0.5);
 
   @media (width > 700px) {
     margin: 0;
@@ -121,16 +121,17 @@
 
 .lines {
   stroke-dasharray: 8;
-  stroke: none;
-  stroke-width: 1;
+  stroke: #c2c8d6;
+  stroke-width: 10;
+  stroke-dasharray: 10;
   fill: none;
   fill-rule: evenodd;
   animation: dash 20s linear infinite;
 
-  path,
-  line {
-    stroke: #c2c8d6;
+  @media (width > 600px) {
     stroke-width: 5;
+    stroke-dasharray: 5;
+    margin: 15px 40px;
   }
 }
 

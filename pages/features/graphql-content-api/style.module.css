@@ -1,5 +1,5 @@
 .video {
-  margin: 0 auto 20vh;
+  margin: 0 auto rfs(200px);
   box-shadow: var(--box-shadow);
   border-radius: 3px;
   overflow: hidden;

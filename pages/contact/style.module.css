@@ -17,7 +17,7 @@
 }
 
 .picker {
-  margin: 0 -25px;
+  margin: 0 calc(var(--page-margin) * -0.5);
   @media (width > 900px) {
     margin: 0;
     min-width: 540px;

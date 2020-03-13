@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
+import Wrapper from 'components/Wrapper';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
 import TitleIllustrationStripWithContent from 'components/TitleIllustrationStripWithContent';
 import Result from 'components/Result';
@@ -69,7 +70,9 @@ function DigitalMarketers({ integrations, preview, page }) {
       />
 
       <Space bottom={3}>
-        <OmnichannelIllustration />
+        <Wrapper>
+          <OmnichannelIllustration />
+        </Wrapper>
       </Space>
 
       <TitleIllustrationStripWithContent

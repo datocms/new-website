@@ -4,6 +4,8 @@ import Highlight from 'components/Highlight';
 import Button from 'components/Button';
 import Checks from 'components/Checks';
 import UseCaseExcerpts from 'components/UseCaseExcerpts';
+import OmnichannelIllustration from 'components/OmnichannelIllustration';
+import Wrapper from 'components/Wrapper';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 import PersonasPicker from 'components/PersonasPicker';
 import InterstitialTitle from 'components/InterstitialTitle';
@@ -90,7 +92,7 @@ function Homepage({ successStories, preview, page }) {
 
       <LogosBar clients={[Dropbox, Hashicorp, Verizon, Vmware, Linkedin]} />
 
-      <Space top={2} bottom={2}>
+      <Space top={2}>
         <InterstitialTitle subtitle="Here’s 3 symptoms to&nbsp;watch&nbsp;out">
           Are you losing money because of{' '}
           <Highlight>legacy&nbsp;content infrastructure</Highlight>?
@@ -221,6 +223,12 @@ function Homepage({ successStories, preview, page }) {
         <InterstitialTitle style="two">
           Here's how an Headless&nbsp;CMS can&nbsp;help&nbsp;your company
         </InterstitialTitle>
+      </Space>
+
+      <Space top={2}>
+        <Wrapper>
+          <OmnichannelIllustration />
+        </Wrapper>
       </Space>
 
       <Flag

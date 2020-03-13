@@ -1,5 +1,5 @@
 .root {
-  padding: 15vh 0 13vh;
+  padding: rfs(150px) 0;
   background: linear-gradient(45deg, #faedff, #e4faff);
   clip-path: var(--clip-path);
   text-align: center;

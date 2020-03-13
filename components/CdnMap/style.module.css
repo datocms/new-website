@@ -1,6 +1,6 @@
 .map {
   position: relative;
-  margin: 0 -25px;
+  margin: 0 calc(var(--page-margin) * -0.5);
 
   svg {
     width: 100%;
