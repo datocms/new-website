@@ -54,14 +54,14 @@
 
   @media (width > 900px) {
     padding: 40px 50px 40px 150px;
+
+    &:hover {
+      padding-left: 160px;
+    }
   }
 
   &:last-child {
     border-bottom-width: 0;
-  }
-
-  &:hover {
-    padding-left: 160px;
   }
 }
 
