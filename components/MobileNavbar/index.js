@@ -70,13 +70,16 @@ const Feature = ({ href, icon: Icon, title, description }) => (
 );
 
 export default function Navbar() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const toggleVisibility = useCallback(() => {
     setVisible(v => !v);
   });
 
   return (
     <>
+      {visible && (
+        <div className={s.overlay} onClick={() => setVisible(false)} />
+      )}
       <div className={classnames(s.root)}>
         <Wrapper>
           <div className={s.innerRoot}>
@@ -92,144 +95,146 @@ export default function Navbar() {
           </div>
         </Wrapper>
         {visible && (
-          <div className={s.pane}>
-            <Wrapper>
-              <Group title="Why DatoCMS">
-                <div className={s.sectionTitle}>Features</div>
-                <Feature
-                  icon={Cdn}
-                  title="Worldwide CDN"
-                  href="/features/worldwide-cdn"
-                  description="Performant, secure, and close to every customer"
-                />
+          <>
+            <div className={s.pane}>
+              <Wrapper>
+                <Group title="Why DatoCMS">
+                  <div className={s.sectionTitle}>Features</div>
+                  <Feature
+                    icon={Cdn}
+                    title="Worldwide CDN"
+                    href="/features/worldwide-cdn"
+                    description="Performant, secure, and close to every customer"
+                  />
 
-                <Feature
-                  icon={GraphQl}
-                  title="GraphQL Content API"
-                  href="/features/graphql-content-api"
-                  description="Develop faster with powerful developer tools"
-                />
+                  <Feature
+                    icon={GraphQl}
+                    title="GraphQL Content API"
+                    href="/features/graphql-content-api"
+                    description="Develop faster with powerful developer tools"
+                  />
 
-                <Feature
-                  icon={Image}
-                  title="Images API"
-                  href="/features/images-api"
-                  description="Endless image transformations at your disposal"
-                />
+                  <Feature
+                    icon={Image}
+                    title="Images API"
+                    href="/features/images-api"
+                    description="Endless image transformations at your disposal"
+                  />
 
-                <Feature
-                  icon={Video}
-                  title="Video streaming/encoding"
-                  href="/features/video-streaming-encoding"
-                  description="Produce videos and serve them fast to any device"
-                />
+                  <Feature
+                    icon={Video}
+                    title="Video streaming/encoding"
+                    href="/features/video-streaming-encoding"
+                    description="Produce videos and serve them fast to any device"
+                  />
 
-                <Feature
-                  icon={Languages}
-                  title="Multi-language"
-                  href="/features/multi-language"
-                  description="Reach your global audience with localized content"
-                />
+                  <Feature
+                    icon={Languages}
+                    title="Multi-language"
+                    href="/features/multi-language"
+                    description="Reach your global audience with localized content"
+                  />
 
-                <Feature
-                  icon={Layouts}
-                  title="Dynamic layouts"
-                  href="/features/dynamic-layouts"
-                  description="Easily build dynamic layouts for landing pages"
-                />
+                  <Feature
+                    icon={Layouts}
+                    title="Dynamic layouts"
+                    href="/features/dynamic-layouts"
+                    description="Easily build dynamic layouts for landing pages"
+                  />
 
-                <div className={s.sectionTitle}>Team</div>
-                <Link href="/team/developers">
-                  <a className={s.extraLink}>For developers</a>
-                </Link>
-                <Link href="/team/digital-marketers">
-                  <a className={s.extraLink}>For digital marketers</a>
-                </Link>
-                <Link href="/team/content-creators">
-                  <a className={s.extraLink}>For content creators</a>
-                </Link>
+                  <div className={s.sectionTitle}>Team</div>
+                  <Link href="/team/developers">
+                    <a className={s.extraLink}>For developers</a>
+                  </Link>
+                  <Link href="/team/digital-marketers">
+                    <a className={s.extraLink}>For digital marketers</a>
+                  </Link>
+                  <Link href="/team/content-creators">
+                    <a className={s.extraLink}>For content creators</a>
+                  </Link>
 
-                <div className={s.sectionTitle}>Enterprise</div>
-                <Link href="/enterprise">
-                  <a className={s.extraLink}>DatoCMS for Enterprise</a>
-                </Link>
-              </Group>
+                  <div className={s.sectionTitle}>Enterprise</div>
+                  <Link href="/enterprise">
+                    <a className={s.extraLink}>DatoCMS for Enterprise</a>
+                  </Link>
+                </Group>
 
-              <Group title="Success stories">
-                <Link href="/customers/[slug]" as="/customers/arduino">
-                  <a className={s.extraLink}>Arduino</a>
-                </Link>
-                <Link href="/customers/[slug]" as="/customers/hashicorp">
-                  <a className={s.extraLink}>Hashicorp</a>
-                </Link>
-                <Link href="/customers/[slug]" as="/customers/nike">
-                  <a className={s.extraLink}>Nike</a>
-                </Link>
-                <Link href="/customers/[slug]" as="/customers/chilly-s">
-                  <a className={s.extraLink}>Chilly's Bottles</a>
-                </Link>
-              </Group>
+                <Group title="Success stories">
+                  <Link href="/customers/[slug]" as="/customers/arduino">
+                    <a className={s.extraLink}>Arduino</a>
+                  </Link>
+                  <Link href="/customers/[slug]" as="/customers/hashicorp">
+                    <a className={s.extraLink}>Hashicorp</a>
+                  </Link>
+                  <Link href="/customers/[slug]" as="/customers/nike">
+                    <a className={s.extraLink}>Nike</a>
+                  </Link>
+                  <Link href="/customers/[slug]" as="/customers/chilly-s">
+                    <a className={s.extraLink}>Chilly's Bottles</a>
+                  </Link>
+                </Group>
 
-              <BigLink href="/integrations">Integrations</BigLink>
+                <BigLink href="/integrations">Integrations</BigLink>
 
-              <Group title="Learn">
-                <LearnResource
-                  title="Documentation"
-                  description="Guides, tutorials and API reference"
-                  href="/docs"
-                />
+                <Group title="Learn">
+                  <LearnResource
+                    title="Documentation"
+                    description="Guides, tutorials and API reference"
+                    href="/docs"
+                  />
 
-                <LearnResource
-                  title="Blog"
-                  description="Culture, learnings, and announcements"
-                  href="/blog"
-                />
+                  <LearnResource
+                    title="Blog"
+                    description="Culture, learnings, and announcements"
+                    href="/blog"
+                  />
 
-                <LearnResource
-                  title="Product updates"
-                  description="Changelog for new features and improvements"
-                  href="/product-updates"
-                />
+                  <LearnResource
+                    title="Product updates"
+                    description="Changelog for new features and improvements"
+                    href="/product-updates"
+                  />
 
-                <LearnResource
-                  title={
-                    <>
-                      Community forum <External />
-                    </>
-                  }
-                  description="Ask questions and start discussions with your peers."
-                  href="https://community.datocms.com"
-                  target="_blank"
-                />
-                <LearnResource
-                  title="Slack channel"
-                  description="Chat live with other developers in our Slack channel"
-                  href="/slack"
-                />
-                <LearnResource
-                  title="Support"
-                  description="Get in touch with our team"
-                  href="/support"
-                />
-              </Group>
+                  <LearnResource
+                    title={
+                      <>
+                        Community forum <External />
+                      </>
+                    }
+                    description="Ask questions and start discussions with your peers."
+                    href="https://community.datocms.com"
+                    target="_blank"
+                  />
+                  <LearnResource
+                    title="Slack channel"
+                    description="Chat live with other developers in our Slack channel"
+                    href="/slack"
+                  />
+                  <LearnResource
+                    title="Support"
+                    description="Get in touch with our team"
+                    href="/support"
+                  />
+                </Group>
 
-              <BigLink href="/pricing">Pricing</BigLink>
+                <BigLink href="/pricing">Pricing</BigLink>
 
-              <div className={s.actions}>
-                <Link href="/contact">
-                  <a className={s.sales}>Contact sales</a>
-                </Link>
+                <div className={s.actions}>
+                  <Link href="/contact">
+                    <a className={s.sales}>Contact sales</a>
+                  </Link>
 
-                <Button
-                  as="a"
-                  p="small"
-                  href="https://dashboard.datocms.com/signup"
-                >
-                  Try for free!
-                </Button>
-              </div>
-            </Wrapper>
-          </div>
+                  <Button
+                    as="a"
+                    p="small"
+                    href="https://dashboard.datocms.com/signup"
+                  >
+                    Try for free!
+                  </Button>
+                </div>
+              </Wrapper>
+            </div>
+          </>
         )}
       </div>
     </>
