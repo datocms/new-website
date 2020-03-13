@@ -4,8 +4,11 @@
 }
 
 .root {
+  text-align: center;
+
   @media screen and (width > 650px) {
     display: grid;
+    text-align: center;
     grid-template-columns: 45% 1fr;
     grid-column-gap: 10%;
     align-items: center;
@@ -19,6 +22,7 @@
 
 .image {
   margin-bottom: 40px;
+  text-align: left;
 
   @media screen and (width > 650px) {
     margin-bottom: 0;
@@ -26,6 +30,9 @@
 
   > svg,
   > img {
+    display: block;
+    margin: 0 auto;
+
     @media screen and (width < 650px) {
       width: 50vw;
     }
@@ -67,8 +74,6 @@
 }
 
 .content {
-  text-align: center;
-
   @media screen and (width > 650px) {
     text-align: left;
   }
