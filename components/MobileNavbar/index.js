@@ -70,7 +70,7 @@ const Feature = ({ href, icon: Icon, title, description }) => (
 );
 
 export default function Navbar() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const toggleVisibility = useCallback(() => {
     setVisible(v => !v);
   });
