@@ -24,3 +24,10 @@ img,
 video {
   max-width: 100%;
 }
+
+::-moz-selection {
+  background: #f4cf58;
+}
+::selection {
+  background: #f4cf58;
+}

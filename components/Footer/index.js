@@ -129,6 +129,11 @@ export default function Footer({ noCta }) {
                           <a>Support</a>
                         </Link>
                       </div>
+                      <div className={s.groupLink}>
+                        <Link href="/contact">
+                          <a>Contact sales</a>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

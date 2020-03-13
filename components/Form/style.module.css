@@ -19,6 +19,7 @@
   textarea {
     border: 0;
     margin: 0;
+    background-color: white;
     padding: 45px rfs(29px) 20px;
     font-family: inherit;
     font-size: rfs(17px);
