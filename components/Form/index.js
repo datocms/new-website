@@ -18,13 +18,22 @@ export const Field = ({
   validations,
   options,
   as,
+  type,
+  multiple,
 }) => {
   const { register, control, watch, errors } = useFormContext();
   const ref = register(validations);
   const value = watch(name);
 
   let input = (
-    <input name={name} id={name} placeholder={placeholder} ref={ref} />
+    <input
+      name={name}
+      id={name}
+      placeholder={placeholder}
+      ref={ref}
+      type={type}
+      multiple={multiple}
+    />
   );
 
   if (options) {
