@@ -25,6 +25,7 @@
 .footerRoot {
   color: white;
   padding: rfs(60px) 0;
+  text-align: center;
 
   a {
     color: white;
@@ -33,6 +34,10 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  @media (width > 900px) {
+    text-align: left;
   }
 }
 
@@ -87,6 +92,7 @@
   background: #13151b;
   padding: rfs(50px) 0;
   color: #ddd;
+  text-align: center;
 
   a {
     color: #ddd;
@@ -95,6 +101,10 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  @media (width > 900px) {
+    text-align: left;
   }
 }
 
@@ -131,6 +141,12 @@
     a,
     span {
       display: inline;
+      &:after {
+        content: ' —';
+      }
+      &:last-child:after {
+        display: none;
+      }
     }
   }
 }

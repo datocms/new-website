@@ -7,14 +7,29 @@
 
   &:before {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 50%;
     top: 0;
     font-family: var(--font-serif);
     content: '\201C';
     color: var(--accent-color);
     font-size: 150px;
     line-height: 0.3;
+    transform: translateX(-50%);
+  }
+
+  @media (width > 900px) {
+    &:before {
+      left: 0;
+      transform: translateX(0);
+    }
+  }
+}
+
+.author {
+  text-align: center;
+
+  @media (width > 900px) {
+    text-align: left;
   }
 }
 
@@ -24,6 +39,7 @@
   margin-bottom: 40px;
   letter-spacing: -0.03em;
   line-height: 1.2;
+  text-align: center;
 
   &:before {
     content: '\201C';
@@ -31,5 +47,9 @@
 
   &:after {
     content: '\201D';
+  }
+
+  @media (width > 900px) {
+    text-align: left;
   }
 }

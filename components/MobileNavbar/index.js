@@ -45,16 +45,24 @@ const BigLink = ({ children, href }) => {
   );
 };
 
-const LearnResource = ({ href, title, target }) =>
-  target ? (
-    <a className={s.extraLink} href={href} target={target}>
-      {title}
+const LearnResource = ({ href, title, target, description }) => {
+  const content = (
+    <>
+      <div className={s.learnResourceTitle}>{title}</div>
+      <div className={s.learnResourceDesc}>{description}</div>
+    </>
+  );
+
+  return target ? (
+    <a className={s.learnResource} href={href} target={target}>
+      {content}
     </a>
   ) : (
     <Link href={href}>
-      <a className={s.extraLink}>{title}</a>
+      <a className={s.learnResource}>{content}</a>
     </Link>
   );
+};
 
 const Feature = ({ href, icon: Icon, title, description }) => (
   <Link href={href}>
@@ -99,6 +107,17 @@ export default function Navbar() {
             <div className={s.pane}>
               <Wrapper>
                 <Group title="Why DatoCMS">
+                  <div className={s.sectionTitle}>Team</div>
+                  <Link href="/team/developers">
+                    <a className={s.extraLink}>For developers</a>
+                  </Link>
+                  <Link href="/team/digital-marketers">
+                    <a className={s.extraLink}>For digital marketers</a>
+                  </Link>
+                  <Link href="/team/content-creators">
+                    <a className={s.extraLink}>For content creators</a>
+                  </Link>
+
                   <div className={s.sectionTitle}>Features</div>
                   <Feature
                     icon={Cdn}
@@ -142,17 +161,6 @@ export default function Navbar() {
                     description="Easily build dynamic layouts for landing pages"
                   />
 
-                  <div className={s.sectionTitle}>Team</div>
-                  <Link href="/team/developers">
-                    <a className={s.extraLink}>For developers</a>
-                  </Link>
-                  <Link href="/team/digital-marketers">
-                    <a className={s.extraLink}>For digital marketers</a>
-                  </Link>
-                  <Link href="/team/content-creators">
-                    <a className={s.extraLink}>For content creators</a>
-                  </Link>
-
                   <div className={s.sectionTitle}>Enterprise</div>
                   <Link href="/enterprise">
                     <a className={s.extraLink}>DatoCMS for Enterprise</a>
@@ -177,44 +185,49 @@ export default function Navbar() {
                 <BigLink href="/integrations">Integrations</BigLink>
 
                 <Group title="Learn">
-                  <LearnResource
-                    title="Documentation"
-                    description="Guides, tutorials and API reference"
-                    href="/docs"
-                  />
+                  <div className={s.cols}>
+                    <div className={s.col}>
+                      <LearnResource
+                        title="Documentation"
+                        description="Guides, tutorials and API reference"
+                        href="/docs"
+                      />
 
-                  <LearnResource
-                    title="Blog"
-                    description="Culture, learnings, and announcements"
-                    href="/blog"
-                  />
+                      <LearnResource
+                        title="Blog"
+                        description="Culture, learnings, and announcements"
+                        href="/blog"
+                      />
 
-                  <LearnResource
-                    title="Product updates"
-                    description="Changelog for new features and improvements"
-                    href="/product-updates"
-                  />
-
-                  <LearnResource
-                    title={
-                      <>
-                        Community forum <External />
-                      </>
-                    }
-                    description="Ask questions and start discussions with your peers."
-                    href="https://community.datocms.com"
-                    target="_blank"
-                  />
-                  <LearnResource
-                    title="Slack channel"
-                    description="Chat live with other developers in our Slack channel"
-                    href="/slack"
-                  />
-                  <LearnResource
-                    title="Support"
-                    description="Get in touch with our team"
-                    href="/support"
-                  />
+                      <LearnResource
+                        title="Product updates"
+                        description="Changelog for new features and improvements"
+                        href="/product-updates"
+                      />
+                    </div>
+                    <div className={s.col}>
+                      <LearnResource
+                        title={
+                          <>
+                            Community forum <External />
+                          </>
+                        }
+                        description="Ask questions and start discussions with your peers."
+                        href="https://community.datocms.com"
+                        target="_blank"
+                      />
+                      <LearnResource
+                        title="Slack channel"
+                        description="Chat live with other developers in our Slack channel"
+                        href="/slack"
+                      />
+                      <LearnResource
+                        title="Support"
+                        description="Get in touch with our team"
+                        href="/support"
+                      />
+                    </div>
+                  </div>
                 </Group>
 
                 <BigLink href="/pricing">Pricing</BigLink>

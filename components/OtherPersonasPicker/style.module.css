@@ -34,6 +34,7 @@
   position: relative;
   padding: 30px;
   margin-bottom: 30px;
+  text-align: center;
 
   &:hover {
     transform: translateY(-10px);
@@ -46,16 +47,17 @@
   @media (width > 900px) {
     padding: 40px 50px 40px 150px;
     margin-bottom: 0px;
+    text-align: left;
   }
 }
 
 .personasImage {
   width: 40px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
 
   @media (width > 900px) {
     width: 60px;
-
+    margin: 0 0 20px;
     position: absolute;
     left: 50px;
   }

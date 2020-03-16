@@ -12,7 +12,7 @@ import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
 import Quote from 'components/Quote';
 import TitleStripWithContent from 'components/TitleStripWithContent';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import SuccessIcon from 'public/icons/regular/check.svg';
 import Arrow3 from 'public/images/illustrations/arrow-sketch-3.svg';
 import Crown from 'public/images/illustrations/corona2.svg';
 import Bugs from 'public/images/illustrations/bugs1.svg';

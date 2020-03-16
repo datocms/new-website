@@ -171,7 +171,37 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
+.cols {
+  display: flex;
+  align-items: stretch;
+}
+
+.col {
+  flex: 1;
+}
+
+.learnResource {
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  color: black;
+  margin-bottom: 15px;
+}
+
+.learnResourceTitle {
+  margin-bottom: 5px;
+}
+
+.learnResourceDesc {
+  font-size: 14px;
+  color: var(--light-body-color);
+}
+
 @media screen and (width > 900px) {
+  .overlay {
+    display: none;
+  }
+
   .root {
     visibility: hidden;
     height: 0;

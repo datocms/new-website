@@ -189,9 +189,9 @@ export default function Footer({ noCta }) {
             </Link>
           </div>
           <div className={s.finalLine}>
-            <a href="mailto:support@datocms.com">support@datocms.com —</a>{' '}
+            <a href="mailto:support@datocms.com">support@datocms.com</a>{' '}
             <span>
-              ©{new Date().getUTCFullYear()} Dato srl, all rights reserved —
+              ©{new Date().getUTCFullYear()} Dato srl, all rights reserved
             </span>{' '}
             <span>P.IVA 06969620480</span>
           </div>

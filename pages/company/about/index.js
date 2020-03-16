@@ -62,7 +62,7 @@ export default function About({ members, page }) {
       />
       <Flag
         style="good"
-        image="box-things"
+        image="team"
         title={
           <>
             Designed by an agency{' '}
@@ -103,7 +103,7 @@ export default function About({ members, page }) {
       />
       <Flag
         style="good"
-        image="box-things"
+        image="growing"
         title={
           <>
             Slowly and <FlagHighlight>steadily</FlagHighlight>

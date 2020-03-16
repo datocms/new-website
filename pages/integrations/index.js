@@ -80,15 +80,17 @@ const Category = ({ title, description, children, noBrowse }) => (
 );
 
 const Box = ({ title, description, image, href, as }) => (
-  <Link href={href} as={as}>
-    <a className={s.box}>
-      {image}
-      <div className={s.boxBody}>
-        <div className={s.boxTitle}>{title}</div>
-        <div className={s.boxDesc}>{description}</div>
-      </div>
-    </a>
-  </Link>
+  <div className={s.boxContainer}>
+    <Link href={href} as={as}>
+      <a className={s.box}>
+        {image}
+        <div className={s.boxBody}>
+          <div className={s.boxTitle}>{title}</div>
+          <div className={s.boxDesc}>{description}</div>
+        </div>
+      </a>
+    </Link>
+  </div>
 );
 
 const LogoImage = ({ logo }) => (
@@ -111,116 +113,114 @@ export default function IntegrationsPage({ page }) {
         }
         subtitle="Expand and customize the capabilities of DatoCMS, integrating your favorite third-party services"
       />
-      <Wrapper>
+      <Category
+        title="Web technologies"
+        description={
+          <>
+            DatoCMS integrates with every framework so that you can always
+            choose the best fit for your project.
+          </>
+        }
+      >
+        {page.technologies.map(item => (
+          <Box
+            key={item.slug}
+            title={item.name}
+            as={item.landingUrl || item.documentationUrl}
+            href={item.landingUrl || docHref(item.documentationUrl)}
+            description={`Use DatoCMS into your ${item.name} website`}
+            image={<LogoImage logo={item.logo} />}
+          />
+        ))}
+      </Category>
+      <Category
+        title="Community Plugins"
+        description={
+          <>
+            Easily expand and customize the capabilities of DatoCMS with one of
+            the existing community plugins.
+          </>
+        }
+      >
+        {page.plugins.map(item => (
+          <Box
+            key={item.slug}
+            href="/plugins/i/[...chunks]"
+            as={`/plugins/i/${item.packageName}`}
+            title={item.title}
+            description={truncate(item.description, 55)}
+            image={
+              <Image
+                className={s.boxImageImage}
+                data={item.coverImage.responsiveImage}
+              />
+            }
+          />
+        ))}
+      </Category>
+      <Category
+        title="Hosting &amp; CI Building"
+        description={
+          <>
+            Server, serverless or static. No matter the stack you're using,
+            we've got you covered.
+          </>
+        }
+      >
+        {page.hostingBuilding.map(item => (
+          <Box
+            key={item.slug}
+            as={item.landingUrl || item.documentationUrl}
+            href={item.landingUrl || docHref(item.documentationUrl)}
+            title={item.name}
+            description={`Trigger a build of your website on ${item.name}`}
+            image={<LogoImage logo={item.logo} />}
+          />
+        ))}
+      </Category>
+      <div className={s.grid}>
         <Category
-          title="Web technologies"
+          title="Assets storage"
+          noBrowse
           description={
             <>
-              DatoCMS integrates with every framework so that you can always
-              choose the best fit for your project.
+              Keep 100% ownership of your media files using your own AWS/Google
+              Storage buckets.
             </>
           }
         >
-          {page.technologies.map(item => (
+          {page.assetsStorage.map(item => (
             <Box
               key={item.slug}
-              title={item.name}
               as={item.landingUrl || item.documentationUrl}
               href={item.landingUrl || docHref(item.documentationUrl)}
-              description={`Use DatoCMS into your ${item.name} website`}
+              title={item.name}
+              description={`Store your DatoCMS assets in ${item.name}`}
               image={<LogoImage logo={item.logo} />}
             />
           ))}
         </Category>
         <Category
-          title="Community Plugins"
+          title="Single Sign-On"
+          noBrowse
           description={
             <>
-              Easily expand and customize the capabilities of DatoCMS with one
-              of the existing community plugins.
+              Keep your company data secure with centralized users management.
             </>
           }
         >
-          {page.plugins.map(item => (
-            <Box
-              key={item.slug}
-              href="/plugins/i/[...chunks]"
-              as={`/plugins/i/${item.packageName}`}
-              title={item.title}
-              description={truncate(item.description, 55)}
-              image={
-                <Image
-                  className={s.boxImageImage}
-                  data={item.coverImage.responsiveImage}
-                />
-              }
-            />
-          ))}
-        </Category>
-        <Category
-          title="Hosting &amp; CI Building"
-          description={
-            <>
-              Server, serverless or static. No matter the stack you're using,
-              we've got you covered.
-            </>
-          }
-        >
-          {page.hostingBuilding.map(item => (
+          {page.singleSignOn.map(item => (
             <Box
               key={item.slug}
               as={item.landingUrl || item.documentationUrl}
               href={item.landingUrl || docHref(item.documentationUrl)}
               title={item.name}
-              description={`Trigger a build of your website on ${item.name}`}
+              description={`Provision/deprovision users using your ${item.name} account`}
               image={<LogoImage logo={item.logo} />}
             />
           ))}
         </Category>
-        <div className={s.grid}>
-          <Category
-            title="Assets storage"
-            noBrowse
-            description={
-              <>
-                Keep 100% ownership of your media files using your own
-                AWS/Google Storage buckets.
-              </>
-            }
-          >
-            {page.assetsStorage.map(item => (
-              <Box
-                key={item.slug}
-                as={item.landingUrl || item.documentationUrl}
-                href={item.landingUrl || docHref(item.documentationUrl)}
-                title={item.name}
-                description={`Store your DatoCMS assets in ${item.name}`}
-                image={<LogoImage logo={item.logo} />}
-              />
-            ))}
-          </Category>
-          <Category
-            title="Single Sign-On"
-            noBrowse
-            description={
-              <>
-                Keep your company data secure with centralized users management.
-              </>
-            }
-          >
-            {page.singleSignOn.map(item => (
-              <Box
-                key={item.slug}
-                as={item.landingUrl || item.documentationUrl}
-                href={item.landingUrl || docHref(item.documentationUrl)}
-                title={item.name}
-                description={`Provision/deprovision users using your ${item.name} account`}
-                image={<LogoImage logo={item.logo} />}
-              />
-            ))}
-          </Category>
-        </div>
-      </Wrapper>
+      </div>
     </Layout>
   );
 }
