@@ -1,6 +1,8 @@
 .root {
-  display: flex;
-  align-items: center;
+  @media (width > 900px) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .box,
@@ -10,6 +12,12 @@
 
 .left {
   position: relative;
+  max-width: 600px;
+  margin: 0 auto rfs(70px) auto;
+
+  @media (width > 900px) {
+    margin: 0;
+  }
 }
 
 .chrometop {
@@ -21,20 +29,36 @@
   position: absolute;
   top: -40px;
   left: 20px;
-  width: 100%;
+  right: 20px;
+
+  @media (width > 900) {
+    top: -40px;
+    left: 20px;
+    right: auto;
+    width: 100%;
+  }
 }
 
 .code {
   background-color: #282d3f;
+  max-width: 600px;
   &:before {
     content: '';
-    padding-top: 66%;
+    padding-top: 66.666%;
     display: block;
   }
 }
 
 .box {
-  padding-left: 80px;
+  max-width: 600px;
+  min-width: 300px;
+  margin: 0 auto;
+
+  @media (width > 900px) {
+    margin: 0;
+    margin-left: rfs(80px);
+    max-width: none;
+  }
 }
 
 .screenshot {
@@ -50,7 +74,7 @@
 
 .title {
   font-family: var(--font-headline);
-  font-size: 50px;
+  font-size: rfs(50px);
   margin-bottom: 10px;
   line-height: 1;
   margin-bottom: 20px;

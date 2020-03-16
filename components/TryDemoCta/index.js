@@ -37,11 +37,13 @@ export default function TryDemoCta({
             <Button as="a" href={href}>
               Start new project
             </Button>
-            <span> or </span>
             {docsAs && (
-              <Link as={docsAs} href={docHref(docsAs)}>
-                <a className={s.docs}>Read our docs</a>
-              </Link>
+              <>
+                <span> or </span>
+                <Link as={docsAs} href={docHref(docsAs)}>
+                  <a className={s.docs}>Read our docs</a>
+                </Link>
+              </>
             )}
           </div>
         </div>

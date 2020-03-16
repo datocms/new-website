@@ -41,10 +41,13 @@
 }
 
 .result {
-  width: 75ch;
   position: relative;
   animation: appear 1200ms ease-in-out;
   animation-fill-mode: both;
+
+  @media (width > 900px) {
+    width: 75ch;
+  }
 
   &:after {
     content: '';

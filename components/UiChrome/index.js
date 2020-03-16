@@ -10,7 +10,6 @@ export default function UiChrome({ title = 'Acme Inc. - DatoCMS', children }) {
           <div className={s.barButton} />
         </div>
         <div className={s.tab}>{title}</div>
-        <div className={s.space} />
       </div>
       {children}
     </div>

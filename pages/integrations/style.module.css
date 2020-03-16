@@ -59,7 +59,7 @@
   padding: 30px;
   height: 150px;
   overflow: hidden;
-  background: linear-gradient(45deg, #f9ecfe, #fefae4);
+  background: linear-gradient(45deg, #f9ecfe, white);
   display: flex;
   align-items: center;
   justify-content: center;

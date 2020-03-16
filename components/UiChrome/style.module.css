@@ -33,4 +33,9 @@
   display: flex;
   align-items: center;
   color: var(--extra-light-body-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 1px;
 }

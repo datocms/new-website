@@ -144,7 +144,7 @@ export default function IntegrationsPage({ page }) {
       >
         {page.plugins.map(item => (
           <Box
-            key={item.slug}
+            key={item.packageName}
             href="/plugins/i/[...chunks]"
             as={`/plugins/i/${item.packageName}`}
             title={item.title}
