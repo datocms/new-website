@@ -10,9 +10,9 @@ import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import Hero from 'components/Hero';
 import SmartMarkdown from 'components/SmartMarkdown';
-import Highlight, { highlightHtml } from 'components/Highlight';
+import { highlightHtml } from 'components/Highlight';
 import Wrapper from 'components/Wrapper';
-import Logo from 'public/images/logos/next.svg';
+import LazyImage from 'components/LazyImage';
 import Button from 'components/Button';
 import Checks from 'components/Checks';
 import CdnMap from 'components/CdnMap';
@@ -35,6 +35,7 @@ import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
 import TryDemoCta from 'components/TryDemoCta';
 import Space from 'components/Space';
+import VideoPlayer from 'components/VideoPlayer';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -85,6 +86,8 @@ export const getStaticProps = gqlStaticProps(
             content(markdown: true)
             code
             language
+            githubRepoTitle
+            githubPackageName
             id
             _modelApiKey
           }
@@ -100,11 +103,23 @@ export const getStaticProps = gqlStaticProps(
             id
             _modelApiKey
           }
+          ... on LandingVideoBlockRecord {
+            title
+            content(markdown: true)
+            video {
+              video {
+                streamingUrl
+              }
+            }
+            id
+            _modelApiKey
+          }
           ... on TryDemoBlockRecord {
             id
             _modelApiKey
             title
             content(markdown: true)
+            docsUrl
             screenshot {
               responsiveImage(
                 imgixParams: { w: 600, h: 400, fit: crop, crop: top }
@@ -134,7 +149,7 @@ export default function UseCase({ landing, preview }) {
         <>
           <Head>{renderMetaTags(landing.seo)}</Head>
           <Hero
-            kicker={<Logo />}
+            kicker={<LazyImage className={s.logo} src={landing.logo.url} />}
             title={highlightHtml(landing.title)}
             subtitle={<SmartMarkdown>{landing.subtitle}</SmartMarkdown>}
           >
@@ -289,7 +304,26 @@ export default function UseCase({ landing, preview }) {
                 <Space top={3}>
                   <TitleStripWithContent
                     title={highlightHtml(block.title)}
-                    subtitle={<SmartMarkdown>{block.content}</SmartMarkdown>}
+                    subtitle={
+                      <>
+                        <SmartMarkdown>{block.content}</SmartMarkdown>
+                        {block.githubPackageName && (
+                          <div>
+                            <div className={s.readMore}>
+                              {block.githubRepoTitle}
+                            </div>
+                            <div className={s.button}>
+                              <Arrow3 />
+                              <GitHubButton
+                                href={`https://github.com/datocms/${block.githubPackageName}`}
+                              >
+                                {block.githubPackageName}
+                              </GitHubButton>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    }
                   >
                     <CodeExcerpt code={block.code} language={block.language} />
                   </TitleStripWithContent>
@@ -319,7 +353,26 @@ export default function UseCase({ landing, preview }) {
                   windowTitle={`${landing.name} + DatoCMS demo`}
                   description={<SmartMarkdown>{block.content}</SmartMarkdown>}
                   href={`https://dashboard.datocms.com/deploy?repo=${block.demo.githubRepo}`}
+                  docsAs={block.docsUrl}
                 />
+              )}
+              {block._modelApiKey === 'landing_video_block' && (
+                <Space top={3}>
+                  <TitleStripWithContent
+                    title={highlightHtml(block.title)}
+                    subtitle={<SmartMarkdown>{block.content}</SmartMarkdown>}
+                  >
+                    <div className={s.video}>
+                      <VideoPlayer
+                        controls
+                        autoPlay
+                        muted
+                        loop
+                        src={block.video.video.streamingUrl}
+                      />
+                    </div>
+                  </TitleStripWithContent>
+                </Space>
               )}
             </React.Fragment>
           ))}
