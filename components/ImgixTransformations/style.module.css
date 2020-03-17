@@ -14,9 +14,12 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transition: all 0.2s 1000ms ease-in-out;
   box-shadow: var(--box-shadow);
   border-radius: 5px;
+}
+
+.withTransitions {
+  transition: all 0.2s 1000ms ease-in-out;
 }
 
 .image {

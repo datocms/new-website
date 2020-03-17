@@ -127,7 +127,9 @@ export default function IntegrationsPage({ page }) {
             key={item.slug}
             title={item.name}
             as={item.landingUrl || item.documentationUrl}
-            href={item.landingUrl || docHref(item.documentationUrl)}
+            href={
+              item.landingUrl ? '/cms/[slug]' : docHref(item.documentationUrl)
+            }
             description={`Use DatoCMS into your ${item.name} website`}
             image={<LogoImage logo={item.logo} />}
           />
@@ -170,8 +172,8 @@ export default function IntegrationsPage({ page }) {
         {page.hostingBuilding.map(item => (
           <Box
             key={item.slug}
-            as={item.landingUrl || item.documentationUrl}
-            href={item.landingUrl || docHref(item.documentationUrl)}
+            as={item.documentationUrl}
+            href={docHref(item.documentationUrl)}
             title={item.name}
             description={`Trigger a build of your website on ${item.name}`}
             image={<LogoImage logo={item.logo} />}
@@ -192,8 +194,8 @@ export default function IntegrationsPage({ page }) {
           {page.assetsStorage.map(item => (
             <Box
               key={item.slug}
-              as={item.landingUrl || item.documentationUrl}
-              href={item.landingUrl || docHref(item.documentationUrl)}
+              as={item.documentationUrl}
+              href={docHref(item.documentationUrl)}
               title={item.name}
               description={`Store your DatoCMS assets in ${item.name}`}
               image={<LogoImage logo={item.logo} />}
@@ -212,8 +214,8 @@ export default function IntegrationsPage({ page }) {
           {page.singleSignOn.map(item => (
             <Box
               key={item.slug}
-              as={item.landingUrl || item.documentationUrl}
-              href={item.landingUrl || docHref(item.documentationUrl)}
+              as={item.documentationUrl}
+              href={docHref(item.documentationUrl)}
               title={item.name}
               description={`Provision/deprovision users using your ${item.name} account`}
               image={<LogoImage logo={item.logo} />}

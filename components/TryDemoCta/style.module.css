@@ -31,7 +31,7 @@
   left: 20px;
   right: 20px;
 
-  @media (width > 900) {
+  @media (width > 900px) {
     top: -40px;
     left: 20px;
     right: auto;
@@ -53,11 +53,13 @@
   max-width: 600px;
   min-width: 300px;
   margin: 0 auto;
+  text-align: center;
 
   @media (width > 900px) {
     margin: 0;
     margin-left: rfs(80px);
     max-width: none;
+    text-align: left;
   }
 }
 
@@ -85,11 +87,20 @@
 }
 
 .actions {
-  span {
-    padding-left: 15px;
-  }
-
   .docs {
-    color: inherit;
+    display: block;
+    margin-top: 15px;
+
+    a {
+      color: inherit;
+    }
+
+    @media (width > 900px) {
+      display: inline;
+      margin-top: 0px;
+      span {
+        padding-left: 15px;
+      }
+    }
   }
 }

@@ -251,6 +251,7 @@ export default function InterstitialTitle() {
 
   const [image, setImage] = useState(url);
   const [ellipse, setEllipse] = useState(false);
+  const [started, setStarted] = useState(false);
   const [params, setParams] = useState([]);
   const [result, setResult] = useState({
     width: `calc(var(--max-width) * ${width})`,
@@ -286,6 +287,7 @@ export default function InterstitialTitle() {
 
   useEffect(() => {
     reset();
+    setStarted(true);
     setInterval(reset, steps.length * stepTime);
   }, []);
 
@@ -296,7 +298,10 @@ export default function InterstitialTitle() {
         style={{ height: `calc(var(--max-width) / ${ar})` }}
       >
         <div
-          className={cn(s.imageFrame, { [s.ellipseFrame]: ellipse })}
+          className={cn(s.imageFrame, {
+            [s.withTransitions]: started,
+            [s.ellipseFrame]: ellipse,
+          })}
           style={{
             width: `calc(var(--max-width) * ${result.width})`,
             height: `calc(var(--max-width) / ${ar} * ${result.height})`,

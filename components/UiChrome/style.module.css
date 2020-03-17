@@ -10,8 +10,13 @@
   display: flex;
 }
 
-.barButtons,
-.space {
+.address {
+  padding: 10px 15px;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.barButtons {
   padding: 10px 15px;
   display: flex;
 }

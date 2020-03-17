@@ -1,7 +1,7 @@
 import Layout from 'components/Layout';
 import {
   gqlStaticPaths,
-  gqlStaticProps,
+  request,
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
@@ -26,6 +26,7 @@ import Arrow3 from 'public/images/illustrations/arrow-sketch-1.svg';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import UseModularBlocks from 'components/UseModularBlocks';
 import CodeExcerpt from 'components/CodeExcerpt';
+import ImgixTransformations from 'components/ImgixTransformations';
 import Quote from 'components/Quote';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
@@ -36,6 +37,11 @@ import LogosBar from 'components/LogosBar';
 import TryDemoCta from 'components/TryDemoCta';
 import Space from 'components/Space';
 import VideoPlayer from 'components/VideoPlayer';
+import UiChrome from 'components/UiChrome';
+import { Image } from 'react-datocms';
+import Link from 'next/link';
+import { useEffect } from 'react';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -49,132 +55,238 @@ export const getStaticPaths = gqlStaticPaths(
   ({ landingPages }) => landingPages.map(p => p.slug),
 );
 
-export const getStaticProps = gqlStaticProps(
-  gql`
-    query($slug: String!) {
-      landing: landingPage(filter: { slug: { eq: $slug } }) {
-        seo: _seoMetaTags {
-          ...seoMetaTagsFields
-        }
-        name
-        title(markdown: true)
-        subtitle
-        logo {
-          url
-        }
-        content {
-          ... on LandingCdnMapBlockRecord {
-            title
-            description(markdown: true)
-            id
-            _modelApiKey
+export const getStaticProps = async ({ params: { slug }, preview }) => {
+  const {
+    data: { landing },
+  } = await request({
+    preview,
+    variables: { slug },
+    query: gql`
+      query($slug: String!) {
+        landing: landingPage(filter: { slug: { eq: $slug } }) {
+          seo: _seoMetaTags {
+            ...seoMetaTagsFields
           }
-          ... on GraphqlDemoBlockRecord {
+          name
+          title(markdown: true)
+          subtitle
+          integration {
             id
-            _modelApiKey
+            squareLogo {
+              url
+            }
+            logo {
+              url
+            }
           }
-          ... on LandingProgressiveImagesBlockRecord {
-            title
-            content(markdown: true)
-            githubRepoTitle
-            githubPackageName
-            id
-            _modelApiKey
-          }
-          ... on CodeExcerptBlockRecord {
-            title(markdown: true)
-            content(markdown: true)
+          docsUrl
+          demo {
             code
-            language
-            githubRepoTitle
-            githubPackageName
-            id
-            _modelApiKey
+            githubRepo
+            deploymentType
           }
-          ... on ModularBlocksBlockRecord {
-            title(markdown: true)
-            content(markdown: true)
-            id
-            _modelApiKey
-          }
-          ... on QuoteRecord {
-            quote
-            author
-            id
-            _modelApiKey
-          }
-          ... on LandingVideoBlockRecord {
-            title
-            content(markdown: true)
-            video {
-              video {
-                streamingUrl
-              }
+          content {
+            ... on LandingCdnMapBlockRecord {
+              title
+              description(markdown: true)
+              id
+              _modelApiKey
             }
-            id
-            _modelApiKey
-          }
-          ... on TryDemoBlockRecord {
-            id
-            _modelApiKey
-            title
-            content(markdown: true)
-            docsUrl
-            screenshot {
-              responsiveImage(
-                imgixParams: { w: 600, h: 400, fit: crop, crop: top }
-              ) {
-                ...imageFields
-              }
+            ... on GraphqlDemoBlockRecord {
+              id
+              _modelApiKey
             }
-            demo {
+            ... on LandingProgressiveImagesBlockRecord {
+              title
+              content(markdown: true)
+              githubRepoTitle
+              githubPackageName
+              id
+              _modelApiKey
+            }
+            ... on CodeExcerptBlockRecord {
+              title(markdown: true)
+              content(markdown: true)
               code
-              githubRepo
-              deploymentType
+              language
+              githubRepoTitle
+              githubPackageName
+              id
+              _modelApiKey
+            }
+            ... on ModularBlocksBlockRecord {
+              title(markdown: true)
+              content(markdown: true)
+              id
+              _modelApiKey
+            }
+            ... on QuoteRecord {
+              quote
+              author
+              id
+              _modelApiKey
+            }
+            ... on LandingVideoBlockRecord {
+              title
+              content(markdown: true)
+              video {
+                video {
+                  streamingUrl
+                }
+              }
+              id
+              _modelApiKey
+            }
+            ... on ImageTransformationsBlockRecord {
+              title
+              content(markdown: true)
+              id
+              _modelApiKey
+            }
+            ... on TryDemoBlockRecord {
+              id
+              _modelApiKey
+              title
+              content(markdown: true)
+              screenshot {
+                responsiveImage(
+                  imgixParams: { w: 600, h: 400, fit: crop, crop: top }
+                ) {
+                  ...imageFields
+                }
+              }
             }
           }
         }
       }
+
+      ${seoMetaTagsFields}
+      ${imageFields}
+    `,
+  });
+
+  const {
+    data: { websites },
+  } = await request({
+    preview,
+    variables: { technologyId: landing.integration.id },
+    query: gql`
+      query($technologyId: ItemId!) {
+        websites: allWebsites(
+          filter: { technologies: { allIn: [$technologyId] } }
+        ) {
+          id
+          title
+          url
+          image {
+            responsiveImage(
+              imgixParams: { w: 400, h: 300, fit: crop, crop: top }
+            ) {
+              ...imageFields
+            }
+          }
+        }
+      }
+      ${imageFields}
+    `,
+  });
+
+  const sortedWebsites = websites.reduce((acc, website, i) => {
+    if (i % 2 === 0) {
+      return [...acc, website];
+    } else {
+      return [website, ...acc];
     }
+  }, []);
 
-    ${seoMetaTagsFields}
-    ${imageFields}
-  `,
-);
+  return {
+    props: { preview: preview || false, landing, websites: sortedWebsites },
+  };
+};
 
-export default function UseCase({ landing, preview }) {
+export default function UseCase({ landing, websites, preview }) {
+  useEffect(() => {
+    const el = document.getElementById(`centerwebsite`);
+
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      console.log(el.parentElement.parentElement);
+      el.parentElement.parentElement.scroll({
+        top: 0,
+        left: el.offsetLeft - (window.innerWidth - rect.width) / 2,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
   return (
     <Layout preview={preview}>
       {landing && (
         <>
           <Head>{renderMetaTags(landing.seo)}</Head>
           <Hero
-            kicker={<LazyImage className={s.logo} src={landing.logo.url} />}
+            kicker={
+              <LazyImage
+                className={s.logo}
+                src={
+                  (landing.integration.squareLogo || landing.integration.logo)
+                    .url
+                }
+              />
+            }
             title={highlightHtml(landing.title)}
             subtitle={<SmartMarkdown>{landing.subtitle}</SmartMarkdown>}
           >
-            <Checks checks={['Best practices', '30s setup']}>
-              <Button
-                fs="big"
-                as="a"
-                href="https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo"
-              >
-                Try our Next.js demo
-              </Button>
-            </Checks>
+            {landing.demo && (
+              <Checks checks={['Best practices', '30s setup']}>
+                <Button
+                  fs="big"
+                  as="a"
+                  href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
+                >
+                  Try our {landing.name} demo project now!
+                </Button>
+              </Checks>
+            )}
           </Hero>
-          <Space top={2} bottom={2}>
-            <LogosBar
-              title="We power experiences for over half a billion users"
-              clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
-            />
-          </Space>
+
+          {websites.length > 0 && (
+            <div className={s.poweredBy}>
+              <Wrapper>
+                <div className={s.poweredByTitle}>
+                  Proudly powered by <strong>DatoCMS + {landing.name}</strong>:
+                </div>
+              </Wrapper>
+              <div className={s.websites}>
+                <div className={s.websitesInner}>
+                  {websites.map((website, i) => (
+                    <div
+                      key={website.id}
+                      className={s.website}
+                      id={
+                        parseInt(websites.length / 2) === i
+                          ? 'centerwebsite'
+                          : null
+                      }
+                    >
+                      <UiChrome title={website.title} url={website.url}>
+                        <Image
+                          className={s.websiteScreen}
+                          data={website.image.responsiveImage}
+                        />
+                      </UiChrome>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
 
           {landing.content.map(block => (
             <React.Fragment key={block.id}>
               {block._modelApiKey === 'landing_cdn_map_block' && (
                 <>
-                  <Space top={3} bottom={1}>
+                  <Space top={4} bottom={1}>
                     <InterstitialTitle style="two">
                       {highlightHtml(block.title)}
                     </InterstitialTitle>
@@ -182,6 +294,13 @@ export default function UseCase({ landing, preview }) {
                   <Wrapper>
                     <div className={s.copy}>
                       <SmartMarkdown>{block.description}</SmartMarkdown>
+                      <p>
+                        <Link href="/features/worldwide">
+                          <a className={s.readMoreAbout}>
+                            Read more about our Worldwide CDN <ArrowIcon />
+                          </a>
+                        </Link>
+                      </p>
                     </div>
                   </Wrapper>
                   <Space bottom={2}>
@@ -195,10 +314,19 @@ export default function UseCase({ landing, preview }) {
                   title={<>Ask for what you need, get exactly that</>}
                   subtitle={
                     <>
-                      Our Content Delivery API is built with GraphQL. That means
-                      powerful developer tools, multiple resources in a single
-                      request and complete control over the data your website
-                      downloads.
+                      <p>
+                        Our Content Delivery API is built with GraphQL. That
+                        means powerful developer tools, multiple resources in a
+                        single request and complete control over the data your
+                        website downloads.
+                      </p>
+                      <p>
+                        <Link href="/features/graphql-content-api">
+                          <a className={s.readMoreAbout}>
+                            Read more about our GraphQL API <ArrowIcon />
+                          </a>
+                        </Link>
+                      </p>
                     </>
                   }
                 >
@@ -280,7 +408,7 @@ export default function UseCase({ landing, preview }) {
                         <SmartMarkdown>{block.content}</SmartMarkdown>
                         {block.githubPackageName && (
                           <div>
-                            <div className={s.readMore}>
+                            <div className={s.readMoreAbout}>
                               {block.githubRepoTitle}
                             </div>
                             <div className={s.button}>
@@ -338,6 +466,13 @@ export default function UseCase({ landing, preview }) {
                   image={UseModularBlocks}
                 >
                   <SmartMarkdown>{block.content}</SmartMarkdown>
+                  <p>
+                    <Link href="/features/dynamic-layouts">
+                      <a className={s.readMoreAbout}>
+                        Read more about DatoCMS modular blocks <ArrowIcon />
+                      </a>
+                    </Link>
+                  </p>
                 </Flag>
               )}
               {block._modelApiKey === 'quote' && (
@@ -346,15 +481,29 @@ export default function UseCase({ landing, preview }) {
                   author={block.author}
                 />
               )}
-              {block._modelApiKey === 'try_demo_block' && (
-                <TryDemoCta
-                  image={block.screenshot.responsiveImage}
-                  title={block.title}
-                  windowTitle={`${landing.name} + DatoCMS demo`}
-                  description={<SmartMarkdown>{block.content}</SmartMarkdown>}
-                  href={`https://dashboard.datocms.com/deploy?repo=${block.demo.githubRepo}`}
-                  docsAs={block.docsUrl}
-                />
+              {block._modelApiKey === 'try_demo_block' && landing.demo && (
+                <>
+                  <TryDemoCta
+                    image={block.screenshot.responsiveImage}
+                    title={block.title}
+                    windowTitle={`${landing.name} + DatoCMS demo`}
+                    description={<SmartMarkdown>{block.content}</SmartMarkdown>}
+                    href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
+                    docsAs={landing.docsUrl}
+                  />
+                  <Space top={2} bottom={2}>
+                    <LogosBar
+                      title="We power experiences for over half a billion users"
+                      clients={[
+                        DeutscheTelekom,
+                        Hashicorp,
+                        Verizon,
+                        Nike,
+                        Linkedin,
+                      ]}
+                    />
+                  </Space>
+                </>
               )}
               {block._modelApiKey === 'landing_video_block' && (
                 <Space top={3}>
@@ -371,6 +520,27 @@ export default function UseCase({ landing, preview }) {
                         src={block.video.video.streamingUrl}
                       />
                     </div>
+                  </TitleStripWithContent>
+                </Space>
+              )}
+              {block._modelApiKey === 'image_transformations_block' && (
+                <Space top={3}>
+                  <TitleStripWithContent
+                    title={highlightHtml(block.title)}
+                    subtitle={
+                      <>
+                        <SmartMarkdown>{block.content}</SmartMarkdown>
+                        <p>
+                          <Link href="/features/images-api">
+                            <a className={s.readMoreAbout}>
+                              Read more about DatoCMS Image API <ArrowIcon />
+                            </a>
+                          </Link>
+                        </p>
+                      </>
+                    }
+                  >
+                    <ImgixTransformations />
                   </TitleStripWithContent>
                 </Space>
               )}
