@@ -127,27 +127,24 @@ export default function Docs({ roots, preview, page }) {
           </Link>
         </div>
 
-        <h6 className={s.introTitle}>Start from a template</h6>
+        <h6 className={s.introTitle}>Popular integrations</h6>
         <div className={s.useCaseCards}>
-          <Link href="/docs/general-concepts">
+          <Link href={docHref('/docs/gatsby')} as="/docs/gatsby">
             <a className={s.useCaseCard}>
-              <div className={s.useCaseCardTitle}>Gatsby website</div>
-              <p>Learn all the basic concepts and features behind DatoCMS.</p>
+              <div className={s.useCaseCardTitle}>Gatsby</div>
+              <p>Learn how to integrate your Gatsby website with DatoCMS</p>
             </a>
           </Link>
-          <Link href="/docs/content-delivery-api/overview">
+          <Link href={docHref('/docs/hugo')} as="/docs/hugo">
             <a className={s.useCaseCard}>
-              <div className={s.useCaseCardTitle}>NextJS website</div>
-              <p>Learn how to fetch your content into any frontend project.</p>
+              <div className={s.useCaseCardTitle}>Hugo</div>
+              <p>Learn how to integrate your Hugo website with DatoCMS</p>
             </a>
           </Link>
-          <Link href="/docs/content-modelling">
+          <Link href={docHref('/docs/jekyll')} as="/docs/jekyll">
             <a className={s.useCaseCard}>
-              <div className={s.useCaseCardTitle}>Hugo website</div>
-              <p>
-                Build your administrative area and define the structure of your
-                content.
-              </p>
+              <div className={s.useCaseCardTitle}>Jekyll</div>
+              <p>Learn how to integrate your Jekyll website with DatoCMS</p>
             </a>
           </Link>
         </div>

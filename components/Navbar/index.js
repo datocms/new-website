@@ -5,7 +5,8 @@ import s from './style.module.css';
 import classnames from 'classnames';
 import Button from 'components/Button';
 import docHref from 'utils/docHref';
-
+import { useState, useEffect } from 'react';
+import { getCookie } from 'utils/cookies';
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import Image from 'public/images/illustrations/image-api.svg';
@@ -55,6 +56,12 @@ const Pane = ({ children }) => (
 );
 
 export default function Navbar() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setLoggedIn(!!getCookie('datoAccountEmail'));
+  }, []);
+
   return (
     <>
       <div className={s.placeholder} />
@@ -318,15 +325,31 @@ export default function Navbar() {
                 </a>
               </Link>
 
-              <div className={s.entry}>
-                <Button
-                  as="a"
-                  p="small"
-                  href="https://dashboard.datocms.com/signup"
-                >
-                  Try for free!
-                </Button>
-              </div>
+              {loggedIn ? (
+                <>
+                  <div className={s.entry}>
+                    <Button
+                      as="a"
+                      p="small"
+                      href="https://dashboard.datocms.com/"
+                    >
+                      Enter dashboard
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className={s.entry}>
+                    <Button
+                      as="a"
+                      p="small"
+                      href="https://dashboard.datocms.com/signup"
+                    >
+                      Try for free!
+                    </Button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </Wrapper>

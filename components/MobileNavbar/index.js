@@ -3,7 +3,8 @@ import FullLogo from 'public/images/full_logo.svg';
 import Link from 'next/link';
 import s from './style.module.css';
 import classnames from 'classnames';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
+import { getCookie } from 'utils/cookies';
 import Hamburger from 'public/icons/regular/bars.svg';
 import Button from 'components/Button';
 import cn from 'classnames';
@@ -79,6 +80,12 @@ const Feature = ({ href, icon: Icon, title, description }) => (
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setLoggedIn(!!getCookie('datoAccountEmail'));
+  }, []);
+
   const toggleVisibility = useCallback(() => {
     setVisible(v => !v);
   });
@@ -237,13 +244,31 @@ export default function Navbar() {
                     <a className={s.sales}>Contact sales</a>
                   </Link>
 
-                  <Button
-                    as="a"
-                    p="small"
-                    href="https://dashboard.datocms.com/signup"
-                  >
-                    Try for free!
-                  </Button>
+                  {loggedIn ? (
+                    <>
+                      <div className={s.entry}>
+                        <Button
+                          as="a"
+                          p="small"
+                          href="https://dashboard.datocms.com/"
+                        >
+                          Enter dashboard
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={s.entry}>
+                        <Button
+                          as="a"
+                          p="small"
+                          href="https://dashboard.datocms.com/signup"
+                        >
+                          Try for free!
+                        </Button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </Wrapper>
             </div>

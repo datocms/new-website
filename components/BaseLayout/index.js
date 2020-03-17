@@ -2,30 +2,23 @@ import Head from 'next/head';
 import s from './style.module.css';
 import { useRouter } from 'next/router';
 import NProgress from 'components/NProgress';
-// import FontFaceObserver from 'fontfaceobserver';
-// import { useEffect, useState } from 'react';
-
-// const fontData = {
-//   'tiempos-headline': { weight: 400 },
-//   'tiempos-text': { weight: 400 },
-//   colfax: { weight: 400 },
-// };
+import Link from 'next/link';
+import { getCookie, setCookie } from 'utils/cookies';
+import { useState, useEffect, useCallback } from 'react';
+import TimesIcon from 'public/icons/regular/times.svg';
 
 export default function Layout({ preview, children }) {
   const router = useRouter();
-  // const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [cookieAccept, setCookieAccept] = useState(true);
 
-  // useEffect(() => {
-  //   const observers = [];
+  useEffect(() => {
+    setCookieAccept(!!getCookie('cookies-accepted'));
+  }, []);
 
-  //   Object.keys(fontData).map(family => {
-  //     const data = fontData[family];
-  //     const obs = new FontFaceObserver(family, data);
-  //     return obs.load();
-  //   });
-
-  //   Promise.all(observers).then(() => setFontsLoaded(true));
-  // }, []);
+  const accept = useCallback(() => {
+    setCookie('cookies-accepted', true, 500);
+    setCookieAccept(true);
+  });
 
   return (
     <>
@@ -71,6 +64,19 @@ export default function Layout({ preview, children }) {
         </a>
       )}
       {children}
+      {!cookieAccept && (
+        <div className={s.cookies}>
+          By continuing to use this site you consent to the use of cookies in
+          accordance with{' '}
+          <Link href="/legal/cookie-policy">
+            <a>our cookie policy</a>
+          </Link>
+          .
+          <button onClick={accept}>
+            <TimesIcon />
+          </button>
+        </div>
+      )}
       <div
         className={s.overlay}
         style={{
