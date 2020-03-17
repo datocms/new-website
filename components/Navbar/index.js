@@ -172,7 +172,7 @@ export default function Navbar() {
 
                         <ul className={s.integrationTop}>
                           <li className={s.integration}>
-                            <Link href="/cms/[slug]" as="/cms/gatsby">
+                            <Link href="/cms/[slug]" as="/cms/gatsbyjs">
                               <a>Gatsby</a>
                             </Link>
                           </li>
