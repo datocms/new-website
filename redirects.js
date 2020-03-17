@@ -163,20 +163,4 @@ module.exports = [
     source: '/plugins/field_addon/:rest*',
     destination: '/plugins',
   },
-  {
-    source: '/cms/middleman/:rest*',
-    destination: '/cms/middleman',
-  },
-  {
-    source: '/cms/hugo/:rest*',
-    destination: '/cms/hugo',
-  },
-  {
-    source: '/cms/gatsbyjs/:rest*',
-    destination: '/cms/gatsbyjs',
-  },
-  {
-    source: '/cms/jekyll/:rest*',
-    destination: '/cms/jekyll',
-  },
 ];
