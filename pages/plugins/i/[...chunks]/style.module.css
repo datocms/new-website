@@ -1,3 +1,22 @@
+.back {
+  display: block;
+  color: var(--light-body-color);
+  text-decoration: none;
+  margin-bottom: rfs(30px);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  svg {
+    fill: var(--light-body-color);
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    font-size: 0.8em;
+  }
+}
+
 .split {
   display: flex;
 }
@@ -25,6 +44,7 @@
   font-weight: bold;
   font-size: 35px;
   margin-bottom: 5px;
+  letter-spacing: -0.03em;
 }
 
 .description {

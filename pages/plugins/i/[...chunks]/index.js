@@ -2,7 +2,6 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
-import Highlight from 'components/Highlight';
 import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
 import SmartMarkdown from 'components/SmartMarkdown';
@@ -17,6 +16,7 @@ import s from './style.module.css';
 import useSWR from 'swr';
 import wretch from 'wretch';
 import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
+import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -112,6 +112,11 @@ export default function Plugin({ plugin, preview }) {
 
       <Wrapper>
         <div className={s.root}>
+          <Link href="/plugins">
+            <a className={s.back}>
+              <LeftIcon /> Browse all plugins
+            </a>
+          </Link>
           <div className={s.split}>
             <div className={s.content}>
               <div className={s.header}>

@@ -2,7 +2,6 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import LazyImage from 'components/LazyImage';
-import Wrapper from 'components/Wrapper';
 import Head from 'next/head';
 import { gqlStaticProps, imageFields } from 'lib/datocms';
 import s from './style.module.css';
@@ -13,6 +12,13 @@ import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import Link from 'next/link';
 import cn from 'classnames';
 import docHref from 'utils/docHref';
+import Space from 'components/Space';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import Nike from 'public/images/logos/nike.svg';
+import Linkedin from 'public/images/logos/linkedin.svg';
+import LogosBar from 'components/LogosBar';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -62,18 +68,18 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-const Category = ({ title, description, children, noBrowse }) => (
+const Category = ({ title, description, children, browse }) => (
   <div className={s.category}>
-    <div className={s.categoryHeader}>
+    <div
+      className={cn(s.categoryHeader, {
+        [s.categoryHeaderWithBrowse]: !!browse,
+      })}
+    >
       <div className={s.categoryLeft}>
         <div className={s.categoryTitle}>{title}</div>
         <div className={s.categoryDesc}>{description}</div>
       </div>
-      {!noBrowse && (
-        <div className={s.browseAll}>
-          Browse all <ArrowIcon />
-        </div>
-      )}
+      {browse}
     </div>
     <div className={s.boxes}>{children}</div>
   </div>
@@ -137,6 +143,13 @@ export default function IntegrationsPage({ page }) {
       </Category>
       <Category
         title="Community Plugins"
+        browse={
+          <Link href="/plugins">
+            <a className={s.browseAll}>
+              Browse all our plugins <ArrowIcon />
+            </a>
+          </Link>
+        }
         description={
           <>
             Easily expand and customize the capabilities of DatoCMS with one of
@@ -183,7 +196,6 @@ export default function IntegrationsPage({ page }) {
       <div className={s.grid}>
         <Category
           title="Assets storage"
-          noBrowse
           description={
             <>
               Keep 100% ownership of your media files using your own AWS/Google
@@ -204,7 +216,6 @@ export default function IntegrationsPage({ page }) {
         </Category>
         <Category
           title="Single Sign-On"
-          noBrowse
           description={
             <>
               Keep your company data secure with centralized users management.
@@ -223,6 +234,12 @@ export default function IntegrationsPage({ page }) {
           ))}
         </Category>
       </div>
+      <Space bottom={1}>
+        <LogosBar
+          title="We power experiences for over half a billion users"
+          clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
+        />
+      </Space>
     </Layout>
   );
 }

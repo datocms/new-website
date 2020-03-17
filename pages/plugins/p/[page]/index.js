@@ -21,6 +21,7 @@ import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import s from './style.module.css';
 import truncate from 'truncate';
+import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -98,6 +99,13 @@ export default function Plugins({
         subtitle={<>Extend the functionality of DatoCMS</>}
       />
       <Wrapper>
+        <Link as="/docs/building-plugins" href="/docs/[...chunks]">
+          <a className={s.announce}>
+            <MegaphoneIcon /> <strong>These are Community Plugin!</strong> Learn
+            how create your own plugin, or copy and remix existing ones in our
+            documentation →
+          </a>
+        </Link>
         <Masonry
           breakpointCols={3}
           className={s.grid}
