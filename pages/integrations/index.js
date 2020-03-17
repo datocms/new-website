@@ -146,7 +146,7 @@ export default function IntegrationsPage({ page }) {
         browse={
           <Link href="/plugins">
             <a className={s.browseAll}>
-              Browse all our plugins <ArrowIcon />
+              Browse all the plugins <ArrowIcon />
             </a>
           </Link>
         }

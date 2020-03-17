@@ -69,7 +69,7 @@
 
   .entry {
     &:hover {
-      span:after {
+      > span:after {
         width: 100%;
       }
     }
@@ -131,7 +131,6 @@
   }
 
   .sectionTitle {
-    /* color: #805b7d; */
     text-transform: uppercase;
     font-weight: bold;
     font-size: 13px;
@@ -252,5 +251,85 @@
   .actions {
     display: flex;
     align-items: center;
+  }
+}
+
+.integrations {
+  min-width: 300px;
+  font-size: 16px;
+}
+
+.marketplace {
+  border-bottom: 1px solid var(--border-color);
+  padding: 40px 40px 30px;
+}
+
+.plugins {
+  white-space: nowrap;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding: 30px 40px;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+}
+
+.marketplaceTitle {
+  font-weight: bold;
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 15px;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+}
+
+.integrationGroup {
+  margin-bottom: 15px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.integrationGroupTitle {
+  text-decoration: none;
+  color: inherit;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: var(--extra-light-body-color);
+}
+
+.integrationTop {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  white-space: nowrap;
+  margin-top: 5px;
+}
+
+.integration {
+  display: inline;
+
+  &:after {
+    content: ' • ';
+  }
+
+  &:last-child:after {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: var(--accent-color);
+    }
   }
 }

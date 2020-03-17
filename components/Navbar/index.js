@@ -4,6 +4,7 @@ import Link from 'next/link';
 import s from './style.module.css';
 import classnames from 'classnames';
 import Button from 'components/Button';
+import docHref from 'utils/docHref';
 
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
@@ -151,11 +152,110 @@ export default function Navbar() {
                 </Pane>
               </div>
 
-              <Link href="/integrations">
-                <a className={s.entry}>
-                  <span>Integrations</span>
-                </a>
-              </Link>
+              <div className={s.group}>
+                <div className={s.groupTitle}>
+                  <Link href="/integrations">
+                    <a className={s.entry}>
+                      <span>Integrations</span>
+                    </a>
+                  </Link>
+                </div>
+
+                <Pane>
+                  <div className={s.integrations}>
+                    <div className={s.marketplace}>
+                      <Link href="/integrations">
+                        <a className={s.marketplaceTitle}>
+                          Integrations Marketplace
+                        </a>
+                      </Link>
+                      <div className={s.integrationGroup}>
+                        <div className={s.integrationGroupTitle}>
+                          Web technologies
+                        </div>
+
+                        <ul className={s.integrationTop}>
+                          <li className={s.integration}>
+                            <Link href="/cms/[slug]" as="/cms/gatsby">
+                              <a>Gatsby</a>
+                            </Link>
+                          </li>
+                          <li className={s.integration}>
+                            <Link href="/cms/[slug]" as="/cms/nextjs">
+                              <a>Next</a>
+                            </Link>
+                          </li>
+                          <li className={s.integration}>
+                            <Link href="/cms/[slug]" as="/cms/nuxt-js">
+                              <a>Nuxt.js</a>
+                            </Link>
+                          </li>
+                          <li className={s.integration}>
+                            <Link href="/cms/[slug]" as="/cms/hugo">
+                              <a>Hugo</a>
+                            </Link>
+                          </li>
+                          <li className={s.integration}>
+                            <Link href="/integrations">
+                              <a>Others</a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className={s.integrationGroup}>
+                        <div className={s.integrationGroupTitle}>
+                          Hosting &amp; CI
+                        </div>
+
+                        <ul className={s.integrationTop}>
+                          <li className={s.integration}>
+                            <Link
+                              href={docHref('/docs/netlify')}
+                              as="/docs/netlify"
+                            >
+                              <a>Netlify</a>
+                            </Link>
+                          </li>
+                          <li className={s.integration}>
+                            <Link href={docHref('/docs/zeit')} as="/docs/zeit">
+                              <a>ZEIT</a>
+                            </Link>
+                          </li>
+                          <li className={s.integration}>
+                            <Link
+                              href={docHref('/docs/travis')}
+                              as="/docs/travis"
+                            >
+                              <a>Travis</a>
+                            </Link>
+                          </li>
+                          <li className={s.integration}>
+                            <Link
+                              href={docHref('/cms/gitlab')}
+                              as="/cms/gitlab"
+                            >
+                              <a>Gitlab</a>
+                            </Link>
+                          </li>
+                          <li className={s.integration}>
+                            <Link href="/integrations">
+                              <a>Others</a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <Link href="/plugins">
+                      <a className={s.plugins}>
+                        <div className={s.learnResTitle}>Community plugins</div>
+                        <div className={s.learnResDescription}>
+                          Easily extend the functionality of DatoCMS
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
+                </Pane>
+              </div>
 
               <div className={s.group}>
                 <div className={s.groupTitle}>
