@@ -107,7 +107,11 @@ export default function Plugins({
           </a>
         </Link>
         <Masonry
-          breakpointCols={3}
+          breakpointCols={{
+            default: 3,
+            900: 2,
+            550: 1,
+          }}
           className={s.grid}
           columnClassName={s.column}
         >

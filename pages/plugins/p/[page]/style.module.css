@@ -42,12 +42,12 @@
 
 .grid {
   display: flex;
-  margin-left: -50px; /* gutter size offset */
+  margin-left: rfs(-50px); /* gutter size offset */
   width: auto;
 }
 
 .column {
-  padding-left: 50px; /* gutter size */
+  padding-left: rfs(50px); /* gutter size */
   background-clip: padding-box;
 }
 

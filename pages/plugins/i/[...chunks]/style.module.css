@@ -3,6 +3,7 @@
   color: var(--light-body-color);
   text-decoration: none;
   margin-bottom: rfs(30px);
+  text-align: center;
 
   &:hover {
     text-decoration: underline;
@@ -15,49 +16,70 @@
     margin-right: 8px;
     font-size: 0.8em;
   }
+
+  @media (width > 900px) {
+    text-align: left;
+  }
 }
 
 .split {
-  display: flex;
+  text-align: center;
+  @media (width > 900px) {
+    display: flex;
+    text-align: left;
+  }
 }
 
 .content {
-  margin-right: 60px;
-  flex: 1;
+  margin-bottom: 30px;
+
+  @media (width > 900px) {
+    margin-right: 60px;
+    margin-bottom: 0;
+    flex: 1;
+  }
 }
 
 .sidebar {
-  width: 300px;
+  @media (width > 900px) {
+    width: 300px;
+  }
 }
 
 .header {
   margin-bottom: 40px;
-  display: flex;
-  align-items: center;
+  @media (width > 900px) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .headerLeft {
-  flex: 1;
+  @media (width > 900px) {
+    flex: 1;
+  }
 }
 
 .title {
   font-weight: bold;
   font-size: 35px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   letter-spacing: -0.03em;
+
+  @media (width > 900px) {
+    margin-bottom: 0px;
+  }
 }
 
 .description {
   color: var(--light-body-color);
-  font-size: 22px;
-  margin-bottom: 40px;
+  font-size: rfs(22px);
+  margin-bottom: rfs(40px);
 }
 
 .preview {
   border-radius: 5px;
-  margin-bottom: 40px;
-  padding: 40px;
-  background: linear-gradient(45deg, #f9ecfe, #fefae4);
+  margin-bottom: rfs(40px);
 
   img {
     background: white;
@@ -65,6 +87,11 @@
     display: block;
     width: 100%;
     box-shadow: var(--box-shadow);
+  }
+
+  @media (width > 900px) {
+    padding: 40px;
+    background: linear-gradient(45deg, #f9ecfe, #fefae4);
   }
 }
 
@@ -81,8 +108,9 @@
 }
 
 .readme {
-  padding: 40px;
+  padding: rfs(40px);
   box-shadow: var(--box-shadow);
+  text-align: left;
 
   border-radius: 10px;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,

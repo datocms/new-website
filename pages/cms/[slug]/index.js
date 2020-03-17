@@ -437,7 +437,7 @@ export default function UseCase({ landing, websites, preview }) {
                         <SmartMarkdown>{block.content}</SmartMarkdown>
                         {block.githubPackageName && (
                           <div>
-                            <div className={s.readMore}>
+                            <div className={s.readMoreAbout}>
                               {block.githubRepoTitle}
                             </div>
                             <div className={s.button}>
