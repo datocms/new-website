@@ -5,8 +5,8 @@
     sans-serif;
   font-size: 0;
   white-space: nowrap;
-  padding: 3px 10px;
-  font-size: 12px;
+  padding: 5px 10px 7px;
+  font-size: 14px;
   line-height: 20px;
   border-radius: 0.25em;
   color: #24292e;
@@ -24,10 +24,10 @@
 
   svg {
     display: inline-block;
-    vertical-align: text-top;
+    vertical-align: middle;
     fill: currentColor;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     margin-right: 7px;
   }
 

@@ -84,19 +84,23 @@
   display: block;
   margin-top: 30px;
   text-transform: uppercase;
-  text-align: center;
   font-weight: bold;
   color: var(--light-body-color) !important;
-  text-decoration: none;
   letter-spacing: -0.02em;
   font-size: 0.95em;
-  &:hover {
-    text-decoration: underline;
-  }
+
   svg {
     display: inline-block;
     width: 2em;
     margin-left: 0.4em;
     fill: var(--light-body-color);
+  }
+}
+
+a.readMoreAbout {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
