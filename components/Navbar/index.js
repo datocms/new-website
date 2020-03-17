@@ -154,11 +154,7 @@ export default function Navbar() {
 
               <div className={s.group}>
                 <div className={s.groupTitle}>
-                  <Link href="/integrations">
-                    <a className={s.entry}>
-                      <span>Integrations</span>
-                    </a>
-                  </Link>
+                  <span>Integrations</span>
                 </div>
 
                 <Pane>
