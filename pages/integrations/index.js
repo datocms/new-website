@@ -38,14 +38,36 @@ export const getStaticProps = gqlStaticProps(
           description
         }
         hostingBuilding {
-          ...integration
+          ...hostingBuildingApp
         }
         assetsStorage {
-          ...integration
+          ...enterpriseApp
         }
         singleSignOn {
-          ...integration
+          ...enterpriseApp
         }
+      }
+    }
+
+    fragment enterpriseApp on EnterpriseAppRecord {
+      slug
+      title
+      description: shortDescription
+      logo {
+        url
+        width
+        height
+      }
+    }
+
+    fragment hostingBuildingApp on HostingBuildingAppRecord {
+      slug
+      title
+      description: shortDescription
+      logo {
+        url
+        width
+        height
       }
     }
 
@@ -185,10 +207,10 @@ export default function IntegrationsPage({ page }) {
         {page.hostingBuilding.map(item => (
           <Box
             key={item.slug}
-            as={item.documentationUrl}
-            href={docHref(item.documentationUrl)}
+            as={`/integrations/hosting/${item.slug}`}
+            href="/integrations/hosting/[slug]"
             title={item.name}
-            description={`Trigger a build of your website on ${item.name}`}
+            description={truncate(item.description, 55)}
             image={<LogoImage logo={item.logo} />}
           />
         ))}
@@ -206,10 +228,10 @@ export default function IntegrationsPage({ page }) {
           {page.assetsStorage.map(item => (
             <Box
               key={item.slug}
-              as={item.documentationUrl}
-              href={docHref(item.documentationUrl)}
+              as={`/integrations/enterprise/${item.slug}`}
+              href="/integrations/enterprise/[slug]"
               title={item.name}
-              description={`Store your DatoCMS assets in ${item.name}`}
+              description={truncate(item.description, 55)}
               image={<LogoImage logo={item.logo} />}
             />
           ))}
@@ -225,10 +247,10 @@ export default function IntegrationsPage({ page }) {
           {page.singleSignOn.map(item => (
             <Box
               key={item.slug}
-              as={item.documentationUrl}
-              href={docHref(item.documentationUrl)}
+              as={`/integrations/enterprise/${item.slug}`}
+              href="/integrations/enterprise/[slug]"
               title={item.name}
-              description={`Provision/deprovision users using your ${item.name} account`}
+              description={truncate(item.description, 55)}
               image={<LogoImage logo={item.logo} />}
             />
           ))}

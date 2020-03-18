@@ -327,27 +327,23 @@ export default function Navbar() {
 
               {loggedIn ? (
                 <>
-                  <div className={s.entry}>
-                    <Button
-                      as="a"
-                      p="small"
-                      href="https://dashboard.datocms.com/"
-                    >
-                      Enter dashboard
-                    </Button>
-                  </div>
+                  <Button
+                    as="a"
+                    p="small"
+                    href="https://dashboard.datocms.com/"
+                  >
+                    Enter dashboard
+                  </Button>
                 </>
               ) : (
                 <>
-                  <div className={s.entry}>
-                    <Button
-                      as="a"
-                      p="small"
-                      href="https://dashboard.datocms.com/signup"
-                    >
-                      Try for free!
-                    </Button>
-                  </div>
+                  <Button
+                    as="a"
+                    p="small"
+                    href="https://dashboard.datocms.com/signup"
+                  >
+                    Try for free!
+                  </Button>
                 </>
               )}
             </div>

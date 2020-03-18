@@ -1,9 +1,7 @@
 import Layout from 'components/Layout';
-import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
-import Link from 'next/link';
 import SmartMarkdown from 'components/SmartMarkdown';
 import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
@@ -15,8 +13,15 @@ import FormattedDate from 'components/FormattedDate';
 import s from './style.module.css';
 import useSWR from 'swr';
 import wretch from 'wretch';
-import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
-import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
+import PluginBox, { LogoImage } from 'components/PluginBox';
+import {
+  PluginInfo,
+  Info,
+  NameWithGravatar,
+  Header,
+  Back,
+  Announce,
+} from 'components/PluginToolkit';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -112,47 +117,110 @@ export default function Plugin({ plugin, preview }) {
 
       <Wrapper>
         <div className={s.root}>
-          <Link href="/plugins">
-            <a className={s.back}>
-              <LeftIcon /> Browse all plugins
-            </a>
-          </Link>
+          <Back href="/plugins" label="Browse all plugins" />
+
           <div className={s.split}>
-            <div className={s.content}>
-              <div className={s.header}>
-                <div className={s.headerLeft}>
-                  <div className={s.title}>
-                    {isFallback ? <Text width={30} /> : plugin.title}
-                  </div>
-                </div>
-                <div className={s.actions}>
-                  <Button
-                    as="a"
-                    href={
-                      isFallback
-                        ? '#'
-                        : `https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/plugins/install/${plugin.packageName}`
-                    }
-                    target="_blank"
+            <div className={s.sidebar}>
+              <div className={s.sidebarInner}>
+                <PluginBox
+                  isFallback={isFallback}
+                  title={!isFallback && plugin.title}
+                  image={
+                    !isFallback &&
+                    plugin.coverImage && (
+                      <div className={s.cover}>
+                        <img alt="Preview" src={plugin.coverImage.url} />
+                      </div>
+                    )
+                  }
+                  description={!isFallback && plugin.description}
+                  actions={
+                    <Button
+                      as="a"
+                      href={
+                        isFallback
+                          ? '#'
+                          : `https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/plugins/install/${plugin.packageName}`
+                      }
+                      target="_blank"
+                    >
+                      Install
+                    </Button>
+                  }
+                />
+
+                <div className={s.announce}>
+                  <Announce
+                    as="/docs/building-plugins"
+                    href="/docs/[...chunks]"
                   >
-                    Install
-                  </Button>
+                    <strong>This is a Community Plugin!</strong> Learn how
+                    create your own plugin, or copy and remix existing ones in
+                    our documentation
+                  </Announce>
+                </div>
+
+                <div className={s.info}>
+                  <PluginInfo>
+                    <Info title="Publisher" isFallback={isFallback}>
+                      {!isFallback && (
+                        <NameWithGravatar
+                          email={plugin.author.email}
+                          name={plugin.author.name}
+                        />
+                      )}
+                    </Info>
+                    <Info title="Homepage">
+                      <a
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        href={plugin && plugin.homepage}
+                      >
+                        Visit homepage
+                      </a>
+                    </Info>
+                    <Info title="Plugin type" isFallback={isFallback}>
+                      {!isFallback && plugin.pluginType.name}
+                    </Info>
+                    <Info
+                      title="Compatible with fields"
+                      isFallback={isFallback}
+                    >
+                      {!isFallback &&
+                        plugin.fieldTypes.map(f => f.name).join(', ')}
+                    </Info>
+                    <Info title="First released" isFallback={isFallback}>
+                      {!isFallback && (
+                        <FormattedDate date={plugin.releasedAt} />
+                      )}
+                    </Info>
+                    <Info title="Current version" isFallback={isFallback}>
+                      {!isFallback && plugin.version}
+                    </Info>
+                    <Info title="Installs count" isFallback={!info}>
+                      {info && info.installs}
+                    </Info>
+                    <Info title="Last update" isFallback={!info}>
+                      {info && <FormattedDate date={info.lastUpdate} />}
+                    </Info>
+                  </PluginInfo>
                 </div>
               </div>
-
-              <div className={s.description}>
-                {isFallback ? <Copy /> : plugin.description}
-              </div>
-
-              {isFallback ? (
-                <Image />
-              ) : (
-                plugin.previewImage && (
-                  <div className={s.preview}>
-                    <img alt="Preview" src={plugin.previewImage.url} />
-                  </div>
-                )
-              )}
+            </div>
+            <div className={s.content}>
+              <Header
+                isFallback={isFallback}
+                title={!isFallback && plugin.title}
+                description={!isFallback && plugin.description}
+              >
+                {!isFallback && plugin.previewImage && (
+                  <img
+                    alt="Preview"
+                    src={plugin.previewImage.url}
+                    height="250"
+                  />
+                )}
+              </Header>
 
               <div className={s.readme}>
                 {isFallback ? (
@@ -165,86 +233,6 @@ export default function Plugin({ plugin, preview }) {
                   <SmartMarkdown>{plugin.readme}</SmartMarkdown>
                 )}
               </div>
-            </div>
-            <div className={s.sidebar}>
-              <Link as="/docs/building-plugins" href="/docs/[...chunks]">
-                <a className={s.announce}>
-                  <MegaphoneIcon /> <strong>This is a Community Plugin!</strong>{' '}
-                  Learn how create your own plugin, or copy and remix existing
-                  ones in our documentation →
-                </a>
-              </Link>
-              <div className={s.info}>
-                <div className={s.infoBlock}>
-                  <div className={s.infoBlockTitle}>Publisher</div>
-                  {isFallback ? (
-                    <Line />
-                  ) : (
-                    <>
-                      <img
-                        alt="Author gravatar"
-                        className={s.avatar}
-                        src={gravatar(plugin.author.email, {
-                          s: 80,
-                          d: 'retro',
-                        })}
-                      />
-                      {plugin.author.name}
-                    </>
-                  )}
-                </div>
-                <dl>
-                  <dt>Homepage</dt>
-                  <dd>
-                    <a
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      href={plugin && plugin.homepage}
-                    >
-                      Visit homepage
-                    </a>
-                  </dd>
-                  <dt>Plugin type</dt>
-                  <dd>{isFallback ? <Line /> : plugin.pluginType.name}</dd>
-                  <dt>Compatible with fields</dt>
-                  <dd>
-                    {isFallback ? (
-                      <Line />
-                    ) : (
-                      plugin.fieldTypes.map(f => f.name).join(', ')
-                    )}
-                  </dd>
-                  <dt>First released</dt>
-                  <dd>
-                    {isFallback ? (
-                      <Line />
-                    ) : (
-                      <FormattedDate date={plugin.releasedAt} />
-                    )}
-                  </dd>
-                  <dt>Current version</dt>
-                  <dd>{isFallback ? <Line /> : plugin.version}</dd>
-                  <dt>Installs count</dt>
-                  <dd>{!info ? <Line /> : info.installs}</dd>
-                  <dt>Last update</dt>
-                  <dd>
-                    {!info ? (
-                      <Line />
-                    ) : (
-                      <FormattedDate date={info.lastUpdate} />
-                    )}
-                  </dd>
-                </dl>
-              </div>
-              {isFallback ? (
-                <Image />
-              ) : (
-                plugin.coverImage && (
-                  <div className={s.cover}>
-                    <img alt="Preview" src={plugin.coverImage.url} />
-                  </div>
-                )
-              )}
             </div>
           </div>
         </div>
