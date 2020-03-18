@@ -5,15 +5,16 @@ import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import SmartMarkdown from 'components/SmartMarkdown';
 import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
-import { Line, Text, Copy, Image } from 'components/FakeContent';
+import { Copy, Image } from 'components/FakeContent';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
-import gravatar from 'utils/gravatar';
 import FormattedDate from 'components/FormattedDate';
 import s from './style.module.css';
 import useSWR from 'swr';
 import wretch from 'wretch';
-import PluginBox, { LogoImage } from 'components/PluginBox';
+import PluginBox from 'components/PluginBox';
+import truncate from 'truncate';
+
 import {
   PluginInfo,
   Info,
@@ -133,7 +134,7 @@ export default function Plugin({ plugin, preview }) {
                       </div>
                     )
                   }
-                  description={!isFallback && plugin.description}
+                  description={!isFallback && truncate(plugin.description, 55)}
                   actions={
                     <Button
                       as="a"
@@ -216,8 +217,8 @@ export default function Plugin({ plugin, preview }) {
                 {!isFallback && plugin.previewImage && (
                   <img
                     alt="Preview"
+                    className={s.previewImage}
                     src={plugin.previewImage.url}
-                    height="250"
                   />
                 )}
               </Header>

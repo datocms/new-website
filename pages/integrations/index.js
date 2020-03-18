@@ -11,7 +11,6 @@ import truncate from 'truncate';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import Link from 'next/link';
 import cn from 'classnames';
-import docHref from 'utils/docHref';
 import Space from 'components/Space';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';

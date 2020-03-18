@@ -61,15 +61,13 @@
 
 .categoryDesc {
   font-size: 0.9em;
-  @media (width > 900px) {
-    font-size: 1em;
-  }
 }
 
 .categoryTitle {
   font-size: rfs(40px);
-  font-family: var(--font-headline);
   color: var(--light-body-color);
+  font-weight: bold;
+  letter-spacing: -0.03em;
   margin-bottom: 10px;
 }
 

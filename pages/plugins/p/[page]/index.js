@@ -137,7 +137,7 @@ export default function Plugins({
                       </div>
                       <div className={s.footer}>
                         <div className={s.date}>
-                          Posted on <FormattedDate date={post.releasedAt} />
+                          Released on <FormattedDate date={post.releasedAt} />
                         </div>
                       </div>
                     </div>
