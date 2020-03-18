@@ -32,6 +32,12 @@
   &:last-child {
     padding-right: var(--page-margin);
   }
+
+  > a {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
 }
 
 .box {
@@ -71,17 +77,21 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 14px;
-  color: var(--light-body-color);
+  color: var(--azure-color);
   margin-top: rfs(30px);
   display: block;
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   svg {
     height: 0.7em;
     margin-left: 10px;
     display: inline-block;
     vertical-align: middle;
-    fill: var(--light-body-color);
+    fill: var(--azure-color);
   }
 }
 
@@ -97,4 +107,19 @@
     .category {
     }
   }
+}
+
+.techLogo {
+  height: 25px;
+  margin-top: 20px;
+}
+
+.demoDesc {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.demoDescBody {
+  flex: 1;
 }

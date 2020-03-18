@@ -44,7 +44,7 @@ export default function EnterpriseApp({ page, preview }) {
                   actions={
                     <Button
                       as="a"
-                      href="http://localhost:3000/support?topics=business-partnerships/general-requests"
+                      href="/support?topics=business-partnerships/general-requests"
                       target="_blank"
                     >
                       Install this app

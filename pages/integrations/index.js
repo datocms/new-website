@@ -25,8 +25,30 @@ export const getStaticProps = gqlStaticProps(
   gql`
     {
       page: integrationsPage {
-        technologies {
-          ...integration
+        demos {
+          id
+          code
+          githubRepo
+          deploymentType
+          description
+          name
+          demoName
+          technology {
+            name
+            logo {
+              url
+            }
+          }
+          category {
+            name
+          }
+          screenshot {
+            responsiveImage(
+              imgixParams: { w: 300, h: 200, fit: crop, crop: top }
+            ) {
+              ...imageFields
+            }
+          }
         }
         plugins {
           packageName
@@ -39,7 +61,14 @@ export const getStaticProps = gqlStaticProps(
           description
         }
         hostingBuilding {
-          ...hostingBuildingApp
+          slug
+          title
+          description: shortDescription
+          logo {
+            url
+            width
+            height
+          }
         }
         assetsStorage {
           ...enterpriseApp
@@ -54,32 +83,6 @@ export const getStaticProps = gqlStaticProps(
       slug
       title
       description: shortDescription
-      logo {
-        url
-        width
-        height
-      }
-    }
-
-    fragment hostingBuildingApp on HostingBuildingAppRecord {
-      slug
-      title
-      description: shortDescription
-      logo {
-        url
-        width
-        height
-      }
-    }
-
-    fragment integration on IntegrationRecord {
-      slug
-      name
-      integrationType {
-        slug
-      }
-      documentationUrl
-      landingUrl
       logo {
         url
         width
@@ -133,24 +136,45 @@ export default function IntegrationsPage({ page }) {
         subtitle="Expand and customize the capabilities of DatoCMS, integrating your favorite third-party services"
       />
       <Category
-        title="Web technologies"
+        title="Starter projects"
         description={
           <>
-            DatoCMS integrates with every framework so that you can always
-            choose the best fit for your project.
+            Start with a fully configured DatoCMS project, a best practice
+            frontend in a range of popular frameworks, and deployment on
+            Netlify/ZEIT/Heroku.
           </>
         }
+        browse={
+          <Link href="/starters">
+            <a className={s.browseAll}>
+              Browse all the starter projects <ArrowIcon />
+            </a>
+          </Link>
+        }
       >
-        {page.technologies.map(item => (
+        {page.demos.map(item => (
           <Box
-            key={item.slug}
+            key={item.code}
             title={item.name}
-            as={item.landingUrl || item.documentationUrl}
-            href={
-              item.landingUrl ? '/cms/[slug]' : docHref(item.documentationUrl)
+            as={`/integrations/starters/${item.code}`}
+            href="/integrations/starters/[slug]"
+            description={
+              <div className={s.demoDesc}>
+                <div className={s.demoDescBody}>{item.description}</div>
+                <div className={s.demoDescImage}>
+                  <LazyImage
+                    className={s.techLogo}
+                    src={item.technology.logo.url}
+                  />
+                </div>
+              </div>
             }
-            description={`Use DatoCMS into your ${item.name} website`}
-            image={<LogoImage logo={item.logo} />}
+            image={
+              <Image
+                className={s.boxImageImage}
+                data={item.screenshot.responsiveImage}
+              />
+            }
           />
         ))}
       </Category>

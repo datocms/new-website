@@ -8,10 +8,16 @@
   text-decoration: none;
   overflow: hidden;
   transition: all 200ms ease-in-out;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .boxBody {
   padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .boxTitle {
@@ -23,6 +29,9 @@
   font-size: 15px;
   color: var(--light-body-color);
   line-height: 1.1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .boxActions {
