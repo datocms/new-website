@@ -209,7 +209,7 @@ export default function IntegrationsPage({ page }) {
             key={item.slug}
             as={`/integrations/hosting/${item.slug}`}
             href="/integrations/hosting/[slug]"
-            title={item.name}
+            title={item.title}
             description={truncate(item.description, 55)}
             image={<LogoImage logo={item.logo} />}
           />
@@ -230,7 +230,7 @@ export default function IntegrationsPage({ page }) {
               key={item.slug}
               as={`/integrations/enterprise/${item.slug}`}
               href="/integrations/enterprise/[slug]"
-              title={item.name}
+              title={item.title}
               description={truncate(item.description, 55)}
               image={<LogoImage logo={item.logo} />}
             />
@@ -249,7 +249,7 @@ export default function IntegrationsPage({ page }) {
               key={item.slug}
               as={`/integrations/enterprise/${item.slug}`}
               href="/integrations/enterprise/[slug]"
-              title={item.name}
+              title={item.title}
               description={truncate(item.description, 55)}
               image={<LogoImage logo={item.logo} />}
             />
