@@ -19,6 +19,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
+import PluginBox, { LogoImage } from 'components/PluginBox';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -111,19 +112,9 @@ const Box = ({ title, description, image, href, as }) => (
   <div className={s.boxContainer}>
     <Link href={href} as={as}>
       <a className={s.box}>
-        {image}
-        <div className={s.boxBody}>
-          <div className={s.boxTitle}>{title}</div>
-          <div className={s.boxDesc}>{description}</div>
-        </div>
+        <PluginBox title={title} description={description} image={image} />
       </a>
     </Link>
-  </div>
-);
-
-const LogoImage = ({ logo }) => (
-  <div className={cn(s.logo, { [s.square]: logo.width / logo.height < 1.7 })}>
-    <LazyImage src={logo.url} />
   </div>
 );
 
