@@ -1,4 +1,4 @@
-import Layout from 'components/IntegrationsLayout';
+import Layout from 'components/MarketplaceLayout';
 import LazyImage from 'components/LazyImage';
 import Head from 'next/head';
 import { gqlStaticProps, imageFields } from 'lib/datocms';
@@ -152,8 +152,8 @@ export default function IntegrationsPage({
           <Box
             key={item.code}
             title={item.name}
-            as={`/integrations/starters/${item.code}`}
-            href="/integrations/starters/[slug]"
+            as={`/marketplace/starters/${item.code}`}
+            href="/marketplace/starters/[slug]"
             description={
               <div className={s.demoDesc}>
                 <div className={s.demoDescBody}>{item.description}</div>
@@ -177,7 +177,7 @@ export default function IntegrationsPage({
       <Category
         title="Community Plugins"
         browse={
-          <Link href="/integrations/plugins">
+          <Link href="/marketplace/plugins">
             <a className={s.browseAll}>
               View all ({plugins.count}) <ArrowIcon />
             </a>
@@ -193,8 +193,8 @@ export default function IntegrationsPage({
         {page.plugins.map(item => (
           <Box
             key={item.packageName}
-            href="/integrations/plugins/i/[...chunks]"
-            as={`/integrations/plugins/i/${item.packageName}`}
+            href="/marketplace/plugins/i/[...chunks]"
+            as={`/marketplace/plugins/i/${item.packageName}`}
             title={item.title}
             description={truncate(item.description, 55)}
             image={
@@ -215,7 +215,7 @@ export default function IntegrationsPage({
           </>
         }
         browse={
-          <Link href="/integrations/hosting">
+          <Link href="/marketplace/hosting">
             <a className={s.browseAll}>
               View all ({hostingApps.count}) <ArrowIcon />
             </a>
@@ -225,8 +225,8 @@ export default function IntegrationsPage({
         {page.hostingBuilding.map(item => (
           <Box
             key={item.slug}
-            as={`/integrations/hosting/${item.slug}`}
-            href="/integrations/hosting/[slug]"
+            as={`/marketplace/hosting/${item.slug}`}
+            href="/marketplace/hosting/[slug]"
             title={item.title}
             description={truncate(item.description, 55)}
             image={<LogoImage logo={item.logo} />}
@@ -247,7 +247,7 @@ export default function IntegrationsPage({
           </>
         }
         browse={
-          <Link href="/integrations/enterprise">
+          <Link href="/marketplace/enterprise">
             <a className={s.browseAll}>
               View all ({enterpriseApps.count}) <ArrowIcon />
             </a>
@@ -257,8 +257,8 @@ export default function IntegrationsPage({
         {page.enterpriseApps.map(item => (
           <Box
             key={item.slug}
-            as={`/integrations/enterprise/${item.slug}`}
-            href="/integrations/enterprise/[slug]"
+            as={`/marketplace/enterprise/${item.slug}`}
+            href="/marketplace/enterprise/[slug]"
             title={item.title}
             description={truncate(item.description, 55)}
             image={<LogoImage style="azure" logo={item.logo} />}

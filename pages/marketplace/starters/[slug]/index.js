@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
-import Layout from 'components/IntegrationsLayout';
+import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
-import s from 'pages/integrations/plugins/i/[...chunks]/style.module.css';
+import s from 'pages/marketplace/plugins/i/[...chunks]/style.module.css';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import UiChrome from 'components/UiChrome';

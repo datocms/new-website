@@ -1,10 +1,10 @@
-import Layout from 'components/IntegrationsLayout';
+import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import { gqlStaticProps } from 'lib/datocms';
 import Head from 'next/head';
 import gql from 'graphql-tag';
 import PluginBox, { LogoImage } from 'components/PluginBox';
-import s from 'pages/integrations/plugins/p/[page]/style.module.css';
+import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   gql`
@@ -35,8 +35,8 @@ export default function Hosting({ items, preview }) {
             items.map(item => (
               <PluginBox
                 key={item.slug}
-                as={`/integrations/hosting/${item.slug}`}
-                href="/integrations/hosting/[slug]"
+                as={`/marketplace/hosting/${item.slug}`}
+                href="/marketplace/hosting/[slug]"
                 title={item.title}
                 description={item.description}
                 image={<LogoImage logo={item.logo} />}

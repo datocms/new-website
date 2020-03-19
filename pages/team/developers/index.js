@@ -8,7 +8,7 @@ import OtherPersonasPicker from 'components/OtherPersonasPicker';
 import DatoIllustration from 'components/DatoIllustration';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import IntegrationsBanner from 'components/IntegrationsBanner';
+import IntegrationsBanner from 'components/marketplaceBanner';
 import Quote from 'components/Quote';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Result from 'components/Result';
@@ -221,7 +221,7 @@ function Developers({ integrations, preview, page }) {
         third-party platform or service. Build your digital products by
         composing the best tools in the market: we offer plugins, webhooks,
         templates and SDKs to get you started in no time.
-      </IntegrationsBanner>
+      </marketplaceBanner>
 
       <Flag
         style="good"

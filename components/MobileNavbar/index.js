@@ -246,23 +246,23 @@ export default function Navbar() {
                 <Group title="Marketplace">
                   <div className={s.twocols}>
                     <LearnResource
-                      href="/integrations/starters"
+                      href="/marketplace/starters"
                       title="Starter projects"
                       description="Start with a fully configured DatoCMS project"
                     />
                     <LearnResource
-                      href="/integrations/plugins"
+                      href="/marketplace/plugins"
                       title="Plugins"
                       description="Easily expand the capabilities of DatoCMS"
                     />
                     <LearnResource
-                      href="/integrations/hosting"
+                      href="/marketplace/hosting"
                       title="Hosting &amp; Builds"
                       description="No matter the stack you're using, we've got you covered"
                     />
 
                     <LearnResource
-                      href="/integrations/enterprise"
+                      href="/marketplace/enterprise"
                       title="Enterprise apps"
                       description="Keep your company data secure"
                     />

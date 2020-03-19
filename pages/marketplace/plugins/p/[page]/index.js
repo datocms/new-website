@@ -1,4 +1,4 @@
-import Layout from 'components/IntegrationsLayout';
+import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
@@ -8,7 +8,6 @@ import {
 } from 'lib/datocms';
 import Link from 'next/link';
 import { Image } from 'react-datocms';
-import Masonry from 'react-masonry-css';
 import FormattedDate from 'components/FormattedDate';
 import { PLUGINS_PER_PAGE } from 'lib/sitemap';
 import Head from 'next/head';
@@ -87,9 +86,9 @@ export default function Plugins({
       <Wrapper>
         <Link as="/docs/building-plugins" href="/docs/[...chunks]">
           <a className={s.announce}>
-            <MegaphoneIcon /> <strong>Welcome to Community Plugins!</strong>{' '}
-            Learn how create your own plugin, or copy and remix existing ones in
-            our documentation →
+            <MegaphoneIcon /> <strong>Wanna be here?</strong> Learn how create
+            your own plugin, or copy and remix existing ones in our
+            documentation! →
           </a>
         </Link>
         <div className={s.grid}>
@@ -98,8 +97,8 @@ export default function Plugins({
               <PluginBox
                 key={post.packageName}
                 title={post.title}
-                href="/integrations/plugins/i/[...chunks]"
-                as={`/integrations/plugins/i/${post.packageName}`}
+                href="/marketplace/plugins/i/[...chunks]"
+                as={`/marketplace/plugins/i/${post.packageName}`}
                 image={
                   post.coverImage && post.coverImage.responsiveImage ? (
                     <Image
@@ -126,13 +125,13 @@ export default function Plugins({
             totalEntries={meta.count}
             href={index =>
               index === 0
-                ? '/integrations/plugins'
-                : '/integrations/plugins/p/[page]'
+                ? '/marketplace/plugins'
+                : '/marketplace/plugins/p/[page]'
             }
             as={index =>
               index === 0
-                ? '/integrations/plugins'
-                : `/integrations/plugins/p/${index}`
+                ? '/marketplace/plugins'
+                : `/marketplace/plugins/p/${index}`
             }
           />
         )}

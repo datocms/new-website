@@ -6,29 +6,33 @@ import classnames from 'classnames';
 import Button from 'components/Button';
 import { useState, useEffect } from 'react';
 import { getCookie } from 'utils/cookies';
+import cn from 'classnames';
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import Image from 'public/images/illustrations/image-api.svg';
 import Video from 'public/images/illustrations/video-encoding.svg';
 import Languages from 'public/images/illustrations/multilanguage-2.svg';
 import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
+import Developers from 'public/images/illustrations/developers-2.svg';
+import Marketers from 'public/images/illustrations/marketers.svg';
+import ContentCreators from 'public/images/illustrations/content-editors2.svg';
 
 import External from 'public/icons/regular/external-link.svg';
 
-const LearnResource = ({ href, as, title, description, target }) =>
+const TitleDesc = ({ href, as, title, description, target }) =>
   target ? (
-    <a className={s.learnRes} href={href} target={target}>
-      <div className={s.learnResBody}>
-        <div className={s.learnResTitle}>{title}</div>
-        <div className={s.learnResDescription}>{description}</div>
+    <a className={s.titleDesc} href={href} target={target}>
+      <div className={s.titleDescBody}>
+        <div className={s.titleDescTitle}>{title}</div>
+        <div className={s.titleDescDescription}>{description}</div>
       </div>
     </a>
   ) : (
     <Link href={href} as={as}>
-      <a className={s.learnRes}>
-        <div className={s.learnResBody}>
-          <div className={s.learnResTitle}>{title}</div>
-          <div className={s.learnResDescription}>{description}</div>
+      <a className={s.titleDesc}>
+        <div className={s.titleDescBody}>
+          <div className={s.titleDescTitle}>{title}</div>
+          <div className={s.titleDescDescription}>{description}</div>
         </div>
       </a>
     </Link>
@@ -36,21 +40,34 @@ const LearnResource = ({ href, as, title, description, target }) =>
 
 const Feature = ({ href, icon: Icon, title, description }) => (
   <Link href={href}>
-    <a className={s.feature}>
-      <div className={s.featureIcon}>
+    <a className={s.flag}>
+      <div className={s.flagIcon}>
         <Icon />
       </div>
-      <div className={s.featureBody}>
-        <div className={s.featureTitle}>{title}</div>
-        <div className={s.featureDescription}>{description}</div>
+      <div className={s.flagBody}>
+        <div className={s.flagTitle}>{title}</div>
+        <div className={s.flagDescription}>{description}</div>
+      </div>
+    </a>
+  </Link>
+);
+
+const Team = ({ href, icon: Icon, title }) => (
+  <Link href={href}>
+    <a className={cn(s.flag, s.flagSmall)}>
+      <div className={s.flagIcon}>
+        <Icon />
+      </div>
+      <div className={s.flagBody}>
+        <div className={s.flagTitle}>{title}</div>
       </div>
     </a>
   </Link>
 );
 
 const Pane = ({ children }) => (
-  <div className={s.groupPane}>
-    <div className={s.groupPaneInner}>{children}</div>
+  <div className={s.pane}>
+    <div className={s.paneInner}>{children}</div>
   </div>
 );
 
@@ -79,65 +96,78 @@ export default function Navbar() {
                 </div>
                 <Pane>
                   <div className={s.cols}>
-                    <div className={s.extraWhy}>
-                      <div className={s.sectionTitle}>Team</div>
-                      <Link href="/team/developers">
-                        <a className={s.extraLink}>For developers</a>
-                      </Link>
-                      <Link href="/team/digital-marketers">
-                        <a className={s.extraLink}>For digital marketers</a>
-                      </Link>
-                      <Link href="/team/content-creators">
-                        <a className={s.extraLink}>For content creators</a>
-                      </Link>
+                    <div className={cn(s.section, s.sectionInverse)}>
+                      <div className={s.sectionTitle}>Happy team</div>
+
+                      <Team
+                        href="/team/developers"
+                        icon={Developers}
+                        title="For developers"
+                      />
+
+                      <Team
+                        href="/team/digital-marketers"
+                        icon={Marketers}
+                        title="For digital marketers"
+                      />
+
+                      <Team
+                        href="/team/content-creators"
+                        icon={ContentCreators}
+                        title="For content creators"
+                      />
 
                       <div className={s.sectionTitle}>Enterprise</div>
                       <Link href="/enterprise">
                         <a className={s.extraLink}>DatoCMS for Enterprise</a>
                       </Link>
                     </div>
-                    <div className={s.features}>
-                      <Feature
-                        icon={Cdn}
-                        title="Worldwide CDN"
-                        href="/features/worldwide-cdn"
-                        description="Performant, secure, and close to every customer"
-                      />
+                    <div className={s.section}>
+                      <div className={s.sectionTitle}>Features</div>
 
-                      <Feature
-                        icon={GraphQl}
-                        title="GraphQL Content API"
-                        href="/features/graphql-content-api"
-                        description="Develop faster with powerful developer tools"
-                      />
+                      <div className={s.grid2}>
+                        <Feature
+                          icon={Cdn}
+                          title="Worldwide CDN"
+                          href="/features/worldwide-cdn"
+                          description="Performant, secure, and close to every customer"
+                        />
 
-                      <Feature
-                        icon={Image}
-                        title="Images API"
-                        href="/features/images-api"
-                        description="Endless image transformations at your disposal"
-                      />
+                        <Feature
+                          icon={GraphQl}
+                          title="GraphQL Content API"
+                          href="/features/graphql-content-api"
+                          description="Develop faster with powerful developer tools"
+                        />
 
-                      <Feature
-                        icon={Video}
-                        title="Video streaming/encoding"
-                        href="/features/video-streaming-encoding"
-                        description="Produce videos and serve them fast to any device"
-                      />
+                        <Feature
+                          icon={Image}
+                          title="Images API"
+                          href="/features/images-api"
+                          description="Endless transformations at your disposal"
+                        />
 
-                      <Feature
-                        icon={Languages}
-                        title="Multi-language"
-                        href="/features/multi-language"
-                        description="Reach your global audience with localized content"
-                      />
+                        <Feature
+                          icon={Video}
+                          title="Video API"
+                          href="/features/video-streaming-encoding"
+                          description="Produce videos and serve them fast to any device"
+                        />
 
-                      <Feature
-                        icon={Layouts}
-                        title="Dynamic layouts"
-                        href="/features/dynamic-layouts"
-                        description="Easily build dynamic layouts for landing pages"
-                      />
+                        <Feature
+                          icon={Languages}
+                          title="Multi-language"
+                          href="/features/multi-language"
+                          description="Reach global audience with localized content"
+                        />
+
+                        <Feature
+                          icon={Layouts}
+                          title="Dynamic layouts"
+                          href="/features/dynamic-layouts"
+                          description="Easily build dynamic layouts for landing pages"
+                        />
+                      </div>
                     </div>
                   </div>
                 </Pane>
@@ -149,34 +179,37 @@ export default function Navbar() {
                 </div>
 
                 <Pane>
-                  <div className={s.learnDocs}>
-                    <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/arduino"
-                      title="Arduino"
-                      description="Arduino doubled his time-to-market speed with DatoCMS"
-                    />
+                  <div className={s.cols}>
+                    <div className={s.section}>
+                      <TitleDesc
+                        href="/customers/[slug]"
+                        as="/customers/arduino"
+                        title="Arduino"
+                        description="2x time-to-market speed with DatoCMS"
+                      />
 
-                    <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/hashicorp"
-                      title="Hashicorp"
-                      description="How HashiCorp built a reliable and secure editorial workflow"
-                    />
+                      <TitleDesc
+                        href="/customers/[slug]"
+                        as="/customers/hashicorp"
+                        title="Hashicorp"
+                        description="Reliable and secure editorial workflow"
+                      />
+                    </div>
+                    <div className={s.section}>
+                      <TitleDesc
+                        href="/customers/[slug]"
+                        as="/customers/nike"
+                        title="Matter supply for Nike"
+                        description="Award-winning Nike campaign in 4 weeks"
+                      />
 
-                    <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/nike"
-                      title="Nike"
-                      description="How to deliver an award-winning Nike campaign in 4 weeks"
-                    />
-
-                    <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/chilly-s"
-                      title="Chilly's Bottles"
-                      description="How Rotate built a 2M users a month e-commerce for Chilly’s"
-                    />
+                      <TitleDesc
+                        href="/customers/[slug]"
+                        as="/customers/chilly-s"
+                        title="Chilly's Bottles"
+                        description="2M users a month e-commerce"
+                      />
+                    </div>
                   </div>
                 </Pane>
               </div>
@@ -186,7 +219,7 @@ export default function Navbar() {
                 </div>
                 <Pane>
                   <div className={s.cols}>
-                    <div className={s.extraWhy}>
+                    {/* <div className={s.section}>
                       <div className={s.sectionTitle}>Technologies</div>
                       <Link href="/cms/[slug]" as="/cms/nextjs">
                         <a className={s.extraLink}>Next.js</a>
@@ -212,28 +245,28 @@ export default function Navbar() {
                       <Link href="/cms/[slug]" as="/cms/middleman">
                         <a className={s.extraLink}>Middleman</a>
                       </Link>
-                    </div>
-                    <div className={s.learnDocs}>
-                      <LearnResource
+                    </div> */}
+                    <div className={s.section}>
+                      <TitleDesc
                         title="Documentation"
                         description="Guides, tutorials and API reference"
                         href="/docs"
                       />
 
-                      <LearnResource
+                      <TitleDesc
                         title="Blog"
                         description="Culture, learnings, and announcements"
                         href="/blog"
                       />
 
-                      <LearnResource
+                      <TitleDesc
                         title="Product updates"
                         description="Changelog for new features and improvements"
                         href="/product-updates"
                       />
                     </div>
-                    <div className={s.help}>
-                      <LearnResource
+                    <div className={s.section}>
+                      <TitleDesc
                         title={
                           <>
                             Community forum <External />
@@ -243,12 +276,12 @@ export default function Navbar() {
                         href="https://community.datocms.com"
                         target="_blank"
                       />
-                      <LearnResource
+                      <TitleDesc
                         title="Slack channel"
                         description="Chat live with other devs in our Slack channel"
                         href="/slack"
                       />
-                      <LearnResource
+                      <TitleDesc
                         title="Support"
                         description="Got questions? Get in touch with our team"
                         href="/support"
@@ -266,27 +299,27 @@ export default function Navbar() {
                 <Pane>
                   <div className={s.cols}>
                     <div className={s.cols}>
-                      <div className={s.learnDocs}>
-                        <LearnResource
-                          href="/integrations/starters"
+                      <div className={s.section}>
+                        <TitleDesc
+                          href="/marketplace/starters"
                           title="Starter projects"
                           description="Start with a fully configured DatoCMS project"
                         />
-                        <LearnResource
-                          href="/integrations/plugins"
+                        <TitleDesc
+                          href="/marketplace/plugins"
                           title="Community plugins"
                           description="Easily expand the capabilities of DatoCMS"
                         />
                       </div>
-                      <div className={s.help}>
-                        <LearnResource
-                          href="/integrations/hosting"
+                      <div className={s.section}>
+                        <TitleDesc
+                          href="/marketplace/hosting"
                           title="Hosting &amp; Builds"
                           description="No matter the stack you're using, we've got you covered"
                         />
 
-                        <LearnResource
-                          href="/integrations/enterprise"
+                        <TitleDesc
+                          href="/marketplace/enterprise"
                           title="Enterprise apps"
                           description="Keep your company data secure"
                         />

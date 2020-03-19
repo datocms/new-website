@@ -130,7 +130,7 @@ function Enterprise({ page }) {
         />
         <Point
           title="Single Sign-On"
-          description="Manage access to GraphCMS through your preferred identity provider."
+          description="Manage access to DatoCMS through your preferred identity provider."
         />
         <Point
           title="ISO 27001 and GDPR Compliance"

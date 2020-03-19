@@ -1,4 +1,4 @@
-import Layout from 'components/IntegrationsLayout';
+import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';

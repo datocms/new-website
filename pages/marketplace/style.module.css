@@ -32,7 +32,7 @@
 }
 
 .category {
-  padding-bottom: 40px;
+  padding-bottom: rfs(60px);
 }
 
 .categoryHeader {
@@ -63,7 +63,7 @@
 }
 
 .categoryTitle {
-  font-size: rfs(35px);
+  font-size: rfs(40px);
   color: var(--light-body-color);
   font-weight: bold;
   letter-spacing: -0.03em;

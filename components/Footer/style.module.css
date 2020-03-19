@@ -4,7 +4,7 @@
 
   &:before {
     content: '';
-    background: #2e343f;
+    background: var(--dark-bg-color);
     clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
     position: absolute;
     left: 0;
@@ -19,7 +19,7 @@
   margin-top: rfs(150px);
   padding-top: rfs(50px);
   clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
-  background: #2e343f;
+  background: var(--dark-bg-color);
 }
 
 .footerRoot {

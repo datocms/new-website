@@ -4,9 +4,9 @@ import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import PostContent from 'components/PostContent';
 import docPageStyles from 'pages/docs/pageStyle.module.css';
-import Layout from 'components/IntegrationsLayout';
+import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
-import s from 'pages/integrations/plugins/i/[...chunks]/style.module.css';
+import s from 'pages/marketplace/plugins/i/[...chunks]/style.module.css';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import { Image } from 'react-datocms';
@@ -17,12 +17,11 @@ import {
   NameWithGravatar,
   Header,
   Back,
-  Badge,
 } from 'components/PluginToolkit';
 import { Copy, Image as FakeImage } from 'components/FakeContent';
 
-export const getStaticPaths = generatePaths('allEnterpriseApps');
-export const getStaticProps = generateProps('enterpriseApp');
+export const getStaticPaths = generatePaths('allHostingApps');
+export const getStaticProps = generateProps('hostingApp');
 
 export default function EnterpriseApp({ page, preview }) {
   const { isFallback } = useRouter();
@@ -37,13 +36,7 @@ export default function EnterpriseApp({ page, preview }) {
             <div className={s.content}>
               <Header
                 isFallback={isFallback}
-                title={
-                  !isFallback && (
-                    <>
-                      {page.title} <Badge>Enterprise integration</Badge>
-                    </>
-                  )
-                }
+                title={!isFallback && page.title}
                 description={!isFallback && page.description}
               >
                 {!isFallback &&
@@ -77,9 +70,7 @@ export default function EnterpriseApp({ page, preview }) {
                 <PluginBox
                   isFallback={isFallback}
                   title={!isFallback && page.title}
-                  image={
-                    !isFallback && <LogoImage style="azure" logo={page.logo} />
-                  }
+                  image={!isFallback && <LogoImage logo={page.logo} />}
                   description={!isFallback && page.shortDescription}
                   actions={
                     <Button
@@ -87,7 +78,7 @@ export default function EnterpriseApp({ page, preview }) {
                       href="/support?topics=business-partnerships/general-requests"
                       target="_blank"
                     >
-                      Request activation
+                      Install this app
                     </Button>
                   }
                 />

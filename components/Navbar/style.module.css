@@ -1,4 +1,4 @@
-@media screen and (width <= 900px) {
+@media screen and (width <= 1050px) {
   .root {
     visibility: hidden;
     height: 0;
@@ -6,7 +6,7 @@
   }
 }
 
-@media screen and (width > 900px) {
+@media screen and (width > 1050px) {
   .root {
     position: fixed;
     top: 0;
@@ -41,7 +41,7 @@
   .entries {
     flex: 1;
     display: flex;
-    padding-left: 40px;
+    padding-left: 30px;
     position: relative;
   }
 
@@ -91,13 +91,13 @@
     position: relative;
 
     &:hover {
-      .groupPane {
+      .pane {
         display: block;
       }
     }
   }
 
-  .groupPane {
+  .pane {
     display: none;
     color: var(--base-body-color);
     position: absolute;
@@ -105,9 +105,10 @@
     padding: 0 50px 50px 50px;
   }
 
-  .groupPaneInner {
+  .paneInner {
     border-radius: 4px;
     background: white;
+    overflow: hidden;
     box-shadow: 0 0.9px 2.2px rgba(0, 0, 0, 0.02),
       0 2.2px 5.3px rgba(0, 0, 0, 0.028), 0 4.1px 10px rgba(0, 0, 0, 0.035),
       0 7.4px 17.9px rgba(0, 0, 0, 0.042), 0 13.8px 33.4px rgba(0, 0, 0, 0.05),
@@ -119,15 +120,39 @@
     align-items: stretch;
   }
 
-  .extraWhy {
-    background: linear-gradient(45deg, #fefae4, #f9ecfe);
+  .grid1 {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr;
   }
 
-  .features,
-  .learnDocs,
-  .help,
+  .grid2 {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid3 {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .extraWhy {
+    /* background: linear-gradient(45deg, #fefae4, #f9ecfe); */
+  }
+
+  .section {
     padding: 40px 30px;
+    background: linear-gradient(45deg, white 40%, #f8f8f8);
+    padding-right: 40px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+
+    &:last-child {
+      background: white;
+      border-right: 0;
+      padding-right: 30px;
+    }
   }
 
   .sectionTitle {
@@ -142,14 +167,14 @@
     }
   }
 
-  .feature {
+  .flag {
     margin-bottom: 15px;
     font-size: 16px;
-    white-space: nowrap;
     text-decoration: none;
-    color: var(--base-body-color);
+    color: inherit;
     display: flex;
     align-items: center;
+    min-width: 250px;
 
     &:last-child {
       margin-bottom: 0;
@@ -158,13 +183,13 @@
     &:hover {
       text-decoration: none;
 
-      .featureTitle {
+      .flagTitle {
         color: var(--accent-color);
       }
     }
   }
 
-  .featureIcon {
+  .flagIcon {
     width: 50px;
     height: 50px;
     background: #e4faff;
@@ -173,21 +198,22 @@
     align-items: center;
     justify-content: center;
     margin-right: 20px;
+    flex-shrink: 0;
 
     svg {
+      fill: #0e5a61;
       width: 30px;
       height: 30px;
-      fill: var(--base-body-color);
     }
   }
 
-  .featureDescription {
+  .flagDescription {
     font-size: 0.9em;
     margin-top: 5px;
     color: var(--light-body-color);
   }
 
-  .featureTitle {
+  .flagTitle {
     font-weight: bold;
   }
 
@@ -195,8 +221,7 @@
     text-decoration: none;
     font-size: 16px;
     display: block;
-    color: black;
-    white-space: nowrap;
+    color: inherit;
     margin-bottom: 5px;
 
     &:hover {
@@ -204,21 +229,13 @@
     }
   }
 
-  .learnDocs,
-  .help {
-    min-width: 270px;
-  }
-
-  .learnDocs {
-    border-right: 1px solid var(--border-color);
-  }
-
-  .learnRes {
+  .titleDesc {
     display: block;
     text-decoration: none;
     color: inherit;
     font-size: 16px;
     margin-bottom: 25px;
+    min-width: 190px;
 
     &:last-child {
       margin-bottom: 0;
@@ -227,19 +244,19 @@
     &:hover {
       text-decoration: none;
 
-      .learnResTitle {
+      .titleDescTitle {
         color: var(--accent-color);
       }
     }
   }
 
-  .learnResDescription {
+  .titleDescDescription {
     font-size: 0.9em;
     margin-top: 5px;
     color: var(--light-body-color);
   }
 
-  .learnResTitle {
+  .titleDescTitle {
     font-weight: bold;
 
     svg {
@@ -252,84 +269,34 @@
     display: flex;
     align-items: center;
   }
-}
 
-.integrations {
-  min-width: 300px;
-  font-size: 16px;
-}
+  .flagSmall {
+    margin-bottom: 10px;
+    min-width: 210px;
 
-.marketplace {
-  border-bottom: 1px solid var(--border-color);
-  padding: 40px 40px 30px;
-}
+    .flagIcon {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
 
-.plugins {
-  white-space: nowrap;
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  padding: 30px 40px;
-
-  &:hover {
-    color: var(--accent-color);
-  }
-}
-
-.marketplaceTitle {
-  font-weight: bold;
-  color: inherit;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 15px;
-
-  &:hover {
-    color: var(--accent-color);
-  }
-}
-
-.integrationGroup {
-  margin-bottom: 15px;
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.integrationGroupTitle {
-  text-decoration: none;
-  color: inherit;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 12px;
-  margin-bottom: 4px;
-  color: var(--extra-light-body-color);
-}
-
-.integrationTop {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  white-space: nowrap;
-  margin-top: 5px;
-}
-
-.integration {
-  display: inline;
-
-  &:after {
-    content: ' • ';
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 
-  &:last-child:after {
-    display: none;
-  }
+  .sectionInverse {
+    background: linear-gradient(45deg, #533451 40%, #422941);
+    color: white;
+    border-right: 0;
 
-  a {
-    text-decoration: none;
-    color: inherit;
+    .flagIcon {
+      background: #422941;
 
-    &:hover {
-      color: var(--accent-color);
+      svg {
+        fill: rgba(255, 255, 255, 0.6);
+      }
     }
   }
 }

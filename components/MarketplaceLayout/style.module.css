@@ -1,11 +1,19 @@
-.root {
-  padding: rfs(30px) 0 0;
+.notice {
+  background: #f4cf58;
+  padding: 10px 0;
+  color: black;
+  font-size: 14px;
+  text-align: center;
 }
 
 .header {
+  padding: rfs(45px) 0;
+  margin-bottom: rfs(50px);
+}
+
+.headerInner {
   display: flex;
   align-items: center;
-  margin-bottom: rfs(60px);
 }
 
 .logo {
@@ -43,7 +51,27 @@
   font-size: 14px;
 
   a {
-    color: inherit;
+    color: var(--light-body-color);
+    text-decoration: none;
+    padding: 0.8em 1em;
+    border: 1px solid var(--extra-light-body-color);
+    border-radius: 4px;
+
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      fill: var(--light-body-color);
+      margin-right: 4px;
+    }
+
+    &:hover {
+      border-color: var(--base-body-color);
+      color: var(--base-body-color);
+
+      svg {
+        fill: var(--base-body-color);
+      }
+    }
   }
 
   @media (width > 900px) {

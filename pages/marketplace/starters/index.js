@@ -1,4 +1,4 @@
-import Layout from 'components/IntegrationsLayout';
+import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import { gqlStaticProps, imageFields } from 'lib/datocms';
 import { Image } from 'react-datocms';
@@ -6,7 +6,7 @@ import Head from 'next/head';
 import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import PluginBox from 'components/PluginBox';
-import s from 'pages/integrations/plugins/p/[page]/style.module.css';
+import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';
 
 export const getStaticProps = gqlStaticProps(
@@ -58,8 +58,8 @@ export default function Plugins({ starters, preview }) {
               <PluginBox
                 title={item.name}
                 key={item.code}
-                as={`/integrations/starters/${item.code}`}
-                href="/integrations/starters/[slug]"
+                as={`/marketplace/starters/${item.code}`}
+                href="/marketplace/starters/[slug]"
                 description={
                   <div className={s.demoDesc}>
                     <div className={s.demoDescBody}>{item.description}</div>
