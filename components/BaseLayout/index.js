@@ -63,20 +63,23 @@ export default function Layout({ preview, children }) {
           Exit preview mode
         </a>
       )}
-      {children}
-      {!cookieAccept && (
-        <div className={s.cookies}>
-          By continuing to use this site you consent to the use of cookies in
-          accordance with{' '}
-          <Link href="/legal/cookie-policy">
-            <a>our cookie policy</a>
-          </Link>
-          .
-          <button onClick={accept}>
-            <TimesIcon />
-          </button>
-        </div>
-      )}
+      <div className={s.root}>
+        {children}
+        {!cookieAccept && (
+          <div className={s.cookies}>
+            By continuing to use this site you consent to the use of cookies in
+            accordance with{' '}
+            <Link href="/legal/cookie-policy">
+              <a>our cookie policy</a>
+            </Link>
+            .
+            <button onClick={accept}>
+              <TimesIcon />
+            </button>
+          </div>
+        )}
+      </div>
+
       <div
         className={s.overlay}
         style={{

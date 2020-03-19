@@ -1,54 +1,20 @@
 .post {
-  box-shadow: var(--box-shadow);
-  border-radius: 5px;
   color: inherit;
   text-decoration: none;
   display: block;
-  margin-bottom: 50px;
-  overflow: hidden;
   transition: transform 200ms ease-in-out;
+  display: flex;
+  align-items: stretch;
 
   &:hover {
     transform: translateY(-5px);
   }
 }
 
-.postBody {
-  padding: 20px;
-  border-top: 1px solid var(---border-color);
-}
-
-.title {
-  margin: 0 0 10px;
-  font-weight: bold;
-  font-size: 22px;
-  letter-spacing: -0.04em;
-}
-
-.excerpt {
-  font-size: 15px;
-  line-height: 1.1;
-
-  strong {
-    font-weight: bold;
-  }
-}
-
-.footer {
-  margin-top: 10px;
-  font-size: 15px;
-  color: var(--light-body-color);
-}
-
 .grid {
-  display: flex;
-  margin-left: rfs(-50px); /* gutter size offset */
-  width: auto;
-}
-
-.column {
-  padding-left: rfs(50px); /* gutter size */
-  background-clip: padding-box;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .image {
@@ -82,4 +48,19 @@
     display: inline-block;
     margin-right: 8px;
   }
+}
+
+.techLogo {
+  height: 25px;
+  margin-top: 20px;
+}
+
+.demoDesc {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.demoDescBody {
+  flex: 1;
 }

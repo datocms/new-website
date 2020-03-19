@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
-import Layout from 'components/Layout';
+import Layout from 'components/IntegrationsLayout';
 import Wrapper from 'components/Wrapper';
-import s from 'pages/plugins/i/[...chunks]/style.module.css';
+import s from 'pages/integrations/plugins/i/[...chunks]/style.module.css';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import UiChrome from 'components/UiChrome';
@@ -97,8 +97,43 @@ export default function EnterpriseApp({ page, preview }) {
 
       <Wrapper>
         <div className={s.root}>
-          <Back href="/integrations" label="All integrations" />
           <div className={s.split}>
+            <div className={s.content}>
+              <Header
+                isFallback={isFallback}
+                title={!isFallback && page.name}
+                description={
+                  !isFallback && (
+                    <>
+                      {page.category.name} in {page.technology.name}
+                      {page.deploymentType in deployments
+                        ? deployments[page.deploymentType]
+                        : page.deploymentType}
+                    </>
+                  )
+                }
+              >
+                {!isFallback &&
+                  [
+                    <UiChrome key="front" title={page.demoName}>
+                      <Image
+                        style={{ display: 'block' }}
+                        explicitWidth
+                        data={page.screenshot.responsiveImage}
+                      />
+                    </UiChrome>,
+                    page.backendScreenshot && (
+                      <UiChrome key="back">
+                        <Image
+                          style={{ display: 'block' }}
+                          explicitWidth
+                          data={page.backendScreenshot.responsiveImage}
+                        />
+                      </UiChrome>
+                    ),
+                  ].filter(i => !!i)}
+              </Header>
+            </div>
             <div className={s.sidebar}>
               <div className={s.sidebarInner}>
                 <PluginBox
@@ -142,42 +177,6 @@ export default function EnterpriseApp({ page, preview }) {
                   </PluginInfo>
                 </div>
               </div>
-            </div>
-            <div className={s.content}>
-              <Header
-                isFallback={isFallback}
-                title={!isFallback && page.name}
-                description={
-                  !isFallback && (
-                    <>
-                      {page.category.name} in {page.technology.name}
-                      {page.deploymentType in deployments
-                        ? deployments[page.deploymentType]
-                        : page.deploymentType}
-                    </>
-                  )
-                }
-              >
-                {!isFallback &&
-                  [
-                    <UiChrome key="front" title={page.demoName}>
-                      <Image
-                        style={{ display: 'block' }}
-                        explicitWidth
-                        data={page.screenshot.responsiveImage}
-                      />
-                    </UiChrome>,
-                    page.backendScreenshot && (
-                      <UiChrome key="back">
-                        <Image
-                          style={{ display: 'block' }}
-                          explicitWidth
-                          data={page.backendScreenshot.responsiveImage}
-                        />
-                      </UiChrome>
-                    ),
-                  ].filter(i => !!i)}
-              </Header>
             </div>
           </div>
         </div>

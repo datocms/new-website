@@ -4,9 +4,9 @@ import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import PostContent from 'components/PostContent';
 import docPageStyles from 'pages/docs/pageStyle.module.css';
-import Layout from 'components/Layout';
+import Layout from 'components/IntegrationsLayout';
 import Wrapper from 'components/Wrapper';
-import s from 'pages/plugins/i/[...chunks]/style.module.css';
+import s from 'pages/integrations/plugins/i/[...chunks]/style.module.css';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import { Image } from 'react-datocms';
@@ -33,41 +33,7 @@ export default function EnterpriseApp({ page, preview }) {
 
       <Wrapper>
         <div className={s.root}>
-          <Back href="/integrations" label="All integrations" />
           <div className={s.split}>
-            <div className={s.sidebar}>
-              <div className={s.sidebarInner}>
-                <PluginBox
-                  isFallback={isFallback}
-                  title={!isFallback && page.title}
-                  image={!isFallback && <LogoImage logo={page.logo} />}
-                  description={!isFallback && page.shortDescription}
-                  actions={
-                    <Button
-                      as="a"
-                      href="/support?topics=business-partnerships/general-requests"
-                      target="_blank"
-                    >
-                      Request activation
-                    </Button>
-                  }
-                />
-
-                <div className={s.info}>
-                  <PluginInfo>
-                    <Info title="Publisher">
-                      <NameWithGravatar
-                        email="support@datocms.com"
-                        name="DatoCMS"
-                      />
-                    </Info>
-                    <Info title="First released">
-                      <FormattedDate date={'2019-03-12'} />
-                    </Info>
-                  </PluginInfo>
-                </div>
-              </div>
-            </div>
             <div className={s.content}>
               <Header
                 isFallback={isFallback}
@@ -104,6 +70,41 @@ export default function EnterpriseApp({ page, preview }) {
                     style={docPageStyles}
                   />
                 )}
+              </div>
+            </div>
+            <div className={s.sidebar}>
+              <div className={s.sidebarInner}>
+                <PluginBox
+                  isFallback={isFallback}
+                  title={!isFallback && page.title}
+                  image={
+                    !isFallback && <LogoImage style="azure" logo={page.logo} />
+                  }
+                  description={!isFallback && page.shortDescription}
+                  actions={
+                    <Button
+                      as="a"
+                      href="/support?topics=business-partnerships/general-requests"
+                      target="_blank"
+                    >
+                      Request activation
+                    </Button>
+                  }
+                />
+
+                <div className={s.info}>
+                  <PluginInfo>
+                    <Info title="Publisher">
+                      <NameWithGravatar
+                        email="support@datocms.com"
+                        name="DatoCMS"
+                      />
+                    </Info>
+                    <Info title="First released">
+                      <FormattedDate date={'2019-03-12'} />
+                    </Info>
+                  </PluginInfo>
+                </div>
               </div>
             </div>
           </div>

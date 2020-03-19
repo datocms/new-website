@@ -4,9 +4,9 @@ import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import PostContent from 'components/PostContent';
 import docPageStyles from 'pages/docs/pageStyle.module.css';
-import Layout from 'components/Layout';
+import Layout from 'components/IntegrationsLayout';
 import Wrapper from 'components/Wrapper';
-import s from 'pages/plugins/i/[...chunks]/style.module.css';
+import s from 'pages/integrations/plugins/i/[...chunks]/style.module.css';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import { Image } from 'react-datocms';
@@ -20,8 +20,8 @@ import {
 } from 'components/PluginToolkit';
 import { Copy, Image as FakeImage } from 'components/FakeContent';
 
-export const getStaticPaths = generatePaths('allHostingBuildingApps');
-export const getStaticProps = generateProps('hostingBuildingApp');
+export const getStaticPaths = generatePaths('allHostingApps');
+export const getStaticProps = generateProps('hostingApp');
 
 export default function EnterpriseApp({ page, preview }) {
   const { isFallback } = useRouter();
@@ -32,8 +32,39 @@ export default function EnterpriseApp({ page, preview }) {
 
       <Wrapper>
         <div className={s.root}>
-          <Back href="/integrations" label="All integrations" />
           <div className={s.split}>
+            <div className={s.content}>
+              <Header
+                isFallback={isFallback}
+                title={!isFallback && page.title}
+                description={!isFallback && page.description}
+              >
+                {!isFallback &&
+                  page.gallery.map(image => (
+                    <Image
+                      key={image.id}
+                      explicitWidth
+                      data={image.responsiveImage}
+                    />
+                  ))}
+              </Header>
+
+              <div className={s.readme}>
+                {isFallback ? (
+                  <>
+                    <Copy />
+                    <FakeImage />
+                    <Copy />
+                  </>
+                ) : (
+                  <PostContent
+                    isFallback={isFallback}
+                    content={page && page.content}
+                    style={docPageStyles}
+                  />
+                )}
+              </div>
+            </div>
             <div className={s.sidebar}>
               <div className={s.sidebarInner}>
                 <PluginBox
@@ -65,38 +96,6 @@ export default function EnterpriseApp({ page, preview }) {
                     </Info>
                   </PluginInfo>
                 </div>
-              </div>
-            </div>
-            <div className={s.content}>
-              <Header
-                isFallback={isFallback}
-                title={!isFallback && page.title}
-                description={!isFallback && page.description}
-              >
-                {!isFallback &&
-                  page.gallery.map(image => (
-                    <Image
-                      key={image.id}
-                      explicitWidth
-                      data={image.responsiveImage}
-                    />
-                  ))}
-              </Header>
-
-              <div className={s.readme}>
-                {isFallback ? (
-                  <>
-                    <Copy />
-                    <FakeImage />
-                    <Copy />
-                  </>
-                ) : (
-                  <PostContent
-                    isFallback={isFallback}
-                    content={page && page.content}
-                    style={docPageStyles}
-                  />
-                )}
               </div>
             </div>
           </div>

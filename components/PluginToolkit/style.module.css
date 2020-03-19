@@ -49,6 +49,7 @@
   padding: 4px 15px;
   border-radius: 40px;
   letter-spacing: -0.02em;
+  color: var(--base-body-color);
 }
 
 .back {
@@ -82,7 +83,7 @@
 .gallery {
   margin-top: rfs(50px);
   overflow-x: auto;
-  background: #e4faff;
+  background: var(--light-bg-color);
   border-radius: 5px;
 }
 

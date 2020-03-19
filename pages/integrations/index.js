@@ -1,6 +1,4 @@
-import Layout from 'components/Layout';
-import Hero from 'components/Hero';
-import Highlight from 'components/Highlight';
+import Layout from 'components/IntegrationsLayout';
 import LazyImage from 'components/LazyImage';
 import Head from 'next/head';
 import { gqlStaticProps, imageFields } from 'lib/datocms';
@@ -11,18 +9,24 @@ import truncate from 'truncate';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import Link from 'next/link';
 import cn from 'classnames';
-import Space from 'components/Space';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
-import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
-import Nike from 'public/images/logos/nike.svg';
-import Linkedin from 'public/images/logos/linkedin.svg';
-import LogosBar from 'components/LogosBar';
 import PluginBox, { LogoImage } from 'components/PluginBox';
+import { Badge } from 'components/PluginToolkit';
 
 export const getStaticProps = gqlStaticProps(
   gql`
     {
+      demos: _allTemplateDemosMeta {
+        count
+      }
+      plugins: _allPluginsMeta {
+        count
+      }
+      hostingApps: _allHostingAppsMeta {
+        count
+      }
+      enterpriseApps: _allEnterpriseAppsMeta {
+        count
+      }
       page: integrationsPage {
         demos {
           id
@@ -69,23 +73,16 @@ export const getStaticProps = gqlStaticProps(
             height
           }
         }
-        assetsStorage {
-          ...enterpriseApp
+        enterpriseApps {
+          slug
+          title
+          description: shortDescription
+          logo {
+            url
+            width
+            height
+          }
         }
-        singleSignOn {
-          ...enterpriseApp
-        }
-      }
-    }
-
-    fragment enterpriseApp on EnterpriseAppRecord {
-      slug
-      title
-      description: shortDescription
-      logo {
-        url
-        width
-        height
       }
     }
 
@@ -120,33 +117,31 @@ const Box = ({ title, description, image, href, as }) => (
   </div>
 );
 
-export default function IntegrationsPage({ page }) {
+export default function IntegrationsPage({
+  page,
+  plugins,
+  demos,
+  hostingApps,
+  enterpriseApps,
+  preview,
+}) {
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Head>
         <title>Integrations Marketplace</title>
       </Head>
-      <Hero
-        title={
-          <>
-            <Highlight>Integrations Marketplace</Highlight>
-          </>
-        }
-        subtitle="Expand and customize the capabilities of DatoCMS, integrating your favorite third-party services"
-      />
       <Category
         title="Starter projects"
         description={
           <>
-            Start with a fully configured DatoCMS project, a best practice
-            frontend in a range of popular frameworks, and deployment on
-            Netlify/ZEIT/Heroku.
+            Start with a fully configured DatoCMS project, a best-practice
+            frontend and free hosting
           </>
         }
         browse={
           <Link href="/starters">
             <a className={s.browseAll}>
-              Browse all the starter projects <ArrowIcon />
+              View all ({demos.count}) <ArrowIcon />
             </a>
           </Link>
         }
@@ -180,24 +175,24 @@ export default function IntegrationsPage({ page }) {
       <Category
         title="Community Plugins"
         browse={
-          <Link href="/plugins">
+          <Link href="/integrations/plugins">
             <a className={s.browseAll}>
-              Browse all the plugins <ArrowIcon />
+              View all ({plugins.count}) <ArrowIcon />
             </a>
           </Link>
         }
         description={
           <>
-            Easily expand and customize the capabilities of DatoCMS with one of
-            the existing community plugins.
+            Easily expand and customize the capabilities of DatoCMS with
+            community plugins
           </>
         }
       >
         {page.plugins.map(item => (
           <Box
             key={item.packageName}
-            href="/plugins/i/[...chunks]"
-            as={`/plugins/i/${item.packageName}`}
+            href="/integrations/plugins/i/[...chunks]"
+            as={`/integrations/plugins/i/${item.packageName}`}
             title={item.title}
             description={truncate(item.description, 55)}
             image={
@@ -213,9 +208,16 @@ export default function IntegrationsPage({ page }) {
         title="Hosting &amp; CI Building"
         description={
           <>
-            Server, serverless or static. No matter the stack you're using,
-            we've got you covered.
+            Server, serverless or static: no matter the stack you're using,
+            we've got you covered
           </>
+        }
+        browse={
+          <Link href="/integrations/hosting">
+            <a className={s.browseAll}>
+              View all ({hostingApps.count}) <ArrowIcon />
+            </a>
+          </Link>
         }
       >
         {page.hostingBuilding.map(item => (
@@ -229,53 +231,38 @@ export default function IntegrationsPage({ page }) {
           />
         ))}
       </Category>
-      <div className={s.grid}>
-        <Category
-          title="Assets storage"
-          description={
-            <>
-              Keep 100% ownership of your media files using your own AWS/Google
-              Storage buckets.
-            </>
-          }
-        >
-          {page.assetsStorage.map(item => (
-            <Box
-              key={item.slug}
-              as={`/integrations/enterprise/${item.slug}`}
-              href="/integrations/enterprise/[slug]"
-              title={item.title}
-              description={truncate(item.description, 55)}
-              image={<LogoImage logo={item.logo} />}
-            />
-          ))}
-        </Category>
-        <Category
-          title="Single Sign-On"
-          description={
-            <>
-              Keep your company data secure with centralized users management.
-            </>
-          }
-        >
-          {page.singleSignOn.map(item => (
-            <Box
-              key={item.slug}
-              as={`/integrations/enterprise/${item.slug}`}
-              href="/integrations/enterprise/[slug]"
-              title={item.title}
-              description={truncate(item.description, 55)}
-              image={<LogoImage logo={item.logo} />}
-            />
-          ))}
-        </Category>
-      </div>
-      <Space bottom={1}>
-        <LogosBar
-          title="We power experiences for over half a billion users"
-          clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
-        />
-      </Space>
+
+      <Category
+        title={
+          <>
+            Custom storage and Single Sign-On <Badge>Enterpise only</Badge>
+          </>
+        }
+        description={
+          <>
+            Keep your company data secure with centralized users management and
+            assets storage
+          </>
+        }
+        browse={
+          <Link href="/integrations/enterprise">
+            <a className={s.browseAll}>
+              View all ({enterpriseApps.count}) <ArrowIcon />
+            </a>
+          </Link>
+        }
+      >
+        {page.enterpriseApps.map(item => (
+          <Box
+            key={item.slug}
+            as={`/integrations/enterprise/${item.slug}`}
+            href="/integrations/enterprise/[slug]"
+            title={item.title}
+            description={truncate(item.description, 55)}
+            image={<LogoImage style="azure" logo={item.logo} />}
+          />
+        ))}
+      </Category>
     </Layout>
   );
 }

@@ -1,4 +1,4 @@
-import Layout from 'components/Layout';
+import Layout from 'components/IntegrationsLayout';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
@@ -12,7 +12,7 @@ import FormattedDate from 'components/FormattedDate';
 import s from './style.module.css';
 import useSWR from 'swr';
 import wretch from 'wretch';
-import PluginBox from 'components/PluginBox';
+import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
 import truncate from 'truncate';
 
 import {
@@ -118,20 +118,46 @@ export default function Plugin({ plugin, preview }) {
 
       <Wrapper>
         <div className={s.root}>
-          <Back href="/plugins" label="Browse all plugins" />
-
           <div className={s.split}>
+            <div className={s.content}>
+              <Header
+                isFallback={isFallback}
+                title={!isFallback && plugin.title}
+                description={!isFallback && plugin.description}
+              >
+                {!isFallback && plugin.previewImage && (
+                  <img
+                    alt="Preview"
+                    className={s.previewImage}
+                    src={plugin.previewImage.url}
+                  />
+                )}
+              </Header>
+
+              <div className={s.readme}>
+                {isFallback ? (
+                  <>
+                    <Copy />
+                    <Image />
+                    <Copy />
+                  </>
+                ) : (
+                  <SmartMarkdown>{plugin.readme}</SmartMarkdown>
+                )}
+              </div>
+            </div>
             <div className={s.sidebar}>
               <div className={s.sidebarInner}>
                 <PluginBox
                   isFallback={isFallback}
                   title={!isFallback && plugin.title}
                   image={
-                    !isFallback &&
-                    plugin.coverImage && (
+                    !isFallback && plugin.coverImage ? (
                       <div className={s.cover}>
                         <img alt="Preview" src={plugin.coverImage.url} />
                       </div>
+                    ) : (
+                      <PluginImagePlacehoder />
                     )
                   }
                   description={!isFallback && truncate(plugin.description, 55)}
@@ -145,7 +171,7 @@ export default function Plugin({ plugin, preview }) {
                       }
                       target="_blank"
                     >
-                      Install
+                      Install this plugin!
                     </Button>
                   }
                 />
@@ -206,33 +232,6 @@ export default function Plugin({ plugin, preview }) {
                     </Info>
                   </PluginInfo>
                 </div>
-              </div>
-            </div>
-            <div className={s.content}>
-              <Header
-                isFallback={isFallback}
-                title={!isFallback && plugin.title}
-                description={!isFallback && plugin.description}
-              >
-                {!isFallback && plugin.previewImage && (
-                  <img
-                    alt="Preview"
-                    className={s.previewImage}
-                    src={plugin.previewImage.url}
-                  />
-                )}
-              </Header>
-
-              <div className={s.readme}>
-                {isFallback ? (
-                  <>
-                    <Copy />
-                    <Image />
-                    <Copy />
-                  </>
-                ) : (
-                  <SmartMarkdown>{plugin.readme}</SmartMarkdown>
-                )}
               </div>
             </div>
           </div>

@@ -1,33 +1,20 @@
 .boxes {
   display: flex;
   overflow-x: auto;
-  padding: 10px 0 20px var(--page-margin);
+  padding: 15px 0 40px var(--page-margin);
   max-width: var(--page-width-with-margin);
   margin-left: auto;
   margin-right: auto;
   align-items: stretch;
   width: 100%;
-}
-
-.categoryHeader {
-  width: 100%;
-  max-width: var(--page-width-with-margin);
-  padding-left: var(--page-margin);
-  padding-right: var(--page-margin);
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto 40px;
 }
 
 .boxContainer {
-  padding-right: 20px;
-  flex: 1;
+  padding-right: 30px;
   display: flex;
   align-items: stretch;
-  min-width: 280px;
-  max-width: 350px;
+  width: 330px;
+  flex-shrink: 0;
 
   &:last-child {
     padding-right: var(--page-margin);
@@ -56,7 +43,25 @@
 }
 
 .category {
-  margin-bottom: 90px;
+  padding-bottom: 40px;
+}
+
+.categoryHeader {
+  width: 100%;
+  max-width: var(--page-width-with-margin);
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  margin: 0px auto 20px;
+  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.categoryLeft {
+  flex: 1;
 }
 
 .categoryDesc {
@@ -64,11 +69,11 @@
 }
 
 .categoryTitle {
-  font-size: rfs(40px);
+  font-size: rfs(35px);
   color: var(--light-body-color);
   font-weight: bold;
   letter-spacing: -0.03em;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .browseAll {

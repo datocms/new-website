@@ -248,7 +248,7 @@ export default function Navbar() {
                         </ul>
                       </div>
                     </div>
-                    <Link href="/plugins">
+                    <Link href="/integrations/plugins">
                       <a className={s.plugins}>
                         <div className={s.learnResTitle}>Community plugins</div>
                         <div className={s.learnResDescription}>
