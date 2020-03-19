@@ -45,8 +45,8 @@ export default function Enterprise({ items, preview, startersPage }) {
             items.map(item => (
               <PluginBox
                 key={item.slug}
-                as={`/integrations/hosting/${item.slug}`}
-                href="/integrations/hosting/[slug]"
+                as={`/integrations/enterprise/${item.slug}`}
+                href="/integrations/enterprise/[slug]"
                 title={item.title}
                 description={truncate(item.description, 55)}
                 image={<LogoImage style="azure" logo={item.logo} />}
