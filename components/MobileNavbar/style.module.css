@@ -22,6 +22,7 @@
 .hamburger {
   background: transparent;
   padding: 10px;
+  margin-right: -10px;
   border: 0;
   font-size: inherit;
   text-decoration: none;
@@ -171,21 +172,23 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
-.cols {
-  display: flex;
-  align-items: stretch;
+.onecol {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr;
 }
 
-.col {
-  flex: 1;
+.twocols {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .learnResource {
   text-decoration: none;
-  font-size: 18px;
+  font-size: 17px;
   display: block;
   color: black;
-  margin-bottom: 15px;
 }
 
 .learnResourceTitle {

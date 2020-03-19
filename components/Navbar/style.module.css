@@ -47,7 +47,7 @@
 
   .entry,
   .groupTitle {
-    padding: 13px 15px;
+    padding: 13px 14px;
     font-size: 17px;
 
     span {
@@ -120,14 +120,14 @@
   }
 
   .extraWhy {
-    padding: 40px;
     background: linear-gradient(45deg, #fefae4, #f9ecfe);
   }
 
   .features,
   .learnDocs,
-  .help {
-    padding: 40px;
+  .help,
+  .extraWhy {
+    padding: 40px 30px;
   }
 
   .sectionTitle {
@@ -206,7 +206,7 @@
 
   .learnDocs,
   .help {
-    min-width: 300px;
+    min-width: 270px;
   }
 
   .learnDocs {

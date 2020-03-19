@@ -15,7 +15,7 @@ import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 
 import External from 'public/icons/regular/external-link.svg';
 
-const LearnResource = ({ href, title, description, target }) =>
+const LearnResource = ({ href, as, title, description, target }) =>
   target ? (
     <a className={s.learnRes} href={href} target={target}>
       <div className={s.learnResBody}>
@@ -24,7 +24,7 @@ const LearnResource = ({ href, title, description, target }) =>
       </div>
     </a>
   ) : (
-    <Link href={href}>
+    <Link href={href} as={as}>
       <a className={s.learnRes}>
         <div className={s.learnResBody}>
           <div className={s.learnResTitle}>{title}</div>
@@ -95,21 +95,6 @@ export default function Navbar() {
                       <Link href="/enterprise">
                         <a className={s.extraLink}>DatoCMS for Enterprise</a>
                       </Link>
-
-                      <div className={s.sectionTitle}>Success stories</div>
-
-                      <Link href="/customers/[slug]" as="/customers/arduino">
-                        <a className={s.extraLink}>Arduino</a>
-                      </Link>
-                      <Link href="/customers/[slug]" as="/customers/hashicorp">
-                        <a className={s.extraLink}>Hashicorp</a>
-                      </Link>
-                      <Link href="/customers/[slug]" as="/customers/nike">
-                        <a className={s.extraLink}>Nike</a>
-                      </Link>
-                      <Link href="/customers/[slug]" as="/customers/chilly-s">
-                        <a className={s.extraLink}>Chilly's Bottles</a>
-                      </Link>
                     </div>
                     <div className={s.features}>
                       <Feature
@@ -160,9 +145,45 @@ export default function Navbar() {
 
               <div className={s.group}>
                 <div className={s.groupTitle}>
-                  <span>Integrations</span>
+                  <span>Customers</span>
                 </div>
 
+                <Pane>
+                  <div className={s.learnDocs}>
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/arduino"
+                      title="Arduino"
+                      description="Arduino doubled his time-to-market speed with DatoCMS"
+                    />
+
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/hashicorp"
+                      title="Hashicorp"
+                      description="How HashiCorp built a reliable and secure editorial workflow"
+                    />
+
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/nike"
+                      title="Nike"
+                      description="How to deliver an award-winning Nike campaign in 4 weeks"
+                    />
+
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/chilly-s"
+                      title="Chilly's Bottles"
+                      description="How Rotate built a 2M users a month e-commerce for Chilly’s"
+                    />
+                  </div>
+                </Pane>
+              </div>
+              <div className={s.group}>
+                <div className={s.groupTitle}>
+                  <span>Learn</span>
+                </div>
                 <Pane>
                   <div className={s.cols}>
                     <div className={s.extraWhy}>
@@ -186,49 +207,12 @@ export default function Navbar() {
                         <a className={s.extraLink}>React</a>
                       </Link>
                       <Link href="/cms/[slug]" as="/cms/vue">
-                        <a className={s.extraLink}>Vue</a>
+                        <a className={s.extraLink}>Vue.js</a>
                       </Link>
                       <Link href="/cms/[slug]" as="/cms/middleman">
                         <a className={s.extraLink}>Middleman</a>
                       </Link>
                     </div>
-                    <div className={s.cols}>
-                      <div className={s.learnDocs}>
-                        <LearnResource
-                          href="/integrations/starters"
-                          title="Project starters"
-                          description="Start with a fully configured DatoCMS project, a best-practice frontend and free hosting"
-                        />
-                        <LearnResource
-                          href="/integrations/plugins"
-                          title="Community plugins"
-                          description="Easily expand and customize the capabilities of DatoCMS with community plugins"
-                        />
-                      </div>
-                      <div className={s.learnDocs}>
-                        <LearnResource
-                          href="/integrations/hosting"
-                          title="Hosting &amp; Builds"
-                          description="Server, serverless or static: no matter the stack you're using, we've got you covered"
-                        />
-
-                        <LearnResource
-                          href="/integrations/enterprise"
-                          title="Enterprise apps"
-                          description="Keep your company data secure with centralized users management and assets storage"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </Pane>
-              </div>
-
-              <div className={s.group}>
-                <div className={s.groupTitle}>
-                  <span>Learn</span>
-                </div>
-                <Pane>
-                  <div className={s.cols}>
                     <div className={s.learnDocs}>
                       <LearnResource
                         title="Documentation"
@@ -255,20 +239,58 @@ export default function Navbar() {
                             Community forum <External />
                           </>
                         }
-                        description="Ask questions and start discussions with your peers."
+                        description="Ask questions and discuss with your peers"
                         href="https://community.datocms.com"
                         target="_blank"
                       />
                       <LearnResource
                         title="Slack channel"
-                        description="Chat live with other developers in our Slack channel"
+                        description="Chat live with other devs in our Slack channel"
                         href="/slack"
                       />
                       <LearnResource
                         title="Support"
-                        description="Get in touch with our team"
+                        description="Got questions? Get in touch with our team"
                         href="/support"
                       />
+                    </div>
+                  </div>
+                </Pane>
+              </div>
+
+              <div className={s.group}>
+                <div className={s.groupTitle}>
+                  <span>Marketplace</span>
+                </div>
+
+                <Pane>
+                  <div className={s.cols}>
+                    <div className={s.cols}>
+                      <div className={s.learnDocs}>
+                        <LearnResource
+                          href="/integrations/starters"
+                          title="Starter projects"
+                          description="Start with a fully configured DatoCMS project"
+                        />
+                        <LearnResource
+                          href="/integrations/plugins"
+                          title="Community plugins"
+                          description="Easily expand the capabilities of DatoCMS"
+                        />
+                      </div>
+                      <div className={s.help}>
+                        <LearnResource
+                          href="/integrations/hosting"
+                          title="Hosting &amp; Builds"
+                          description="No matter the stack you're using, we've got you covered"
+                        />
+
+                        <LearnResource
+                          href="/integrations/enterprise"
+                          title="Enterprise apps"
+                          description="Keep your company data secure"
+                        />
+                      </div>
                     </div>
                   </div>
                 </Pane>

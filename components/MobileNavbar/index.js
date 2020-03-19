@@ -16,8 +16,6 @@ import Video from 'public/images/illustrations/video-encoding.svg';
 import Languages from 'public/images/illustrations/multilanguage-2.svg';
 import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 
-import External from 'public/icons/regular/external-link.svg';
-
 const Group = ({ title, children }) => {
   const [open, setOpen] = useState(false);
 
@@ -174,66 +172,100 @@ export default function Navbar() {
                   </Link>
                 </Group>
 
-                <Group title="Success stories">
-                  <Link href="/customers/[slug]" as="/customers/arduino">
-                    <a className={s.extraLink}>Arduino</a>
-                  </Link>
-                  <Link href="/customers/[slug]" as="/customers/hashicorp">
-                    <a className={s.extraLink}>Hashicorp</a>
-                  </Link>
-                  <Link href="/customers/[slug]" as="/customers/nike">
-                    <a className={s.extraLink}>Nike</a>
-                  </Link>
-                  <Link href="/customers/[slug]" as="/customers/chilly-s">
-                    <a className={s.extraLink}>Chilly's Bottles</a>
-                  </Link>
+                <Group title="Customers">
+                  <div className={s.onecol}>
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/arduino"
+                      title="Arduino"
+                      description="Arduino doubled his time-to-market speed with DatoCMS"
+                    />
+
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/hashicorp"
+                      title="Hashicorp"
+                      description="How HashiCorp built a reliable and secure editorial workflow"
+                    />
+
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/nike"
+                      title="Nike"
+                      description="How to deliver an award-winning Nike campaign in 4 weeks"
+                    />
+
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/chilly-s"
+                      title="Chilly's Bottles"
+                      description="How Rotate built a 2M users a month e-commerce for Chilly’s"
+                    />
+                  </div>
                 </Group>
 
-                <BigLink href="/integrations">Integrations</BigLink>
-
                 <Group title="Learn">
-                  <div className={s.cols}>
-                    <div className={s.col}>
-                      <LearnResource
-                        title="Documentation"
-                        description="Guides, tutorials and API reference"
-                        href="/docs"
-                      />
+                  <div className={s.twocols}>
+                    <LearnResource
+                      title="Documentation"
+                      description="Guides, tutorials and API reference"
+                      href="/docs"
+                    />
 
-                      <LearnResource
-                        title="Blog"
-                        description="Culture, learnings, and announcements"
-                        href="/blog"
-                      />
+                    <LearnResource
+                      title="Blog"
+                      description="Culture, learnings, and announcements"
+                      href="/blog"
+                    />
 
-                      <LearnResource
-                        title="Product updates"
-                        description="Changelog for new features and improvements"
-                        href="/product-updates"
-                      />
-                    </div>
-                    <div className={s.col}>
-                      <LearnResource
-                        title={
-                          <>
-                            Community forum <External />
-                          </>
-                        }
-                        description="Ask questions and start discussions with your peers."
-                        href="https://community.datocms.com"
-                        target="_blank"
-                      />
-                      <LearnResource
-                        title="Slack channel"
-                        description="Chat live with other developers in our Slack channel"
-                        href="/slack"
-                      />
-                      <LearnResource
-                        title="Support"
-                        description="Get in touch with our team"
-                        href="/support"
-                      />
-                    </div>
+                    <LearnResource
+                      title="Product updates"
+                      description="Changelog for features and improvements"
+                      href="/product-updates"
+                    />
+
+                    <LearnResource
+                      title="Community forum"
+                      description="Ask questions/discuss with your peers"
+                      href="https://community.datocms.com"
+                      target="_blank"
+                    />
+                    <LearnResource
+                      title="Slack channel"
+                      description="Chat live with other devs"
+                      href="/slack"
+                    />
+                    <LearnResource
+                      title="Support"
+                      description="Got questions? Get in touch!"
+                      href="/support"
+                    />
+                  </div>
+                </Group>
+
+                <Group title="Marketplace">
+                  <div className={s.twocols}>
+                    <LearnResource
+                      href="/integrations/starters"
+                      title="Starter projects"
+                      description="Start with a fully configured DatoCMS project"
+                    />
+                    <LearnResource
+                      href="/integrations/plugins"
+                      title="Plugins"
+                      description="Easily expand the capabilities of DatoCMS"
+                    />
+                    <LearnResource
+                      href="/integrations/hosting"
+                      title="Hosting &amp; Builds"
+                      description="No matter the stack you're using, we've got you covered"
+                    />
+
+                    <LearnResource
+                      href="/integrations/enterprise"
+                      title="Enterprise apps"
+                      description="Keep your company data secure"
+                    />
                   </div>
                 </Group>
 
