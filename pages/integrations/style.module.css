@@ -27,17 +27,6 @@
   }
 }
 
-.box {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  transition: all 200ms ease-in-out;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-}
-
 .boxImageImage {
   width: 100% !important;
 }

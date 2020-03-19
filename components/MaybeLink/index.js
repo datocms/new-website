@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-export default function MaybeLink({ href, children, ...other }) {
+export default function MaybeLink({ href, as, children, ...other }) {
   return href ? (
-    <Link href={href}>
+    <Link href={href} as={as}>
       <a {...other}>{children}</a>
     </Link>
   ) : (

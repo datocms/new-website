@@ -95,33 +95,28 @@ export default function Plugins({
         <div className={s.grid}>
           {plugins &&
             plugins.map(post => (
-              <Link
+              <PluginBox
                 key={post.packageName}
+                title={post.title}
                 href="/integrations/plugins/i/[...chunks]"
                 as={`/integrations/plugins/i/${post.packageName}`}
-              >
-                <a className={s.post}>
-                  <PluginBox
-                    title={post.title}
-                    image={
-                      post.coverImage && post.coverImage.responsiveImage ? (
-                        <Image
-                          className={s.image}
-                          data={post.coverImage.responsiveImage}
-                        />
-                      ) : (
-                        <PluginImagePlacehoder />
-                      )
-                    }
-                    description={truncate(post.description, 120)}
-                    details={
-                      <>
-                        Released on <FormattedDate date={post.releasedAt} />
-                      </>
-                    }
-                  />
-                </a>
-              </Link>
+                image={
+                  post.coverImage && post.coverImage.responsiveImage ? (
+                    <Image
+                      className={s.image}
+                      data={post.coverImage.responsiveImage}
+                    />
+                  ) : (
+                    <PluginImagePlacehoder />
+                  )
+                }
+                description={truncate(post.description, 120)}
+                details={
+                  <>
+                    Released on <FormattedDate date={post.releasedAt} />
+                  </>
+                }
+              />
             ))}
         </div>
         {!router.isFallback && (

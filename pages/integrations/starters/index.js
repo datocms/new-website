@@ -1,14 +1,11 @@
 import Layout from 'components/IntegrationsLayout';
 import Wrapper from 'components/Wrapper';
 import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
-import Link from 'next/link';
 import { Image } from 'react-datocms';
-import FormattedDate from 'components/FormattedDate';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
-import truncate from 'truncate';
 import PluginBox from 'components/PluginBox';
 import s from 'pages/integrations/plugins/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';
@@ -63,36 +60,29 @@ export default function Plugins({ starters, preview, startersPage }) {
         <div className={s.grid}>
           {starters &&
             starters.map(item => (
-              <Link
+              <PluginBox
+                title={item.name}
                 key={item.code}
                 as={`/integrations/starters/${item.code}`}
                 href="/integrations/starters/[slug]"
-              >
-                <a className={s.post}>
-                  <PluginBox
-                    title={item.name}
-                    as={`/integrations/starters/${item.code}`}
-                    href="/integrations/starters/[slug]"
-                    description={
-                      <div className={s.demoDesc}>
-                        <div className={s.demoDescBody}>{item.description}</div>
-                        <div className={s.demoDescImage}>
-                          <LazyImage
-                            className={s.techLogo}
-                            src={item.technology.logo.url}
-                          />
-                        </div>
-                      </div>
-                    }
-                    image={
-                      <Image
-                        className={s.boxImageImage}
-                        data={item.screenshot.responsiveImage}
+                description={
+                  <div className={s.demoDesc}>
+                    <div className={s.demoDescBody}>{item.description}</div>
+                    <div className={s.demoDescImage}>
+                      <LazyImage
+                        className={s.techLogo}
+                        src={item.technology.logo.url}
                       />
-                    }
+                    </div>
+                  </div>
+                }
+                image={
+                  <Image
+                    className={s.boxImageImage}
+                    data={item.screenshot.responsiveImage}
                   />
-                </a>
-              </Link>
+                }
+              />
             ))}
         </div>
       </Wrapper>

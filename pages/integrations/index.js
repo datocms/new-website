@@ -109,11 +109,13 @@ const Category = ({ title, description, children, browse }) => (
 
 const Box = ({ title, description, image, href, as }) => (
   <div className={s.boxContainer}>
-    <Link href={href} as={as}>
-      <a className={s.box}>
-        <PluginBox title={title} description={description} image={image} />
-      </a>
-    </Link>
+    <PluginBox
+      href={href}
+      as={as}
+      title={title}
+      description={description}
+      image={image}
+    />
   </div>
 );
 

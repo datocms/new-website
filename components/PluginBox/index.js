@@ -3,6 +3,7 @@ import LazyImage from 'components/LazyImage';
 import s from './style.module.css';
 import { Line, Copy, Image } from 'components/FakeContent';
 import PluginIcon from 'public/icons/regular/puzzle-piece.svg';
+import MaybeLink from 'components/MaybeLink';
 
 export const LogoImage = ({ logo, style = 'pink' }) => (
   <div
@@ -31,9 +32,11 @@ export default function PluginBox({
   description,
   actions,
   details,
+  href,
+  as,
 }) {
   return (
-    <div className={s.box}>
+    <MaybeLink href={href} as={as} className={s.box}>
       {isFallback ? <Image /> : image}
       <div className={s.boxBody}>
         <div className={s.boxTitle}>{isFallback ? <Line /> : title}</div>
@@ -41,6 +44,6 @@ export default function PluginBox({
         {actions && <div className={s.boxActions}>{actions}</div>}
         {details && <div className={s.boxDetails}>{details}</div>}
       </div>
-    </div>
+    </MaybeLink>
   );
 }

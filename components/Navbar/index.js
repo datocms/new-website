@@ -165,97 +165,61 @@ export default function Navbar() {
                 </div>
 
                 <Pane>
-                  <div className={s.integrations}>
-                    <div className={s.marketplace}>
-                      <Link href="/integrations">
-                        <a className={s.marketplaceTitle}>
-                          Integrations Marketplace
-                        </a>
+                  <div className={s.cols}>
+                    <div className={s.extraWhy}>
+                      <div className={s.sectionTitle}>Technologies</div>
+                      <Link href="/cms/[slug]" as="/cms/nextjs">
+                        <a className={s.extraLink}>Next.js</a>
                       </Link>
-                      <div className={s.integrationGroup}>
-                        <div className={s.integrationGroupTitle}>
-                          Web technologies
-                        </div>
-
-                        <ul className={s.integrationTop}>
-                          <li className={s.integration}>
-                            <Link href="/cms/[slug]" as="/cms/gatsbyjs">
-                              <a>Gatsby</a>
-                            </Link>
-                          </li>
-                          <li className={s.integration}>
-                            <Link href="/cms/[slug]" as="/cms/nextjs">
-                              <a>Next</a>
-                            </Link>
-                          </li>
-                          <li className={s.integration}>
-                            <Link href="/cms/[slug]" as="/cms/nuxt-js">
-                              <a>Nuxt.js</a>
-                            </Link>
-                          </li>
-                          <li className={s.integration}>
-                            <Link href="/cms/[slug]" as="/cms/hugo">
-                              <a>Hugo</a>
-                            </Link>
-                          </li>
-                          <li className={s.integration}>
-                            <Link href="/integrations">
-                              <a>Others</a>
-                            </Link>
-                          </li>
-                        </ul>
+                      <Link href="/cms/[slug]" as="/cms/gatsbyjs">
+                        <a className={s.extraLink}>Gatsby</a>
+                      </Link>
+                      <Link href="/cms/[slug]" as="/cms/nuxt-js">
+                        <a className={s.extraLink}>Nuxt.js</a>
+                      </Link>
+                      <Link href="/cms/[slug]" as="/cms/hugo">
+                        <a className={s.extraLink}>Hugo</a>
+                      </Link>
+                      <Link href="/cms/[slug]" as="/cms/jekyll">
+                        <a className={s.extraLink}>Jekyll</a>
+                      </Link>
+                      <Link href="/cms/[slug]" as="/cms/react">
+                        <a className={s.extraLink}>React</a>
+                      </Link>
+                      <Link href="/cms/[slug]" as="/cms/vue">
+                        <a className={s.extraLink}>Vue</a>
+                      </Link>
+                      <Link href="/cms/[slug]" as="/cms/middleman">
+                        <a className={s.extraLink}>Middleman</a>
+                      </Link>
+                    </div>
+                    <div className={s.cols}>
+                      <div className={s.learnDocs}>
+                        <LearnResource
+                          href="/integrations/starters"
+                          title="Project starters"
+                          description="Start with a fully configured DatoCMS project, a best-practice frontend and free hosting"
+                        />
+                        <LearnResource
+                          href="/integrations/plugins"
+                          title="Community plugins"
+                          description="Easily expand and customize the capabilities of DatoCMS with community plugins"
+                        />
                       </div>
-                      <div className={s.integrationGroup}>
-                        <div className={s.integrationGroupTitle}>
-                          Hosting &amp; CI
-                        </div>
+                      <div className={s.learnDocs}>
+                        <LearnResource
+                          href="/integrations/hosting"
+                          title="Hosting &amp; Builds"
+                          description="Server, serverless or static: no matter the stack you're using, we've got you covered"
+                        />
 
-                        <ul className={s.integrationTop}>
-                          <li className={s.integration}>
-                            <Link
-                              href={docHref('/docs/netlify')}
-                              as="/docs/netlify"
-                            >
-                              <a>Netlify</a>
-                            </Link>
-                          </li>
-                          <li className={s.integration}>
-                            <Link href={docHref('/docs/zeit')} as="/docs/zeit">
-                              <a>ZEIT</a>
-                            </Link>
-                          </li>
-                          <li className={s.integration}>
-                            <Link
-                              href={docHref('/docs/travis')}
-                              as="/docs/travis"
-                            >
-                              <a>Travis</a>
-                            </Link>
-                          </li>
-                          <li className={s.integration}>
-                            <Link
-                              href={docHref('/cms/gitlab')}
-                              as="/cms/gitlab"
-                            >
-                              <a>Gitlab</a>
-                            </Link>
-                          </li>
-                          <li className={s.integration}>
-                            <Link href="/integrations">
-                              <a>Others</a>
-                            </Link>
-                          </li>
-                        </ul>
+                        <LearnResource
+                          href="/integrations/enterprise"
+                          title="Enterprise apps"
+                          description="Keep your company data secure with centralized users management and assets storage"
+                        />
                       </div>
                     </div>
-                    <Link href="/integrations/plugins">
-                      <a className={s.plugins}>
-                        <div className={s.learnResTitle}>Community plugins</div>
-                        <div className={s.learnResDescription}>
-                          Easily extend the functionality of DatoCMS
-                        </div>
-                      </a>
-                    </Link>
                   </div>
                 </Pane>
               </div>
