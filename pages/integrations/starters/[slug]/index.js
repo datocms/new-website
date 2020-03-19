@@ -150,7 +150,7 @@ export default function EnterpriseApp({ page, preview }) {
                         href={`https://dashboard.datocms.com/projects/new-from-template/${page.category.code}/${page.code}`}
                         target="_blank"
                       >
-                        Start project
+                        Start free project
                       </Button>
                     )
                   }

@@ -55,7 +55,7 @@ export default function IntegrationsLayout({ children, preview }) {
 
             <div className={s.nav}>
               <Link href="/">
-                <a>Go to datocms.com</a>
+                <a>Back to datocms.com</a>
               </Link>
             </div>
           </div>

@@ -1,9 +1,8 @@
 import Layout from 'components/IntegrationsLayout';
 import Wrapper from 'components/Wrapper';
-import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
+import { gqlStaticProps, imageFields } from 'lib/datocms';
 import { Image } from 'react-datocms';
 import Head from 'next/head';
-import { renderMetaTags } from 'react-datocms';
 import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import PluginBox from 'components/PluginBox';
@@ -13,11 +12,6 @@ import LazyImage from 'components/LazyImage';
 export const getStaticProps = gqlStaticProps(
   gql`
     {
-      startersPage: pluginsPage {
-        seo: _seoMetaTags {
-          ...seoMetaTagsFields
-        }
-      }
       starters: allTemplateDemos(first: 100) {
         id
         code
@@ -46,16 +40,17 @@ export const getStaticProps = gqlStaticProps(
     }
 
     ${imageFields}
-    ${seoMetaTagsFields}
   `,
 );
 
-export default function Plugins({ starters, preview, startersPage }) {
+export default function Plugins({ starters, preview }) {
   const router = useRouter();
 
   return (
     <Layout preview={preview}>
-      {!router.isFallback && <Head>{renderMetaTags(startersPage.seo)}</Head>}
+      <Head>
+        <title>Project starters - Free demo projects - Marketplace</title>
+      </Head>
       <Wrapper>
         <div className={s.grid}>
           {starters &&

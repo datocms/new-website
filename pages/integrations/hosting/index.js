@@ -1,22 +1,14 @@
 import Layout from 'components/IntegrationsLayout';
 import Wrapper from 'components/Wrapper';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import { gqlStaticProps } from 'lib/datocms';
 import Head from 'next/head';
-import { renderMetaTags } from 'react-datocms';
 import gql from 'graphql-tag';
-import { useRouter } from 'next/router';
 import PluginBox, { LogoImage } from 'components/PluginBox';
 import s from 'pages/integrations/plugins/p/[page]/style.module.css';
-import truncate from 'truncate';
 
 export const getStaticProps = gqlStaticProps(
   gql`
     {
-      startersPage: pluginsPage {
-        seo: _seoMetaTags {
-          ...seoMetaTagsFields
-        }
-      }
       items: allHostingApps(first: 100) {
         slug
         title
@@ -28,17 +20,15 @@ export const getStaticProps = gqlStaticProps(
         }
       }
     }
-
-    ${seoMetaTagsFields}
   `,
 );
 
-export default function Hosting({ items, preview, startersPage }) {
-  const router = useRouter();
-
+export default function Hosting({ items, preview }) {
   return (
     <Layout preview={preview}>
-      {!router.isFallback && <Head>{renderMetaTags(startersPage.seo)}</Head>}
+      <Head>
+        <title>Hosting and building - Marketplace</title>
+      </Head>
       <Wrapper>
         <div className={s.grid}>
           {items &&
@@ -48,7 +38,7 @@ export default function Hosting({ items, preview, startersPage }) {
                 as={`/integrations/hosting/${item.slug}`}
                 href="/integrations/hosting/[slug]"
                 title={item.title}
-                description={truncate(item.description, 55)}
+                description={item.description}
                 image={<LogoImage logo={item.logo} />}
               />
             ))}

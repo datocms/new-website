@@ -4,7 +4,6 @@ import Link from 'next/link';
 import s from './style.module.css';
 import classnames from 'classnames';
 import Button from 'components/Button';
-import docHref from 'utils/docHref';
 import { useState, useEffect } from 'react';
 import { getCookie } from 'utils/cookies';
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';

@@ -1,7 +1,14 @@
 .grid {
   display: grid;
   grid-gap: 30px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
+
+  @media (width > 450px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (width > 850px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .image {
