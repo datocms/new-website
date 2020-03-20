@@ -47,7 +47,7 @@ export const getStaticProps = gqlStaticProps(
         releasedAt
         packageName
         coverImage {
-          responsiveImage(imgixParams: { w: 500, h: 330, fit: crop }) {
+          responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
             ...imageFields
           }
         }
