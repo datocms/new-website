@@ -141,7 +141,7 @@ export default function IntegrationsPage({
           </>
         }
         browse={
-          <Link href="/starters">
+          <Link href="/marketplace/starters">
             <a className={s.browseAll}>
               View all ({demos.count}) <ArrowIcon />
             </a>
@@ -235,11 +235,7 @@ export default function IntegrationsPage({
       </Category>
 
       <Category
-        title={
-          <>
-            Custom storage and Single Sign-On <Badge>Enterpise only</Badge>
-          </>
-        }
+        title={<>Enterprise Apps</>}
         description={
           <>
             Keep your company data secure with centralized users management and

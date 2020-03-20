@@ -9,6 +9,8 @@
 .header {
   padding: rfs(45px) 0;
   margin-bottom: rfs(50px);
+  position: relative;
+  z-index: 5;
 }
 
 .headerInner {
@@ -27,28 +29,21 @@
   }
 
   span {
-    font-size: rfs(25px);
+    font-size: 25px;
     font-weight: bold;
     letter-spacing: -0.03em;
     padding-left: 15px;
   }
-
-  @media (width < 950px) {
-    svg {
-      height: 30px;
-    }
-
-    span {
-      font-size: rfs(20px);
-      padding-left: 10px;
-    }
-  }
 }
 
 .nav {
+  @media (width < 1000px) {
+    display: none;
+  }
+
   flex: 1;
   text-align: right;
-  font-size: 14px;
+  font-size: 16px;
 
   a {
     color: var(--light-body-color);
@@ -73,21 +68,21 @@
       }
     }
   }
-
-  @media (width > 900px) {
-    font-size: 16px;
-  }
 }
 
 .categories {
-  @media (width < 950px) {
+  @media (width < 1000px) {
     display: none;
   }
 
   margin: 0 20px;
   display: flex;
   align-items: center;
-  font-size: 17px;
+  font-size: 16px;
+
+  @media (width > 1100px) {
+    font-size: 17px;
+  }
 
   a {
     color: inherit;
@@ -115,6 +110,99 @@
       > span:after {
         width: 100%;
       }
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.space {
+  @media (width >= 1000px) {
+    display: none;
+  }
+  flex: 1;
+}
+
+.hamburger {
+  @media (width >= 1000px) {
+    display: none;
+  }
+  background: transparent;
+  padding: 10px;
+  border: 0;
+  font-size: inherit;
+  text-decoration: none;
+  border: 1px solid var(--extra-light-body-color);
+  border-radius: 5px;
+
+  &:focus {
+    outline: none;
+  }
+
+  svg {
+    width: 25px;
+    height: 25px;
+    display: block;
+    fill: var(--light-body-color);
+  }
+}
+
+.pane {
+  @media (width >= 1000px) {
+    display: none;
+  }
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 5;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  padding-bottom: var(--page-margin);
+  background: white;
+}
+
+.paneLinks {
+  padding: 30px 0;
+
+  a {
+    display: block;
+    text-align: center;
+    color: inherit;
+    margin-bottom: 20px;
+    text-decoration: none;
+    font-size: 30px;
+  }
+}
+
+.paneBack {
+  color: var(--light-body-color);
+  display: block;
+  text-decoration: none;
+  padding: 0.8em 1em;
+  border: 1px solid var(--extra-light-body-color);
+  border-radius: 4px;
+  text-align: center;
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    fill: var(--light-body-color);
+    margin-right: 4px;
+  }
+
+  &:hover {
+    border-color: var(--base-body-color);
+    color: var(--base-body-color);
+
+    svg {
+      fill: var(--base-body-color);
     }
   }
 }

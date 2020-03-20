@@ -52,6 +52,13 @@ export default function Plugins({ starters, preview }) {
         <title>Project starters - Free demo projects - Marketplace</title>
       </Head>
       <Wrapper>
+        <div className={s.hero}>
+          <div className={s.heroTitle}>Starter projects</div>
+          <div className={s.heroDesc}>
+            Start with a fully configured DatoCMS project, a best-practice
+            frontend and free hosting
+          </div>
+        </div>
         <div className={s.grid}>
           {starters &&
             starters.map(item => (

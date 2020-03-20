@@ -180,46 +180,7 @@ export default function Navbar() {
 
                 <Pane>
                   <div className={s.cols}>
-                    <div className={s.section}>
-                      <TitleDesc
-                        href="/customers/[slug]"
-                        as="/customers/arduino"
-                        title="Arduino"
-                        description="2x time-to-market speed with DatoCMS"
-                      />
-
-                      <TitleDesc
-                        href="/customers/[slug]"
-                        as="/customers/hashicorp"
-                        title="Hashicorp"
-                        description="Reliable and secure editorial workflow"
-                      />
-                    </div>
-                    <div className={s.section}>
-                      <TitleDesc
-                        href="/customers/[slug]"
-                        as="/customers/nike"
-                        title="Matter supply for Nike"
-                        description="Award-winning Nike campaign in 4 weeks"
-                      />
-
-                      <TitleDesc
-                        href="/customers/[slug]"
-                        as="/customers/chilly-s"
-                        title="Chilly's Bottles"
-                        description="2M users a month e-commerce"
-                      />
-                    </div>
-                  </div>
-                </Pane>
-              </div>
-              <div className={s.group}>
-                <div className={s.groupTitle}>
-                  <span>Learn</span>
-                </div>
-                <Pane>
-                  <div className={s.cols}>
-                    {/* <div className={s.section}>
+                    <div className={cn(s.section, s.sectionInverse)}>
                       <div className={s.sectionTitle}>Technologies</div>
                       <Link href="/cms/[slug]" as="/cms/nextjs">
                         <a className={s.extraLink}>Next.js</a>
@@ -245,47 +206,91 @@ export default function Navbar() {
                       <Link href="/cms/[slug]" as="/cms/middleman">
                         <a className={s.extraLink}>Middleman</a>
                       </Link>
-                    </div> */}
-                    <div className={s.section}>
-                      <TitleDesc
-                        title="Documentation"
-                        description="Guides, tutorials and API reference"
-                        href="/docs"
-                      />
-
-                      <TitleDesc
-                        title="Blog"
-                        description="Culture, learnings, and announcements"
-                        href="/blog"
-                      />
-
-                      <TitleDesc
-                        title="Product updates"
-                        description="Changelog for new features and improvements"
-                        href="/product-updates"
-                      />
                     </div>
                     <div className={s.section}>
-                      <TitleDesc
-                        title={
-                          <>
-                            Community forum <External />
-                          </>
-                        }
-                        description="Ask questions and discuss with your peers"
-                        href="https://community.datocms.com"
-                        target="_blank"
-                      />
-                      <TitleDesc
-                        title="Slack channel"
-                        description="Chat live with other devs in our Slack channel"
-                        href="/slack"
-                      />
-                      <TitleDesc
-                        title="Support"
-                        description="Got questions? Get in touch with our team"
-                        href="/support"
-                      />
+                      <div className={s.sectionTitle}>Success stories</div>
+                      <div className={s.grid2}>
+                        <TitleDesc
+                          href="/customers/[slug]"
+                          as="/customers/arduino"
+                          title="Arduino"
+                          description="2x time-to-market speed with DatoCMS"
+                        />
+
+                        <TitleDesc
+                          href="/customers/[slug]"
+                          as="/customers/hashicorp"
+                          title="Hashicorp"
+                          description="Reliable and secure editorial workflow"
+                        />
+                        <TitleDesc
+                          href="/customers/[slug]"
+                          as="/customers/nike"
+                          title="Matter supply for Nike"
+                          description="Award-winning Nike campaign in 4 weeks"
+                        />
+
+                        <TitleDesc
+                          href="/customers/[slug]"
+                          as="/customers/chilly-s"
+                          title="Chilly's Bottles"
+                          description="2M users a month e-commerce"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Pane>
+              </div>
+              <div className={s.group}>
+                <div className={s.groupTitle}>
+                  <span>Learn</span>
+                </div>
+                <Pane>
+                  <div className={s.cols}>
+                    <div className={s.section}>
+                      <div className={s.grid1}>
+                        <TitleDesc
+                          title="Documentation"
+                          description="Guides, tutorials and API reference"
+                          href="/docs"
+                        />
+
+                        <TitleDesc
+                          title="Blog"
+                          description="Culture, learnings, and announcements"
+                          href="/blog"
+                        />
+
+                        <TitleDesc
+                          title="Product updates"
+                          description="Changelog for new features and improvements"
+                          href="/product-updates"
+                        />
+                      </div>
+                    </div>
+                    <div className={s.section}>
+                      <div className={s.grid1}>
+                        <TitleDesc
+                          title={
+                            <>
+                              Community forum <External />
+                            </>
+                          }
+                          description="Ask questions and discuss with your peers"
+                          href="https://community.datocms.com"
+                          target="_blank"
+                        />
+                        <TitleDesc
+                          title="Slack channel"
+                          description="Chat live with other devs in our Slack channel"
+                          href="/slack"
+                        />
+                        <TitleDesc
+                          title="Support"
+                          description="Got questions? Get in touch with our team"
+                          href="/support"
+                        />
+                      </div>
                     </div>
                   </div>
                 </Pane>
@@ -300,29 +305,33 @@ export default function Navbar() {
                   <div className={s.cols}>
                     <div className={s.cols}>
                       <div className={s.section}>
-                        <TitleDesc
-                          href="/marketplace/starters"
-                          title="Starter projects"
-                          description="Start with a fully configured DatoCMS project"
-                        />
-                        <TitleDesc
-                          href="/marketplace/plugins"
-                          title="Community plugins"
-                          description="Easily expand the capabilities of DatoCMS"
-                        />
+                        <div className={s.grid1}>
+                          <TitleDesc
+                            href="/marketplace/starters"
+                            title="Starter projects"
+                            description="Start with a fully configured DatoCMS project"
+                          />
+                          <TitleDesc
+                            href="/marketplace/plugins"
+                            title="Community plugins"
+                            description="Easily expand the capabilities of DatoCMS"
+                          />
+                        </div>
                       </div>
                       <div className={s.section}>
-                        <TitleDesc
-                          href="/marketplace/hosting"
-                          title="Hosting &amp; Builds"
-                          description="No matter the stack you're using, we've got you covered"
-                        />
+                        <div className={s.grid1}>
+                          <TitleDesc
+                            href="/marketplace/hosting"
+                            title="Hosting &amp; Builds"
+                            description="No matter the stack you're using, we've got you covered"
+                          />
 
-                        <TitleDesc
-                          href="/marketplace/enterprise"
-                          title="Enterprise apps"
-                          description="Keep your company data secure"
-                        />
+                          <TitleDesc
+                            href="/marketplace/enterprise"
+                            title="Enterprise apps"
+                            description="Keep your company data secure"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

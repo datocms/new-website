@@ -6,8 +6,15 @@ import ActiveLink from 'components/ActiveLink';
 import s from './style.module.css';
 import Logo from 'public/images/logo.svg';
 import LeftArrow from 'public/icons/regular/long-arrow-alt-left.svg';
+import { useState, useCallback } from 'react';
+import Hamburger from 'public/icons/regular/bars.svg';
 
 export default function IntegrationsLayout({ children, preview }) {
+  const [visible, setVisible] = useState(false);
+  const toggleVisibility = useCallback(() => {
+    setVisible(v => !v);
+  });
+
   return (
     <BaseLayout preview={preview}>
       <div className={s.notice}>
@@ -30,7 +37,7 @@ export default function IntegrationsLayout({ children, preview }) {
               <div className={s.categories}>
                 <ActiveLink activeClassName={s.active} href="/marketplace">
                   <a>
-                    <span>Home</span>
+                    <span>Featured</span>
                   </a>
                 </ActiveLink>
                 <ActiveLink
@@ -54,7 +61,7 @@ export default function IntegrationsLayout({ children, preview }) {
                   href="/marketplace/hosting"
                 >
                   <a>
-                    <span>Hosting &amp; Building</span>
+                    <span>Hosting</span>
                   </a>
                 </ActiveLink>
                 <ActiveLink
@@ -74,6 +81,42 @@ export default function IntegrationsLayout({ children, preview }) {
                   </a>
                 </Link>
               </div>
+
+              <div className={s.space} />
+
+              <button className={s.hamburger} onClick={toggleVisibility}>
+                <Hamburger />
+              </button>
+
+              {visible && (
+                <div className={s.pane}>
+                  <Wrapper>
+                    <div className={s.paneLinks}>
+                      <Link href="/marketplace">
+                        <a>Featured</a>
+                      </Link>
+                      <Link href="/marketplace/starters">
+                        <a>Starter projects</a>
+                      </Link>
+                      <Link href="/marketplace/plugins">
+                        <a>Plugins</a>
+                      </Link>
+                      <Link href="/marketplace/hosting">
+                        <a>Hosting</a>
+                      </Link>
+                      <Link href="/marketplace/enterprise">
+                        <a>Enterprise</a>
+                      </Link>
+                    </div>
+
+                    <Link href="/">
+                      <a className={s.paneBack}>
+                        <LeftArrow /> Back to datocms.com
+                      </a>
+                    </Link>
+                  </Wrapper>
+                </div>
+              )}
             </div>
           </Wrapper>
         </div>
@@ -82,6 +125,9 @@ export default function IntegrationsLayout({ children, preview }) {
 
         <Footer noCta />
       </div>
+      {visible && (
+        <div className={s.overlay} onClick={() => setVisible(false)} />
+      )}
     </BaseLayout>
   );
 }

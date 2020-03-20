@@ -30,6 +30,13 @@ export default function Hosting({ items, preview }) {
         <title>Hosting and building - Marketplace</title>
       </Head>
       <Wrapper>
+        <div className={s.hero}>
+          <div className={s.heroTitle}>Hosting &amp; CI Building</div>
+          <div className={s.heroDesc}>
+            Server, serverless or static: no matter the stack you're using,
+            we've got you covered
+          </div>
+        </div>
         <div className={s.grid}>
           {items &&
             items.map(item => (

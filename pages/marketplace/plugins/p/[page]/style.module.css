@@ -60,3 +60,16 @@
 .demoDescBody {
   flex: 1;
 }
+
+.hero {
+  padding-bottom: rfs(80px);
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: rfs(60px);
+  color: var(--light-body-color);
+  font-weight: bold;
+  letter-spacing: -0.03em;
+  margin-bottom: 5px;
+}

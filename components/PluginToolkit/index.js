@@ -4,6 +4,8 @@ import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
 import Link from 'next/link';
 import s from './style.module.css';
 import { Line, Text, Copy, Image } from 'components/FakeContent';
+import Wrapper from 'components/Wrapper';
+import PluginBox from 'components/PluginBox';
 
 export const PluginInfo = ({ children }) => {
   return <div className={s.root}>{children}</div>;
@@ -32,36 +34,8 @@ export const NameWithGravatar = ({ name, email }) => (
   </>
 );
 
-export const Header = ({ isFallback, title, description, children }) => (
-  <div className={s.header}>
-    <div className={s.title}>{isFallback ? <Text width={30} /> : title}</div>
-    <div className={s.description}>{isFallback ? <Copy /> : description}</div>
-    {children && (
-      <div className={s.gallery}>
-        <div className={s.galleryInner}>
-          {isFallback ? (
-            <Image />
-          ) : (
-            React.Children.map(children, el => (
-              <div className={s.galleryImage}>{el}</div>
-            ))
-          )}
-        </div>
-      </div>
-    )}
-  </div>
-);
-
 export const Badge = ({ children }) => (
   <span className={s.badge}>{children}</span>
-);
-
-export const Back = ({ href, label }) => (
-  <Link href={href}>
-    <a className={s.back}>
-      <LeftIcon /> {label}
-    </a>
-  </Link>
 );
 
 export const Announce = ({ href, as, children }) => (
@@ -70,4 +44,65 @@ export const Announce = ({ href, as, children }) => (
       <MegaphoneIcon /> {children} →
     </a>
   </Link>
+);
+
+export const PluginDetails = ({
+  isFallback,
+  title,
+  shortTitle,
+  description,
+  shortDescription,
+  content,
+  image,
+  actions,
+  announce,
+  info,
+  gallery,
+}) => (
+  <Wrapper>
+    <div className={s.split}>
+      <div className={s.content}>
+        <div className={s.header}>
+          <div className={s.title}>
+            {isFallback ? <Text width={30} /> : title}
+          </div>
+          <div className={s.description}>
+            {isFallback ? <Copy /> : description}
+          </div>
+          <div className={s.action}>{actions}</div>
+        </div>
+        {gallery && (
+          <div className={s.gallery}>
+            <div className={s.galleryInner}>
+              {isFallback ? (
+                <Image />
+              ) : (
+                React.Children.map(gallery, el => (
+                  <div className={s.galleryImage}>{el}</div>
+                ))
+              )}
+            </div>
+          </div>
+        )}
+        {announce}
+
+        {content && <div className={s.readme}>{content}</div>}
+      </div>
+      <div className={s.sidebar}>
+        <div className={s.sidebarInner}>
+          <div className={s.pluginBox}>
+            <PluginBox
+              isFallback={isFallback}
+              title={shortTitle || title}
+              image={image}
+              description={shortDescription}
+              actions={actions}
+            />
+            {announce}
+          </div>
+          <div className={s.info}>{info}</div>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
 );

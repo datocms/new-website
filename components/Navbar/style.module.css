@@ -128,13 +128,13 @@
 
   .grid2 {
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 25px;
     grid-template-columns: repeat(2, 1fr);
   }
 
   .grid3 {
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 25px;
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -145,8 +145,8 @@
   .section {
     padding: 40px 30px;
     background: linear-gradient(45deg, white 40%, #f8f8f8);
-    padding-right: 40px;
-    clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+    padding-right: 45px;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 100%, 0 100%);
 
     &:last-child {
       background: white;
@@ -168,7 +168,6 @@
   }
 
   .flag {
-    margin-bottom: 15px;
     font-size: 16px;
     text-decoration: none;
     color: inherit;
@@ -234,7 +233,6 @@
     text-decoration: none;
     color: inherit;
     font-size: 16px;
-    margin-bottom: 25px;
     min-width: 190px;
 
     &:last-child {

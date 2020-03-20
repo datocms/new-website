@@ -15,7 +15,7 @@ import {
   PluginInfo,
   Info,
   NameWithGravatar,
-  Header,
+  PluginDetails,
   Back,
 } from 'components/PluginToolkit';
 import { Copy, Image as FakeImage } from 'components/FakeContent';
@@ -30,77 +30,53 @@ export default function EnterpriseApp({ page, preview }) {
     <Layout preview={preview}>
       {!isFallback && <Head>{renderMetaTags(page.seo)}</Head>}
 
-      <Wrapper>
-        <div className={s.root}>
-          <div className={s.split}>
-            <div className={s.content}>
-              <Header
-                isFallback={isFallback}
-                title={!isFallback && page.title}
-                description={!isFallback && page.description}
-              >
-                {!isFallback &&
-                  page.gallery.map(image => (
-                    <Image
-                      key={image.id}
-                      explicitWidth
-                      data={image.responsiveImage}
-                    />
-                  ))}
-              </Header>
-
-              <div className={s.readme}>
-                {isFallback ? (
-                  <>
-                    <Copy />
-                    <FakeImage />
-                    <Copy />
-                  </>
-                ) : (
-                  <PostContent
-                    isFallback={isFallback}
-                    content={page && page.content}
-                    style={docPageStyles}
-                  />
-                )}
-              </div>
-            </div>
-            <div className={s.sidebar}>
-              <div className={s.sidebarInner}>
-                <PluginBox
-                  isFallback={isFallback}
-                  title={!isFallback && page.title}
-                  image={!isFallback && <LogoImage logo={page.logo} />}
-                  description={!isFallback && page.shortDescription}
-                  actions={
-                    <Button
-                      as="a"
-                      href="/support?topics=business-partnerships/general-requests"
-                      target="_blank"
-                    >
-                      Install this app
-                    </Button>
-                  }
-                />
-
-                <div className={s.info}>
-                  <PluginInfo>
-                    <Info title="Publisher">
-                      <NameWithGravatar
-                        email="support@datocms.com"
-                        name="DatoCMS"
-                      />
-                    </Info>
-                    <Info title="First released">
-                      <FormattedDate date={'2019-03-12'} />
-                    </Info>
-                  </PluginInfo>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Wrapper>
+      <PluginDetails
+        isFallback={isFallback}
+        title={!isFallback && page.title}
+        description={!isFallback && page.description}
+        gallery={
+          !isFallback &&
+          page.gallery.map(image => (
+            <Image key={image.id} explicitWidth data={image.responsiveImage} />
+          ))
+        }
+        content={
+          isFallback ? (
+            <>
+              <Copy />
+              <FakeImage />
+              <Copy />
+            </>
+          ) : (
+            <PostContent
+              isFallback={isFallback}
+              content={page && page.content}
+              style={docPageStyles}
+            />
+          )
+        }
+        image={!isFallback && <LogoImage logo={page.logo} />}
+        shortDescription={!isFallback && page.shortDescription}
+        actions={
+          <Button
+            as="a"
+            href="/support?topics=business-partnerships/general-requests"
+            target="_blank"
+          >
+            Install this app
+          </Button>
+        }
+        info={
+          <PluginInfo>
+            <Info title="Publisher">
+              <NameWithGravatar email="support@datocms.com" name="DatoCMS" />
+            </Info>
+            <Info title="First released">
+              <FormattedDate date={'2019-03-12'} />
+            </Info>
+          </PluginInfo>
+        }
+      />
     </Layout>
   );
 }

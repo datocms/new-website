@@ -10,7 +10,7 @@ import Result from 'components/Result';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
-import IntegrationsBanner from 'components/marketplaceBanner';
+import IntegrationsBanner from 'components/IntegrationsBanner';
 import OmnichannelIllustration from 'components/OmnichannelIllustration';
 import Quote from 'components/Quote';
 import LazyImage from 'components/LazyImage';
@@ -163,7 +163,7 @@ function DigitalMarketers({ integrations, preview, page }) {
         Easily integrate your CMS with your preferred marketing technologies,
         Marketo, Salesforce, Google Analytics, SEMrush, Brightcove, Watson, etc.
         so you can get valuable insights to make meaningful business decisions.
-      </marketplaceBanner>
+      </IntegrationsBanner>
 
       <Flag
         style="good"

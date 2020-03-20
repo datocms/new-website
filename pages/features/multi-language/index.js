@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import IntegrationsBanner from 'components/marketplaceBanner';
+import IntegrationsBanner from 'components/IntegrationsBanner';
 import LazyImage from 'components/LazyImage';
 import ProjectSettings from 'components/ProjectSettings';
 import FieldSettings from 'components/FieldSettings';
@@ -103,7 +103,7 @@ function MultiLanguage({ page, preview }) {
       >
         All your content and assets are localizable, including rich text,
         responsive images, geo-points, SEO metadata and especially your URLs.
-      </marketplaceBanner>
+      </IntegrationsBanner>
 
       <Flag
         style="good"

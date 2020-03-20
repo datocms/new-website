@@ -84,10 +84,17 @@ export default function Plugins({
     <Layout preview={preview}>
       {!router.isFallback && <Head>{renderMetaTags(pluginsPage.seo)}</Head>}
       <Wrapper>
+        <div className={s.hero}>
+          <div className={s.heroTitle}>Community Plugins</div>
+          <div className={s.heroDesc}>
+            Easily expand and customize the capabilities of DatoCMS with
+            community plugins
+          </div>
+        </div>
         <Link as="/docs/building-plugins" href="/docs/[...chunks]">
           <a className={s.announce}>
-            <MegaphoneIcon /> <strong>Wanna be here?</strong> Learn how create
-            your own plugin, or copy and remix existing ones in our
+            <MegaphoneIcon /> <strong>Want to be in catalog?</strong> Learn how
+            create your own plugin, or copy and remix existing ones in our
             documentation! →
           </a>
         </Link>
