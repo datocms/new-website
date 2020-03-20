@@ -1,0 +1,104 @@
+.plans {
+  position: relative;
+
+  &:before {
+    content: '';
+    background: linear-gradient(45deg, #e9fcff 30%, #fdf2ed 60%);
+    clip-path: var(--clip-path);
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 70%;
+    transform: translateY(-50%);
+    z-index: -1;
+  }
+}
+
+.plansInner {
+  display: grid;
+  grid-gap: 0 var(--page-margin);
+  grid-template-columns: repeat(3, 1fr);
+
+  /* grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column; */
+}
+
+.plan {
+  box-shadow: var(--box-shadow);
+  background: white;
+  border-radius: 5px;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.planHeader {
+  padding: 0 50px 30px;
+}
+
+.planName {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-size: rfs(25px);
+  margin-bottom: 10px;
+}
+
+.planDescription {
+  color: var(--light-body-color);
+  font-size: 0.9em;
+}
+
+.planPriceContainer {
+  padding-top: 20px;
+}
+
+.planPriceKicker {
+  margin-top: 5px;
+  color: var(--light-body-color);
+  font-size: 0.9em;
+  &:before {
+    content: 'x';
+    color: transparent;
+  }
+}
+
+.planPrice {
+  font-size: rfs(45px);
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+.planPriceSubtitle {
+  color: var(--light-body-color);
+  font-size: 0.9em;
+}
+
+.planIncluded {
+  font-weight: bold;
+  letter-spacing: -0.02em;
+  text-treansform: uppercase;
+  color: var(--light-body-color);
+  text-align: center;
+  margin: 20px 0;
+}
+
+.planBullets {
+  text-align: center;
+
+  ul,
+  li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    border-top: 1px solid var(--border-color);
+    padding: 20px;
+    font-size: 0.9em;
+  }
+}
