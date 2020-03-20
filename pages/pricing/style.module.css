@@ -102,3 +102,60 @@
     font-size: 0.9em;
   }
 }
+
+.compare {
+  width: 100%;
+
+  td {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.quota {
+  width: 40%;
+}
+
+.quotaValue {
+  text-align: center;
+  width: 20%;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.quotaName {
+  font-weight: bold;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+}
+
+.quotaExtra {
+  font-size: 0.8em;
+  color: var(--light-body-color);
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.quotaDescription {
+  font-size: 0.8em;
+  color: var(--light-body-color);
+  max-width: 330px;
+  margin-top: 5px;
+}
+
+.comparePlan {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
