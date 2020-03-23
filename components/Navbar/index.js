@@ -173,7 +173,7 @@ export default function Navbar() {
                 </Pane>
               </div>
 
-              <div className={s.group}>
+              {/* <div className={s.group}>
                 <div className={s.groupTitle}>
                   <span>Customers</span>
                 </div>
@@ -240,7 +240,8 @@ export default function Navbar() {
                     </div>
                   </div>
                 </Pane>
-              </div>
+              </div> */}
+
               <div className={s.group}>
                 <div className={s.groupTitle}>
                   <span>Learn</span>

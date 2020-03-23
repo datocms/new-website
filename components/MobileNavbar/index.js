@@ -172,7 +172,7 @@ export default function Navbar() {
                   </Link>
                 </Group>
 
-                <Group title="Customers">
+                {/* <Group title="Customers">
                   <div className={s.onecol}>
                     <LearnResource
                       href="/customers/[slug]"
@@ -202,7 +202,7 @@ export default function Navbar() {
                       description="How Rotate built a 2M users a month e-commerce for Chilly’s"
                     />
                   </div>
-                </Group>
+                </Group> */}
 
                 <Group title="Learn">
                   <div className={s.twocols}>

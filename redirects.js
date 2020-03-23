@@ -53,6 +53,14 @@ module.exports = [
       '/marketplace/plugins/i/@ecologic/datocms-plugin-ordered-tag-editor',
   },
   {
+    source: '/content-management-api',
+    destination: '/docs/content-management-api',
+  },
+  {
+    source: '/plugins/',
+    destination: '/marketplace/plugins',
+  },
+  {
     source: '/plugins/i/:rest*',
     destination: '/marketplace/plugins/i/:rest*',
   },

@@ -90,11 +90,6 @@ export default function Footer({ noCta }) {
                     <div className={s.groupTitle}>Resources</div>
                     <div className={s.groupLinks}>
                       <div className={s.groupLink}>
-                        <Link href="/blog">
-                          <a>Blog</a>
-                        </Link>
-                      </div>
-                      <div className={s.groupLink}>
                         <Link href="/product-updates">
                           <a>Product updates</a>
                         </Link>
@@ -102,6 +97,26 @@ export default function Footer({ noCta }) {
                       <div className={s.groupLink}>
                         <Link href="/docs">
                           <a>Documentation</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/support">
+                          <a>Support</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/contact">
+                          <a>Contact sales</a>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={s.group}>
+                    <div className={s.groupTitle}>Social</div>
+                    <div className={s.groupLinks}>
+                      <div className={s.groupLink}>
+                        <Link href="/blog">
+                          <a>Blog</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
@@ -115,18 +130,58 @@ export default function Footer({ noCta }) {
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <a href="https://status.datocms.com" target="_blank">
-                          Status page
+                        <a
+                          href="https://www.twitter.com/datocms"
+                          target="_blank"
+                        >
+                          Twitter
                         </a>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div className={s.col}>
+                  <div className={s.group}>
+                    <div className={s.groupTitle}>Technologies</div>
+                    <div className={s.groupLinks}>
                       <div className={s.groupLink}>
-                        <Link href="/support">
-                          <a>Support</a>
+                        <Link href="/cms/[slug]" as="/cms/nextjs">
+                          <a className={s.extraLink}>Next.js</a>
                         </Link>
                       </div>
                       <div className={s.groupLink}>
-                        <Link href="/contact">
-                          <a>Contact sales</a>
+                        <Link href="/cms/[slug]" as="/cms/gatsbyjs">
+                          <a className={s.extraLink}>Gatsby</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/cms/[slug]" as="/cms/nuxt-js">
+                          <a className={s.extraLink}>Nuxt.js</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/cms/[slug]" as="/cms/hugo">
+                          <a className={s.extraLink}>Hugo</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/cms/[slug]" as="/cms/jekyll">
+                          <a className={s.extraLink}>Jekyll</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/cms/[slug]" as="/cms/react">
+                          <a className={s.extraLink}>React</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/cms/[slug]" as="/cms/vue">
+                          <a className={s.extraLink}>Vue.js</a>
+                        </Link>
+                      </div>
+                      <div className={s.groupLink}>
+                        <Link href="/cms/[slug]" as="/cms/middleman">
+                          <a className={s.extraLink}>Middleman</a>
                         </Link>
                       </div>
                     </div>
@@ -141,6 +196,7 @@ export default function Footer({ noCta }) {
                       </div>
                     </div>
                   </div>
+
                   <div className={s.group}>
                     <div className={s.groupTitle}>Company</div>
                     <div className={s.groupLinks}>

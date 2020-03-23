@@ -13,15 +13,15 @@ The system stores personal information for the main account and invited editors.
 
 Account:
 
-* email,
-* name,
-* company
+- email,
+- name,
+- company
 
 Editors:
 
-* email,
-* first name,
-* last name
+- email,
+- first name,
+- last name
 
 ## Data storage
 
@@ -45,12 +45,12 @@ this information in our systems.
 
 The information is:
 
-* email,
-* first name,
-* last name,
-* company,
-* VAT number,
-* billing address.
+- email,
+- first name,
+- last name,
+- company,
+- VAT number,
+- billing address.
 
 [Chargebee GDPR Compliance](https://www.chargebee.com/security/gdpr/)
 
@@ -62,8 +62,8 @@ We then forward the result of the card registration to Chargebee that triggers t
 
 So to Stripe we send:
 
-* credit card details, which we cannot read ourselves apart the last 4 digits,
-* email
+- credit card details, which we cannot read ourselves apart the last 4 digits,
+- email
 
 ### Fatture in Cloud
 
@@ -72,12 +72,12 @@ the government. To do that we use _Fatture in Cloud_.
 
 The information passed on to _Fatture in Cloud_ are:
 
-* email,
-* first name,
-* last name,
-* company,
-* VAT number,
-* billing address.
+- email,
+- first name,
+- last name,
+- company,
+- VAT number,
+- billing address.
 
 [Fatture in Cloud GDPR Compliance](https://www.fattureincloud.it/gdpr/)
 
@@ -92,9 +92,9 @@ When you open a support ticket, via email or support form, we supply them the em
 If you opt to sign up for our newsletter, we register you on our Mailchimp
 account, supplying them with:
 
-* email,
-* first name,
-* last name.
+- email,
+- first name,
+- last name.
 
 [Mailchimp GDPR Compliance announcement](https://mailchimp.com/help/about-the-general-data-protection-regulation/)
 
@@ -108,8 +108,8 @@ We use Rollbar to track software errors. In certain situations, to help the trac
 
 We collect and store your data for the following reasons:
 
-* To fulfill contractual obligations with a data subject.
-* To perform tasks at the request of a data subject who is in the process of
+- To fulfill contractual obligations with a data subject.
+- To perform tasks at the request of a data subject who is in the process of
   entering into a contract with a data controller.
 
 (For more information about these reasons, see [the explanation on Wikipedia][wikipedia-gdpr-lawful-basis])
@@ -120,12 +120,12 @@ We collect and store your data for the following reasons:
 
 We use your data to do the following:
 
-* to allow you to log in to the site. In this case your data stays in our main servers only.
-* to send you an invoice, we never save your invoicing data, we delegate Stripe and Chargebee the storage and management of your data.
-* as an Italian company we need to send electronic copy of all our invoices to the state. To do that we have an automated service that pulls the data from Chargebee and generates the invoices also on Fatture in Cloud. So your invoicing data will be both on Chargebee and Fatture in Cloud.
-* to send you transactional emails about the service, promotional and marketing emails we use Mailchimp. On account registration we send your email address only to them.
-* on support request we ask your email address to contact you back and we share that information with Front, the service we use for customer care.
-* when an error occurs on the platform we automatically send some telemetry data to Rollbar to be notified about the errors and help us to resolve them. If the error happens on the CMS interface we also send the email address of the user to be able to easily get in touch to gain additional information.
+- to allow you to log in to the site. In this case your data stays in our main servers only.
+- to send you an invoice, we never save your invoicing data, we delegate Stripe and Chargebee the storage and management of your data.
+- as an Italian company we need to send electronic copy of all our invoices to the state. To do that we have an automated service that pulls the data from Chargebee and generates the invoices also on Fatture in Cloud. So your invoicing data will be both on Chargebee and Fatture in Cloud.
+- to send you transactional emails about the service, promotional and marketing emails we use Mailchimp. On account registration we send your email address only to them.
+- on support request we ask your email address to contact you back and we share that information with Front, the service we use for customer care.
+- when an error occurs on the platform we automatically send some telemetry data to Rollbar to be notified about the errors and help us to resolve them. If the error happens on the CMS interface we also send the email address of the user to be able to easily get in touch to gain additional information.
 
 ## Duration of data retention
 
@@ -137,13 +137,13 @@ As soon as you cancel your account, your personal information is erased.
 
 We respect your right to do the following:
 
-* request a copy of your data
-* update your data
-* request deletion of your data
+- request a copy of your data
+- update your data
+- request deletion of your data
 
 Please contact us (at the address below) if you want to do any of the above.
 
 ## How to contact us
 
 If you have any doubts, or wish to exercise your rights (as listed above),
-please send us an email here: [support@datocms.com](support@datocms.com)
+please send us an email here: [support@datocms.com](mailto:support@datocms.com)

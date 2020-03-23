@@ -295,7 +295,7 @@ export default function UseCase({ landing, websites, preview }) {
                     <div className={s.copy}>
                       <SmartMarkdown>{block.description}</SmartMarkdown>
                       <p>
-                        <Link href="/features/worldwide">
+                        <Link href="/features/worldwide-cdn">
                           <a className={s.readMoreAbout}>
                             Read more about our Worldwide CDN <ArrowIcon />
                           </a>

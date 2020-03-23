@@ -311,24 +311,24 @@ function Homepage({ successStories, preview, page }) {
 
       <Numbers title="Why you should use DatoCMS">
         <NumbersBlock
-          href="href=/customers/[slug]"
-          as="/customers/hashicorp"
+          // href="href=/customers/[slug]"
+          // as="/customers/hashicorp"
           title="-79%"
           logo={Hashicorp}
         >
           In operational costs
         </NumbersBlock>
         <NumbersBlock
-          href="href=/customers/[slug]"
-          as="/customers/nike"
+          // href="href=/customers/[slug]"
+          // as="/customers/nike"
           title="2x"
           logo={Nike}
         >
           Faster time to market
         </NumbersBlock>
         <NumbersBlock
-          href="href=/customers/[slug]"
-          as="/customers/arduino"
+          // href="href=/customers/[slug]"
+          // as="/customers/arduino"
           title="8x"
           logo={Arduino}
         >
@@ -338,7 +338,7 @@ function Homepage({ successStories, preview, page }) {
 
       <PersonasPicker />
 
-      {successStories && <UseCaseExcerpts cases={successStories} />}
+      {successStories && false && <UseCaseExcerpts cases={successStories} />}
     </Layout>
   );
 }
