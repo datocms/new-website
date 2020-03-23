@@ -21,6 +21,7 @@ async function start() {
 
   const notFound = s1.sites.filter(url => {
     let realUrl = url.replace('https://www.datocms.com', '').replace(/\/$/, '');
+
     const redirect = liveRedirects.find(r => r.match(realUrl));
 
     if (redirect) {

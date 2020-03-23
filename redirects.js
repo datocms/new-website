@@ -16,16 +16,45 @@ module.exports = [
     destination: '/team/developers',
   },
   {
-    source: '/plugins/i/@stackbitdatocms-plugin-typed-list/',
-    destination: '/plugins/i/@stackbit/datocms-plugin-typed-list',
+    source: '/docs/guides/custom-assets-domain/:rest*',
+    destination: '/marketplace/enterprise/:rest*',
   },
   {
-    source: '/plugins/i/@ecologicdatocms-plugin-multiselect/',
-    destination: '/plugins/i/@ecologic/datocms-plugin-multiselect',
+    source: '/docs/guides/single-sign-on',
+    destination: '/marketplace/enterprise',
   },
   {
-    source: '/plugins/i/@ecologicdatocms-plugin-ordered-tag-editor/',
-    destination: '/plugins/i/@ecologicdatocms/plugin-ordered-tag-editor',
+    source: '/docs/guides/single-sign-on/configure-sso-with-okta',
+    destination: '/marketplace/enterprise/okta-sso',
+  },
+  {
+    source: '/docs/guides/single-sign-on/configure-sso-with-onelogin',
+    destination: '/marketplace/enterprise/onelogin-sso',
+  },
+  {
+    source: '/docs/deployments/travis',
+    destination: '/marketplace/hosting/travis-ci',
+  },
+  {
+    source: '/docs/deployments/:rest*',
+    destination: '/marketplace/hosting/:rest*',
+  },
+  {
+    source: '/plugins/i/@stackbitdatocms-plugin-typed-list',
+    destination: '/marketplace/plugins/i/@stackbit/datocms-plugin-typed-list',
+  },
+  {
+    source: '/plugins/i/@ecologicdatocms-plugin-multiselect',
+    destination: '/marketplace/plugins/i/@ecologic/datocms-plugin-multiselect',
+  },
+  {
+    source: '/plugins/i/@ecologicdatocms-plugin-ordered-tag-editor',
+    destination:
+      '/marketplace/plugins/i/@ecologic/datocms-plugin-ordered-tag-editor',
+  },
+  {
+    source: '/plugins/i/:rest*',
+    destination: '/marketplace/plugins/i/:rest*',
   },
   {
     source: '/docs/guides/offline-backups',
@@ -157,10 +186,10 @@ module.exports = [
   },
   {
     source: '/plugins/field_editor/:rest*',
-    destination: '/plugins',
+    destination: '/marketplace/plugins',
   },
   {
     source: '/plugins/field_addon/:rest*',
-    destination: '/plugins',
+    destination: '/marketplace/plugins',
   },
 ];

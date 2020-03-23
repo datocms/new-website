@@ -67,6 +67,10 @@
     }
   }
 
+  .entryContact {
+    padding-right: 28px;
+  }
+
   .entry {
     &:hover {
       > span:after {

@@ -347,7 +347,7 @@ export default function Navbar() {
 
             <div className={s.actions}>
               <Link href="/contact">
-                <a className={s.entry}>
+                <a className={cn(s.entry, s.entryContact)}>
                   <span>Contact sales</span>
                 </a>
               </Link>
