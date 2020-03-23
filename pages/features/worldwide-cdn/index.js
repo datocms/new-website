@@ -2,7 +2,12 @@ import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import gql from 'graphql-tag';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  imageFields,
+  reviewFields,
+  gqlStaticProps,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import CdnMap from 'components/CdnMap';
@@ -22,12 +27,17 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
+      review1: review(filter: { id: { eq: "4368563" } }) {
+        ...reviewFields
+      }
     }
+    ${imageFields}
+    ${reviewFields}
     ${seoMetaTagsFields}
   `,
 );
 
-function WorldwideCdn({ page, preview }) {
+function WorldwideCdn({ page, preview, review1 }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -80,17 +90,7 @@ function WorldwideCdn({ page, preview }) {
         </p>
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            We aired our first Super Bowl ad and{' '}
-            <Highlight>the website performed flawlessly</Highlight>, even under
-            high load, which was awesome. We’re transitioning all our sites to
-            DatoCMS in the coming months.
-          </>
-        }
-        author="Andrew Smith, Architect for web @ Little Caesars"
-      />
+      <Quote review={review1} />
 
       <Numbers>
         <NumbersBlock title="74">CDN Edges</NumbersBlock>

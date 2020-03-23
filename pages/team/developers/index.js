@@ -1,7 +1,12 @@
 import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  imageFields,
+  reviewFields,
+  gqlStaticProps,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
@@ -42,12 +47,17 @@ export const getStaticProps = gqlStaticProps(
           url
         }
       }
+      review(filter: { id: { eq: "4368579" } }) {
+        ...reviewFields
+      }
     }
+    ${imageFields}
+    ${reviewFields}
     ${seoMetaTagsFields}
   `,
 );
 
-function Developers({ integrations, preview, page }) {
+function Developers({ integrations, preview, page, review }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -174,19 +184,7 @@ function Developers({ integrations, preview, page }) {
         </p>
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            DatoCMS does not force you to speak its language, instead gives you
-            the peace of mind of{' '}
-            <Highlight>
-              being able to use the right solution for each project
-            </Highlight>
-            .
-          </>
-        }
-        author="Matteo Manzo, Technical Project Manager @LeanPanda"
-      />
+      <Quote review={review} />
 
       <Flag
         style="good"

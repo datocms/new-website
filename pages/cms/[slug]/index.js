@@ -3,6 +3,7 @@ import {
   gqlStaticPaths,
   request,
   imageFields,
+  reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
 import gql from 'graphql-tag';
@@ -120,9 +121,10 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
               id
               _modelApiKey
             }
-            ... on QuoteRecord {
-              quote
-              author
+            ... on QuoteLinkRecord {
+              quote {
+                ...reviewFields
+              }
               id
               _modelApiKey
             }
@@ -162,6 +164,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
 
       ${seoMetaTagsFields}
       ${imageFields}
+      ${reviewFields}
     `,
   });
 
@@ -475,11 +478,8 @@ export default function UseCase({ landing, websites, preview }) {
                   </p>
                 </Flag>
               )}
-              {block._modelApiKey === 'quote' && (
-                <Quote
-                  quote={highlightHtml(block.quote)}
-                  author={block.author}
-                />
+              {block._modelApiKey === 'quote_link' && (
+                <Quote review={block.quote} />
               )}
               {block._modelApiKey === 'try_demo_block' && landing.demo && (
                 <>

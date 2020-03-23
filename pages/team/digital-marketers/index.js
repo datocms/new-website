@@ -15,7 +15,12 @@ import OmnichannelIllustration from 'components/OmnichannelIllustration';
 import Quote from 'components/Quote';
 import LazyImage from 'components/LazyImage';
 import gql from 'graphql-tag';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  imageFields,
+  reviewFields,
+  gqlStaticProps,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Space from 'components/Space';
 import SuccessIcon from 'public/icons/regular/check.svg';
 
@@ -41,12 +46,17 @@ export const getStaticProps = gqlStaticProps(
           url
         }
       }
+      review1: review(filter: { id: { eq: "4368589" } }) {
+        ...reviewFields
+      }
     }
+    ${imageFields}
+    ${reviewFields}
     ${seoMetaTagsFields}
   `,
 );
 
-function DigitalMarketers({ integrations, preview, page }) {
+function DigitalMarketers({ integrations, preview, page, review1 }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -191,15 +201,7 @@ function DigitalMarketers({ integrations, preview, page }) {
         />
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
+      <Quote review={review1} />
 
       <Flag
         style="good"
@@ -227,16 +229,6 @@ function DigitalMarketers({ integrations, preview, page }) {
           ]}
         />
       </Flag>
-
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
 
       <Flag
         style="good"

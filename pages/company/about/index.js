@@ -10,7 +10,12 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
-import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import { Image } from 'react-datocms';
 import gql from 'graphql-tag';
 import s from './style.module.css';
@@ -39,14 +44,21 @@ export const getStaticProps = gqlStaticProps(
           }
         }
       }
+      review1: review(filter: { id: { eq: "4368320" } }) {
+        ...reviewFields
+      }
+      review2: review(filter: { id: { eq: "4368343" } }) {
+        ...reviewFields
+      }
     }
 
     ${imageFields}
+    ${reviewFields}
     ${seoMetaTagsFields}
   `,
 );
 
-export default function About({ members, page }) {
+export default function About({ members, page, review1, review2 }) {
   return (
     <Layout>
       <Head>{renderMetaTags(page.seo)}</Head>
@@ -92,15 +104,8 @@ export default function About({ members, page }) {
           job.
         </p>
       </Flag>
-      <Quote
-        quote={
-          <>
-            <Highlight>This is precisely what I want</Highlight>: a CMS that's
-            been built by an agency because they know what my clients need.
-          </>
-        }
-        author="Marc Ammann, CEO @ Matter Supply Co."
-      />
+      <Quote review={review1} />
+
       <Flag
         style="good"
         image="growing"
@@ -127,18 +132,8 @@ export default function About({ members, page }) {
           steadily.
         </p>
       </Flag>
-      <Quote
-        quote={
-          <>
-            <Highlight>
-              It's astounding that you're able to listen to everybody's feedback
-            </Highlight>
-            , not just ours, and act on it while still being such a small,
-            bootstrapped company.
-          </>
-        }
-        author="Jeff Escalante, Web Engineer Manager @ HashiCorp"
-      />
+
+      <Quote review={review2} />
 
       <Numbers title="Why you should use DatoCMS">
         <NumbersBlock title="2.500">Paying customers</NumbersBlock>

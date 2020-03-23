@@ -2,7 +2,12 @@ import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import gql from 'graphql-tag';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  gqlStaticProps,
+  seoMetaTagsFields,
+  imageFields,
+  reviewFields,
+} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import CreateModularBlocks from 'components/CreateModularBlocks';
@@ -20,12 +25,20 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
+      review1: review(filter: { id: { eq: "159108" } }) {
+        ...reviewFields
+      }
+      review2: review(filter: { id: { eq: "4368427" } }) {
+        ...reviewFields
+      }
     }
     ${seoMetaTagsFields}
+    ${imageFields}
+    ${reviewFields}
   `,
 );
 
-function DynamicLayouts({ page, preview }) {
+function DynamicLayouts({ page, preview, review1, review2 }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -64,6 +77,8 @@ function DynamicLayouts({ page, preview }) {
         </p>
       </Flag>
 
+      <Quote review={review2} />
+
       <Flag
         style="good"
         title={
@@ -79,17 +94,7 @@ function DynamicLayouts({ page, preview }) {
         </p>
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            I think Modular Content is probably{' '}
-            <Highlight>one of my favorite features</Highlight>. Being able to
-            put together a piece of content that the client can see on one page
-            and ‘hey, this gets very close to Squarespace‘.
-          </>
-        }
-        author="Marc Ammann, CEO @ Matter Supply Co."
-      />
+      <Quote review={review1} />
 
       <Flag
         style="good"

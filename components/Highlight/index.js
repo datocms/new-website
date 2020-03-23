@@ -33,5 +33,5 @@ export const highlightHtml = (
     },
   };
 
-  return parse(html, noWrappers ? parseOptionsNoWrappers : parseOptions);
+  return parse(html.trim(), noWrappers ? parseOptionsNoWrappers : parseOptions);
 };

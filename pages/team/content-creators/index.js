@@ -2,7 +2,12 @@ import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import gql from 'graphql-tag';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  gqlStaticProps,
+  seoMetaTagsFields,
+  reviewFields,
+  imageFields,
+} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import OtherPersonasPicker from 'components/OtherPersonasPicker';
@@ -28,12 +33,20 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
+      review1: review(filter: { id: { eq: "4368131" } }) {
+        ...reviewFields
+      }
+      review2: review(filter: { id: { eq: "191151" } }) {
+        ...reviewFields
+      }
     }
     ${seoMetaTagsFields}
+    ${reviewFields}
+    ${imageFields}
   `,
 );
 
-function ContentCreators({ page, preview }) {
+function ContentCreators({ page, review1, review2, preview }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -120,15 +133,7 @@ function ContentCreators({ page, preview }) {
         </div>
       </TitleStripWithContent>
 
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
+      <Quote review={review1} />
 
       <Space top={4} bottom={3}>
         <InterstitialTitle>
@@ -188,17 +193,7 @@ function ContentCreators({ page, preview }) {
         />
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            We tried DatoCMS, and the team loved it; it felt good, it felt very
-            nice, and{' '}
-            <Highlight>our team at Nike has been super happy with it</Highlight>
-            .
-          </>
-        }
-        author="Marc Ammann, CEO @ Matter Supply Co."
-      />
+      <Quote review={review2} />
 
       <Flag
         style="good"

@@ -6,7 +6,12 @@ import EnterpriseStrip, { Point } from 'components/EnterpriseStrip';
 import LogosBar from 'components/LogosBar';
 import Wrapper from 'components/Wrapper';
 import TalkWithUs from 'components/TalkWithUs';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  gqlStaticProps,
+  seoMetaTagsFields,
+  reviewFields,
+  imageFields,
+} from 'lib/datocms';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
@@ -27,12 +32,20 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
+      review1: review(filter: { id: { eq: "3695940" } }) {
+        ...reviewFields
+      }
+      review2: review(filter: { id: { eq: "159111" } }) {
+        ...reviewFields
+      }
     }
     ${seoMetaTagsFields}
+    ${imageFields}
+    ${reviewFields}
   `,
 );
 
-function Enterprise({ page }) {
+function Enterprise({ page, review1, review2 }) {
   return (
     <Layout>
       <Head>{renderMetaTags(page.seo)}</Head>
@@ -79,15 +92,7 @@ function Enterprise({ page }) {
         />
       </EnterpriseStrip>
 
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
+      <Quote review={review1} />
 
       <EnterpriseStrip
         title="Full accountability and governance control"
@@ -107,18 +112,7 @@ function Enterprise({ page }) {
         />
       </EnterpriseStrip>
 
-      <Quote
-        quote={
-          <>
-            We are <Highlight>beyond excited</Highlight> about the close
-            relationship we have built between Dato and HashiCorp. It’s amazing.
-            More than once, we have asked, ‘Hey, can we have this thing?’ and
-            the next day we get back a response, ‘Oh yeah, here it is.’
-            Unbelievable.
-          </>
-        }
-        author="Jeff Escalante, Web Engineer Manager @ HashiCorp"
-      />
+      <Quote review={review2} />
 
       <EnterpriseStrip
         title="Robust data security, privacy and compliance"

@@ -12,24 +12,9 @@
     font-family: var(--font-serif);
     content: '\201C';
     color: var(--accent-color);
-    font-size: 150px;
+    font-size: 250px;
     line-height: 0.3;
     transform: translateX(-50%);
-  }
-
-  @media (width > 900px) {
-    &:before {
-      left: 0;
-      transform: translateX(0);
-    }
-  }
-}
-
-.author {
-  text-align: center;
-
-  @media (width > 900px) {
-    text-align: left;
   }
 }
 
@@ -48,8 +33,41 @@
   &:after {
     content: '\201D';
   }
+}
 
-  @media (width > 900px) {
+.image {
+  border-radius: 400px;
+  margin-bottom: 20px;
+
+  @media (width > 700px) {
+    margin-bottom: 0;
+    margin-right: 40px;
+  }
+}
+
+.name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.content {
+  text-align: center;
+
+  @media (width > 700px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: left;
   }
+}
+
+.authorRole {
+  @media (width > 700px) {
+    max-width: 250px;
+  }
+}
+
+.role {
+  color: var(--light-body-color);
 }

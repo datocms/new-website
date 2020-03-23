@@ -2,7 +2,12 @@ import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import gql from 'graphql-tag';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  imageFields,
+  reviewFields,
+  gqlStaticProps,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import GraphQlDemo from 'components/GraphQlDemo';
@@ -20,12 +25,17 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
+      review(filter: { id: { eq: "4368471" } }) {
+        ...reviewFields
+      }
     }
+    ${imageFields}
+    ${reviewFields}
     ${seoMetaTagsFields}
   `,
 );
 
-function GraphQlContentApi({ page, preview }) {
+function GraphQlContentApi({ page, preview, review }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -125,15 +135,7 @@ function GraphQlContentApi({ page, preview }) {
         </GraphQlDemo>
       </TitleStripWithContent>
 
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
+      <Quote review={review} />
 
       <TitleStripWithContent
         title={<>Move faster with powerful developer tools</>}

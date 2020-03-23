@@ -2,7 +2,12 @@ import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import gql from 'graphql-tag';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  imageFields,
+  reviewFields,
+  gqlStaticProps,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import ImgixTransformations from 'components/ImgixTransformations';
@@ -19,12 +24,17 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
+      review: review(filter: { id: { eq: "4368546" } }) {
+        ...reviewFields
+      }
     }
     ${seoMetaTagsFields}
+    ${imageFields}
+    ${reviewFields}
   `,
 );
 
-function ImagesApi({ page, preview }) {
+function ImagesApi({ page, preview, review }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -80,16 +90,6 @@ function ImagesApi({ page, preview }) {
         </p>
       </Flag>
 
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
-
       <TitleStripWithContent
         title={<>State of the art for responsive and progressive images</>}
         subtitle={
@@ -103,16 +103,6 @@ function ImagesApi({ page, preview }) {
       >
         <ProgressiveImagesDemo />
       </TitleStripWithContent>
-
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
 
       <Flag
         style="good"
@@ -129,6 +119,8 @@ function ImagesApi({ page, preview }) {
           stored in DatoCMS and ready to be used in your websites.
         </p>
       </Flag>
+
+      <Quote review={review} />
     </Layout>
   );
 }

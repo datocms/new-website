@@ -8,7 +8,12 @@ import Quote from 'components/Quote';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import s from './style.module.css';
-import { request, seoMetaTagsFields } from 'lib/datocms';
+import {
+  imageFields,
+  reviewFields,
+  request,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import gql from 'graphql-tag';
 import tiny from 'tiny-json-http';
 import formatNumber from 'utils/formatNumber';
@@ -186,7 +191,7 @@ export const getStaticProps = async ({ preview }) => {
   });
 
   const {
-    data: { page, plans, faqs, hints },
+    data: { plans, hints, ...others },
   } = await request({
     query: gql`
       {
@@ -222,17 +227,23 @@ export const getStaticProps = async ({ preview }) => {
             value
           }
         }
+        review1: review(filter: { id: { eq: "3686622" } }) {
+          ...reviewFields
+        }
+        review2: review(filter: { id: { eq: "4368343" } }) {
+          ...reviewFields
+        }
       }
-
+      ${imageFields}
+      ${reviewFields}
       ${seoMetaTagsFields}
     `,
   });
 
   return {
     props: {
+      ...others,
       preview: preview || false,
-      page,
-      faqs,
       plans: plans.map(datoPlan => ({
         ...(datoPlans.data.find(dp => {
           return dp.id === datoPlan.apiId;
@@ -264,7 +275,15 @@ export const getStaticProps = async ({ preview }) => {
   };
 };
 
-export default function Pricing({ page, hints, plans, faqs, preview }) {
+export default function Pricing({
+  page,
+  hints,
+  plans,
+  faqs,
+  preview,
+  review1,
+  review2,
+}) {
   const [annualPricing, setAnnualPricing] = useState(true);
 
   return (
@@ -381,15 +400,7 @@ export default function Pricing({ page, hints, plans, faqs, preview }) {
         </Wrapper>
       </Space>
 
-      <Quote
-        quote={
-          <>
-            With DatoCMS we made the impossibile: we launched a successful
-            omnichannel campaign in <Highlight>less than a month</Highlight>.
-          </>
-        }
-        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
-      />
+      <Quote review={review1} />
 
       <Space bottom={2}>
         <LogosBar
