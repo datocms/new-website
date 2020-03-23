@@ -6,8 +6,9 @@ import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import Quote from 'components/Quote';
 import Head from 'next/head';
+import { renderMetaTags } from 'react-datocms';
 import s from './style.module.css';
-import { request } from 'lib/datocms';
+import { request, seoMetaTagsFields } from 'lib/datocms';
 import gql from 'graphql-tag';
 import tiny from 'tiny-json-http';
 import formatNumber from 'utils/formatNumber';
@@ -66,7 +67,7 @@ const Plan = ({
             as="a"
             href="https://dashboard.datocms.com/projects/browse/new"
           >
-            {price === 0 ? 'Get started for free' : 'Start with free plan!'}
+            {price === 0 ? 'Get started for free' : 'Buy plan'}
           </Button>
         )}
       </div>
@@ -164,7 +165,8 @@ const ToggleQuota = ({ name, children }) => {
   return (
     <>
       <a href="#" onClick={toggle} className={s.quotaName}>
-        {name} <Down />
+        {name}&nbsp;
+        <Down />
       </a>
       {open && <div className={s.quotaDescription}>{children}</div>}
     </>
@@ -184,10 +186,15 @@ export const getStaticProps = async ({ preview }) => {
   });
 
   const {
-    data: { plans, faqs, hints },
+    data: { page, plans, faqs, hints },
   } = await request({
     query: gql`
       {
+        page: pricingPage {
+          seo: _seoMetaTags {
+            ...seoMetaTagsFields
+          }
+        }
         plans: allPlans {
           apiId
           name
@@ -216,12 +223,15 @@ export const getStaticProps = async ({ preview }) => {
           }
         }
       }
+
+      ${seoMetaTagsFields}
     `,
   });
 
   return {
     props: {
       preview: preview || false,
+      page,
       faqs,
       plans: plans.map(datoPlan => ({
         ...(datoPlans.data.find(dp => {
@@ -254,14 +264,12 @@ export const getStaticProps = async ({ preview }) => {
   };
 };
 
-export default function Pricing({ hints, plans, faqs, preview }) {
+export default function Pricing({ page, hints, plans, faqs, preview }) {
   const [annualPricing, setAnnualPricing] = useState(true);
 
   return (
     <Layout preview={preview}>
-      <Head>
-        <title>Pricing</title>
-      </Head>
+      <Head>{renderMetaTags(page.seo)}</Head>
       <Hero
         kicker="Future-proof your digital experiences"
         title={
@@ -273,8 +281,9 @@ export default function Pricing({ hints, plans, faqs, preview }) {
         }
         subtitle={
           <>
-            Save tens of thousands of dollars annually by using DatoCMS headless
-            technologies and content infrastructure
+            Zero maintenance, zero operations: save tens of thousands of dollars
+            annually by using DatoCMS headless technology and
+            content&nbsp;infrastructure
           </>
         }
       />
@@ -290,9 +299,9 @@ export default function Pricing({ hints, plans, faqs, preview }) {
       />
 
       <div className={s.plans}>
-        <Wrapper>
-          <div className={s.plansInner}>
-            {plans.map(plan => (
+        <div className={s.plansInner}>
+          {plans.map(plan => (
+            <div className={s.planContainer}>
               <Plan
                 planId={plan.id}
                 name={plan.cmsAttributes.name}
@@ -309,9 +318,9 @@ export default function Pricing({ hints, plans, faqs, preview }) {
                   <SmartMarkdown>{plan.cmsAttributes.bullets}</SmartMarkdown>
                 }
               />
-            ))}
-          </div>
-        </Wrapper>
+            </div>
+          ))}
+        </div>
       </div>
 
       <Space top={2}>
@@ -392,62 +401,67 @@ export default function Pricing({ hints, plans, faqs, preview }) {
       <Space top={4}>
         <InterstitialTitle style="two">Compare plans</InterstitialTitle>
         <Wrapper>
-          <table className={s.compare}>
-            <tbody>
-              <tr>
-                <td />
-                {plans.map(plan => (
-                  <td key={plan.id} className={s.comparePlan}>
-                    {plan.cmsAttributes.name}
-                  </td>
-                ))}
-              </tr>
-              {Object.entries(hints).map(([limit, hint]) => (
-                <tr key={limit}>
-                  <td className={s.quota}>
-                    <ToggleQuota name={hint.name}>
-                      {hint.description}
-                    </ToggleQuota>
-                  </td>
-                  {plans.map(plan => {
-                    const extraPacket =
-                      plan.attributes &&
-                      ((plan.attributes.extra_packets &&
-                        plan.attributes.extra_packets[limit]) ||
-                        (plan.attributes.auto_packets &&
-                          plan.attributes.auto_packets[limit]));
-
-                    return (
-                      <td key={`hint-plan-${plan.id}`} className={s.quotaValue}>
-                        <div>
-                          <ValueForLimit
-                            limit={limit}
-                            hint={hint}
-                            plan={plan}
-                          />
-                        </div>
-                        {extraPacket && (
-                          <div className={s.quotaExtra}>
-                            {extraPacket.amount_per_packet === 1
-                              ? `Extra ${limitLabel(limit)} for €${
-                                  extraPacket.price
-                                } each`
-                              : `€${extraPacket.price} every ${formatValue(
-                                  limit,
-                                  extraPacket.amount_per_packet,
-                                )} extra ${limitLabel(limit).replace(
-                                  /_/g,
-                                  ' ',
-                                )}`}
-                          </div>
-                        )}
-                      </td>
-                    );
-                  })}
+          <div className={s.compare}>
+            <table className={s.compareTable}>
+              <tbody>
+                <tr>
+                  <td />
+                  {plans.map(plan => (
+                    <td key={plan.id} className={s.comparePlan}>
+                      {plan.cmsAttributes.name}
+                    </td>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+                {Object.entries(hints).map(([limit, hint]) => (
+                  <tr key={limit}>
+                    <td className={s.quota}>
+                      <ToggleQuota name={hint.name}>
+                        {hint.description}
+                      </ToggleQuota>
+                    </td>
+                    {plans.map(plan => {
+                      const extraPacket =
+                        plan.attributes &&
+                        ((plan.attributes.extra_packets &&
+                          plan.attributes.extra_packets[limit]) ||
+                          (plan.attributes.auto_packets &&
+                            plan.attributes.auto_packets[limit]));
+
+                      return (
+                        <td
+                          key={`hint-plan-${plan.id}`}
+                          className={s.quotaValue}
+                        >
+                          <div>
+                            <ValueForLimit
+                              limit={limit}
+                              hint={hint}
+                              plan={plan}
+                            />
+                          </div>
+                          {extraPacket && (
+                            <div className={s.quotaExtra}>
+                              {extraPacket.amount_per_packet === 1
+                                ? `Extra ${limitLabel(limit)} for €${
+                                    extraPacket.price
+                                  } each`
+                                : `€${extraPacket.price} every ${formatValue(
+                                    limit,
+                                    extraPacket.amount_per_packet,
+                                  )} extra ${limitLabel(limit).replace(
+                                    /_/g,
+                                    ' ',
+                                  )}`}
+                            </div>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Wrapper>
       </Space>
 
