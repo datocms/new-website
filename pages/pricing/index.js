@@ -1,13 +1,15 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
+import SmartMarkdown from 'components/SmartMarkdown';
 import Wrapper from 'components/Wrapper';
+import Button from 'components/Button';
+import Quote from 'components/Quote';
 import Head from 'next/head';
 import s from './style.module.css';
 import { request } from 'lib/datocms';
 import gql from 'graphql-tag';
 import tiny from 'tiny-json-http';
-import cn from 'classnames';
 import formatNumber from 'utils/formatNumber';
 import prettyBytes from 'utils/prettyBytes';
 import Check from 'public/icons/regular/check.svg';
@@ -15,28 +17,59 @@ import Down from 'public/icons/regular/chevron-down.svg';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Space from 'components/Space';
 import { useState, useCallback } from 'react';
+import cn from 'classnames';
+import Link from 'next/link';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import Nike from 'public/images/logos/nike.svg';
+import Linkedin from 'public/images/logos/linkedin.svg';
+import LogosBar from 'components/LogosBar';
+import { Badge } from 'components/PluginToolkit';
 
 const Plan = ({
   name,
   description,
   price,
-  priceKicker,
   priceSubtitle,
   bullets,
+  color,
+  planId,
 }) => (
   <>
     <div className={s.plan}>
       <div className={s.planHeader}>
-        <div className={s.planName}>{name}</div>
+        <div className={s.planName} style={{ color }}>
+          {name}
+        </div>
         <div className={s.planDescription}>{description}</div>
         <div className={s.planPriceContainer}>
-          <div className={s.planPriceKicker}>{priceKicker}</div>
-          <div className={s.planPrice}>{price}</div>
+          <div className={s.planPriceKicker}>{price > 0 && 'From'}</div>
+          <div className={s.planPrice}>€{formatNumber(price)}</div>
           <div className={s.planPriceSubtitle}>{priceSubtitle}</div>
         </div>
       </div>
       <div className={s.planIncluded}>What's included?</div>
       <div className={s.planBullets}>{bullets}</div>
+      <div className={s.planAction}>
+        {planId === 'enterprise' ? (
+          <Link href="/contact">
+            <Button block p="big" s="invert" as="a">
+              Contact us
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            block
+            p="big"
+            s={price > 0 && 'invert'}
+            as="a"
+            href="https://dashboard.datocms.com/projects/browse/new"
+          >
+            {price === 0 ? 'Get started for free' : 'Start with free plan!'}
+          </Button>
+        )}
+      </div>
     </div>
   </>
 );
@@ -138,20 +171,38 @@ const ToggleQuota = ({ name, children }) => {
   );
 };
 
-export const getStaticProps = async () => {
+const Switch = ({ label, onChange, value }) => (
+  <div className={s.switchContainer} onClick={() => onChange(!value)}>
+    <div className={cn(s.switch, { [s.switchOn]: value })} /> {label}
+  </div>
+);
+
+export const getStaticProps = async ({ preview }) => {
   const { body: datoPlans } = await tiny.get({
     url: `https://account-api.datocms.com/plans`,
     headers: { accept: 'application/json' },
   });
 
   const {
-    data: { plans, hints },
+    data: { plans, faqs, hints },
   } = await request({
     query: gql`
       {
         plans: allPlans {
           apiId
           name
+          color {
+            hex
+          }
+          description
+          bullets(markdown: true)
+          monthlyPrice
+          priceUnit
+        }
+        faqs: allFaqs {
+          id
+          question
+          answer(markdown: true)
         }
         hints: allPricingHints {
           apiId
@@ -170,12 +221,14 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      plans: plans.map(
-        ({ apiId, name }) =>
-          datoPlans.data.find(dp => {
-            return dp.id === apiId;
-          }) || { id: 'enterprise', attributes: { name } },
-      ),
+      preview: preview || false,
+      faqs,
+      plans: plans.map(datoPlan => ({
+        ...(datoPlans.data.find(dp => {
+          return dp.id === datoPlan.apiId;
+        }) || { id: 'enterprise' }),
+        cmsAttributes: datoPlan,
+      })),
       hints: hints
         .filter(
           hint =>
@@ -201,9 +254,11 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function Pricing({ hints, plans }) {
+export default function Pricing({ hints, plans, faqs, preview }) {
+  const [annualPricing, setAnnualPricing] = useState(true);
+
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Head>
         <title>Pricing</title>
       </Head>
@@ -223,56 +278,117 @@ export default function Pricing({ hints, plans }) {
           </>
         }
       />
+
+      <Switch
+        label={
+          <>
+            Annual pricing&nbsp;&nbsp;<Badge>50% OFF!</Badge>
+          </>
+        }
+        value={annualPricing}
+        onChange={setAnnualPricing}
+      />
+
       <div className={s.plans}>
         <Wrapper>
           <div className={s.plansInner}>
-            <Plan
-              name="Developer"
-              description="Perfect for small projects with low&nbsp;traffic"
-              price="Free"
-              priceSubtitle="No credit card needed"
-              bullets={
-                <ul>
-                  <li>All of our standard features</li>
-                  <li>Invite a single collaborator</li>
-                  <li>Hard limits on quota</li>
-                  <li>Community-based support</li>
-                </ul>
-              }
-            />
-            <Plan
-              name="Professional"
-              description="For larger teams &amp; high volume&nbsp;projects"
-              priceKicker="From"
-              price="€99"
-              priceSubtitle="per project/month"
-              bullets={
-                <ul>
-                  <li>All of our standard features</li>
-                  <li>As many collaborators as you want</li>
-                  <li>Soft limits on quota</li>
-                  <li>Email support (24h response time)</li>
-                </ul>
-              }
-            />
-            <Plan
-              name="Enterprise"
-              description="For companies looking to build a lasting brand and drive growth "
-              priceKicker="From"
-              price="€1,500"
-              priceSubtitle="per month"
-              bullets={
-                <ul>
-                  <li>Private cloud, custom endpoints</li>
-                  <li>Service level agreements</li>
-                  <li>Custom quota, predictable costs</li>
-                  <li>Onboarding, Slack/phone support</li>
-                </ul>
-              }
-            />
+            {plans.map(plan => (
+              <Plan
+                planId={plan.id}
+                name={plan.cmsAttributes.name}
+                color={plan.cmsAttributes.color.hex}
+                description={plan.cmsAttributes.description}
+                price={
+                  plan.cmsAttributes.monthlyPrice ||
+                  (annualPricing
+                    ? plan.attributes.yearly_price / 12
+                    : plan.attributes.monthly_price)
+                }
+                priceSubtitle={plan.cmsAttributes.priceUnit}
+                bullets={
+                  <SmartMarkdown>{plan.cmsAttributes.bullets}</SmartMarkdown>
+                }
+              />
+            ))}
           </div>
         </Wrapper>
       </div>
+
+      <Space top={2}>
+        <Wrapper>
+          <div className={s.std}>
+            <div className={s.stdTitle}>And included in every plan...</div>
+            <div className={s.stdBullets}>
+              <div className={s.stdBullet}>
+                <div className={s.stdBulletTitle}>GraphQL API</div>
+                <div className={s.stdBulletDesc}>
+                  An understandable description of your API, the power to ask
+                  exactly the data you need and powerful developer tools
+                </div>
+              </div>
+              <div className={s.stdBullet}>
+                <div className={s.stdBulletTitle}>Worldwide CDN</div>
+                <div className={s.stdBulletDesc}>
+                  Delight your customers with lightning fast responses thanks to
+                  our CDN: performant, secure, and close to every customer
+                </div>
+              </div>
+              <div className={s.stdBullet}>
+                <div className={s.stdBulletTitle}>
+                  Granular roles and permissions
+                </div>
+                <div className={s.stdBulletDesc}>
+                  Assign the appropriate roles and permissions to your members,
+                  precisely determining what actions they can perform
+                </div>
+              </div>
+              <div className={s.stdBullet}>
+                <div className={s.stdBulletTitle}>Unlimited plugins</div>
+                <div className={s.stdBulletDesc}>
+                  Easily expand the capabilities of DatoCMS with plugins to
+                  handle custom editing needs and 3rd-party integrations
+                </div>
+              </div>
+              <div className={s.stdBullet}>
+                <div className={s.stdBulletTitle}>
+                  Unlimited image transformations
+                </div>
+                <div className={s.stdBulletDesc}>
+                  Optimize, resize, crop, rotate and watermark images on-the-fly
+                  simply adding custom parameters to the URL of your images
+                </div>
+              </div>
+              <div className={s.stdBullet}>
+                <div className={s.stdBulletTitle}>
+                  AI-based smart image tagging
+                </div>
+                <div className={s.stdBulletDesc}>
+                  Locate media files quickly using AI-powered tagging and
+                  advanced search capabilities, saved filters and asset folders
+                </div>
+              </div>
+            </div>
+          </div>
+        </Wrapper>
+      </Space>
+
+      <Quote
+        quote={
+          <>
+            With DatoCMS we made the impossibile: we launched a successful
+            omnichannel campaign in <Highlight>less than a month</Highlight>.
+          </>
+        }
+        author="Tizio Caio, Chief Marketing Officer @BigshotFirm"
+      />
+
+      <Space bottom={2}>
+        <LogosBar
+          title="We power experiences for over half a billion users"
+          clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
+        />
+      </Space>
+
       <Space top={4}>
         <InterstitialTitle style="two">Compare plans</InterstitialTitle>
         <Wrapper>
@@ -282,7 +398,7 @@ export default function Pricing({ hints, plans }) {
                 <td />
                 {plans.map(plan => (
                   <td key={plan.id} className={s.comparePlan}>
-                    {plan.attributes.name}
+                    {plan.cmsAttributes.name}
                   </td>
                 ))}
               </tr>
@@ -334,12 +450,22 @@ export default function Pricing({ hints, plans }) {
           </table>
         </Wrapper>
       </Space>
+
+      <Space top={3}>
+        <Wrapper>
+          <InterstitialTitle>Frequently asked questions</InterstitialTitle>
+          <div className={s.faqs}>
+            {faqs.map(faq => (
+              <div key={faq.id} className={s.faq}>
+                <div className={s.faqQ}>{faq.question}</div>
+                <div className={s.faqA}>
+                  <SmartMarkdown>{faq.answer}</SmartMarkdown>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Wrapper>
+      </Space>
     </Layout>
   );
 }
-
-// - GraphQL API to fetch content
-// - Unlimited plugins
-// - Unlimited image transformations
-// - AI-based smart image tagging
-// - Granular roles and permissions

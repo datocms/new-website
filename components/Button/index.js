@@ -9,12 +9,16 @@ const pClassNames = {
   big: style.pBig,
   small: style.pSmall,
 };
+const sClassNames = {
+  invert: style.sInvert,
+};
 
 export default function Button({
   as: Component = 'div',
   children,
   fs,
   p,
+  s,
   block,
   disabled,
   ...other
@@ -28,6 +32,7 @@ export default function Button({
           [style.disabled]: disabled,
           [style.block]: block,
         },
+        s && sClassNames[s],
         fs && fsClassNames[fs],
         p && pClassNames[p],
       )}

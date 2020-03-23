@@ -21,7 +21,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) skew(0deg, -15deg);
+    transform: translate(-50%, -50%) skew(0deg, -10deg);
     background: linear-gradient(45deg, #f9ecfe, #fefae4);
   }
 }

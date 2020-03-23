@@ -46,10 +46,11 @@
   font-size: 14px;
   letter-spacing: 0;
   background: #f4cf58;
-  padding: 4px 15px;
+  padding: 4px 12px;
   border-radius: 40px;
   letter-spacing: -0.02em;
   white-space: nowrap;
+  font-weight: bold;
   color: var(--base-body-color);
 }
 

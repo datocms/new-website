@@ -21,6 +21,12 @@
   opacity: 0.7;
 }
 
+.sInvert {
+  background: white;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color) !important;
+}
+
 .pSmall {
   padding: 0.8em 1.1em;
 }

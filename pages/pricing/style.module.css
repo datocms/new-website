@@ -31,7 +31,7 @@
   background: white;
   border-radius: 5px;
   text-align: center;
-  padding: 50px 0;
+  padding-top: 40px;
 }
 
 .planHeader {
@@ -66,9 +66,9 @@
 }
 
 .planPrice {
-  font-size: rfs(45px);
+  font-size: rfs(60px);
   font-weight: bold;
-  line-height: 1.5;
+  line-height: 1.1;
   letter-spacing: -0.02em;
 }
 
@@ -86,6 +86,10 @@
   margin: 20px 0;
 }
 
+.planAction {
+  padding: 40px 40px;
+}
+
 .planBullets {
   text-align: center;
 
@@ -98,7 +102,7 @@
 
   li {
     border-top: 1px solid var(--border-color);
-    padding: 20px;
+    padding: 15px 20px;
     font-size: 0.9em;
   }
 }
@@ -158,4 +162,106 @@
   text-transform: uppercase;
   letter-spacing: -0.02em;
   text-align: center;
+}
+
+.stdTitle {
+  font-size: rfs(20px);
+  font-weight: bold;
+  color: var(--extra-light-body-color);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 auto rfs(70px);
+  max-width: 700px;
+}
+
+.stdBullets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: rfs(70px) rfs(100px);
+}
+
+.stdBullet {
+  text-align: center;
+}
+
+.stdBulletTitle {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: rfs(20px);
+}
+
+.stdBulletDesc {
+  color: var(--light-body-color);
+  font-size: 0.9em;
+}
+
+.faqs {
+  column-count: 2;
+  column-gap: 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.faq {
+  margin-bottom: rfs(40px);
+  display: inline-block;
+  width: 100%;
+}
+
+.faqQ {
+  font-weight: bold;
+  color: var(--light-body-color);
+  font-size: rfs(20px);
+  margin-bottom: 15px;
+}
+
+.faqA {
+  font-size: 0.9em;
+
+  a {
+    color: inherit;
+
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+}
+
+.switchContainer {
+  display: flex;
+  justify-content: center;
+  margin: rfs(70px) 0;
+  align-items: center;
+  cursor: pointer;
+  font-size: rfs(20px);
+}
+
+.switch {
+  height: 25px;
+  width: 50px;
+  position: relative;
+  border-radius: 40px;
+  background: var(--extra-light-body-color);
+  transition: all 0.2s ease-in-out;
+  margin-right: 13px;
+
+  &:before {
+    content: '';
+    height: 21px;
+    width: 21px;
+    border-radius: 40px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    background: var(--light-bg-color);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.switchOn {
+  background: var(--azure-color);
+
+  &:before {
+    left: calc(100% - 23px);
+  }
 }

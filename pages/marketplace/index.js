@@ -10,7 +10,6 @@ import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import Link from 'next/link';
 import cn from 'classnames';
 import PluginBox, { LogoImage } from 'components/PluginBox';
-import { Badge } from 'components/PluginToolkit';
 
 export const getStaticProps = gqlStaticProps(
   gql`
