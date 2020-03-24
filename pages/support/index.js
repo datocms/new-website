@@ -33,6 +33,8 @@ export const getStaticProps = gqlStaticProps(
           url
         }
         disableContactForm
+        contactFormType
+        autoResponderType
         description(markdown: true)
         children {
           slug
@@ -212,7 +214,10 @@ export default function Support({ preview, topics }) {
                     </div>
                   </div>
                   <div className={s.form}>
-                    <TalkWithUs />
+                    <TalkWithUs
+                      contactFormType={leafTopic.contactFormType}
+                      issueType={leafTopic.autoResponderType}
+                    />
                   </div>
                 </div>
               </div>
