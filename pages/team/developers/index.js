@@ -119,8 +119,8 @@ function Developers({ integrations, preview, page, review }) {
         <p>
           As long as you’re receiving the usual amount of web traffic, pretty
           much any solution can work. But is your stack capable of handling
-          prime-time TV website traffic, or without becoming completely
-          unusable? And if so, what’s the up-front cost you’re paying for that?
+          prime-time TV website traffic without becoming completely unusable?
+          And if so, what’s the up-front cost you’re paying for that?
         </p>
       </Flag>
 
@@ -138,7 +138,7 @@ function Developers({ integrations, preview, page, review }) {
         <p>
           It should not be your job to constantly make tiny changes to
           copy/images as asked by marketing/content teams. Yet to delegate the
-          job directly to them your CMS must be able to enforce strict
+          job directly to them, your CMS must be able to enforce strict
           validation rules to editors, and have a fast way to continuously adapt
           the backend to their needs. Is that the case?
         </p>

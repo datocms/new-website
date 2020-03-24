@@ -136,9 +136,10 @@ function Homepage({ successStories, preview, page }) {
         image="stale-flower"
       >
         <p>
-          How can you deliver a cohesive brand and message strategy if your
-          company functions in silos and information is manually copy-pasted
-          across tens of different platforms?
+          Your customers demand blazing-fast digital products, web standards are
+          evolving at the speed of light, yet you rely on 15-years-old solutions
+          like Wordpress that force you to deliver heavy, low-quality user
+          experiences.
         </p>
         <Bullets
           style="bad"
@@ -242,9 +243,9 @@ function Homepage({ successStories, preview, page }) {
         }
       >
         <p>
-          Headless CMS means keep everyone on the same page, storing everything
-          in a single centralized hub, making an edit and publish it instantly,
-          everywhere.
+          Headless CMS means keeping everyone on the same page, storing
+          everything in a single centralized hub, making an edit and publish it
+          instantly, everywhere.
         </p>
         <Bullets
           style="good"
