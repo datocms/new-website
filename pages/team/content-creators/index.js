@@ -205,9 +205,10 @@ function ContentCreators({ page, review1, review2, preview }) {
         }
       >
         <p>
-          Organize all your digital assets in folders, locate media files
-          quickly using AI-powered tagging and advanced search capabilities,
-          publish them wherever you want with perfect quality and speed.
+          Organize all your digital assets with shared filters, locate media
+          files quickly using AI-powered tagging and advanced search
+          capabilities, publish them wherever you want with perfect quality and
+          speed.
         </p>
 
         <Bullets

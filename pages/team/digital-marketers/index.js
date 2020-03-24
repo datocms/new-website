@@ -125,7 +125,7 @@ function DigitalMarketers({ integrations, preview, page, review1 }) {
 
       <Space top={4} bottom={3}>
         <InterstitialTitle style="two">
-          Here's DatoCMS helps you build better{' '}
+          DatoCMS helps you build better{' '}
           <Highlight>digital&nbsp;experiences</Highlight>
         </InterstitialTitle>
       </Space>
@@ -152,7 +152,7 @@ function DigitalMarketers({ integrations, preview, page, review1 }) {
           bullets={[
             'Build channel-agnostic content, reusable across touchpoints',
             'Publish changes instantly to all your channels',
-            'Provide personalized, contextual help linking resources together',
+            'Provide personalized, contextual help by linking resources together',
           ]}
         />
       </Flag>
@@ -252,7 +252,7 @@ function DigitalMarketers({ integrations, preview, page, review1 }) {
           bullets={[
             "Easily achieve 100/100 on Google's PageSpeed Insight",
             'Highly optimized images and video streaming',
-            'A globally delivered network at your disposal',
+            'A globally delivered network at your service',
           ]}
         />
       </Flag>

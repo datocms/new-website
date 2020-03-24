@@ -119,8 +119,8 @@ function Developers({ integrations, preview, page, review }) {
         <p>
           As long as you’re receiving the usual amount of web traffic, pretty
           much any solution can work. But is your stack capable of handling
-          prime-time TV website traffic, or without becoming completely
-          unusable? And if so, what’s the up-front cost you’re paying for that?
+          prime-time TV website traffic without becoming completely unusable?
+          And if so, what’s the up-front cost you’re paying for that?
         </p>
       </Flag>
 
@@ -137,8 +137,8 @@ function Developers({ integrations, preview, page, review }) {
       >
         <p>
           It should not be your job to constantly make tiny changes to
-          copy/images as asked by marketing/content teams. Yet to delegate the
-          job directly to them your CMS must be able to enforce strict
+          copy/images as asked by marketing/content teams. Yet, to delegate the
+          job directly to them, your CMS must be able to enforce strict
           validation rules to editors, and have a fast way to continuously adapt
           the backend to their needs. Is that the case?
         </p>
@@ -180,7 +180,7 @@ function Developers({ integrations, preview, page, review }) {
           React, Vue, Gatsby, Next.js: take advantage of the best frameworks
           around, without carrying around CMS technical debt. Your content is
           reusable via API across any digital product — websites, apps,
-          chatbots, IoT — and technology.
+          chatbots, IoT — any technology.
         </p>
       </Flag>
 
@@ -232,9 +232,9 @@ function Developers({ integrations, preview, page, review }) {
         image="fruit"
       >
         <p>
-          From business-critical product pages, to dynamic landing-pages, to
-          tiny microcopy: we give you all the flexibility you need to model any
-          kind of content. And, most importantly, to change it over time.
+          From business-critical product pages, to dynamic landing-pages or tiny
+          microcopy: we give you all the flexibility you need to model any kind
+          of content. And, most importantly, to change it over time.
         </p>
       </Flag>
 
@@ -242,22 +242,22 @@ function Developers({ integrations, preview, page, review }) {
         style="good"
         title={
           <>
-            Build product, <FlagHighlight>not infrastructure</FlagHighlight>
+            Build products, <FlagHighlight>not infrastructure</FlagHighlight>
           </>
         }
         image="bear-bird"
       >
         <p>
           You’re not the one that should worry about traffic spikes, performance
-          or maintenance: our managed global CDN will always ensure your content
-          is accessible, secure, and close to every visitor.
+          or maintenance: our managed global CDN will always ensure that your
+          content is accessible, secure, and close to every visitor.
         </p>
       </Flag>
 
       <TitleStripWithContent
         title={
           <>
-            A technology investment that doubles performaces and dev team
+            A technology investment that doubles performace and dev team
             productivity
           </>
         }

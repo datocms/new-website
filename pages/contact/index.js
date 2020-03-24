@@ -48,7 +48,7 @@ export default function Support() {
               </div>
             </div>
             <div className={s.picker}>
-              <TalkWithUs />
+              <TalkWithUs contactFormType="sales" issueType="sales" />
             </div>
           </div>
         </Wrapper>

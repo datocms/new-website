@@ -52,14 +52,14 @@ function ImagesApi({ page, preview, review }) {
         }
         subtitle={
           <>
-            Serve lightning fast images from any digital product with a suite of
+            Serve lightning fast images for any digital product with a suite of
             tools built to save both development time and visitor bandwidth.
           </>
         }
       />
 
       <TitleStripWithContent
-        title={<>Endless image transformations at your disposal</>}
+        title={<>Endless image transformations at your service</>}
         subtitle={
           <>
             DatoCMS offers best-in-class image processing and image CDN thanks
@@ -115,8 +115,8 @@ function ImagesApi({ page, preview, review }) {
       >
         <p>
           Dominant colors, EXIF data, aspect ratio, filesize, copyright
-          information, geolocation. Every possible information on your images is
-          stored in DatoCMS and ready to be used in your websites.
+          information, geolocation. Every possible information about your images
+          is stored in DatoCMS and ready to be used in your websites.
         </p>
       </Flag>
 
