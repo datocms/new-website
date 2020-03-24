@@ -99,7 +99,7 @@ export default function EnterpriseApp({ page, preview }) {
         description={
           !isFallback && (
             <>
-              {page.category.name} in {page.technology.name}
+              {page.category && page.category.name} in {page.technology.name}
               {page.deploymentType in deployments
                 ? deployments[page.deploymentType]
                 : page.deploymentType}
@@ -110,7 +110,7 @@ export default function EnterpriseApp({ page, preview }) {
           !isFallback && (
             <Button
               as="a"
-              href={`https://dashboard.datocms.com/projects/new-from-template/${page.category.code}/${page.code}`}
+              href={`https://dashboard.datocms.com/deploy?repo=${page.githubRepo}`}
               target="_blank"
             >
               Start free project
