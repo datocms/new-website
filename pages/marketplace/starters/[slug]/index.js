@@ -126,6 +126,16 @@ export default function EnterpriseApp({ page, preview }) {
                 </a>
               )}
             </Info>
+            <Info title="Github repo" isFallback={isFallback}>
+              {!isFallback && (
+                <a
+                  href={`https://github.com/${page.githubRepo}`}
+                  target="_blank"
+                >
+                  {page.githubRepo}
+                </a>
+              )}
+            </Info>
             <Info title="Publisher">
               <NameWithGravatar email="support@datocms.com" name="DatoCMS" />
             </Info>
