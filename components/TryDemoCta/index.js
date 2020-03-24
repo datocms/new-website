@@ -13,6 +13,7 @@ export default function TryDemoCta({
   windowTitle,
   href,
   docsAs,
+  cta,
 }) {
   return (
     <Wrapper>
@@ -35,7 +36,7 @@ export default function TryDemoCta({
           <div className={s.description}>{description}</div>
           <div className={s.actions}>
             <Button as="a" href={href}>
-              Start new project
+              {cta}
             </Button>
             {docsAs && (
               <span className={s.docs}>
