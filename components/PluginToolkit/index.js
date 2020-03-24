@@ -98,7 +98,6 @@ export const PluginDetails = ({
               description={shortDescription}
               actions={actions}
             />
-            {announce}
           </div>
           <div className={s.info}>{info}</div>
         </div>

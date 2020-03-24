@@ -60,7 +60,7 @@ export default function EnterpriseApp({ page, preview }) {
         actions={
           <Button
             as="a"
-            href="/support?topics=business-partnerships/general-requests"
+            href="https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/deployment_environments/new"
             target="_blank"
           >
             Install this app
