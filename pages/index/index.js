@@ -86,7 +86,9 @@ function Homepage({ successStories, preview, page }) {
         }
       >
         <Checks checks={['No credit card', 'Easy setup']}>
-          <Button fs="big">Try it now for free!</Button>
+          <Button fs="big" as="a" href="https://dashboard.datocms.com/signup">
+            Try it now for free!
+          </Button>
         </Checks>
       </Hero>
 
@@ -147,7 +149,7 @@ function Homepage({ successStories, preview, page }) {
           bullets={[
             'Slow development times',
             'Rigid structures and models',
-            'Low-performant websites and apps',
+            'Poor performance in websites and apps',
           ]}
         />
       </Flag>
@@ -191,9 +193,8 @@ function Homepage({ successStories, preview, page }) {
               </>
             }
           >
-            <strong>Harris</strong> found 86% of consumers stop
-            interacting&#8203;/&#8203;buying from businesses if they have a bad
-            experience.
+            According to <strong>Gartner</strong> 89 percent of companies plan
+            to compete primarily on the basis of CX this year.
           </Result>
           <Result
             number="86%"
@@ -203,8 +204,9 @@ function Homepage({ successStories, preview, page }) {
               </>
             }
           >
-            According to <strong>Gartner</strong> 89 percent of companies plan
-            to compete primarily on the basis of CX this year.
+            <strong>Harris</strong> found 86% of consumers stop
+            interacting&#8203;/&#8203;buying from businesses if they have a bad
+            experience.
           </Result>
           <Result
             number="25%"
@@ -289,7 +291,7 @@ function Homepage({ successStories, preview, page }) {
         title={
           <>
             A <FlagHighlight>global delivery network</FlagHighlight> at your
-            disposal
+            service
           </>
         }
         image="muscles"

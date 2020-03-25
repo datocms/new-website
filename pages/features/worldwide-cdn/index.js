@@ -84,9 +84,9 @@ function WorldwideCdn({ page, preview, review1 }) {
         <p>
           We built DatoCMS content infrastructure so you don’t have to. Focus on
           writing great content and creating new, innovative digital
-          experiences. We build every day to offer a reliable solution capable
-          of following your growth, globally, and lets you adapt along the
-          journey, with no upfront costs.
+          experiences. We work every day to offer a reliable solution capable of
+          following your growth, globally, and lets you adapt along the journey,
+          with no upfront costs.
         </p>
       </Flag>
 

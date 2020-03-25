@@ -126,10 +126,10 @@ export default function About({ members, page, review1, review2 }) {
         </p>
         <p>
           We don’t want venture capital funding. We don’t have an outbound sales
-          team. We like dogs more than unicorns, sharing than disrupting and
-          we’re here to stay. We owe only our best efforts to you and ourselves.
-          We've put down our roots and we want them to grow. Slowly but
-          steadily.
+          team. We like dogs more than unicorns, sharing instead of disrupting
+          and we’re here to stay. We owe only our best efforts to you and
+          ourselves. We've put down our roots and we want them to grow. Slowly
+          but steadily.
         </p>
       </Flag>
 

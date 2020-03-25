@@ -21,7 +21,7 @@
 .icon {
   width: 30px;
   height: 1.3em;
-  display: block;
+  display: inline-block;
   margin: 0 auto 2px;
 
   @media screen and (width > 650px) {
