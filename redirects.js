@@ -1903,6 +1903,10 @@ module.exports = [
     destination: '/docs',
   },
   {
+    source: '/search',
+    destination: '/docs',
+  },
+  {
     source: '/about',
     destination: '/company/about',
   },
@@ -1956,7 +1960,7 @@ module.exports = [
     destination: '/docs/content-management-api',
   },
   {
-    source: '/plugins/',
+    source: '/plugins',
     destination: '/marketplace/plugins',
   },
   {

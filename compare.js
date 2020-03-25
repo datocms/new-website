@@ -14,9 +14,9 @@ async function start() {
   const sitemapper = new Sitemapper();
   sitemapper.timeout = 5000;
 
-  const s1 = await sitemapper.fetch('https://www.datocms.com/sitemap.xml');
+  const s1 = await sitemapper.fetch('https://datocms.netlify.com/sitemap.xml');
   const s2Sites = (
-    await sitemapper.fetch('https://new.datocms.com/sitemap.xml')
+    await sitemapper.fetch('https://www.datocms.com/sitemap.xml')
   ).sites.map(x => x.replace('https://www.datocms.com', '').replace(/\/$/, ''));
 
   const notFound = s1.sites.filter(url => {
