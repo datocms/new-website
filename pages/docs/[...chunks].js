@@ -259,7 +259,7 @@ export function Toc({ content, extraEntries: extra }) {
 
   return (contentEntries && contentEntries.length > 0) ||
     (extraEntries && extraEntries.length > 0) ? (
-    <div className={s.sidebar}>
+    <div className={s.sidebar} data-datocms-noindex>
       <div className={s.toc}>
         <div className={s.tocInner}>
           <div className={s.tocTitle}>In this page</div>

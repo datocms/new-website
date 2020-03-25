@@ -16,7 +16,9 @@ export default function DocsLayout({ sidebar, children, preview }) {
               <FullLogo height={30} />
             </a>
           </Link>
-          <div className={s.innerSidebar}>{sidebar}</div>
+          <div className={s.innerSidebar} data-datocms-noindex>
+            {sidebar}
+          </div>
         </div>
         <div className={s.contentWrapper}>
           <DocSearch />
@@ -40,7 +42,7 @@ export default function DocsLayout({ sidebar, children, preview }) {
           </div>
           <div className={s.container}>
             {children}
-            <div className={s.footer}>
+            <div className={s.footer} data-datocms-noindex>
               <div className={s.footerTitle}>Questions?</div>
               <div className={s.footerBody}>
                 We're always happy to help with code or other questions you

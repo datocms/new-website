@@ -93,7 +93,7 @@ export default function Navbar() {
       {visible && (
         <div className={s.overlay} onClick={() => setVisible(false)} />
       )}
-      <div className={classnames(s.root)}>
+      <div className={classnames(s.root)} data-datocms-noindex>
         <Wrapper>
           <div className={s.innerRoot}>
             <Link href="/">

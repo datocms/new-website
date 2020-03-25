@@ -7,7 +7,10 @@ import s from './style.module.css';
 
 export default function Footer({ noCta }) {
   return (
-    <div className={cn(s.footerBg, { [s.noCta]: noCta, [s.cta]: !noCta })}>
+    <div
+      className={cn(s.footerBg, { [s.noCta]: noCta, [s.cta]: !noCta })}
+      data-datocms-noindex
+    >
       {!noCta && <FinalCta />}
       <div className={s.footerRoot}>
         <Wrapper>

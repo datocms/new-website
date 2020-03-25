@@ -17,7 +17,7 @@ export default function IntegrationsLayout({ children, preview }) {
 
   return (
     <BaseLayout preview={preview}>
-      <div className={s.notice}>
+      <div className={s.notice} data-datocms-noindex>
         <Wrapper>
           <strong>🎈 Welcome to the Marketplace</strong> — Explore and discover
           the ecosystem around DatoCMS, and share your own work with the

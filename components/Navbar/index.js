@@ -81,7 +81,7 @@ export default function Navbar() {
   return (
     <>
       <div className={s.placeholder} />
-      <div className={classnames(s.root)}>
+      <div className={classnames(s.root)} data-datocms-noindex>
         <Wrapper>
           <div className={s.innerRoot}>
             <Link href="/">
