@@ -44,7 +44,14 @@ export const getStaticPaths = gqlStaticPaths(
         root.children
           .filter(c => c.slug !== 'content-management-api')
           .map(sub =>
-            sub.pages.map(page =>
+            (sub.slug === 'content-delivery-api'
+              ? sub.pages.filter(
+                  page =>
+                    (page.slugOverride || page.page.slug) !==
+                    'filtering-records',
+                )
+              : sub.pages
+            ).map(page =>
               (page.slugOverride || page.page.slug) === 'index'
                 ? [sub.slug]
                 : [sub.slug, page.slugOverride || page.page.slug],
