@@ -26,7 +26,7 @@ export default function StatusBadge() {
 
   return (
     <a
-      href="https://support.datocms.com"
+      href="https://status.datocms.com"
       target="_blank"
       className={cn(s.status, { [s.ok]: !firstDownStatus })}
     >
