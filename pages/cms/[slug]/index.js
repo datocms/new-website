@@ -47,7 +47,7 @@ import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
-      landingPages: allLandingPages(first: 15) {
+      landingPages: allLandingPages(first: 100) {
         slug
       }
     }

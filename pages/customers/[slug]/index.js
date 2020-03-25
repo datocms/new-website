@@ -21,7 +21,7 @@ import Head from 'next/head';
 export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
-      posts: allSuccessStories(first: 15, orderBy: _firstPublishedAt_DESC) {
+      posts: allSuccessStories(first: 100, orderBy: _firstPublishedAt_DESC) {
         slug
       }
     }

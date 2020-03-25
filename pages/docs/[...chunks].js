@@ -23,7 +23,7 @@ var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 export const getStaticPaths = gqlStaticPaths(
   gql`
     {
-      roots: allDocGroups(filter: { parent: { exists: false } }) {
+      roots: allDocGroups(first: 100, filter: { parent: { exists: false } }) {
         slug
         children {
           slug
@@ -44,12 +44,14 @@ export const getStaticPaths = gqlStaticPaths(
         root.children
           .filter(c => c.slug !== 'content-management-api')
           .map(sub =>
-            (sub.pages[0].slugOverride || sub.pages[0].page.slug) === 'index'
-              ? [sub.slug]
-              : [sub.slug, sub.pages[0].slugOverride || sub.pages[0].page.slug],
+            sub.pages.map(page =>
+              (page.slugOverride || page.page.slug) === 'index'
+                ? [sub.slug]
+                : [sub.slug, page.slugOverride || page.page.slug],
+            ),
           ),
       )
-      .flat(),
+      .flat(2),
 );
 
 export const getStaticProps = async function({

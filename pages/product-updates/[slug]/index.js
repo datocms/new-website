@@ -17,7 +17,7 @@ import s from 'pages/product-updates/p/[page]/style.module.css';
 export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
-      posts: allChangelogEntries(first: 15, orderBy: _firstPublishedAt_DESC) {
+      posts: allChangelogEntries(first: 100, orderBy: _firstPublishedAt_DESC) {
         slug
       }
     }

@@ -4,6 +4,7 @@ import DatoCmsSearch from 'datocms-search/dist/datocms-search.base';
 import highlighter from 'keyword-highlighter';
 import cn from 'classnames';
 import parse from 'html-react-parser';
+import wretch from 'wretch';
 
 import s from './style.module.css';
 
@@ -12,8 +13,10 @@ const client = new DatoCmsSearch('d46fe8134ea916b42af4eaa0d06109');
 const fetchCommunity = async query => {
   const endpoint = 'https://community.datocms.com/search/query.json';
 
-  const { topics, posts } = await ky
-    .get(`${endpoint}?include_blurbs=true&term=${encodeURIComponent(query)}`)
+  const { topics, posts } = await wretch(
+    `${endpoint}?include_blurbs=true&term=${encodeURIComponent(query)}`,
+  )
+    .get()
     .json();
 
   if (!posts) {
@@ -77,7 +80,7 @@ export default function DocSearch() {
             <li key={result.url} className={s.result}>
               <a href={result.url}>
                 <div className={s.resultTitle}>
-                  {parse(result.title.replace(/ - DatoCMS$/, ''))}{' '}
+                  {parse((result.title || '').replace(/ - DatoCMS$/, ''))}{' '}
                   {result.community && (
                     <span className={s.community}>Community</span>
                   )}

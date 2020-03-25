@@ -25,7 +25,7 @@ import {
 export const getStaticPaths = gqlStaticPaths(
   gql`
     {
-      plugins: allPlugins(orderBy: installs_DESC, first: 10) {
+      plugins: allPlugins(orderBy: installs_DESC, first: 100) {
         packageName
       }
     }

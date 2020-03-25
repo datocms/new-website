@@ -24,7 +24,7 @@ import gql from 'graphql-tag';
 export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
-      posts: allTemplateDemos(first: 15, orderBy: _firstPublishedAt_DESC) {
+      posts: allTemplateDemos(first: 100, orderBy: _firstPublishedAt_DESC) {
         code
       }
     }
