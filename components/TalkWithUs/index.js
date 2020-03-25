@@ -26,10 +26,18 @@ export default function TalkWithUs({ contactFormType, issueType }) {
     return contactFormType == 'support';
   }
 
+  function frontUrl(contactFormType) {
+    if (contactFormType == 'sales') {
+      return 'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/4GuYjvVpHX6Xqau-2EggC1eKeg0Iw_fMbehg2EbuLpRQARK6OetUIsAzCTs5-NdwQS_X02Qo1vdMMh6aNGLiySEIPM3EqvAkgNvPW-dQ6BdvbK4bXw1qwh3D2i5j';
+    } else {
+      return 'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/sWPCwvUmu--UpyGfM9hRVfjaIwWCyVh-3I0nJ4gNZKU6fQeDGRdrNfYSsrIyeoqTcGPguYxKX-ULe-OYj08sar17B0gWytpkKNcAZNZB_0HTwk9jBCh5wEQCmsmm';
+    }
+  }
+
   return (
     <div className={s.root}>
       <Form
-        action="https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/4GuYjvVpHX6Xqau-2EggC1eKeg0Iw_fMbehg2EbuLpRQARK6OetUIsAzCTs5-NdwQS_X02Qo1vdMMh6aNGLiySEIPM3EqvAkgNvPW-dQ6BdvbK4bXw1qwh3D2i5j"
+        action={frontUrl(contactFormType)}
         defaultValues={defaultValues}
         submitLabel="Get in touch"
       >
