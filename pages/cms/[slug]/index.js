@@ -490,6 +490,7 @@ export default function UseCase({ landing, websites, preview }) {
                     description={<SmartMarkdown>{block.content}</SmartMarkdown>}
                     href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
                     docsAs={landing.docsUrl}
+                    cta={`Try our ${landing.name} demo project now!`}
                   />
                   <Space top={2} bottom={2}>
                     <LogosBar

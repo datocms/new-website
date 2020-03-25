@@ -79,7 +79,7 @@
   "devDependencies": {
     "esm": "^3.2.25",
     "husky": "^4.2.3",
-    "now": "^17.0.4",
+    "now": "^17.1.1",
     "postcss-custom-media": "^7.0.8",
     "postcss-media-minmax": "^4.0.0",
     "prettier": "^1.19.1",
