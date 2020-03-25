@@ -6,7 +6,7 @@
 }
 
 .rootBlocks {
-  @media screen and (width > 900px) {
+  @media screen and (width > 800px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -27,7 +27,7 @@
     margin-bottom: 0;
   }
 
-  @media screen and (width > 900px) {
+  @media screen and (width > 800px) {
     margin-bottom: 0;
   }
 }

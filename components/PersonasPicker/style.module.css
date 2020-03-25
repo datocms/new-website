@@ -1,7 +1,9 @@
 .root {
   margin: rfs(200px) 0;
+  text-align: center;
 
   @media (width > 900px) {
+    text-align: left;
     display: flex;
     margin: rfs(100px) 0;
     justify-content: space-between;
@@ -92,11 +94,12 @@
 
 .personasImage {
   width: 40px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
 
   @media (width > 900px) {
     width: 60px;
     position: absolute;
     left: 50px;
+    margin: 0 0 20px;
   }
 }

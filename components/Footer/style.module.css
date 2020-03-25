@@ -22,9 +22,13 @@
   background: var(--dark-bg-color);
 }
 
+.footerInnerRoot {
+  padding-bottom: rfs(60px);
+}
+
 .footerRoot {
   color: white;
-  padding: rfs(60px) 0;
+  padding: rfs(60px) 0 0;
   text-align: center;
 
   a {

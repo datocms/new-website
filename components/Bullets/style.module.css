@@ -19,14 +19,15 @@
 }
 
 .icon {
-  width: 30px;
-  height: 1.3em;
   display: inline-block;
-  margin: 0 auto 2px;
+  vertical-align: middle;
+  margin-right: 3px;
+  display: inline-flex;
+  height: 1.3em;
+  align-items: center;
 
   @media screen and (width > 650px) {
-    display: flex;
-    align-items: center;
+    width: 20px;
   }
 }
 

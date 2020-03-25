@@ -149,55 +149,52 @@ export default function Support({ preview, topics }) {
               </div>
             )}
           </div>
-          {leafTopic && leafTopic.description && (
-            <div className={s.description}>
-              <SmartMarkdown>{leafTopic.description}</SmartMarkdown>
-            </div>
-          )}
-          {leafTopic && leafTopic.commonQuestions.length > 0 && (
-            <div className={s.description}>
-              <h3>Popular guides and tutorials</h3>
-              <p>
-                Please take a look at these resources, as they might probably be
-                the fastest way to solve your issue!
-              </p>
-              <ul>
-                {leafTopic.commonQuestions.map(q => (
-                  <li id={q.url}>
-                    <a href={q.url}>{q.title}</a>
-                  </li>
-                ))}
-              </ul>
-              {leafTopic &&
-                leafTopic.children.length === 0 &&
-                !leafTopic.disableContactForm && (
-                  <>
-                    <h3>Didn't find what you're looking for?</h3>
-                    <ul>
-                      <li>
-                        <a
-                          href="#form"
-                          onClick={e => {
-                            e.preventDefault();
-                            setFormVisible(true);
-                            const el = document.getElementById('form');
-                            if (el) {
-                              scrollIntoView(el, {
-                                behavior: 'smooth',
-                                block: 'start',
-                                inline: 'start',
-                              });
-                            }
-                          }}
-                        >
-                          Access our contact form
-                        </a>
-                      </li>
-                    </ul>
-                  </>
-                )}
-            </div>
-          )}
+          {leafTopic &&
+            (leafTopic.commonQuestions.length > 0 || leafTopic.description) && (
+              <div className={s.description}>
+                <SmartMarkdown>{leafTopic.description}</SmartMarkdown>
+                <h3>Popular guides and tutorials</h3>
+                <p>
+                  Please take a look at these resources, as they might probably
+                  be the fastest way to solve your issue!
+                </p>
+                <ul>
+                  {leafTopic.commonQuestions.map(q => (
+                    <li id={q.url}>
+                      <a href={q.url}>{q.title}</a>
+                    </li>
+                  ))}
+                </ul>
+                {leafTopic &&
+                  leafTopic.children.length === 0 &&
+                  !leafTopic.disableContactForm && (
+                    <>
+                      <h3>Didn't find what you're looking for?</h3>
+                      <ul>
+                        <li>
+                          <a
+                            href="#form"
+                            onClick={e => {
+                              e.preventDefault();
+                              setFormVisible(true);
+                              const el = document.getElementById('form');
+                              if (el) {
+                                scrollIntoView(el, {
+                                  behavior: 'smooth',
+                                  block: 'start',
+                                  inline: 'start',
+                                });
+                              }
+                            }}
+                          >
+                            Access our contact form
+                          </a>
+                        </li>
+                      </ul>
+                    </>
+                  )}
+              </div>
+            )}
           {leafTopic &&
             leafTopic.children.length === 0 &&
             ((leafTopic.commonQuestions.length === 0 &&
