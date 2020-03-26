@@ -63,7 +63,7 @@ function ImagesApi({ page, preview, review }) {
         subtitle={
           <>
             DatoCMS offers best-in-class image processing and image CDN thanks
-            to the seamless partnership with Imgix. Optimize, resize, crop,
+            to the seamless partnership with imgix. Optimize, resize, crop,
             rotate and watermark images on-the-fly simply adding custom
             parameters to the URL of your image.
           </>
