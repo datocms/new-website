@@ -1996,6 +1996,10 @@ module.exports = [
     destination: '/docs/custom-build-methods',
   },
   {
+    source: '/docs/content-delivery-api/overview',
+    destination: '/docs/content-delivery-api',
+  },
+  {
     source: '/docs/content-delivery-api/endpoint',
     destination: '/docs/content-delivery-api/api-endpoints',
   },
