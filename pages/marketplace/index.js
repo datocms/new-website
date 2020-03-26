@@ -1,7 +1,7 @@
 import Layout from 'components/MarketplaceLayout';
 import LazyImage from 'components/LazyImage';
 import Head from 'next/head';
-import { gqlStaticProps, imageFields } from 'lib/datocms';
+import { request, imageFields } from 'lib/datocms';
 import s from './style.module.css';
 import gql from 'graphql-tag';
 import { Image } from 'react-datocms';
@@ -10,84 +10,99 @@ import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import Link from 'next/link';
 import cn from 'classnames';
 import PluginBox, { LogoImage } from 'components/PluginBox';
+import tiny from 'tiny-json-http';
 
-export const getStaticProps = gqlStaticProps(
-  gql`
-    {
-      demos: _allTemplateDemosMeta {
-        count
-      }
-      plugins: _allPluginsMeta {
-        count
-      }
-      hostingApps: _allHostingAppsMeta {
-        count
-      }
-      enterpriseApps: _allEnterpriseAppsMeta {
-        count
-      }
-      page: integrationsPage {
-        demos {
-          id
-          code
-          githubRepo
-          deploymentType
-          description
-          name
-          demoName
-          technology {
-            name
+export const getStaticProps = async ({ preview }) => {
+  const {
+    data: { page, ...other },
+  } = await request({
+    query: gql`
+      {
+        demos: _allTemplateDemosMeta {
+          count
+        }
+        plugins: _allPluginsMeta {
+          count
+        }
+        hostingApps: _allHostingAppsMeta {
+          count
+        }
+        enterpriseApps: _allEnterpriseAppsMeta {
+          count
+        }
+        page: integrationsPage {
+          demos {
+            id
+            code
+            githubRepo
+            technology {
+              name
+              logo {
+                url
+              }
+            }
+            screenshot {
+              responsiveImage(
+                imgixParams: { w: 300, h: 200, fit: crop, crop: top }
+              ) {
+                ...imageFields
+              }
+            }
+          }
+          plugins {
+            packageName
+            coverImage {
+              responsiveImage(imgixParams: { w: 300, h: 200, fit: crop }) {
+                ...imageFields
+              }
+            }
+            title
+            description
+          }
+          hostingBuilding {
+            slug
+            title
+            description: shortDescription
             logo {
               url
+              width
+              height
             }
           }
-          category {
-            name
-          }
-          screenshot {
-            responsiveImage(
-              imgixParams: { w: 300, h: 200, fit: crop, crop: top }
-            ) {
-              ...imageFields
+          enterpriseApps {
+            slug
+            title
+            description: shortDescription
+            logo {
+              url
+              width
+              height
             }
-          }
-        }
-        plugins {
-          packageName
-          coverImage {
-            responsiveImage(imgixParams: { w: 300, h: 200, fit: crop }) {
-              ...imageFields
-            }
-          }
-          title
-          description
-        }
-        hostingBuilding {
-          slug
-          title
-          description: shortDescription
-          logo {
-            url
-            width
-            height
-          }
-        }
-        enterpriseApps {
-          slug
-          title
-          description: shortDescription
-          logo {
-            url
-            width
-            height
           }
         }
       }
-    }
 
-    ${imageFields}
-  `,
-);
+      ${imageFields}
+    `,
+  });
+
+  page.demos = await Promise.all(
+    page.demos.map(async starter => {
+      const { body } = await tiny.get({
+        url: `https://raw.githubusercontent.com/${starter.githubRepo}/master/datocms.json`,
+      });
+      return { ...JSON.parse(body), ...starter };
+    }),
+  );
+
+  return {
+    props: {
+      preview: preview || false,
+      page,
+      ...other,
+    },
+  };
+};
 
 const Category = ({ title, description, children, browse }) => (
   <div className={s.category}>

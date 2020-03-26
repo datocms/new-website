@@ -84,7 +84,6 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
           demo {
             code
             githubRepo
-            deploymentType
           }
           content {
             ... on LandingCdnMapBlockRecord {
