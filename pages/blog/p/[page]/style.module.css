@@ -48,3 +48,7 @@
   padding-left: rfs(50px); /* gutter size */
   background-clip: padding-box;
 }
+
+.image {
+  display: block !important;
+}

@@ -19,12 +19,6 @@ export default function Flag({
   const [x] = useState(Math.floor(Math.random() * 30));
   const [y] = useState(Math.floor(Math.random() * 30) + 20);
 
-  // const elementRef = useRef(null);
-
-  // const [dotAnimStyle, setDotAnimStyle] = useSpring(() => ({
-  //   transform: 'perspective(500px) rotateX(0deg) translateZ(-500px)',
-  // }));
-
   const imageEl =
     typeof image === 'string' ? (
       <LazyImage src={`/images/illustrations/${image}.svg`} />
@@ -33,27 +27,6 @@ export default function Flag({
     ) : (
       <span />
     );
-
-  // const [ref, inView] = useInView({
-  //   threshold: 0,
-  //   rootMargin: '300px 300px 300px 300px',
-  //   triggerOnce: true,
-  // });
-
-  // useScrollPosition(
-  //   ({ prevPos, currPos }) => {
-  //     const rotation = clamp((prevPos.y - currPos.y) / 2, -10, 10);
-
-  //     if (inView) {
-  //       setDotAnimStyle({
-  //         transform: `perspective(500px) rotateX(${rotation}deg) translateZ(-500px)`,
-  //       });
-  //     }
-  //   },
-  //   [],
-  //   elementRef,
-  //   false,
-  // );
 
   return (
     <Wrapper>

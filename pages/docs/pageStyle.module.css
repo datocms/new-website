@@ -151,7 +151,7 @@
 
   pre,
   .responsiveImage,
-  video,
+  .videoWrapper,
   iframe,
   img {
     border-radius: 5px;
@@ -159,6 +159,13 @@
     display: inline-block;
     box-shadow: var(--box-shadow);
     width: 100%;
+  }
+
+  .videoWrapper {
+    overflow: hidden;
+    video {
+      display: block;
+    }
   }
 
   pre {

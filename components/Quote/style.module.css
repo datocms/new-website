@@ -38,6 +38,8 @@
 .image {
   border-radius: 400px;
   margin-bottom: 20px;
+  width: 150px;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 
   @media (width > 700px) {
     margin-bottom: 0;

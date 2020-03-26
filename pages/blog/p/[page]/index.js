@@ -108,7 +108,10 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
               >
                 <a className={s.post}>
                   {post.coverImage && (
-                    <Image data={post.coverImage.responsiveImage} />
+                    <Image
+                      className={s.image}
+                      data={post.coverImage.responsiveImage}
+                    />
                   )}
                   <div className={s.postBody}>
                     <h6 className={s.title}>{post.title}</h6>

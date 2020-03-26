@@ -63,12 +63,19 @@
 
   pre,
   .responsiveImage,
-  video,
+  .videoWrapper,
   img {
     border-radius: 5px;
     overflow: hidden;
     display: inline-block;
     box-shadow: var(--box-shadow);
+  }
+
+  .videoWrapper {
+    overflow: hidden;
+    video {
+      display: block;
+    }
   }
 
   pre {

@@ -1,6 +1,6 @@
 .root {
   margin: rfs(150px) 0;
-  --dotBaseUnit: 70px;
+  --dotBaseUnit: 40px;
 }
 
 .root {
@@ -12,7 +12,7 @@
     grid-template-columns: 45% 1fr;
     grid-column-gap: 10%;
     align-items: center;
-    --dotBaseUnit: 120px;
+    --dotBaseUnit: 70px;
   }
 }
 
@@ -23,8 +23,6 @@
 .image {
   margin-bottom: 40px;
   text-align: left;
-  position: relative;
-  z-index: 1;
 
   @media screen and (width > 650px) {
     margin-bottom: 0;
@@ -48,19 +46,19 @@
 }
 
 .neutralDot {
-  content: '';
   position: absolute;
   border-radius: 1000px;
   animation: move 2s infinite alternate ease-in-out;
+  z-index: -1;
 }
 
 @keyframes move {
   0% {
-    transform: perspective(500px) rotateX(-3deg) translateZ(-500px);
+    transform: translateY(-15px);
   }
 
   100% {
-    transform: perspective(500px) rotateX(3deg) translateZ(-500px);
+    transform: translateY(15px);
   }
 }
 

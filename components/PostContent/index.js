@@ -35,16 +35,18 @@ export default function PostContent({ isFallback, content, style, children }) {
                 )}
                 {block._modelApiKey === 'internal_video' && (
                   <figure>
-                    <VideoPlayer
-                      controls
-                      autoPlay={block.autoplay}
-                      loop={block.loop}
-                      src={block.video.video.streamingUrl}
-                      poster={`${
-                        block.video.video.thumbnailUrl
-                      }?time=${block.thumbTimeSeconds ||
-                        block.video.video.duration / 2}`}
-                    />
+                    <div className={s.videoWrapper}>
+                      <VideoPlayer
+                        controls
+                        autoPlay={block.autoplay}
+                        loop={block.loop}
+                        src={block.video.video.streamingUrl}
+                        poster={`${
+                          block.video.video.thumbnailUrl
+                        }?time=${block.thumbTimeSeconds ||
+                          block.video.video.duration / 2}`}
+                      />
+                    </div>
                     {block.video.title && (
                       <figcaption>{block.video.title}</figcaption>
                     )}
