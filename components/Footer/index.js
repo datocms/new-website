@@ -39,7 +39,7 @@ export default function Footer({ noCta }) {
                 </div>
 
                 <div className={s.monoLink}>
-                  <Link href="/">
+                  <Link href="/pricing">
                     <a>Pricing</a>
                   </Link>
                 </div>
