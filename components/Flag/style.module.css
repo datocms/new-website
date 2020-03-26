@@ -23,6 +23,8 @@
 .image {
   margin-bottom: 40px;
   text-align: left;
+  position: relative;
+  z-index: 1;
 
   @media screen and (width > 650px) {
     margin-bottom: 0;
@@ -48,7 +50,6 @@
 .neutralDot {
   content: '';
   position: absolute;
-  z-index: -1;
   border-radius: 1000px;
   animation: move 2s infinite alternate ease-in-out;
 }
