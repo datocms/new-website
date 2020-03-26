@@ -1,51 +1,62 @@
 import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
-import { gqlStaticProps, imageFields } from 'lib/datocms';
+import { request, imageFields } from 'lib/datocms';
 import { Image } from 'react-datocms';
 import Head from 'next/head';
 import gql from 'graphql-tag';
-import { useRouter } from 'next/router';
 import PluginBox from 'components/PluginBox';
 import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';
+import tiny from 'tiny-json-http';
 
-export const getStaticProps = gqlStaticProps(
-  gql`
-    {
-      starters: allTemplateDemos(first: 100) {
-        id
-        code
-        githubRepo
-        deploymentType
-        description
-        name
-        demoName
-        technology {
-          name
-          logo {
-            url
+export const getStaticProps = async ({ preview }) => {
+  const {
+    data: { starters },
+  } = await request({
+    query: gql`
+      {
+        starters: allTemplateDemos(first: 100) {
+          id
+          code
+          githubRepo
+          technology {
+            name
+            logo {
+              url
+            }
           }
-        }
-        category {
-          name
-        }
-        screenshot {
-          responsiveImage(
-            imgixParams: { w: 400, h: 300, fit: crop, crop: top }
-          ) {
-            ...imageFields
+          screenshot {
+            responsiveImage(
+              imgixParams: { w: 400, h: 300, fit: crop, crop: top }
+            ) {
+              ...imageFields
+            }
           }
         }
       }
-    }
 
-    ${imageFields}
-  `,
-);
+      ${imageFields}
+    `,
+  });
+
+  const startersData = await Promise.all(
+    starters.map(async starter => {
+      const { body } = await tiny.get({
+        url: `https://raw.githubusercontent.com/${starter.githubRepo}/master/datocms.json`,
+      });
+      return { ...JSON.parse(body), ...starter };
+    }),
+  );
+
+  return {
+    props: {
+      preview: preview || false,
+      starters: startersData,
+    },
+  };
+};
 
 export default function Plugins({ starters, preview }) {
-  const router = useRouter();
-
   return (
     <Layout preview={preview}>
       <Head>

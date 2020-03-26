@@ -15,11 +15,12 @@ import {
 } from 'components/PluginToolkit';
 import {
   gqlStaticPaths,
-  gqlStaticProps,
+  request,
   seoMetaTagsFields,
   imageFields,
 } from 'lib/datocms';
 import gql from 'graphql-tag';
+import tiny from 'tiny-json-http';
 
 export const getStaticPaths = gqlStaticPaths(
   gql`
@@ -33,55 +34,64 @@ export const getStaticPaths = gqlStaticPaths(
   ({ posts }) => posts.map(p => p.code),
 );
 
-export const getStaticProps = gqlStaticProps(
-  gql`
-    query EnterpriseAppQuery($slug: String!) {
-      page: templateDemo(filter: { code: { eq: $slug } }) {
-        seo: _seoMetaTags {
-          ...seoMetaTagsFields
-        }
-        code
-        githubRepo
-        deploymentType
-        description
-        name
-        demoName
-        demoUrl
-        technology {
-          name
-          logo {
-            url
-            width
-            height
+export const getStaticProps = async ({ params: { slug }, preview }) => {
+  const {
+    data: { page },
+  } = await request({
+    query: gql`
+      query StarterQuery($slug: String!) {
+        page: templateDemo(filter: { code: { eq: $slug } }) {
+          seo: _seoMetaTags {
+            ...seoMetaTagsFields
           }
-        }
-        category {
-          name
+          _firstPublishedAt
           code
-        }
-        screenshot {
-          responsiveImage(
-            imgixParams: { w: 600, h: 500, fit: crop, crop: top }
-          ) {
-            ...imageFields
+          githubRepo
+          technology {
+            name
+            logo {
+              url
+              width
+              height
+            }
           }
-        }
-        backendScreenshot {
-          responsiveImage(imgixParams: { h: 500, fit: crop, crop: top }) {
-            ...imageFields
+          screenshot {
+            responsiveImage(
+              imgixParams: { w: 600, h: 500, fit: crop, crop: top }
+            ) {
+              ...imageFields
+            }
+          }
+          backendScreenshot {
+            responsiveImage(imgixParams: { h: 500, fit: crop, crop: top }) {
+              ...imageFields
+            }
           }
         }
       }
-    }
 
-    ${seoMetaTagsFields}
-    ${imageFields}
-  `,
-);
+      ${seoMetaTagsFields}
+      ${imageFields}
+    `,
+    variables: { slug },
+  });
+
+  const { body } = await tiny.get({
+    url: `https://raw.githubusercontent.com/${page.githubRepo}/master/datocms.json`,
+  });
+
+  return {
+    props: {
+      preview: preview || false,
+      page: { ...JSON.parse(body), ...page },
+    },
+  };
+};
 
 const deployments = {
-  static: ', deployable on Netlify or ZEIT',
-  server: ', deployable on Heroku',
+  static: 'Deployable on Netlify or ZEIT.',
+  server: 'Deployable on Heroku.',
+  zeit: 'Deployable on ZEIT.',
   copyRepo: '',
 };
 
@@ -99,10 +109,7 @@ export default function EnterpriseApp({ page, preview }) {
         description={
           !isFallback && (
             <>
-              {page.category && page.category.name} in {page.technology.name}
-              {page.deploymentType in deployments
-                ? deployments[page.deploymentType]
-                : page.deploymentType}
+              {page.description}. {deployments[page.deploymentType]}
             </>
           )
         }
@@ -121,7 +128,7 @@ export default function EnterpriseApp({ page, preview }) {
           <PluginInfo>
             <Info title="Preview URL" isFallback={isFallback}>
               {!isFallback && (
-                <a href={page.demoUrl} target="_blank">
+                <a href={page.livePreviewUrl} target="_blank">
                   Visit preview website
                 </a>
               )}
@@ -140,7 +147,7 @@ export default function EnterpriseApp({ page, preview }) {
               <NameWithGravatar email="support@datocms.com" name="DatoCMS" />
             </Info>
             <Info title="First released">
-              <FormattedDate date={'2019-03-12'} />
+              <FormattedDate date={page._firstPublishedAt} />
             </Info>
           </PluginInfo>
         }
