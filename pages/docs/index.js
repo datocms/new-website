@@ -117,8 +117,8 @@ export default function Docs({ roots, preview, page }) {
             </a>
           </Link>
           <Link
-            href={docHref('/docs/content-delivery-api/overview')}
-            as="/docs/content-delivery-api/overview"
+            href={docHref('/docs/content-delivery-api')}
+            as="/docs/content-delivery-api"
           >
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>GraphQL API</div>
