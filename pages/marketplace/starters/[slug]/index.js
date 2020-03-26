@@ -146,8 +146,8 @@ export default function EnterpriseApp({ page, preview }) {
             <Info title="Publisher">
               <NameWithGravatar email="support@datocms.com" name="DatoCMS" />
             </Info>
-            <Info title="First released">
-              <FormattedDate date={page._firstPublishedAt} />
+            <Info title="First released" isFallback={isFallback}>
+              {!isFallback && <FormattedDate date={page._firstPublishedAt} />}
             </Info>
           </PluginInfo>
         }
