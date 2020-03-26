@@ -312,7 +312,7 @@ function Homepage({ successStories, preview, page }) {
         />
       </Flag>
 
-      <Numbers title="Why you should use DatoCMS">
+      {/* <Numbers title="Why you should use DatoCMS">
         <NumbersBlock
           // href="href=/customers/[slug]"
           // as="/customers/hashicorp"
@@ -337,7 +337,7 @@ function Homepage({ successStories, preview, page }) {
         >
           Faster loading times
         </NumbersBlock>
-      </Numbers>
+      </Numbers> */}
 
       <PersonasPicker />
 

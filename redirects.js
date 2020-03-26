@@ -873,6 +873,10 @@ module.exports = [
     destination: '/docs/guides/custom-assets-domain',
   },
   {
+    source: '/docs/introduction/custom-assets-domain/',
+    destination: '/docs/guides/custom-assets-domain',
+  },
+  {
     source: '/docs/guides/custom-assets-domain/aws-s3/',
     destination: '/docs/guides/custom-assets-domain/aws-s3',
   },
