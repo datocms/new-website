@@ -13,7 +13,7 @@
 
 .image {
   border-bottom: 1px solid var(--border-color);
-
+  display: block !important;
   img {
     background: white;
   }
@@ -71,4 +71,8 @@
   font-weight: bold;
   letter-spacing: -0.03em;
   margin-bottom: 5px;
+}
+
+.boxImageImage {
+  display: block !important;
 }
