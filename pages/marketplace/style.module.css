@@ -28,7 +28,7 @@
 }
 
 .boxImageImage {
-  width: 100% !important;
+  display: block !important;
 }
 
 .category {

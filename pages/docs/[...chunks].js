@@ -142,6 +142,29 @@ export const getStaticProps = async function({
                   providerUid
                 }
               }
+              ... on DemoRecord {
+                id
+                _modelApiKey
+                demo {
+                  id
+                  name
+                  code
+                  githubRepo
+                  technology {
+                    name
+                    logo {
+                      url
+                    }
+                  }
+                  screenshot {
+                    responsiveImage(
+                      imgixParams: { w: 450, h: 350, fit: crop, crop: top }
+                    ) {
+                      ...imageFields
+                    }
+                  }
+                }
+              }
               ... on InternalVideoRecord {
                 id
                 _modelApiKey

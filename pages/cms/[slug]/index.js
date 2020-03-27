@@ -84,6 +84,13 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
           demo {
             code
             githubRepo
+            screenshot {
+              responsiveImage(
+                imgixParams: { w: 600, h: 400, fit: crop, crop: top }
+              ) {
+                ...imageFields
+              }
+            }
           }
           content {
             ... on LandingCdnMapBlockRecord {
@@ -149,13 +156,6 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
               _modelApiKey
               title
               content(markdown: true)
-              screenshot {
-                responsiveImage(
-                  imgixParams: { w: 600, h: 400, fit: crop, crop: top }
-                ) {
-                  ...imageFields
-                }
-              }
             }
           }
         }
@@ -483,7 +483,7 @@ export default function UseCase({ landing, websites, preview }) {
               {block._modelApiKey === 'try_demo_block' && landing.demo && (
                 <>
                   <TryDemoCta
-                    image={block.screenshot.responsiveImage}
+                    image={landing.demo.screenshot.responsiveImage}
                     title={block.title}
                     windowTitle={`${landing.name} + DatoCMS demo`}
                     description={<SmartMarkdown>{block.content}</SmartMarkdown>}

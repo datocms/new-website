@@ -320,7 +320,7 @@ export default function Pricing({
       <div className={s.plans}>
         <div className={s.plansInner}>
           {plans.map(plan => (
-            <div className={s.planContainer}>
+            <div key={plan.id} className={s.planContainer}>
               <Plan
                 planId={plan.id}
                 name={plan.cmsAttributes.name}

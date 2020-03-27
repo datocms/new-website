@@ -4,7 +4,11 @@ import SmartMarkdown from 'components/SmartMarkdown';
 import ImageFigure from 'components/ImageFigure';
 import Prism from 'components/Prism';
 import defaultStyles from './style.module.css';
-import { Copy, Image } from 'components/FakeContent';
+import { Copy, Image as FakeImage } from 'components/FakeContent';
+import LazyImage from 'components/LazyImage';
+import { Image } from 'react-datocms';
+import UiChrome from 'components/UiChrome';
+import Button from 'components/Button';
 
 export default function PostContent({ isFallback, content, style, children }) {
   const s = style || defaultStyles;
@@ -17,7 +21,7 @@ export default function PostContent({ isFallback, content, style, children }) {
             <Copy lines={4} />
           </div>
           <figure>
-            <Image />
+            <FakeImage />
           </figure>
           <div className={s.text}>
             <Copy lines={3} />
@@ -66,6 +70,36 @@ export default function PostContent({ isFallback, content, style, children }) {
                         dangerouslySetInnerHTML={{
                           __html: block.answer,
                         }}
+                      />
+                    </div>
+                  </div>
+                )}
+                {block._modelApiKey === 'demo' && (
+                  <div className={s.demo}>
+                    <div className={s.demoPreview}>
+                      <UiChrome title={block.demo.name}>
+                        <Image
+                          className={s.demoImage}
+                          data={block.demo.screenshot.responsiveImage}
+                        />
+                      </UiChrome>
+                    </div>
+                    <div className={s.demoCopy}>
+                      <div className={s.demoTitle}>{block.demo.name}</div>
+                      <div className={s.demoDesc}>
+                        Try the full-fledged DatoCMS demo project in minutes.
+                      </div>
+                      <Button
+                        as="a"
+                        target="_blank"
+                        p="small"
+                        href={`https://dashboard.datocms.com/deploy?repo=${block.demo.githubRepo}`}
+                      >
+                        Deploy the demo project
+                      </Button>
+                      <LazyImage
+                        className={s.techLogo}
+                        src={block.demo.technology.logo.url}
                       />
                     </div>
                   </div>
