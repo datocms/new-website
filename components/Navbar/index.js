@@ -348,7 +348,7 @@ export default function Navbar() {
 
             <div className={s.actions}>
               <Link href="/contact">
-                <a className={cn(s.entry, s.entryContact)}>
+                <a className={cn(s.entry, loggedIn && s.entryContact)}>
                   <span>Contact sales</span>
                 </a>
               </Link>
@@ -365,6 +365,12 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
+                  <a
+                    href="https://dashboard.datocms.com/login"
+                    className={cn(s.entry, s.entryContact)}
+                  >
+                    <span>Log in</span>
+                  </a>
                   <Button
                     as="a"
                     p="small"

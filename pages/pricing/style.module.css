@@ -115,19 +115,25 @@
 }
 
 .compare {
-  width: 100%;
   overflow: auto;
   font-size: 0.9em;
+  margin-left: calc(var(--page-margin) * -1);
+  margin-right: calc(var(--page-margin) * -1);
+
+  td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+  }
 
   @media (width > 900px) {
     font-size: 1em;
-  }
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
 
-  td {
-    padding: 20px;
-    border-bottom: 1px solid var(--border-color);
-    &:first-child {
-      padding-left: 0;
+    td {
+      padding: 20px;
     }
   }
 }
@@ -146,8 +152,13 @@
 .quotaName {
   font-weight: bold;
   color: inherit;
-  white-space: nowrap;
+  display: inline-block;
   text-decoration: none;
+  white-space: nowrap;
+
+  span {
+    white-space: normal;
+  }
 
   &:hover {
     text-decoration: underline;
@@ -157,6 +168,7 @@
     display: inline-block;
     vertical-align: middle;
     margin-left: 5px;
+    fill: var(--light-body-color);
   }
 }
 

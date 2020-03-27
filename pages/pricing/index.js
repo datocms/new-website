@@ -170,7 +170,7 @@ const ToggleQuota = ({ name, children }) => {
   return (
     <>
       <a href="#" onClick={toggle} className={s.quotaName}>
-        {name}&nbsp;
+        <span>{name}</span>
         <Down />
       </a>
       {open && <div className={s.quotaDescription}>{children}</div>}
