@@ -330,7 +330,7 @@ export default function DocPage({ docGroup, titleOverride, page }) {
           <Sidebar
             title={docGroup.name}
             entries={
-              docGroup.pages.length > 1
+              docGroup && docGroup.pages.length > 1
                 ? docGroup.pages.map(page => {
                     return {
                       url: `/docs/${docGroup.slug}${
@@ -383,7 +383,9 @@ export default function DocPage({ docGroup, titleOverride, page }) {
     >
       <Head>{!isFallback && renderMetaTags(page._seoMetaTags)}</Head>
       <div className={s.articleContainer}>
-        {docGroup.pages.length > 1 && <Toc content={page && page.content} />}
+        {docGroup && docGroup.pages.length > 1 && (
+          <Toc content={page && page.content} />
+        )}
         <div className={s.article}>
           <div className={s.title}>
             {isFallback ? <Line /> : titleOverride || (page && page.title)}
