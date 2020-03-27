@@ -1,3 +1,11 @@
+.container {
+  @media (width < 1300px) {
+    padding: rfs(50px);
+    padding-left: var(--page-margin);
+    padding-right: var(--page-margin);
+  }
+}
+
 .topGuide,
 .guide {
   margin-bottom: 7px;
@@ -24,7 +32,7 @@
 }
 
 .title {
-  font-size: 50px;
+  font-size: rfs(50px);
   margin: 0;
   margin-bottom: 20px;
   line-height: 1;
@@ -33,9 +41,9 @@
 }
 
 .subtitle {
-  font-size: 20px;
+  font-size: rfs(20px);
   margin: 0;
-  margin-bottom: 50px;
+  margin-bottom: rfs(50px);
   line-height: 1.3;
   color: var(--light-body-color);
 }
@@ -53,10 +61,13 @@
 .useCaseCards {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   list-style: none;
   margin-top: 16px;
+
+  @media (width > 600px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .useCaseCard {

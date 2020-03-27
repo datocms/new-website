@@ -34,8 +34,8 @@
 }
 
 .title {
-  font-size: 50px;
-  margin-bottom: 40px;
+  font-size: rfs(50px);
+  margin-bottom: rfs(40px);
   line-height: 1;
   letter-spacing: -0.03em;
   font-family: var(--font-sans);
@@ -43,11 +43,11 @@
 }
 
 .body {
-  font-size: 18px;
+  font-size: rfs(18px);
   font-family: var(--font-serif);
   line-height: 1.6;
   letter-spacing: -0.02em;
-  padding-bottom: 80px;
+  padding-bottom: rfs(80px);
 
   a {
     color: inherit;
@@ -63,7 +63,7 @@
   h6 {
     font-size: 130%;
     line-height: 1.25;
-    margin: 3em 0 1em;
+    margin: rfs(70px) 0 rfs(23px);
     font-weight: bold;
     font-family: var(--font-sans);
   }
@@ -73,7 +73,7 @@
   }
 
   hr {
-    margin: 60px 0;
+    margin: rfs(60px) 0;
     width: 90%;
     height: 1px;
     background: var(--border-color);
@@ -147,6 +147,7 @@
     font-family: var(--font-mono);
     border-radius: 0.25em;
     font-size: 0.9em;
+    overflow-wrap: break-word;
   }
 
   pre,
@@ -231,32 +232,49 @@
   max-width: 750px;
 }
 
-.articleContainer {
-  display: flex;
+@media (width >= 1300px) {
+  .articleContainer {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .article {
+    min-width: 738px;
+    flex: 1;
+  }
+
+  .sidebar {
+    padding-top: 8px;
+    padding-left: 48px;
+    min-width: 209px;
+  }
+
+  .toc {
+    display: block;
+    position: sticky;
+    top: 48px;
+    height: calc(100vh - 48px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .tocInner {
+    padding-bottom: 40px;
+  }
 }
 
-.article {
-  min-width: 738px;
-  flex: 1;
-}
+@media (width < 1300px) {
+  .article {
+    padding-top: rfs(50px);
+    padding-left: var(--page-margin);
+    padding-right: var(--page-margin);
+    border-bottom: 1px solid var(--border-color);
+  }
 
-.sidebar {
-  padding-top: 8px;
-  padding-left: 48px;
-  min-width: 252px;
-}
-
-.toc {
-  display: block;
-  position: sticky;
-  top: 48px;
-  height: calc(100vh - 48px);
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.tocInner {
-  padding-bottom: 40px;
+  .toc {
+    padding: 30px var(--page-margin);
+    border-bottom: 1px solid var(--border-color);
+  }
 }
 
 .tocTitle {
@@ -273,6 +291,10 @@
   text-decoration: none;
   margin-bottom: 10px;
   font-size: 0.9em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   code {
     font-size: 0.85em;

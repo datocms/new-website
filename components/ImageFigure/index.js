@@ -6,7 +6,7 @@ export default function ImageFigure({ data, imageClassName }) {
       {data.format === 'gif' && (
         <video
           poster={`${data.url}?fm=jpg&fit=max&w=900`}
-          style={{ maxWidth: `${data.width}px` }}
+          style={{ width: `${data.width}px` }}
           autoPlay
           loop
         >

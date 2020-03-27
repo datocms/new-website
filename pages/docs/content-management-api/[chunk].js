@@ -72,11 +72,11 @@ export default function DocPage(props) {
         <>
           <Head>{renderMetaTags(page._seoMetaTags)}</Head>
           <div className={s.articleContainer}>
+            <Toc content={page.content} />
             <div className={s.article}>
               <div className={s.title}>{titleOverride || page.title}</div>
               <PostContent content={page.content} style={s} />
             </div>
-            <Toc content={page.content} />
           </div>
         </>
       )}

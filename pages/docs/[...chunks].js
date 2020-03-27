@@ -321,6 +321,7 @@ export default function DocPage({ docGroup, titleOverride, page }) {
     >
       <Head>{!isFallback && renderMetaTags(page._seoMetaTags)}</Head>
       <div className={s.articleContainer}>
+        <Toc content={page && page.content} />
         <div className={s.article}>
           <div className={s.title}>
             {isFallback ? <Line /> : titleOverride || (page && page.title)}
@@ -331,7 +332,6 @@ export default function DocPage({ docGroup, titleOverride, page }) {
             style={s}
           />
         </div>
-        <Toc content={page && page.content} />
       </div>
     </DocsLayout>
   );

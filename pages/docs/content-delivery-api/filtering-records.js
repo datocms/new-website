@@ -70,6 +70,21 @@ export default function DocPage({
     >
       <Head>{renderMetaTags(page._seoMetaTags)}</Head>
       <div className={s.articleContainer}>
+        <Toc
+          content={page.content}
+          extraEntries={[].concat(
+            [
+              {
+                anchor: 'field-types',
+                label: 'Filters available for field types',
+              },
+            ],
+            Object.keys(fieldTypesInfo).map(name => ({
+              anchor: name,
+              label: `${fieldTypes[name]} fields`,
+            })),
+          )}
+        />
         <div className={s.article}>
           <div className={s.title}>{titleOverride || page.title}</div>
           <PostContent content={page.content} style={s}>
@@ -97,21 +112,6 @@ export default function DocPage({
             ))}
           </PostContent>
         </div>
-        <Toc
-          content={page.content}
-          extraEntries={[].concat(
-            [
-              {
-                anchor: 'field-types',
-                label: 'Filters available for field types',
-              },
-            ],
-            Object.keys(fieldTypesInfo).map(name => ({
-              anchor: name,
-              label: `${fieldTypes[name]} fields`,
-            })),
-          )}
-        />
       </div>
     </DocsLayout>
   );
