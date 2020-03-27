@@ -8,6 +8,7 @@ import { Copy, Image as FakeImage } from 'components/FakeContent';
 import LazyImage from 'components/LazyImage';
 import { Image } from 'react-datocms';
 import UiChrome from 'components/UiChrome';
+import PluginBox from 'components/PluginBox';
 import Button from 'components/Button';
 
 export default function PostContent({ isFallback, content, style, children }) {
@@ -45,10 +46,11 @@ export default function PostContent({ isFallback, content, style, children }) {
                         autoPlay={block.autoplay}
                         loop={block.loop}
                         src={block.video.video.streamingUrl}
-                        poster={`${
-                          block.video.video.thumbnailUrl
-                        }?time=${block.thumbTimeSeconds ||
-                          block.video.video.duration / 2}`}
+                        poster={`${block.video.video.thumbnailUrl}?time=${
+                          block.thumbTimeSeconds !== null
+                            ? block.thumbTimeSeconds
+                            : block.video.video.duration / 2
+                        }`}
                       />
                     </div>
                     {block.video.title && (
@@ -104,10 +106,32 @@ export default function PostContent({ isFallback, content, style, children }) {
                     </div>
                   </div>
                 )}
+                {block._modelApiKey === 'multiple_demos_block' && (
+                  <div className={s.pluginBoxes}>
+                    {block.demos.map(item => (
+                      <div className={s.pluginBoxContainer}>
+                        <PluginBox
+                          description="View this demo »"
+                          image={
+                            <Image
+                              className={s.pluginBoxImage}
+                              data={item.screenshot.responsiveImage}
+                            />
+                          }
+                          title={item.name}
+                          as={`/marketplace/starters/${item.code}`}
+                          href="/marketplace/starters/[slug]"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
                 {block._modelApiKey === 'code_block' && (
                   <Prism
                     code={block.code}
                     language={block.language || 'unknown'}
+                    highlightLines={block.highlightLines}
+                    showLineNumbers={block.showLineNumbers}
                   />
                 )}
                 {block._modelApiKey === 'quote' && (

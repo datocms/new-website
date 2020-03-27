@@ -119,6 +119,14 @@ export const getStaticProps = gqlStaticProps(
             question(markdown: true)
             answer(markdown: true)
           }
+          ... on CodeBlockRecord {
+            id
+            _modelApiKey
+            code
+            language
+            highlightLines
+            showLineNumbers
+          }
         }
         _firstPublishedAt
         author {

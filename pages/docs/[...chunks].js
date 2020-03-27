@@ -165,6 +165,28 @@ export const getStaticProps = async function({
                   }
                 }
               }
+              ... on MultipleDemosBlockRecord {
+                id
+                _modelApiKey
+                demos {
+                  id
+                  name
+                  code
+                  technology {
+                    name
+                    logo {
+                      url
+                    }
+                  }
+                  screenshot {
+                    responsiveImage(
+                      imgixParams: { w: 300, h: 200, fit: crop, crop: top }
+                    ) {
+                      ...imageFields
+                    }
+                  }
+                }
+              }
               ... on InternalVideoRecord {
                 id
                 _modelApiKey
@@ -187,6 +209,8 @@ export const getStaticProps = async function({
                 _modelApiKey
                 code
                 language
+                highlightLines
+                showLineNumbers
               }
             }
           }
@@ -305,23 +329,61 @@ export default function DocPage({ docGroup, titleOverride, page }) {
         docGroup && (
           <Sidebar
             title={docGroup.name}
-            entries={docGroup.pages.map(page => {
-              return {
-                url: `/docs/${docGroup.slug}${
-                  (page.slugOverride || page.page.slug) === 'index'
-                    ? ''
-                    : `/${page.slugOverride || page.page.slug}`
-                }`,
-                label: page.titleOverride || page.page.title,
-              };
-            })}
+            entries={
+              docGroup.pages.length > 1
+                ? docGroup.pages.map(page => {
+                    return {
+                      url: `/docs/${docGroup.slug}${
+                        (page.slugOverride || page.page.slug) === 'index'
+                          ? ''
+                          : `/${page.slugOverride || page.page.slug}`
+                      }`,
+                      label: page.titleOverride || page.page.title,
+                    };
+                  })
+                : page &&
+                  page.content &&
+                  page.content
+                    .filter(b => b._modelApiKey === 'text')
+                    .map(b => {
+                      const dom = htmlToDOM(b.text, domParserOptions);
+
+                      return dom
+                        .filter(
+                          el => el.type === 'tag' && el.name.match(/^h[1-6]$/),
+                        )
+                        .map(heading => {
+                          const innerText = getInnerText([heading]);
+
+                          return {
+                            url: `#${slugify(innerText)}`,
+                            label: domToReact([heading], {
+                              replace: ({ children }) => {
+                                return (
+                                  <span key={innerText}>
+                                    {domToReact(children, {
+                                      replace: ({ type, data }) => {
+                                        if (type === 'text') {
+                                          return <>{emojify(data)}</>;
+                                        }
+                                      },
+                                    })}
+                                  </span>
+                                );
+                              },
+                            }),
+                          };
+                        });
+                    })
+                    .flat()
+            }
           />
         )
       }
     >
       <Head>{!isFallback && renderMetaTags(page._seoMetaTags)}</Head>
       <div className={s.articleContainer}>
-        <Toc content={page && page.content} />
+        {docGroup.pages.length > 1 && <Toc content={page && page.content} />}
         <div className={s.article}>
           <div className={s.title}>
             {isFallback ? <Line /> : titleOverride || (page && page.title)}

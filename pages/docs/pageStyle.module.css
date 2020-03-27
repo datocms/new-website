@@ -338,3 +338,47 @@
     }
   }
 }
+
+.pluginBoxes {
+  display: flex;
+  overflow-x: auto;
+  padding: 40px 0 40px var(--page-margin);
+  max-width: var(--page-width-with-margin);
+  margin-left: calc(var(--page-margin) * -1);
+  margin-right: calc(var(--page-margin) * -1);
+  align-items: stretch;
+  font-family: var(--font-sans);
+}
+
+.pluginBoxContainer {
+  padding-right: 30px;
+  display: flex;
+  align-items: stretch;
+  width: 330px;
+  flex-shrink: 0;
+
+  &:last-child {
+    padding-right: var(--page-margin);
+  }
+
+  > a {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
+}
+
+.pluginBoxImage {
+  display: block !important;
+  img {
+    border-radius: 0 !important;
+  }
+}
+
+.techLogo {
+  box-shadow: none !important;
+  height: 40px;
+  display: inline !important;
+  margin: 0 !important;
+  width: auto !important;
+}

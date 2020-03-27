@@ -1,0 +1,9 @@
+.highlight {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.showLineNumbers:before {
+  content: attr(data-line-number);
+  padding-right: 15px;
+  opacity: 0.5;
+}

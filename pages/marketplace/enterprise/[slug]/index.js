@@ -5,8 +5,6 @@ import Head from 'next/head';
 import PostContent from 'components/PostContent';
 import docPageStyles from 'pages/docs/pageStyle.module.css';
 import Layout from 'components/MarketplaceLayout';
-import Wrapper from 'components/Wrapper';
-import s from 'pages/marketplace/plugins/i/[...chunks]/style.module.css';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import { Image } from 'react-datocms';
