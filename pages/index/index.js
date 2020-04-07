@@ -324,7 +324,7 @@ function Homepage({ successStories, preview, page }) {
         </NumbersBlock>
         <NumbersBlock
           href="href=/customers/[slug]"
-          as="/customers/arduino"
+          as="/customers/wonderland"
           title="6x"
           logo={Wonderland}
         >
