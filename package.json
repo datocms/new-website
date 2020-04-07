@@ -24,7 +24,7 @@
     "clamp": "^1.0.1",
     "classnames": "^2.2.6",
     "country-list": "^2.2.0",
-    "custom-prism-react-renderer": "1.0.5",
+    "custom-prism-react-renderer": "1.0.6",
     "date-fns": "^2.11.1",
     "datocms-search": "^0.1.7",
     "dotenv-load": "^2.0.0",

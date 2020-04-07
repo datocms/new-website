@@ -25,7 +25,7 @@ const Group = ({ title, children }) => {
         className={cn(s.groupTitle, s.groupTitleHandle, {
           [s.handleOpen]: open,
         })}
-        onClick={() => setOpen(x => !x)}
+        onClick={() => setOpen((x) => !x)}
       >
         {title}
       </button>
@@ -85,7 +85,7 @@ export default function Navbar() {
   }, []);
 
   const toggleVisibility = useCallback(() => {
-    setVisible(v => !v);
+    setVisible((v) => !v);
   });
 
   return (
@@ -172,9 +172,9 @@ export default function Navbar() {
                   </Link>
                 </Group>
 
-                {/* <Group title="Customers">
+                <Group title="Customers">
                   <div className={s.onecol}>
-                    <LearnResource
+                    {/* <LearnResource
                       href="/customers/[slug]"
                       as="/customers/arduino"
                       title="Arduino"
@@ -186,23 +186,30 @@ export default function Navbar() {
                       as="/customers/hashicorp"
                       title="Hashicorp"
                       description="How HashiCorp built a reliable and secure editorial workflow"
+                    /> */}
+
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/matter-supply"
+                      title="Matter Supply"
+                      description="How to deliver an Emmy award-campaign in 4 weeks"
                     />
 
                     <LearnResource
                       href="/customers/[slug]"
-                      as="/customers/nike"
-                      title="Nike"
-                      description="How to deliver an award-winning Nike campaign in 4 weeks"
-                    />
-
-                    <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/chilly-s"
+                      as="/customers/chillys"
                       title="Chilly's Bottles"
                       description="How Rotate built a 2M users a month e-commerce for Chilly’s"
                     />
+
+                    <LearnResource
+                      href="/customers/[slug]"
+                      as="/customers/wonderland"
+                      title="Wonderland"
+                      description="How to setup dozens of visually-stunning projects in minutes"
+                    />
                   </div>
-                </Group> */}
+                </Group>
 
                 <Group title="Learn">
                   <div className={s.twocols}>

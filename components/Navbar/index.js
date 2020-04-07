@@ -173,7 +173,7 @@ export default function Navbar() {
                 </Pane>
               </div>
 
-              {/* <div className={s.group}>
+              <div className={s.group}>
                 <div className={s.groupTitle}>
                   <span>Customers</span>
                 </div>
@@ -209,8 +209,8 @@ export default function Navbar() {
                     </div>
                     <div className={s.section}>
                       <div className={s.sectionTitle}>Success stories</div>
-                      <div className={s.grid2}>
-                        <TitleDesc
+                      <div className={s.grid1}>
+                        {/* <TitleDesc
                           href="/customers/[slug]"
                           as="/customers/arduino"
                           title="Arduino"
@@ -222,25 +222,33 @@ export default function Navbar() {
                           as="/customers/hashicorp"
                           title="Hashicorp"
                           description="Reliable and secure editorial workflow"
-                        />
+                        /> */}
+
                         <TitleDesc
                           href="/customers/[slug]"
-                          as="/customers/nike"
-                          title="Matter supply for Nike"
-                          description="Award-winning Nike campaign in 4 weeks"
+                          as="/customers/chillys"
+                          title="Chilly's Bottles"
+                          description="How Rotate built a 2M users a month e-commerce"
                         />
 
                         <TitleDesc
                           href="/customers/[slug]"
-                          as="/customers/chilly-s"
-                          title="Chilly's Bottles"
-                          description="2M users a month e-commerce"
+                          as="/customers/matter-supply"
+                          title="Matter Supply"
+                          description="How to deliver an Emmy award-campaign in 4 weeks"
+                        />
+
+                        <TitleDesc
+                          href="/customers/[slug]"
+                          as="/customers/wonderland"
+                          title="Wonderland"
+                          description="How to setup visually-stunning projects in minutes"
                         />
                       </div>
                     </div>
                   </div>
                 </Pane>
-              </div> */}
+              </div>
 
               <div className={s.group}>
                 <div className={s.groupTitle}>

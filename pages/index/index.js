@@ -28,8 +28,9 @@ import Dropbox from 'public/images/logos/dropbox.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Vmware from 'public/images/logos/vmware.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
-import Nike from 'public/images/logos/nike.svg';
-import Arduino from 'public/images/logos/arduino.svg';
+import Wonderland from 'public/images/logos/wonderland.svg';
+import Chillys from 'public/images/logos/chillys.svg';
+import MatterSupply from 'public/images/logos/matter-supply.svg';
 
 import styles from './style.module.css';
 
@@ -312,36 +313,36 @@ function Homepage({ successStories, preview, page }) {
         />
       </Flag>
 
-      {/* <Numbers title="Why you should use DatoCMS">
+      <Numbers title="Why you should use DatoCMS">
         <NumbersBlock
-          // href="href=/customers/[slug]"
-          // as="/customers/hashicorp"
-          title="-79%"
-          logo={Hashicorp}
+          href="href=/customers/[slug]"
+          as="/customers/chillys"
+          title="+134%"
+          logo={Chillys}
         >
-          In operational costs
+          Mobile conversion rate
         </NumbersBlock>
         <NumbersBlock
-          // href="href=/customers/[slug]"
-          // as="/customers/nike"
-          title="2x"
-          logo={Nike}
-        >
-          Faster time to market
-        </NumbersBlock>
-        <NumbersBlock
-          // href="href=/customers/[slug]"
-          // as="/customers/arduino"
-          title="8x"
-          logo={Arduino}
+          href="href=/customers/[slug]"
+          as="/customers/arduino"
+          title="6x"
+          logo={Wonderland}
         >
           Faster loading times
         </NumbersBlock>
-      </Numbers> */}
+        <NumbersBlock
+          href="href=/customers/[slug]"
+          as="/customers/matter-supply"
+          title="0,9s"
+          logo={MatterSupply}
+        >
+          First contentful paint
+        </NumbersBlock>
+      </Numbers>
 
       <PersonasPicker />
 
-      {successStories && false && <UseCaseExcerpts cases={successStories} />}
+      {successStories && <UseCaseExcerpts cases={successStories} />}
     </Layout>
   );
 }
