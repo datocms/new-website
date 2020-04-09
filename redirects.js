@@ -4,6 +4,10 @@ module.exports = [
     destination: '/:path+',
   },
   {
+    source: '/docs/introduction/custom-assets-domain',
+    destination: '/marketplace/enterprise/aws-s3',
+  },
+  {
     source: '/search',
     destination: '/docs',
   },
