@@ -117,8 +117,8 @@ const limitLabel = (limit) => {
 };
 
 const formatValue = (name, value) => {
-  if (name.endsWith('months')) {
-    return `${value} ${value === 1 ? ' month' : ' months'}`;
+  if (name.endsWith('days')) {
+    return `${value} days`;
   }
 
   if (name.endsWith('seconds')) {
