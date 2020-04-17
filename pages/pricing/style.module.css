@@ -309,3 +309,11 @@
     left: calc(100% - 23px);
   }
 }
+
+.cross {
+  fill: #fa1607;
+}
+
+.check {
+  fill: #16ae3c;
+}

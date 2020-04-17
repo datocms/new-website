@@ -19,6 +19,7 @@ import tiny from 'tiny-json-http';
 import formatNumber from 'utils/formatNumber';
 import prettyBytes from 'utils/prettyBytes';
 import Check from 'public/icons/regular/check.svg';
+import Cross from 'public/icons/regular/times.svg';
 import Down from 'public/icons/regular/chevron-down.svg';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Space from 'components/Space';
@@ -98,11 +99,11 @@ const limitLabel = (limit) => {
   }
 
   if (limit === 'mux_encoding_seconds') {
-    return 'of video input';
+    return 'footage';
   }
 
   if (limit === 'mux_streaming_seconds') {
-    return 'of delivered video';
+    return 'video delivered to visitors';
   }
 
   if (limit === 'items') {
@@ -122,7 +123,11 @@ const formatValue = (name, value) => {
   }
 
   if (name.endsWith('seconds')) {
-    return `${parseInt(value / 60)} minutes`;
+    return value / 60 >= 5000 ? (
+      <>{formatNumber(parseInt(value / 60 / 60))}&nbsp;hrs</>
+    ) : (
+      <>{formatNumber(parseInt(value / 60))}&nbsp;mins</>
+    );
   }
 
   if (name.endsWith('bytes')) {
@@ -136,7 +141,13 @@ const formatValue = (name, value) => {
   return value;
 };
 
-const ValueForLimit = ({ limit, plan, hint }) => {
+const hasUnit = (name) => {
+  return (
+    name.endsWith('days') || name.endsWith('seconds') || name.endsWith('bytes')
+  );
+};
+
+const ValueForLimit = ({ limit, plan, hint, suffix }) => {
   if (plan.attributes && limit in plan.attributes) {
     const value = plan.attributes[limit];
 
@@ -149,23 +160,43 @@ const ValueForLimit = ({ limit, plan, hint }) => {
     }
 
     if (value === true) {
-      return <Check />;
+      return <Check className={s.check} />;
     }
 
-    return <span>{formatValue(limit, value)}</span>;
+    if (value === false) {
+      return <Cross className={s.cross} />;
+    }
+
+    return (
+      <span>
+        {formatValue(limit, value)}
+        {suffix}
+      </span>
+    );
   }
 
   const value = hint.plans[plan.id];
 
   if (value === ':check:') {
-    return <Check />;
+    return <Check className={s.check} />;
   }
 
   if (value === undefined) {
     return <span>Custom</span>;
   }
 
-  return <span>{value}</span>;
+  return (
+    <span>
+      {value ? (
+        <>
+          {value}
+          {suffix}
+        </>
+      ) : (
+        <Cross className={s.cross} />
+      )}
+    </span>
+  );
 };
 
 const ToggleQuota = ({ name, children }) => {
@@ -455,21 +486,35 @@ export default function Pricing({
                               limit={limit}
                               hint={hint}
                               plan={plan}
+                              suffix={
+                                [
+                                  'mux_streaming_seconds',
+                                  'mux_encoding_seconds',
+                                  'api_calls',
+                                  'traffic_bytes',
+                                ].includes(limit) && '/month'
+                              }
                             />
                           </div>
                           {extraPacket && (
                             <div className={s.quotaExtra}>
-                              {extraPacket.amount_per_packet === 1
-                                ? `Extra ${limitLabel(limit)} for €${
-                                    extraPacket.price
-                                  } each`
-                                : `€${extraPacket.price} every ${formatValue(
+                              {extraPacket.amount_per_packet === 1 ? (
+                                <>
+                                  Extra {limitLabel(limit)} for €
+                                  {extraPacket.price} each
+                                </>
+                              ) : (
+                                <>
+                                  €{extraPacket.price} every{' '}
+                                  {formatValue(
                                     limit,
                                     extraPacket.amount_per_packet,
-                                  )} extra ${limitLabel(limit).replace(
-                                    /_/g,
-                                    ' ',
-                                  )}`}
+                                  )}
+                                  {hasUnit(limit) ? ' of ' : ' '}
+                                  additional{' '}
+                                  {limitLabel(limit).replace(/_/g, ' ')}
+                                </>
+                              )}
                             </div>
                           )}
                         </td>
