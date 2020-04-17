@@ -80,7 +80,7 @@ const Plan = ({
   </>
 );
 
-const limitLabel = limit => {
+const limitLabel = (limit) => {
   if (limit === 'item_types') {
     return 'models';
   }
@@ -104,6 +104,15 @@ const limitLabel = limit => {
   if (limit === 'mux_streaming_seconds') {
     return 'of delivered video';
   }
+
+  if (limit === 'items') {
+    return 'records';
+  }
+
+  if (limit === 'uploadable_bytes') {
+    return 'storage';
+  }
+
   return limit;
 };
 
@@ -163,9 +172,9 @@ const ValueForLimit = ({ limit, plan, hint }) => {
 
 const ToggleQuota = ({ name, children }) => {
   const [open, setOpen] = useState(false);
-  const toggle = useCallback(e => {
+  const toggle = useCallback((e) => {
     e.preventDefault();
-    setOpen(s => !s);
+    setOpen((s) => !s);
   });
   return (
     <>
@@ -244,15 +253,15 @@ export const getStaticProps = async ({ preview }) => {
     props: {
       ...others,
       preview: preview || false,
-      plans: plans.map(datoPlan => ({
-        ...(datoPlans.data.find(dp => {
+      plans: plans.map((datoPlan) => ({
+        ...(datoPlans.data.find((dp) => {
           return dp.id === datoPlan.apiId;
         }) || { id: 'enterprise' }),
         cmsAttributes: datoPlan,
       })),
       hints: hints
         .filter(
-          hint =>
+          (hint) =>
             ![
               'roles',
               'plugins',
@@ -319,7 +328,7 @@ export default function Pricing({
 
       <div className={s.plans}>
         <div className={s.plansInner}>
-          {plans.map(plan => (
+          {plans.map((plan) => (
             <div key={plan.id} className={s.planContainer}>
               <Plan
                 planId={plan.id}
@@ -417,7 +426,7 @@ export default function Pricing({
               <tbody>
                 <tr>
                   <td />
-                  {plans.map(plan => (
+                  {plans.map((plan) => (
                     <td key={plan.id} className={s.comparePlan}>
                       {plan.cmsAttributes.name}
                     </td>
@@ -430,7 +439,7 @@ export default function Pricing({
                         {hint.description}
                       </ToggleQuota>
                     </td>
-                    {plans.map(plan => {
+                    {plans.map((plan) => {
                       const extraPacket =
                         plan.attributes &&
                         ((plan.attributes.extra_packets &&
@@ -480,7 +489,7 @@ export default function Pricing({
         <Wrapper>
           <InterstitialTitle>Frequently asked questions</InterstitialTitle>
           <div className={s.faqs}>
-            {faqs.map(faq => (
+            {faqs.map((faq) => (
               <div key={faq.id} className={s.faq}>
                 <div className={s.faqQ}>{faq.question}</div>
                 <div className={s.faqA}>
