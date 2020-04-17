@@ -122,9 +122,7 @@ const formatValue = (name, value) => {
   }
 
   if (name.endsWith('seconds')) {
-    return value > 60 * 60
-      ? `${parseInt(value / 60 / 60)} hours`
-      : `${parseInt(value / 60)} minutes`;
+    return `${parseInt(value / 60)} minutes`;
   }
 
   if (name.endsWith('bytes')) {
