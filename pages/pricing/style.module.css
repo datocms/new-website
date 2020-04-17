@@ -123,6 +123,7 @@
   td {
     padding: 12px;
     border-bottom: 1px solid var(--border-color);
+    height: 4em;
   }
 
   @media (width > 900px) {
@@ -134,6 +135,7 @@
 
     td {
       padding: 20px;
+      height: 6em;
     }
   }
 }
