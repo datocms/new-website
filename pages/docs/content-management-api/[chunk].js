@@ -62,7 +62,17 @@ export default function DocPage(props) {
                   label: page.titleOverride || page.page.title,
                 };
               }),
-              result.toc,
+              result.toc.map((entry) => {
+                return {
+                  ...entry,
+                  children: entry.children.map((resourceEntry) => {
+                    return {
+                      ...resourceEntry,
+                      children: [],
+                    };
+                  }),
+                };
+              }),
             )}
           />
         )
