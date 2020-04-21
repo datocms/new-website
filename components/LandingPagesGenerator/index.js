@@ -4,8 +4,16 @@ import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 
-const shuffle = array => {
-  return [...array].sort(() => Math.random() - 0.5);
+const shuffle = (array) => {
+  const currentId = array.map((i) => i.name).join('-');
+  do {
+    const shuffled = [...array].sort(() => Math.random() - 0.5);
+    const shuffledId = shuffled.map((i) => i.name).join('-');
+
+    if (shuffledId !== currentId) {
+      return shuffled;
+    }
+  } while (true);
 };
 
 const blocks = [
@@ -31,32 +39,26 @@ export default function UseModularBlocks() {
   useEffect(() => void setInterval(() => set(shuffle), 800), []);
 
   let height = 0;
-  const transitions = useTransition(
-    rows.map(data => ({ ...data, y: (height += data.height) - data.height })),
-    d => d.name,
-    {
-      from: { height: 0, opacity: 0 },
-      leave: { height: 0, opacity: 0 },
-      enter: ({ y, height }) => ({ y, height, opacity: 1 }),
-      update: ({ y, height }) => ({ y, height }),
-    },
-  );
+
+  rows.forEach((row) => {
+    row.y = height;
+    height += row.height;
+  });
+
+  const transitions = useTransition(rows, {
+    from: { height: 0, opacity: 0 },
+    leave: { height: 0, opacity: 0 },
+    enter: ({ y, height }) => ({ y, height, opacity: 1 }),
+    update: ({ y, height }) => ({ y, height }),
+  });
 
   return (
     <UIChrome>
       <div className={s.body}>
         <div className={s.title}>Acme Inc.</div>
         <div className={s.list} style={{ height }}>
-          {transitions.map(({ item, props: { y, ...rest }, key }, index) => (
-            <animated.div
-              key={key}
-              className={s.card}
-              style={{
-                zIndex: blocks.length - index,
-                transform: y.interpolate(y => `translate3d(0,${y}px,0)`),
-                ...rest,
-              }}
-            >
+          {transitions((style, item) => (
+            <animated.div className={s.card} style={style}>
               <div className={s.cell}>
                 <div
                   className={s.details}
