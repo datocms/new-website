@@ -11,7 +11,9 @@ export default function schemaExampleFor(schema, pagination = true) {
     return schemaExampleFor(schema.anyOf[0]);
   }
 
-  const type = Array.isArray(schema.type) ? schema.type[0] : schema.type;
+  const type = Array.isArray(schema.type)
+    ? schema.type.find((t) => t !== 'null') || schema.type[0]
+    : schema.type;
 
   if (type === 'object') {
     if (schema.oneOf) {
@@ -31,11 +33,20 @@ export default function schemaExampleFor(schema, pagination = true) {
       });
     }, {});
   } else if (type === 'array') {
+    if (!schema.items) {
+      return [];
+    }
     if (schema.items.oneOf) {
-      return schema.items.oneOf.map(s => schemaExampleFor(s));
+      return schema.items.oneOf.map((s) => schemaExampleFor(s));
     }
     return [schemaExampleFor(schema.items)];
   } else if (type === 'string') {
+    if (schema.format === 'date-time') {
+      return '2020-04-21T07:57:11.124Z';
+    }
+    if (schema.enum) {
+      return schema.enum[0];
+    }
     return '';
   } else if (type === 'boolean') {
     return true;

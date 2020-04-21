@@ -36,7 +36,7 @@ export const getStaticProps = async ({ params: { resource }, ...other }) => {
 
 export default function DocPage({ docGroup, cma, preview, resourceId }) {
   const result = useMemo(() => cma && parse(cma), [cma]);
-  const url = `/docs/content-management-api/resources/${resourceId}/`;
+  const url = `/docs/content-management-api/resources/${resourceId}`;
 
   return (
     <DocsLayout
@@ -72,7 +72,12 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
               <div className={s.title}>{result.schema.title}</div>
               <div className={s.body}>
                 <ReactMarkdown source={result.schema.description} />
-                <Schema title="Object payload" showId schema={result.schema} />
+                <Schema
+                  title="Object payload"
+                  showId
+                  hideRequired
+                  schema={result.schema}
+                />
 
                 <h4>Available endpoints</h4>
                 <ul>

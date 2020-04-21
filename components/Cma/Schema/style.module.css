@@ -29,7 +29,21 @@
   font-size: 0.95em;
 }
 
-.type {
+.description,
+.deprecatedDescription {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.deprecatedTitle {
+  font-family: var(--font-sans);
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.deprecatedDescription {
+  color: var(--light-body-color);
 }
 
 .required {

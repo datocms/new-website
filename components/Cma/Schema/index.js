@@ -2,18 +2,24 @@ import { useState } from 'react';
 import s from './style.module.css';
 import { LanguageConsumer } from 'components/LanguagePicker';
 import humps from 'humps';
+import Link from 'next/link';
+import docHref from 'utils/docHref';
+import ReactMarkdown from 'react-markdown';
 
 const types = (t) => (Array.isArray(t) ? t : [t]);
 
-function Properties({ prefix, schema, level }) {
+function Properties({ prefix, schema, level, hideRequired }) {
   const required = schema.required || [];
-
+  const deprecated = Object.entries(schema.properties).filter(
+    ([name, schema]) => !required.includes(name) && schema.deprecated,
+  );
   const content = (
     <>
       {required.map((name) => (
         <JsonSchema
           key={name}
           required
+          hideRequired={hideRequired}
           name={name}
           prefix={prefix}
           schema={schema.properties[name]}
@@ -21,20 +27,60 @@ function Properties({ prefix, schema, level }) {
         />
       ))}
       {Object.entries(schema.properties)
-        .filter(([name]) => !required.includes(name))
+        .filter(
+          ([name, schema]) => !required.includes(name) && !schema.deprecated,
+        )
         .map(([name, schema]) => (
           <JsonSchema
             key={name}
+            hideRequired={hideRequired}
             name={name}
             prefix={prefix}
             schema={schema}
             level={level + 1}
           />
         ))}
+
+      {deprecated.length > 0 && (
+        <>
+          <div className={s.deprecatedTitle}>Deprecated</div>
+          {deprecated.map(([name, schema]) => (
+            <JsonSchema
+              key={name}
+              hideRequired={hideRequired}
+              name={name}
+              prefix={prefix}
+              schema={schema}
+              level={level + 1}
+            />
+          ))}
+        </>
+      )}
     </>
   );
 
   return level >= 1 ? <div className={s.properties}>{content}</div> : content;
+}
+
+function Enum({ values, description }) {
+  return (
+    <div className={s.properties}>
+      {values
+        .filter((x) => !!x)
+        .map((value) => (
+          <div key={value} className={s.schema}>
+            <div className={s.header}>
+              <span className={s.name}>{value}</span>
+            </div>
+            {description && description[value] && (
+              <div className={s.description}>
+                <ReactMarkdown source={description[value]} />
+              </div>
+            )}
+          </div>
+        ))}
+    </div>
+  );
 }
 
 function Type({ schema }) {
@@ -46,6 +92,14 @@ function Type({ schema }) {
     <span className={s.types}>
       {types(schema.type).map((type, i) => {
         let realType = type;
+
+        if (type === 'string' && schema.format) {
+          realType = schema.format;
+        }
+
+        if (type === 'string' && schema.enum) {
+          realType = 'enum';
+        }
 
         if (realType === 'array') {
           realType = schema.items
@@ -64,18 +118,16 @@ function Type({ schema }) {
   );
 }
 
-function Relationship({ name, schema, required }) {
+function Relationship({ name, schema, required, hideRequired }) {
   const dataSchema = schema.properties.data;
 
   const isArray = dataSchema.type === 'array';
   const resourceSchema = isArray ? dataSchema.items : dataSchema;
 
   const relationshipTypes = resourceSchema.type
-    ? [`${resourceSchema.properties.type.example}.id`]
+    ? [resourceSchema.properties.type.example]
     : resourceSchema.anyOf.map((s) =>
-        types(s.type).includes('null')
-          ? 'null'
-          : `${s.properties.type.example}.id`,
+        types(s.type).includes('null') ? 'null' : s.properties.type.example,
       );
 
   return (
@@ -92,22 +144,34 @@ function Relationship({ name, schema, required }) {
             {language === 'http' && <span className={s.prefix}>.data.id</span>}
             &nbsp;&nbsp;
             <span className={s.types}>
-              {relationshipTypes.map((type, i) => [
-                i > 0 && ', ',
-                <span className={s.type} key={type}>
-                  {isArray ? `array[${type}]` : type}
-                </span>,
-              ])}
+              {relationshipTypes.map((type, i) => {
+                const url = `/docs/content-management-api/resources/${type}`;
+
+                return [
+                  i > 0 && ', ',
+                  <Link href={docHref(url)} as={url} key={type}>
+                    <a className={s.type}>
+                      {isArray ? `array[${type}.id]` : `${type}.id`}
+                    </a>
+                  </Link>,
+                ];
+              })}
             </span>
-            &nbsp;&nbsp;
-            {required ? (
-              <span className={s.required}>Required</span>
-            ) : (
-              <span className={s.optional}>Optional</span>
+            {!hideRequired && (
+              <>
+                &nbsp;&nbsp;
+                {required ? (
+                  <span className={s.required}>Required</span>
+                ) : (
+                  <span className={s.optional}>Optional</span>
+                )}
+              </>
             )}
           </div>
           {schema.description && (
-            <div className={s.description}>{schema.description}</div>
+            <div className={s.description}>
+              <ReactMarkdown source={schema.description} />
+            </div>
           )}
         </div>
       )}
@@ -115,7 +179,7 @@ function Relationship({ name, schema, required }) {
   );
 }
 
-function Relationships({ relationships }) {
+function Relationships({ relationships, hideRequired }) {
   const required = relationships.required || [];
 
   return (
@@ -124,6 +188,7 @@ function Relationships({ relationships }) {
         <Relationship
           key={name}
           required
+          hideRequired={hideRequired}
           name={name}
           schema={relationships.properties[name]}
         />
@@ -131,14 +196,30 @@ function Relationships({ relationships }) {
       {Object.entries(relationships.properties)
         .filter(([name]) => !required.includes(name))
         .map(([name, schema]) => (
-          <Relationship key={name} name={name} schema={schema} />
+          <Relationship
+            key={name}
+            name={name}
+            schema={schema}
+            hideRequired={hideRequired}
+          />
         ))}
     </>
   );
 }
 
-function JsonSchema({ level = 0, name, prefix, required, schema }) {
+function JsonSchema({
+  level = 0,
+  name,
+  prefix,
+  required,
+  hideRequired,
+  schema,
+}) {
   const [open, setOpen] = useState(false);
+
+  if (name === 'appeareance' || name === 'appearance') {
+    debugger;
+  }
 
   return (
     <LanguageConsumer>
@@ -152,16 +233,33 @@ function JsonSchema({ level = 0, name, prefix, required, schema }) {
               </span>
               &nbsp;&nbsp;
               <Type schema={schema} />
-              &nbsp;&nbsp;
-              {required ? (
-                <span className={s.required}>Required</span>
-              ) : (
-                <span className={s.optional}>Optional</span>
+              {schema.deprecated && (
+                <>
+                  &nbsp;&nbsp;
+                  <span className={s.required}>Deprecated</span>
+                </>
+              )}
+              {!hideRequired && (
+                <>
+                  &nbsp;&nbsp;
+                  {required ? (
+                    <span className={s.required}>Required</span>
+                  ) : (
+                    <span className={s.optional}>Optional</span>
+                  )}
+                </>
               )}
             </div>
           )}
           {schema.description && (
-            <div className={s.description}>{schema.description}</div>
+            <div className={s.description}>
+              <ReactMarkdown source={schema.description} />
+            </div>
+          )}
+          {schema.deprecated && (
+            <div className={s.deprecatedDescription}>
+              <ReactMarkdown source={schema.deprecated} />
+            </div>
           )}
           {types(schema.type).includes('object') &&
             schema.properties &&
@@ -176,6 +274,18 @@ function JsonSchema({ level = 0, name, prefix, required, schema }) {
               <button onClick={() => setOpen(true)}>
                 Show child parameters
               </button>
+            ))}
+          {schema.enum &&
+            (open ? (
+              <>
+                <button onClick={() => setOpen(false)}>Hide enum values</button>
+                <Enum
+                  values={schema.enum}
+                  description={schema.enumDescription}
+                />
+              </>
+            ) : (
+              <button onClick={() => setOpen(true)}>Show enum values</button>
             ))}
           {types(schema.type).includes('array') &&
             types(schema.items).includes('object') &&
@@ -213,7 +323,7 @@ export function HrefSchema({ schema }) {
   );
 }
 
-export function Schema({ title, schema, showId }) {
+export function Schema({ title, schema, showId, hideRequired }) {
   return (
     <LanguageConsumer>
       {(language) => (
@@ -224,8 +334,6 @@ export function Schema({ title, schema, showId }) {
               <div className={s.header}>
                 <span className={s.name}>id</span>&nbsp;&nbsp;
                 <Type schema={schema.properties.id} />
-                &nbsp;&nbsp;
-                <span className={s.required}>Required</span>
               </div>
               <div className={s.description}>ID of the resource</div>
             </div>
@@ -235,8 +343,6 @@ export function Schema({ title, schema, showId }) {
               <div className={s.header}>
                 <span className={s.name}>type</span>&nbsp;&nbsp;
                 <Type schema={schema.properties.type} />
-                &nbsp;&nbsp;
-                <span className={s.required}>Required</span>
               </div>
               <div className={s.description}>
                 Must be exactly <code>"{schema.properties.type.example}"</code>
@@ -248,11 +354,23 @@ export function Schema({ title, schema, showId }) {
               <Properties
                 level={0}
                 prefix={language === 'http' ? 'attributes.' : null}
+                hideRequired={hideRequired}
                 schema={schema.properties.attributes}
               />
             )}
+          {schema.properties.meta && schema.properties.meta.properties && (
+            <Properties
+              level={0}
+              prefix="meta."
+              hideRequired={hideRequired}
+              schema={schema.properties.meta}
+            />
+          )}
           {schema.properties.relationships && (
-            <Relationships relationships={schema.properties.relationships} />
+            <Relationships
+              relationships={schema.properties.relationships}
+              hideRequired={hideRequired}
+            />
           )}
         </>
       )}

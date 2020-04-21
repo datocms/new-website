@@ -41,6 +41,7 @@ function example(resource, link, allPages = false) {
     const attrs = {
       ...id,
       ...(data.attributes || {}),
+      ...(data.meta ? { meta: data.meta } : {}),
       ...Object.entries(data.relationships || {}).reduce(
         (acc, [name, value]) => {
           acc[name] = value.data ? value.data.id : null;
@@ -62,7 +63,7 @@ function example(resource, link, allPages = false) {
     }
   }
 
-  if (link.schema) {
+  if (link.schema && (link.method === 'PUT' || link.method === 'POST')) {
     const example = schemaExampleFor(link.schema, !allPages);
 
     if (example.data) {
@@ -87,15 +88,19 @@ function example(resource, link, allPages = false) {
   let output;
 
   if (link.targetSchema) {
-    const example = schemaExampleFor(link.targetSchema);
+    const example = schemaExampleFor(link.jobSchema || link.targetSchema);
     const variable = resource.id;
 
     if (Array.isArray(example.data)) {
-      output = JSON.stringify(deserialize(example.data[0], true), null, 2)
-        .replace(/": /g, '" => ')
-        .replace(/null/g, 'nil');
+      output =
+        example.data.length > 0 &&
+        JSON.stringify(deserialize(example.data[0], true), null, 2)
+          .replace(/": /g, '" => ')
+          .replace(/null/g, 'nil');
 
-      returnCode = `${call}.each do |${variable}|
+      returnCode =
+        example.data.length > 0 &&
+        `${call}.each do |${variable}|
   puts ${variable}.inspect
 end`;
     } else {
@@ -114,8 +119,7 @@ puts ${variable}.inspect
 client = Dato::Site::Client.new("YOUR-API-KEY")
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
       precode.length > 0 ? '\n' : ''
-    }
-${returnCode}
+    }${returnCode ? `\n${returnCode}` : ''}
 ${
   link.targetSchema && link.targetSchema.properties.meta
     ? '\n\n# if you want to fetch all the pages with just one call:\n\n' +
@@ -139,7 +143,7 @@ function renderExample(example, requestCode, responseCode) {
             code: (example.request || requestCode).trim(),
             language: 'ruby',
           },
-          responseCode && {
+          (example.response || responseCode) && {
             title: 'Returned output:',
             code: (example.response || responseCode).trim(),
             language: 'ruby',

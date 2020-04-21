@@ -39,6 +39,7 @@ function example(resource, link, allPages = false) {
     const attrs = {
       ...id,
       ...(humps.camelizeKeys(data.attributes) || {}),
+      ...(data.meta ? { meta: data.meta } : {}),
       ...Object.entries(data.relationships || {}).reduce(
         (acc, [name, value]) => {
           acc[humps.camelize(name)] = value.data ? value.data.id : null;
@@ -50,7 +51,7 @@ function example(resource, link, allPages = false) {
     return attrs;
   };
 
-  if (link.schema) {
+  if (link.schema && (link.method === 'PUT' || link.method === 'POST')) {
     const example = schemaExampleFor(link.schema, !allPages);
 
     if (example.data) {
@@ -69,16 +70,20 @@ function example(resource, link, allPages = false) {
 
   let returnCode, output;
 
-  if (link.targetSchema) {
-    const example = schemaExampleFor(link.targetSchema);
+  if (link.targetSchema || link) {
+    const example = schemaExampleFor(link.jobSchema || link.targetSchema);
 
     if (Array.isArray(example.data)) {
       const singleVariable = humps.camelize(resource.id);
       const multipleVariable = humps.camelize(pluralize(resource.id));
 
-      output = JSON.stringify(deserialize(example.data[0], true), null, 2);
+      output =
+        example.data.length > 0 &&
+        JSON.stringify(deserialize(example.data[0], true), null, 2);
 
-      returnCode = `.then((${multipleVariable}) => {
+      returnCode =
+        example.data.length > 0 &&
+        `.then((${multipleVariable}) => {
     ${multipleVariable}.forEach((${singleVariable}) => {
       console.log(${singleVariable});
     });
@@ -109,8 +114,9 @@ const client = new SiteClient('YOUR-API-KEY');
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
       precode.length > 0 ? '\n' : ''
     }
-client.${namespace}.${action}(${params.join(', ')})
-${returnCode}
+client.${namespace}.${action}(${params.join(', ')})${
+      returnCode ? `\n${returnCode}` : ''
+    }
 .catch((error) => {
   console.error(error);
 });
@@ -140,12 +146,12 @@ function renderExample(example, requestCode, responseCode) {
             language: 'javascript',
             code: example.request || requestCode,
           },
-          {
+          (example.response || responseCode) && {
             title: 'Returned output:',
             language: 'javascript',
             code: example.response || responseCode,
           },
-        ]}
+        ].filter((x) => x)}
       />
     </div>
   );
@@ -154,7 +160,7 @@ function renderExample(example, requestCode, responseCode) {
 export default function JsExample({ resource, link }) {
   const { code, output } = example(resource, link);
 
-  const outputWithRun = `> node example.js\n\n${output}`;
+  const outputWithRun = output && `> node example.js\n\n${output}`;
 
   if (link.examples && link.examples.js) {
     return link.examples.js.map((example) =>
