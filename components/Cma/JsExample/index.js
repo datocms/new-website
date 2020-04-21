@@ -28,8 +28,10 @@ function example(resource, link, allPages = false) {
     match = regexp.exec(link.href);
   }
 
+  const resourceId = resource.definitions.identity.example || '43';
+
   placeholders.forEach((placeholder) => {
-    precode.push(`const ${humps.camelize(placeholder)}Id = '43';`);
+    precode.push(`const ${humps.camelize(placeholder)}Id = '${resourceId}';`);
     params.push(`${humps.camelize(placeholder)}Id`);
   });
 
@@ -70,7 +72,7 @@ function example(resource, link, allPages = false) {
 
   let returnCode, output;
 
-  if (link.targetSchema || link) {
+  if (link.targetSchema || link.jobSchema) {
     const example = schemaExampleFor(link.jobSchema || link.targetSchema);
 
     if (Array.isArray(example.data)) {

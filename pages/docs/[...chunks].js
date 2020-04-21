@@ -238,11 +238,30 @@ export const getStaticProps = async function ({
 };
 
 const SidebarEntry = ({ url, level, label, children }) => {
+  if (!url && level === 0) {
+    return (
+      <>
+        <div className={s.subgroupName}>{label}</div>
+        {children && children.length > 0 && (
+          <div className={cn(s.pageChildren, s[`pageChildrenLevel${level}`])}>
+            {children.map((entry) => (
+              <SidebarEntry key={entry.url} level={level + 1} {...entry} />
+            ))}
+          </div>
+        )}
+      </>
+    );
+  }
+
   return (
     <div>
-      <ActiveLink href={docHref(url)} as={url} activeClassName={s.activePage}>
-        <a className={cn(s.page, s[`page-level${level}`])}>{label}</a>
-      </ActiveLink>
+      {url ? (
+        <ActiveLink href={docHref(url)} as={url} activeClassName={s.activePage}>
+          <a className={cn(s.page, s[`page-level${level}`])}>{label}</a>
+        </ActiveLink>
+      ) : (
+        <span className={cn(s.page, s[`page-level${level}`])}>{label}</span>
+      )}
       {children && children.length > 0 && (
         <div className={cn(s.pageChildren, s[`pageChildrenLevel${level}`])}>
           {children.map((entry) => (
@@ -266,8 +285,10 @@ export const Sidebar = ({ title, entries }) => {
       <div className={s.groupName}>{title}</div>
 
       {entries.map((entry) => (
-        <SidebarEntry key={entry.url} level={0} {...entry} />
+        <SidebarEntry key={entry.label} level={0} {...entry} />
       ))}
+
+      <div style={{ height: '80px' }} />
     </>
   );
 };

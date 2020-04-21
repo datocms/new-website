@@ -63,3 +63,28 @@
   font-size: 0.95em;
   color: #555;
 }
+
+.button {
+  background: white;
+  color: var(--light-body-color);
+  border: 1px solid var(--border-color);
+  margin-top: 10px;
+  padding: 5px 13px;
+  font-family: var(--font-sans);
+  border-radius: 3px;
+  font-size: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 0.95em;
+
+  svg {
+    margin-right: 5px;
+    fill: var(--extra-light-body-color);
+  }
+
+  &:hover {
+    color: var(--base-body-color);
+  }
+}

@@ -23,8 +23,10 @@ function example(resource, link, allPages = false) {
     match = regexp.exec(link.href);
   }
 
+  const resourceId = resource.definitions.identity.example || '43';
+
   placeholders.forEach((placeholder) => {
-    precode.push(`${placeholder}_id = "43"`);
+    precode.push(`${placeholder}_id = "${resourceId}"`);
     params.push(`${placeholder}_id`);
   });
 
@@ -87,7 +89,7 @@ function example(resource, link, allPages = false) {
   let returnCode = '';
   let output;
 
-  if (link.targetSchema) {
+  if (link.targetSchema || link.jobSchema) {
     const example = schemaExampleFor(link.jobSchema || link.targetSchema);
     const variable = resource.id;
 

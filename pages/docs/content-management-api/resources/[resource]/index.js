@@ -12,6 +12,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Schema } from 'components/Cma/Schema';
 import ReactMarkdown from 'react-markdown';
+import { useRouter } from 'next/router';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -19,7 +20,10 @@ export const getStaticPaths = async () => {
 
   return {
     fallback: true,
-    paths: toc.map(({ slug }) => ({ params: { resource: slug } })),
+    paths: toc
+      .map(({ children }) => children)
+      .flat(1)
+      .map(({ slug }) => ({ params: { resource: slug } })),
   };
 };
 
@@ -35,6 +39,7 @@ export const getStaticProps = async ({ params: { resource }, ...other }) => {
 };
 
 export default function DocPage({ docGroup, cma, preview, resourceId }) {
+  const router = useRouter();
   const result = useMemo(() => cma && parse(cma), [cma]);
   const url = `/docs/content-management-api/resources/${resourceId}`;
 
@@ -56,7 +61,20 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
                   label: page.titleOverride || page.page.title,
                 };
               }),
-              result.toc,
+              result.toc.map((entry) => {
+                return {
+                  ...entry,
+                  children: entry.children.map((resourceEntry) => {
+                    return {
+                      ...resourceEntry,
+                      children:
+                        router.query.resource === resourceEntry.slug
+                          ? resourceEntry.children
+                          : [],
+                    };
+                  }),
+                };
+              }),
             )}
           />
         )
@@ -79,19 +97,23 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
                   schema={result.schema}
                 />
 
-                <h4>Available endpoints</h4>
-                <ul>
-                  {result.schema.links.map((link) => (
-                    <li key={link.rel}>
-                      <Link
-                        href={docHref(`${url}/${link.rel}`)}
-                        as={`${url}/${link.rel}`}
-                      >
-                        <a>{link.title}</a>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                {result.schema.links.length > 0 && (
+                  <>
+                    <h4>Available endpoints</h4>
+                    <ul>
+                      {result.schema.links.map((link) => (
+                        <li key={link.rel}>
+                          <Link
+                            href={docHref(`${url}/${link.rel}`)}
+                            as={`${url}/${link.rel}`}
+                          >
+                            <a>{link.title}</a>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
             </div>
           </div>

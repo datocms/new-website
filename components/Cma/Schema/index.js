@@ -5,8 +5,20 @@ import humps from 'humps';
 import Link from 'next/link';
 import docHref from 'utils/docHref';
 import ReactMarkdown from 'react-markdown';
+import PlusIcon from 'public/icons/regular/plus.svg';
+import TimesIcon from 'public/icons/regular/times.svg';
 
 const types = (t) => (Array.isArray(t) ? t : [t]);
+
+const Button = ({ children, label, open, onToggle }) => (
+  <>
+    <button className={s.button} onClick={() => onToggle((open) => !open)}>
+      {open ? <TimesIcon /> : <PlusIcon />}
+      {open ? `Hide ${label}` : `Show ${label}`}
+    </button>
+    {open && children}
+  </>
+);
 
 function Properties({ prefix, schema, level, hideRequired }) {
   const required = schema.required || [];
@@ -261,47 +273,28 @@ function JsonSchema({
               <ReactMarkdown source={schema.deprecated} />
             </div>
           )}
-          {types(schema.type).includes('object') &&
-            schema.properties &&
-            (open ? (
-              <>
-                <button onClick={() => setOpen(false)}>
-                  Hide child parameters
-                </button>
-                <Properties schema={schema} level={level} />
-              </>
-            ) : (
-              <button onClick={() => setOpen(true)}>
-                Show child parameters
-              </button>
-            ))}
-          {schema.enum &&
-            (open ? (
-              <>
-                <button onClick={() => setOpen(false)}>Hide enum values</button>
+          {types(schema.type).includes('object') && schema.properties && (
+            <Button open={open} label="child parameters" onToggle={setOpen}>
+              <Properties schema={schema} level={level} />
+            </Button>
+          )}
+          {schema.enum && (
+            <>
+              <Button open={open} onToggle={setOpen} label="enum values">
                 <Enum
                   values={schema.enum}
                   description={schema.enumDescription}
                 />
-              </>
-            ) : (
-              <button onClick={() => setOpen(true)}>Show enum values</button>
-            ))}
+              </Button>
+            </>
+          )}
           {types(schema.type).includes('array') &&
             types(schema.items).includes('object') &&
-            schema.items.properties &&
-            (open ? (
-              <>
-                <button onClick={() => setOpen(false)}>
-                  Hide items parameters
-                </button>
+            schema.items.properties && (
+              <Button open={open} onToggle={setOpen} label="items parameters">
                 <Properties schema={schema.items} level={level} />
-              </>
-            ) : (
-              <button onClick={() => setOpen(true)}>
-                Show items parameters
-              </button>
-            ))}
+              </Button>
+            )}
         </div>
       )}
     </LanguageConsumer>

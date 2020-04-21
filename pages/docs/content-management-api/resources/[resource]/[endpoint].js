@@ -16,6 +16,7 @@ import ReactMarkdown from 'react-markdown';
 import { HrefSchema, Schema } from 'components/Cma/Schema';
 import TargetSchema from 'components/Cma/TargetSchema';
 import { LanguageConsumer } from 'components/LanguagePicker';
+import { useRouter } from 'next/router';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -24,6 +25,8 @@ export const getStaticPaths = async () => {
   return {
     fallback: true,
     paths: toc
+      .map(({ children }) => children)
+      .flat(1)
       .map(({ slug, children }) =>
         children.map((child) => ({
           params: { resource: slug, endpoint: child.slug },
@@ -50,6 +53,7 @@ export const getStaticProps = async ({
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 
 export default function DocPage({ docGroup, cma, preview, endpoint }) {
+  const router = useRouter();
   const result = useMemo(() => cma && parse(cma), [cma]);
   const link =
     result && result.schema.links.find((link) => link.rel === endpoint);
@@ -73,7 +77,20 @@ export default function DocPage({ docGroup, cma, preview, endpoint }) {
                   label: page.titleOverride || page.page.title,
                 };
               }),
-              result.toc,
+              result.toc.map((entry) => {
+                return {
+                  ...entry,
+                  children: entry.children.map((resourceEntry) => {
+                    return {
+                      ...resourceEntry,
+                      children:
+                        router.query.resource === resourceEntry.slug
+                          ? resourceEntry.children
+                          : [],
+                    };
+                  }),
+                };
+              }),
             )}
           />
         )
