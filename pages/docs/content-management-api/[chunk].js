@@ -2,7 +2,7 @@ import DocsLayout from 'components/DocsLayout';
 import {
   Sidebar,
   Toc,
-  getStaticProps as docPageUnstableGetStaticProps,
+  getStaticProps as docPageGetStaticProps,
 } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
@@ -27,11 +27,11 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'chunk',
-  ({ root }) => root.pages.map(p => p.page.slug),
+  ({ root }) => root.pages.map((p) => p.page.slug),
 );
 
 export const getStaticProps = async ({ params: { chunk }, ...other }) => {
-  const { props } = await docPageUnstableGetStaticProps({
+  const { props } = await docPageGetStaticProps({
     ...other,
     params: { chunks: ['content-management-api', chunk] },
   });
@@ -54,7 +54,7 @@ export default function DocPage(props) {
           <Sidebar
             title={docGroup.name}
             entries={[].concat(
-              docGroup.pages.map(page => {
+              docGroup.pages.map((page) => {
                 return {
                   url: `/docs/${docGroup.slug}${
                     page.page.slug === 'index' ? '' : `/${page.page.slug}`

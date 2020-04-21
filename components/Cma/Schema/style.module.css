@@ -1,0 +1,51 @@
+.schema {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.properties {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.prefix {
+  font-family: var(--font-mono);
+  color: #555;
+  font-size: 0.95em;
+}
+
+.name {
+  font-family: var(--font-mono);
+  font-weight: bold;
+  color: #555;
+  font-size: 0.95em;
+}
+
+.type {
+}
+
+.required {
+  color: var(--accent-color);
+  text-tranform: uppercase;
+  font-size: 0.95em;
+}
+
+.optional {
+  color: var(--light-body-color);
+  font-size: 0.95em;
+}
+
+.type {
+  background: var(--light-bg-color);
+  padding: 0.05em 0.3em;
+  font-size: 0.95em;
+  color: #555;
+}

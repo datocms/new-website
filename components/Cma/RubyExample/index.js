@@ -23,27 +23,30 @@ function example(resource, link, allPages = false) {
     match = regexp.exec(link.href);
   }
 
-  placeholders.forEach(placeholder => {
+  placeholders.forEach((placeholder) => {
     precode.push(`${placeholder}_id = "43"`);
     params.push(`${placeholder}_id`);
   });
 
-  const fix = string => string.replace(/": /g, '" => ').replace(/null/g, 'nil');
+  const fix = (string) =>
+    string
+      .replace(/}$/, '')
+      .replace(/^{/, '')
+      .replace(/"([^"]+)": /g, '$1: ')
+      .replace(/null/g, 'nil');
 
   const deserialize = (data, withId = false) => {
     const id = withId ? { id: data.id } : {};
 
     const attrs = {
       ...id,
-      ...(sortObject(data.attributes) || {}),
-      ...sortObject(
-        Object.entries(data.relationships || {}).reduce(
-          (acc, [name, value]) => {
-            acc[name] = value.data ? value.data.id : null;
-            return acc;
-          },
-          {},
-        ),
+      ...(data.attributes || {}),
+      ...Object.entries(data.relationships || {}).reduce(
+        (acc, [name, value]) => {
+          acc[name] = value.data ? value.data.id : null;
+          return acc;
+        },
+        {},
       ),
     };
 
@@ -67,7 +70,7 @@ function example(resource, link, allPages = false) {
     }
   }
 
-  const namespace = resource.links.find(l => l.rel === 'instances')
+  const namespace = resource.links.find((l) => l.rel === 'instances')
     ? pluralize(resource.id)
     : resource.id;
 
@@ -141,7 +144,7 @@ function renderExample(example, requestCode, responseCode) {
             code: (example.response || responseCode).trim(),
             language: 'ruby',
           },
-        ].filter(x => !!x)}
+        ].filter((x) => !!x)}
       />
     </div>
   );
@@ -153,7 +156,7 @@ export default function RubyExample({ resource, link }) {
   const outputWithRun = `> ruby example.rb\n\n${output}`;
 
   if (link.examples && link.examples.ruby) {
-    return link.examples.ruby.map(example =>
+    return link.examples.ruby.map((example) =>
       renderExample(example, code, outputWithRun),
     );
   }

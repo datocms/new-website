@@ -18,7 +18,6 @@
 
 .chunkTitle {
   font-family: var(--font-sans);
-  padding-left: 30px;
   margin-bottom: 20px;
   color: var(--light-body-color);
   font-size: 0.9em;

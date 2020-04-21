@@ -5,23 +5,38 @@ import { stringify } from 'flatted/cjs';
 
 const defaultLinksOrder = ['instances', 'self', 'create', 'update', 'destroy'];
 
-const buildToc = schema => {
+const buildEndpointToc = (parentSlug, link) => {
+  return {
+    slug: link.rel,
+    url: `/docs/content-management-api/resources/${parentSlug}/${link.rel}`,
+    label: link.title,
+    position: defaultLinksOrder.includes(link.rel)
+      ? defaultLinksOrder.indexOf(link.rel)
+      : 99,
+    children: [],
+  };
+};
+
+const buildToc = (schema) => {
   return Object.entries(schema.properties)
     .map(([resource, resourceSchema]) => {
+      const slug = resource.replace(/\_/g, '-');
+      const endpoints = resourceSchema.links.filter((l) => !l.private);
+
+      if (endpoints.length === 0) {
+        return null;
+      }
+
       return {
-        slug: resource.replace(/\_/g, '-'),
-        url: `/docs/content-management-api/resources/${resource.replace(
-          /\_/g,
-          '-',
-        )}`,
+        slug,
+        url: `/docs/content-management-api/resources/${slug}`,
         label: resourceSchema.title,
-        position: resourceSchema.position || 99,
-        links: resourceSchema.links.filter(l => !l.private),
+        children: endpoints
+          .map(buildEndpointToc.bind(null, slug))
+          .sort(sortBy('position')),
       };
     })
-    .filter(resource => resource.links.length > 0)
-    .sort(sortBy('position'))
-    .map(({ url, slug, label }) => ({ url, slug, label }));
+    .filter((x) => x);
 };
 
 const normalizeSchema = (resource, resourceSchema) => ({
@@ -31,8 +46,8 @@ const normalizeSchema = (resource, resourceSchema) => ({
     ? resourceSchema.definitions.attributes.properties
     : {},
   links: resourceSchema.links
-    .filter(l => !l.private)
-    .map(link => ({
+    .filter((l) => !l.private)
+    .map((link) => ({
       ...link,
       position: defaultLinksOrder.includes(link.rel)
         ? defaultLinksOrder.indexOf(link.rel)
@@ -41,7 +56,7 @@ const normalizeSchema = (resource, resourceSchema) => ({
     .sort(sortBy('position')),
 });
 
-export default async function buildCmaResources(resource) {
+export default async function buildCmaResources(resource, endpoint) {
   const { body: unreferencedSchema } = await tiny.get({
     url: 'https://site-api.datocms.com/docs/site-api-hyperschema.json',
   });
@@ -57,8 +72,12 @@ export default async function buildCmaResources(resource) {
   }
 
   const result = {
-    toc: buildToc(schema),
+    toc: buildToc(schema, resourceId),
     schema: normalizeSchema(resourceId, schema.properties[resourceId]),
+    jobRetrieveLink: normalizeSchema(
+      'job_result',
+      schema.properties['job_result'],
+    ).links[0],
   };
 
   return stringify(result);

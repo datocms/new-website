@@ -13,6 +13,9 @@ const methods = {
   self: 'find',
 };
 
+const fix = (string) =>
+  string.replace(/"([^[\-"]+)": /g, '$1: ').replace(/"/g, "'");
+
 function example(resource, link, allPages = false) {
   let params = [];
   let precode = [];
@@ -25,7 +28,7 @@ function example(resource, link, allPages = false) {
     match = regexp.exec(link.href);
   }
 
-  placeholders.forEach(placeholder => {
+  placeholders.forEach((placeholder) => {
     precode.push(`const ${humps.camelize(placeholder)}Id = '43';`);
     params.push(`${humps.camelize(placeholder)}Id`);
   });
@@ -35,34 +38,32 @@ function example(resource, link, allPages = false) {
 
     const attrs = {
       ...id,
-      ...sortObject(humps.camelizeKeys(data.attributes) || {}),
-      ...sortObject(
-        Object.entries(data.relationships || {}).reduce(
-          (acc, [name, value]) => {
-            acc[humps.camelize(name)] = value.data ? value.data.id : null;
-            return acc;
-          },
-          {},
-        ),
+      ...(humps.camelizeKeys(data.attributes) || {}),
+      ...Object.entries(data.relationships || {}).reduce(
+        (acc, [name, value]) => {
+          acc[humps.camelize(name)] = value.data ? value.data.id : null;
+          return acc;
+        },
+        {},
       ),
     };
     return attrs;
   };
 
-  if (link.hrefSchema) {
-    const example = schemaExampleFor(link.hrefSchema, !allPages);
-    params.push(JSON.stringify(example, null, 2));
-
-    if (allPages && link.targetSchema && link.targetSchema.properties.meta) {
-      params.push(JSON.stringify({ allPages: true }, null, 2));
-    }
-  }
-
   if (link.schema) {
     const example = schemaExampleFor(link.schema, !allPages);
 
     if (example.data) {
-      params.push(JSON.stringify(deserialize(example.data), null, 2));
+      params.push(fix(JSON.stringify(deserialize(example.data), null, 2)));
+    }
+  }
+
+  if (link.hrefSchema) {
+    const example = schemaExampleFor(link.hrefSchema, !allPages);
+    params.push(fix(JSON.stringify(example, null, 2)));
+
+    if (allPages && link.targetSchema && link.targetSchema.properties.meta) {
+      params.push(fix(JSON.stringify({ allPages: true }, null, 2)));
     }
   }
 
@@ -77,7 +78,7 @@ function example(resource, link, allPages = false) {
 
       output = JSON.stringify(deserialize(example.data[0], true), null, 2);
 
-      returnCode = `  .then((${multipleVariable}) => {
+      returnCode = `.then((${multipleVariable}) => {
     ${multipleVariable}.forEach((${singleVariable}) => {
       console.log(${singleVariable});
     });
@@ -86,17 +87,17 @@ function example(resource, link, allPages = false) {
       const variable = humps.camelize(resource.id);
       output = JSON.stringify(deserialize(example.data, true), null, 2);
 
-      returnCode = `  .then((${variable}) => {
-    console.log(${variable});
-  })`;
+      returnCode = `.then((${variable}) => {
+  console.log(${variable});
+})`;
     }
   } else {
-    returnCode = `  .then(() => {
-    console.log('Done!');
-  })`;
+    returnCode = `.then(() => {
+  console.log('Done!');
+})`;
   }
 
-  const namespace = resource.links.find(l => l.rel === 'instances')
+  const namespace = resource.links.find((l) => l.rel === 'instances')
     ? humps.camelize(pluralize(resource.id))
     : humps.camelize(resource.id);
 
@@ -104,15 +105,15 @@ function example(resource, link, allPages = false) {
 
   if (!allPages) {
     const code = `const SiteClient = require('datocms-client').SiteClient;
-const client = new SiteClient("YOUR-API-KEY");
+const client = new SiteClient('YOUR-API-KEY');
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
       precode.length > 0 ? '\n' : ''
     }
 client.${namespace}.${action}(${params.join(', ')})
 ${returnCode}
-  .catch((error) => {
-    console.log(error);
-  });
+.catch((error) => {
+  console.error(error);
+});
 ${
   link.targetSchema && link.targetSchema.properties.meta
     ? '\n\n// if you want to fetch all the pages with just one call:\n' +
@@ -156,7 +157,7 @@ export default function JsExample({ resource, link }) {
   const outputWithRun = `> node example.js\n\n${output}`;
 
   if (link.examples && link.examples.js) {
-    return link.examples.js.map(example =>
+    return link.examples.js.map((example) =>
       renderExample(example, code, outputWithRun),
     );
   }

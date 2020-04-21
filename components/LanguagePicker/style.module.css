@@ -6,21 +6,17 @@
   align-items: center;
   background: white;
   z-index: 2;
-  margin-top: 60px;
   border-bottom: 1px solid var(--border-color);
-  border-top: 1px solid var(--border-color);
   top: -1px;
   font-family: var(--font-sans);
   font-size: 0.8em;
 
   @media (width < 1300px) {
-    margin-left: calc(var(--page-margin) * -1);
-    margin-right: calc(var(--page-margin) * -1);
     padding-left: var(--page-margin);
   }
+
   @media (width >= 1300px) {
-    margin-left: -64px;
-    padding-left: 64px;
+    padding-left: 33px;
   }
 }
 

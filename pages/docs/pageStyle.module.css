@@ -9,6 +9,17 @@
   }
 }
 
+.pageLevel1 {
+  font-size: 0.9em;
+}
+
+.pageChildren {
+  border-left: 1px solid var(--border-color);
+  padding-left: 15px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+
 .activePage {
   color: var(--accent-color);
 }

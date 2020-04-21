@@ -5,7 +5,7 @@ import RequestResponse from '../RequestResponse';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 
-const toParam = schema => {
+const toParam = (schema) => {
   const params = (
     schema.required || Object.keys(schema.properties).slice(0, 2)
   ).reduce((acc, k) => {
@@ -25,11 +25,14 @@ function renderExample(example, resource) {
 
   let requestCode =
     request && request.method
-      ? `${request.method} ${request.url.replace(regexp, ':$1_id') +
-          params} HTTP/1.1`
-      : `${resource.method} ${'https://site-api.datocms.com' +
+      ? `${request.method} ${
+          request.url.replace(regexp, ':$1_id') + params
+        } HTTP/1.1`
+      : `${resource.method} ${
+          'https://site-api.datocms.com' +
           resource.href.replace(regexp, ':$1_id') +
-          params} HTTP/1.1`;
+          params
+        } HTTP/1.1`;
 
   requestCode += '\n\n';
 
@@ -50,7 +53,7 @@ function renderExample(example, resource) {
                 'Content-Type: application/json',
               ],
           )
-          .filter(x => x)
+          .filter((x) => x)
           .join('\n');
 
   if (
@@ -69,8 +72,9 @@ function renderExample(example, resource) {
   let responseCode = '';
 
   if (resource.targetSchema) {
-    responseCode = `HTTP/1.1 ${(response && response.statusCode) ||
-      '200'} ${(response && response.statusText) || 'OK'}`;
+    responseCode = `HTTP/1.1 ${(response && response.statusCode) || '200'} ${
+      (response && response.statusText) || 'OK'
+    }`;
 
     responseCode += '\n\n';
 
@@ -111,7 +115,7 @@ function renderExample(example, resource) {
             code: responseCode,
             language: 'http',
           },
-        ].filter(x => !!x)}
+        ].filter((x) => !!x)}
       />
     </div>
   );
@@ -119,10 +123,28 @@ function renderExample(example, resource) {
 
 export default class HttpExample extends React.Component {
   render() {
-    const { link } = this.props;
+    const { link, jobRetrieveLink } = this.props;
 
     if (link.examples && link.examples.http) {
-      return link.examples.http.map(example => renderExample(example, link));
+      return link.examples.http.map((example) => renderExample(example, link));
+    }
+
+    if (link.jobSchema) {
+      const response = schemaExampleFor(jobRetrieveLink.targetSchema);
+      response.data.attributes.payload = schemaExampleFor(link.jobSchema);
+
+      return (
+        <>
+          {renderExample({ title: 'Step 1: Perform the request' }, link)}
+          {renderExample(
+            {
+              title: 'Step 2: Poll for the job result',
+              response: { body: JSON.stringify(response, null, 2) },
+            },
+            jobRetrieveLink,
+          )}
+        </>
+      );
     }
 
     return renderExample({}, link);

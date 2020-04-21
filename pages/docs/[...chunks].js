@@ -17,6 +17,7 @@ import docHref from 'utils/docHref';
 import emojify from 'utils/emojify';
 import { useRouter } from 'next/router';
 import { Line } from 'components/FakeContent';
+import cn from 'classnames';
 
 var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 
@@ -40,18 +41,18 @@ export const getStaticPaths = gqlStaticPaths(
   'chunks',
   ({ roots }) =>
     roots
-      .map(root =>
+      .map((root) =>
         root.children
-          .filter(c => c.slug !== 'content-management-api')
-          .map(sub =>
+          .filter((c) => c.slug !== 'content-management-api')
+          .map((sub) =>
             (sub.slug === 'content-delivery-api'
               ? sub.pages.filter(
-                  page =>
+                  (page) =>
                     (page.slugOverride || page.page.slug) !==
                     'filtering-records',
                 )
               : sub.pages
-            ).map(page =>
+            ).map((page) =>
               (page.slugOverride || page.page.slug) === 'index'
                 ? [sub.slug]
                 : [sub.slug, page.slugOverride || page.page.slug],
@@ -61,11 +62,11 @@ export const getStaticPaths = gqlStaticPaths(
       .flat(2),
 );
 
-export const getStaticProps = async function({
+export const getStaticProps = async function ({
   params: { chunks: rawChunks },
   preview,
 }) {
-  const chunks = rawChunks.map(chunk => chunk.split(/\//g)).flat();
+  const chunks = rawChunks.map((chunk) => chunk.split(/\//g)).flat();
   const groupSlug = chunks.length >= 2 ? chunks[chunks.length - 2] : chunks[0];
   const pageSlug = chunks.length >= 2 ? chunks[chunks.length - 1] : 'index';
 
@@ -96,7 +97,7 @@ export const getStaticProps = async function({
   const page =
     docGroup &&
     docGroup.pages.find(
-      page => (page.slugOverride || page.page.slug) === pageSlug,
+      (page) => (page.slugOverride || page.page.slug) === pageSlug,
     );
   const titleOverride = page ? page.titleOverride : null;
   const pageId = page && page.page.id;
@@ -236,6 +237,23 @@ export const getStaticProps = async function({
   };
 };
 
+const SidebarEntry = ({ url, level, label, children }) => {
+  return (
+    <div>
+      <ActiveLink href={docHref(url)} as={url} activeClassName={s.activePage}>
+        <a className={cn(s.page, s[`page-level${level}`])}>{label}</a>
+      </ActiveLink>
+      {children && children.length > 0 && (
+        <div className={cn(s.pageChildren, s[`pageChildrenLevel${level}`])}>
+          {children.map((entry) => (
+            <SidebarEntry key={entry.url} level={level + 1} {...entry} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const Sidebar = ({ title, entries }) => {
   return (
     <>
@@ -247,15 +265,8 @@ export const Sidebar = ({ title, entries }) => {
 
       <div className={s.groupName}>{title}</div>
 
-      {entries.map(({ url, label }) => (
-        <ActiveLink
-          href={docHref(url)}
-          as={url}
-          activeClassName={s.activePage}
-          key={url}
-        >
-          <a className={s.page}>{label}</a>
-        </ActiveLink>
+      {entries.map((entry) => (
+        <SidebarEntry key={entry.url} level={0} {...entry} />
       ))}
     </>
   );
@@ -265,13 +276,13 @@ export function Toc({ content, extraEntries: extra }) {
   const contentEntries =
     content &&
     content
-      .filter(b => b._modelApiKey === 'text')
-      .map(b => {
+      .filter((b) => b._modelApiKey === 'text')
+      .map((b) => {
         const dom = htmlToDOM(b.text, domParserOptions);
 
         return dom
-          .filter(el => el.type === 'tag' && el.name.match(/^h[1-6]$/))
-          .map(heading =>
+          .filter((el) => el.type === 'tag' && el.name.match(/^h[1-6]$/))
+          .map((heading) =>
             domToReact([heading], {
               replace: ({ children }) => {
                 const innerText = getInnerText(children);
@@ -331,7 +342,7 @@ export default function DocPage({ docGroup, titleOverride, page }) {
             title={docGroup.name}
             entries={
               docGroup && docGroup.pages.length > 1
-                ? docGroup.pages.map(page => {
+                ? docGroup.pages.map((page) => {
                     return {
                       url: `/docs/${docGroup.slug}${
                         (page.slugOverride || page.page.slug) === 'index'
@@ -344,15 +355,16 @@ export default function DocPage({ docGroup, titleOverride, page }) {
                 : page &&
                   page.content &&
                   page.content
-                    .filter(b => b._modelApiKey === 'text')
-                    .map(b => {
+                    .filter((b) => b._modelApiKey === 'text')
+                    .map((b) => {
                       const dom = htmlToDOM(b.text, domParserOptions);
 
                       return dom
                         .filter(
-                          el => el.type === 'tag' && el.name.match(/^h[1-6]$/),
+                          (el) =>
+                            el.type === 'tag' && el.name.match(/^h[1-6]$/),
                         )
-                        .map(heading => {
+                        .map((heading) => {
                           const innerText = getInnerText([heading]);
 
                           return {
