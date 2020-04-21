@@ -1,3 +1,3 @@
 # DatoCMS Marketing website
 
-Please feel free to take a look :)
+Please feel free to take a look! :)
