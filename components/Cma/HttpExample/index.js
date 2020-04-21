@@ -19,7 +19,7 @@ const toParam = (schema) => {
 };
 
 function renderExample(example, resource) {
-  const { request, response, title } = example;
+  const { request, response, title, description } = example;
 
   const params = resource.hrefSchema ? toParam(resource.hrefSchema) : '';
 
@@ -105,19 +105,18 @@ function renderExample(example, resource) {
   }
 
   return (
-    <div>
-      {title && <h6>{title}</h6>}
-      <RequestResponse
-        chunks={[
-          { title: 'HTTP Request:', code: requestCode, language: 'http' },
-          responseCode && {
-            title: 'HTTP Response:',
-            code: responseCode,
-            language: 'http',
-          },
-        ].filter((x) => !!x)}
-      />
-    </div>
+    <RequestResponse
+      title={title}
+      description={description}
+      chunks={[
+        { title: 'HTTP Request:', code: requestCode, language: 'http' },
+        responseCode && {
+          title: 'HTTP Response:',
+          code: responseCode,
+          language: 'http',
+        },
+      ].filter((x) => !!x)}
+    />
   );
 }
 

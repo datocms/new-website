@@ -119,6 +119,7 @@ export default function DocPage({ docGroup, cma, preview, endpoint }) {
                 )}
                 {link && <TargetSchema link={link} />}
 
+                <h4>Examples</h4>
                 <LanguageConsumer>
                   {(language) => (
                     <>

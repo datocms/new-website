@@ -1,8 +1,8 @@
 import React from 'react';
-import sortObject from 'sort-object';
 import pluralize from 'pluralize';
 import schemaExampleFor from 'utils/schemaExampleFor';
 import RequestResponse from '../RequestResponse';
+import ReactMarkdown from 'react-markdown';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 
@@ -137,8 +137,9 @@ ${
 function renderExample(example, requestCode, responseCode) {
   return (
     <div>
-      {example.title && <h6>{example.title}</h6>}
       <RequestResponse
+        title={example.title}
+        description={example.description}
         chunks={[
           {
             title: 'Example code:',

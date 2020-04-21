@@ -1,6 +1,5 @@
 import React from 'react';
 import humps from 'humps';
-import sortObject from 'sort-object';
 import pluralize from 'pluralize';
 import RequestResponse from '../RequestResponse';
 
@@ -140,8 +139,9 @@ ${returnCode}`;
 function renderExample(example, requestCode, responseCode) {
   return (
     <div>
-      {example.title && <h6>{example.title}</h6>}
       <RequestResponse
+        title={example.title}
+        description={example.description}
         chunks={[
           {
             title: 'Example code:',

@@ -1,8 +1,13 @@
 import Prism from 'components/Prism';
+import ReactMarkdown from 'react-markdown';
+
 import s from './style.module.css';
 
-const RequestResponse = ({ chunks }) => (
+const RequestResponse = ({ title, description, chunks }) => (
   <div className={s.reqRes}>
+    {title && <h6 className={s.title}>{title}</h6>}
+    {description && <ReactMarkdown source={description} />}
+
     {chunks.map((chunk) => (
       <div className={s.chunk} key={chunk.title}>
         <div className={s.chunkTitle}>{chunk.title}</div>
