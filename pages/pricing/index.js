@@ -86,8 +86,8 @@ const limitLabel = (limit) => {
     return 'models';
   }
 
-  if (limit === 'deployment_environments') {
-    return 'environments';
+  if (limit === 'build_triggers') {
+    return 'build triggers';
   }
 
   if (limit === 'traffic_bytes') {
@@ -291,12 +291,9 @@ export const getStaticProps = async ({ preview }) => {
       hints: hints
         .filter(
           (hint) =>
-            ![
-              'roles',
-              'plugins',
-              'access_tokens',
-              'deployment_environments',
-            ].includes(hint.apiId),
+            !['roles', 'plugins', 'access_tokens', 'build_triggers'].includes(
+              hint.apiId,
+            ),
         )
         .reduce((acc, hint) => {
           acc[hint.apiId] = {

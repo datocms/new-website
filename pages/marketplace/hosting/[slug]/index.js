@@ -36,7 +36,7 @@ export default function EnterpriseApp({ page, preview }) {
         description={!isFallback && page.description}
         gallery={
           !isFallback &&
-          page.gallery.map(image => (
+          page.gallery.map((image) => (
             <Image key={image.id} explicitWidth data={image.responsiveImage} />
           ))
         }
@@ -60,7 +60,7 @@ export default function EnterpriseApp({ page, preview }) {
         actions={
           <Button
             as="a"
-            href="https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/deployment_environments/new"
+            href="https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/build_triggers/new"
             target="_blank"
           >
             Install this app
