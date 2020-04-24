@@ -16,7 +16,7 @@ export default function TitleIllustrationStripWithContent({
         </div>
         <Wrapper>
           <div className={s.body}>
-            <div className={s.title}>{title}</div>
+            <h2 className={s.title}>{title}</h2>
             <div className={s.subtitle}>{subtitle}</div>
           </div>
         </Wrapper>

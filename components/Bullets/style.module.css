@@ -1,3 +1,7 @@
+.root {
+  padding: 0;
+}
+
 .bullet {
   margin-bottom: 12px;
   align-items: center;

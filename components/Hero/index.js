@@ -6,7 +6,7 @@ export default function Hero({ kicker, title, subtitle, children }) {
     <Wrapper>
       <div className={styles.root}>
         {kicker && <div className={styles.kicker}>{kicker}</div>}
-        <div className={styles.title}>{title}</div>
+        <h1 className={styles.title}>{title}</h1>
         {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
         {children && <div className={styles.children}>{children}</div>}
       </div>

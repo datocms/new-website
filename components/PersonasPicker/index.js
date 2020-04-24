@@ -12,7 +12,7 @@ export default function PersonasPicker() {
           <div className={s.introSub}>
             A technology investment for your whole company
           </div>
-          <div className={s.introTitle}>Empower every member of your team</div>
+          <h2 className={s.introTitle}>Empower every member of your team</h2>
           <div className={s.introBody}>
             An end-to-end solution for businesses who create and distribute
             content to websites and other digital experiences at scale.
@@ -24,7 +24,7 @@ export default function PersonasPicker() {
               <div className={s.personasImage}>
                 <LazyImage src={`/images/illustrations/developers-2.svg`} />
               </div>
-              <div className={s.personasTitle}>For developers</div>
+              <h6 className={s.personasTitle}>For developers</h6>
               <div className={s.personasBody}>
                 Your business needs a reliable and future-proof infrastructure
               </div>
@@ -39,7 +39,7 @@ export default function PersonasPicker() {
               <div className={s.personasImage}>
                 <LazyImage src={`/images/illustrations/marketers.svg`} />
               </div>
-              <div className={s.personasTitle}>For digital marketers</div>
+              <h6 className={s.personasTitle}>For digital marketers</h6>
               <div className={s.personasBody}>
                 Solve complex strategic goals with technology that empowers your
                 team
@@ -55,7 +55,7 @@ export default function PersonasPicker() {
               <div className={s.personasImage}>
                 <LazyImage src={`/images/illustrations/content-editors2.svg`} />
               </div>
-              <div className={s.personasTitle}>For content editors</div>
+              <h6 className={s.personasTitle}>For content editors</h6>
               <div className={s.personasBody}>
                 Automate SEO and manage content on multiple sites without filing
                 an IT ticket

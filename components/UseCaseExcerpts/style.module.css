@@ -15,6 +15,8 @@
 }
 
 .title {
+  margin: 0;
+  font-weight: normal;
   font-family: var(--font-sans);
   font-weight: bold;
   font-size: rfs(25px);
@@ -46,6 +48,8 @@
 }
 
 .mainStoryTitle {
+  margin: 0;
+  font-weight: normal;
   font-family: var(--font-headline);
   font-size: rfs(70px);
   line-height: 1;
@@ -77,6 +81,8 @@
 }
 
 .otherUseCaseTitle {
+  margin: 0;
+  font-weight: normal;
   font-family: var(--font-serif);
   font-size: rfs(30px);
   line-height: 1.1;

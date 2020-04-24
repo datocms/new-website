@@ -90,6 +90,7 @@
 .title {
   font-size: rfs(45px);
   font-weight: bold;
+  margin: 0;
   margin-bottom: rfs(30px);
   line-height: 1;
   letter-spacing: -0.02em;

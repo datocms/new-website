@@ -32,7 +32,7 @@ export default function TryDemoCta({
         </div>
         <div className={s.box}>
           <div className={s.kicker}>Try our Project starter</div>
-          <div className={s.title}>{title}</div>
+          <h2 className={s.title}>{title}</h2>
           <div className={s.description}>{description}</div>
           <div className={s.actions}>
             <Button as="a" href={href}>

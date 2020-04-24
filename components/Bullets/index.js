@@ -1,20 +1,16 @@
 import styles from './style.module.css';
 
-export default function InterstitialTitle({
-  style = 'good',
-  icon: Icon,
-  bullets,
-}) {
+export default function Bullets({ style = 'good', icon: Icon, bullets }) {
   return (
-    <div className={styles.root}>
-      {bullets.map(bullet => (
-        <div key={bullet} className={styles.bullet}>
+    <ul className={styles.root}>
+      {bullets.map((bullet) => (
+        <li key={bullet} className={styles.bullet}>
           <div className={styles[style]}>
             <Icon />
           </div>
           <span>{bullet}</span>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

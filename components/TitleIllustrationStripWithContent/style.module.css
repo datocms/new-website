@@ -46,6 +46,8 @@
 }
 
 .title {
+  margin: 0;
+  font-weight: normal;
   font-family: var(--font-headline);
   font-size: rfs(70px);
   letter-spacing: -0.02em;

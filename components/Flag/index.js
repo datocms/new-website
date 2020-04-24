@@ -44,7 +44,7 @@ export default function Flag({
           <div className={s.image}>{imageEl}</div>
         </div>
         <div className={s.content}>
-          <div className={s.title}>{title}</div>
+          <h3 className={s.title}>{title}</h3>
           {subtitle && <div className={s.subtitle}>{subtitle}</div>}
           <div className={s.body}>{children}</div>
         </div>

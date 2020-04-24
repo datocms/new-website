@@ -15,10 +15,12 @@
 }
 
 .title {
+  margin: 0;
   font-family: var(--font-headline);
   font-size: rfs(80px);
   letter-spacing: -0.02em;
   line-height: 1.1;
+  font-weight: normal;
 }
 
 .subtitle {
