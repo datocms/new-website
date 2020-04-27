@@ -139,7 +139,7 @@ export default function About({ members, page, review1, review2 }) {
         <NumbersBlock title="2.500">Paying customers</NumbersBlock>
         <NumbersBlock title="15%">Monthly growth</NumbersBlock>
         <NumbersBlock title="5M">Records created</NumbersBlock>
-        <NumbersBlock title="20M">Monthly API calls</NumbersBlock>
+        <NumbersBlock title="600M">Monthly API calls</NumbersBlock>
       </Numbers>
 
       <Space top={2} bottom={2}>

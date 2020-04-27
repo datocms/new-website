@@ -95,7 +95,7 @@ function WorldwideCdn({ page, preview, review1 }) {
       <Numbers>
         <NumbersBlock title="74">CDN Edges</NumbersBlock>
         <NumbersBlock title="50TB">Data served daily</NumbersBlock>
-        <NumbersBlock title="100M">Requests per week</NumbersBlock>
+        <NumbersBlock title="150M">Requests per week</NumbersBlock>
         <NumbersBlock title="99.99%">Guaranteed uptime</NumbersBlock>
       </Numbers>
 
