@@ -9,11 +9,11 @@ module.exports = [
   },
   {
     source: '/search',
-    destination: '/docs',
+    destination: '/docs/site-search',
   },
   {
-    source: '/search',
-    destination: '/docs',
+    source: '/docs/search',
+    destination: '/docs/site-search',
   },
   {
     source: '/about',
