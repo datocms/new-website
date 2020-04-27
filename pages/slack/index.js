@@ -13,10 +13,7 @@ import Head from 'next/head';
 
 wretch().errorType('json');
 
-const fetcher = url =>
-  wretch(url)
-    .get()
-    .json();
+const fetcher = (url) => wretch(url).get().json();
 
 const errorLabels = {
   already_invited:
@@ -94,7 +91,7 @@ export default function Slack() {
             ref={register({
               required: 'Please, enter your email! 😊',
               pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
                 message: 'Please, enter a valid email! 😊',
               },
             })}

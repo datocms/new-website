@@ -51,7 +51,7 @@ export default function TalkWithUs({ contactFormType, issueType }) {
                 validations={{
                   required: 'Required',
                   pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
                     message: 'Invalid email',
                   },
                 }}
@@ -82,7 +82,7 @@ export default function TalkWithUs({ contactFormType, issueType }) {
                 validations={{
                   required: 'Required',
                   pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
                     message: 'Invalid email',
                   },
                 }}
