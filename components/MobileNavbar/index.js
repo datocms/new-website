@@ -44,7 +44,7 @@ const BigLink = ({ children, href }) => {
   );
 };
 
-const LearnResource = ({ href, title, target, description }) => {
+const LearnResource = ({ href, as, title, target, description }) => {
   const content = (
     <>
       <div className={s.learnResourceTitle}>{title}</div>
@@ -57,7 +57,7 @@ const LearnResource = ({ href, title, target, description }) => {
       {content}
     </a>
   ) : (
-    <Link href={href}>
+    <Link href={href} as={as}>
       <a className={s.learnResource}>{content}</a>
     </Link>
   );
