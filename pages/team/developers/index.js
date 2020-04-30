@@ -204,7 +204,7 @@ function Developers({ integrations, preview, page, review }) {
 
       <IntegrationsBanner
         title={<>Extensible and integrable by&nbsp;design</>}
-        bubbles={integrations.map(integration => (
+        bubbles={integrations.map((integration) => (
           <LazyImage
             key={integration.id}
             src={
@@ -278,8 +278,8 @@ function Developers({ integrations, preview, page, review }) {
           </Result>
           <Result
             number="-79%"
-            // href="/customers/hashicorp"
-            // as="/customers/[slug]"
+            href="/customers/hashicorp"
+            as="/customers/[slug]"
             label={
               <>
                 in <Highlight style="good">operational costs</Highlight>
@@ -291,8 +291,8 @@ function Developers({ integrations, preview, page, review }) {
           </Result>
           <Result
             number="0,9s"
-            // href="/customers/nike"
-            // as="/customers/[slug]"
+            href="/customers/matter-supply"
+            as="/customers/[slug]"
             label={
               <>
                 in <Highlight style="good">loading times</Highlight>

@@ -179,14 +179,14 @@ export default function Navbar() {
                       as="/customers/arduino"
                       title="Arduino"
                       description="Arduino doubled his time-to-market speed with DatoCMS"
-                    />
+                    />*/}
 
                     <LearnResource
                       href="/customers/[slug]"
                       as="/customers/hashicorp"
                       title="Hashicorp"
                       description="How HashiCorp built a reliable and secure editorial workflow"
-                    /> */}
+                    />
 
                     <LearnResource
                       href="/customers/[slug]"

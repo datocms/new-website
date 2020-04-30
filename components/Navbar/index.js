@@ -209,20 +209,20 @@ export default function Navbar() {
                     </div>
                     <div className={s.section}>
                       <div className={s.sectionTitle}>Success stories</div>
-                      <div className={s.grid1}>
+                      <div className={s.grid2}>
                         {/* <TitleDesc
                           href="/customers/[slug]"
                           as="/customers/arduino"
                           title="Arduino"
                           description="2x time-to-market speed with DatoCMS"
-                        />
+                        /> */}
 
                         <TitleDesc
                           href="/customers/[slug]"
                           as="/customers/hashicorp"
                           title="Hashicorp"
-                          description="Reliable and secure editorial workflow"
-                        /> */}
+                          description="How HashiCorp delivers a reliable editorial workflow"
+                        />
 
                         <TitleDesc
                           href="/customers/[slug]"
