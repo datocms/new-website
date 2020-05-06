@@ -319,3 +319,30 @@
 .check {
   fill: #16ae3c;
 }
+
+.volume {
+  background: #fdf2ed;
+  padding: 20px;
+  font-size: 0.9em;
+  text-align: center;
+
+  @media (width > 1100px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+.volumeRight {
+  margin-top: 15px;
+
+  @media (width > 1100px) {
+    text-align: right;
+    margin-top: 0;
+    margin-left: 30px;
+  }
+}

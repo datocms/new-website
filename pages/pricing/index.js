@@ -377,6 +377,23 @@ export default function Pricing({
         </div>
       </div>
 
+      <Wrapper>
+        <div className={s.volume}>
+          <div className={s.volumeLeft}>
+            <strong>You're an agency?</strong> Contact us if you need to build
+            multiple projects at once: we can offer{' '}
+            <strong>up to 80% volume discount!</strong>
+          </div>
+          <div className={s.volumeRight}>
+            <Link href="/contact">
+              <Button as="a" p="small" invert>
+                Get a quote
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </Wrapper>
+
       <Space top={2}>
         <Wrapper>
           <div className={s.std}>
