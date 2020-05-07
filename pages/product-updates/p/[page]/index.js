@@ -41,12 +41,12 @@ export const getStaticProps = gqlStaticProps(
       posts: allChangelogEntries(
         first: $first
         skip: $skip
-        orderBy: _firstPublishedAt_DESC
+        orderBy: publicationDate_DESC
       ) {
         title
         slug
         content(markdown: true)
-        _firstPublishedAt
+        publicationDate
         categories {
           name
           color {
@@ -66,7 +66,7 @@ export const getStaticProps = gqlStaticProps(
     first: CHANGELOG_POSTS_PER_PAGE,
     skip: CHANGELOG_POSTS_PER_PAGE * parseInt(page),
   }),
-  data => ({
+  (data) => ({
     ...data,
     perPage: CHANGELOG_POSTS_PER_PAGE,
   }),
@@ -98,10 +98,10 @@ export default function Changelog({
       <Wrapper>
         <div>
           {posts &&
-            posts.map(post => (
+            posts.map((post) => (
               <div key={post.slug} className={s.post}>
                 <div className={s.info}>
-                  <FormattedDate date={post._firstPublishedAt} />
+                  <FormattedDate date={post.publicationDate} />
                 </div>
                 <h6 className={s.title}>
                   <Link
@@ -113,7 +113,7 @@ export default function Changelog({
                   </Link>
                 </h6>
                 <div className={s.categories}>
-                  {post.categories.map(cat => (
+                  {post.categories.map((cat) => (
                     <span
                       key={cat.name}
                       className={s.category}
@@ -137,10 +137,10 @@ export default function Changelog({
             perPage={perPage}
             currentPage={router.query ? parseInt(router.query.page) : 0}
             totalEntries={meta.count}
-            href={index =>
+            href={(index) =>
               index === 0 ? '/product-updates' : '/product-updates/p/[page]'
             }
-            as={index =>
+            as={(index) =>
               index === 0 ? '/product-updates' : `/product-updates/p/${index}`
             }
           />

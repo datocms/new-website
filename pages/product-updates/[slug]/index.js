@@ -17,13 +17,13 @@ import s from 'pages/product-updates/p/[page]/style.module.css';
 export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
-      posts: allChangelogEntries(first: 100, orderBy: _firstPublishedAt_DESC) {
+      posts: allChangelogEntries(first: 100, orderBy: publicationDate_DESC) {
         slug
       }
     }
   `,
   'slug',
-  ({ posts }) => posts.map(p => p.slug),
+  ({ posts }) => posts.map((p) => p.slug),
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -36,7 +36,7 @@ export const getStaticProps = gqlStaticProps(
         title
         slug
         content(markdown: true)
-        _firstPublishedAt
+        publicationDate
         categories {
           name
           color {
@@ -73,7 +73,7 @@ export default function Changelog({ post, preview }) {
             {isFallback ? (
               <Line />
             ) : (
-              <FormattedDate date={post._firstPublishedAt} />
+              <FormattedDate date={post.publicationDate} />
             )}
           </div>
           <h6 className={s.title}>
@@ -91,7 +91,7 @@ export default function Changelog({ post, preview }) {
           </h6>
           <div className={s.categories}>
             {post &&
-              post.categories.map(cat => (
+              post.categories.map((cat) => (
                 <span
                   key={cat.name}
                   className={s.category}
