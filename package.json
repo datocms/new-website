@@ -56,7 +56,7 @@
     "react": "^16.13.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-autosize-textarea": "^7.0.0",
-    "react-datocms": "^1.2.2",
+    "react-datocms": "^1.2.4",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.5.2",
     "react-markdown": "^4.3.1",
