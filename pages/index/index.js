@@ -96,7 +96,7 @@ function Homepage({ successStories, preview, page }) {
       <LogosBar clients={[Dropbox, Hashicorp, Verizon, Vmware, Linkedin]} />
 
       <Space top={2}>
-        <InterstitialTitle subtitle="Here’s 3 symptoms to&nbsp;watch&nbsp;out">
+        <InterstitialTitle subtitle="Three symptoms to&nbsp;watch&nbsp;out">
           Are you losing money because of{' '}
           <Highlight>legacy&nbsp;content infrastructure</Highlight>?
         </InterstitialTitle>
