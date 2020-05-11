@@ -1,9 +1,9 @@
 import UIChrome from 'components/UiChrome';
 import s from './style.module.css';
 import cn from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const labels = {
   text: 'Text',
   gallery: 'Gallery',
@@ -63,20 +63,28 @@ const blocksContent = {
 export default function UseModularBlocks() {
   const [blockCount, setBlockCount] = useState(-1);
   const [iteration, setIteration] = useState(0);
+  const isStopped = useRef(false);
 
   useEffect(() => {
     (async () => {
-      while (true) {
-        const c = new Date();
+      while (!isStopped.current) {
         for (let x = 0; x <= blocksSequence.length; x++) {
-          setBlockCount(i => i + 1);
+          if (!isStopped.current) {
+            setBlockCount((i) => i + 1);
+          }
           await wait(2500);
         }
         await wait(3500);
-        setBlockCount(-1);
-        setIteration(i => i + 1);
+        if (!isStopped.current) {
+          setBlockCount(-1);
+          setIteration((i) => i + 1);
+        }
       }
     })();
+
+    return () => {
+      isStopped.current = true;
+    };
   }, []);
 
   return (
@@ -110,7 +118,7 @@ export default function UseModularBlocks() {
               ))}
               <div className={s.mcAdd}>
                 <div className={s.mcAddLabel}>Add a new block:</div>
-                {allBlocks.map(block => (
+                {allBlocks.map((block) => (
                   <div
                     className={cn(s.mcAddButton, {
                       [s.mcAddButtonActive]:

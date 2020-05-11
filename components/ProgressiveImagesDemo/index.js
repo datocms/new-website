@@ -1,7 +1,7 @@
 import s from './style.module.css';
 import { range } from 'range';
-import { useState, useCallback, useEffect } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { useRef, useState, useCallback, useEffect } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import useInterval from '@use-it/interval';
 import cn from 'classnames';
 
@@ -84,7 +84,7 @@ const Header = () => (
 
 const Copy = ({ lines }) => (
   <div className={s.paragraph}>
-    {range(0, lines - 1).map(i => (
+    {range(0, lines - 1).map((i) => (
       <div key={i} className={s.copy} />
     ))}
     <div className={s.copy} style={{ width: '60%' }} />
@@ -101,19 +101,7 @@ const Scroller = ({ children, loading, duration, label }) => (
       <div className={s.browserBar}>
         <div className={s.addressBar} />
       </div>
-      <ReactCSSTransitionGroup
-        className={s.page}
-        transitionName={{
-          enter: s.pageInnerEnter,
-          enterActive: s.pageInnerEnterActive,
-          leave: s.pageInnerLeave,
-          leaveActive: s.pageInnerLeaveActive,
-        }}
-        transitionEnterTimeout={1400}
-        transitionLeaveTimeout={1400}
-      >
-        {children}
-      </ReactCSSTransitionGroup>
+      <TransitionGroup className={s.page}>{children}</TransitionGroup>
       <div
         className={cn(s.progress, { [s.progressLoading]: loading })}
         style={{ animationDuration: `${duration}ms` }}
@@ -127,87 +115,129 @@ export default function ProgressiveImagesDemo() {
   const [loadingStarted, setLoadingStarted] = useState(false);
   const [leftLoaded, setLeftLoaded] = useState(true);
   const [rightLoaded, setRightLoaded] = useState(true);
+  const timersToClear = useRef([]);
 
   const next = useCallback(() => {
-    setPage(page => (page === 4 ? 0 : page + 1));
+    setPage((page) => (page === 4 ? 0 : page + 1));
     setLoadingStarted(false);
     setLeftLoaded(false);
     setRightLoaded(false);
-    setTimeout(() => setLoadingStarted(true), 1400);
-    setTimeout(() => setLeftLoaded(true), 1400 + 3000 - 700);
-    setTimeout(() => setRightLoaded(true), 1400 + 1500);
-  });
+
+    timersToClear.current.forEach(clearTimeout);
+
+    timersToClear.current = [
+      setTimeout(() => setLoadingStarted(true), 1400),
+      setTimeout(() => setLeftLoaded(true), 1400 + 3000 - 700),
+      setTimeout(() => setRightLoaded(true), 1400 + 1000),
+    ];
+  }, [page]);
 
   useInterval(() => {
     next();
   }, 5500);
 
   useEffect(() => {
-    images.forEach(image => {
+    images.forEach((image) => {
       const i = new Image();
       i.src = image.url;
     });
     next();
+
+    return () => {
+      timersToClear.current.forEach(clearTimeout);
+    };
   }, []);
 
   return (
     <div className={s.root}>
       <Scroller label="Before" loading={loadingStarted} duration={3200}>
-        <div key={page} className={s.pageInner}>
-          <Header />
-          <Copy lines={4} />
-          <div className={cn(s.image, { [s.imageLoaded]: leftLoaded })}>
-            <img src={images[page * 2].url} />
+        <CSSTransition
+          key={page}
+          classNames={{
+            enter: s.pageInnerEnter,
+            enterActive: s.pageInnerEnterActive,
+            exit: s.pageInnerLeave,
+            exitActive: s.pageInnerLeaveActive,
+          }}
+          timeout={1400}
+        >
+          <div className={s.pageInner}>
+            <Header />
+            <Copy lines={4} />
+            <div className={cn(s.image, { [s.imageLoaded]: leftLoaded })}>
+              <img src={images[page * 2].url} />
+            </div>
+            <Copy lines={3} />
+            <div
+              className={cn(s.image, [s.imageDelayed], {
+                [s.imageLoaded]: leftLoaded,
+              })}
+            >
+              <img src={images[page * 2 + 1].url} />
+            </div>
+            <Copy lines={4} />
           </div>
-          <Copy lines={3} />
-          <div
-            className={cn(s.image, [s.imageDelayed], {
-              [s.imageLoaded]: leftLoaded,
-            })}
-          >
-            <img src={images[page * 2 + 1].url} />
-          </div>
-          <Copy lines={4} />
-        </div>
+        </CSSTransition>
       </Scroller>
 
       <Scroller label="With DatoCMS" loading={loadingStarted} duration={1500}>
-        <div key={page} className={s.pageInner}>
-          <Header />
-          <Copy lines={4} />
-          <ReactCSSTransitionGroup
-            className={cn(s.image, [s.imageLoaded])}
-            style={{ backgroundImage: `url(${images[page * 2].blurUpThumb})` }}
-            transitionName={{
-              enter: s.progressiveEnter,
-              enterActive: s.progressiveEnterActive,
-              leave: s.progressiveLeave,
-              leaveActive: s.progressiveLeaveActive,
-            }}
-            transitionEnterTimeout={800}
-            transitionLeaveTimeout={800}
-          >
-            {rightLoaded && <img key="image" src={images[page * 2].url} />}
-          </ReactCSSTransitionGroup>
-          <Copy lines={3} />
-          <ReactCSSTransitionGroup
-            className={cn(s.image, [s.imageLoaded])}
-            style={{
-              backgroundImage: `url(${images[page * 2 + 1].blurUpThumb})`,
-            }}
-            transitionName={{
-              enter: s.progressiveEnter,
-              enterActive: s.progressiveEnterActive,
-              leave: s.progressiveLeave,
-              leaveActive: s.progressiveLeaveActive,
-            }}
-            transitionEnterTimeout={800}
-            transitionLeaveTimeout={800}
-          >
-            {rightLoaded && <img key="image" src={images[page * 2 + 1].url} />}
-          </ReactCSSTransitionGroup>
-          <Copy lines={4} />
-        </div>
+        <CSSTransition
+          key={page}
+          classNames={{
+            enter: s.pageInnerEnter,
+            enterActive: s.pageInnerEnterActive,
+            exit: s.pageInnerLeave,
+            exitActive: s.pageInnerLeaveActive,
+          }}
+          timeout={1400}
+        >
+          <div className={s.pageInner}>
+            <Header />
+            <Copy lines={4} />
+            <TransitionGroup
+              className={cn(s.image, [s.imageLoaded])}
+              style={{
+                backgroundImage: `url(${images[page * 2].blurUpThumb})`,
+              }}
+            >
+              {rightLoaded && (
+                <CSSTransition
+                  classNames={{
+                    enter: s.progressiveEnter,
+                    enterActive: s.progressiveEnterActive,
+                    exit: s.progressiveLeave,
+                    exitActive: s.progressiveLeaveActive,
+                  }}
+                  timeout={800}
+                >
+                  <img key="image" src={images[page * 2].url} />
+                </CSSTransition>
+              )}
+            </TransitionGroup>
+            <Copy lines={3} />
+            <TransitionGroup
+              className={cn(s.image, [s.imageLoaded])}
+              style={{
+                backgroundImage: `url(${images[page * 2 + 1].blurUpThumb})`,
+              }}
+            >
+              {rightLoaded && (
+                <CSSTransition
+                  classNames={{
+                    enter: s.progressiveEnter,
+                    enterActive: s.progressiveEnterActive,
+                    exit: s.progressiveLeave,
+                    exitActive: s.progressiveLeaveActive,
+                  }}
+                  timeout={800}
+                >
+                  <img key="image" src={images[page * 2 + 1].url} />
+                </CSSTransition>
+              )}
+            </TransitionGroup>
+            <Copy lines={4} />
+          </div>
+        </CSSTransition>
       </Scroller>
     </div>
   );

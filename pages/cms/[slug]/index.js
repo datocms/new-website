@@ -53,7 +53,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'slug',
-  ({ landingPages }) => landingPages.map(p => p.slug),
+  ({ landingPages }) => landingPages.map((p) => p.slug),
 );
 
 export const getStaticProps = async ({ params: { slug }, preview }) => {
@@ -212,7 +212,6 @@ export default function UseCase({ landing, websites, preview }) {
 
     if (el) {
       const rect = el.getBoundingClientRect();
-      console.log(el.parentElement.parentElement);
       el.parentElement.parentElement.scroll({
         top: 0,
         left: el.offsetLeft - (window.innerWidth - rect.width) / 2,
@@ -284,7 +283,7 @@ export default function UseCase({ landing, websites, preview }) {
             </div>
           )}
 
-          {landing.content.map(block => (
+          {landing.content.map((block) => (
             <React.Fragment key={block.id}>
               {block._modelApiKey === 'landing_cdn_map_block' && (
                 <>

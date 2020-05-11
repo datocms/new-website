@@ -1,10 +1,9 @@
 import UIChrome from 'components/UiChrome';
 import s from './style.module.css';
 import { useEffect, useState } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import SettingsIcon from 'public/icons/regular/cog.svg';
-import UsageIcon from 'public/icons/regular/chart-area.svg';
 import ItemTypesIcon from 'public/icons/regular/shapes.svg';
 import PluginsIcon from 'public/icons/regular/puzzle-piece.svg';
 import RolesIcon from 'public/icons/regular/shield-alt.svg';
@@ -199,21 +198,20 @@ const labels = {
 
 const Label = ({ label, locale }) => {
   return (
-    <ReactCSSTransitionGroup
-      className={s.labelContainer}
-      transitionName={{
-        enter: s.labelEnter,
-        enterActive: s.labelEnterActive,
-        leave: s.labelLeave,
-        leaveActive: s.labelLeaveActive,
-      }}
-      transitionEnterTimeout={1200}
-      transitionLeaveTimeout={1200}
-    >
-      <span className={s.label} key={`${label}${locale}`}>
-        {label}
-      </span>
-    </ReactCSSTransitionGroup>
+    <TransitionGroup className={s.labelContainer}>
+      <CSSTransition
+        key={`${label}${locale}`}
+        classNames={{
+          enter: s.labelEnter,
+          enterActive: s.labelEnterActive,
+          exit: s.labelLeave,
+          exitActive: s.labelLeaveActive,
+        }}
+        timeout={{ enter: 1200, exit: 1200 }}
+      >
+        <span className={s.label}>{label}</span>
+      </CSSTransition>
+    </TransitionGroup>
   );
 };
 
@@ -222,7 +220,7 @@ export default function TranslatedUI() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setLocale(locale => (locale + 1) % Object.keys(labels).length);
+      setLocale((locale) => (locale + 1) % Object.keys(labels).length);
     }, 1500);
 
     return () => clearInterval(interval);
@@ -362,21 +360,22 @@ export default function TranslatedUI() {
           </div>
         </div>
         <div className={s.main}>
-          <ReactCSSTransitionGroup
-            className={s.flagContainer}
-            transitionName={{
-              enter: s.flagEnter,
-              enterActive: s.flagEnterActive,
-              leave: s.flagLeave,
-              leaveActive: s.flagLeaveActive,
-            }}
-            transitionEnterTimeout={1200}
-            transitionLeaveTimeout={1200}
-          >
-            <span className={s.flag} key={localeString}>
-              <Flag />
-            </span>
-          </ReactCSSTransitionGroup>
+          <TransitionGroup className={s.flagContainer}>
+            <CSSTransition
+              key={localeString}
+              classNames={{
+                enter: s.flagEnter,
+                enterActive: s.flagEnterActive,
+                exit: s.flagLeave,
+                exitActive: s.flagLeaveActive,
+              }}
+              timeout={{ enter: 1200, exit: 1200 }}
+            >
+              <span className={s.flag}>
+                <Flag />
+              </span>
+            </CSSTransition>
+          </TransitionGroup>
           <div className={s.hey}>We speak {name[localeString]}!</div>
         </div>
       </div>

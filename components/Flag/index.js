@@ -1,12 +1,9 @@
 import Wrapper from 'components/Wrapper';
 import s from './style.module.css';
-// import { animated, useSpring } from 'react-spring';
-// import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import { useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import LazyImage from 'components/LazyImage';
-// import clamp from 'clamp';
 import cn from 'classnames';
-// import { useInView } from 'react-intersection-observer';
+import seedrandom from 'seedrandom';
 
 export default function Flag({
   style = 'neutral',
@@ -15,9 +12,15 @@ export default function Flag({
   image,
   children,
 }) {
-  const [size] = useState(Math.random() * 1.5 + 2);
-  const [x] = useState(Math.floor(Math.random() * 30));
-  const [y] = useState(Math.floor(Math.random() * 30) + 20);
+  const seed = useMemo(() => seedrandom(title + subtitle + style)(), [
+    title,
+    subtitle,
+    style,
+  ]);
+
+  const [size] = useState(seed * 1.5 + 2);
+  const [x] = useState(Math.floor(seed * 30));
+  const [y] = useState(Math.floor(seed * 30) + 20);
 
   const imageEl =
     typeof image === 'string' ? (

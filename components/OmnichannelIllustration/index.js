@@ -46,10 +46,10 @@ export default function OmnichannelIllustration() {
     <Wrapper>
       <div className={s.root}>
         <div className={s.apps}>
-          {apps.map(app => (
+          {apps.map((app) => (
             <div className={s.app} key={app.id}>
               <div className={s.appIcon}>
-                <app.Icon preserveAspectRatio="meet" />
+                <app.Icon />
               </div>
               <div className={s.appLabel}>{app.id}</div>
             </div>
@@ -113,7 +113,7 @@ export default function OmnichannelIllustration() {
           </div>
         </div>
         <div className={s.people}>
-          {people.map(person => (
+          {people.map((person) => (
             <div className={s.person} key={person.name}>
               <div className={s.personIcon}>
                 <LazyImage src={`/images/faces/${person.image}`} />

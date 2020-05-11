@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Wrapper from 'components/Wrapper';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
 import s from './style.module.css';
 
@@ -81,22 +81,22 @@ function Param({ param, isFirst }) {
       <span className={s.paramEq}>{isFirst ? '?' : '&'}</span>
       <span className={s.paramName}>{key}</span>
       <span className={s.paramEq}>=</span>
-      <ReactCSSTransitionGroup
-        className={s.paramValueContainer}
-        style={{ width: `${value.length}ch` }}
-        transitionName={{
-          enter: s.valueAnimationEnter,
-          enterActive: s.valueAnimationEnterActive,
-          leave: s.valueAnimationLeave,
-          leaveActive: s.valueAnimationLeaveActive,
-        }}
-        transitionEnterTimeout={1200}
-        transitionLeaveTimeout={1200}
-      >
-        <span key={value} className={s.paramValue}>
-          {value}
-        </span>
-      </ReactCSSTransitionGroup>
+      <TransitionGroup className={s.paramValueContainer}>
+        <CSSTransition
+          key={value}
+          classNames={{
+            enter: s.valueAnimationEnter,
+            enterActive: s.valueAnimationEnterActive,
+            exit: s.valueAnimationLeave,
+            exitActive: s.valueAnimationLeaveActive,
+          }}
+          timeout={{ enter: 1200, exit: 1200 }}
+        >
+          <span style={{ width: `${value.length}ch` }} className={s.paramValue}>
+            {value}
+          </span>
+        </CSSTransition>
+      </TransitionGroup>
     </span>
   );
 }
@@ -263,11 +263,11 @@ export default function InterstitialTitle() {
     ref.current.map(clearTimeout);
 
     for (let i = 0; i < steps.length; i++) {
-      const colorTransform = steps[i].transforms.find(t =>
+      const colorTransform = steps[i].transforms.find((t) =>
         t.match(/(sepia|duotone|blur|htn)/),
       );
 
-      const isEllipse = !!steps[i].transforms.find(t => t.match(/mask/));
+      const isEllipse = !!steps[i].transforms.find((t) => t.match(/mask/));
 
       const stepImage = url + (colorTransform ? `&${colorTransform}` : '');
 
@@ -307,55 +307,62 @@ export default function InterstitialTitle() {
             height: `calc(var(--max-width) / ${ar} * ${result.height})`,
           }}
         >
-          <ReactCSSTransitionGroup
-            transitionName={{
-              enter: s.imageAnimationEnter,
-              enterActive: s.imageAnimationEnterActive,
-              leave: s.imageAnimationLeave,
-              leaveActive: s.imageAnimationLeaveActive,
-            }}
-            transitionEnterTimeout={1300}
-            transitionLeaveTimeout={1800}
-          >
-            <img
+          <TransitionGroup>
+            <CSSTransition
               key={image}
-              src={image}
-              className={s.image}
-              style={{
-                width: `calc(var(--max-width))`,
-                height: `calc(var(--max-width) / ${ar})`,
-                transform: result.transform,
+              classNames={{
+                enter: s.imageAnimationEnter,
+                enterActive: s.imageAnimationEnterActive,
+                exit: s.imageAnimationLeave,
+                exitActive: s.imageAnimationLeaveActive,
               }}
-            />
-          </ReactCSSTransitionGroup>
+              timeout={{ enter: 1300, exit: 1800 }}
+            >
+              <img
+                src={image}
+                className={s.image}
+                style={{
+                  width: `calc(var(--max-width))`,
+                  height: `calc(var(--max-width) / ${ar})`,
+                  transform: result.transform,
+                }}
+              />
+            </CSSTransition>
+          </TransitionGroup>
         </div>
 
         <div className={s.params}>
-          <ReactCSSTransitionGroup
+          <TransitionGroup
             className={s.paramsInner}
-            style={{ '--content-length': `${40 + params.join('.').length}ch` }}
-            transitionName={{
-              enter: s.paramAnimationEnter,
-              enterActive: s.paramAnimationEnterActive,
-              leave: s.paramAnimationLeave,
-              leaveActive: s.paramAnimationLeaveActive,
+            style={{
+              '--content-length': `${40 + params.join('.').length}ch`,
             }}
-            transitionEnterTimeout={900}
-            transitionLeaveTimeout={400}
           >
-            <span className={s.paramEq}>
-              https://datocms-assets.com/image.png
-            </span>
+            <CSSTransition key="prefix" timeout={0}>
+              <span className={s.paramEq}>
+                https://datocms-assets.com/image.png
+              </span>
+            </CSSTransition>
             {params.map((param, i) => (
-              <div
-                className={s.paramContainer}
+              <CSSTransition
                 key={param.split(/=/)[0]}
-                style={{ '--content-length': `${param.length + 2}ch` }}
+                classNames={{
+                  enter: s.paramAnimationEnter,
+                  enterActive: s.paramAnimationEnterActive,
+                  exit: s.paramAnimationLeave,
+                  exitActive: s.paramAnimationLeaveActive,
+                }}
+                timeout={{ enter: 900, exit: 400 }}
               >
-                <Param param={param} isFirst={i === 0} />
-              </div>
+                <div
+                  className={s.paramContainer}
+                  style={{ '--content-length': `${param.length + 2}ch` }}
+                >
+                  <Param param={param} isFirst={i === 0} />
+                </div>
+              </CSSTransition>
             ))}
-          </ReactCSSTransitionGroup>
+          </TransitionGroup>
         </div>
       </div>
     </Wrapper>

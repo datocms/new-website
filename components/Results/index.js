@@ -19,7 +19,7 @@ export function Block({ image, title, children, logo: Logo }) {
       {image}
       <div className={s.blockTitle}>{title}</div>
       {children}
-      {Logo && <Logo preserveAspectRatio="meet" className={s.logo} />}
+      {Logo && <Logo className={s.logo} />}
     </div>
   );
 }

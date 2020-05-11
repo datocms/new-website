@@ -98,7 +98,7 @@ export default function Navbar() {
           <div className={s.innerRoot}>
             <Link href="/">
               <a className={s.logo}>
-                <FullLogo height="auto" />
+                <FullLogo />
               </a>
             </Link>
             <div className={s.space} />
