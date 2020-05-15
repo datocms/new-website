@@ -3,6 +3,10 @@ export default function schemaExampleFor(schema, pagination = true) {
     return null;
   }
 
+  if (schema.hasOwnProperty('deprecated')) {
+    return;
+  }
+
   if (schema.hasOwnProperty('example')) {
     return schema.example;
   }

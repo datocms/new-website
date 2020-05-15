@@ -229,10 +229,6 @@ function JsonSchema({
 }) {
   const [open, setOpen] = useState(false);
 
-  if (name === 'appeareance' || name === 'appearance') {
-    debugger;
-  }
-
   return (
     <LanguageConsumer>
       {(language) => (
