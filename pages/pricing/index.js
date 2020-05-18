@@ -290,10 +290,7 @@ export const getStaticProps = async ({ preview }) => {
       })),
       hints: hints
         .filter(
-          (hint) =>
-            !['roles', 'plugins', 'access_tokens', 'build_triggers'].includes(
-              hint.apiId,
-            ),
+          (hint) => !['roles', 'plugins', 'access_tokens'].includes(hint.apiId),
         )
         .reduce((acc, hint) => {
           acc[hint.apiId] = {
