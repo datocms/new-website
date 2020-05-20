@@ -111,7 +111,7 @@ function example(resource, link, allPages = false) {
 
   if (!allPages) {
     const code = `const SiteClient = require('datocms-client').SiteClient;
-const client = new SiteClient('YOUR-API-KEY');
+const client = new SiteClient('YOUR-API-TOKEN');
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
       precode.length > 0 ? '\n' : ''
     }
