@@ -31,7 +31,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'slug',
-  ({ posts }) => posts.map(p => p.code),
+  ({ posts }) => posts.map((p) => p.code),
 );
 
 export const getStaticProps = async ({ params: { slug }, preview }) => {
@@ -89,9 +89,9 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
 };
 
 const deployments = {
-  static: 'Deployable on Netlify or ZEIT.',
+  static: 'Deployable on Netlify or Vercel.',
   server: 'Deployable on Heroku.',
-  zeit: 'Deployable on ZEIT.',
+  zeit: 'Deployable on Vercel.',
   copyRepo: '',
 };
 
@@ -168,7 +168,7 @@ export default function EnterpriseApp({ page, preview }) {
                 />
               </UiChrome>
             ),
-          ].filter(i => !!i)
+          ].filter((i) => !!i)
         }
       />
     </Layout>

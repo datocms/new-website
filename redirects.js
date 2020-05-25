@@ -216,4 +216,8 @@ module.exports = [
     source: '/plugins/field_addon/:rest*',
     destination: '/marketplace/plugins',
   },
+  {
+    source: '/marketplace/hosting/zeit',
+    destination: '/marketplace/hosting/vercel',
+  },
 ];
