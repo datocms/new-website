@@ -24,7 +24,7 @@ import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
 export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
-      meta: _allPluginsMeta {
+      meta: _allPluginsMeta(filter: { manuallyDeprecated: { eq: false } }) {
         count
       }
     }
@@ -45,7 +45,7 @@ export const getStaticProps = gqlStaticProps(
         first: $first
         skip: $skip
         orderBy: installs_DESC
-        filter: { manuallyDeprecated: { eq: "false" } }
+        filter: { manuallyDeprecated: { eq: false } }
       ) {
         title
         description
@@ -58,7 +58,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
 
-      meta: _allPluginsMeta {
+      meta: _allPluginsMeta(filter: { manuallyDeprecated: { eq: false } }) {
         count
       }
     }

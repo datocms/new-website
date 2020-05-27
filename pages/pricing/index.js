@@ -383,7 +383,7 @@ export default function Pricing({
           </div>
           <div className={s.volumeRight}>
             <Link href="/contact">
-              <Button as="a" p="small" invert>
+              <Button as="a" p="small">
                 Get a quote
               </Button>
             </Link>
