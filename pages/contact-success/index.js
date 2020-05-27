@@ -2,7 +2,6 @@ import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
 import s from './style.module.css';
-import TalkWithUs from 'components/TalkWithUs';
 import Highlight from 'components/Highlight';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
@@ -11,6 +10,7 @@ import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
 import Head from 'next/head';
+import Shout from 'public/images/illustrations/marketers.svg';
 
 export default function Support() {
   return (
@@ -20,6 +20,7 @@ export default function Support() {
       </Head>
       <div className={s.root}>
         <Wrapper>
+          <Shout className={s.image} />
           <div className={s.rootInner}>
             <div className={s.intro}>
               <div className={s.introTitle}>
@@ -27,7 +28,7 @@ export default function Support() {
               </div>
               <div className={s.introBody}>
                 <p>
-                  You should get an automated email with more details in few
+                  You should get a confirmation email with more details in few
                   moments.
                 </p>
 

@@ -4,6 +4,12 @@
   text-align: center;
 }
 
+.image {
+  max-width: 100px;
+  margin-bottom: 30px;
+  fill: var(--base-body-color);
+}
+
 .rootInner {
   @media (width > 900px) {
     display: flex;
