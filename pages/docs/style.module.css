@@ -1,5 +1,5 @@
 .container {
-  @media (width < 1300px) {
+  @media (width < 1000px) {
     padding: rfs(50px);
     padding-left: var(--page-margin);
     padding-right: var(--page-margin);

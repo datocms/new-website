@@ -2,7 +2,6 @@ import React from 'react';
 import pluralize from 'pluralize';
 import schemaExampleFor from 'utils/schemaExampleFor';
 import RequestResponse from '../RequestResponse';
-import ReactMarkdown from 'react-markdown';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 
@@ -93,16 +92,12 @@ function example(resource, link, allPages = false) {
     const example = schemaExampleFor(link.jobSchema || link.targetSchema);
     const variable = resource.id;
 
-    if (Array.isArray(example.data)) {
-      output =
-        example.data.length > 0 &&
-        JSON.stringify(deserialize(example.data[0], true), null, 2)
-          .replace(/": /g, '" => ')
-          .replace(/null/g, 'nil');
+    if (Array.isArray(example.data) && example.data.length > 0) {
+      output = JSON.stringify(deserialize(example.data[0], true), null, 2)
+        .replace(/": /g, '" => ')
+        .replace(/null/g, 'nil');
 
-      returnCode =
-        example.data.length > 0 &&
-        `${call}.each do |${variable}|
+      returnCode = `${call}.each do |${variable}|
   puts ${variable}.inspect
 end`;
     } else {
@@ -118,7 +113,7 @@ puts ${variable}.inspect
 
   if (!allPages) {
     const code = `require "dato"
-client = Dato::Site::Client.new("YOUR-API-KEY")
+client = Dato::Site::Client.new("YOUR-API-TOKEN")
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
       precode.length > 0 ? '\n' : ''
     }${returnCode ? `\n${returnCode}` : ''}

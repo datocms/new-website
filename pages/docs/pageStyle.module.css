@@ -251,7 +251,11 @@
 
 .text,
 .qa {
-  max-width: 750px;
+  max-width: 680px;
+}
+
+.article {
+  padding-top: rfs(50px);
 }
 
 @media (width >= 1300px) {
@@ -261,7 +265,7 @@
   }
 
   .article {
-    min-width: 738px;
+    min-width: 538px;
     flex: 1;
   }
 
@@ -287,7 +291,6 @@
 
 @media (width < 1300px) {
   .article {
-    padding-top: rfs(50px);
     padding-left: var(--page-margin);
     padding-right: var(--page-margin);
     border-bottom: 1px solid var(--border-color);
@@ -296,6 +299,10 @@
   .toc {
     padding: 30px var(--page-margin);
     border-bottom: 1px solid var(--border-color);
+  }
+
+  .toc {
+    padding-bottom: 50px;
   }
 }
 

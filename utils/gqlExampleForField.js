@@ -1,6 +1,6 @@
 import humps from 'humps';
 
-export const camelize = name => {
+export const camelize = (name) => {
   if (name.startsWith('_')) {
     return `_${humps.camelize(name)}`;
   }
@@ -42,6 +42,19 @@ const exampleForType = (queryFieldName, field) => {
   return exampleData;
 };
 
+const isMetaField = (fieldName) => {
+  return (
+    fieldName.startsWith('_') ||
+    ['id', 'parent', 'position'].includes(fieldName)
+  );
+};
+
+const nicerFieldName = (fieldName) => {
+  let nicerFieldName = `${camelize(fieldName)}`;
+  if (!isMetaField(fieldName)) nicerFieldName += 'Field';
+  return nicerFieldName;
+};
+
 export default function exampleForField(fieldName, queryFieldName, field) {
   let filter = `${camelize(queryFieldName)}: ${exampleForType(
     queryFieldName,
@@ -52,7 +65,7 @@ export default function exampleForField(fieldName, queryFieldName, field) {
     return `query {
   allProducts(
     filter: {
-      ${camelize(fieldName)}Field: {
+      ${nicerFieldName(fieldName)}: {
         ${filter}
       }
     }
@@ -63,7 +76,7 @@ export default function exampleForField(fieldName, queryFieldName, field) {
   }
 
   return `query {
-  allProducts(filter: { ${camelize(fieldName)}Field: { ${filter} } }) {
+  allProducts(filter: { ${nicerFieldName(fieldName)}: { ${filter} } }) {
     title
   }
 }`;

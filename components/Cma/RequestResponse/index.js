@@ -1,11 +1,16 @@
 import Prism from 'components/Prism';
 import ReactMarkdown from 'react-markdown';
+import slugify from 'utils/slugify';
 
 import s from './style.module.css';
 
 const RequestResponse = ({ title, description, chunks }) => (
   <div className={s.reqRes}>
-    {title && <h6 className={s.title}>{title}</h6>}
+    {title && (
+      <h6 className={s.title} id={slugify(title)}>
+        {title}
+      </h6>
+    )}
     {description && <ReactMarkdown source={description} />}
 
     {chunks.map((chunk) => (

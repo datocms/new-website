@@ -43,7 +43,7 @@ function renderExample(example, resource) {
           .join('\n')
       : [
           'X-Api-Version: 3',
-          'Authorization: Bearer YOUR-API-KEY',
+          'Authorization: Bearer YOUR-API-TOKEN',
           'Accept: application/json',
         ]
           .concat(
@@ -72,7 +72,9 @@ function renderExample(example, resource) {
   let responseCode = '';
 
   if (resource.targetSchema) {
-    responseCode = `HTTP/1.1 ${(response && response.statusCode) || '200'} ${
+    let statusCode = (response && response.statusCode) || '200';
+    statusCode = resource.jobSchema ? '202' : statusCode;
+    responseCode = `HTTP/1.1 ${statusCode} ${
       (response && response.statusText) || 'OK'
     }`;
 
