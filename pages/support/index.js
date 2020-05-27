@@ -49,8 +49,9 @@ export default function Support({ preview, topics }) {
   const [formVisible, setFormVisible] = useState(false);
 
   const selectedTopicSlugs = (router.query.topics || '').split('/');
+  const { email, message, projectUrl } = router.query;
 
-  const setSelectedTopicSlugs = slugs => {
+  const setSelectedTopicSlugs = (slugs) => {
     const url = `/support?topics=${slugs.join('/')}`;
     router.push(url, url, {
       shallow: true,
@@ -58,15 +59,16 @@ export default function Support({ preview, topics }) {
   };
 
   const rootTopicSlug = selectedTopicSlugs[0];
-  const rootTopics = topics.filter(t => !t.parent);
-  const rootTopic = rootTopicSlug && topics.find(t => t.slug === rootTopicSlug);
+  const rootTopics = topics.filter((t) => !t.parent);
+  const rootTopic =
+    rootTopicSlug && topics.find((t) => t.slug === rootTopicSlug);
   const subTopics =
     rootTopic &&
-    rootTopic.children.map(x => topics.find(t => t.slug === x.slug));
+    rootTopic.children.map((x) => topics.find((t) => t.slug === x.slug));
   const leafTopic =
     selectedTopicSlugs.length > 0 &&
     topics.find(
-      t => t.slug === selectedTopicSlugs[selectedTopicSlugs.length - 1],
+      (t) => t.slug === selectedTopicSlugs[selectedTopicSlugs.length - 1],
     );
 
   const handleChange = (level, event) => {
@@ -122,7 +124,7 @@ export default function Support({ preview, topics }) {
                 <option value="empty" disabled>
                   Please select a topic...
                 </option>
-                {rootTopics.map(topic => (
+                {rootTopics.map((topic) => (
                   <option value={topic.slug} key={topic.slug}>
                     {topic.title}
                   </option>
@@ -140,7 +142,7 @@ export default function Support({ preview, topics }) {
                   <option value="empty" disabled>
                     Please select a topic...
                   </option>
-                  {subTopics.map(topic => (
+                  {subTopics.map((topic) => (
                     <option value={topic.slug} key={topic.slug}>
                       {topic.title}
                     </option>
@@ -159,7 +161,7 @@ export default function Support({ preview, topics }) {
                   be the fastest way to solve your issue!
                 </p>
                 <ul>
-                  {leafTopic.commonQuestions.map(q => (
+                  {leafTopic.commonQuestions.map((q) => (
                     <li id={q.url}>
                       <a href={q.url}>{q.title}</a>
                     </li>
@@ -174,7 +176,7 @@ export default function Support({ preview, topics }) {
                         <li>
                           <a
                             href="#form"
-                            onClick={e => {
+                            onClick={(e) => {
                               e.preventDefault();
                               setFormVisible(true);
                               const el = document.getElementById('form');
@@ -212,6 +214,11 @@ export default function Support({ preview, topics }) {
                   </div>
                   <div className={s.form}>
                     <TalkWithUs
+                      initialValues={{
+                        email,
+                        body: message,
+                        project: projectUrl,
+                      }}
                       contactFormType={leafTopic.contactFormType}
                       issueType={leafTopic.autoResponderType}
                     />

@@ -4,9 +4,14 @@ import { getData } from 'country-list';
 import { Form, Field } from 'components/Form';
 import { getCookie } from 'utils/cookies';
 
-export default function TalkWithUs({ contactFormType, issueType }) {
+export default function TalkWithUs({
+  initialValues = {},
+  contactFormType,
+  issueType,
+}) {
   const defaultValues = {
     name: '',
+    project: '',
     email: getCookie('datoAccountEmail'),
     phoneNumber: '',
     companyName: '',
@@ -16,6 +21,7 @@ export default function TalkWithUs({ contactFormType, issueType }) {
     numberEmployees: '',
     body: '',
     issueType: issueType,
+    ...initialValues,
   };
 
   function salesForm(contactFormType) {
