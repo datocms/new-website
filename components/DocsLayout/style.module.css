@@ -117,8 +117,6 @@
   }
 
   .container {
-    padding-top: 0;
-    padding-left: 0;
     padding-bottom: 33px;
   }
 
@@ -128,7 +126,7 @@
 
   .footer {
     border-top: 1px solid var(--border-color);
-    padding: 50px var(--page-margin);
+    padding: 50px 0;
     margin-top: 50px;
   }
 }

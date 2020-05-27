@@ -270,9 +270,10 @@
   }
 
   .sidebar {
-    padding-top: 8px;
+    padding-top: 58px;
     padding-left: 48px;
     min-width: 209px;
+    max-width: 280px;
   }
 
   .toc {
