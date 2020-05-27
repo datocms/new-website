@@ -24,7 +24,7 @@ import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
 export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
-      meta: _allPluginsMeta {
+      meta: _allPluginsMeta(filter: { manuallyDeprecated: { eq: false } }) {
         count
       }
     }
@@ -41,7 +41,12 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
-      plugins: allPlugins(first: $first, skip: $skip, orderBy: installs_DESC) {
+      plugins: allPlugins(
+        first: $first
+        skip: $skip
+        orderBy: installs_DESC
+        filter: { manuallyDeprecated: { eq: false } }
+      ) {
         title
         description
         releasedAt
@@ -53,7 +58,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
 
-      meta: _allPluginsMeta {
+      meta: _allPluginsMeta(filter: { manuallyDeprecated: { eq: false } }) {
         count
       }
     }
@@ -65,7 +70,7 @@ export const getStaticProps = gqlStaticProps(
     first: PLUGINS_PER_PAGE,
     skip: PLUGINS_PER_PAGE * parseInt(page),
   }),
-  data => ({
+  (data) => ({
     ...data,
     perPage: PLUGINS_PER_PAGE,
   }),
@@ -100,7 +105,7 @@ export default function Plugins({
         </Link>
         <div className={s.grid}>
           {plugins &&
-            plugins.map(post => (
+            plugins.map((post) => (
               <PluginBox
                 key={post.packageName}
                 title={post.title}
@@ -130,12 +135,12 @@ export default function Plugins({
             perPage={perPage}
             currentPage={router.query ? parseInt(router.query.page) : 0}
             totalEntries={meta.count}
-            href={index =>
+            href={(index) =>
               index === 0
                 ? '/marketplace/plugins'
                 : '/marketplace/plugins/p/[page]'
             }
-            as={index =>
+            as={(index) =>
               index === 0
                 ? '/marketplace/plugins'
                 : `/marketplace/plugins/p/${index}`

@@ -21,7 +21,9 @@ export const getStaticProps = async ({ preview }) => {
         demos: _allTemplateDemosMeta {
           count
         }
-        plugins: _allPluginsMeta {
+        plugins: _allPluginsMeta(
+          filter: { manuallyDeprecated: { eq: false } }
+        ) {
           count
         }
         hostingApps: _allHostingAppsMeta {
@@ -87,7 +89,7 @@ export const getStaticProps = async ({ preview }) => {
   });
 
   page.demos = await Promise.all(
-    page.demos.map(async starter => {
+    page.demos.map(async (starter) => {
       const { body } = await tiny.get({
         url: `https://raw.githubusercontent.com/${starter.githubRepo}/master/datocms.json`,
       });
@@ -162,7 +164,7 @@ export default function IntegrationsPage({
           </Link>
         }
       >
-        {page.demos.map(item => (
+        {page.demos.map((item) => (
           <Box
             key={item.code}
             title={item.name}
@@ -204,7 +206,7 @@ export default function IntegrationsPage({
           </>
         }
       >
-        {page.plugins.map(item => (
+        {page.plugins.map((item) => (
           <Box
             key={item.packageName}
             href="/marketplace/plugins/i/[...chunks]"
@@ -236,7 +238,7 @@ export default function IntegrationsPage({
           </Link>
         }
       >
-        {page.hostingBuilding.map(item => (
+        {page.hostingBuilding.map((item) => (
           <Box
             key={item.slug}
             as={`/marketplace/hosting/${item.slug}`}
@@ -264,7 +266,7 @@ export default function IntegrationsPage({
           </Link>
         }
       >
-        {page.enterpriseApps.map(item => (
+        {page.enterpriseApps.map((item) => (
           <Box
             key={item.slug}
             as={`/marketplace/enterprise/${item.slug}`}

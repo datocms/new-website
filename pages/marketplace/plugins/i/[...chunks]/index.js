@@ -25,19 +25,28 @@ import {
 export const getStaticPaths = gqlStaticPaths(
   gql`
     {
-      plugins: allPlugins(orderBy: installs_DESC, first: 100) {
+      plugins: allPlugins(
+        orderBy: installs_DESC
+        first: 100
+        filter: { manuallyDeprecated: { eq: false } }
+      ) {
         packageName
       }
     }
   `,
   'chunks',
-  ({ plugins }) => plugins.map(p => p.packageName.split(/\//)),
+  ({ plugins }) => plugins.map((p) => p.packageName.split(/\//)),
 );
 
 export const getStaticProps = gqlStaticProps(
   gql`
     query pluginQuery($name: String!) {
-      plugin(filter: { packageName: { eq: $name } }) {
+      plugin(
+        filter: {
+          packageName: { eq: $name }
+          manuallyDeprecated: { eq: false }
+        }
+      ) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
@@ -78,7 +87,7 @@ export const getStaticProps = gqlStaticProps(
   ({ chunks }) => ({ name: chunks.join('/') }),
 );
 
-const fetcher = packageName =>
+const fetcher = (packageName) =>
   wretch('https://graphql.datocms.com/', {
     headers: {
       Authorization:
@@ -88,7 +97,12 @@ const fetcher = packageName =>
     .post({
       query: `
         query pluginQuery($packageName: String!) {
-          plugin(filter: { packageName: { eq: $packageName } }) {
+          plugin(
+            filter: {
+              packageName: { eq: $packageName }
+              manuallyDeprecated: { eq: false }
+            }
+          ) {
             lastUpdate
             version
             installs
@@ -172,7 +186,7 @@ export default function Plugin({ plugin, preview }) {
               {!isFallback && plugin.pluginType.name}
             </Info>
             <Info title="Compatible with fields" isFallback={isFallback}>
-              {!isFallback && plugin.fieldTypes.map(f => f.name).join(', ')}
+              {!isFallback && plugin.fieldTypes.map((f) => f.name).join(', ')}
             </Info>
             <Info title="First released" isFallback={isFallback}>
               {!isFallback && <FormattedDate date={plugin.releasedAt} />}
