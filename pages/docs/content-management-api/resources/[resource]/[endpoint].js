@@ -115,6 +115,7 @@ export default function DocPage({ docGroup, cma, preview, endpoint }) {
                   <Schema
                     title="Parameters"
                     schema={link.schema.properties.data}
+                    showId={link.method !== 'PUT'}
                   />
                 )}
                 {link && <TargetSchema link={link} />}

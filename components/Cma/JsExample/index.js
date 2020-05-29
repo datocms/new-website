@@ -56,7 +56,15 @@ function example(resource, link, allPages = false) {
     const example = schemaExampleFor(link.schema, !allPages);
 
     if (example.data) {
-      params.push(fix(JSON.stringify(deserialize(example.data), null, 2)));
+      params.push(
+        fix(
+          JSON.stringify(
+            deserialize(example.data, link.method === 'POST'),
+            null,
+            2,
+          ),
+        ),
+      );
     }
   }
 

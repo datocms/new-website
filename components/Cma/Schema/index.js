@@ -324,7 +324,9 @@ export function Schema({ title, schema, showId, hideRequired }) {
                 <span className={s.name}>id</span>&nbsp;&nbsp;
                 <Type schema={schema.properties.id} />
               </div>
-              <div className={s.description}>ID of the resource</div>
+              <div className={s.description}>
+                {schema.properties.id.description}
+              </div>
             </div>
           )}
           {language === 'http' && (
