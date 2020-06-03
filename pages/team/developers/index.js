@@ -83,7 +83,7 @@ function Developers({ integrations, preview, page, review }) {
 
       <Space top={2} bottom={2}>
         <InterstitialTitle style="two">
-          Does any of this sounds painfully&nbsp;familiar?
+          Does any of this sound painfully&nbsp;familiar?
         </InterstitialTitle>
       </Space>
 
