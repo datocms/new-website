@@ -44,15 +44,15 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-const normalize = slug => (slug === 'index' ? '' : `/${slug}`);
+const normalize = (slug) => (slug === 'index' ? '' : `/${slug}`);
 
 const Sidebar = ({ roots }) => (
   <>
-    {roots.map(root => (
+    {roots.map((root) => (
       <div className={s.group} key={root.slug}>
         <div className={s.groupName}>{root.name}</div>
         <div className={s.guides}>
-          {root.children.map(sub => (
+          {root.children.map((sub) => (
             <Link
               href={docHref(
                 `/docs/${sub.slug}${normalize(
@@ -89,8 +89,8 @@ export default function Docs({ roots, preview, page }) {
         <h2 className={s.title}>Documentation</h2>
         <p className={s.subtitle}>
           Whether you’re a startup or a global enterprise, learn how to
-          integrate with Stripe to accept payments and manage your business
-          online.
+          integrate with DatoCMS to manage your content in a centralized,
+          structured hub.
         </p>
 
         <h6 className={s.introTitle}>Start with your use case</h6>
