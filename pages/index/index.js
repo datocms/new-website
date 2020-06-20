@@ -315,7 +315,7 @@ function Homepage({ successStories, preview, page }) {
 
       <Numbers title="Why you should use DatoCMS">
         <NumbersBlock
-          href="href=/customers/[slug]"
+          href="/customers/[slug]"
           as="/customers/chillys"
           title="+134%"
           logo={Chillys}
@@ -323,7 +323,7 @@ function Homepage({ successStories, preview, page }) {
           Mobile conversion rate
         </NumbersBlock>
         <NumbersBlock
-          href="href=/customers/[slug]"
+          href="/customers/[slug]"
           as="/customers/wonderland"
           title="6x"
           logo={Wonderland}
@@ -331,7 +331,7 @@ function Homepage({ successStories, preview, page }) {
           Faster loading times
         </NumbersBlock>
         <NumbersBlock
-          href="href=/customers/[slug]"
+          href="/customers/[slug]"
           as="/customers/matter-supply"
           title="0,9s"
           logo={MatterSupply}
