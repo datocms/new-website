@@ -244,6 +244,13 @@ export default function Navbar() {
                           title="Wonderland"
                           description="How to setup visually-stunning projects in minutes"
                         />
+
+                        <TitleDesc
+                          href="/customers/[slug]"
+                          as="/customers/dovetail"
+                          title="Dovetail"
+                          description="Why DatoCMS is their headless CMS of choice"
+                        />
                       </div>
                     </div>
                   </div>
