@@ -224,7 +224,7 @@ const Switch = ({ label, onChange, value }) => (
 
 export const getStaticProps = async ({ preview }) => {
   const { body: datoPlans } = await tiny.get({
-    url: `https://account-api.datocms.com/plans`,
+    url: `https://account-api.datocms.com/site-plans`,
     headers: { accept: 'application/json' },
   });
 
