@@ -77,6 +77,10 @@ module.exports = [
     destination: '/marketplace/plugins/i/:rest*',
   },
   {
+    source: '/docs/plugins/entry-point',
+    destination: '/docs/building-plugins/entry-point',
+  },
+  {
     source: '/docs/guides/offline-backups',
     destination: '/docs/import-and-export/export-data',
   },
