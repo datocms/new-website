@@ -17,13 +17,9 @@ import {
 import gql from 'graphql-tag';
 import tiny from 'tiny-json-http';
 import formatNumber from 'utils/formatNumber';
-import prettyBytes from 'utils/prettyBytes';
-import Check from 'public/icons/regular/check.svg';
-import Cross from 'public/icons/regular/times.svg';
-import Down from 'public/icons/regular/chevron-down.svg';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Space from 'components/Space';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
@@ -33,188 +29,12 @@ import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
 import { Badge } from 'components/PluginToolkit';
-
-const Plan = ({
-  name,
-  description,
-  price,
-  priceSubtitle,
-  bullets,
-  color,
-  planId,
-}) => (
-  <>
-    <div className={s.plan}>
-      <div className={s.planHeader}>
-        <div className={s.planName} style={{ color }}>
-          {name}
-        </div>
-        <div className={s.planDescription}>{description}</div>
-        <div className={s.planPriceContainer}>
-          <div className={s.planPriceKicker}>{price > 0 && 'From'}</div>
-          <div className={s.planPrice}>€{formatNumber(price)}</div>
-          <div className={s.planPriceSubtitle}>{priceSubtitle}</div>
-        </div>
-      </div>
-      <div className={s.planIncluded}>What's included?</div>
-      <div className={s.planBullets}>{bullets}</div>
-      <div className={s.planAction}>
-        {planId === 'enterprise' ? (
-          <Link href="/contact">
-            <Button block p="big" s="invert" as="a">
-              Contact us
-            </Button>
-          </Link>
-        ) : (
-          <Button
-            block
-            p="big"
-            s={price > 0 && 'invert'}
-            as="a"
-            href="https://dashboard.datocms.com/projects/browse/new"
-          >
-            {price === 0 ? 'Get started for free' : 'Buy plan'}
-          </Button>
-        )}
-      </div>
-    </div>
-  </>
-);
-
-const limitLabel = (limit) => {
-  if (limit === 'item_types') {
-    return 'models';
-  }
-
-  if (limit === 'build_triggers') {
-    return 'build triggers';
-  }
-
-  if (limit === 'traffic_bytes') {
-    return 'traffic';
-  }
-
-  if (limit === 'api_calls') {
-    return 'calls';
-  }
-
-  if (limit === 'mux_encoding_seconds') {
-    return 'footage';
-  }
-
-  if (limit === 'mux_streaming_seconds') {
-    return 'video delivered to visitors';
-  }
-
-  if (limit === 'items') {
-    return 'records';
-  }
-
-  if (limit === 'uploadable_bytes') {
-    return 'storage';
-  }
-
-  return limit;
-};
-
-const formatValue = (name, value) => {
-  if (name.endsWith('days')) {
-    return `${value} days`;
-  }
-
-  if (name.endsWith('seconds')) {
-    return value / 60 >= 5000 ? (
-      <>{formatNumber(parseInt(value / 60 / 60))}&nbsp;hrs</>
-    ) : (
-      <>{formatNumber(parseInt(value / 60))}&nbsp;mins</>
-    );
-  }
-
-  if (name.endsWith('bytes')) {
-    return prettyBytes(value);
-  }
-
-  if (Number.isInteger(value)) {
-    return formatNumber(value);
-  }
-
-  return value;
-};
-
-const hasUnit = (name) => {
-  return (
-    name.endsWith('days') || name.endsWith('seconds') || name.endsWith('bytes')
-  );
-};
-
-const ValueForLimit = ({ limit, plan, hint, suffix }) => {
-  if (plan.attributes && limit in plan.attributes) {
-    const value = plan.attributes[limit];
-
-    if (value === null) {
-      return <span>Unlimited</span>;
-    }
-
-    if (value === 0) {
-      return <span />;
-    }
-
-    if (value === true) {
-      return <Check className={s.check} />;
-    }
-
-    if (value === false) {
-      return <Cross className={s.cross} />;
-    }
-
-    return (
-      <span>
-        {formatValue(limit, value)}
-        {suffix}
-      </span>
-    );
-  }
-
-  const value = hint.plans[plan.id];
-
-  if (value === ':check:') {
-    return <Check className={s.check} />;
-  }
-
-  if (value === undefined) {
-    return <span>Custom</span>;
-  }
-
-  return (
-    <span>
-      {value ? (
-        <>
-          {value}
-          {suffix}
-        </>
-      ) : (
-        <Cross className={s.cross} />
-      )}
-    </span>
-  );
-};
-
-const ToggleQuota = ({ name, children }) => {
-  const [open, setOpen] = useState(false);
-  const toggle = useCallback((e) => {
-    e.preventDefault();
-    setOpen((s) => !s);
-  });
-  return (
-    <>
-      <a href="#" onClick={toggle} className={s.quotaName}>
-        <span>{name}</span>
-        <Down />
-      </a>
-      {open && <div className={s.quotaDescription}>{children}</div>}
-    </>
-  );
-};
+import {
+  hasUnit,
+  limitLabel,
+  formatValue,
+  perMonth,
+} from 'utils/planLimitsHelpers';
 
 const Switch = ({ label, onChange, value }) => (
   <div className={s.switchContainer} onClick={() => onChange(!value)}>
@@ -223,13 +43,15 @@ const Switch = ({ label, onChange, value }) => (
 );
 
 export const getStaticProps = async ({ preview }) => {
-  const { body: datoPlans } = await tiny.get({
-    url: `https://account-api.datocms.com/site-plans`,
+  const {
+    body: { data: datoPlans },
+  } = await tiny.get({
+    url: `https://account-api.datocms.com/account-plans`,
     headers: { accept: 'application/json' },
   });
 
   const {
-    data: { plans, hints, ...others },
+    data: { hints, ...others },
   } = await request({
     query: gql`
       {
@@ -237,17 +59,6 @@ export const getStaticProps = async ({ preview }) => {
           seo: _seoMetaTags {
             ...seoMetaTagsFields
           }
-        }
-        plans: allPlans {
-          apiId
-          name
-          color {
-            hex
-          }
-          description
-          bullets(markdown: true)
-          monthlyPrice
-          priceUnit
         }
         faqs: allFaqs {
           id
@@ -258,12 +69,6 @@ export const getStaticProps = async ({ preview }) => {
           apiId
           name
           description
-          plans {
-            plan {
-              apiId
-            }
-            value
-          }
         }
         review1: review(filter: { id: { eq: "3686622" } }) {
           ...reviewFields
@@ -276,33 +81,34 @@ export const getStaticProps = async ({ preview }) => {
       ${reviewFields}
       ${seoMetaTagsFields}
     `,
+    preview,
   });
+
+  const plan = datoPlans[0];
 
   return {
     props: {
       ...others,
       preview: preview || false,
-      plans: plans.map((datoPlan) => ({
-        ...(datoPlans.data.find((dp) => {
-          return dp.id === datoPlan.apiId;
-        }) || { id: 'enterprise' }),
-        cmsAttributes: datoPlan,
-      })),
-      hints: hints
-        .filter(
-          (hint) => !['roles', 'plugins', 'access_tokens'].includes(hint.apiId),
-        )
-        .reduce((acc, hint) => {
-          acc[hint.apiId] = {
-            name: hint.name,
-            description: hint.description,
-            plans: hint.plans.reduce((acc, plan) => {
-              acc[plan.plan.apiId || 'enterprise'] = plan.value;
-              return acc;
-            }, {}),
-          };
-          return acc;
-        }, {}),
+      plans: datoPlans.sort(
+        (a, b) => a.attributes.monthly_price - b.attributes.monthly_price,
+      ),
+      hints: hints.filter((hint) => {
+        const limit = plan.attributes.limits.find((l) => l.id === hint.apiId);
+
+        if (
+          !limit ||
+          !(
+            limit.type === 'shared_quota_metered_site_resource' ||
+            limit.id === 'support_level' ||
+            limit.extra_packets_available_in_some_plan
+          )
+        ) {
+          return null;
+        }
+
+        return true;
+      }),
     },
   };
 };
@@ -339,56 +145,229 @@ export default function Pricing({
         }
       />
 
-      <Switch
-        label={
-          <>
-            Annual pricing&nbsp;&nbsp;<Badge>50% OFF!</Badge>
-          </>
-        }
-        value={annualPricing}
-        onChange={setAnnualPricing}
-      />
-
-      <div className={s.plans}>
-        <div className={s.plansInner}>
-          {plans.map((plan) => (
-            <div key={plan.id} className={s.planContainer}>
-              <Plan
-                planId={plan.id}
-                name={plan.cmsAttributes.name}
-                color={plan.cmsAttributes.color.hex}
-                description={plan.cmsAttributes.description}
-                price={
-                  plan.cmsAttributes.monthlyPrice ||
-                  (annualPricing
-                    ? plan.attributes.yearly_price / 12
-                    : plan.attributes.monthly_price)
-                }
-                priceSubtitle={plan.cmsAttributes.priceUnit}
-                bullets={
-                  <SmartMarkdown>{plan.cmsAttributes.bullets}</SmartMarkdown>
-                }
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
       <Wrapper>
-        <div className={s.volume}>
-          <div className={s.volumeLeft}>
-            <strong>You're an agency?</strong> Contact us if you need to build
-            multiple projects at once: we can offer{' '}
-            <strong>up to 80% volume discount!</strong>
-          </div>
-          <div className={s.volumeRight}>
-            <Link href="/contact">
-              <Button as="a" p="small">
-                Get a quote
-              </Button>
-            </Link>
-          </div>
+        <div className={s.switchWrapper}>
+          <Switch
+            label={
+              <>
+                Annual pricing&nbsp;&nbsp;<Badge>50% OFF!</Badge>
+              </>
+            }
+            value={annualPricing}
+            onChange={setAnnualPricing}
+          />
         </div>
+      </Wrapper>
+      <div className={s.plansStrip}>
+        <Wrapper>
+          <div className={s.plansContainer}>
+            <div />
+            {plans.map((plan) => {
+              const price = annualPricing
+                ? plan.attributes.yearly_price / 12
+                : plan.attributes.monthly_price;
+              return (
+                <div className={s.plan}>
+                  <div
+                    className={s.planName}
+                    style={{ color: plan.attributes.color_hex }}
+                  >
+                    {plan.attributes.name}
+                  </div>
+                  <div className={s.planDescription}>
+                    {plan.attributes.description}
+                  </div>
+
+                  <div className={s.planPriceContainer}>
+                    <span className={s.planPriceKicker}>
+                      {price > 0 && 'from'}{' '}
+                    </span>
+                    <span className={s.planPrice}>€{formatNumber(price)}</span>
+                    <span className={s.planPricePerMonth}>/mo</span>
+                  </div>
+                  <div className={s.planAction}>
+                    <Button
+                      block
+                      s="invert"
+                      as="a"
+                      href="https://dashboard.datocms.com/projects/browse/new"
+                    >
+                      Try for free
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+            <div className={s.plan}>
+              <div className={s.planName}>Enterprise</div>
+              <div className={s.planDescription}>
+                For ultimate control, security and flexibility
+              </div>
+              <div className={s.planPriceContainer}>
+                <span className={s.planPrice}>Custom</span>
+              </div>
+              <div className={s.planAction}>
+                <Link href="/contact">
+                  <Button block s="invert" as="a">
+                    Contact us
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Wrapper>
+      </div>
+      <Wrapper>
+        {hints.map((hint) => {
+          const limitsWithExtras = plans
+            .map((plan) =>
+              plan.attributes.limits.find((l) => l.id === hint.apiId),
+            )
+            .filter((x) => x.extra_packet_price);
+
+          const extraPacketPrices = limitsWithExtras.map(
+            (l) => l.extra_packet_price,
+          );
+
+          const allSameExtras = extraPacketPrices.every(
+            (price) => price === extraPacketPrices[0],
+          );
+
+          const limitsWithExtrasToRender = allSameExtras
+            ? limitsWithExtras.slice(0, 1)
+            : limitsWithExtras;
+
+          return (
+            <div key={hint.apiId} className={s.limit}>
+              <div className={s.limitLegend}>{hint.name}</div>
+              {plans.map((plan) => {
+                const limit = plan.attributes.limits.find(
+                  (l) => l.id === hint.apiId,
+                );
+
+                let content;
+
+                if (limit.type === 'countable_system_limit') {
+                  content = formatValue(limit.id, limit.limit);
+                } else if (
+                  limit.type === 'per_site_quota_managed_site_resource'
+                ) {
+                  content = limit.extra_packet_amount ? (
+                    <>
+                      {perMonth(
+                        limit.id,
+                        formatValue(
+                          limit.id,
+                          limit.free_of_charge_per_site_usage,
+                        ),
+                      )}{' '}
+                      per project
+                    </>
+                  ) : (
+                    <>
+                      Up to{' '}
+                      {perMonth(
+                        limit.id,
+                        formatValue(
+                          limit.id,
+                          limit.free_of_charge_per_site_usage,
+                        ),
+                      )}{' '}
+                      per project
+                    </>
+                  );
+                } else if (
+                  limit.type === 'per_environment_quota_managed_site_resource'
+                ) {
+                  content = limit.extra_packet_amount ? (
+                    <>
+                      {perMonth(
+                        limit.id,
+                        formatValue(
+                          limit.id,
+                          limit.free_of_charge_per_environment_usage,
+                        ),
+                      )}{' '}
+                      included per project
+                    </>
+                  ) : (
+                    <>
+                      Up to{' '}
+                      {perMonth(
+                        limit.id,
+                        formatValue(
+                          limit.id,
+                          limit.free_of_charge_per_environment_usage,
+                        ),
+                      )}{' '}
+                      per project
+                    </>
+                  );
+                } else {
+                  content = limit.extra_packet_amount ? (
+                    <>
+                      {perMonth(
+                        limit.id,
+                        formatValue(limit.id, limit.free_of_charge_usage),
+                      )}{' '}
+                      included
+                    </>
+                  ) : (
+                    <>
+                      Up to{' '}
+                      {perMonth(
+                        limit.id,
+                        formatValue(limit.id, limit.free_of_charge_usage),
+                      )}
+                    </>
+                  );
+                }
+
+                return (
+                  <div
+                    key={plan.id}
+                    className={cn(s.limitPlan, {
+                      [s.limitPlanWithExtra]: !!limit.extra_packet_amount,
+                    })}
+                  >
+                    {content}
+                  </div>
+                );
+              })}
+              <div className={s.limitPlan}>Custom</div>
+              {limitsWithExtrasToRender.map((limit) => {
+                return (
+                  <div
+                    className={cn(s.limitExtra, {
+                      [s.limitExtraWide]: allSameExtras,
+                    })}
+                    style={
+                      allSameExtras
+                        ? {
+                            gridColumn: `3 / span ${limitsWithExtras.length}`,
+                          }
+                        : {}
+                    }
+                  >
+                    {limit.extra_packet_amount === 1 ? (
+                      <span>
+                        then €{limit.extra_packet_price} per extra{' '}
+                        {limitLabel(limit.id)}
+                      </span>
+                    ) : (
+                      <span>
+                        then €{limit.extra_packet_price} every{' '}
+                        {formatValue(limit.id, limit.extra_packet_amount)}
+                        {hasUnit(limit.id) ? ' of ' : ' '}
+                        extra {limitLabel(limit.id).replace(/_/g, ' ')}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
       </Wrapper>
 
       <Space top={2}>
@@ -456,87 +435,6 @@ export default function Pricing({
           title="We power experiences for over half a billion users"
           clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
         />
-      </Space>
-
-      <Space top={4}>
-        <InterstitialTitle style="two">Compare plans</InterstitialTitle>
-        <Wrapper>
-          <div className={s.compare}>
-            <table className={s.compareTable}>
-              <tbody>
-                <tr>
-                  <td />
-                  {plans.map((plan) => (
-                    <td key={plan.id} className={s.comparePlan}>
-                      {plan.cmsAttributes.name}
-                    </td>
-                  ))}
-                </tr>
-                {Object.entries(hints).map(([limit, hint]) => (
-                  <tr key={limit}>
-                    <td className={s.quota}>
-                      <ToggleQuota name={hint.name}>
-                        {hint.description}
-                      </ToggleQuota>
-                    </td>
-                    {plans.map((plan) => {
-                      const extraPacket =
-                        plan.attributes &&
-                        ((plan.attributes.extra_packets &&
-                          plan.attributes.extra_packets[limit]) ||
-                          (plan.attributes.auto_packets &&
-                            plan.attributes.auto_packets[limit]));
-
-                      return (
-                        <td
-                          key={`hint-plan-${plan.id}`}
-                          className={s.quotaValue}
-                        >
-                          <div>
-                            <ValueForLimit
-                              limit={limit}
-                              hint={hint}
-                              plan={plan}
-                              suffix={
-                                [
-                                  'mux_streaming_seconds',
-                                  'mux_encoding_seconds',
-                                  'api_calls',
-                                  'traffic_bytes',
-                                ].includes(limit) && '/month'
-                              }
-                            />
-                          </div>
-                          {extraPacket && (
-                            <div className={s.quotaExtra}>
-                              {extraPacket.amount_per_packet === 1 ? (
-                                <>
-                                  Extra {limitLabel(limit)} for €
-                                  {extraPacket.price} each
-                                </>
-                              ) : (
-                                <>
-                                  €{extraPacket.price} every{' '}
-                                  {formatValue(
-                                    limit,
-                                    extraPacket.amount_per_packet,
-                                  )}
-                                  {hasUnit(limit) ? ' of ' : ' '}
-                                  additional{' '}
-                                  {limitLabel(limit).replace(/_/g, ' ')}
-                                </>
-                              )}
-                            </div>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Wrapper>
       </Space>
 
       <Space top={3}>

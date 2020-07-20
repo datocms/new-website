@@ -17,7 +17,6 @@ body {
   font-family: var(--font-sans);
   font-size: rfs(18px);
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   background: white;
 }
 

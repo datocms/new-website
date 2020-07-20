@@ -1,4 +1,13 @@
-.plans {
+.limit,
+.plansContainer,
+.switchWrapper {
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 4fr);
+  align-items: center;
+  column-gap: 15px;
+}
+
+.plansStrip {
   position: relative;
 
   &:before {
@@ -9,191 +18,120 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 50%;
-    height: 70%;
-    transform: translateY(-50%);
+    top: 20%;
+    bottom: 20%;
     z-index: -1;
   }
 }
 
-.plansInner {
-  display: flex;
-  overflow-x: auto;
-  padding: 20px 0 60px var(--page-margin);
-  max-width: var(--page-width-with-margin);
-  margin-left: auto;
-  margin-right: auto;
-  align-items: stretch;
-  width: 100%;
-}
-
-.planContainer {
-  flex: 1;
-  min-width: 320px;
-  padding-right: var(--page-margin);
+.plansContainer {
+  padding-bottom: 40px;
 }
 
 .plan {
-  box-shadow: var(--box-shadow);
-  background: white;
-  border-radius: 5px;
   text-align: center;
-  padding-top: 40px;
-}
-
-.planHeader {
-  padding: 0 50px 30px;
+  box-shadow: var(--box-shadow);
+  padding: 40px 15px 15px;
+  border-radius: 10px;
+  background: white;
 }
 
 .planName {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  font-size: rfs(25px);
-  margin-bottom: 10px;
+  font-size: rfs(23px);
+  margin-bottom: 15px;
 }
 
 .planDescription {
   color: var(--light-body-color);
   font-size: 0.9em;
+  margin-bottom: 30px;
 }
 
 .planPriceContainer {
-  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 .planPriceKicker {
   margin-top: 5px;
   color: var(--light-body-color);
-  font-size: 0.9em;
-  &:before {
-    content: 'x';
-    color: transparent;
-  }
 }
 
 .planPrice {
-  font-size: rfs(60px);
-  font-weight: bold;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.planPriceSubtitle {
-  color: var(--light-body-color);
-  font-size: 0.9em;
-}
-
-.planIncluded {
   font-weight: bold;
   letter-spacing: -0.02em;
-  text-treansform: uppercase;
+  font-size: rfs(35px);
+}
+
+.planPricePerMonth {
   color: var(--light-body-color);
+}
+
+.limit {
+  padding: 20px 0;
   text-align: center;
-  margin: 20px 0;
-}
-
-.planAction {
-  padding: 40px 40px;
-}
-
-.planBullets {
-  text-align: center;
-
-  ul,
-  li {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    border-top: 1px solid var(--border-color);
-    padding: 15px 20px;
-    font-size: 0.9em;
-  }
-}
-
-.compare {
-  overflow: auto;
   font-size: 0.9em;
-  margin-left: calc(var(--page-margin) * -1);
-  margin-right: calc(var(--page-margin) * -1);
+  border-radius: 10px;
 
-  td {
-    padding: 12px;
-    border-bottom: 1px solid var(--border-color);
-    height: 4em;
+  &:last-child {
+    border-bottom: 0;
   }
 
-  @media (width > 900px) {
-    font-size: 1em;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-
-    td {
-      padding: 20px;
-      height: 6em;
-    }
+  &:nth-child(2n) {
+    background: var(--highlight-bg-color);
   }
 }
 
-.quota {
-  width: 40%;
-}
-
-.quotaValue {
-  text-align: center;
-  width: 20%;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.quotaName {
+.limitLegend {
+  text-align: left;
+  grid-row: 1 / span 2;
+  padding-left: 20px;
   font-weight: bold;
-  color: inherit;
-  display: inline-block;
-  text-decoration: none;
-  white-space: nowrap;
-
-  span {
-    white-space: normal;
-  }
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  svg {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    fill: var(--light-body-color);
-  }
 }
 
-.quotaExtra {
-  font-size: 0.8em;
-  color: var(--light-body-color);
-  margin: 0 auto;
+.limitPlan {
+  grid-row: 1 / span 2;
+}
+
+.limitPlanWithExtra {
+  grid-row: 1 / span 1;
+}
+
+.limitExtra {
   margin-top: 10px;
-}
-
-.quotaDescription {
-  font-size: 0.8em;
+  flex: 8;
   color: var(--light-body-color);
-  max-width: 330px;
-  margin-top: 5px;
+  font-size: 0.8em;
 }
 
-.comparePlan {
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  text-align: center;
+.limitExtraWide span {
+  position: relative;
+  padding: 0 15px;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 1px;
+    background: var(--border-color);
+    top: 50%;
+  }
+
+  &:before {
+    width: 30px;
+    right: 100%;
+  }
+
+  &:after {
+    left: 100%;
+    width: 30px;
+  }
 }
+
+/* --------------------------------------------------- */
 
 .stdTitle {
   font-size: rfs(20px);
@@ -276,10 +214,11 @@
 .switchContainer {
   display: flex;
   justify-content: center;
-  margin: rfs(70px) 0;
+  margin: rfs(70px) 0 rfs(50px);
   align-items: center;
   cursor: pointer;
   font-size: rfs(20px);
+  grid-column: 2 / span 4;
 }
 
 .switch {
@@ -309,40 +248,5 @@
 
   &:before {
     left: calc(100% - 23px);
-  }
-}
-
-.cross {
-  fill: #fa1607;
-}
-
-.check {
-  fill: #16ae3c;
-}
-
-.volume {
-  background: #fdf2ed;
-  padding: 20px;
-  font-size: 0.9em;
-  text-align: center;
-
-  @media (width > 1100px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  a {
-    color: inherit;
-  }
-}
-
-.volumeRight {
-  margin-top: 15px;
-
-  @media (width > 1100px) {
-    text-align: right;
-    margin-top: 0;
-    margin-left: 30px;
   }
 }
