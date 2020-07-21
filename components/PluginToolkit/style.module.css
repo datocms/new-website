@@ -43,12 +43,12 @@
 
 .badge {
   vertical-align: super;
-  font-size: 14px;
   letter-spacing: 0;
   background: #f4cf58;
-  padding: 4px 12px;
+  padding: 0.2em 0.8em 0.1em;
   border-radius: 40px;
   letter-spacing: -0.02em;
+  font-size: min(0.7em, 14px);
   white-space: nowrap;
   font-weight: bold;
   color: var(--base-body-color);

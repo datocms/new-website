@@ -32,6 +32,7 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import SuccessIcon from 'public/icons/regular/check.svg';
 import Bullets from 'components/Bullets';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import { Badge } from 'components/PluginToolkit';
 
 export const getStaticProps = async ({ preview }) => {
   const {
@@ -240,6 +241,14 @@ export default function Pricing({
                     })}
                   >
                     {formatLimit(limit)}
+                    {limit.id === 'sites' &&
+                      limit.free_of_charge_usage > 1 &&
+                      plan.attributes.monthly_price > 0 && (
+                        <>
+                          {' '}
+                          <Badge>NEW!</Badge>
+                        </>
+                      )}
                   </div>
                 );
               })}

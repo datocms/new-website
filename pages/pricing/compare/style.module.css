@@ -41,7 +41,5 @@
   .extra {
     color: var(--light-body-color);
     font-size: 0.8em;
-    max-width: 120px;
-    margin: 0 auto;
   }
 }

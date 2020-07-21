@@ -167,11 +167,11 @@ export const formatExtra = (limit) => {
 
   return limit.extra_packet_amount === 1 ? (
     <>
-      €{limit.extra_packet_price} per extra {limitLabel(limit.id)}
+      €{limit.extra_packet_price}/mo per extra {limitLabel(limit.id)}
     </>
   ) : (
     <>
-      €{limit.extra_packet_price} every{' '}
+      €{limit.extra_packet_price}/mo every{' '}
       {formatValue(limit.id, limit.extra_packet_amount)}
       {hasUnit(limit.id) ? ' of ' : ' '}
       extra {limitLabel(limit.id).replace(/_/g, ' ')}
