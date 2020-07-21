@@ -1,10 +1,17 @@
 .limit,
-.plansContainer,
-.switchWrapper {
-  display: grid;
-  grid-template-columns: 2fr repeat(4, 4fr);
-  align-items: center;
-  column-gap: 15px;
+.plansContainer {
+  @media screen and (min-width: 650px) {
+    display: grid;
+    grid-template-columns: 150px repeat(3, minmax(200px, 5fr));
+    align-items: center;
+    column-gap: 30px;
+  }
+
+  @media screen and (max-width: 649px) {
+    > * {
+      margin-bottom: 40px;
+    }
+  }
 }
 
 .plansStrip {
@@ -31,17 +38,24 @@
 .plan {
   text-align: center;
   box-shadow: var(--box-shadow);
-  padding: 40px 15px 15px;
+  padding: 40px 20px 20px;
   border-radius: 10px;
   background: white;
+}
+
+.planImage {
+  width: 80px;
+  height: 60px;
+  background: var(--light-bg-color);
+  margin: 0 auto 40px;
 }
 
 .planName {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  font-size: rfs(23px);
-  margin-bottom: 15px;
+  font-size: rfs(28px);
+  margin-bottom: 10px;
 }
 
 .planDescription {
@@ -69,11 +83,48 @@
   color: var(--light-body-color);
 }
 
+.planYearlyPrice {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.9em;
+}
+
+.planLimits {
+  margin-bottom: 30px;
+
+  @media screen and (min-width: 650px) {
+    display: none;
+  }
+}
+
+.planLimit {
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.planLimitName {
+  color: var(--light-body-color);
+  margin-bottom: 4px;
+}
+
+.planLimitExtra {
+  color: var(--light-body-color);
+  font-size: 0.8em;
+}
+
 .limit {
   padding: 20px 0;
   text-align: center;
   font-size: 0.9em;
   border-radius: 10px;
+  display: none;
+
+  @media screen and (min-width: 650px) {
+    display: grid;
+  }
 
   &:last-child {
     border-bottom: 0;
@@ -211,42 +262,56 @@
   }
 }
 
-.switchContainer {
-  display: flex;
-  justify-content: center;
-  margin: rfs(70px) 0 rfs(50px);
-  align-items: center;
-  cursor: pointer;
-  font-size: rfs(20px);
-  grid-column: 2 / span 4;
-}
+.enterprise {
+  box-shadow: var(--box-shadow);
+  padding: rfs(40px);
+  background: white;
 
-.switch {
-  height: 25px;
-  width: 50px;
-  position: relative;
-  border-radius: 40px;
-  background: var(--extra-light-body-color);
-  transition: all 0.2s ease-in-out;
-  margin-right: 13px;
-
-  &:before {
-    content: '';
-    height: 21px;
-    width: 21px;
-    border-radius: 40px;
-    position: absolute;
-    left: 2px;
-    top: 2px;
-    background: var(--light-bg-color);
-    transition: all 0.2s ease-in-out;
+  @media screen and (width > 650px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 40px;
   }
 }
 
-.switchOn {
-  background: var(--azure-color);
+.enterpriseGroup {
+  margin-bottom: 30px;
 
-  &:before {
-    left: calc(100% - 23px);
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.enterpriseGroupTitle {
+  font-weight: bold;
+  font-size: rfs(25px);
+  margin-bottom: rfs(20px);
+}
+
+.buttonGroup {
+  margin-top: 20px;
+  display: inline-grid;
+  column-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.fullComparison {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: rfs(30px);
+
+  svg {
+    height: 0.7em;
+    margin-left: 10px;
+    fill: var(--accent-color);
+    position: relative;
+  }
+
+  &:hover svg {
+    left: 3px;
   }
 }

@@ -1,5 +1,7 @@
 import prettyBytes from 'utils/prettyBytes';
 import prettyNumber from 'utils/prettyNumber';
+import SuccessIcon from 'public/icons/regular/check.svg';
+import WarningIcon from 'public/icons/regular/times.svg';
 
 export const hasUnit = (name) => {
   return (
@@ -94,4 +96,114 @@ export const perMonth = (name, value) => {
   }
 
   return value;
+};
+
+export const formatLimit = (limit) => {
+  if (['activable_feature', 'boolean_system_limit'].includes(limit.type)) {
+    return formatLimitRaw(limit);
+  }
+
+  if (limit.type === 'countable_system_limit') {
+    return formatLimitRaw(limit);
+  }
+
+  if (limit.type === 'per_site_quota_managed_site_resource') {
+    return limit.extra_packet_amount ? (
+      <>{formatLimitRaw(limit)} per project</>
+    ) : (
+      <>Up to {formatLimitRaw(limit)} per project</>
+    );
+  }
+
+  if (limit.type === 'per_environment_quota_managed_site_resource') {
+    return limit.extra_packet_amount ? (
+      <>{formatLimitRaw(limit)} included per project</>
+    ) : (
+      <>Up to {formatLimitRaw(limit)} per project</>
+    );
+  }
+
+  return limit.extra_packet_amount ? (
+    <>{formatLimitRaw(limit)} included</>
+  ) : (
+    <>Up to {formatLimitRaw(limit)}</>
+  );
+};
+
+export const formatLimitRaw = (limit) => {
+  if (['activable_feature', 'boolean_system_limit'].includes(limit.type)) {
+    return limit.available ? (
+      <SuccessIcon style={{ fill: '#72e8c1' }} />
+    ) : (
+      <WarningIcon style={{ fill: '#bebebecc' }} />
+    );
+  }
+
+  if (limit.type === 'countable_system_limit') {
+    return formatValue(limit.id, limit.limit);
+  }
+
+  if (limit.type === 'per_site_quota_managed_site_resource') {
+    return perMonth(
+      limit.id,
+      formatValue(limit.id, limit.free_of_charge_per_site_usage),
+    );
+  }
+
+  if (limit.type === 'per_environment_quota_managed_site_resource') {
+    return perMonth(
+      limit.id,
+      formatValue(limit.id, limit.free_of_charge_per_environment_usage),
+    );
+  }
+
+  return perMonth(limit.id, formatValue(limit.id, limit.free_of_charge_usage));
+};
+
+export const formatExtra = (limit) => {
+  if (!limit.extra_packet_amount) {
+    return null;
+  }
+
+  return limit.extra_packet_amount === 1 ? (
+    <>
+      €{limit.extra_packet_price} per extra {limitLabel(limit.id)}
+    </>
+  ) : (
+    <>
+      €{limit.extra_packet_price} every{' '}
+      {formatValue(limit.id, limit.extra_packet_amount)}
+      {hasUnit(limit.id) ? ' of ' : ' '}
+      extra {limitLabel(limit.id).replace(/_/g, ' ')}
+    </>
+  );
+};
+
+export const limitType = (type) => {
+  switch (type) {
+    case 'account_managed_resource': {
+      return 'Projects';
+    }
+    case 'activable_feature': {
+      return 'Activable features';
+    }
+    case 'boolean_system_limit': {
+      return 'Available features';
+    }
+    case 'countable_system_limit': {
+      return 'Plan limits';
+    }
+    case 'per_environment_quota_managed_site_resource': {
+      return 'Per-environment limits';
+    }
+    case 'per_site_quota_managed_site_resource': {
+      return 'Per-project limits';
+    }
+    case 'shared_quota_managed_site_resource': {
+      return 'Shared resources';
+    }
+    case 'shared_quota_metered_site_resource': {
+      return 'Shared resources';
+    }
+  }
 };

@@ -12,7 +12,7 @@
     font-family: var(--font-serif);
     content: '\201C';
     color: var(--accent-color);
-    font-size: 250px;
+    font-size: rfs(250px);
     line-height: 0.3;
     transform: translateX(-50%);
   }
@@ -37,11 +37,12 @@
 
 .image {
   border-radius: 400px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
   width: 150px;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
 
   @media (width > 700px) {
+    margin-left: 0;
     margin-bottom: 0;
     margin-right: 40px;
   }

@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
 import useComponentSize from '@rehooks/component-size';
-import { useDebounce } from 'use-debounce';
 
 const BackgroundImage = ({ src, scale = 1.0, ...other }) => {
   const imageLoader = useRef(typeof Image === 'function' ? new Image() : null);

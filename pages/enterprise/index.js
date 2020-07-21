@@ -87,7 +87,7 @@ function Enterprise({ page, review1, review2 }) {
           description="Add a DatoCMS integration expert to your project to help you jumpstart your architecture and get running faster."
         />
         <Point
-          title="Custom SLA"
+          title="Guaranteed SLA"
           description="We can tailor a solution to your specific use case, with dedicated priority, 24/7 support, and real-time scaling"
         />
       </EnterpriseStrip>
