@@ -52,10 +52,9 @@ const normalizeSchema = (resource, resourceSchema) => ({
 });
 
 export default async function buildCmaResources(resource) {
-  const { body: unreferencedSchema } = await tiny.get({
-    url: 'https://site-api.datocms.com/docs/site-api-hyperschema.json',
-    // url: 'http://localhost:8080/docs/site-api-hyperschema.json',
-  });
+  const url = 'https://site-api.datocms.com/docs/site-api-hyperschema.json';
+  // const url = 'http://localhost:3001/docs/site-api-hyperschema.json';
+  const { body: unreferencedSchema } = await tiny.get({ url });
 
   const schema = await parser.dereference(unreferencedSchema);
   const resources = Object.keys(schema.properties);

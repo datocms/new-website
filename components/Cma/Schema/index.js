@@ -22,9 +22,7 @@ const Button = ({ children, label, open, onToggle }) => (
 
 function Properties({ prefix, schema, level, hideRequired }) {
   const required = schema.required || [];
-  const deprecated = Object.entries(schema.properties).filter(
-    ([name, schema]) => !required.includes(name) && schema.deprecated,
-  );
+
   const content = (
     <>
       {required.map((name) => (
@@ -40,7 +38,10 @@ function Properties({ prefix, schema, level, hideRequired }) {
       ))}
       {Object.entries(schema.properties)
         .filter(
-          ([name, schema]) => !required.includes(name) && !schema.deprecated,
+          ([name, schema]) =>
+            !required.includes(name) &&
+            !schema.deprecated &&
+            !schema.hideFromDocs,
         )
         .map(([name, schema]) => (
           <JsonSchema
@@ -52,26 +53,38 @@ function Properties({ prefix, schema, level, hideRequired }) {
             level={level + 1}
           />
         ))}
-
-      {deprecated.length > 0 && (
-        <>
-          <div className={s.deprecatedTitle}>Deprecated</div>
-          {deprecated.map(([name, schema]) => (
-            <JsonSchema
-              key={name}
-              hideRequired={hideRequired}
-              name={name}
-              prefix={prefix}
-              schema={schema}
-              level={level + 1}
-            />
-          ))}
-        </>
-      )}
     </>
   );
 
   return level >= 1 ? <div className={s.properties}>{content}</div> : content;
+}
+
+function Deprecated({ prefix, schema, level, hideRequired }) {
+  const required = schema.required || [];
+
+  const deprecated = Object.entries(schema.properties).filter(
+    ([name, schema]) => !required.includes(name) && schema.deprecated,
+  );
+
+  if (deprecated.length == 0) {
+    return null;
+  }
+
+  return (
+    <>
+      <div className={s.deprecatedTitle}>Deprecated</div>
+      {deprecated.map(([name, schema]) => (
+        <JsonSchema
+          key={name}
+          hideRequired={hideRequired}
+          name={name}
+          prefix={prefix}
+          schema={schema}
+          level={level + 1}
+        />
+      ))}
+    </>
+  );
 }
 
 function Enum({ values, description }) {
@@ -363,6 +376,15 @@ export function Schema({ title, schema, showId, hideRequired }) {
               hideRequired={hideRequired}
             />
           )}
+          {schema.properties.attributes &&
+            schema.properties.attributes.properties && (
+              <Deprecated
+                level={0}
+                prefix={language === 'http' ? 'attributes.' : null}
+                hideRequired={hideRequired}
+                schema={schema.properties.attributes}
+              />
+            )}
         </>
       )}
     </LanguageConsumer>
