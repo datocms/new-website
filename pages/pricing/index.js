@@ -121,11 +121,13 @@ const PlanBox = ({ plan, hints }) => {
         <span className={s.planPrice}>€{formatNumber(monthlyPrice)}</span>
         <span className={s.planPricePerMonth}>/month</span>
 
-        {monthlyPrice > 0 && (
+        {monthlyPrice > 0 ? (
           <span className={s.planYearlyPrice}>
             or <strong>€{formatNumber(yearlyPrice)}/month</strong> if paying
             annually
           </span>
+        ) : (
+          <span className={s.planYearlyPrice}>No credit card required</span>
         )}
       </div>
 
@@ -255,6 +257,7 @@ export default function Pricing({
               {limitsWithExtrasToRender.map((limit) => {
                 return (
                   <div
+                    key={`${limit.id}-${limit.extra_packet_price}`}
                     className={cn(s.limitExtra, {
                       [s.limitExtraWide]: allSameExtras,
                     })}
