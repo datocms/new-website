@@ -3,7 +3,10 @@ export default function schemaExampleFor(schema, pagination = true) {
     return null;
   }
 
-  if (schema.hasOwnProperty('deprecated')) {
+  if (
+    schema.hasOwnProperty('deprecated') ||
+    schema.hasOwnProperty('hideFromDocs')
+  ) {
     return;
   }
 
