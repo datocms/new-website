@@ -280,6 +280,10 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  @media screen and (width > 650px) {
+    margin-bottom: 0;
+  }
 }
 
 .enterpriseGroupTitle {
