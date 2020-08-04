@@ -20,6 +20,7 @@ export default function TalkWithUs({
     companyRevenue: '',
     numberEmployees: '',
     body: '',
+    errorId: '',
     issueType: issueType,
     ...initialValues,
   };
@@ -163,6 +164,10 @@ export default function TalkWithUs({
           validations={{ required: 'Required' }}
           as={<Textarea />}
         />
+
+        {initialValues.errorId && (
+          <Field name="errorId" label="Error ID" readOnly />
+        )}
 
         <Field
           name="uploads"
