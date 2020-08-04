@@ -32,7 +32,7 @@ export default function Layout({ preview, children }) {
           name="google-site-verification"
           content="wfOsq57h3qCQUTbHcX-4qEEY07vgi4KgH9rdT1ywwwc"
         />
-        {[16, 32, 96, 192].map(size => (
+        {[16, 32, 96, 192].map((size) => (
           <link
             rel="icon"
             sizes="16x16"

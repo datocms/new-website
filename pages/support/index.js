@@ -49,7 +49,7 @@ export default function Support({ preview, topics }) {
   const [formVisible, setFormVisible] = useState(false);
 
   const selectedTopicSlugs = (router.query.topics || '').split('/');
-  const { email, message, projectUrl } = router.query;
+  const { email, errorId, projectUrl } = router.query;
 
   const setSelectedTopicSlugs = (slugs) => {
     const url = `/support?topics=${slugs.join('/')}`;
@@ -216,7 +216,7 @@ export default function Support({ preview, topics }) {
                     <TalkWithUs
                       initialValues={{
                         email,
-                        body: message,
+                        errorId,
                         project: projectUrl,
                       }}
                       contactFormType={leafTopic.contactFormType}

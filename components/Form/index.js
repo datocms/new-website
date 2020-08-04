@@ -20,6 +20,7 @@ export const Field = ({
   as,
   type,
   multiple,
+  readOnly,
 }) => {
   const { register, control, watch, errors } = useFormContext();
   const ref = register(validations);
@@ -33,6 +34,7 @@ export const Field = ({
       ref={ref}
       type={type}
       multiple={multiple}
+      readOnly={readOnly}
     />
   );
 
@@ -44,7 +46,7 @@ export const Field = ({
         )}
         <select name={name} id={name} ref={ref}>
           <option value=""></option>
-          {options.map(option => {
+          {options.map((option) => {
             const value = typeof option === 'string' ? option : option.value;
             const label = typeof option === 'string' ? option : option.label;
             return (
