@@ -8,7 +8,7 @@ import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
-import Linkedin from 'public/images/logos/linkedin.svg';
+import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
 import Head from 'next/head';
 
@@ -55,7 +55,7 @@ export default function Support() {
       </div>
       <LogosBar
         title="We power experiences for over half a billion users"
-        clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
+        clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
       />
     </Layout>
   );

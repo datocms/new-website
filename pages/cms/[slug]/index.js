@@ -33,7 +33,7 @@ import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
-import Linkedin from 'public/images/logos/linkedin.svg';
+import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
 import TryDemoCta from 'components/TryDemoCta';
 import Space from 'components/Space';
@@ -498,7 +498,7 @@ export default function UseCase({ landing, websites, preview }) {
                         Hashicorp,
                         Verizon,
                         Nike,
-                        Linkedin,
+                        Vercel,
                       ]}
                     />
                   </Space>

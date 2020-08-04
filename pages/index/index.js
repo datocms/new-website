@@ -24,10 +24,10 @@ import WarningIcon from 'public/icons/regular/times.svg';
 import SuccessIcon from 'public/icons/regular/check.svg';
 
 import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Vercel from 'public/images/logos/vercel.svg';
 import Dropbox from 'public/images/logos/dropbox.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Vmware from 'public/images/logos/vmware.svg';
-import Linkedin from 'public/images/logos/linkedin.svg';
 import Wonderland from 'public/images/logos/wonderland.svg';
 import Chillys from 'public/images/logos/chillys.svg';
 import MatterSupply from 'public/images/logos/matter-supply.svg';
@@ -93,7 +93,7 @@ function Homepage({ successStories, preview, page }) {
         </Checks>
       </Hero>
 
-      <LogosBar clients={[Dropbox, Hashicorp, Verizon, Vmware, Linkedin]} />
+      <LogosBar clients={[Vercel, Dropbox, Hashicorp, Verizon, Vmware]} />
 
       <Space top={2}>
         <InterstitialTitle subtitle="Three symptoms to&nbsp;watch&nbsp;out">

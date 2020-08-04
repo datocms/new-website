@@ -20,7 +20,7 @@ import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
-import Linkedin from 'public/images/logos/linkedin.svg';
+import Vercel from 'public/images/logos/vercel.svg';
 
 import s from './style.module.css';
 
@@ -71,7 +71,7 @@ function Enterprise({ page, review1, review2 }) {
             with our Content Delivery API
           </>
         }
-        clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
+        clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
       />
 
       <EnterpriseStrip
