@@ -126,7 +126,7 @@
 
   .footer {
     border-top: 1px solid var(--border-color);
-    padding: 50px 0;
+    padding: 50px var(--page-margin);
     margin-top: 50px;
   }
 }
@@ -155,6 +155,10 @@
 
   .mainHeader {
     width: 1010px;
+  }
+
+  .footer {
+    padding: 50px 0;
   }
 }
 
