@@ -115,8 +115,9 @@ export function FormInner({ children, defaultValues, action, submitLabel }) {
   });
   const { handleSubmit } = methods;
 
-  const onSubmit = (values, event) => {
-    event.nativeEvent.currentTarget.submit();
+  const onSubmit = async (values, event) => {
+    const done = await event.nativeEvent.currentTarget.submit();
+    console.log('ho fatto!', done);
   };
 
   return (

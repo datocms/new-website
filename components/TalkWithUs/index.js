@@ -34,6 +34,7 @@ export default function TalkWithUs({
   }
 
   function frontUrl(contactFormType) {
+    // return 'https://support-form.free.beeceptor.com';
     if (contactFormType == 'sales') {
       return 'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/4GuYjvVpHX6Xqau-2EggC1eKeg0Iw_fMbehg2EbuLpRQARK6OetUIsAzCTs5-NdwQS_X02Qo1vdMMh6aNGLiySEIPM3EqvAkgNvPW-dQ6BdvbK4bXw1qwh3D2i5j';
     } else {
