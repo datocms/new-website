@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 30px;
+
+  @media (width > 900px) {
+    margin-top: 60px;
+  }
+}
+
+.logo {
+  display: block;
+  text-align: center;
+  margin-bottom: 30px;
+  @media (width > 900px) {
+    margin: 0;
+  }
+
+  svg {
+    height: 50px;
+    fill: var(--light-body-color);
+    max-width: 100px;
+
+    &:hover {
+      fill: var(--azure-color);
+    }
+  }
+}
