@@ -18,11 +18,7 @@ export default function ImageFigure({ data, imageClassName }) {
         <Image className={imageClassName} data={data.responsiveImage} />
       )}
       {data.format !== 'gif' && !data.responsiveImage && (
-        <img
-          alt={data.alt}
-          style={{ maxWidth: `${data.width}px` }}
-          src={`${data.url}?auto=format&fit=max&w=900`}
-        />
+        <img alt={data.alt} src={`${data.url}?auto=format&fit=max&w=900`} />
       )}
       {data.title && <figcaption>{data.title}</figcaption>}
     </figure>
