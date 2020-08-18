@@ -129,10 +129,12 @@ export default function TalkWithUs({
                 name="country"
                 label="Country"
                 validations={{ required: 'Required' }}
-                options={getData().map(({ code, name }) => ({
-                  value: code,
-                  label: name,
-                }))}
+                options={getData()
+                  .map(({ code, name }) => ({
+                    value: code,
+                    label: name,
+                  }))
+                  .sort((a, b) => a.label.localeCompare(b.label))}
               />
             </div>
             <div className={s.formCols}>
