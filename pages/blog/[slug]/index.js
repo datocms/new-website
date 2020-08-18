@@ -25,7 +25,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'slug',
-  ({ posts }) => posts.map(p => p.slug),
+  ({ posts }) => posts.map((p) => p.slug),
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -49,6 +49,8 @@ export const getStaticProps = gqlStaticProps(
             image {
               format
               width
+              title
+              alt
               responsiveImage(imgixParams: { w: 810 }) {
                 ...imageFields
               }
