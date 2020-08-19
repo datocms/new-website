@@ -38,7 +38,7 @@ Error.getInitialProps = ({ res, err }) => {
       captureUncaught: true,
       captureUnhandledRejections: true,
     });
-    rollbar.error(err, req, (rollbarError) => {
+    rollbar.error(err, res, (rollbarError) => {
       if (rollbarError) {
         console.error('Rollbar error reporting failed:');
         console.error(rollbarError);
