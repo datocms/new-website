@@ -35,7 +35,7 @@ export const getStaticProps = async ({ preview }) => {
   } = await request({
     query: gql`
       {
-        hints: allPricingHints {
+        hints: allPricingHints(first: 100) {
           apiId
           name
           description
@@ -79,6 +79,8 @@ export default function ComparePricing({ hints, plans, preview }) {
                         limit.type,
                       )
                     ? 'boolean_system_limit'
+                    : limit.type === 'countable_system_limit'
+                    ? 'per_site_quota_managed_site_resource'
                     : limit.type,
               ),
             ).map(([group, limits]) => (

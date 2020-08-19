@@ -130,13 +130,12 @@ export const formatLimit = (limit) => {
   );
 };
 
+const successIcon = <SuccessIcon style={{ fill: '#72e8c1' }} />;
+const warningIcon = <WarningIcon style={{ fill: '#bebebecc' }} />;
+
 export const formatLimitRaw = (limit) => {
   if (['activable_feature', 'boolean_system_limit'].includes(limit.type)) {
-    return limit.available ? (
-      <SuccessIcon style={{ fill: '#72e8c1' }} />
-    ) : (
-      <WarningIcon style={{ fill: '#bebebecc' }} />
-    );
+    return limit.available ? successIcon : warningIcon;
   }
 
   if (limit.type === 'countable_system_limit') {
