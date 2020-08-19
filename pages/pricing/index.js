@@ -111,7 +111,6 @@ const PlanBox = ({ plan, hints }) => {
 
   return (
     <div key={plan.id} className={s.plan}>
-      <div className={s.planImage} />
       <div className={s.planName} style={{ color: plan.attributes.color_hex }}>
         {plan.attributes.name}
       </div>
