@@ -33,6 +33,11 @@ import SuccessIcon from 'public/icons/regular/check.svg';
 import Bullets from 'components/Bullets';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import { Badge } from 'components/PluginToolkit';
+import Tier1 from 'public/images/tiers/tier-1.svg';
+import Tier2 from 'public/images/tiers/tier-2.svg';
+import Tier3 from 'public/images/tiers/tier-3.svg';
+
+const TierIcons = [Tier1, Tier2, Tier3];
 
 export const getStaticProps = async ({ preview }) => {
   const {
@@ -105,12 +110,13 @@ export const getStaticProps = async ({ preview }) => {
   };
 };
 
-const PlanBox = ({ plan, hints }) => {
+const PlanBox = ({ plan, hints, icon: Icon }) => {
   const monthlyPrice = plan.attributes.monthly_price;
   const yearlyPrice = plan.attributes.yearly_price / 12;
 
   return (
     <div key={plan.id} className={s.plan}>
+      <Icon className={s.planImage} />
       <div className={s.planName} style={{ color: plan.attributes.color_hex }}>
         {plan.attributes.name}
       </div>
@@ -199,8 +205,13 @@ export default function Pricing({
           <Wrapper>
             <div className={s.plansContainer}>
               <div />
-              {plans.map((plan) => (
-                <PlanBox key={plan.id} plan={plan} hints={hints} />
+              {plans.map((plan, index) => (
+                <PlanBox
+                  key={plan.id}
+                  plan={plan}
+                  hints={hints}
+                  icon={TierIcons[index]}
+                />
               ))}
             </div>
           </Wrapper>
