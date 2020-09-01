@@ -6,7 +6,8 @@ import {
 import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
 import docHref from 'utils/docHref';
-import { parse } from 'flatted/cjs';
+import { parse } from 'flatted';
+
 import { useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';

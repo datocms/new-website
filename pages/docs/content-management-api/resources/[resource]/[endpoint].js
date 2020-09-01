@@ -5,7 +5,8 @@ import {
 } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
-import { parse } from 'flatted/cjs';
+import { parse } from 'flatted';
+
 import { useMemo } from 'react';
 import Head from 'next/head';
 import React from 'react';
