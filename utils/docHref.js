@@ -1,4 +1,4 @@
-export default (url) => {
+export default function docHref(url) {
   if (url === '/docs/content-delivery-api/filtering-records') {
     return '/docs/content-delivery-api/filtering-records';
   }
@@ -20,4 +20,4 @@ export default (url) => {
   }
 
   return '/docs/content-management-api/[...chunks]';
-};
+}

@@ -25,8 +25,16 @@ function example(resource, link, allPages = false) {
   const resourceId = resource.definitions.identity.example || '43';
 
   placeholders.forEach((placeholder) => {
-    precode.push(`${placeholder}_id = "${resourceId}"`);
-    params.push(`${placeholder}_id`);
+    if (placeholder === 'item_type') {
+      precode.push(`model_id_or_api_key = "blog_post"`);
+      params.push('model_id_or_api_key');
+    } else if (placeholder === 'field') {
+      precode.push(`field_id_or_api_key = "blog_post::title"`);
+      params.push('field_id_or_api_key');
+    } else {
+      precode.push(`${placeholder}_id = "${resourceId}"`);
+      params.push(`${placeholder}_id`);
+    }
   });
 
   const fix = (string) =>

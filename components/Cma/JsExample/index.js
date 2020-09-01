@@ -30,8 +30,16 @@ function example(resource, link, allPages = false) {
   const resourceId = resource.definitions.identity.example || '43';
 
   placeholders.forEach((placeholder) => {
-    precode.push(`const ${humps.camelize(placeholder)}Id = '${resourceId}';`);
-    params.push(`${humps.camelize(placeholder)}Id`);
+    if (placeholder === 'item_type') {
+      precode.push(`const modelIdOrApiKey = 'blog_post';`);
+      params.push('modelIdOrApiKey');
+    } else if (placeholder === 'field') {
+      precode.push(`const fieldIdOrApiKey = 'blog_post::title';`);
+      params.push('fieldIdOrApiKey');
+    } else {
+      precode.push(`const ${humps.camelize(placeholder)}Id = '${resourceId}';`);
+      params.push(`${humps.camelize(placeholder)}Id`);
+    }
   });
 
   const deserialize = (data, withId = false) => {

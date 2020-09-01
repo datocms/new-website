@@ -19,10 +19,8 @@ const svgTemplate = (
 };
 
 module.exports = withNextEnv({
-  experimental: {
-    async redirects() {
-      return redirects.map(r => ({ ...r, statusCode: 301 }));
-    },
+  async redirects() {
+    return redirects.map((r) => ({ ...r, statusCode: 301 }));
   },
   webpack(config) {
     config.resolve.modules.push(path.resolve('./'));

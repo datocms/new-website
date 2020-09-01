@@ -5,7 +5,7 @@ import s from './style.module.css';
 import { range } from 'range';
 import { useMemo } from 'react';
 
-export default ({ code, language, showLineNumbers, highlightLines }) => {
+const Prism = ({ code, language, showLineNumbers, highlightLines }) => {
   const lines = useMemo(() => {
     if (!highlightLines) {
       return [];
@@ -13,7 +13,7 @@ export default ({ code, language, showLineNumbers, highlightLines }) => {
 
     return highlightLines
       .split(/\s*,\s*/)
-      .map(str => {
+      .map((str) => {
         const chunks = str.split(/\-/);
         if (chunks.length === 1) {
           return parseInt(chunks[0]);
@@ -58,3 +58,5 @@ export default ({ code, language, showLineNumbers, highlightLines }) => {
     </Highlight>
   );
 };
+
+export default Prism;

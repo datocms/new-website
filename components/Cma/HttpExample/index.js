@@ -23,15 +23,28 @@ function renderExample(example, resource) {
 
   const params = resource.hrefSchema ? toParam(resource.hrefSchema) : '';
 
+  const pathnameWithPlaceholders = (request
+    ? request.url
+    : resource.href
+  ).replace(regexp, (_matched, chunk) => {
+    console.log(chunk);
+
+    if (chunk === 'item_type') {
+      return `:model_id_or_api_key`;
+    }
+
+    if (chunk === 'field') {
+      return `:field_id_or_api_key`;
+    }
+
+    return `:${chunk}_id`;
+  });
+
   let requestCode =
     request && request.method
-      ? `${request.method} ${
-          request.url.replace(regexp, ':$1_id') + params
-        } HTTP/1.1`
+      ? `${request.method} ${pathnameWithPlaceholders + params} HTTP/1.1`
       : `${resource.method} ${
-          'https://site-api.datocms.com' +
-          resource.href.replace(regexp, ':$1_id') +
-          params
+          'https://site-api.datocms.com' + pathnameWithPlaceholders + params
         } HTTP/1.1`;
 
   requestCode += '\n\n';

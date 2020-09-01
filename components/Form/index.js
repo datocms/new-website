@@ -2,7 +2,7 @@ import s from './style.module.css';
 import Button from 'components/Button';
 import Link from 'next/link';
 import {
-  FormContext,
+  FormProvider,
   useForm,
   useFormContext,
   Controller,
@@ -120,7 +120,7 @@ export function FormInner({ children, defaultValues, action, submitLabel }) {
   };
 
   return (
-    <FormContext {...methods}>
+    <FormProvider {...methods}>
       <form
         className={s.form}
         onSubmit={handleSubmit(onSubmit)}
@@ -148,7 +148,7 @@ export function FormInner({ children, defaultValues, action, submitLabel }) {
           </Button>
         </div>
       </form>
-    </FormContext>
+    </FormProvider>
   );
 }
 
