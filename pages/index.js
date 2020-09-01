@@ -32,6 +32,18 @@ import Wonderland from 'public/images/logos/wonderland.svg';
 import Chillys from 'public/images/logos/chillys.svg';
 import MatterSupply from 'public/images/logos/matter-supply.svg';
 
+import Arduino from 'public/images/logos/arduino.svg';
+import CityOfSidney from 'public/images/logos/cityofsidney.svg';
+import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
+import LinkedIn from 'public/images/logos/linkedin.svg';
+
+import Oberlo from 'public/images/logos/new/oberlo.svg';
+import Nhs from 'public/images/logos/new/nhs.svg';
+import LittleCaesars from 'public/images/logos/new/little-caesars.svg';
+import Mit from 'public/images/logos/new/mit.svg';
+import Afsp from 'public/images/logos/new/afsp.svg';
+import Harrys from 'public/images/logos/new/harrys.svg';
+
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
@@ -93,7 +105,25 @@ function Homepage({ successStories, preview, page }) {
         </Checks>
       </Hero>
 
-      <LogosBar clients={[Vercel, Dropbox, Hashicorp, Verizon, Vmware]} />
+      <LogosBar
+        clients={[
+          Vercel,
+          Dropbox,
+          Hashicorp,
+          Verizon,
+          Vmware,
+          Arduino,
+          CityOfSidney,
+          DeutscheTelekom,
+          LinkedIn,
+          Oberlo,
+          Nhs,
+          LittleCaesars,
+          Mit,
+          Afsp,
+          Harrys,
+        ]}
+      />
 
       <Space top={2}>
         <InterstitialTitle subtitle="Three symptoms to&nbsp;watch&nbsp;out">
