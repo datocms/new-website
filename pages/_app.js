@@ -1,31 +1,33 @@
-import Router from 'next/router';
-
-import '../components/NProgress/style.css';
+import * as Fathom from 'fathom-client';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import '../components/BaseLayout/global.css';
+import '../components/NProgress/style.css';
 
-import { initAnalytics } from '@pinjollist/next-with-analytics';
+function App({ Component, pageProps }) {
+  const router = useRouter();
 
-const options = {
-  trackingCode: 'UA-22858312-5',
-  respectDNT: true,
-};
+  useEffect(() => {
+    // Initialize Fathom when the app loads
+    Fathom.load('NVXWCARK', {
+      includedDomains: ['datocms.com'],
+      url: 'https://panther.datocms.com/script.js',
+      honorDNT: true,
+    });
 
-const analyticsInstance = initAnalytics(options);
+    function onRouteChangeComplete() {
+      Fathom.trackPageview();
+    }
+    // Record a pageview when route changes
+    router.events.on('routeChangeComplete', onRouteChangeComplete);
 
-export default class MyApp extends React.PureComponent {
-  componentDidMount() {
-    const { handleRouteChange } = analyticsInstance;
-    Router.events.on('routeChangeComplete', handleRouteChange);
-  }
+    // Unassign event listener
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete);
+    };
+  }, []);
 
-  componentWillUnmount() {
-    const { handleRouteChange } = analyticsInstance;
-    Router.events.off('routeChangeComplete', handleRouteChange);
-  }
-
-  render() {
-    const { Component, pageProps } = this.props;
-
-    return <Component {...pageProps} />;
-  }
+  return <Component {...pageProps} />;
 }
+
+export default App;

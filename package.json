@@ -14,7 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "@n8tb1t/use-scroll-position": "^1.0.43",
-    "@pinjollist/next-with-analytics": "^1.0.0-rc.0",
     "@rehooks/component-size": "^1.0.3",
     "@slack/web-api": "^5.11.0",
     "@svgr/webpack": "^5.4.0",
@@ -27,6 +26,7 @@
     "date-fns": "^2.16.1",
     "datocms-search": "^0.1.8",
     "dotenv-load": "^2.0.0",
+    "fathom-client": "^3.0.0",
     "flatted": "^3.0.4",
     "fontfaceobserver": "^2.1.0",
     "front-matter": "^4.0.2",
