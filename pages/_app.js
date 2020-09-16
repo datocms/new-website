@@ -10,7 +10,7 @@ function App({ Component, pageProps }) {
   useEffect(() => {
     // Initialize Fathom when the app loads
     Fathom.load('NVXWCARK', {
-      includedDomains: ['datocms.com'],
+      includedDomains: ['www.datocms.com'],
       url: 'https://panther.datocms.com/script.js',
       honorDNT: true,
     });
