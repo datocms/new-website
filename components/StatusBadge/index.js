@@ -3,10 +3,7 @@ import cn from 'classnames';
 import s from './style.module.css';
 import wretch from 'wretch';
 
-const fetcher = url =>
-  wretch(url)
-    .get()
-    .json();
+const fetcher = (url) => wretch(url).get().json();
 
 const statusLabel = {
   down: 'Down',
@@ -15,12 +12,12 @@ const statusLabel = {
 
 export default function StatusBadge() {
   const { data: components } = useSWR(
-    'https://status.datocms.com/.netlify/functions/componentsStatus?days=1',
+    'https://status.datocms.com/.netlify/functions/component-status?days=1',
     fetcher,
   );
 
   const firstDownComponent =
-    components && components.find(component => component.status !== 'up');
+    components && components.find((component) => component.status !== 'up');
 
   const firstDownStatus = firstDownComponent && firstDownComponent.status;
 
