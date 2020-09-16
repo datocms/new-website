@@ -2,23 +2,9 @@ import Head from 'next/head';
 import s from './style.module.css';
 import { useRouter } from 'next/router';
 import NProgress from 'components/NProgress';
-import Link from 'next/link';
-import { getCookie, setCookie } from 'utils/cookies';
-import { useState, useEffect, useCallback } from 'react';
-import TimesIcon from 'public/icons/regular/times.svg';
 
 export default function Layout({ preview, children }) {
   const router = useRouter();
-  const [cookieAccept, setCookieAccept] = useState(true);
-
-  useEffect(() => {
-    setCookieAccept(!!getCookie('cookies-accepted'));
-  }, []);
-
-  const accept = useCallback(() => {
-    setCookie('cookies-accepted', true, 500);
-    setCookieAccept(true);
-  });
 
   return (
     <>
@@ -63,22 +49,7 @@ export default function Layout({ preview, children }) {
           Exit preview mode
         </a>
       )}
-      <div className={s.root}>
-        {children}
-        {!cookieAccept && (
-          <div className={s.cookies}>
-            By continuing to use this site you consent to the use of cookies in
-            accordance with{' '}
-            <Link href="/legal/cookie-policy">
-              <a>our cookie policy</a>
-            </Link>
-            .
-            <button onClick={accept}>
-              <TimesIcon />
-            </button>
-          </div>
-        )}
-      </div>
+      <div className={s.root}>{children}</div>
 
       <div
         className={s.overlay}
