@@ -3,6 +3,7 @@ import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import LazyImage from 'components/LazyImage';
+import Highlight from 'components/Highlight';
 
 export default function PersonasPicker() {
   return (
@@ -12,7 +13,9 @@ export default function PersonasPicker() {
           <div className={s.introSub}>
             A technology investment for your whole company
           </div>
-          <h2 className={s.introTitle}>Empower every member of your team</h2>
+          <h2 className={s.introTitle}>
+            Empower <Highlight>every&nbsp;member</Highlight> of&nbsp;your team
+          </h2>
           <div className={s.introBody}>
             An end-to-end solution for businesses who create and distribute
             content to websites and other digital experiences at scale.

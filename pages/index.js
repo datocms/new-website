@@ -6,7 +6,6 @@ import Checks from 'components/Checks';
 import UseCaseExcerpts from 'components/UseCaseExcerpts';
 import OmnichannelIllustration from 'components/OmnichannelIllustration';
 import Wrapper from 'components/Wrapper';
-import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 import PersonasPicker from 'components/PersonasPicker';
 import InterstitialTitle from 'components/InterstitialTitle';
 import TitleStripWithContent from 'components/TitleStripWithContent';
@@ -86,15 +85,15 @@ function Homepage({ successStories, preview, page }) {
       <Hero
         title={
           <>
-            The&nbsp;best companies are&nbsp;built&nbsp;on{' '}
-            <Highlight>unified&nbsp;content</Highlight>
+            Simply put, the most complete, user-friendly and performant{' '}
+            <Highlight>Headless&nbsp;CMS</Highlight>
           </>
         }
         subtitle={
           <>
-            More than 4.000 businesses use DatoCMS to create their online
-            content at scale from a central hub, and distribute it easily via
-            API to websites and any other digital experience.
+            It's the CMS for the modern web. More than 25.000 businesses use
+            DatoCMS to create online content at scale from a central hub and
+            distribute it via API.
           </>
         }
       >
@@ -125,7 +124,11 @@ function Homepage({ successStories, preview, page }) {
         ]}
       />
 
-      <Space top={2}>
+      <Space top={3}>
+        <PersonasPicker />
+      </Space>
+
+      <Space top={3}>
         <InterstitialTitle subtitle="Three symptoms to&nbsp;watch&nbsp;out">
           Are you losing money because of{' '}
           <Highlight>legacy&nbsp;content infrastructure</Highlight>?
@@ -342,35 +345,6 @@ function Homepage({ successStories, preview, page }) {
           ]}
         />
       </Flag>
-
-      <Numbers title="Why you should use DatoCMS">
-        <NumbersBlock
-          href="/customers/[slug]"
-          as="/customers/chillys"
-          title="+134%"
-          logo={Chillys}
-        >
-          Mobile conversion rate
-        </NumbersBlock>
-        <NumbersBlock
-          href="/customers/[slug]"
-          as="/customers/wonderland"
-          title="6x"
-          logo={Wonderland}
-        >
-          Faster loading times
-        </NumbersBlock>
-        <NumbersBlock
-          href="/customers/[slug]"
-          as="/customers/matter-supply"
-          title="0,9s"
-          logo={MatterSupply}
-        >
-          First contentful paint
-        </NumbersBlock>
-      </Numbers>
-
-      <PersonasPicker />
 
       {successStories && <UseCaseExcerpts cases={successStories} />}
     </Layout>

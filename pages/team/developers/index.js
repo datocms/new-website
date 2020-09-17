@@ -20,7 +20,10 @@ import Result from 'components/Result';
 import LazyImage from 'components/LazyImage';
 import gql from 'graphql-tag';
 import Space from 'components/Space';
-
+import Numbers, { Block as NumbersBlock } from 'components/Numbers';
+import Wonderland from 'public/images/logos/wonderland.svg';
+import Chillys from 'public/images/logos/chillys.svg';
+import MatterSupply from 'public/images/logos/matter-supply.svg';
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
@@ -237,6 +240,33 @@ function Developers({ integrations, preview, page, review }) {
           of content. And, most importantly, to change it over time.
         </p>
       </Flag>
+
+      <Numbers title="Why you should use DatoCMS">
+        <NumbersBlock
+          href="/customers/[slug]"
+          as="/customers/chillys"
+          title="+134%"
+          logo={Chillys}
+        >
+          Mobile conversion rate
+        </NumbersBlock>
+        <NumbersBlock
+          href="/customers/[slug]"
+          as="/customers/wonderland"
+          title="6x"
+          logo={Wonderland}
+        >
+          Faster loading times
+        </NumbersBlock>
+        <NumbersBlock
+          href="/customers/[slug]"
+          as="/customers/matter-supply"
+          title="0,9s"
+          logo={MatterSupply}
+        >
+          First contentful paint
+        </NumbersBlock>
+      </Numbers>
 
       <Flag
         style="good"

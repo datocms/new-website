@@ -5,12 +5,24 @@
 }
 
 .logo {
-  margin: 0 20px 40px 20px;
+  margin: 0 10px 20px 10px;
   text-align: center;
 
+  @media screen and (width > 850px) {
+    margin: 0 20px 40px 20px;
+  }
+
   svg {
-    height: 30px;
+    height: 20px;
     fill: var(--light-body-color);
+
+    @media screen and (width > 450px) {
+      height: 25px;
+    }
+
+    @media screen and (width > 950px) {
+      height: 30px;
+    }
   }
 }
 
