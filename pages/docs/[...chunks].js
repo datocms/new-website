@@ -125,7 +125,7 @@ export const getStaticProps = async function ({
                 image {
                   format
                   width
-                  responsiveImage(imgixParams: { w: 810 }) {
+                  responsiveImage(imgixParams: { w: 950 }) {
                     ...imageFields
                   }
                   url

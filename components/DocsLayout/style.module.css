@@ -62,6 +62,7 @@
   .contentWrapper {
     outline: none;
     background: white;
+    overflow: hidden;
   }
 
   .logo {
