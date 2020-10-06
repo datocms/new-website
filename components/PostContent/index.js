@@ -10,6 +10,7 @@ import { Image } from 'react-datocms';
 import UiChrome from 'components/UiChrome';
 import PluginBox from 'components/PluginBox';
 import Button from 'components/Button';
+import cn from 'classnames';
 
 export default function PostContent({ isFallback, content, style, children }) {
   const s = style || defaultStyles;
@@ -31,7 +32,7 @@ export default function PostContent({ isFallback, content, style, children }) {
       ) : (
         <>
           {content &&
-            content.map(block => (
+            content.map((block) => (
               <React.Fragment key={block.id}>
                 {block._modelApiKey === 'text' && (
                   <div className={s.text}>
@@ -108,7 +109,7 @@ export default function PostContent({ isFallback, content, style, children }) {
                 )}
                 {block._modelApiKey === 'multiple_demos_block' && (
                   <div className={s.pluginBoxes}>
-                    {block.demos.map(item => (
+                    {block.demos.map((item) => (
                       <div className={s.pluginBoxContainer}>
                         <PluginBox
                           description="View this demo »"
@@ -135,7 +136,11 @@ export default function PostContent({ isFallback, content, style, children }) {
                   />
                 )}
                 {block._modelApiKey === 'quote' && (
-                  <div className={s.quote}>
+                  <div
+                    className={cn(s.quote, {
+                      [s.smallerQuote]: block.quote.length > 500,
+                    })}
+                  >
                     <div
                       className={s.quoteQuote}
                       dangerouslySetInnerHTML={{

@@ -112,7 +112,7 @@
 
 .quote {
   text-align: left;
-  padding-top: rfs(90px);
+  padding-top: rfs(70px);
   position: relative;
   max-width: 800px;
   margin: rfs(50px) auto;
@@ -135,6 +135,25 @@
   font-size: rfs(35px);
   line-height: 1.2;
   margin-left: rfs(80px);
+  color: #333;
+
+  p,
+  ul,
+  ol {
+    margin: 0 0 rfs(20px);
+  }
+
+  strong {
+    background-image: linear-gradient(120deg, #f4cf58 0%, #f4cf58 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.5em;
+    background-position: 0 88%;
+    font-weight: 600;
+  }
+}
+
+.smallerQuote .quoteQuote {
+  font-size: rfs(25px);
 }
 
 .demo {
