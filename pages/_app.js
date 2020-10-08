@@ -3,11 +3,23 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import '../components/BaseLayout/global.css';
 import '../components/NProgress/style.css';
+import { getCookie, setCookie } from 'utils/cookies';
 
 function App({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const source = urlParams.get('utm_source');
+
+    if (source && !getCookie('datoUtm')) {
+      const medium = urlParams.get('utm_medium');
+      const campaign = urlParams.get('utm_campaign');
+
+      setCookie('datoUtm', JSON.stringify({ source, medium, campaign }), 365);
+    }
+
     // Initialize Fathom when the app loads
     Fathom.load('NVXWCARK', {
       includedDomains: ['www.datocms.com'],

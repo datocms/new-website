@@ -1,4 +1,4 @@
-export const getCookie = name => {
+export const getCookie = (name) => {
   if (typeof document === 'undefined') {
     return;
   }
@@ -20,5 +20,10 @@ export const setCookie = (name, value, days) => {
     expires = '; expires=' + date.toGMTString();
   }
 
-  document.cookie = name + '=' + value + expires + '; path=/';
+  document.cookie =
+    name +
+    '=' +
+    value +
+    expires +
+    '; path=/; domain=.datocms.com; samesite=none; secure';
 };
