@@ -10,15 +10,7 @@ function App({ Component, pageProps }) {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-
     const source = urlParams.get('utm_source');
-
-    if (source && !getCookie('datoUtm')) {
-      const medium = urlParams.get('utm_medium');
-      const campaign = urlParams.get('utm_campaign');
-
-      setCookie('datoUtm', JSON.stringify({ source, medium, campaign }), 365);
-    }
 
     // Initialize Fathom when the app loads
     Fathom.load('NVXWCARK', {
@@ -26,6 +18,17 @@ function App({ Component, pageProps }) {
       url: 'https://panther.datocms.com/script.js',
       honorDNT: true,
     });
+
+    if (source && !getCookie('datoUtm')) {
+      const medium = urlParams.get('utm_medium');
+      const campaign = urlParams.get('utm_campaign');
+
+      setCookie('datoUtm', JSON.stringify({ source, medium, campaign }), 365);
+
+      if (source === 'twitter') {
+        Fathom.trackGoal('5OHZ6BAS', 0);
+      }
+    }
 
     function onRouteChangeComplete() {
       Fathom.trackPageview();
