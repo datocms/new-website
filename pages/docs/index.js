@@ -129,6 +129,12 @@ export default function Docs({ roots, preview, page }) {
 
         <h6 className={s.introTitle}>Popular integrations</h6>
         <div className={s.useCaseCards}>
+          <Link href={docHref('/docs/next-js')} as="/docs/next-js">
+            <a className={s.useCaseCard}>
+              <div className={s.useCaseCardTitle}>Next.js</div>
+              <p>Learn how to integrate your Next.js website with DatoCMS</p>
+            </a>
+          </Link>
           <Link href={docHref('/docs/gatsby')} as="/docs/gatsby">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Gatsby</div>
@@ -139,12 +145,6 @@ export default function Docs({ roots, preview, page }) {
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Hugo</div>
               <p>Learn how to integrate your Hugo website with DatoCMS</p>
-            </a>
-          </Link>
-          <Link href={docHref('/docs/jekyll')} as="/docs/jekyll">
-            <a className={s.useCaseCard}>
-              <div className={s.useCaseCardTitle}>Jekyll</div>
-              <p>Learn how to integrate your Jekyll website with DatoCMS</p>
             </a>
           </Link>
         </div>
