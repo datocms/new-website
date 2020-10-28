@@ -243,24 +243,21 @@ function Developers({ integrations, preview, page, review }) {
 
       <Numbers title="Why you should use DatoCMS">
         <NumbersBlock
-          href="/customers/[slug]"
-          as="/customers/chillys"
+          href="/customers/chillys"
           title="+134%"
           logo={Chillys}
         >
           Mobile conversion rate
         </NumbersBlock>
         <NumbersBlock
-          href="/customers/[slug]"
-          as="/customers/wonderland"
+          href="/customers/wonderland"
           title="6x"
           logo={Wonderland}
         >
           Faster loading times
         </NumbersBlock>
         <NumbersBlock
-          href="/customers/[slug]"
-          as="/customers/matter-supply"
+          href="/customers/matter-supply"
           title="0,9s"
           logo={MatterSupply}
         >
@@ -309,7 +306,6 @@ function Developers({ integrations, preview, page, review }) {
           <Result
             number="-79%"
             href="/customers/hashicorp"
-            as="/customers/[slug]"
             label={
               <>
                 in <Highlight style="good">operational costs</Highlight>
@@ -322,7 +318,6 @@ function Developers({ integrations, preview, page, review }) {
           <Result
             number="0,9s"
             href="/customers/matter-supply"
-            as="/customers/[slug]"
             label={
               <>
                 in <Highlight style="good">loading times</Highlight>
