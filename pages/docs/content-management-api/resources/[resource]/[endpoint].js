@@ -24,14 +24,18 @@ export const getStaticPaths = async () => {
   const { toc } = parse(cma);
 
   return {
-    fallback: true,
+    fallback: 'blocking',
     paths: toc
       .map(({ children }) => children)
       .flat(1)
       .map(({ slug, children }) =>
-        children.map((child) => ({
-          params: { resource: slug, endpoint: child.slug },
-        })),
+        children
+          .map((child) => ({
+            params: { resource: slug, endpoint: child.slug },
+          }))
+          // .slice() only pre-renders the first 2 sub-pages for each section
+          // remove it if you want to pre-render all the pages
+          .slice(0, 2),
       )
       .flat(),
   };

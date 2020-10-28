@@ -40,7 +40,7 @@
     "json-schema-ref-parser": "^9.0.6",
     "keyword-highlighter": "^1.0.6",
     "min-md5": "^1.0.0",
-    "next": "^9.5.2",
+    "next": "^10.0.0",
     "next-env": "^1.1.1",
     "nprogress": "^0.2.0",
     "paginator": "^1.0.0",

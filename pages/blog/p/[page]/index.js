@@ -31,7 +31,10 @@ export const getStaticPaths = gqlStaticPaths(
   `,
   'page',
   ({ meta }) =>
-    range(1, Math.ceil(meta.count / parseFloat(BLOG_POSTS_PER_PAGE))),
+    range(
+      1,
+      Math.min(5, Math.ceil(meta.count / parseFloat(BLOG_POSTS_PER_PAGE))),
+    ),
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -70,7 +73,7 @@ export const getStaticProps = gqlStaticProps(
     first: BLOG_POSTS_PER_PAGE,
     skip: BLOG_POSTS_PER_PAGE * parseInt(page),
   }),
-  data => ({
+  (data) => ({
     ...data,
     perPage: BLOG_POSTS_PER_PAGE,
   }),
@@ -100,7 +103,7 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
           columnClassName={s.column}
         >
           {posts &&
-            posts.map(post => (
+            posts.map((post) => (
               <Link
                 key={post.slug}
                 href="/blog/[slug]"
@@ -135,8 +138,8 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
             perPage={perPage}
             currentPage={router.query ? parseInt(router.query.page) : 0}
             totalEntries={meta.count}
-            href={index => (index === 0 ? '/blog' : '/blog/p/[page]')}
-            as={index => (index === 0 ? '/blog' : `/blog/p/${index}`)}
+            href={(index) => (index === 0 ? '/blog' : '/blog/p/[page]')}
+            as={(index) => (index === 0 ? '/blog' : `/blog/p/${index}`)}
           />
         )}
       </Wrapper>

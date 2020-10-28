@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 export const getStaticPaths = gqlStaticPaths(
   gql`
     query {
-      posts: allBlogPosts(first: 100, orderBy: _firstPublishedAt_DESC) {
+      posts: allBlogPosts(first: 10, orderBy: _firstPublishedAt_DESC) {
         slug
       }
     }

@@ -20,7 +20,7 @@ export const getStaticPaths = async () => {
   const { toc } = parse(cma);
 
   return {
-    fallback: true,
+    fallback: 'blocking',
     paths: toc
       .map(({ children }) => children)
       .flat(1)

@@ -27,7 +27,7 @@ export const getStaticPaths = gqlStaticPaths(
     {
       plugins: allPlugins(
         orderBy: installs_DESC
-        first: 100
+        first: 10
         filter: { manuallyDeprecated: { eq: false } }
       ) {
         packageName

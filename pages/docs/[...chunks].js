@@ -39,8 +39,8 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'chunks',
-  ({ roots }) =>
-    roots
+  ({ roots }) => {
+    const results = roots
       .map((root) =>
         root.children
           .filter((c) => c.slug !== 'content-management-api')
@@ -52,14 +52,21 @@ export const getStaticPaths = gqlStaticPaths(
                     'filtering-records',
                 )
               : sub.pages
-            ).map((page) =>
-              (page.slugOverride || page.page.slug) === 'index'
-                ? [sub.slug]
-                : [sub.slug, page.slugOverride || page.page.slug],
-            ),
+            )
+              .map((page) =>
+                (page.slugOverride || page.page.slug) === 'index'
+                  ? [sub.slug]
+                  : [sub.slug, page.slugOverride || page.page.slug],
+              )
+              // .slice() only pre-renders the first 2 sub-pages for each section
+              // remove it if you want to pre-render all the pages
+              .slice(0, 2),
           ),
       )
-      .flat(2),
+      .flat(2);
+
+    return results;
+  },
 );
 
 export const getStaticProps = async function ({
