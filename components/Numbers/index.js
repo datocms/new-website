@@ -14,9 +14,9 @@ export default function Numbers({ children }) {
   );
 }
 
-export function Block({ image, title, href, as, children, logo: Logo }) {
+export function Block({ image, title, href, children, logo: Logo }) {
   return (
-    <MaybeLink as={as} href={href} className={s.block}>
+    <MaybeLink href={href} className={s.block}>
       {image}
       <div className={s.blockTitle}>{title}</div>
       {children}

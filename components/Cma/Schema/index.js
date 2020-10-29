@@ -3,7 +3,6 @@ import s from './style.module.css';
 import { LanguageConsumer } from 'components/LanguagePicker';
 import humps from 'humps';
 import Link from 'next/link';
-import docHref from 'utils/docHref';
 import ReactMarkdown from 'react-markdown';
 import PlusIcon from 'public/icons/regular/plus.svg';
 import TimesIcon from 'public/icons/regular/times.svg';
@@ -202,7 +201,7 @@ function Relationship({ name, schema, required, hideRequired }) {
 
                 return [
                   i > 0 && ', ',
-                  <Link href={docHref(url)} as={url} key={type}>
+                  <Link href={url} key={type}>
                     <a className={s.type}>
                       {isArray ? `array[${type}.id]` : `${type}.id`}
                     </a>

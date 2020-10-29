@@ -40,7 +40,7 @@ export const getStaticProps = async ({ preview }) => {
   });
 
   const startersData = await Promise.all(
-    starters.map(async starter => {
+    starters.map(async (starter) => {
       const { body } = await tiny.get({
         url: `https://raw.githubusercontent.com/${starter.githubRepo}/master/datocms.json`,
       });
@@ -72,12 +72,11 @@ export default function Plugins({ starters, preview }) {
         </div>
         <div className={s.grid}>
           {starters &&
-            starters.map(item => (
+            starters.map((item) => (
               <PluginBox
                 title={item.name}
                 key={item.code}
-                as={`/marketplace/starters/${item.code}`}
-                href="/marketplace/starters/[slug]"
+                href={`/marketplace/starters/${item.code}`}
                 description={
                   <div className={s.demoDesc}>
                     <div className={s.demoDescBody}>{item.description}</div>

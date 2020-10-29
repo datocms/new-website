@@ -2,7 +2,6 @@ import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import UiChrome from 'components/UiChrome';
 import { Image } from 'react-datocms';
-import docHref from 'utils/docHref';
 import s from './style.module.css';
 import Link from 'next/link';
 
@@ -41,7 +40,7 @@ export default function TryDemoCta({
             {docsAs && (
               <span className={s.docs}>
                 <span> or </span>
-                <Link as={docsAs} href={docHref(docsAs)}>
+                <Link href={docsAs}>
                   <a>Read our docs</a>
                 </Link>
               </span>

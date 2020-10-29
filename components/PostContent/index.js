@@ -120,8 +120,7 @@ export default function PostContent({ isFallback, content, style, children }) {
                             />
                           }
                           title={item.name}
-                          as={`/marketplace/starters/${item.code}`}
-                          href="/marketplace/starters/[slug]"
+                          href={`/marketplace/starters/${item.code}`}
                         />
                       </div>
                     ))}

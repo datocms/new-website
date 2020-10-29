@@ -33,10 +33,9 @@ export default function PluginBox({
   actions,
   details,
   href,
-  as,
 }) {
   return (
-    <MaybeLink href={href} as={as} className={s.box}>
+    <MaybeLink href={href} className={s.box}>
       {isFallback ? <Image /> : image}
       <div className={s.boxBody}>
         <div className={s.boxTitle}>{isFallback ? <Line /> : title}</div>

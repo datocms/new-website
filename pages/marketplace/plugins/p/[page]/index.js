@@ -96,7 +96,7 @@ export default function Plugins({
             community plugins
           </div>
         </div>
-        <Link as="/docs/building-plugins" href="/docs/[...chunks]">
+        <Link href="/docs/building-plugins">
           <a className={s.announce}>
             <MegaphoneIcon /> <strong>Want to be in catalog?</strong> Learn how
             create your own plugin, or copy and remix existing ones in our
@@ -109,8 +109,7 @@ export default function Plugins({
               <PluginBox
                 key={post.packageName}
                 title={post.title}
-                href="/marketplace/plugins/i/[...chunks]"
-                as={`/marketplace/plugins/i/${post.packageName}`}
+                href={`/marketplace/plugins/i/${post.packageName}`}
                 image={
                   post.coverImage && post.coverImage.responsiveImage ? (
                     <Image
@@ -136,11 +135,6 @@ export default function Plugins({
             currentPage={router.query ? parseInt(router.query.page) : 0}
             totalEntries={meta.count}
             href={(index) =>
-              index === 0
-                ? '/marketplace/plugins'
-                : '/marketplace/plugins/p/[page]'
-            }
-            as={(index) =>
               index === 0
                 ? '/marketplace/plugins'
                 : `/marketplace/plugins/p/${index}`

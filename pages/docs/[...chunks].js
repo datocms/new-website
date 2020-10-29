@@ -13,7 +13,6 @@ import slugify from 'utils/slugify';
 import getInnerText from 'utils/getInnerText';
 import s from 'pages/docs/pageStyle.module.css';
 import Head from 'next/head';
-import docHref from 'utils/docHref';
 import emojify from 'utils/emojify';
 import { useRouter } from 'next/router';
 import { Line } from 'components/FakeContent';
@@ -263,7 +262,7 @@ const SidebarEntry = ({ url, level, label, children }) => {
   return (
     <div>
       {url ? (
-        <ActiveLink href={docHref(url)} as={url} activeClassName={s.activePage}>
+        <ActiveLink href={url} activeClassName={s.activePage}>
           <a className={cn(s.page, s[`page-level${level}`])}>{label}</a>
         </ActiveLink>
       ) : (

@@ -1,6 +1,5 @@
 import { LanguageConsumer } from 'components/LanguagePicker';
 import Link from 'next/link';
-import docHref from 'utils/docHref';
 
 const types = (t) => (Array.isArray(t) ? t : [t]);
 
@@ -27,7 +26,7 @@ export default function TargetSchema({ link }) {
     '-',
   )}`;
   const resourceLink = (
-    <Link href={docHref(resourceUrl)} as={resourceUrl}>
+    <Link href={resourceUrl}>
       <a>{resource}</a>
     </Link>
   );
@@ -48,10 +47,8 @@ export default function TargetSchema({ link }) {
               {link.jobSchema ? (
                 <>
                   a Job ID. You can then poll for the{' '}
-                  <Link href={docHref(retrieveJobUrl)} as={retrieveJobUrl}>
-                    completion of the job
-                  </Link>
-                  , that will eventually return {returnDescription}
+                  <Link href={retrieveJobUrl}>completion of the job</Link>, that
+                  will eventually return {returnDescription}
                 </>
               ) : (
                 returnDescription

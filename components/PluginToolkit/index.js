@@ -38,8 +38,8 @@ export const Badge = ({ children }) => (
   <span className={s.badge}>{children}</span>
 );
 
-export const Announce = ({ href, as, children }) => (
-  <Link as={as} href={href}>
+export const Announce = ({ href, children }) => (
+  <Link href={href}>
     <a className={s.announce}>
       <MegaphoneIcon /> {children} →
     </a>
@@ -77,7 +77,7 @@ export const PluginDetails = ({
               {isFallback ? (
                 <Image />
               ) : (
-                React.Children.map(gallery, el => (
+                React.Children.map(gallery, (el) => (
                   <div className={s.galleryImage}>{el}</div>
                 ))
               )}

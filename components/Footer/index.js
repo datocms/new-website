@@ -144,42 +144,42 @@ export default function Footer({ noCta }) {
                   <div className={s.groupTitle}>Technologies</div>
                   <div className={s.groupLinks}>
                     <div className={s.groupLink}>
-                      <Link href="/cms/[slug]" as="/cms/nextjs">
+                      <Link href="/cms/nextjs">
                         <a className={s.extraLink}>Next.js</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/[slug]" as="/cms/gatsbyjs">
+                      <Link href="/cms/gatsbyjs">
                         <a className={s.extraLink}>Gatsby</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/[slug]" as="/cms/nuxt-js">
+                      <Link href="/cms/nuxt-js">
                         <a className={s.extraLink}>Nuxt.js</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/[slug]" as="/cms/hugo">
+                      <Link href="/cms/hugo">
                         <a className={s.extraLink}>Hugo</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/[slug]" as="/cms/jekyll">
+                      <Link href="/cms/jekyll">
                         <a className={s.extraLink}>Jekyll</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/[slug]" as="/cms/react">
+                      <Link href="/cms/react">
                         <a className={s.extraLink}>React</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/[slug]" as="/cms/vue">
+                      <Link href="/cms/vue">
                         <a className={s.extraLink}>Vue.js</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/[slug]" as="/cms/middleman">
+                      <Link href="/cms/middleman">
                         <a className={s.extraLink}>Middleman</a>
                       </Link>
                     </div>

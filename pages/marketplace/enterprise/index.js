@@ -39,11 +39,10 @@ export default function Enterprise({ items, preview }) {
         </div>
         <div className={s.grid}>
           {items &&
-            items.map(item => (
+            items.map((item) => (
               <PluginBox
                 key={item.slug}
-                as={`/marketplace/enterprise/${item.slug}`}
-                href="/marketplace/enterprise/[slug]"
+                href={`/marketplace/enterprise/${item.slug}`}
                 title={item.title}
                 description={item.description}
                 image={<LogoImage style="azure" logo={item.logo} />}

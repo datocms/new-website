@@ -39,11 +39,10 @@ export default function Hosting({ items, preview }) {
         </div>
         <div className={s.grid}>
           {items &&
-            items.map(item => (
+            items.map((item) => (
               <PluginBox
                 key={item.slug}
-                as={`/marketplace/hosting/${item.slug}`}
-                href="/marketplace/hosting/[slug]"
+                href={`/marketplace/hosting/${item.slug}`}
                 title={item.title}
                 description={item.description}
                 image={<LogoImage logo={item.logo} />}

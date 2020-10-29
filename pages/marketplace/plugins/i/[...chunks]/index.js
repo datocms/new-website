@@ -216,7 +216,7 @@ export default function Plugin({ plugin, preview }) {
           </Button>
         }
         announce={
-          <Announce as="/docs/building-plugins" href="/docs/[...chunks]">
+          <Announce href="/docs/building-plugins">
             <strong>This is a Community Plugin!</strong> Learn how create your
             own plugin, or copy and remix existing ones in our documentation
           </Announce>

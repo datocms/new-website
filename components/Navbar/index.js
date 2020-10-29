@@ -19,7 +19,7 @@ import ContentCreators from 'public/images/illustrations/content-editors2.svg';
 
 import External from 'public/icons/regular/external-link.svg';
 
-const TitleDesc = ({ href, as, title, description, target }) =>
+const TitleDesc = ({ href, title, description, target }) =>
   target ? (
     <a className={s.titleDesc} href={href} target={target}>
       <div className={s.titleDescBody}>
@@ -28,7 +28,7 @@ const TitleDesc = ({ href, as, title, description, target }) =>
       </div>
     </a>
   ) : (
-    <Link href={href} as={as}>
+    <Link href={href}>
       <a className={s.titleDesc}>
         <div className={s.titleDescBody}>
           <div className={s.titleDescTitle}>{title}</div>
@@ -182,28 +182,28 @@ export default function Navbar() {
                   <div className={s.cols}>
                     <div className={cn(s.section, s.sectionInverse)}>
                       <div className={s.sectionTitle}>Technologies</div>
-                      <Link href="/cms/[slug]" as="/cms/nextjs">
+                      <Link href="/cms/nextjs">
                         <a className={s.extraLink}>Next.js</a>
                       </Link>
-                      <Link href="/cms/[slug]" as="/cms/gatsbyjs">
+                      <Link href="/cms/gatsbyjs">
                         <a className={s.extraLink}>Gatsby</a>
                       </Link>
-                      <Link href="/cms/[slug]" as="/cms/nuxt-js">
+                      <Link href="/cms/nuxt-js">
                         <a className={s.extraLink}>Nuxt.js</a>
                       </Link>
-                      <Link href="/cms/[slug]" as="/cms/hugo">
+                      <Link href="/cms/hugo">
                         <a className={s.extraLink}>Hugo</a>
                       </Link>
-                      <Link href="/cms/[slug]" as="/cms/jekyll">
+                      <Link href="/cms/jekyll">
                         <a className={s.extraLink}>Jekyll</a>
                       </Link>
-                      <Link href="/cms/[slug]" as="/cms/react">
+                      <Link href="/cms/react">
                         <a className={s.extraLink}>React</a>
                       </Link>
-                      <Link href="/cms/[slug]" as="/cms/vue">
+                      <Link href="/cms/vue">
                         <a className={s.extraLink}>Vue.js</a>
                       </Link>
-                      <Link href="/cms/[slug]" as="/cms/middleman">
+                      <Link href="/cms/middleman">
                         <a className={s.extraLink}>Middleman</a>
                       </Link>
                     </div>
@@ -211,43 +211,37 @@ export default function Navbar() {
                       <div className={s.sectionTitle}>Success stories</div>
                       <div className={s.grid2}>
                         {/* <TitleDesc
-                          href="/customers/[slug]"
-                          as="/customers/arduino"
+                          href="/customers/arduino"
                           title="Arduino"
                           description="2x time-to-market speed with DatoCMS"
                         /> */}
 
                         <TitleDesc
-                          href="/customers/[slug]"
-                          as="/customers/hashicorp"
+                          href="/customers/hashicorp"
                           title="Hashicorp"
                           description="How HashiCorp delivers a reliable editorial workflow"
                         />
 
                         <TitleDesc
-                          href="/customers/[slug]"
-                          as="/customers/chillys"
+                          href="/customers/chillys"
                           title="Chilly's Bottles"
                           description="How Rotate built a 2M users a month e-commerce"
                         />
 
                         <TitleDesc
-                          href="/customers/[slug]"
-                          as="/customers/matter-supply"
+                          href="/customers/matter-supply"
                           title="Matter Supply"
                           description="How to deliver an Emmy award-campaign in 4 weeks"
                         />
 
                         <TitleDesc
-                          href="/customers/[slug]"
-                          as="/customers/wonderland"
+                          href="/customers/wonderland"
                           title="Wonderland"
                           description="How to setup visually-stunning projects in minutes"
                         />
 
                         <TitleDesc
-                          href="/customers/[slug]"
-                          as="/customers/dovetail"
+                          href="/customers/dovetail"
                           title="Dovetail"
                           description="Why DatoCMS is their headless CMS of choice"
                         />

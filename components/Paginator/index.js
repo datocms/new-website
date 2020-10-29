@@ -4,13 +4,13 @@ import s from './style.module.css';
 import cn from 'classnames';
 import Link from 'next/link';
 
-const GoTo = ({ href, as, index, className, disabled, children }) =>
+const GoTo = ({ href, index, className, disabled, children }) =>
   disabled ? (
     <span className={cn(className, { [s.disabled]: disabled })}>
       {children}
     </span>
   ) : (
-    <Link href={href(index)} as={as(index)}>
+    <Link href={href(index)}>
       <a className={cn(className, { [s.disabled]: disabled })}>{children}</a>
     </Link>
   );
@@ -20,7 +20,6 @@ export default function Pagination({
   currentPage,
   totalEntries,
   href,
-  as,
   maxPagesToBeShown = 4,
 }) {
   const paginator = new Paginator(perPage, maxPagesToBeShown);
@@ -42,7 +41,6 @@ export default function Pagination({
     <div className={s.root}>
       <GoTo
         href={href}
-        as={as}
         index={previousPage - 1}
         className={cn(s.nav, s.link, s.linkPrev)}
         disabled={!hasPreviousPage}
@@ -51,10 +49,9 @@ export default function Pagination({
       </GoTo>
 
       <div className={s.links}>
-        {range(0, pageCount).map(i => (
+        {range(0, pageCount).map((i) => (
           <GoTo
             href={href}
-            as={as}
             key={i}
             index={firstPage + i - 1}
             className={cn(s.link, {
@@ -68,7 +65,6 @@ export default function Pagination({
 
       <GoTo
         href={href}
-        as={as}
         index={nextPage - 1}
         className={cn(s.nav, s.link, s.linkNext)}
         disabled={!hasNextPage}

@@ -80,11 +80,7 @@ export default function Changelog({ post, preview }) {
             {isFallback ? (
               <Copy lines={2} />
             ) : (
-              <Link
-                key={post.slug}
-                href="/product-updates/[slug]"
-                as={`/product-updates/${post.slug}`}
-              >
+              <Link key={post.slug} href={`/product-updates/${post.slug}`}>
                 <a>{post.title}</a>
               </Link>
             )}

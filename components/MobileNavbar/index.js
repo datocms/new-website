@@ -44,7 +44,7 @@ const BigLink = ({ children, href }) => {
   );
 };
 
-const LearnResource = ({ href, as, title, target, description }) => {
+const LearnResource = ({ href, title, target, description }) => {
   const content = (
     <>
       <div className={s.learnResourceTitle}>{title}</div>
@@ -57,7 +57,7 @@ const LearnResource = ({ href, as, title, target, description }) => {
       {content}
     </a>
   ) : (
-    <Link href={href} as={as}>
+    <Link href={href}>
       <a className={s.learnResource}>{content}</a>
     </Link>
   );
@@ -174,37 +174,26 @@ export default function Navbar() {
 
                 <Group title="Customers">
                   <div className={s.onecol}>
-                    {/* <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/arduino"
-                      title="Arduino"
-                      description="Arduino doubled his time-to-market speed with DatoCMS"
-                    />*/}
-
                     <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/hashicorp"
+                      href="/customers/hashicorp"
                       title="Hashicorp"
                       description="How HashiCorp built a reliable and secure editorial workflow"
                     />
 
                     <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/matter-supply"
+                      href="/customers/matter-supply"
                       title="Matter Supply"
                       description="How to deliver an Emmy award-campaign in 4 weeks"
                     />
 
                     <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/chillys"
+                      href="/customers/chillys"
                       title="Chilly's Bottles"
                       description="How Rotate built a 2M users a month e-commerce for Chilly’s"
                     />
 
                     <LearnResource
-                      href="/customers/[slug]"
-                      as="/customers/wonderland"
+                      href="/customers/wonderland"
                       title="Wonderland"
                       description="How to setup dozens of visually-stunning projects in minutes"
                     />

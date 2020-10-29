@@ -104,11 +104,7 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
         >
           {posts &&
             posts.map((post) => (
-              <Link
-                key={post.slug}
-                href="/blog/[slug]"
-                as={`/blog/${post.slug}`}
-              >
+              <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <a className={s.post}>
                   {post.coverImage && (
                     <Image
@@ -138,8 +134,7 @@ export default function Blog({ posts, preview, meta, blog, perPage }) {
             perPage={perPage}
             currentPage={router.query ? parseInt(router.query.page) : 0}
             totalEntries={meta.count}
-            href={(index) => (index === 0 ? '/blog' : '/blog/p/[page]')}
-            as={(index) => (index === 0 ? '/blog' : `/blog/p/${index}`)}
+            href={(index) => (index === 0 ? '/blog' : `/blog/p/${index}`)}
           />
         )}
       </Wrapper>

@@ -107,11 +107,7 @@ export default function Changelog({
                   <FormattedDate date={post.publicationDate} />
                 </div>
                 <h6 className={s.title}>
-                  <Link
-                    key={post.slug}
-                    href="/product-updates/[slug]"
-                    as={`/product-updates/${post.slug}`}
-                  >
+                  <Link key={post.slug} href={`/product-updates/${post.slug}`}>
                     <a>{post.title}</a>
                   </Link>
                 </h6>
@@ -141,9 +137,6 @@ export default function Changelog({
             currentPage={router.query ? parseInt(router.query.page) : 0}
             totalEntries={meta.count}
             href={(index) =>
-              index === 0 ? '/product-updates' : '/product-updates/p/[page]'
-            }
-            as={(index) =>
               index === 0 ? '/product-updates' : `/product-updates/p/${index}`
             }
           />

@@ -123,11 +123,10 @@ const Category = ({ title, description, children, browse }) => (
   </div>
 );
 
-const Box = ({ title, description, image, href, as }) => (
+const Box = ({ title, description, image, href }) => (
   <div className={s.boxContainer}>
     <PluginBox
       href={href}
-      as={as}
       title={title}
       description={description}
       image={image}
@@ -168,8 +167,7 @@ export default function IntegrationsPage({
           <Box
             key={item.code}
             title={item.name}
-            as={`/marketplace/starters/${item.code}`}
-            href="/marketplace/starters/[slug]"
+            href={`/marketplace/starters/${item.code}`}
             description={
               <div className={s.demoDesc}>
                 <div className={s.demoDescBody}>{item.description}</div>
@@ -210,8 +208,7 @@ export default function IntegrationsPage({
           <Box
             key={item.packageName}
             href="/marketplace/plugins/i/[...chunks]"
-            as={`/marketplace/plugins/i/${item.packageName}`}
-            title={item.title}
+            href={`/marketplace/plugins/i/${item.packageName}`}
             description={truncate(item.description, 55)}
             image={
               <Image
@@ -241,8 +238,7 @@ export default function IntegrationsPage({
         {page.hostingBuilding.map((item) => (
           <Box
             key={item.slug}
-            as={`/marketplace/hosting/${item.slug}`}
-            href="/marketplace/hosting/[slug]"
+            href={`/marketplace/hosting/${item.slug}`}
             title={item.title}
             description={truncate(item.description, 55)}
             image={<LogoImage logo={item.logo} />}
@@ -269,8 +265,7 @@ export default function IntegrationsPage({
         {page.enterpriseApps.map((item) => (
           <Box
             key={item.slug}
-            as={`/marketplace/enterprise/${item.slug}`}
-            href="/marketplace/enterprise/[slug]"
+            href={`/marketplace/enterprise/${item.slug}`}
             title={item.title}
             description={truncate(item.description, 55)}
             image={<LogoImage style="azure" logo={item.logo} />}

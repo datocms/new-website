@@ -104,10 +104,7 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
                     <ul>
                       {result.schema.links.map((link) => (
                         <li key={link.rel}>
-                          <Link
-                            href={docHref(`${url}/${link.rel}`)}
-                            as={`${url}/${link.rel}`}
-                          >
+                          <Link href={`${url}/${link.rel}`}>
                             <a>{link.title}</a>
                           </Link>
                         </li>

@@ -13,7 +13,7 @@ export default function UseCaseExcerpts({ cases }) {
       <Wrapper>
         <div className={s.inner}>
           <h2 className={s.title}>Read their stories</h2>
-          <Link href="/customers/[slug]" as={`/customers/${firstCase.slug}`}>
+          <Link href={`/customers/${firstCase.slug}`}>
             <a className={s.mainStory}>
               <div className={s.mainStoryLogo}>
                 <LazyImage src={firstCase.logo.url} />
@@ -27,11 +27,7 @@ export default function UseCaseExcerpts({ cases }) {
             </a>
           </Link>
           {cases.slice(1).map((useCase) => (
-            <Link
-              key={useCase.slug}
-              href="/customers/[slug]"
-              as={`/customers/${useCase.slug}`}
-            >
+            <Link key={useCase.slug} href={`/customers/${useCase.slug}`}>
               <a key={useCase.slug} className={s.otherUseCase}>
                 <div className={s.otherStoryLogo}>
                   <LazyImage src={useCase.logo.url} />

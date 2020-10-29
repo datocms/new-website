@@ -242,18 +242,10 @@ function Developers({ integrations, preview, page, review }) {
       </Flag>
 
       <Numbers title="Why you should use DatoCMS">
-        <NumbersBlock
-          href="/customers/chillys"
-          title="+134%"
-          logo={Chillys}
-        >
+        <NumbersBlock href="/customers/chillys" title="+134%" logo={Chillys}>
           Mobile conversion rate
         </NumbersBlock>
-        <NumbersBlock
-          href="/customers/wonderland"
-          title="6x"
-          logo={Wonderland}
-        >
+        <NumbersBlock href="/customers/wonderland" title="6x" logo={Wonderland}>
           Faster loading times
         </NumbersBlock>
         <NumbersBlock
@@ -292,8 +284,6 @@ function Developers({ integrations, preview, page, review }) {
         <div className={styles.grid}>
           <Result
             number="-92,5%"
-            // href="/customers/arduino"
-            // as="/customers/[slug]"
             label={
               <>
                 <Highlight style="good">lines of code</Highlight>

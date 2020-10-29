@@ -6,8 +6,6 @@ import Head from 'next/head';
 import s from './style.module.css';
 import { renderMetaTags } from 'react-datocms';
 
-import docHref from 'utils/docHref';
-
 export const getStaticProps = gqlStaticProps(
   gql`
     query {
@@ -54,12 +52,7 @@ const Sidebar = ({ roots }) => (
         <div className={s.guides}>
           {root.children.map((sub) => (
             <Link
-              href={docHref(
-                `/docs/${sub.slug}${normalize(
-                  sub.pages[0].slugOverride || sub.pages[0].page.slug,
-                )}`,
-              )}
-              as={`/docs/${sub.slug}${normalize(
+              href={`/docs/${sub.slug}${normalize(
                 sub.pages[0].slugOverride || sub.pages[0].page.slug,
               )}`}
               key={sub.slug}
@@ -95,19 +88,13 @@ export default function Docs({ roots, preview, page }) {
 
         <h6 className={s.introTitle}>Start with your use case</h6>
         <div className={s.useCaseCards}>
-          <Link
-            href={docHref('/docs/general-concepts')}
-            as="/docs/general-concepts"
-          >
+          <Link href="/docs/general-concepts">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Getting started</div>
               <p>Learn all the basic concepts and features behind DatoCMS.</p>
             </a>
           </Link>
-          <Link
-            href={docHref('/docs/content-modelling')}
-            as="/docs/content-modelling"
-          >
+          <Link href="/docs/content-modelling">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Model your schema</div>
               <p>
@@ -116,10 +103,7 @@ export default function Docs({ roots, preview, page }) {
               </p>
             </a>
           </Link>
-          <Link
-            href={docHref('/docs/content-delivery-api')}
-            as="/docs/content-delivery-api"
-          >
+          <Link href="/docs/content-delivery-api">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>GraphQL API</div>
               <p>Learn how to fetch your content into any frontend project.</p>
@@ -129,19 +113,19 @@ export default function Docs({ roots, preview, page }) {
 
         <h6 className={s.introTitle}>Popular integrations</h6>
         <div className={s.useCaseCards}>
-          <Link href={docHref('/docs/next-js')} as="/docs/next-js">
+          <Link href="/docs/next-js">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Next.js</div>
               <p>Learn how to integrate your Next.js website with DatoCMS</p>
             </a>
           </Link>
-          <Link href={docHref('/docs/gatsby')} as="/docs/gatsby">
+          <Link href="/docs/gatsby">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Gatsby</div>
               <p>Learn how to integrate your Gatsby website with DatoCMS</p>
             </a>
           </Link>
-          <Link href={docHref('/docs/hugo')} as="/docs/hugo">
+          <Link href="/docs/hugo">
             <a className={s.useCaseCard}>
               <div className={s.useCaseCardTitle}>Hugo</div>
               <p>Learn how to integrate your Hugo website with DatoCMS</p>
