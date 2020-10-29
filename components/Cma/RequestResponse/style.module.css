@@ -1,10 +1,9 @@
 .reqRes {
-  margin: 3em 0;
+  margin: 2em 0 4em;
 }
 
 .title.title.title {
-  color: var(--light-body-color);
-  font-size: 120%;
+  font-size: 150%;
   line-height: 1.25;
   margin: rfs(30px) 0 rfs(10px);
   font-weight: bold;
@@ -38,4 +37,11 @@
   margin-bottom: 15px;
   color: var(--light-body-color);
   font-size: 0.9em;
+}
+
+.description {
+  table,
+  pre {
+    margin: 1em 0;
+  }
 }

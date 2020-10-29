@@ -109,6 +109,22 @@
     min-height: 400px;
   }
 
+  details {
+    margin-bottom: 1em;
+
+    > *:last-child {
+      margin-bottom: 4em;
+    }
+  }
+
+  summary {
+    font-family: var(--font-sans);
+    line-height: 1.25;
+    font-size: 110%;
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+
   [data-with-anchor] {
     position: relative;
 
@@ -212,7 +228,9 @@
 
   table {
     width: 100%;
-    margin: 2.5em 0;
+    margin: 1em 0;
+    font-size: 0.9em;
+    font-family: var(--font-sans);
   }
 
   th {
@@ -229,12 +247,6 @@
     border-bottom: 1px solid var(--border-color);
     padding: 10px 20px;
     text-align: left;
-  }
-
-  tr:first-child {
-    td {
-      border-top: 1px solid var(--border-color);
-    }
   }
 
   th,

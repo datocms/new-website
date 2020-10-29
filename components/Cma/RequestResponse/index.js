@@ -1,6 +1,7 @@
 import Prism from 'components/Prism';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdownWithHtml from 'react-markdown/with-html';
 import slugify from 'utils/slugify';
+import gfm from 'remark-gfm';
 
 import s from './style.module.css';
 
@@ -11,7 +12,26 @@ const RequestResponse = ({ title, description, chunks }) => (
         {title}
       </h6>
     )}
-    {description && <ReactMarkdown source={description} />}
+    {description && (
+      <div className={s.description}>
+        <ReactMarkdownWithHtml
+          allowDangerousHtml
+          plugins={[gfm]}
+          source={description}
+          renderers={{
+            code: ({ language, value }) => {
+              return (
+                <Prism
+                  code={value}
+                  language={language || 'unknown'}
+                  showLineNumbers
+                />
+              );
+            },
+          }}
+        />
+      </div>
+    )}
 
     {chunks.map((chunk) => (
       <div className={s.chunk} key={chunk.title}>

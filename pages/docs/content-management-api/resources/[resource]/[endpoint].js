@@ -13,11 +13,13 @@ import React from 'react';
 import HttpExample from 'components/Cma/HttpExample';
 import JsExample from 'components/Cma/JsExample';
 import RubyExample from 'components/Cma/RubyExample';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdownWithHtml from 'react-markdown/with-html';
 import { HrefSchema, Schema } from 'components/Cma/Schema';
 import TargetSchema from 'components/Cma/TargetSchema';
 import { LanguageConsumer } from 'components/LanguagePicker';
 import { useRouter } from 'next/router';
+import Prism from 'components/Prism';
+import gfm from 'remark-gfm';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -113,7 +115,22 @@ export default function DocPage({ docGroup, cma, preview, endpoint }) {
               <div className={s.title}>{link.title}</div>
               <div className={s.body}>
                 {link.description && (
-                  <ReactMarkdown source={link.description} />
+                  <ReactMarkdownWithHtml
+                    allowDangerousHtml
+                    plugins={[gfm]}
+                    source={link.description}
+                    renderers={{
+                      code: ({ language, value }) => {
+                        return (
+                          <Prism
+                            code={value}
+                            language={language || 'unknown'}
+                            showLineNumbers
+                          />
+                        );
+                      },
+                    }}
+                  />
                 )}
                 {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
                 {link.schema && (

@@ -20,6 +20,34 @@ const Button = ({ children, label, open, onToggle }) => (
   </>
 );
 
+function PatternProperties({ prefix, schema, level, hideRequired }) {
+  const content = (
+    <>
+      {Object.entries(schema.patternProperties).map(([keyPattern, schema]) => {
+        let name = keyPattern;
+
+        if (keyPattern.startsWith('^(?<languagecode>')) {
+          keyPattern = '<locale>';
+        }
+
+        return (
+          <JsonSchema
+            key={keyPattern}
+            required
+            hideRequired={hideRequired}
+            name={keyPattern}
+            prefix={prefix}
+            schema={schema}
+            level={level + 1}
+          />
+        );
+      })}
+    </>
+  );
+
+  return level >= 1 ? <div className={s.properties}>{content}</div> : content;
+}
+
 function Properties({ prefix, schema, level, hideRequired }) {
   const required = schema.required || [];
 
@@ -285,6 +313,11 @@ function JsonSchema({
           {types(schema.type).includes('object') && schema.properties && (
             <Button open={open} label="child parameters" onToggle={setOpen}>
               <Properties schema={schema} level={level} />
+            </Button>
+          )}
+          {types(schema.type).includes('object') && schema.patternProperties && (
+            <Button open={open} label="child parameters" onToggle={setOpen}>
+              <PatternProperties schema={schema} level={level} />
             </Button>
           )}
           {schema.enum && (
