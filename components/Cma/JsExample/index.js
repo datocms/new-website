@@ -51,7 +51,11 @@ function example(resource, link, allPages = false) {
       ...(data.meta ? { meta: data.meta } : {}),
       ...Object.entries(data.relationships || {}).reduce(
         (acc, [name, value]) => {
-          acc[humps.camelize(name)] = value.data ? value.data.id : null;
+          acc[humps.camelize(name)] = Array.isArray(value.data)
+            ? value.data.map((el) => el.id)
+            : value.data
+            ? value.data.id
+            : null;
           return acc;
         },
         {},
@@ -62,7 +66,6 @@ function example(resource, link, allPages = false) {
 
   if (link.schema && (link.method === 'PUT' || link.method === 'POST')) {
     const example = schemaExampleFor(link.schema, !allPages);
-
     if (example.data) {
       params.push(
         fix(

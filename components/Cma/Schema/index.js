@@ -155,8 +155,8 @@ function Type({ schema }) {
 
         if (realType === 'array') {
           realType = schema.items
-            ? `array[${types(schema.items.type).join('/')}]`
-            : 'array[]';
+            ? `Array<${types(schema.items.type).join('/')}>`
+            : 'Array';
         }
 
         return [
@@ -203,7 +203,7 @@ function Relationship({ name, schema, required, hideRequired }) {
                   i > 0 && ', ',
                   <Link href={url} key={type}>
                     <a className={s.type}>
-                      {isArray ? `array[${type}.id]` : `${type}.id`}
+                      {isArray ? `Array<${type}.id>` : `${type}.id`}
                     </a>
                   </Link>,
                 ];

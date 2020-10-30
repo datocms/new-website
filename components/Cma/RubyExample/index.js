@@ -53,7 +53,11 @@ function example(resource, link, allPages = false) {
       ...(data.meta ? { meta: data.meta } : {}),
       ...Object.entries(data.relationships || {}).reduce(
         (acc, [name, value]) => {
-          acc[name] = value.data ? value.data.id : null;
+          acc[name] = Array.isArray(value.data)
+            ? value.data.map((el) => el.id)
+            : value.data
+            ? value.data.id
+            : null;
           return acc;
         },
         {},
