@@ -18,7 +18,6 @@ import Quote from 'components/Quote';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Result from 'components/Result';
 import LazyImage from 'components/LazyImage';
-import gql from 'graphql-tag';
 import Space from 'components/Space';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 import Wonderland from 'public/images/logos/wonderland.svg';
@@ -27,7 +26,7 @@ import MatterSupply from 'public/images/logos/matter-supply.svg';
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query {
       page: homePage {
         seo: _seoMetaTags {

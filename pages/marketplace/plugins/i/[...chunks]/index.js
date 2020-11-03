@@ -1,9 +1,7 @@
 import Layout from 'components/MarketplaceLayout';
-import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import SmartMarkdown from 'components/SmartMarkdown';
-import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import { Copy, Image } from 'components/FakeContent';
 import { renderMetaTags } from 'react-datocms';
@@ -23,7 +21,7 @@ import {
 } from 'components/PluginToolkit';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     {
       plugins: allPlugins(
         orderBy: installs_DESC
@@ -39,7 +37,7 @@ export const getStaticPaths = gqlStaticPaths(
 );
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query pluginQuery($name: String!) {
       plugin(
         filter: {

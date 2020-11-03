@@ -2,7 +2,6 @@ import { request, seoMetaTagsFields, imageFields } from 'lib/datocms';
 import { renderMetaTags } from 'react-datocms';
 import { gqlStaticPaths } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
-import gql from 'graphql-tag';
 import PostContent from 'components/PostContent';
 import Link from 'next/link';
 import ActiveLink from 'components/ActiveLink';
@@ -21,7 +20,7 @@ import cn from 'classnames';
 var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     {
       roots: allDocGroups(first: 100, filter: { parent: { exists: false } }) {
         slug
@@ -79,7 +78,7 @@ export const getStaticProps = async function ({
   const {
     data: { docGroup },
   } = await request({
-    query: gql`
+    query: `
       query($groupSlug: String!) {
         docGroup(filter: { slug: { eq: $groupSlug } }) {
           name
@@ -112,7 +111,7 @@ export const getStaticProps = async function ({
 
   if (pageId) {
     const { data } = await request({
-      query: gql`
+      query: `
         query($pageId: ItemId!) {
           page: docPage(filter: { id: { eq: $pageId } }) {
             title

@@ -1,7 +1,6 @@
 import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
-import gql from 'graphql-tag';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
@@ -43,7 +42,7 @@ const icons = [
 ];
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     {
       page: homePage {
         seo: _seoMetaTags {
@@ -97,7 +96,7 @@ function MultiLanguage({ page, preview }) {
 
       <IntegrationsBanner
         title={<>Localize both content&nbsp;and&nbsp;assets</>}
-        bubbles={icons.map(path => (
+        bubbles={icons.map((path) => (
           <LazyImage key={path} src={path} />
         ))}
       >

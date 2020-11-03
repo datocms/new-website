@@ -3,7 +3,6 @@ import LazyImage from 'components/LazyImage';
 import Head from 'next/head';
 import { request, imageFields } from 'lib/datocms';
 import s from './style.module.css';
-import gql from 'graphql-tag';
 import { Image } from 'react-datocms';
 import truncate from 'truncate';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
@@ -16,7 +15,7 @@ export const getStaticProps = async ({ preview }) => {
   const {
     data: { page, ...other },
   } = await request({
-    query: gql`
+    query: `
       {
         demos: _allTemplateDemosMeta {
           count

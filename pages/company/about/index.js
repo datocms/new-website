@@ -17,7 +17,6 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import { Image } from 'react-datocms';
-import gql from 'graphql-tag';
 import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
 import Head from 'next/head';
@@ -25,7 +24,7 @@ import { renderMetaTags } from 'react-datocms';
 import Space from 'components/Space';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     {
       page: aboutPage {
         seo: _seoMetaTags {

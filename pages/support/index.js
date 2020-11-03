@@ -2,7 +2,6 @@ import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import gql from 'graphql-tag';
 import { gqlStaticProps } from 'lib/datocms';
 import { useState, useEffect } from 'react';
 import s from './style.module.css';
@@ -19,7 +18,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
 import Head from 'next/head';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     {
       topics: allSupportTopics(first: 60) {
         slug

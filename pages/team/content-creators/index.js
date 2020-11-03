@@ -1,7 +1,6 @@
 import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
-import gql from 'graphql-tag';
 import {
   gqlStaticProps,
   seoMetaTagsFields,
@@ -26,7 +25,7 @@ import Space from 'components/Space';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query {
       page: homePage {
         seo: _seoMetaTags {

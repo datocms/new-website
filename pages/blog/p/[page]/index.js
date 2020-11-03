@@ -17,12 +17,12 @@ import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import Paginator from 'components/Paginator';
 import { range } from 'range';
-import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import s from './style.module.css';
+import { useQuerySubscription } from 'react-datocms';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       meta: _allBlogPostsMeta {
         count
@@ -37,38 +37,40 @@ export const getStaticPaths = gqlStaticPaths(
     ),
 );
 
-export const getStaticProps = gqlStaticProps(
-  gql`
-    query($first: IntType!, $skip: IntType!) {
-      blog {
-        seo: _seoMetaTags {
-          ...seoMetaTagsFields
-        }
-      }
-      posts: allBlogPosts(
-        first: $first
-        skip: $skip
-        orderBy: _firstPublishedAt_DESC
-      ) {
-        slug
-        title
-        excerpt(markdown: true)
-        coverImage {
-          responsiveImage(imgixParams: { w: 550 }) {
-            ...imageFields
-          }
-        }
-        _firstPublishedAt
-      }
-
-      meta: _allBlogPostsMeta {
-        count
+const query = `
+  query($first: IntType!, $skip: IntType!) {
+    blog {
+      seo: _seoMetaTags {
+        ...seoMetaTagsFields
       }
     }
+    posts: allBlogPosts(
+      first: $first
+      skip: $skip
+      orderBy: _firstPublishedAt_DESC
+    ) {
+      slug
+      title
+      excerpt(markdown: true)
+      coverImage {
+        responsiveImage(imgixParams: { w: 550 }) {
+          ...imageFields
+        }
+      }
+      _firstPublishedAt
+    }
 
-    ${imageFields}
-    ${seoMetaTagsFields}
-  `,
+    meta: _allBlogPostsMeta {
+      count
+    }
+  }
+
+  ${imageFields}
+  ${seoMetaTagsFields}
+`;
+
+export const getStaticProps = gqlStaticProps(
+  query,
   ({ page }) => ({
     first: BLOG_POSTS_PER_PAGE,
     skip: BLOG_POSTS_PER_PAGE * parseInt(page),
@@ -79,8 +81,12 @@ export const getStaticProps = gqlStaticProps(
   }),
 );
 
-export default function Blog({ posts, preview, meta, blog, perPage }) {
+export default function Blog({ preview, subscription, perPage }) {
   const router = useRouter();
+
+  const {
+    data: { posts, blog, meta },
+  } = useQuerySubscription(subscription);
 
   return (
     <Layout preview={preview}>

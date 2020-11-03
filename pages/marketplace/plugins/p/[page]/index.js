@@ -14,7 +14,6 @@ import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import Paginator from 'components/Paginator';
 import { range } from 'range';
-import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import s from './style.module.css';
 import truncate from 'truncate';
@@ -22,7 +21,7 @@ import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
 import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       meta: _allPluginsMeta(filter: { manuallyDeprecated: { eq: false } }) {
         count
@@ -34,7 +33,7 @@ export const getStaticPaths = gqlStaticPaths(
 );
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query($first: IntType!, $skip: IntType!) {
       pluginsPage {
         seo: _seoMetaTags {

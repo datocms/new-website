@@ -14,7 +14,6 @@ import IntegrationsBanner from 'components/IntegrationsBanner';
 import OmnichannelIllustration from 'components/OmnichannelIllustration';
 import Quote from 'components/Quote';
 import LazyImage from 'components/LazyImage';
-import gql from 'graphql-tag';
 import {
   imageFields,
   reviewFields,
@@ -27,7 +26,7 @@ import SuccessIcon from 'public/icons/regular/check.svg';
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query {
       page: homePage {
         seo: _seoMetaTags {
@@ -159,7 +158,7 @@ function DigitalMarketers({ integrations, preview, page, review1 }) {
 
       <IntegrationsBanner
         title={<>Easily connect any MarTech&nbsp;tool</>}
-        bubbles={integrations.map(integration => (
+        bubbles={integrations.map((integration) => (
           <LazyImage
             key={integration.id}
             src={

@@ -1,7 +1,6 @@
 import Layout from 'components/Layout';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
-import gql from 'graphql-tag';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
@@ -15,7 +14,7 @@ import s from './style.module.css';
 import { range } from 'range';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     {
       page: homePage {
         seo: _seoMetaTags {
@@ -100,7 +99,7 @@ function VideoStreamingEncoding({ page, preview }) {
         }
       >
         <div className={s.frames}>
-          {range(1, 12, 2).map(t => (
+          {range(1, 12, 2).map((t) => (
             <div key={t} className={s.frame}>
               <img
                 src={`https://image.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i/thumbnail.jpg?width=400&amp;time=${t}`}

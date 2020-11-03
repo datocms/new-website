@@ -6,7 +6,6 @@ import {
   reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import gql from 'graphql-tag';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import Hero from 'components/Hero';
@@ -45,7 +44,7 @@ import { useEffect } from 'react';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       landingPages: allLandingPages(first: 100) {
         slug
@@ -62,7 +61,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
   } = await request({
     preview,
     variables: { slug },
-    query: gql`
+    query: `
       query($slug: String!) {
         landing: landingPage(filter: { slug: { eq: $slug } }) {
           seo: _seoMetaTags {
@@ -172,7 +171,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
   } = await request({
     preview,
     variables: { technologyId: landing.integration.id },
-    query: gql`
+    query: `
       query($technologyId: ItemId!) {
         websites: allWebsites(
           filter: { technologies: { allIn: [$technologyId] } }

@@ -13,13 +13,12 @@ import {
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import gql from 'graphql-tag';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from 'components/PostContent';
 import Head from 'next/head';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       posts: allSuccessStories(first: 100, orderBy: _firstPublishedAt_DESC) {
         slug
@@ -27,11 +26,11 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'slug',
-  ({ posts }) => posts.map(p => p.slug),
+  ({ posts }) => posts.map((p) => p.slug),
 );
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query($slug: String!) {
       post: successStory(filter: { slug: { eq: $slug } }) {
         seo: _seoMetaTags {
@@ -132,7 +131,7 @@ export default function UseCase({ post, preview }) {
   const colors =
     post &&
     [post.duotoneColor1.hex, post.duotoneColor2.hex]
-      .map(x => x.replace(/#/, ''))
+      .map((x) => x.replace(/#/, ''))
       .join(',');
   const duotone = `duotone=${colors}`;
 
@@ -161,7 +160,7 @@ export default function UseCase({ post, preview }) {
               result={highlightHtml(post.result)}
             >
               <Numbers>
-                {post.numbers.map(number => (
+                {post.numbers.map((number) => (
                   <NumbersBlock key={number.label} title={number.number}>
                     {number.label}
                   </NumbersBlock>
@@ -170,7 +169,7 @@ export default function UseCase({ post, preview }) {
             </UseCaseRecap>
 
             <Results image={`${post.mainResultsImage.url}?${duotone}`}>
-              {post.mainResults.map(res => (
+              {post.mainResults.map((res) => (
                 <ResultsBlock key={res.title} title={res.title}>
                   {res.description}
                 </ResultsBlock>

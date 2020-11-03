@@ -14,7 +14,6 @@ import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
 import LogosBar from 'components/LogosBar';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
-import gql from 'graphql-tag';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import Space from 'components/Space';
@@ -46,7 +45,7 @@ import Harrys from 'public/images/logos/new/harrys.svg';
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query {
       page: homePage {
         seo: _seoMetaTags {

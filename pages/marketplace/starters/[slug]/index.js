@@ -19,11 +19,10 @@ import {
   seoMetaTagsFields,
   imageFields,
 } from 'lib/datocms';
-import gql from 'graphql-tag';
 import tiny from 'tiny-json-http';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       posts: allTemplateDemos(first: 100, orderBy: _firstPublishedAt_DESC) {
         code
@@ -38,7 +37,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
   const {
     data: { page },
   } = await request({
-    query: gql`
+    query: `
       query StarterQuery($slug: String!) {
         page: templateDemo(filter: { code: { eq: $slug } }) {
           seo: _seoMetaTags {

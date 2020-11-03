@@ -4,7 +4,6 @@ import Wrapper from 'components/Wrapper';
 import Head from 'next/head';
 import s from './style.module.css';
 import { request } from 'lib/datocms';
-import gql from 'graphql-tag';
 import tiny from 'tiny-json-http';
 import {
   formatLimitRaw,
@@ -33,7 +32,7 @@ export const getStaticProps = async ({ preview }) => {
   const {
     data: { hints, ...others },
   } = await request({
-    query: gql`
+    query: `
       {
         hints: allPricingHints(first: 100) {
           apiId

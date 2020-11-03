@@ -3,7 +3,6 @@ import Wrapper from 'components/Wrapper';
 import { request, imageFields } from 'lib/datocms';
 import { Image } from 'react-datocms';
 import Head from 'next/head';
-import gql from 'graphql-tag';
 import PluginBox from 'components/PluginBox';
 import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';
@@ -13,7 +12,7 @@ export const getStaticProps = async ({ preview }) => {
   const {
     data: { starters },
   } = await request({
-    query: gql`
+    query: `
       {
         starters: allTemplateDemos(first: 100) {
           id

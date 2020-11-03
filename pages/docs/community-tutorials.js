@@ -1,14 +1,13 @@
 import { gqlStaticProps } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
 import SmartMarkdown from 'components/SmartMarkdown';
-import gql from 'graphql-tag';
 import { Sidebar } from 'pages/docs/[...chunks]';
 import Head from 'next/head';
 import s from 'pages/docs/pageStyle.module.css';
 import Anchor from 'public/icons/regular/link.svg';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     {
       tutorials: allTutorials {
         title
@@ -42,7 +41,7 @@ export default function Tutorials({ tutorials }) {
           <div className={s.title}>Community tutorials</div>
 
           <div className={s.tutorials}>
-            {tutorials.map(tutorial => (
+            {tutorials.map((tutorial) => (
               <a href={tutorial.url} key={tutorial.url} className={s.tutorial}>
                 <h6 className={s.tutorialTitle}>
                   {tutorial.title} <Anchor />

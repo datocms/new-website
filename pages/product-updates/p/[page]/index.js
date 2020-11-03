@@ -11,14 +11,14 @@ import Paginator from 'components/Paginator';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
+import { useQuerySubscription } from 'react-datocms';
 
 import { range } from 'range';
-import gql from 'graphql-tag';
 
 import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       meta: _allChangelogEntriesMeta {
         count
@@ -34,7 +34,7 @@ export const getStaticPaths = gqlStaticPaths(
 );
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query($first: IntType!, $skip: IntType!) {
       changelog {
         seo: _seoMetaTags {
@@ -75,14 +75,12 @@ export const getStaticProps = gqlStaticProps(
   }),
 );
 
-export default function Changelog({
-  posts,
-  changelog,
-  perPage,
-  preview,
-  meta,
-}) {
+export default function Changelog({ perPage, preview, subscription }) {
   const router = useRouter();
+
+  const {
+    data: { posts, changelog, meta },
+  } = useQuerySubscription(subscription);
 
   return (
     <Layout preview={preview}>

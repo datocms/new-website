@@ -8,16 +8,16 @@ import {
 } from 'lib/datocms';
 import { Image, renderMetaTags } from 'react-datocms';
 import FormattedDate from 'components/FormattedDate';
-import gql from 'graphql-tag';
 import InterstitialTitle from 'components/InterstitialTitle';
 import PostContent from 'components/PostContent';
 import Head from 'next/head';
 import s from './style.module.css';
 import { Line, Copy, Rect } from 'components/FakeContent';
 import { useRouter } from 'next/router';
+import { useQuerySubscription } from 'react-datocms';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       posts: allBlogPosts(first: 10, orderBy: _firstPublishedAt_DESC) {
         slug
@@ -29,128 +29,132 @@ export const getStaticPaths = gqlStaticPaths(
 );
 
 export const getStaticProps = gqlStaticProps(
-  gql`
-    query ArticleQuery($slug: String!) {
-      post: blogPost(filter: { slug: { eq: $slug } }) {
-        _seoMetaTags {
-          ...seoMetaTagsFields
+  `
+  query ArticleQuery($slug: String!) {
+    post: blogPost(filter: { slug: { eq: $slug } }) {
+      _seoMetaTags {
+        ...seoMetaTagsFields
+      }
+      slug
+      title
+      content {
+        ... on TextRecord {
+          id
+          _modelApiKey
+          text(markdown: true)
         }
-        slug
-        title
-        content {
-          ... on TextRecord {
-            id
-            _modelApiKey
-            text(markdown: true)
-          }
-          ... on ImageRecord {
-            id
-            _modelApiKey
-            image {
-              format
-              width
-              title
-              alt
-              responsiveImage(imgixParams: { w: 1200 }) {
-                ...imageFields
-              }
-              url
-            }
-          }
-          ... on VideoRecord {
-            id
-            _modelApiKey
-            video {
-              url
-              title
-              provider
-              width
-              height
-              providerUid
-            }
-          }
-          ... on DemoRecord {
-            id
-            _modelApiKey
-            demo {
-              id
-              name
-              code
-              githubRepo
-              technology {
-                name
-                logo {
-                  url
-                }
-              }
-              screenshot {
-                responsiveImage(
-                  imgixParams: { w: 450, h: 350, fit: crop, crop: top }
-                ) {
-                  ...imageFields
-                }
-              }
-            }
-          }
-          ... on InternalVideoRecord {
-            id
-            _modelApiKey
-            autoplay
-            loop
-            thumbTimeSeconds
-            video {
-              title
-              width
-              height
-              video {
-                duration
-                streamingUrl
-                thumbnailUrl
-              }
-            }
-          }
-          ... on QuoteRecord {
-            id
-            _modelApiKey
-            quote(markdown: true)
-            author
-          }
-          ... on QuestionAnswerRecord {
-            id
-            _modelApiKey
-            question(markdown: true)
-            answer(markdown: true)
-          }
-          ... on CodeBlockRecord {
-            id
-            _modelApiKey
-            code
-            language
-            highlightLines
-            showLineNumbers
-          }
-        }
-        _firstPublishedAt
-        author {
-          name
-          avatar {
-            responsiveImage(
-              imgixParams: { w: 50, h: 50, fit: crop, crop: faces }
-            ) {
+        ... on ImageRecord {
+          id
+          _modelApiKey
+          image {
+            format
+            width
+            title
+            alt
+            responsiveImage(imgixParams: { w: 1200 }) {
               ...imageFields
             }
+            url
+          }
+        }
+        ... on VideoRecord {
+          id
+          _modelApiKey
+          video {
+            url
+            title
+            provider
+            width
+            height
+            providerUid
+          }
+        }
+        ... on DemoRecord {
+          id
+          _modelApiKey
+          demo {
+            id
+            name
+            code
+            githubRepo
+            technology {
+              name
+              logo {
+                url
+              }
+            }
+            screenshot {
+              responsiveImage(
+                imgixParams: { w: 450, h: 350, fit: crop, crop: top }
+              ) {
+                ...imageFields
+              }
+            }
+          }
+        }
+        ... on InternalVideoRecord {
+          id
+          _modelApiKey
+          autoplay
+          loop
+          thumbTimeSeconds
+          video {
+            title
+            width
+            height
+            video {
+              duration
+              streamingUrl
+              thumbnailUrl
+            }
+          }
+        }
+        ... on QuoteRecord {
+          id
+          _modelApiKey
+          quote(markdown: true)
+          author
+        }
+        ... on QuestionAnswerRecord {
+          id
+          _modelApiKey
+          question(markdown: true)
+          answer(markdown: true)
+        }
+        ... on CodeBlockRecord {
+          id
+          _modelApiKey
+          code
+          language
+          highlightLines
+          showLineNumbers
+        }
+      }
+      _firstPublishedAt
+      author {
+        name
+        avatar {
+          responsiveImage(
+            imgixParams: { w: 50, h: 50, fit: crop, crop: faces }
+          ) {
+            ...imageFields
           }
         }
       }
     }
+  }
 
-    ${imageFields}
-    ${seoMetaTagsFields}
+  ${imageFields}
+  ${seoMetaTagsFields}
   `,
 );
 
-export default function Article({ post, preview }) {
+export default function Article({ preview, subscription }) {
   const { isFallback } = useRouter();
+
+  const {
+    data: { post },
+  } = useQuerySubscription(subscription);
 
   return (
     <Layout preview={preview}>

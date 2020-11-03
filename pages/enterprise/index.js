@@ -12,7 +12,6 @@ import {
   reviewFields,
   imageFields,
 } from 'lib/datocms';
-import gql from 'graphql-tag';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 
@@ -25,7 +24,7 @@ import Vercel from 'public/images/logos/vercel.svg';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     {
       page: enterprisePage {
         seo: _seoMetaTags {

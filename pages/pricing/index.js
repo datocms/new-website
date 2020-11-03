@@ -14,7 +14,6 @@ import {
   request,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import gql from 'graphql-tag';
 import tiny from 'tiny-json-http';
 import formatNumber from 'utils/formatNumber';
 import InterstitialTitle from 'components/InterstitialTitle';
@@ -50,7 +49,7 @@ export const getStaticProps = async ({ preview }) => {
   const {
     data: { hints, ...others },
   } = await request({
-    query: gql`
+    query: `
       {
         page: pricingPage {
           seo: _seoMetaTags {

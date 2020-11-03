@@ -6,16 +6,16 @@ import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import SmartMarkdown from 'components/SmartMarkdown';
-import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import { Line, Copy, Image } from 'components/FakeContent';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
+import { useQuerySubscription } from 'react-datocms';
 
 import s from 'pages/product-updates/p/[page]/style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       posts: allChangelogEntries(first: 10, orderBy: publicationDate_DESC) {
         slug
@@ -27,7 +27,7 @@ export const getStaticPaths = gqlStaticPaths(
 );
 
 export const getStaticProps = gqlStaticProps(
-  gql`
+  `
     query($slug: String!) {
       post: changelogEntry(filter: { slug: { eq: $slug } }) {
         seo: _seoMetaTags {
@@ -49,8 +49,12 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-export default function Changelog({ post, preview }) {
+export default function Changelog({ preview, subscription }) {
   const { isFallback } = useRouter();
+
+  const {
+    data: { post },
+  } = useQuerySubscription(subscription);
 
   return (
     <Layout preview={preview}>

@@ -13,10 +13,9 @@ import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from 'components/PostContent';
 import { gqlStaticPaths } from 'lib/datocms';
-import gql from 'graphql-tag';
 
 export const getStaticPaths = gqlStaticPaths(
-  gql`
+  `
     query {
       root: docGroup(filter: { slug: { eq: "content-management-api" } }) {
         pages {
