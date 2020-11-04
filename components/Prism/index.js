@@ -5,6 +5,21 @@ import s from './style.module.css';
 import { range } from 'range';
 import { useMemo } from 'react';
 
+const modifiedTheme = {
+  ...theme,
+  styles: theme.styles.map((style) =>
+    style.types.includes('comment')
+      ? {
+          types: ['comment'],
+          style: {
+            color: '#98c6e7',
+            fontStyle: 'italic',
+          },
+        }
+      : style,
+  ),
+};
+
 const Prism = ({ code, language, showLineNumbers, highlightLines }) => {
   const lines = useMemo(() => {
     if (!highlightLines) {
@@ -29,7 +44,12 @@ const Prism = ({ code, language, showLineNumbers, highlightLines }) => {
   }, [code]);
 
   return (
-    <Highlight {...defaultProps} theme={theme} code={code} language={language}>
+    <Highlight
+      {...defaultProps}
+      theme={modifiedTheme}
+      code={code}
+      language={language}
+    >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={className} style={style}>
           {tokens.map((line, i) => {

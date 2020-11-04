@@ -247,7 +247,7 @@ function ContentCreators({ page, review1, review2, preview }) {
 
       <TitleIllustrationStripWithContent
         image="zen-garden"
-        title="A fast, distraction-free writing experience"
+        title="Distraction-free writing experience"
         subtitle={
           <>
             Everything in DatoCMS is focused on helping you create great

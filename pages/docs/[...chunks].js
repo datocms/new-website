@@ -357,11 +357,12 @@ export function Toc({ content, extraEntries: extra }) {
   ) : null;
 }
 
-export default function DocPage({ docGroup, titleOverride, page }) {
+export default function DocPage({ docGroup, titleOverride, page, preview }) {
   const { isFallback } = useRouter();
 
   return (
     <DocsLayout
+      preview={preview}
       sidebar={
         docGroup && (
           <Sidebar
