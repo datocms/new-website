@@ -47,8 +47,8 @@ function PatternProperties({ prefix, schema, level, hideRequired }) {
   return level >= 1 ? <div className={s.properties}>{content}</div> : content;
 }
 
-function Properties({ prefix, schema, level, hideRequired }) {
-  const required = schema.required || [];
+function Properties({ prefix, schema, level, groupIsRequired, hideRequired }) {
+  const required = groupIsRequired ? schema.required || [] : [];
 
   const content = (
     <>
@@ -231,8 +231,8 @@ function Relationship({ name, schema, required, hideRequired }) {
   );
 }
 
-function Relationships({ relationships, hideRequired }) {
-  const required = relationships.required || [];
+function Relationships({ relationships, groupIsRequired, hideRequired }) {
+  const required = groupIsRequired ? relationships.required || [] : [];
 
   return (
     <>
@@ -390,6 +390,7 @@ export function Schema({ title, schema, showId, hideRequired }) {
               <Properties
                 level={0}
                 prefix={language === 'http' ? 'attributes.' : null}
+                groupIsRequired={schema.required.includes('attributes')}
                 hideRequired={hideRequired}
                 schema={schema.properties.attributes}
               />
@@ -398,12 +399,14 @@ export function Schema({ title, schema, showId, hideRequired }) {
             <Properties
               level={0}
               prefix="meta."
+              groupIsRequired={schema.required.includes('meta')}
               hideRequired={hideRequired}
               schema={schema.properties.meta}
             />
           )}
           {schema.properties.relationships && (
             <Relationships
+              groupIsRequired={schema.required.includes('relationships')}
               relationships={schema.properties.relationships}
               hideRequired={hideRequired}
             />
