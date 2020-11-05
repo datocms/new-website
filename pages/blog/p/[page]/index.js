@@ -4,7 +4,7 @@ import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
 import {
   gqlStaticPaths,
-  gqlStaticProps,
+  gqlStaticPropsWithSubscription,
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { Image } from 'react-datocms';
 import Masonry from 'react-masonry-css';
 import FormattedDate from 'components/FormattedDate';
-import { BLOG_POSTS_PER_PAGE } from 'lib/sitemap';
+import { BLOG_POSTS_PER_PAGE } from 'lib/pages';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import Paginator from 'components/Paginator';
@@ -37,51 +37,45 @@ export const getStaticPaths = gqlStaticPaths(
     ),
 );
 
-const query = `
-  query($first: IntType!, $skip: IntType!) {
-    blog {
-      seo: _seoMetaTags {
-        ...seoMetaTagsFields
-      }
-    }
-    posts: allBlogPosts(
-      first: $first
-      skip: $skip
-      orderBy: _firstPublishedAt_DESC
-    ) {
-      slug
-      title
-      excerpt(markdown: true)
-      coverImage {
-        responsiveImage(imgixParams: { w: 550 }) {
-          ...imageFields
+export const getStaticProps = gqlStaticPropsWithSubscription(
+  `
+    query($first: IntType!, $skip: IntType!) {
+      blog {
+        seo: _seoMetaTags {
+          ...seoMetaTagsFields
         }
       }
-      _firstPublishedAt
+      posts: allBlogPosts(
+        first: $first
+        skip: $skip
+        orderBy: _firstPublishedAt_DESC
+      ) {
+        slug
+        title
+        excerpt(markdown: true)
+        coverImage {
+          responsiveImage(imgixParams: { w: 550 }) {
+            ...imageFields
+          }
+        }
+        _firstPublishedAt
+      }
+
+      meta: _allBlogPostsMeta {
+        count
+      }
     }
 
-    meta: _allBlogPostsMeta {
-      count
-    }
-  }
-
-  ${imageFields}
-  ${seoMetaTagsFields}
-`;
-
-export const getStaticProps = gqlStaticProps(
-  query,
+    ${imageFields}
+    ${seoMetaTagsFields}
+  `,
   ({ page }) => ({
     first: BLOG_POSTS_PER_PAGE,
     skip: BLOG_POSTS_PER_PAGE * parseInt(page),
   }),
-  (data) => ({
-    ...data,
-    perPage: BLOG_POSTS_PER_PAGE,
-  }),
 );
 
-export default function Blog({ preview, subscription, perPage }) {
+export default function Blog({ preview, subscription }) {
   const router = useRouter();
 
   const {
@@ -137,7 +131,7 @@ export default function Blog({ preview, subscription, perPage }) {
         </Masonry>
         {!router.isFallback && meta && (
           <Paginator
-            perPage={perPage}
+            perPage={BLOG_POSTS_PER_PAGE}
             currentPage={router.query ? parseInt(router.query.page) : 0}
             totalEntries={meta.count}
             href={(index) => (index === 0 ? '/blog' : `/blog/p/${index}`)}

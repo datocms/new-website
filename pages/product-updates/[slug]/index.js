@@ -2,7 +2,11 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
-import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  gqlStaticPaths,
+  gqlStaticPropsWithSubscription,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import SmartMarkdown from 'components/SmartMarkdown';
@@ -26,7 +30,7 @@ export const getStaticPaths = gqlStaticPaths(
   ({ posts }) => posts.map((p) => p.slug),
 );
 
-export const getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticPropsWithSubscription(
   `
     query($slug: String!) {
       post: changelogEntry(filter: { slug: { eq: $slug } }) {

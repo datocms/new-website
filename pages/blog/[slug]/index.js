@@ -2,7 +2,7 @@ import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
-  gqlStaticProps,
+  gqlStaticPropsWithSubscription,
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
@@ -28,7 +28,7 @@ export const getStaticPaths = gqlStaticPaths(
   ({ posts }) => posts.map((p) => p.slug),
 );
 
-export const getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticPropsWithSubscription(
   `
   query ArticleQuery($slug: String!) {
     post: blogPost(filter: { slug: { eq: $slug } }) {

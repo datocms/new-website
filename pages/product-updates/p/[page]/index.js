@@ -2,11 +2,15 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
-import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  gqlStaticPaths,
+  gqlStaticPropsWithSubscription,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import SmartMarkdown from 'components/SmartMarkdown';
-import { CHANGELOG_POSTS_PER_PAGE } from 'lib/sitemap';
+import { CHANGELOG_POSTS_PER_PAGE } from 'lib/pages';
 import Paginator from 'components/Paginator';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -33,7 +37,7 @@ export const getStaticPaths = gqlStaticPaths(
     ),
 );
 
-export const getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticPropsWithSubscription(
   `
     query($first: IntType!, $skip: IntType!) {
       changelog {
@@ -75,7 +79,7 @@ export const getStaticProps = gqlStaticProps(
   }),
 );
 
-export default function Changelog({ perPage, preview, subscription }) {
+export default function Changelog({ preview, subscription }) {
   const router = useRouter();
 
   const {
@@ -131,7 +135,7 @@ export default function Changelog({ perPage, preview, subscription }) {
         </div>
         {!router.isFallback && (
           <Paginator
-            perPage={perPage}
+            perPage={CHANGELOG_POSTS_PER_PAGE}
             currentPage={router.query ? parseInt(router.query.page) : 0}
             totalEntries={meta.count}
             href={(index) =>

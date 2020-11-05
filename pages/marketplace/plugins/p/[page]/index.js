@@ -9,7 +9,7 @@ import {
 import Link from 'next/link';
 import { Image } from 'react-datocms';
 import FormattedDate from 'components/FormattedDate';
-import { PLUGINS_PER_PAGE } from 'lib/sitemap';
+import { PLUGINS_PER_PAGE } from 'lib/pages';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import Paginator from 'components/Paginator';
