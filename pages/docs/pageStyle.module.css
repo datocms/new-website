@@ -424,3 +424,63 @@
   margin: 0 !important;
   width: auto !important;
 }
+
+.demo {
+  display: grid;
+  max-width: 860px;
+  grid-gap: rfs(60px);
+  align-items: center;
+  font-family: var(--font-sans);
+  margin: rfs(80px) auto;
+  font-size: rfs(18px);
+  text-align: center;
+  line-height: 1.3;
+
+  @media (width > 800px) {
+    grid-template-columns: 450px 1fr;
+    text-align: left;
+  }
+}
+
+.demoPreview {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.techLogo {
+  height: 25px !important;
+  margin-top: 20px;
+  box-shadow: none !important;
+  height: 40px !important;
+  display: block !important;
+  margin: 20px auto 0 !important;
+
+  @media (width > 800px) {
+    margin: 20px 0 0 !important;
+  }
+}
+
+.demoDesc {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.demoTitle {
+  font-size: rfs(30px);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.demoDescBody {
+  flex: 1;
+}
+
+.demoImage {
+  display: block !important;
+
+  img {
+    border-radius: 0;
+  }
+}
