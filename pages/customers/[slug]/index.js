@@ -9,13 +9,14 @@ import Results, { Block as ResultsBlock } from 'components/UseCaseResults';
 import s from './style.module.css';
 import {
   gqlStaticPaths,
-  gqlStaticProps,
+  gqlStaticPropsWithSubscription,
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from 'components/PostContent';
 import Head from 'next/head';
+import { useQuerySubscription } from 'react-datocms';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -29,7 +30,7 @@ export const getStaticPaths = gqlStaticPaths(
   ({ posts }) => posts.map((p) => p.slug),
 );
 
-export const getStaticProps = gqlStaticProps(
+export const getStaticProps = gqlStaticPropsWithSubscription(
   `
     query($slug: String!) {
       post: successStory(filter: { slug: { eq: $slug } }) {
@@ -127,7 +128,11 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-export default function UseCase({ post, preview }) {
+export default function UseCase({ subscription, preview }) {
+  const {
+    data: { post },
+  } = useQuerySubscription(subscription);
+
   const colors =
     post &&
     [post.duotoneColor1.hex, post.duotoneColor2.hex]

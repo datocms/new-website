@@ -471,6 +471,7 @@
   font-size: rfs(30px);
   font-weight: bold;
   margin-bottom: 10px;
+  line-height: 1;
 }
 
 .demoDescBody {
