@@ -55,6 +55,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
             }
           }
           screenshot {
+            url(imgixParams: { w: 600, h: 500, fit: crop, crop: top })
             responsiveImage(
               imgixParams: { w: 600, h: 500, fit: crop, crop: top }
             ) {
@@ -99,7 +100,13 @@ export default function EnterpriseApp({ page, preview }) {
 
   return (
     <Layout preview={preview}>
-      {!isFallback && <Head>{renderMetaTags(page.seo)}</Head>}
+      {!isFallback && (
+        <Head>
+          {renderMetaTags(page.seo)}
+          <meta property="og:image" content={page.screenshot.url} />
+          <meta name="twitter:image" content={page.screenshot.url} />
+        </Head>
+      )}
       <PluginDetails
         isFallback={isFallback}
         title={!isFallback && page.name}

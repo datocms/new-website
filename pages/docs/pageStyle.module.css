@@ -437,13 +437,13 @@
   line-height: 1.3;
 
   @media (width > 800px) {
-    grid-template-columns: 450px 1fr;
+    grid-template-columns: 350px 1fr;
     text-align: left;
   }
 }
 
 .demoPreview {
-  max-width: 450px;
+  max-width: 350px;
   margin: 0 auto;
 }
 
@@ -465,6 +465,7 @@
   flex: 1;
   flex-direction: column;
   margin-bottom: 15px;
+  font-size: 0.9em;
 }
 
 .demoTitle {
