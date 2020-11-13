@@ -69,6 +69,28 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             providerUid
           }
         }
+        ... on MultipleDemosBlockRecord {
+          id
+          _modelApiKey
+          demos {
+            id
+            name
+            code
+            technology {
+              name
+              logo {
+                url
+              }
+            }
+            screenshot {
+              responsiveImage(
+                imgixParams: { w: 400, h: 300, fit: crop, crop: top }
+              ) {
+                ...imageFields
+              }
+            }
+          }
+        }
         ... on DemoRecord {
           id
           _modelApiKey
@@ -172,28 +194,30 @@ export default function Article({ preview, subscription }) {
       <InterstitialTitle kicker="The DatoCMS Blog" style="two">
         {isFallback ? <Copy lines={2} /> : post.title}
       </InterstitialTitle>
-      <Wrapper>
-        <div className={s.info}>
-          {isFallback ? (
-            <Rect className={s.avatar} />
-          ) : (
-            <Image
-              className={s.avatar}
-              data={post.author.avatar.responsiveImage}
-            />
-          )}
-          {isFallback ? (
-            <Line />
-          ) : (
-            <>
-              Posted on <FormattedDate date={post._firstPublishedAt} /> by{' '}
-              {post.author.name}
-            </>
-          )}
-        </div>
+      <div className={s.wrapper}>
+        <Wrapper>
+          <div className={s.info}>
+            {isFallback ? (
+              <Rect className={s.avatar} />
+            ) : (
+              <Image
+                className={s.avatar}
+                data={post.author.avatar.responsiveImage}
+              />
+            )}
+            {isFallback ? (
+              <Line />
+            ) : (
+              <>
+                Posted on <FormattedDate date={post._firstPublishedAt} /> by{' '}
+                {post.author.name}
+              </>
+            )}
+          </div>
 
-        <PostContent isFallback={isFallback} content={post && post.content} />
-      </Wrapper>
+          <PostContent isFallback={isFallback} content={post && post.content} />
+        </Wrapper>
+      </div>
     </Layout>
   );
 }

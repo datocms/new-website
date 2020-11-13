@@ -14,3 +14,7 @@
     -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 }
+
+.wrapper {
+  --page-width-with-margin: 1100px;
+}

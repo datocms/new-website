@@ -112,7 +112,7 @@ export default function PostContent({ isFallback, content, style, children }) {
                     {block.demos.map((item) => (
                       <div className={s.pluginBoxContainer}>
                         <PluginBox
-                          description="View this demo »"
+                          description="Try this demo »"
                           image={
                             <Image
                               className={s.pluginBoxImage}

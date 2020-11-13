@@ -208,10 +208,41 @@
   flex: 1;
 }
 
-.demoImage {
+.demoImage,
+.pluginBoxImage {
   display: block !important;
 
   img {
-    border-radius: 0;
+    border-radius: 0 !important;
+  }
+}
+
+.pluginBoxes {
+  display: flex;
+  padding: 40px 0 40px var(--page-margin);
+  max-width: var(--page-width-with-margin);
+  margin-left: calc(var(--page-margin) * -1);
+  margin-right: calc(var(--page-margin) * -1);
+  align-items: stretch;
+  justify-content: center;
+  font-family: var(--font-sans);
+}
+
+.pluginBoxContainer {
+  padding-right: 30px;
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  flex: 1;
+  max-width: 400px;
+
+  &:last-child {
+    padding-right: var(--page-margin);
+  }
+
+  > a {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
   }
 }
