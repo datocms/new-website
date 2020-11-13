@@ -15,7 +15,11 @@ export default function ImageFigure({ data, imageClassName }) {
         </video>
       )}
       {data.format !== 'gif' && data.responsiveImage && (
-        <Image className={imageClassName} data={data.responsiveImage} />
+        <Image
+          className={imageClassName}
+          data={data.responsiveImage}
+          style={{ display: 'inline-block' }}
+        />
       )}
       {data.format !== 'gif' && !data.responsiveImage && (
         <img alt={data.alt} src={`${data.url}?auto=format&fit=max&w=900`} />
