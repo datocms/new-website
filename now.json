@@ -2,6 +2,7 @@
   "env": {
     "FASTLY_API_KEY": "@fastly_api_key",
     "SLACK_TOKEN": "@slack_token",
-    "RECAPTCHA_SECRET_KEY": "@recaptcha_secret_key"
+    "RECAPTCHA_SECRET_KEY": "@recaptcha_secret_key",
+    "MAILCHIMP_TOKEN": "@mailchimp_token"
   }
 }

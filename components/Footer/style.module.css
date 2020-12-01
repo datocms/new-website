@@ -155,3 +155,42 @@
     }
   }
 }
+
+.formContainer {
+  margin-top: 5px;
+}
+
+.form {
+  display: flex;
+  input {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    font-family: inherit;
+    font-size: 18px;
+    box-sizing: border-box;
+    appearance: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    text-align: center;
+    transition: all 100ms ease-in-out;
+    min-width: 30%;
+
+    &:focus {
+      border-color: var(--extra-light-body-color);
+      border: none;
+    }
+  }
+
+  button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.message {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}

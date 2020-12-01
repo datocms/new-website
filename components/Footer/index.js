@@ -1,11 +1,42 @@
+import { useState } from 'react';
 import Wrapper from 'components/Wrapper';
 import FinalCta from 'components/FinalCta';
 import StatusBadge from 'components/StatusBadge';
 import cn from 'classnames';
 import Link from 'next/link';
+import Button from 'components/Button';
 import s from './style.module.css';
+import { useForm } from 'react-hook-form';
+import wretch from 'wretch';
+
+wretch().errorType('json');
 
 export default function Footer({ noCta }) {
+  const {
+    register,
+    reset,
+    setError,
+    handleSubmit,
+    formState,
+    errors,
+  } = useForm();
+
+  const [success, setSuccess] = useState(false);
+
+  const onSubmit = async ({ email }) => {
+    try {
+      await wretch('/api/mailchimp/subscribe').post({ email }).json();
+
+      reset();
+      setSuccess(true);
+    } catch (e) {
+      setSuccess(false);
+      setError('email', {
+        message: `Mailchimp error: ${e.json.error.detail}`,
+      });
+    }
+  };
+
   return (
     <div
       className={cn(s.footerBg, { [s.noCta]: noCta, [s.cta]: !noCta })}
@@ -223,6 +254,35 @@ export default function Footer({ noCta }) {
                 </div>
               </div>
             </div>
+          </div>
+        </Wrapper>
+        <Wrapper>
+          <div className={s.group}>
+            <div className={s.groupTitle}>Subscribe to our newsletter</div>
+            <div className={s.formContainer} onSubmit={handleSubmit(onSubmit)}>
+              <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  name="email"
+                  placeholder="Enter your email"
+                  ref={register({
+                    required: 'Please, enter your email! 😊',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
+                      message: 'Please, enter a valid email! 😊',
+                    },
+                  })}
+                />
+                <Button as="button" disabled={formState.isSubmitting}>
+                  {formState.isSubmitting ? 'Submitting...' : 'Subscribe!'}
+                </Button>
+              </form>
+            </div>
+
+            <span className={s.message}>
+              {errors.email && errors.email.message}
+              {success &&
+                'You successfully subscribed to our newsletter. Welcome on board! 🎉'}
+            </span>
           </div>
         </Wrapper>
         <div className={s.finalFooter}>
