@@ -177,7 +177,7 @@
 
   @media (width > 900px) {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
   }
 }
 
@@ -201,9 +201,21 @@
 
 .formContainer {
   margin-top: 15px;
+  position: relative;
 
   @media (width > 900px) {
     margin-top: 0px;
+  }
+}
+
+.formMessage {
+  margin-top: 10px;
+  font-size: 0.8em;
+
+  @media (width > 900px) {
+    position: absolute;
+    top: 100%;
+    left: 0;
   }
 }
 

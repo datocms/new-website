@@ -32,7 +32,7 @@ export default function Footer({ noCta }) {
     } catch (e) {
       setSuccess(false);
       setError('email', {
-        message: `Mailchimp error: ${e.json.error.detail}`,
+        message: e.json.error,
       });
     }
   };
@@ -77,13 +77,12 @@ export default function Footer({ noCta }) {
                   {formState.isSubmitting ? 'Submitting...' : 'Subscribe!'}
                 </Button>
               </form>
+              <div className={s.formMessage}>
+                {errors.email && errors.email.message}
+                {success &&
+                  'You successfully subscribed to our newsletter. Welcome on board! 🎉'}
+              </div>
             </div>
-
-            <span className={s.message}>
-              {errors.email && errors.email.message}
-              {success &&
-                'You successfully subscribed to our newsletter. Welcome on board! 🎉'}
-            </span>
           </div>
         </Wrapper>
         <Wrapper>

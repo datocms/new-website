@@ -24,6 +24,17 @@ export default async ({ method, body }, res) => {
 
     res.status(200).json({ success: true });
   } catch (e) {
-    res.status(e.status).json({ success: false, error: e.response.body });
+    if (e.status === 400 && e.response.body.title === 'Member Exists') {
+      res
+        .status(e.status)
+        .json({
+          success: false,
+          error: "You're already subscribed to the newsletter!",
+        });
+    } else {
+      res
+        .status(e.status)
+        .json({ success: false, error: e.response.body.title });
+    }
   }
 };
