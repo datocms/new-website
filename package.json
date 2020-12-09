@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.24",
     "@n8tb1t/use-scroll-position": "^1.0.43",
     "@rehooks/component-size": "^1.0.3",
     "@slack/web-api": "^5.11.0",

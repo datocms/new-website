@@ -1,11 +1,42 @@
+import { useState } from 'react';
 import Wrapper from 'components/Wrapper';
 import FinalCta from 'components/FinalCta';
 import StatusBadge from 'components/StatusBadge';
 import cn from 'classnames';
 import Link from 'next/link';
+import Button from 'components/Button';
 import s from './style.module.css';
+import { useForm } from 'react-hook-form';
+import wretch from 'wretch';
+
+wretch().errorType('json');
 
 export default function Footer({ noCta }) {
+  const {
+    register,
+    reset,
+    setError,
+    handleSubmit,
+    formState,
+    errors,
+  } = useForm();
+
+  const [success, setSuccess] = useState(false);
+
+  const onSubmit = async ({ email }) => {
+    try {
+      await wretch('/api/mailchimp/subscribe').post({ email }).json();
+
+      reset();
+      setSuccess(true);
+    } catch (e) {
+      setSuccess(false);
+      setError('email', {
+        message: e.json.error,
+      });
+    }
+  };
+
   return (
     <div
       className={cn(s.footerBg, { [s.noCta]: noCta, [s.cta]: !noCta })}
@@ -13,6 +44,47 @@ export default function Footer({ noCta }) {
     >
       {!noCta && <FinalCta />}
       <div className={s.footerRoot}>
+        <Wrapper>
+          <div className={s.newsletter}>
+            <div className={s.newsletterBody}>
+              <div className={s.newsletterTitle}>
+                Subscribe to our newsletter!
+              </div>
+              <div className={s.newsletterDescription}>
+                One update per month. All the latest news and sneak peeks
+                directly in your inbox.
+              </div>
+            </div>
+            <div className={s.formContainer} onSubmit={handleSubmit(onSubmit)}>
+              <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  name="email"
+                  placeholder="Enter your email"
+                  ref={register({
+                    required: 'Please, enter your email! 😊',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
+                      message: 'Please, enter a valid email! 😊',
+                    },
+                  })}
+                />
+                <Button
+                  as="button"
+                  p="tiny"
+                  fs="small"
+                  disabled={formState.isSubmitting}
+                >
+                  {formState.isSubmitting ? 'Submitting...' : 'Subscribe!'}
+                </Button>
+              </form>
+              <div className={s.formMessage}>
+                {errors.email && errors.email.message}
+                {success &&
+                  'You successfully subscribed to our newsletter. Welcome on board! 🎉'}
+              </div>
+            </div>
+          </div>
+        </Wrapper>
         <Wrapper>
           <div className={s.footerInnerRoot}>
             <div className={s.cols}>

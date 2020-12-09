@@ -31,12 +31,20 @@
   padding: 0.8em 1.1em;
 }
 
+.pTiny {
+  padding: 0.3em 1em;
+}
+
 .pBig {
   padding: 1.2em 1.5em;
 }
 
 .fsBig {
   font-size: 1.2em;
+}
+
+.fsSmall {
+  font-size: 0.9em;
 }
 
 .block {

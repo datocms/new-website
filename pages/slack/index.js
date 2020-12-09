@@ -47,11 +47,9 @@ export default function Slack() {
       reset();
       setSuccess(true);
     } catch (e) {
-      setError(
-        'email',
-        e.json.error,
-        errorLabels[e.json.error] || `Slack error: ${e.json.error}`,
-      );
+      setError('email', {
+        message: errorLabels[e.json.error] || `Slack error: ${e.json.error}`,
+      });
     }
   };
 
