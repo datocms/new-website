@@ -177,7 +177,7 @@
 
   @media (width > 900px) {
     display: flex;
-    align-items: center;
+    align-items: end;
   }
 }
 
