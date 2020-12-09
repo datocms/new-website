@@ -3,12 +3,15 @@ import style from './style.module.css';
 
 const fsClassNames = {
   big: style.fsBig,
+  small: style.fsSmall,
 };
 
 const pClassNames = {
   big: style.pBig,
   small: style.pSmall,
+  tiny: style.pTiny,
 };
+
 const sClassNames = {
   invert: style.sInvert,
 };

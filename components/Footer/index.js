@@ -45,6 +45,48 @@ export default function Footer({ noCta }) {
       {!noCta && <FinalCta />}
       <div className={s.footerRoot}>
         <Wrapper>
+          <div className={s.newsletter}>
+            <div className={s.newsletterBody}>
+              <div className={s.newsletterTitle}>
+                Subscribe to our newsletter!
+              </div>
+              <div className={s.newsletterDescription}>
+                One update per month. All the latest news and sneak peeks
+                directly in your inbox.
+              </div>
+            </div>
+            <div className={s.formContainer} onSubmit={handleSubmit(onSubmit)}>
+              <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  name="email"
+                  placeholder="Enter your email"
+                  ref={register({
+                    required: 'Please, enter your email! 😊',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
+                      message: 'Please, enter a valid email! 😊',
+                    },
+                  })}
+                />
+                <Button
+                  as="button"
+                  p="tiny"
+                  fs="small"
+                  disabled={formState.isSubmitting}
+                >
+                  {formState.isSubmitting ? 'Submitting...' : 'Subscribe!'}
+                </Button>
+              </form>
+            </div>
+
+            <span className={s.message}>
+              {errors.email && errors.email.message}
+              {success &&
+                'You successfully subscribed to our newsletter. Welcome on board! 🎉'}
+            </span>
+          </div>
+        </Wrapper>
+        <Wrapper>
           <div className={s.footerInnerRoot}>
             <div className={s.cols}>
               <div className={s.col}>
@@ -254,35 +296,6 @@ export default function Footer({ noCta }) {
                 </div>
               </div>
             </div>
-          </div>
-        </Wrapper>
-        <Wrapper>
-          <div className={s.group}>
-            <div className={s.groupTitle}>Subscribe to our newsletter</div>
-            <div className={s.formContainer} onSubmit={handleSubmit(onSubmit)}>
-              <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-                <input
-                  name="email"
-                  placeholder="Enter your email"
-                  ref={register({
-                    required: 'Please, enter your email! 😊',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
-                      message: 'Please, enter a valid email! 😊',
-                    },
-                  })}
-                />
-                <Button as="button" disabled={formState.isSubmitting}>
-                  {formState.isSubmitting ? 'Submitting...' : 'Subscribe!'}
-                </Button>
-              </form>
-            </div>
-
-            <span className={s.message}>
-              {errors.email && errors.email.message}
-              {success &&
-                'You successfully subscribed to our newsletter. Welcome on board! 🎉'}
-            </span>
           </div>
         </Wrapper>
         <div className={s.finalFooter}>
