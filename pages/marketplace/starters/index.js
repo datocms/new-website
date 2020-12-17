@@ -7,6 +7,7 @@ import PluginBox from 'components/PluginBox';
 import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';
 import tiny from 'tiny-json-http';
+import { githubRepoToManifest } from 'utils/githubRepo';
 
 export const getStaticProps = async ({ preview }) => {
   const {
@@ -41,7 +42,7 @@ export const getStaticProps = async ({ preview }) => {
   const startersData = await Promise.all(
     starters.map(async (starter) => {
       const { body } = await tiny.get({
-        url: `https://raw.githubusercontent.com/${starter.githubRepo}/master/datocms.json`,
+        url: githubRepoToManifest(starter.githubRepo),
       });
       return { ...JSON.parse(body), ...starter };
     }),

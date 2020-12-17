@@ -20,6 +20,7 @@ import {
   imageFields,
 } from 'lib/datocms';
 import tiny from 'tiny-json-http';
+import { githubRepoToManifest, githubRepoToUrl } from 'utils/githubRepo';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -77,7 +78,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
   });
 
   const { body } = await tiny.get({
-    url: `https://raw.githubusercontent.com/${page.githubRepo}/master/datocms.json`,
+    url: githubRepoToManifest(page.githubRepo),
   });
 
   return {
@@ -141,11 +142,8 @@ export default function EnterpriseApp({ page, preview }) {
             </Info>
             <Info title="Github repo" isFallback={isFallback}>
               {!isFallback && (
-                <a
-                  href={`https://github.com/${page.githubRepo}`}
-                  target="_blank"
-                >
-                  {page.githubRepo}
+                <a href={githubRepoToUrl(page.githubRepo)} target="_blank">
+                  {page.githubRepo.split(':')[0]}
                 </a>
               )}
             </Info>

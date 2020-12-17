@@ -10,6 +10,7 @@ import Link from 'next/link';
 import cn from 'classnames';
 import PluginBox, { LogoImage } from 'components/PluginBox';
 import tiny from 'tiny-json-http';
+import { githubRepoToManifest } from 'utils/githubRepo';
 
 export const getStaticProps = async ({ preview }) => {
   const {
@@ -90,7 +91,7 @@ export const getStaticProps = async ({ preview }) => {
   page.demos = await Promise.all(
     page.demos.map(async (starter) => {
       const { body } = await tiny.get({
-        url: `https://raw.githubusercontent.com/${starter.githubRepo}/master/datocms.json`,
+        url: githubRepoToManifest(starter.githubRepo),
       });
       return { ...JSON.parse(body), ...starter };
     }),
