@@ -19,11 +19,19 @@ import ContentCreators from 'public/images/illustrations/content-editors2.svg';
 
 import External from 'public/icons/regular/external-link.svg';
 
-const TitleDesc = ({ href, title, description, target }) =>
+const TitleDesc = ({ href, title, description, target, isNew }) =>
   target ? (
     <a className={s.titleDesc} href={href} target={target}>
       <div className={s.titleDescBody}>
-        <div className={s.titleDescTitle}>{title}</div>
+        <div className={s.titleDescTitle}>
+          {title}
+          {isNew && (
+            <>
+              {' '}
+              <span className={s.titleDescNew}>New</span>
+            </>
+          )}
+        </div>
         <div className={s.titleDescDescription}>{description}</div>
       </div>
     </a>
@@ -31,7 +39,15 @@ const TitleDesc = ({ href, title, description, target }) =>
     <Link href={href}>
       <a className={s.titleDesc}>
         <div className={s.titleDescBody}>
-          <div className={s.titleDescTitle}>{title}</div>
+          <div className={s.titleDescTitle}>
+            {title}
+            {isNew && (
+              <>
+                {' '}
+                <span className={s.titleDescNew}>New</span>
+              </>
+            )}
+          </div>
           <div className={s.titleDescDescription}>{description}</div>
         </div>
       </a>
@@ -210,11 +226,12 @@ export default function Navbar() {
                     <div className={s.section}>
                       <div className={s.sectionTitle}>Success stories</div>
                       <div className={s.grid2}>
-                        {/* <TitleDesc
-                          href="/customers/arduino"
-                          title="Arduino"
-                          description="2x time-to-market speed with DatoCMS"
-                        /> */}
+                        <TitleDesc
+                          href="/customers/oberlo"
+                          title="Shopify Orberlo"
+                          description="Painless switch to static from Wordpress"
+                          isNew
+                        />
 
                         <TitleDesc
                           href="/customers/hashicorp"

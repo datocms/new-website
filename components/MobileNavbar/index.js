@@ -175,6 +175,12 @@ export default function Navbar() {
                 <Group title="Customers">
                   <div className={s.onecol}>
                     <LearnResource
+                      href="/customers/oberlo"
+                      title="Shopify Orberlo"
+                      description="Painless switch to static from Wordpress"
+                    />
+
+                    <LearnResource
                       href="/customers/hashicorp"
                       title="Hashicorp"
                       description="How HashiCorp built a reliable and secure editorial workflow"
