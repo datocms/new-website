@@ -269,6 +269,7 @@ subscriptions. If the user cancels or downgrades after the 14th day of the first
 will receive redeemable credits to spend on the next purchase. If the User cancels before the
 14th day of the first billing cycle, they can chose between cash and redeemable credits.
 Provisions foreseen for the case of withdrawal referred to in clause 13 for refunds are applied.
+Credits are redeemable within 18 months from the time of issue.
 
 ### 8. Information on Services and Prices
 
