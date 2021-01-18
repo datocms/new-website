@@ -10,6 +10,7 @@ import {
 import cn from 'classnames';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
 import { useEffect } from 'react';
+import Reaptcha from 'reaptcha';
 
 export const Field = ({
   name,
@@ -89,6 +90,7 @@ export const Field = ({
 
 export function FormInner({ children, defaultValues, action, submitLabel }) {
   const { addToast } = useToasts();
+  let captcha;
 
   useEffect(() => {
     var urlParams = new URLSearchParams(window.location.search);
@@ -119,11 +121,16 @@ export function FormInner({ children, defaultValues, action, submitLabel }) {
     event.nativeEvent.currentTarget.submit();
   };
 
+  const executeCaptcha = (e) => {
+    e.preventDefault();
+    captcha.execute();
+  };
+
   return (
     <FormProvider {...methods}>
       <form
         className={s.form}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={executeCaptcha}
         method="POST"
         action={action}
         encType="multipart/form-data"
@@ -142,6 +149,13 @@ export function FormInner({ children, defaultValues, action, submitLabel }) {
               <a>Privacy Policy</a>
             </Link>
           </div>
+
+          <Reaptcha
+            sitekey={process.env.RECAPTCHA_SITE_KEY}
+            ref={(e) => (captcha = e)}
+            onVerify={handleSubmit(onSubmit)}
+            size="invisible"
+          />
 
           <Button as="button" type="submit">
             {submitLabel}
