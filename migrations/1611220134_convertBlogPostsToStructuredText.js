@@ -12,6 +12,7 @@ const {
   codeNodeType,
   validate,
 } = require('datocms-structured-text-utils');
+const { range } = require('range');
 
 const DEMO = 'demo';
 const IMAGE = 'image';
@@ -52,7 +53,6 @@ module.exports = async (client) => {
           itemTypesByApiKey[VIDEO].id,
           itemTypesByApiKey[YOUTUBE_VIDEO].id,
           itemTypesByApiKey[HERO].id,
-          itemTypesByApiKey[CODE_BLOCK].id,
           itemTypesByApiKey[QUOTE].id,
         ],
       },
@@ -108,20 +108,27 @@ module.exports = async (client) => {
           break;
         }
         case itemTypesByApiKey[CODE_BLOCK].id: {
-          if (!block.attributes.highlightLines) {
-            children.push({
-              type: codeNodeType,
-              language: block.attributes.language,
-              code: block.attributes.code,
-            });
-            console.log('Converto code');
-          } else {
-            console.log(
-              'Mantengo code',
-              sanitizedBlock.relationships.itemType.data.id,
-            );
-            children.push({ type: blockNodeType, item: sanitizedBlock });
+          const codeNode = {
+            type: codeNodeType,
+            language: block.attributes.language,
+            code: block.attributes.code,
+          };
+
+          if (block.attributes.highlightLines) {
+            codeNode.highlight = block.attributes.highlightLines
+              .split(/\s*,\s*/)
+              .map((str) => {
+                const chunks = str.split(/\-/);
+                if (chunks.length === 1) {
+                  return parseInt(chunks[0]) - 1;
+                }
+
+                return range(parseInt(chunks[0]) - 1, parseInt(chunks[1]));
+              })
+              .flat();
           }
+
+          children.push(codeNode);
           break;
         }
         default: {
