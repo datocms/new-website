@@ -14,12 +14,6 @@ const { validate } = require('datocms-structured-text-utils');
 
 const IMAGE = 'image';
 
-const mdToDast = async (text) => {
-  const mdastTree = unified().use(parse).parse(text);
-  const hastTree = toHast(mdastTree);
-  return hastToDast(hastTree);
-};
-
 module.exports = async (client) => {
   const itemTypesByApiKey = (await client.itemTypes.all()).reduce(
     (acc, it) => ({ ...acc, [it.apiKey]: it }),
