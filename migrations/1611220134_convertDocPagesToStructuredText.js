@@ -8,13 +8,11 @@ const { hastToDast } = require('datocms-html-to-structured-text');
 const {
   rootNodeType,
   blockNodeType,
-  blockquoteNodeType,
   codeNodeType,
   validate,
 } = require('datocms-structured-text-utils');
 const { range } = require('range');
 
-const QUOTE = 'quote';
 const CODE_BLOCK = 'code_block';
 const TEXT = 'text';
 
@@ -30,9 +28,9 @@ module.exports = async (client) => {
     {},
   );
 
-  const contentField = await client.fields.find('blog_post::content');
+  const contentField = await client.fields.find('doc_page::content');
 
-  await client.fields.create(itemTypesByApiKey['blog_post'].id, {
+  await client.fields.create('doc_page', {
     label: 'Structured text',
     apiKey: 'structured_text',
     fieldType: 'structured_text',
@@ -46,17 +44,17 @@ module.exports = async (client) => {
 
   const articles = await client.items.all(
     {
-      filter: { type: itemTypesByApiKey['blog_post'].id },
+      filter: { type: itemTypesByApiKey['doc_page'].id },
       nested: 'true',
     },
     { allPages: 30 },
   );
 
-  console.log(`Found ${articles.length} articles!`);
+  console.log(`Found ${articles.length} doc pages!`);
 
   for (const article of articles) {
     let children = [];
-    console.log(`Articolo #${article.id}`);
+    console.log(`Doc page #${article.id}`);
 
     for (const block of article.content) {
       const { id, meta, ...sanitizedBlock } = block;
@@ -72,23 +70,6 @@ module.exports = async (client) => {
         case itemTypesByApiKey[TEXT].id: {
           const dastTree = await mdToDast(block.attributes.text);
           children = [...children, ...dastTree.children];
-          break;
-        }
-        case itemTypesByApiKey[QUOTE].id: {
-          if (!block.attributes.author) {
-            const dastTree = await mdToDast(block.attributes.quote);
-            children.push({
-              type: blockquoteNodeType,
-              children: dastTree.children,
-            });
-            console.log('Converto quote');
-          } else {
-            console.log(
-              'Mantengo quote',
-              sanitizedBlock.relationships.itemType.data.id,
-            );
-            children.push({ type: blockNodeType, item: sanitizedBlock });
-          }
           break;
         }
         case itemTypesByApiKey[CODE_BLOCK].id: {
@@ -110,7 +91,6 @@ module.exports = async (client) => {
                 return range(parseInt(chunks[0]) - 1, parseInt(chunks[1]));
               })
               .flat();
-            console.log(codeNode.highlight);
           }
 
           children.push(codeNode);
