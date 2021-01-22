@@ -1,52 +1,33 @@
 'use strict';
 
+const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
+const markdownToStructuredText = require('./utils/markdownToStructuredText');
+const createStructuredTextField = require('./utils/createStructuredTextField');
+const getAllRecords = require('./utils/getAllRecords');
 const { buildModularBlock } = require('datocms-client');
-const unified = require('unified');
 const path = require('path');
-const parse = require('remark-parse');
-const toHast = require('mdast-util-to-hast');
-const inspect = require('unist-util-inspect');
 const {
   paragraph,
 } = require('datocms-html-to-structured-text/dist/lib/lib/handlers');
-const { hastToDast } = require('datocms-html-to-structured-text');
-const { validate } = require('datocms-structured-text-utils');
-
-const IMAGE = 'image';
 
 module.exports = async (client) => {
-  const itemTypesByApiKey = (await client.itemTypes.all()).reduce(
-    (acc, it) => ({ ...acc, [it.apiKey]: it }),
-    {},
+  const itemTypesByApiKey = await getItemTypesByApiKey(client);
+  const imageBlockId = itemTypesByApiKey['image'].id;
+
+  await createStructuredTextField(
+    client,
+    'changelog_entry',
+    'Content (structured-text)',
+    'structured_text_content',
+    [imageBlockId],
   );
 
-  await client.fields.create('changelog_entry', {
-    label: 'Structured text',
-    apiKey: 'structured_text',
-    fieldType: 'structured_text',
-    validators: {
-      structuredTextBlocks: {
-        itemTypes: [itemTypesByApiKey[IMAGE].id],
-      },
-      structuredTextLinks: { itemTypes: [] },
-    },
-  });
+  const records = await getAllRecords(client, 'changelog_entry');
 
-  const articles = await client.items.all(
-    {
-      filter: { type: itemTypesByApiKey['changelog_entry'].id },
-      nested: 'true',
-    },
-    { allPages: 30 },
-  );
+  for (const record of records) {
+    console.log(`Record #${record.id}`);
 
-  console.log(`Found ${articles.length} entries!`);
-
-  for (const article of articles) {
-    console.log(article.id);
-    const mdastTree = unified().use(parse).parse(article.content);
-    const hastTree = toHast(mdastTree);
-    const document = await hastToDast(hastTree, {
+    const structuredTextValue = await markdownToStructuredText(record.content, {
       handlers: {
         p: async (createNode, node, context) => {
           const imgNode = node.children.find(
@@ -83,7 +64,10 @@ module.exports = async (client) => {
           }
 
           if (!upload) {
-            console.log('Upload non trovato! Lo creo!', article.id, url);
+            console.log(
+              'Upload not found in Media Area, creating ex-novo!',
+              url,
+            );
             const uploadPath = await client.createUploadPath(url);
             upload = await client.uploads.create({ path: uploadPath });
           }
@@ -93,26 +77,20 @@ module.exports = async (client) => {
               image: {
                 uploadId: upload.id,
               },
-              itemType: itemTypesByApiKey[IMAGE].id,
+              itemType: imageBlockId,
             }),
           });
         },
       },
     });
 
-    const validationResult = validate(document);
+    await client.items.update(record.id, {
+      structuredTextContent: structuredTextValue,
+    });
 
-    if (!validationResult.valid) {
-      console.log(validationResult.message);
-      console.log(inspect(document));
-      throw new Error('Foo!');
+    if (record.meta.status !== 'draft') {
+      console.log('Republish!');
+      await client.items.publish(record.id);
     }
-
-    const result = {
-      schema: 'dast',
-      document,
-    };
-
-    await client.items.update(article.id, { structuredText: result });
   }
 };

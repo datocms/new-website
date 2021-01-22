@@ -1,7 +1,6 @@
 'use strict';
 
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
-const markdownToStructuredText = require('./utils/markdownToStructuredText');
 const createStructuredTextField = require('./utils/createStructuredTextField');
 const modularContentToStructuredText = require('./utils/modularContentToStructuredText');
 const getAllRecords = require('./utils/getAllRecords');
@@ -9,23 +8,17 @@ const getAllRecords = require('./utils/getAllRecords');
 module.exports = async (client) => {
   const itemTypesByApiKey = await getItemTypesByApiKey(client);
 
-  const contentField = await client.fields.find('blog_post::content');
+  const contentField = await client.fields.find('success_story::content');
 
   await createStructuredTextField(
     client,
-    'blog_post',
+    'success_story',
     'Content (structured-text)',
     'structured_text_content',
     contentField.validators.richTextBlocks.itemTypes,
   );
-  await createStructuredTextField(
-    client,
-    'blog_post',
-    'Excerpt (structured-text)',
-    'structured_text_excerpt',
-  );
 
-  const records = await getAllRecords(client, 'blog_post');
+  const records = await getAllRecords(client, 'success_story');
 
   for (const record of records) {
     console.log(`Record #${record.id}`);
@@ -35,7 +28,6 @@ module.exports = async (client) => {
         record.content,
         itemTypesByApiKey,
       ),
-      structuredTextExcerpt: await markdownToStructuredText(record.excerpt),
     });
 
     if (record.meta.status !== 'draft') {
