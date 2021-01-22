@@ -9,7 +9,7 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import Link from 'next/link';
-import { Image } from 'react-datocms';
+import { Image, StructuredText } from 'react-datocms';
 import Masonry from 'react-masonry-css';
 import FormattedDate from 'components/FormattedDate';
 import { BLOG_POSTS_PER_PAGE } from 'lib/pages';
@@ -52,7 +52,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       ) {
         slug
         title
-        excerpt(markdown: true)
+        excerpt {
+          value
+        }
         coverImage {
           responsiveImage(imgixParams: { w: 550 }) {
             ...imageFields
@@ -81,6 +83,8 @@ export default function Blog({ preview, subscription }) {
   const {
     data: { posts, blog, meta },
   } = useQuerySubscription(subscription);
+
+  console.log(posts[0].excerpt);
 
   return (
     <Layout preview={preview}>
@@ -114,10 +118,9 @@ export default function Blog({ preview, subscription }) {
                   )}
                   <div className={s.postBody}>
                     <h6 className={s.title}>{post.title}</h6>
-                    <div
-                      className={s.excerpt}
-                      dangerouslySetInnerHTML={{ __html: post.excerpt }}
-                    />
+                    <div className={s.excerpt}>
+                      <StructuredText structuredText={post.excerpt} />
+                    </div>
                     <div className={s.footer}>
                       <div className={s.date}>
                         Posted on{' '}

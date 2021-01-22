@@ -38,118 +38,102 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       slug
       title
       content {
-        ... on TextRecord {
-          id
-          _modelApiKey
-          text(markdown: true)
-        }
-        ... on ImageRecord {
-          id
-          _modelApiKey
-          image {
-            format
-            width
-            title
-            alt
-            responsiveImage(imgixParams: { w: 1200 }) {
-              ...imageFields
-            }
-            url
-          }
-        }
-        ... on VideoRecord {
-          id
-          _modelApiKey
-          video {
-            url
-            title
-            provider
-            width
-            height
-            providerUid
-          }
-        }
-        ... on MultipleDemosBlockRecord {
-          id
-          _modelApiKey
-          demos {
+        value
+        blocks {
+          ... on ImageRecord {
             id
-            name
-            code
-            technology {
-              name
-              logo {
-                url
-              }
-            }
-            screenshot {
-              responsiveImage(
-                imgixParams: { w: 400, h: 300, fit: crop, crop: top }
-              ) {
+            _modelApiKey
+            image {
+              format
+              width
+              title
+              alt
+              responsiveImage(imgixParams: { w: 1200 }) {
                 ...imageFields
               }
+              url
             }
           }
-        }
-        ... on DemoRecord {
-          id
-          _modelApiKey
-          demo {
+          ... on VideoRecord {
             id
-            name
-            code
-            githubRepo
-            technology {
-              name
-              logo {
-                url
-              }
-            }
-            screenshot {
-              responsiveImage(
-                imgixParams: { w: 450, h: 350, fit: crop, crop: top }
-              ) {
-                ...imageFields
-              }
-            }
-          }
-        }
-        ... on InternalVideoRecord {
-          id
-          _modelApiKey
-          autoplay
-          loop
-          thumbTimeSeconds
-          video {
-            title
-            width
-            height
+            _modelApiKey
             video {
-              duration
-              streamingUrl
-              thumbnailUrl
+              url
+              title
+              provider
+              width
+              height
+              providerUid
             }
           }
-        }
-        ... on QuoteRecord {
-          id
-          _modelApiKey
-          quote(markdown: true)
-          author
-        }
-        ... on QuestionAnswerRecord {
-          id
-          _modelApiKey
-          question(markdown: true)
-          answer(markdown: true)
-        }
-        ... on CodeBlockRecord {
-          id
-          _modelApiKey
-          code
-          language
-          highlightLines
-          showLineNumbers
+          ... on MultipleDemosBlockRecord {
+            id
+            _modelApiKey
+            demos {
+              id
+              name
+              code
+              technology {
+                name
+                logo {
+                  url
+                }
+              }
+              screenshot {
+                responsiveImage(
+                  imgixParams: { w: 400, h: 300, fit: crop, crop: top }
+                ) {
+                  ...imageFields
+                }
+              }
+            }
+          }
+          ... on DemoRecord {
+            id
+            _modelApiKey
+            demo {
+              id
+              name
+              code
+              githubRepo
+              technology {
+                name
+                logo {
+                  url
+                }
+              }
+              screenshot {
+                responsiveImage(
+                  imgixParams: { w: 450, h: 350, fit: crop, crop: top }
+                ) {
+                  ...imageFields
+                }
+              }
+            }
+          }
+          ... on InternalVideoRecord {
+            id
+            _modelApiKey
+            autoplay
+            loop
+            thumbTimeSeconds
+            video {
+              title
+              width
+              height
+              video {
+                duration
+                streamingUrl
+                thumbnailUrl
+              }
+            }
+          }
+          ... on QuestionAnswerRecord {
+            id
+            _modelApiKey
+            question(markdown: true)
+            answer(markdown: true)
+          }
         }
       }
       _firstPublishedAt
