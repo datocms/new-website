@@ -52,7 +52,25 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       ) {
         title
         slug
-        content(markdown: true)
+        content {
+          value
+          blocks {
+            ... on ImageRecord {
+              id
+              _modelApiKey
+              image {
+                format
+                width
+                title
+                alt
+                responsiveImage(imgixParams: { w: 1200 }) {
+                  ...imageFields
+                }
+                url
+              }
+            }
+          }
+        }
         publicationDate
         categories {
           name

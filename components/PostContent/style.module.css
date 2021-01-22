@@ -3,6 +3,8 @@
   font-family: var(--font-serif);
   line-height: 1.6;
   letter-spacing: -0.02em;
+  max-width: 750px;
+  margin: 0 auto;
 
   a {
     color: inherit;
@@ -39,6 +41,10 @@
 
   li {
     margin: 0 0 5px;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
   }
 
   figure {
@@ -50,6 +56,14 @@
     color: var(--light-body-color);
     font-size: 0.8em;
     margin-top: 15px;
+  }
+
+  mark {
+    background: transparent;
+    background-image: linear-gradient(120deg, #f4cf58 0%, #f4cf58 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.5em;
+    background-position: 0 88%;
   }
 
   code {
@@ -94,14 +108,15 @@
   }
 }
 
-.text,
-.qa {
-  max-width: 750px;
-  margin: 0 auto;
-}
-
 .qa {
   margin: 50px auto;
+}
+
+.unwrap {
+  @media (width > 1100px) {
+    margin-left: -100px;
+    margin-right: -100px;
+  }
 }
 
 .qaQuestion {
@@ -149,6 +164,17 @@
     background-size: 100% 0.5em;
     background-position: 0 88%;
     font-weight: 600;
+  }
+}
+
+.quoteAuthor {
+  margin-left: rfs(80px);
+  font-style: italic;
+  color: var(--light-body-color);
+
+  &:before {
+    content: '—';
+    padding-right: 10px;
   }
 }
 
