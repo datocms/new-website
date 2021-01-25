@@ -11,7 +11,7 @@ import UiChrome from 'components/UiChrome';
 import PluginBox from 'components/PluginBox';
 import Button from 'components/Button';
 import cn from 'classnames';
-import { isBlockquote } from 'datocms-structured-text-utils';
+import { isBlockquote, isCode } from 'datocms-structured-text-utils';
 import { render } from 'datocms-structured-text-to-plain-text';
 
 function renderBlock(s, block) {
@@ -109,32 +109,6 @@ function renderBlock(s, block) {
         </div>
       );
 
-    // case 'code_block':
-    //   return (
-    //     <Prism
-    //       code={block.code}
-    //       language={block.language || 'unknown'}
-    //       highlightLines={block.highlightLines}
-    //       showLineNumbers={block.showLineNumbers}
-    //     />
-    //   );
-
-    // case 'quote':
-    //   return (
-    //     <div
-    //       className={cn(s.quote, {
-    //         [s.smallerQuote]: block.quote.length > 500,
-    //       })}
-    //     >
-    //       <div
-    //         className={s.quoteQuote}
-    //         dangerouslySetInnerHTML={{
-    //           __html: block.quote,
-    //         }}
-    //       />
-    //     </div>
-    //   );
-
     case 'image':
       return (
         <ImageFigure imageClassName={s.responsiveImage} data={block.image} />
@@ -185,26 +159,33 @@ export default function PostContent({ isFallback, content, style, children }) {
             <div className={s.unwrap}>{renderBlock(s, record)}</div>
           )}
           customRules={[
-            renderRule(
-              isBlockquote,
-              ({ adapter: { renderNode }, node, children, key }) => {
-                return (
-                  <div
-                    className={cn(s.quote, {
-                      [s.smallerQuote]:
-                        render({
-                          structuredText: { value: { document: node } },
-                        }).length > 500,
-                    })}
-                  >
-                    <div className={s.quoteQuote}>{children}</div>
-                    {node.attribution && (
-                      <div className={s.quoteAuthor}>{node.attribution}</div>
-                    )}
-                  </div>
-                );
-              },
-            ),
+            renderRule(isBlockquote, ({ node, children }) => {
+              return (
+                <div
+                  className={cn(s.quote, {
+                    [s.smallerQuote]:
+                      render({
+                        structuredText: { value: { document: node } },
+                      }).length > 500,
+                  })}
+                >
+                  <div className={s.quoteQuote}>{children}</div>
+                  {node.attribution && (
+                    <div className={s.quoteAuthor}>{node.attribution}</div>
+                  )}
+                </div>
+              );
+            }),
+            renderRule(isCode, ({ node }) => {
+              return (
+                <Prism
+                  code={node.code}
+                  language={node.language || 'unknown'}
+                  highlightLines={node.highlight}
+                  showLineNumbers={node.code.split(/\n/).length > 10}
+                />
+              );
+            }),
           ]}
         />
       )}

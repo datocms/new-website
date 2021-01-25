@@ -20,25 +20,7 @@ const modifiedTheme = {
   ),
 };
 
-const Prism = ({ code, language, showLineNumbers, highlightLines }) => {
-  const lines = useMemo(() => {
-    if (!highlightLines) {
-      return [];
-    }
-
-    return highlightLines
-      .split(/\s*,\s*/)
-      .map((str) => {
-        const chunks = str.split(/\-/);
-        if (chunks.length === 1) {
-          return parseInt(chunks[0]);
-        }
-
-        return range(parseInt(chunks[0]), parseInt(chunks[1]) + 1);
-      })
-      .flat();
-  }, [highlightLines]);
-
+const Prism = ({ code, language, showLineNumbers, highlightLines = [] }) => {
   const linesCount = useMemo(() => {
     return code.split(/\r\n|\r|\n/).length;
   }, [code]);
@@ -59,7 +41,7 @@ const Prism = ({ code, language, showLineNumbers, highlightLines }) => {
               <div
                 {...lineProps}
                 className={cn(lineProps.className, {
-                  [s.highlight]: lines.includes(i + 1),
+                  [s.highlight]: highlightLines.includes(i),
                   [s.showLineNumbers]: showLineNumbers,
                 })}
                 data-line-number={`${i + 1}`.padStart(
