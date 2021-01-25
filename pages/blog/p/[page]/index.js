@@ -84,8 +84,6 @@ export default function Blog({ preview, subscription }) {
     data: { posts, blog, meta },
   } = useQuerySubscription(subscription);
 
-  console.log(posts[0].excerpt);
-
   return (
     <Layout preview={preview}>
       {!router.isFallback && <Head>{renderMetaTags(blog.seo)}</Head>}

@@ -43,10 +43,10 @@ export const getStaticProps = gqlStaticProps(
           }
         }
       }
-      review1: review(filter: { id: { eq: "4368320" } }) {
+      review1: review(filter: { name: { eq: "Marc Ammann" } }) {
         ...reviewFields
       }
-      review2: review(filter: { id: { eq: "4368343" } }) {
+      review2: review(filter: { name: { eq: "Jeff Escalante" } }) {
         ...reviewFields
       }
     }
