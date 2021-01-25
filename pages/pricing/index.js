@@ -66,10 +66,10 @@ export const getStaticProps = async ({ preview }) => {
           name
           description
         }
-        review1: review(filter: { id: { eq: "3686622" } }) {
+        review1: review(filter: { name: { eq: "Tore Heimann" } }) {
           ...reviewFields
         }
-        review2: review(filter: { id: { eq: "4368343" } }) {
+        review2: review(filter: { name: { eq: "Jeff Escalante" } }) {
           ...reviewFields
         }
       }

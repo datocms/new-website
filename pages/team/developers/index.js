@@ -49,7 +49,7 @@ export const getStaticProps = gqlStaticProps(
           url
         }
       }
-      review(filter: { id: { eq: "4368579" } }) {
+      review(filter: { name: { eq: "Matteo Manzo" } }) {
         ...reviewFields
       }
     }

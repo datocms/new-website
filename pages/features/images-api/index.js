@@ -23,7 +23,7 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
-      review: review(filter: { id: { eq: "4368546" } }) {
+      review: review(filter: { name: { eq: "Grace Guzman" } }) {
         ...reviewFields
       }
     }
