@@ -1,23 +1,20 @@
 import { request, seoMetaTagsFields, imageFields } from 'lib/datocms';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, StructuredText } from 'react-datocms';
 import { gqlStaticPaths } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
 import PostContent from 'components/PostContent';
 import Link from 'next/link';
 import ActiveLink from 'components/ActiveLink';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
-import htmlToDOM from 'html-dom-parser';
-import { domToReact } from 'html-react-parser';
 import slugify from 'utils/slugify';
-import getInnerText from 'utils/getInnerText';
 import s from 'pages/docs/pageStyle.module.css';
 import Head from 'next/head';
-import emojify from 'utils/emojify';
 import { useRouter } from 'next/router';
 import { Line } from 'components/FakeContent';
 import cn from 'classnames';
-
-var domParserOptions = { decodeEntities: true, lowerCaseAttributeNames: false };
+import filter from 'utils/filterNodes';
+import { isHeading } from 'datocms-structured-text-utils';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -119,104 +116,94 @@ export const getStaticProps = async function ({
               ...seoMetaTagsFields
             }
             content {
-              ... on TextRecord {
-                id
-                _modelApiKey
-                text(markdown: true)
-              }
-              ... on ImageRecord {
-                id
-                _modelApiKey
-                image {
-                  format
-                  width
-                  responsiveImage(imgixParams: { w: 950 }) {
-                    ...imageFields
-                  }
-                  url
-                }
-              }
-              ... on VideoRecord {
-                id
-                _modelApiKey
-                video {
-                  url
-                  title
-                  provider
-                  width
-                  height
-                  providerUid
-                }
-              }
-              ... on DemoRecord {
-                id
-                _modelApiKey
-                demo {
+              value
+              blocks {
+                ... on ImageRecord {
                   id
-                  name
-                  code
-                  githubRepo
-                  technology {
-                    name
-                    logo {
-                      url
-                    }
-                  }
-                  screenshot {
-                    responsiveImage(
-                      imgixParams: { w: 450, h: 350, fit: crop, crop: top }
-                    ) {
+                  _modelApiKey
+                  image {
+                    format
+                    width
+                    responsiveImage(imgixParams: { w: 950 }) {
                       ...imageFields
                     }
+                    url
                   }
                 }
-              }
-              ... on MultipleDemosBlockRecord {
-                id
-                _modelApiKey
-                demos {
+                ... on VideoRecord {
                   id
-                  name
-                  code
-                  technology {
-                    name
-                    logo {
-                      url
-                    }
-                  }
-                  screenshot {
-                    responsiveImage(
-                      imgixParams: { w: 300, h: 200, fit: crop, crop: top }
-                    ) {
-                      ...imageFields
-                    }
-                  }
-                }
-              }
-              ... on InternalVideoRecord {
-                id
-                _modelApiKey
-                autoplay
-                loop
-                thumbTimeSeconds
-                video {
-                  title
-                  width
-                  height
+                  _modelApiKey
                   video {
-                    duration
-                    streamingUrl
-                    thumbnailUrl
+                    url
+                    title
+                    provider
+                    width
+                    height
+                    providerUid
                   }
                 }
-              }
-              ... on CodeBlockRecord {
-                id
-                _modelApiKey
-                code
-                language
-                highlightLines
-                showLineNumbers
+                ... on DemoRecord {
+                  id
+                  _modelApiKey
+                  demo {
+                    id
+                    name
+                    code
+                    githubRepo
+                    technology {
+                      name
+                      logo {
+                        url
+                      }
+                    }
+                    screenshot {
+                      responsiveImage(
+                        imgixParams: { w: 450, h: 350, fit: crop, crop: top }
+                      ) {
+                        ...imageFields
+                      }
+                    }
+                  }
+                }
+                ... on MultipleDemosBlockRecord {
+                  id
+                  _modelApiKey
+                  demos {
+                    id
+                    name
+                    code
+                    technology {
+                      name
+                      logo {
+                        url
+                      }
+                    }
+                    screenshot {
+                      responsiveImage(
+                        imgixParams: { w: 300, h: 200, fit: crop, crop: top }
+                      ) {
+                        ...imageFields
+                      }
+                    }
+                  }
+                }
+                ... on InternalVideoRecord {
+                  id
+                  _modelApiKey
+                  autoplay
+                  loop
+                  thumbTimeSeconds
+                  video {
+                    title
+                    width
+                    height
+                    video {
+                      duration
+                      streamingUrl
+                      thumbnailUrl
+                    }
+                  }
+                }
               }
             }
           }
@@ -299,56 +286,39 @@ export const Sidebar = ({ title, entries }) => {
 };
 
 export function Toc({ content, extraEntries: extra }) {
-  const contentEntries =
+  const nodes =
     content &&
-    content
-      .filter((b) => b._modelApiKey === 'text')
-      .map((b) => {
-        const dom = htmlToDOM(b.text, domParserOptions);
-
-        return dom
-          .filter((el) => el.type === 'tag' && el.name.match(/^h[1-6]$/))
-          .map((heading) =>
-            domToReact([heading], {
-              replace: ({ children }) => {
-                const innerText = getInnerText(children);
-                return (
-                  <a
-                    href={`#${slugify(innerText)}`}
-                    className={s.tocEntry}
-                    key={innerText}
-                  >
-                    {domToReact(children, {
-                      replace: ({ type, data }) => {
-                        if (type === 'text') {
-                          return <>{emojify(data)}</>;
-                        }
-                      },
-                    })}
-                  </a>
-                );
-              },
-            }),
-          );
-      })
-      .flat();
+    filter(content.value.document, isHeading).map((heading) => {
+      const slug = slugify(toPlainText(heading));
+      return {
+        type: 'link',
+        url: `#${slug}`,
+        children: heading.children,
+      };
+    });
 
   const extraEntries =
     extra &&
     extra.map(({ anchor, label }) => (
-      <a href={`#${anchor}`} className={s.tocEntry} key={anchor}>
-        {label}
-      </a>
+      <div className={s.tocEntry} key={anchor}>
+        <a href={`#${anchor}`} className={s.tocEntry}>
+          {label}
+        </a>
+      </div>
     ));
 
-  return (contentEntries && contentEntries.length > 0) ||
+  return (nodes && nodes.length > 0) ||
     (extraEntries && extraEntries.length > 0) ? (
     <div className={s.sidebar} data-datocms-noindex>
       <div className={s.toc}>
         <div className={s.tocInner}>
           <div className={s.tocTitle}>In this page</div>
           <div className={s.entries}>
-            {contentEntries}
+            {nodes.map((node) => (
+              <div className={s.tocEntry} key={node.slug}>
+                <StructuredText data={node} />
+              </div>
+            ))}
             {extraEntries}
           </div>
         </div>
@@ -381,46 +351,20 @@ export default function DocPage({ docGroup, titleOverride, page, preview }) {
                   })
                 : page &&
                   page.content &&
-                  page.content
-                    .filter((b) => b._modelApiKey === 'text')
-                    .map((b) => {
-                      const dom = htmlToDOM(b.text, domParserOptions);
+                  filter(content.value.document, isHeading).map((heading) => {
+                    const innerText = toPlainText(heading);
 
-                      return dom
-                        .filter(
-                          (el) =>
-                            el.type === 'tag' && el.name.match(/^h[1-6]$/),
-                        )
-                        .map((heading) => {
-                          const innerText = getInnerText([heading]);
-
-                          return {
-                            url: `#${slugify(innerText)}`,
-                            label: domToReact([heading], {
-                              replace: ({ children }) => {
-                                return (
-                                  <span key={innerText}>
-                                    {domToReact(children, {
-                                      replace: ({ type, data }) => {
-                                        if (type === 'text') {
-                                          return <>{emojify(data)}</>;
-                                        }
-                                      },
-                                    })}
-                                  </span>
-                                );
-                              },
-                            }),
-                          };
-                        });
-                    })
-                    .flat()
+                    return {
+                      url: `#${slugify(innerText)}`,
+                      label: innerText,
+                    };
+                  })
             }
           />
         )
       }
     >
-      <Head>{!isFallback && renderMetaTags(page._seoMetaTags)}</Head>
+      <Head>{!isFallback && page && renderMetaTags(page._seoMetaTags)}</Head>
       <div className={s.articleContainer}>
         {docGroup && docGroup.pages.length > 1 && (
           <Toc content={page && page.content} />

@@ -5,16 +5,11 @@ import Heading from 'components/Heading';
 import { useMemo } from 'react';
 import slugify from 'utils/slugify';
 import getInnerText from 'utils/getInnerText';
-import emojify from 'utils/emojify';
 
 export default function SmartMarkdown({ children, imageClassName }) {
   const parseOptions = useMemo(
     () => ({
       replace: ({ type, name, data, attribs, children }) => {
-        if (type === 'text') {
-          return <>{emojify(data)}</>;
-        }
-
         if (type === 'tag' && name.match(/^h[1-6]$/)) {
           const innerText = getInnerText(children);
 
@@ -50,10 +45,7 @@ export default function SmartMarkdown({ children, imageClassName }) {
                 alt: attribs.alt,
                 title: attribs.title,
                 url: src,
-                format: src
-                  .split('.')
-                  .pop()
-                  .split(/\#|\?/g)[0],
+                format: src.split('.').pop().split(/\#|\?/g)[0],
               }}
             />
           );

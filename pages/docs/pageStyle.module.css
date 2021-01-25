@@ -327,16 +327,12 @@
   margin-bottom: 20px;
 }
 
-.tocEntry {
+.tocEntry a {
   display: block;
   color: var(--light-body-color);
   text-decoration: none;
   margin-bottom: 10px;
   font-size: 0.9em;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 
   code {
     font-size: 0.85em;

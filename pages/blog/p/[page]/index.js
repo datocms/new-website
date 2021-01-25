@@ -119,7 +119,7 @@ export default function Blog({ preview, subscription }) {
                   <div className={s.postBody}>
                     <h6 className={s.title}>{post.title}</h6>
                     <div className={s.excerpt}>
-                      <StructuredText structuredText={post.excerpt} />
+                      <StructuredText data={post.excerpt} />
                     </div>
                     <div className={s.footer}>
                       <div className={s.date}>
