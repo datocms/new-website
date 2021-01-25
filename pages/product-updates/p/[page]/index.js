@@ -6,16 +6,17 @@ import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
   seoMetaTagsFields,
+  imageFields,
 } from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
-import SmartMarkdown from 'components/SmartMarkdown';
 import { CHANGELOG_POSTS_PER_PAGE } from 'lib/pages';
 import Paginator from 'components/Paginator';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'react-datocms';
+import PostContent from 'components/PostContent';
 
 import { range } from 'range';
 
@@ -85,6 +86,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       }
     }
 
+    ${imageFields}
     ${seoMetaTagsFields}
   `,
   ({ page }) => ({
@@ -144,9 +146,10 @@ export default function Changelog({ preview, subscription }) {
                 </div>
 
                 <div className={s.body}>
-                  <SmartMarkdown imageClassName={s.responsiveImage}>
-                    {post.content}
-                  </SmartMarkdown>
+                  <PostContent
+                    isFallback={router.isFallback}
+                    content={post && post.content}
+                  />
                 </div>
               </div>
             ))}

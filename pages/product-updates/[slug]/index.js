@@ -6,15 +6,16 @@ import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
   seoMetaTagsFields,
+  imageFields,
 } from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
-import SmartMarkdown from 'components/SmartMarkdown';
 import { useRouter } from 'next/router';
 import { Line, Copy, Image } from 'components/FakeContent';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import { useQuerySubscription } from 'react-datocms';
+import PostContent from 'components/PostContent';
 
 import s from 'pages/product-updates/p/[page]/style.module.css';
 
@@ -39,7 +40,25 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
         title
         slug
-        content(markdown: true)
+        content {
+          value
+          blocks {
+            ... on ImageRecord {
+              id
+              _modelApiKey
+              image {
+                format
+                width
+                title
+                alt
+                responsiveImage(imgixParams: { w: 1200 }) {
+                  ...imageFields
+                }
+                url
+              }
+            }
+          }
+        }
         publicationDate
         categories {
           name
@@ -49,6 +68,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
       }
     }
+
+    ${imageFields}
     ${seoMetaTagsFields}
   `,
 );
@@ -107,18 +128,10 @@ export default function Changelog({ preview, subscription }) {
           </div>
 
           <div className={s.body}>
-            {isFallback ? (
-              <>
-                <Copy />
-                <figure>
-                  <Image />
-                </figure>
-              </>
-            ) : (
-              <SmartMarkdown imageClassName={s.responsiveImage}>
-                {post.content}
-              </SmartMarkdown>
-            )}
+            <PostContent
+              isFallback={isFallback}
+              content={post && post.content}
+            />
           </div>
         </div>
       </Wrapper>
