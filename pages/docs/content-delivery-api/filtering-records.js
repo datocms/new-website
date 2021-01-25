@@ -73,32 +73,28 @@ export default function DocPage({
       <div className={s.articleContainer}>
         <Toc
           content={page.content}
-          extraEntries={[].concat(
-            [
-              {
-                anchor: 'field-types',
-                label: 'Filters available for field types',
-                tag: 'h3',
-              },
-            ],
-            Object.keys(fieldTypesInfo).map((name) => ({
+          extraEntries={[
+            {
+              anchor: 'field-types',
+              label: 'Filters available for field types',
+              tag: 'h3',
+            },
+            ...Object.keys(fieldTypesInfo).map((name) => ({
               anchor: name,
               label: `${fieldTypes[name]} fields`,
               tag: 'h4',
             })),
-            [
-              {
-                anchor: 'meta-fields',
-                label: 'Filters available for meta fields',
-                tag: 'h3',
-              },
-            ],
-            Object.keys(fieldsMetaInfo).map((name) => ({
+            {
+              anchor: 'meta-fields',
+              label: 'Filters available for meta fields',
+              tag: 'h3',
+            },
+            ...Object.keys(fieldsMetaInfo).map((name) => ({
               anchor: name,
               label: `${metaTypes[name]} meta`,
               tag: 'h4',
             })),
-          )}
+          ]}
         />
         <div className={s.article}>
           <div className={s.title}>{titleOverride || page.title}</div>

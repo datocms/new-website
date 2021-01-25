@@ -67,57 +67,49 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           description
         }
         content {
-          ... on TextRecord {
-            id
-            _modelApiKey
-            text(markdown: true)
-          }
-          ... on ImageRecord {
-            id
-            _modelApiKey
-            image {
-              format
-              width
-              responsiveImage(imgixParams: { w: 810 }) {
-                ...imageFields
+          value
+          blocks {
+            ... on ImageRecord {
+              id
+              _modelApiKey
+              image {
+                format
+                width
+                responsiveImage(imgixParams: { w: 810 }) {
+                  ...imageFields
+                }
+                url
               }
-              url
             }
-          }
-          ... on VideoRecord {
-            id
-            _modelApiKey
-            video {
-              url
-              title
-              provider
-              width
-              height
-              providerUid
-            }
-          }
-          ... on InternalVideoRecord {
-            id
-            _modelApiKey
-            autoplay
-            loop
-            thumbTimeSeconds
-            video {
-              title
-              width
-              height
+            ... on VideoRecord {
+              id
+              _modelApiKey
               video {
-                duration
-                streamingUrl
-                thumbnailUrl
+                url
+                title
+                provider
+                width
+                height
+                providerUid
               }
             }
-          }
-          ... on QuoteRecord {
-            id
-            _modelApiKey
-            quote(markdown: true)
-            author
+            ... on InternalVideoRecord {
+              id
+              _modelApiKey
+              autoplay
+              loop
+              thumbTimeSeconds
+              video {
+                title
+                width
+                height
+                video {
+                  duration
+                  streamingUrl
+                  thumbnailUrl
+                }
+              }
+            }
           }
         }
       }

@@ -1,6 +1,5 @@
 import ResponsiveEmbed from 'react-responsive-embed';
 import VideoPlayer from 'components/VideoPlayer';
-import SmartMarkdown from 'components/SmartMarkdown';
 import ImageFigure from 'components/ImageFigure';
 import Prism from 'components/Prism';
 import defaultStyles from './style.module.css';
@@ -11,8 +10,10 @@ import UiChrome from 'components/UiChrome';
 import PluginBox from 'components/PluginBox';
 import Button from 'components/Button';
 import cn from 'classnames';
-import { isBlockquote, isCode } from 'datocms-structured-text-utils';
-import { render } from 'datocms-structured-text-to-plain-text';
+import { isBlockquote, isCode, isHeading } from 'datocms-structured-text-utils';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import slugify from 'utils/slugify';
+import Heading from 'components/Heading';
 
 function renderBlock(s, block) {
   switch (block._modelApiKey) {
@@ -92,7 +93,7 @@ function renderBlock(s, block) {
       return (
         <div className={s.pluginBoxes}>
           {block.demos.map((item) => (
-            <div className={s.pluginBoxContainer}>
+            <div key={item.name} className={s.pluginBoxContainer}>
               <PluginBox
                 description="Try this demo »"
                 image={
@@ -153,41 +154,51 @@ export default function PostContent({ isFallback, content, style, children }) {
           </div>
         </>
       ) : (
-        <StructuredText
-          structuredText={content}
-          renderBlock={({ record }) => (
-            <div className={s.unwrap}>{renderBlock(s, record)}</div>
-          )}
-          customRules={[
-            renderRule(isBlockquote, ({ node, children }) => {
-              return (
-                <div
-                  className={cn(s.quote, {
-                    [s.smallerQuote]:
-                      render({
-                        structuredText: { value: { document: node } },
-                      }).length > 500,
-                  })}
-                >
-                  <div className={s.quoteQuote}>{children}</div>
-                  {node.attribution && (
-                    <div className={s.quoteAuthor}>{node.attribution}</div>
-                  )}
-                </div>
-              );
-            }),
-            renderRule(isCode, ({ node }) => {
-              return (
-                <Prism
-                  code={node.code}
-                  language={node.language || 'unknown'}
-                  highlightLines={node.highlight}
-                  showLineNumbers={node.code.split(/\n/).length > 10}
-                />
-              );
-            }),
-          ]}
-        />
+        <>
+          <StructuredText
+            data={content}
+            renderBlock={({ record }) => (
+              <div className={s.unwrap}>{renderBlock(s, record)}</div>
+            )}
+            customRules={[
+              renderRule(isBlockquote, ({ node, children }) => {
+                return (
+                  <div
+                    className={cn(s.quote, {
+                      [s.smallerQuote]: toPlainText(node).length > 500,
+                    })}
+                  >
+                    <div className={s.quoteQuote}>{children}</div>
+                    {node.attribution && (
+                      <div className={s.quoteAuthor}>{node.attribution}</div>
+                    )}
+                  </div>
+                );
+              }),
+              renderRule(isCode, ({ node }) => {
+                return (
+                  <Prism
+                    code={node.code}
+                    language={node.language || 'unknown'}
+                    highlightLines={node.highlight}
+                    showLineNumbers={node.code.split(/\n/).length > 10}
+                  />
+                );
+              }),
+              renderRule(isHeading, ({ node, children }) => {
+                return (
+                  <Heading
+                    as={`h${node.level}`}
+                    anchor={slugify(toPlainText(node))}
+                  >
+                    {children}
+                  </Heading>
+                );
+              }),
+            ]}
+          />
+          {children}
+        </>
       )}
     </div>
   );
