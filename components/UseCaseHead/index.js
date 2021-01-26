@@ -4,6 +4,7 @@ import Dato from 'public/images/logos/datocms.svg';
 import cn from 'classnames';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import BackgroundImage from 'components/BackgroundImage';
+import { StructuredText } from 'react-datocms';
 
 export default function UseCaseHead({ title, logo: logoUrl, image }) {
   return (
@@ -17,7 +18,9 @@ export default function UseCaseHead({ title, logo: logoUrl, image }) {
                 <span className={s.plus}>+</span>
                 <Dato />
               </div>
-              <div className={s.title}>{title}</div>
+              <div className={s.title}>
+                <StructuredText data={title} />
+              </div>
               <a className={s.cta} href="#usecase">
                 Read the success case <ArrowIcon />
               </a>
@@ -34,7 +37,9 @@ export default function UseCaseHead({ title, logo: logoUrl, image }) {
                 <span className={s.plus}>+</span>
                 <Dato />
               </div>
-              <div className={s.title}>{title}</div>
+              <div className={s.title}>
+                <StructuredText data={title} />
+              </div>
               <a className={s.cta} href="#usecase">
                 Read the success case <ArrowIcon />
               </a>

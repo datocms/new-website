@@ -1,7 +1,7 @@
 import s from './style.module.css';
 import Link from 'next/link';
 import Wrapper from 'components/Wrapper';
-import { highlightHtml } from 'components/Highlight';
+import { highlightStructuredText } from 'components/Highlight';
 import LazyImage from 'components/LazyImage';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 
@@ -19,7 +19,7 @@ export default function UseCaseExcerpts({ cases }) {
                 <LazyImage src={firstCase.logo.url} />
               </div>
               <h5 className={s.mainStoryTitle}>
-                {highlightHtml(firstCase.title)}
+                {highlightStructuredText(firstCase.title)}
               </h5>
               <div className={s.goto}>
                 Read the story <ArrowIcon />
@@ -33,7 +33,7 @@ export default function UseCaseExcerpts({ cases }) {
                   <LazyImage src={useCase.logo.url} />
                 </div>
                 <h5 className={s.otherUseCaseTitle}>
-                  {highlightHtml(useCase.title)}
+                  {highlightStructuredText(useCase.title)}
                 </h5>
                 <div className={s.goto}>
                   Read the story <ArrowIcon />

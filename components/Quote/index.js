@@ -1,13 +1,13 @@
 import Wrapper from 'components/Wrapper';
 import s from './style.module.css';
 import { Image } from 'react-datocms';
-import { highlightHtml } from 'components/Highlight';
+import { highlightStructuredText } from 'components/Highlight';
 
 export default function Quote({ review }) {
   return (
     <Wrapper>
       <div className={s.root}>
-        <div className={s.quote}>{highlightHtml(review.quote)}</div>
+        <div className={s.quote}>{highlightStructuredText(review.quote)}</div>
         <div className={s.content}>
           <Image className={s.image} data={review.image.responsiveImage} />
           <div className={s.authorRole}>

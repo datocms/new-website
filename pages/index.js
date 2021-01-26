@@ -65,7 +65,7 @@ export const getStaticProps = gqlStaticProps(
         duotoneColor2 {
           hex
         }
-        title(markdown: true)
+        title { value }
         slug
         logo {
           url
