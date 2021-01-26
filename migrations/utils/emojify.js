@@ -4061,6 +4061,6 @@ function replaceAliases(...match) {
   return aliasEmoji || fullMatch;
 }
 
-export default function emojify(text) {
+module.exports = function emojify(text) {
   return text.replace(aliasesRegex, replaceAliases);
-}
+};
