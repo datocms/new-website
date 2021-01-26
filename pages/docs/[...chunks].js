@@ -351,14 +351,16 @@ export default function DocPage({ docGroup, titleOverride, page, preview }) {
                   })
                 : page &&
                   page.content &&
-                  filter(content.value.document, isHeading).map((heading) => {
-                    const innerText = toPlainText(heading);
+                  filter(page.content.value.document, isHeading).map(
+                    (heading) => {
+                      const innerText = toPlainText(heading);
 
-                    return {
-                      url: `#${slugify(innerText)}`,
-                      label: innerText,
-                    };
-                  })
+                      return {
+                        url: `#${slugify(innerText)}`,
+                        label: innerText,
+                      };
+                    },
+                  )
             }
           />
         )

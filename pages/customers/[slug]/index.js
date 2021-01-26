@@ -1,7 +1,6 @@
 import Layout from 'components/Layout';
 import UseCaseRecap from 'components/UseCaseRecap';
-import { highlightHtml } from 'components/Highlight';
-import parse from 'html-react-parser';
+import { highlightStructuredText } from 'components/Highlight';
 import UseCaseHead from 'components/UseCaseHead';
 import Wrapper from 'components/Wrapper';
 import Numbers, { Block as NumbersBlock } from 'components/UseCaseNumbers';
@@ -46,15 +45,15 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         duotoneColor2 {
           hex
         }
-        title(markdown: true)
+        title { value }
         coverImage {
           url
         }
         logo {
           url
         }
-        challenge(markdown: true)
-        result(markdown: true)
+        challenge { value }
+        result { value }
         numbers {
           number
           label
@@ -145,7 +144,7 @@ export default function UseCase({ subscription, preview }) {
             }}
           >
             <UseCaseHead
-              title={parse(post.title)}
+              title={post.title}
               logo={post.logo.url}
               image={`${post.coverImage.url}?${duotone}`}
             />
@@ -153,8 +152,8 @@ export default function UseCase({ subscription, preview }) {
             <div id="usecase" />
 
             <UseCaseRecap
-              challenge={highlightHtml(post.challenge)}
-              result={highlightHtml(post.result)}
+              challenge={highlightStructuredText(post.challenge)}
+              result={highlightStructuredText(post.result)}
             >
               <Numbers>
                 {post.numbers.map((number) => (

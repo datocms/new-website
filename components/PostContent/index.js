@@ -161,9 +161,10 @@ export default function PostContent({ isFallback, content, style, children }) {
               <div className={s.unwrap}>{renderBlock(s, record)}</div>
             )}
             customRules={[
-              renderRule(isBlockquote, ({ node, children }) => {
+              renderRule(isBlockquote, ({ node, children, key }) => {
                 return (
                   <div
+                    key={key}
                     className={cn(s.quote, {
                       [s.smallerQuote]: toPlainText(node).length > 500,
                     })}
@@ -175,9 +176,10 @@ export default function PostContent({ isFallback, content, style, children }) {
                   </div>
                 );
               }),
-              renderRule(isCode, ({ node }) => {
+              renderRule(isCode, ({ node, key }) => {
                 return (
                   <Prism
+                    key={key}
                     code={node.code}
                     language={node.language || 'unknown'}
                     highlightLines={node.highlight}
@@ -185,9 +187,10 @@ export default function PostContent({ isFallback, content, style, children }) {
                   />
                 );
               }),
-              renderRule(isHeading, ({ node, children }) => {
+              renderRule(isHeading, ({ node, children, key }) => {
                 return (
                   <Heading
+                    key={key}
                     as={`h${node.level}`}
                     anchor={slugify(toPlainText(node))}
                   >
