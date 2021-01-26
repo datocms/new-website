@@ -5,17 +5,16 @@ const markdownToStructuredText = require('./utils/markdownToStructuredText');
 const createStructuredTextField = require('./utils/createStructuredTextField');
 const getAllRecords = require('./utils/getAllRecords');
 const swapFields = require('./utils/swapFields');
+const {
+  withMark,
+} = require('datocms-html-to-structured-text/dist/lib/lib/handlers');
 
 module.exports = async (client) => {
-  const itemTypesByApiKey = await getItemTypesByApiKey(client);
-  const imageBlockId = itemTypesByApiKey['image'].id;
-
   await createStructuredTextField(
     client,
     'review',
     'Quote (structured-text)',
     'structured_text_quote',
-    [imageBlockId],
   );
 
   const records = await getAllRecords(client, 'review');
@@ -23,7 +22,11 @@ module.exports = async (client) => {
   for (const record of records) {
     console.log(`Record #${record.id}`);
 
-    const structuredTextValue = await markdownToStructuredText(record.quote);
+    const structuredTextValue = await markdownToStructuredText(record.quote, {
+      handlers: {
+        strong: withMark('highlight'),
+      },
+    });
 
     await client.items.update(record.id, {
       structuredTextQuote: structuredTextValue,

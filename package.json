@@ -96,7 +96,8 @@
     "rss": "^1.2.2",
     "sitemapper": "^3.0.5",
     "unified": "^9.2.0",
-    "unist-util-inspect": "^6.0.1"
+    "unist-util-inspect": "^6.0.1",
+    "unist-util-map": "^2.0.1"
   },
   "husky": {
     "hooks": {

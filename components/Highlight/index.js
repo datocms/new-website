@@ -48,7 +48,9 @@ export const highlightStructuredText = (
     <StructuredText
       data={data}
       renderNode={(tagName, props, ...children) => {
-        const TagName = tagName === 'strong' ? Highlighter : tagName;
+        const TagName = ['strong', 'mark'].includes(tagName)
+          ? Highlighter
+          : tagName;
         return <TagName {...props}>{children}</TagName>;
       }}
       customRules={
