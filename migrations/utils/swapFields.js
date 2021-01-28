@@ -4,12 +4,12 @@ module.exports = async function swapFields(client, modelApiKey, fieldApiKey) {
     `${modelApiKey}::structured_text_${fieldApiKey}`,
   );
 
-  // await client.fields.destroy(oldField.id);
-  await client.fields.update(oldField.id, {
-    apiKey: `legacy_${fieldApiKey}`,
-    label: `Legacy ${oldField.label}`,
-    position: 99,
-  });
+  await client.fields.destroy(oldField.id);
+  // await client.fields.update(oldField.id, {
+  //   apiKey: `legacy_${fieldApiKey}`,
+  //   label: `Legacy ${oldField.label}`,
+  //   position: 99,
+  // });
   await client.fields.update(newField.id, {
     apiKey: fieldApiKey,
     label: oldField.label,

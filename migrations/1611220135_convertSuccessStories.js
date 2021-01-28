@@ -1,20 +1,20 @@
 'use strict';
 
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
-const createStructuredTextField = require('./utils/createStructuredTextField');
+const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
 const modularContentToStructuredText = require('./utils/modularContentToStructuredText');
 const getAllRecords = require('./utils/getAllRecords');
+const swapFields = require('./utils/swapFields');
 
 module.exports = async (client) => {
   const itemTypesByApiKey = await getItemTypesByApiKey(client);
 
   const contentField = await client.fields.find('success_story::content');
 
-  await createStructuredTextField(
+  await createStructuredTextFieldFrom(
     client,
     'success_story',
-    'Content (structured-text)',
-    'structured_text_content',
+    'content',
     contentField.validators.richTextBlocks.itemTypes,
   );
 
@@ -35,4 +35,6 @@ module.exports = async (client) => {
       await client.items.publish(record.id);
     }
   }
+
+  await swapFields(client, 'success_story', 'content');
 };
