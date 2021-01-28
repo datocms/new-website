@@ -13,6 +13,7 @@ const { range } = require('range');
 const QUOTE = 'quote';
 const CODE_BLOCK = 'code_block';
 const TEXT = 'text';
+const QUESTION_ANSWER = 'question_answer';
 
 module.exports = async function convertModularContentToStructuredText(
   modularContentValue,
@@ -76,6 +77,23 @@ module.exports = async function convertModularContentToStructuredText(
         }
 
         children.push(codeNode);
+        break;
+      }
+      case itemTypesByApiKey[QUESTION_ANSWER].id: {
+        sanitizedBlock.attributes = {
+          ...sanitizedBlock.attributes,
+          structuredTextQuestion: await markdownToStructuredText(
+            sanitizedAttributes.question,
+          ),
+          structuredTextAnswer: await markdownToStructuredText(
+            sanitizedAttributes.answer,
+          ),
+        };
+
+        children.push({
+          type: blockNodeType,
+          item: sanitizedBlock,
+        });
         break;
       }
       default: {

@@ -2,7 +2,7 @@
 
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
 const markdownToStructuredText = require('./utils/markdownToStructuredText');
-const createStructuredTextField = require('./utils/createStructuredTextField');
+const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
 const getAllRecords = require('./utils/getAllRecords');
 const swapFields = require('./utils/swapFields');
 const {
@@ -10,12 +10,7 @@ const {
 } = require('datocms-html-to-structured-text/dist/lib/lib/handlers');
 
 module.exports = async (client) => {
-  await createStructuredTextField(
-    client,
-    'review',
-    'Quote (structured-text)',
-    'structured_text_quote',
-  );
+  await createStructuredTextFieldFrom(client, 'review', 'quote');
 
   const records = await getAllRecords(client, 'review');
 
