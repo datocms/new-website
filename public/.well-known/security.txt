@@ -1,0 +1,4 @@
+Contact: security@datocms.com
+Preferred-Languages: en
+Canonical: https://www.datocms.com/.well-known/security.txt
+Policy: https://www.datocms.com/legal/security
