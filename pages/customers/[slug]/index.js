@@ -12,7 +12,7 @@ import {
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, StructuredText } from 'react-datocms';
 import PostContent from 'components/PostContent';
 import Head from 'next/head';
 import { useQuerySubscription } from 'react-datocms';
@@ -63,7 +63,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
         mainResults {
           title
-          description
+          description { value }
         }
         content {
           value
@@ -167,7 +167,7 @@ export default function UseCase({ subscription, preview }) {
             <Results image={`${post.mainResultsImage.url}?${duotone}`}>
               {post.mainResults.map((res) => (
                 <ResultsBlock key={res.title} title={res.title}>
-                  {res.description}
+                  <StructuredText data={res.description} />
                 </ResultsBlock>
               ))}
             </Results>

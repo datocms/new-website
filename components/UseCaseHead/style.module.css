@@ -120,6 +120,11 @@
   font-weight: 600;
   letter-spacing: -0.03em;
   background-clip: text;
+
+  mark {
+    color: inherit;
+    background: inherit;
+  }
 }
 
 .cta {

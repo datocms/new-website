@@ -1,10 +1,10 @@
 import { gqlStaticProps } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
-import SmartMarkdown from 'components/SmartMarkdown';
 import { Sidebar } from 'pages/docs/[...chunks]';
 import Head from 'next/head';
 import s from 'pages/docs/pageStyle.module.css';
 import Anchor from 'public/icons/regular/link.svg';
+import { StructuredText } from 'react-datocms';
 
 export const getStaticProps = gqlStaticProps(
   `
@@ -12,7 +12,7 @@ export const getStaticProps = gqlStaticProps(
       tutorials: allTutorials {
         title
         url
-        excerpt(markdown: true)
+        excerpt { value }
       }
     }
   `,
@@ -47,7 +47,7 @@ export default function Tutorials({ tutorials }) {
                   {tutorial.title} <Anchor />
                 </h6>
                 <div className={s.tutorialDescription}>
-                  <SmartMarkdown>{tutorial.excerpt}</SmartMarkdown>
+                  <StructuredText data={tutorial.excerpt} />
                 </div>
               </a>
             ))}
