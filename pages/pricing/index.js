@@ -1,12 +1,11 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import SmartMarkdown from 'components/SmartMarkdown';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import Quote from 'components/Quote';
 import Head from 'next/head';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, StructuredText } from 'react-datocms';
 import s from './style.module.css';
 import {
   imageFields,
@@ -59,7 +58,7 @@ export const getStaticProps = async ({ preview }) => {
         faqs: allFaqs {
           id
           question
-          answer(markdown: true)
+          answer { value }
         }
         hints: allPricingHints {
           apiId
@@ -439,7 +438,7 @@ export default function Pricing({
               <div key={faq.id} className={s.faq}>
                 <div className={s.faqQ}>{faq.question}</div>
                 <div className={s.faqA}>
-                  <SmartMarkdown>{faq.answer}</SmartMarkdown>
+                  <StructuredText data={faq.answer} />
                 </div>
               </div>
             ))}

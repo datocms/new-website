@@ -6,11 +6,10 @@ import {
   reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, StructuredText } from 'react-datocms';
 import Head from 'next/head';
 import Hero from 'components/Hero';
-import SmartMarkdown from 'components/SmartMarkdown';
-import { highlightHtml } from 'components/Highlight';
+import { highlightStructuredText } from 'components/Highlight';
 import Wrapper from 'components/Wrapper';
 import LazyImage from 'components/LazyImage';
 import Button from 'components/Button';
@@ -68,7 +67,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
             ...seoMetaTagsFields
           }
           name
-          title(markdown: true)
+          title { value }
           subtitle
           integration {
             id
@@ -93,8 +92,8 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
           }
           content {
             ... on LandingCdnMapBlockRecord {
-              title
-              description(markdown: true)
+              title { value }
+              description { value }
               id
               _modelApiKey
             }
@@ -103,16 +102,16 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
               _modelApiKey
             }
             ... on LandingProgressiveImagesBlockRecord {
-              title
-              content(markdown: true)
+              title { value }
+              content { value }
               githubRepoTitle
               githubPackageName
               id
               _modelApiKey
             }
             ... on CodeExcerptBlockRecord {
-              title(markdown: true)
-              content(markdown: true)
+              title { value }
+              content { value }
               code
               language
               githubRepoTitle
@@ -121,8 +120,8 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
               _modelApiKey
             }
             ... on ModularBlocksBlockRecord {
-              title(markdown: true)
-              content(markdown: true)
+              title { value }
+              content { value }
               id
               _modelApiKey
             }
@@ -134,8 +133,8 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
               _modelApiKey
             }
             ... on LandingVideoBlockRecord {
-              title
-              content(markdown: true)
+              title { value }
+              content { value }
               video {
                 video {
                   streamingUrl
@@ -145,16 +144,16 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
               _modelApiKey
             }
             ... on ImageTransformationsBlockRecord {
-              title
-              content(markdown: true)
+              title { value }
+              content { value }
               id
               _modelApiKey
             }
             ... on TryDemoBlockRecord {
               id
               _modelApiKey
-              title
-              content(markdown: true)
+              title { value }
+              content { value }
             }
           }
         }
@@ -234,8 +233,8 @@ export default function UseCase({ landing, websites, preview }) {
                 }
               />
             }
-            title={highlightHtml(landing.title)}
-            subtitle={<SmartMarkdown>{landing.subtitle}</SmartMarkdown>}
+            title={highlightStructuredText(landing.title)}
+            subtitle={landing.subtitle}
           >
             {landing.demo && (
               <Checks checks={['Best practices', '30s setup']}>
@@ -288,12 +287,12 @@ export default function UseCase({ landing, websites, preview }) {
                 <>
                   <Space top={4} bottom={1}>
                     <InterstitialTitle style="two">
-                      {highlightHtml(block.title)}
+                      {highlightStructuredText(block.title)}
                     </InterstitialTitle>
                   </Space>
                   <Wrapper>
                     <div className={s.copy}>
-                      <SmartMarkdown>{block.description}</SmartMarkdown>
+                      <StructuredText data={block.description} />
                       <p>
                         <Link href="/features/worldwide-cdn">
                           <a className={s.readMoreAbout}>
@@ -402,10 +401,10 @@ export default function UseCase({ landing, websites, preview }) {
               {block._modelApiKey === 'landing_progressive_images_block' && (
                 <Space top={3}>
                   <TitleStripWithContent
-                    title={block.title}
+                    title={highlightStructuredText(block.title)}
                     subtitle={
                       <>
-                        <SmartMarkdown>{block.content}</SmartMarkdown>
+                        <StructuredText data={block.content} />
                         {block.githubPackageName && (
                           <div>
                             <div className={s.readMoreAbout}>
@@ -431,10 +430,10 @@ export default function UseCase({ landing, websites, preview }) {
               {block._modelApiKey === 'code_excerpt_block' && (
                 <Space top={3}>
                   <TitleStripWithContent
-                    title={highlightHtml(block.title)}
+                    title={highlightStructuredText(block.title)}
                     subtitle={
                       <>
-                        <SmartMarkdown>{block.content}</SmartMarkdown>
+                        <StructuredText data={block.content} />
                         {block.githubPackageName && (
                           <div>
                             <div className={s.readMoreAbout}>
@@ -460,12 +459,12 @@ export default function UseCase({ landing, websites, preview }) {
               {block._modelApiKey === 'modular_blocks_block' && (
                 <Flag
                   style="good"
-                  title={highlightHtml(block.title, {
+                  title={highlightStructuredText(block.title, {
                     highlightWith: FlagHighlight,
                   })}
                   image={UseModularBlocks}
                 >
-                  <SmartMarkdown>{block.content}</SmartMarkdown>
+                  <StructuredText data={block.content} />
                   <p>
                     <Link href="/features/dynamic-layouts">
                       <a className={s.readMoreAbout}>
@@ -482,9 +481,9 @@ export default function UseCase({ landing, websites, preview }) {
                 <>
                   <TryDemoCta
                     image={landing.demo.screenshot.responsiveImage}
-                    title={block.title}
+                    title={highlightStructuredText(block.title)}
                     windowTitle={`${landing.name} + DatoCMS demo`}
-                    description={<SmartMarkdown>{block.content}</SmartMarkdown>}
+                    description={<StructuredText data={block.content} />}
                     href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
                     docsAs={landing.docsUrl}
                     cta={`Try our ${landing.name} demo project now!`}
@@ -506,8 +505,8 @@ export default function UseCase({ landing, websites, preview }) {
               {block._modelApiKey === 'landing_video_block' && (
                 <Space top={3}>
                   <TitleStripWithContent
-                    title={highlightHtml(block.title)}
-                    subtitle={<SmartMarkdown>{block.content}</SmartMarkdown>}
+                    title={highlightStructuredText(block.title)}
+                    subtitle={<StructuredText data={block.content} />}
                   >
                     <div className={s.video}>
                       <VideoPlayer
@@ -524,10 +523,10 @@ export default function UseCase({ landing, websites, preview }) {
               {block._modelApiKey === 'image_transformations_block' && (
                 <Space top={3}>
                   <TitleStripWithContent
-                    title={highlightHtml(block.title)}
+                    title={highlightStructuredText(block.title)}
                     subtitle={
                       <>
-                        <SmartMarkdown>{block.content}</SmartMarkdown>
+                        <StructuredText data={block.content} />
                         <p>
                           <Link href="/features/images-api">
                             <a className={s.readMoreAbout}>

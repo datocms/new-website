@@ -32,7 +32,6 @@ export const getStaticProps = gqlStaticProps(
         }
       }
       members: allTeamMembers {
-        bio
         name
         role
         avatar {
