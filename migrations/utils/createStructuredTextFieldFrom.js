@@ -15,10 +15,10 @@ module.exports = async function createStructuredTextFieldFrom(
     const existingField = await client.fields.find(
       `${modelApiKey}::${newApiKey}`,
     );
-    console.log(`${newApiKey} already exists!`);
+    console.log(`${modelApiKey}::${newApiKey} already exists!`);
     return existingField;
   } catch (error) {
-    console.log(`Creating ${newApiKey}`);
+    console.log(`Creating ${modelApiKey}::${newApiKey}`);
     return client.fields.create(modelApiKey, {
       label,
       apiKey: newApiKey,
