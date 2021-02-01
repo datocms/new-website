@@ -40,23 +40,28 @@ module.exports = async function convertModularContentToStructuredText(
         const structuredText = await markdownToStructuredText(
           block.attributes.text,
         );
-        children = [...children, ...structuredText.document.children];
+        if (structuredText) {
+          children = [...children, ...structuredText.document.children];
+        }
         break;
       }
       case itemTypesByApiKey[QUOTE].id: {
         const structuredText = await markdownToStructuredText(
           block.attributes.quote,
         );
-        const node = {
-          type: blockquoteNodeType,
-          children: structuredText.document.children,
-        };
 
-        if (block.attributes.author) {
-          node.attribution = block.attributes.author;
+        if (structuredText) {
+          const node = {
+            type: blockquoteNodeType,
+            children: structuredText.document.children,
+          };
+
+          if (block.attributes.author) {
+            node.attribution = block.attributes.author;
+          }
+
+          children.push(node);
         }
-
-        children.push(node);
         break;
       }
       case itemTypesByApiKey[CODE_BLOCK].id: {
@@ -107,20 +112,20 @@ module.exports = async function convertModularContentToStructuredText(
     }
   }
 
-  const dastTree = {
-    type: rootNodeType,
-    children,
+  const result = {
+    schema: 'dast',
+    document: {
+      type: rootNodeType,
+      children,
+    },
   };
 
-  const validationResult = validate(dastTree);
+  const validationResult = validate(result);
 
   if (!validationResult.valid) {
-    console.log(inspect(dastTree));
+    console.log(inspect(result));
     throw new Error(validationResult.message);
   }
 
-  return {
-    schema: 'dast',
-    document: dastTree,
-  };
+  return result;
 };

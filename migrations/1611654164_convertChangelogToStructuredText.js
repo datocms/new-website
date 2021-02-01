@@ -8,7 +8,7 @@ const { buildModularBlock } = require('datocms-client');
 const path = require('path');
 const {
   paragraph,
-} = require('datocms-html-to-structured-text/dist/lib/lib/handlers');
+} = require('datocms-html-to-structured-text/dist/lib/handlers');
 const swapFields = require('./utils/swapFields');
 
 module.exports = async (client) => {

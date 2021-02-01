@@ -8,7 +8,7 @@ const getAllRecords = require('./utils/getAllRecords');
 const swapFields = require('./utils/swapFields');
 const {
   withMark,
-} = require('datocms-html-to-structured-text/dist/lib/lib/handlers');
+} = require('datocms-html-to-structured-text/dist/lib/handlers');
 
 module.exports = async (client) => {
   const itemTypesByApiKey = await getItemTypesByApiKey(client);

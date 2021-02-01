@@ -5,7 +5,7 @@ import Highlight from 'components/Highlight';
 import { gqlStaticProps } from 'lib/datocms';
 import { useState, useEffect } from 'react';
 import s from './style.module.css';
-import SmartMarkdown from 'components/SmartMarkdown';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import TalkWithUs from 'components/TalkWithUs';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
@@ -152,9 +152,10 @@ export default function Support({ preview, topics }) {
             )}
           </div>
           {leafTopic &&
-            (leafTopic.commonQuestions.length > 0 || leafTopic.description) && (
+            (leafTopic.commonQuestions.length > 0 ||
+              (leafTopic.description &&
+                toPlainText(leafTopic.description).length > 0)) && (
               <div className={s.description}>
-                <pre>{JSON.stringify(leafTopic.description)}</pre>
                 <StructuredText data={leafTopic.description} />
                 <h3>Popular guides and tutorials</h3>
                 <p>
