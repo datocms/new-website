@@ -19,22 +19,24 @@ function renderBlock(s, block) {
   switch (block._modelApiKey) {
     case 'internal_video':
       return (
-        <figure>
-          <div className={s.videoWrapper}>
-            <VideoPlayer
-              controls
-              autoPlay={block.autoplay}
-              loop={block.loop}
-              src={block.video.video.streamingUrl}
-              poster={`${block.video.video.thumbnailUrl}?time=${
-                block.thumbTimeSeconds !== null
-                  ? block.thumbTimeSeconds
-                  : block.video.video.duration / 2
-              }`}
-            />
-          </div>
-          {block.video.title && <figcaption>{block.video.title}</figcaption>}
-        </figure>
+        <div className={s.unwrap}>
+          <figure>
+            <div className={s.videoWrapper}>
+              <VideoPlayer
+                controls
+                autoPlay={block.autoplay}
+                loop={block.loop}
+                src={block.video.video.streamingUrl}
+                poster={`${block.video.video.thumbnailUrl}?time=${
+                  block.thumbTimeSeconds !== null
+                    ? block.thumbTimeSeconds
+                    : block.video.video.duration / 2
+                }`}
+              />
+            </div>
+            {block.video.title && <figcaption>{block.video.title}</figcaption>}
+          </figure>
+        </div>
       );
 
     case 'question_answer':
@@ -51,79 +53,87 @@ function renderBlock(s, block) {
 
     case 'demo':
       return (
-        <div className={s.demo}>
-          <div className={s.demoPreview}>
-            <UiChrome title={block.demo.name}>
-              <Image
-                className={s.demoImage}
-                data={block.demo.screenshot.responsiveImage}
-              />
-            </UiChrome>
-          </div>
-          <div className={s.demoCopy}>
-            <div className={s.demoTitle}>{block.demo.name}</div>
-            <div className={s.demoDesc}>
-              Try the full-fledged DatoCMS demo project in minutes.
+        <div className={s.unwrap}>
+          <div className={s.demo}>
+            <div className={s.demoPreview}>
+              <UiChrome title={block.demo.name}>
+                <Image
+                  className={s.demoImage}
+                  data={block.demo.screenshot.responsiveImage}
+                />
+              </UiChrome>
             </div>
-            <Button
-              as="a"
-              target="_blank"
-              p="small"
-              href={`https://dashboard.datocms.com/deploy?repo=${block.demo.githubRepo}`}
-            >
-              Deploy the demo project
-            </Button>
-            <LazyImage
-              className={s.techLogo}
-              src={block.demo.technology.logo.url}
-            />
+            <div className={s.demoCopy}>
+              <div className={s.demoTitle}>{block.demo.name}</div>
+              <div className={s.demoDesc}>
+                Try the full-fledged DatoCMS demo project in minutes.
+              </div>
+              <Button
+                as="a"
+                target="_blank"
+                p="small"
+                href={`https://dashboard.datocms.com/deploy?repo=${block.demo.githubRepo}`}
+              >
+                Deploy the demo project
+              </Button>
+              <LazyImage
+                className={s.techLogo}
+                src={block.demo.technology.logo.url}
+              />
+            </div>
           </div>
         </div>
       );
 
     case 'multiple_demos_block':
       return (
-        <div className={s.pluginBoxes}>
-          {block.demos.map((item) => (
-            <div key={item.name} className={s.pluginBoxContainer}>
-              <PluginBox
-                description="Try this demo »"
-                image={
-                  <Image
-                    className={s.pluginBoxImage}
-                    data={item.screenshot.responsiveImage}
-                  />
-                }
-                title={item.name}
-                href={`/marketplace/starters/${item.code}`}
-              />
-            </div>
-          ))}
+        <div className={s.unwrap}>
+          <div className={s.pluginBoxes}>
+            {block.demos.map((item) => (
+              <div key={item.name} className={s.pluginBoxContainer}>
+                <PluginBox
+                  description="Try this demo »"
+                  image={
+                    <Image
+                      className={s.pluginBoxImage}
+                      data={item.screenshot.responsiveImage}
+                    />
+                  }
+                  title={item.name}
+                  href={`/marketplace/starters/${item.code}`}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       );
 
     case 'image':
       return (
-        <ImageFigure imageClassName={s.responsiveImage} data={block.image} />
+        <div className={s.unwrap}>
+          <ImageFigure imageClassName={s.responsiveImage} data={block.image} />
+        </div>
       );
 
     case 'video':
       return (
-        <figure>
-          {block.video.provider === 'youtube' ? (
-            <ResponsiveEmbed
-              src={`//www.youtube.com/embed/${block.video.providerUid}`}
-              ratio={`${block.video.width}:${block.video.height}`}
-              allowFullScreen
-            />
-          ) : (
-            <ResponsiveEmbed
-              src={`//player.vimeo.com/video/${block.video.providerUid}?title=0&byline=0&portrait=0`}
-              ratio={`${block.video.width}:${block.video.height}`}
-              allowFullScreen
-            />
-          )}
-        </figure>
+        <div className={s.unwrap}>
+          <figure>
+            {block.video.provider === 'youtube' ? (
+              <ResponsiveEmbed
+                src={`//www.youtube.com/embed/${block.video.providerUid}`}
+                ratio={`${block.video.width}:${block.video.height}`}
+                allowFullScreen
+              />
+            ) : (
+              <ResponsiveEmbed
+                src={`//player.vimeo.com/video/${block.video.providerUid}?title=0&byline=0&portrait=0`}
+                ratio={`${block.video.width}:${block.video.height}`}
+                allowFullScreen
+              />
+            )}
+          </figure>
+        </div>
       );
   }
 }
@@ -149,9 +159,7 @@ export default function PostContent({ isFallback, content, style, children }) {
         <>
           <StructuredText
             data={content}
-            renderBlock={({ record }) => (
-              <div className={s.unwrap}>{renderBlock(s, record)}</div>
-            )}
+            renderBlock={({ record }) => renderBlock(s, record)}
             customRules={[
               renderRule(isBlockquote, ({ node, children, key }) => {
                 return (

@@ -123,6 +123,10 @@
   color: var(--light-body-color);
   font-weight: bold;
   margin-bottom: 20px;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .quote {
