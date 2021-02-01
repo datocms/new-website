@@ -41,18 +41,10 @@ function renderBlock(s, block) {
       return (
         <div className={s.qa}>
           <div className={s.qaQuestion}>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: block.question,
-              }}
-            />
+            <StructuredText data={block.question} />
           </div>
           <div className={s.qaAnswer}>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: block.answer,
-              }}
-            />
+            <StructuredText data={block.answer} />
           </div>
         </div>
       );

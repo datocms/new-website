@@ -131,8 +131,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           ... on QuestionAnswerRecord {
             id
             _modelApiKey
-            question(markdown: true)
-            answer(markdown: true)
+            question { value }
+            answer { value }
           }
         }
       }

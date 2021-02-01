@@ -19,6 +19,10 @@ module.exports = async function convertModularContentToStructuredText(
   modularContentValue,
   itemTypesByApiKey,
 ) {
+  if (modularContentValue.length === 0) {
+    return null;
+  }
+
   let children = [];
 
   for (const block of modularContentValue) {

@@ -16,6 +16,7 @@ import LogosBar from 'components/LogosBar';
 import { useRouter } from 'next/router';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import Head from 'next/head';
+import { StructuredText } from 'react-datocms';
 
 export const getStaticProps = gqlStaticProps(
   `
@@ -34,7 +35,7 @@ export const getStaticProps = gqlStaticProps(
         disableContactForm
         contactFormType
         autoResponderType
-        description(markdown: true)
+        description { value }
         children {
           slug
         }
@@ -153,7 +154,8 @@ export default function Support({ preview, topics }) {
           {leafTopic &&
             (leafTopic.commonQuestions.length > 0 || leafTopic.description) && (
               <div className={s.description}>
-                <SmartMarkdown>{leafTopic.description}</SmartMarkdown>
+                <pre>{JSON.stringify(leafTopic.description)}</pre>
+                <StructuredText data={leafTopic.description} />
                 <h3>Popular guides and tutorials</h3>
                 <p>
                   Please take a look at these resources, as they might probably
