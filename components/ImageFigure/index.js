@@ -24,7 +24,9 @@ export default function ImageFigure({ data, imageClassName }) {
       {data.format !== 'gif' && !data.responsiveImage && (
         <img alt={data.alt} src={`${data.url}?auto=format&fit=max&w=900`} />
       )}
-      {data.title && <figcaption>{data.title}</figcaption>}
+      {(data.title || (data.responsiveImage && data.responsiveImage.title)) && (
+        <figcaption>{data.title || data.responsiveImage.title}</figcaption>
+      )}
     </figure>
   );
 }

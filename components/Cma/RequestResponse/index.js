@@ -2,15 +2,16 @@ import Prism from 'components/Prism';
 import ReactMarkdownWithHtml from 'react-markdown/with-html';
 import slugify from 'utils/slugify';
 import gfm from 'remark-gfm';
+import Heading from 'components/Heading';
 
 import s from './style.module.css';
 
 const RequestResponse = ({ title, description, chunks }) => (
   <div className={s.reqRes}>
     {title && (
-      <h6 className={s.title} id={slugify(title)}>
+      <Heading as="h6" className={s.title} anchor={slugify(title)}>
         {title}
-      </h6>
+      </Heading>
     )}
     {description && (
       <div className={s.description}>

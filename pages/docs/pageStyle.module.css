@@ -90,6 +90,18 @@
     font-family: var(--font-sans);
   }
 
+  h4 {
+    margin: rfs(50px) 0 rfs(23px);
+  }
+
+  h5 {
+    margin: rfs(30px) 0 rfs(10px);
+  }
+
+  h6 {
+    margin: rfs(30px) 0 rfs(10px);
+  }
+
   h3 {
     font-size: 160%;
   }
@@ -165,6 +177,10 @@
 
   li {
     margin: 0 0 5px;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
   }
 
   figure {
@@ -174,7 +190,7 @@
 
   figcaption {
     color: var(--light-body-color);
-    font-size: 0.8em;
+    font-size: 0.9em;
     margin-top: 15px;
   }
 
@@ -307,6 +323,7 @@
     padding-left: var(--page-margin);
     padding-right: var(--page-margin);
     border-bottom: 1px solid var(--border-color);
+    max-width: 800px;
   }
 
   .toc {

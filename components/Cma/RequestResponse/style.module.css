@@ -10,14 +10,6 @@
   font-family: var(--font-sans);
 }
 
-.title::before {
-  content: '';
-  display: block;
-  height: 75px;
-  margin-top: -75px;
-  visibility: hidden;
-}
-
 .chunk {
   margin-top: 20px;
 

@@ -2,6 +2,7 @@ import React from 'react';
 import humps from 'humps';
 import pluralize from 'pluralize';
 import RequestResponse from '../RequestResponse';
+import slugify from 'utils/slugify';
 
 import schemaExampleFor from 'utils/schemaExampleFor';
 
@@ -184,8 +185,19 @@ export default function JsExample({ resource, link }) {
   const outputWithRun = output && `> node example.js\n\n${output}`;
 
   if (link.examples && link.examples.js) {
-    return link.examples.js.map((example) =>
-      renderExample(example, code, outputWithRun),
+    return (
+      <>
+        <ul>
+          {link.examples.js.map((example) => (
+            <li key={example.title}>
+              <a href={`#${slugify(example.title)}`}>{example.title}</a>
+            </li>
+          ))}
+        </ul>
+        {link.examples.js.map((example) =>
+          renderExample(example, code, outputWithRun),
+        )}
+      </>
     );
   }
 
