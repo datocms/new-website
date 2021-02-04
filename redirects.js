@@ -81,6 +81,14 @@ module.exports = [
     destination: '/docs/building-plugins/entry-point',
   },
   {
+    source: '/docs/plugins/creating-a-new-plugin',
+    destination: '/docs/building-plugins/creating-a-new-plugin',
+  },
+  {
+    source: '/docs/plugins/publishing',
+    destination: '/docs/building-plugins/publishing',
+  },
+  {
     source: '/docs/guides/offline-backups',
     destination: '/docs/import-and-export/export-data',
   },
