@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import s from './style.module.css';
 import { LanguageConsumer } from 'components/LanguagePicker';
+import delve from 'dlv';
 import humps from 'humps';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -135,7 +136,22 @@ function Enum({ values, description }) {
   );
 }
 
-function Type({ schema }) {
+function resolveRef(schema, ref) {
+  if (!ref.startsWith('#/definitions/')) {
+    return ref;
+  }
+  let path = ref.replace(/^#/, 'schema').split('/');
+  const refName = path[path.length - 1];
+  const res = delve(schema, path.join('.'), '');
+
+  if (typeof res === 'object' && res.type === 'string' && res.const) {
+    return res.const;
+  }
+
+  return refName;
+}
+
+function Type({ schema, rootSchema = {} }) {
   if (!schema || !schema.type) {
     return null;
   }
@@ -153,10 +169,29 @@ function Type({ schema }) {
           realType = 'enum';
         }
 
+        if (realType.$ref) {
+          realType = resolveRef(rootSchema, realType.$ref);
+        }
+
         if (realType === 'array') {
-          realType = schema.items
-            ? `Array<${types(schema.items.type).join('/')}>`
-            : 'Array';
+          if (schema.items) {
+            if (schema.items.type) {
+              realType = `Array<${types(schema.items.type).join('/')}>`;
+            }
+            if (schema.items['$ref']) {
+              realType = `Array<${resolveRef(
+                rootSchema,
+                schema.items['$ref'],
+              )}>`;
+            }
+            if (schema.items.anyOf) {
+              realType = `Array<${schema.items.anyOf
+                .map((i) => resolveRef(rootSchema, i['$ref']))
+                .join(' | ')}>`;
+            }
+          } else {
+            realType = 'Array';
+          }
         }
 
         return [
@@ -425,3 +460,50 @@ export function Schema({ title, schema, showId, hideRequired }) {
     </LanguageConsumer>
   );
 }
+
+export function TsJSONSchema({ schema, definitions = [] }) {
+  if (definitions.length === 0) {
+    definitions = Object.keys(schema.definitions);
+  }
+
+  return (
+    <>
+      {definitions.map((definitionName) => {
+        const definition = schema.definitions[definitionName];
+        return (
+          <JsonSchema name={definitionName} schema={definition} level={1} />
+        );
+      })}
+    </>
+  );
+}
+
+/*
+return (
+          <div key={definitionName} className={s.schema}>
+            <h2>{definitionName}</h2>
+            {definition.description && (
+              <ReactMarkdown source={`${definition.description}.`} />
+            )}
+            <div>
+              {definition.properties &&
+                Object.entries(definition.properties).map(([prop, value]) => {
+                  return (
+                    <div key={prop}>
+                      <span className={s.name}>{prop}</span>&nbsp;&nbsp;
+                      <Type
+                        schema={value.type ? value : { type: value }}
+                        rootSchema={{ schema }}
+                      />
+                    </div>
+                  );
+                })}
+              {definition.enum && (
+                <>
+                  <Type schema={definition} rootSchema={{ schema }} />
+                  <Enum values={definition.enum} />
+                </>
+              )}
+            </div>
+          </div>
+        );*/
