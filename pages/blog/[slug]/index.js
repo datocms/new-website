@@ -54,6 +54,10 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               url
             }
           }
+          ... on TypeformRecord {
+            id
+            _modelApiKey
+          }
           ... on VideoRecord {
             id
             _modelApiKey

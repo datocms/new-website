@@ -47,7 +47,13 @@ function PatternProperties({ prefix, schema, level, hideRequired }) {
   return level >= 1 ? <div className={s.properties}>{content}</div> : content;
 }
 
-function Properties({ prefix, schema, level, groupIsRequired, hideRequired }) {
+export function Properties({
+  prefix,
+  schema,
+  level,
+  groupIsRequired,
+  hideRequired,
+}) {
   const required = groupIsRequired ? schema.required || [] : [];
 
   const content = (
@@ -153,10 +159,15 @@ function Type({ schema }) {
           realType = 'enum';
         }
 
+        if (type === 'string' && schema.const) {
+          realType = `"${schema.const}"`;
+        }
+
         if (realType === 'array') {
-          realType = schema.items
-            ? `Array<${types(schema.items.type).join('/')}>`
-            : 'Array';
+          realType =
+            schema.items && schema.items.type
+              ? `Array<${types(schema.items.type).join('/')}>`
+              : 'Array';
         }
 
         return [
@@ -259,7 +270,7 @@ function Relationships({ relationships, groupIsRequired, hideRequired }) {
   );
 }
 
-function JsonSchema({
+export function JsonSchema({
   level = 0,
   name,
   prefix,

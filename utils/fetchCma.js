@@ -1,5 +1,4 @@
 import tiny from 'tiny-json-http';
-import sortBy from 'sort-by';
 import parser from 'json-schema-ref-parser';
 import { stringify } from 'flatted';
 
