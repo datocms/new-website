@@ -1,0 +1,817 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "List": {
+            "description": "List represents a list of items.\n\nUnordered lists must have its `style` field set to `bulleted`.\nOrdered lists, instead, have its `style` field set to `numbered`.",
+            "properties": {
+                "children": {
+                    "items": {
+                        "$ref": "#/definitions/ListItem"
+                    },
+                    "type": "array"
+                },
+                "style": {
+                    "enum": [
+                        "bulleted",
+                        "numbered"
+                    ],
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "list"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ListItem": {
+            "description": "ListItem represents an item in a List",
+            "properties": {
+                "children": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "description": "Paragraph represents a unit of textual content",
+                                "properties": {
+                                    "children": {
+                                        "items": {
+                                            "anyOf": [
+                                                {
+                                                    "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                    "properties": {
+                                                        "marks": {
+                                                            "description": "optional, array of styles for the current chunk of text",
+                                                            "items": {
+                                                                "description": "Supported marks for Span nodes",
+                                                                "enum": [
+                                                                    "code",
+                                                                    "emphasis",
+                                                                    "highlight",
+                                                                    "strikethrough",
+                                                                    "strong",
+                                                                    "underline"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "span"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "Link represents a hyperlink",
+                                                    "properties": {
+                                                        "children": {
+                                                            "items": {
+                                                                "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                "properties": {
+                                                                    "marks": {
+                                                                        "description": "optional, array of styles for the current chunk of text",
+                                                                        "items": {
+                                                                            "description": "Supported marks for Span nodes",
+                                                                            "enum": [
+                                                                                "code",
+                                                                                "emphasis",
+                                                                                "highlight",
+                                                                                "strikethrough",
+                                                                                "strong",
+                                                                                "underline"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "span"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "link"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "url": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "ItemLink is similar to a Link node, but instead of linking a portion of text to a URL, it links the document to another record present in the DatoCMS project",
+                                                    "properties": {
+                                                        "children": {
+                                                            "items": {
+                                                                "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                "properties": {
+                                                                    "marks": {
+                                                                        "description": "optional, array of styles for the current chunk of text",
+                                                                        "items": {
+                                                                            "description": "Supported marks for Span nodes",
+                                                                            "enum": [
+                                                                                "code",
+                                                                                "emphasis",
+                                                                                "highlight",
+                                                                                "strikethrough",
+                                                                                "strong",
+                                                                                "underline"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "span"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "item": {
+                                                            "description": "the record ID",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "itemLink"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "InlineItem, similarly to ItemLink, links the document to another record but does not specify any inner content (children)",
+                                                    "properties": {
+                                                        "item": {
+                                                            "description": "the record ID",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "inlineItem"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            ]
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": {
+                                        "enum": [
+                                            "paragraph"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/List"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "listItem"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "description": "A DatoCMS compatible document.",
+    "properties": {
+        "document": {
+            "description": "Root represents a document",
+            "properties": {
+                "children": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "description": "Paragraph represents a unit of textual content",
+                                "properties": {
+                                    "children": {
+                                        "items": {
+                                            "anyOf": [
+                                                {
+                                                    "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                    "properties": {
+                                                        "marks": {
+                                                            "description": "optional, array of styles for the current chunk of text",
+                                                            "items": {
+                                                                "description": "Supported marks for Span nodes",
+                                                                "enum": [
+                                                                    "code",
+                                                                    "emphasis",
+                                                                    "highlight",
+                                                                    "strikethrough",
+                                                                    "strong",
+                                                                    "underline"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "span"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "Link represents a hyperlink",
+                                                    "properties": {
+                                                        "children": {
+                                                            "items": {
+                                                                "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                "properties": {
+                                                                    "marks": {
+                                                                        "description": "optional, array of styles for the current chunk of text",
+                                                                        "items": {
+                                                                            "description": "Supported marks for Span nodes",
+                                                                            "enum": [
+                                                                                "code",
+                                                                                "emphasis",
+                                                                                "highlight",
+                                                                                "strikethrough",
+                                                                                "strong",
+                                                                                "underline"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "span"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "link"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "url": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "ItemLink is similar to a Link node, but instead of linking a portion of text to a URL, it links the document to another record present in the DatoCMS project",
+                                                    "properties": {
+                                                        "children": {
+                                                            "items": {
+                                                                "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                "properties": {
+                                                                    "marks": {
+                                                                        "description": "optional, array of styles for the current chunk of text",
+                                                                        "items": {
+                                                                            "description": "Supported marks for Span nodes",
+                                                                            "enum": [
+                                                                                "code",
+                                                                                "emphasis",
+                                                                                "highlight",
+                                                                                "strikethrough",
+                                                                                "strong",
+                                                                                "underline"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "span"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "item": {
+                                                            "description": "the record ID",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "itemLink"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "InlineItem, similarly to ItemLink, links the document to another record but does not specify any inner content (children)",
+                                                    "properties": {
+                                                        "item": {
+                                                            "description": "the record ID",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "inlineItem"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            ]
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": {
+                                        "enum": [
+                                            "paragraph"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "description": "Heading represents a heading of a section",
+                                "properties": {
+                                    "children": {
+                                        "items": {
+                                            "anyOf": [
+                                                {
+                                                    "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                    "properties": {
+                                                        "marks": {
+                                                            "description": "optional, array of styles for the current chunk of text",
+                                                            "items": {
+                                                                "description": "Supported marks for Span nodes",
+                                                                "enum": [
+                                                                    "code",
+                                                                    "emphasis",
+                                                                    "highlight",
+                                                                    "strikethrough",
+                                                                    "strong",
+                                                                    "underline"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "span"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "Link represents a hyperlink",
+                                                    "properties": {
+                                                        "children": {
+                                                            "items": {
+                                                                "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                "properties": {
+                                                                    "marks": {
+                                                                        "description": "optional, array of styles for the current chunk of text",
+                                                                        "items": {
+                                                                            "description": "Supported marks for Span nodes",
+                                                                            "enum": [
+                                                                                "code",
+                                                                                "emphasis",
+                                                                                "highlight",
+                                                                                "strikethrough",
+                                                                                "strong",
+                                                                                "underline"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "span"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "link"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "url": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "ItemLink is similar to a Link node, but instead of linking a portion of text to a URL, it links the document to another record present in the DatoCMS project",
+                                                    "properties": {
+                                                        "children": {
+                                                            "items": {
+                                                                "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                "properties": {
+                                                                    "marks": {
+                                                                        "description": "optional, array of styles for the current chunk of text",
+                                                                        "items": {
+                                                                            "description": "Supported marks for Span nodes",
+                                                                            "enum": [
+                                                                                "code",
+                                                                                "emphasis",
+                                                                                "highlight",
+                                                                                "strikethrough",
+                                                                                "strong",
+                                                                                "underline"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "span"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "item": {
+                                                            "description": "the record ID",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "itemLink"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "description": "InlineItem, similarly to ItemLink, links the document to another record but does not specify any inner content (children)",
+                                                    "properties": {
+                                                        "item": {
+                                                            "description": "the record ID",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "inlineItem"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            ]
+                                        },
+                                        "type": "array"
+                                    },
+                                    "level": {
+                                        "enum": [
+                                            1,
+                                            2,
+                                            3,
+                                            4,
+                                            5,
+                                            6
+                                        ],
+                                        "type": "number"
+                                    },
+                                    "type": {
+                                        "enum": [
+                                            "heading"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "description": "Block is a DatoCMS block records references",
+                                "properties": {
+                                    "item": {
+                                        "description": "The record ID.",
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "enum": [
+                                            "block"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/List",
+                                "description": "List represents a list of items.\n\nUnordered lists must have its `style` field set to `bulleted`.\nOrdered lists, instead, have its `style` field set to `numbered`."
+                            },
+                            {
+                                "description": "Blockquote is a containter that represents text which is an extended quotation",
+                                "properties": {
+                                    "attribution": {
+                                        "type": "string"
+                                    },
+                                    "children": {
+                                        "items": {
+                                            "description": "Paragraph represents a unit of textual content",
+                                            "properties": {
+                                                "children": {
+                                                    "items": {
+                                                        "anyOf": [
+                                                            {
+                                                                "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                "properties": {
+                                                                    "marks": {
+                                                                        "description": "optional, array of styles for the current chunk of text",
+                                                                        "items": {
+                                                                            "description": "Supported marks for Span nodes",
+                                                                            "enum": [
+                                                                                "code",
+                                                                                "emphasis",
+                                                                                "highlight",
+                                                                                "strikethrough",
+                                                                                "strong",
+                                                                                "underline"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "span"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            {
+                                                                "description": "Link represents a hyperlink",
+                                                                "properties": {
+                                                                    "children": {
+                                                                        "items": {
+                                                                            "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                            "properties": {
+                                                                                "marks": {
+                                                                                    "description": "optional, array of styles for the current chunk of text",
+                                                                                    "items": {
+                                                                                        "description": "Supported marks for Span nodes",
+                                                                                        "enum": [
+                                                                                            "code",
+                                                                                            "emphasis",
+                                                                                            "highlight",
+                                                                                            "strikethrough",
+                                                                                            "strong",
+                                                                                            "underline"
+                                                                                        ],
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "type": "array"
+                                                                                },
+                                                                                "type": {
+                                                                                    "enum": [
+                                                                                        "span"
+                                                                                    ],
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "value": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "link"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "url": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            {
+                                                                "description": "ItemLink is similar to a Link node, but instead of linking a portion of text to a URL, it links the document to another record present in the DatoCMS project",
+                                                                "properties": {
+                                                                    "children": {
+                                                                        "items": {
+                                                                            "description": "Span represents a text node. It might optionally contain formatting styles called marks",
+                                                                            "properties": {
+                                                                                "marks": {
+                                                                                    "description": "optional, array of styles for the current chunk of text",
+                                                                                    "items": {
+                                                                                        "description": "Supported marks for Span nodes",
+                                                                                        "enum": [
+                                                                                            "code",
+                                                                                            "emphasis",
+                                                                                            "highlight",
+                                                                                            "strikethrough",
+                                                                                            "strong",
+                                                                                            "underline"
+                                                                                        ],
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "type": "array"
+                                                                                },
+                                                                                "type": {
+                                                                                    "enum": [
+                                                                                        "span"
+                                                                                    ],
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "value": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "item": {
+                                                                        "description": "the record ID",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "itemLink"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            {
+                                                                "description": "InlineItem, similarly to ItemLink, links the document to another record but does not specify any inner content (children)",
+                                                                "properties": {
+                                                                    "item": {
+                                                                        "description": "the record ID",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "inlineItem"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "type": {
+                                                    "enum": [
+                                                        "paragraph"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": {
+                                        "enum": [
+                                            "blockquote"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "description": "Code represents a block of preformatted text, such as computer code",
+                                "properties": {
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "highlight": {
+                                        "description": "optional, represents an array of line numbers to highlight",
+                                        "items": {
+                                            "type": "number"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "language": {
+                                        "description": "optional, represents the language of computer code being marked up",
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "enum": [
+                                            "code"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "root"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "schema": {
+            "enum": [
+                "dast"
+            ],
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+
