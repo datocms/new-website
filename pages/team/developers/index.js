@@ -34,16 +34,14 @@ export const getStaticProps = gqlStaticProps(
         }
       }
       integrations: allIntegrations(
-        first: 30
-        filter: {
-          integrationType: {
-            in: ["166913", "166915", "166916", "166918", "166919"]
-          }
-        }
+        first: 100
       ) {
         id
         logo {
           url
+        }
+        integrationType {
+          slug
         }
         squareLogo {
           url
@@ -206,16 +204,23 @@ function Developers({ integrations, preview, page, review }) {
 
       <IntegrationsBanner
         title={<>Extensible and integrable by&nbsp;design</>}
-        bubbles={integrations.map((integration) => (
-          <LazyImage
-            key={integration.id}
-            src={
-              integration.squareLogo
-                ? integration.squareLogo.url
-                : integration.logo.url
-            }
-          />
-        ))}
+        bubbles={integrations
+          .filter((i) =>
+            ['ci', 'static-generator', 'language', 'cdn', 'framework'].includes(
+              i.integrationType.slug,
+            ),
+          )
+          .slice(0, 30)
+          .map((integration) => (
+            <LazyImage
+              key={integration.id}
+              src={
+                integration.squareLogo
+                  ? integration.squareLogo.url
+                  : integration.logo.url
+              }
+            />
+          ))}
       >
         Being a API-first headless CMS, DatoCMS easily integrates with any
         third-party platform or service. Build your digital products by

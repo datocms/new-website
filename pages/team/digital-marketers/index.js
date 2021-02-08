@@ -34,13 +34,13 @@ export const getStaticProps = gqlStaticProps(
         }
       }
       integrations: allIntegrations(
-        first: 30
-        filter: { integrationType: { eq: "2427498" } }
+        first: 100
       ) {
         id
         logo {
           url
         }
+        integrationType { slug }
         squareLogo {
           url
         }
@@ -158,16 +158,19 @@ function DigitalMarketers({ integrations, preview, page, review1 }) {
 
       <IntegrationsBanner
         title={<>Easily connect any MarTech&nbsp;tool</>}
-        bubbles={integrations.map((integration) => (
-          <LazyImage
-            key={integration.id}
-            src={
-              integration.squareLogo
-                ? integration.squareLogo.url
-                : integration.logo.url
-            }
-          />
-        ))}
+        bubbles={integrations
+          .filter((i) => ['marketing'].includes(i.integrationType.slug))
+          .slice(0, 30)
+          .map((integration) => (
+            <LazyImage
+              key={integration.id}
+              src={
+                integration.squareLogo
+                  ? integration.squareLogo.url
+                  : integration.logo.url
+              }
+            />
+          ))}
       >
         Easily integrate your CMS with your preferred marketing technologies,
         Marketo, Salesforce, Google Analytics, SEMrush, Brightcove, Watson, etc.
