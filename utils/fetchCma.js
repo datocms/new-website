@@ -1,5 +1,6 @@
 import tiny from 'tiny-json-http';
 import sortBy from 'sort-by';
+import path from 'path';
 import parser from 'json-schema-ref-parser';
 import { stringify } from 'flatted';
 
@@ -51,9 +52,31 @@ const normalizeSchema = (resource, resourceSchema) => ({
     })),
 });
 
-export async function buildDastResources() {
-  const unreferencedSchema = require('../public/dast.json');
-  const schema = await parser.bundle(unreferencedSchema);
+export async function buildStructuredTextDocumentSchema() {
+  const {
+    output,
+  } = require('child_process').spawnSync(
+    'ts-json-schema-generator',
+    [
+      '--path',
+      path.resolve(
+        '.',
+        'node_modules',
+        'datocms-structured-text-utils',
+        'dist',
+        'types',
+        'types.d.ts',
+      ),
+      '--type',
+      'Document',
+      '--expose',
+      'all',
+    ],
+    { cwd: __dirname },
+  );
+
+  const unreferencedSchema = output.join(' ');
+  const schema = await parser.bundle(JSON.parse(unreferencedSchema));
   return stringify({
     schema,
   });

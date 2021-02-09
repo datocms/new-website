@@ -294,7 +294,7 @@ function Relationships({ relationships, groupIsRequired, hideRequired }) {
   );
 }
 
-function JsonSchema({
+export function JsonSchema({
   level = 0,
   name,
   prefix,
@@ -460,50 +460,3 @@ export function Schema({ title, schema, showId, hideRequired }) {
     </LanguageConsumer>
   );
 }
-
-export function TsJSONSchema({ schema, definitions = [] }) {
-  if (definitions.length === 0) {
-    definitions = Object.keys(schema.definitions);
-  }
-
-  return (
-    <>
-      {definitions.map((definitionName) => {
-        const definition = schema.definitions[definitionName];
-        return (
-          <JsonSchema name={definitionName} schema={definition} level={1} />
-        );
-      })}
-    </>
-  );
-}
-
-/*
-return (
-          <div key={definitionName} className={s.schema}>
-            <h2>{definitionName}</h2>
-            {definition.description && (
-              <ReactMarkdown source={`${definition.description}.`} />
-            )}
-            <div>
-              {definition.properties &&
-                Object.entries(definition.properties).map(([prop, value]) => {
-                  return (
-                    <div key={prop}>
-                      <span className={s.name}>{prop}</span>&nbsp;&nbsp;
-                      <Type
-                        schema={value.type ? value : { type: value }}
-                        rootSchema={{ schema }}
-                      />
-                    </div>
-                  );
-                })}
-              {definition.enum && (
-                <>
-                  <Type schema={definition} rootSchema={{ schema }} />
-                  <Enum values={definition.enum} />
-                </>
-              )}
-            </div>
-          </div>
-        );*/

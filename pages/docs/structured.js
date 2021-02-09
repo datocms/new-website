@@ -5,8 +5,8 @@ import Link from 'next/link';
 import Head from 'next/head';
 import s from './style.module.css';
 import { renderMetaTags } from 'react-datocms';
-import { buildDastResources } from 'utils/fetchCma';
-import { HrefSchema, Schema, TsJSONSchema } from 'components/Cma/Schema';
+import { buildStructuredTextDocumentSchema } from 'utils/fetchCma';
+import { JsonSchema } from 'components/Cma/Schema';
 import { parse } from 'flatted';
 
 export const getStaticProps = async function ({ params, preview }) {
@@ -46,7 +46,7 @@ export const getStaticProps = async function ({ params, preview }) {
   `,
   )({ params, preview });
 
-  const cma = await buildDastResources();
+  const cma = await buildStructuredTextDocumentSchema();
   props.props.cma = cma;
   return props;
 };
@@ -85,6 +85,12 @@ const Sidebar = ({ roots }) => (
 
 export default function Docs({ roots, preview, page, cma }) {
   const { schema } = React.useMemo(() => cma && parse(cma), [cma]);
+  const definitions = Object.keys(schema.definitions)
+    .filter((d) => !d.endsWith('Type') && !d.endsWith('Node'))
+    .sort((a, b) => {
+      return a === 'Document' ? -1 : 1;
+    });
+
   return (
     <DocsLayout preview={preview} sidebar={<Sidebar roots={roots} />}>
       <Head>{renderMetaTags(page.seo)}</Head>
@@ -95,14 +101,13 @@ export default function Docs({ roots, preview, page, cma }) {
           integrate with DatoCMS to manage your content in a centralized,
           structured hub.
         </p>
-        <TsJSONSchema
-          schema={schema}
-          definitions={Object.keys(schema.definitions)
-            .filter((d) => !d.endsWith('Type') && !d.endsWith('Node'))
-            .sort((a, b) => {
-              return a === 'Document' ? -1 : 1;
-            })}
-        />
+
+        {definitions.map((definitionName) => {
+          const definition = schema.definitions[definitionName];
+          return (
+            <JsonSchema name={definitionName} schema={definition} level={1} />
+          );
+        })}
       </div>
     </DocsLayout>
   );
