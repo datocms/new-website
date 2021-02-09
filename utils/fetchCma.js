@@ -75,11 +75,7 @@ export async function buildStructuredTextDocumentSchema() {
     { cwd: __dirname },
   );
 
-  const unreferencedSchema = output.join(' ');
-  const schema = await parser.bundle(JSON.parse(unreferencedSchema));
-  return stringify({
-    schema,
-  });
+  return stringify({ schema: JSON.parse(output.join(' ')) });
 }
 
 export default async function buildCmaResources(resource) {

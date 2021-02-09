@@ -299,6 +299,7 @@ export function JsonSchema({
   name,
   prefix,
   required,
+  groupIsRequired = false,
   hideRequired,
   schema,
 }) {
@@ -315,7 +316,7 @@ export function JsonSchema({
                 {language === 'javascript' ? humps.camelize(name) : name}
               </span>
               &nbsp;&nbsp;
-              <Type schema={schema} />
+              <Type schema={schema.type ? schema : { type: schema }} />
               {schema.deprecated && (
                 <>
                   &nbsp;&nbsp;
@@ -346,7 +347,11 @@ export function JsonSchema({
           )}
           {types(schema.type).includes('object') && schema.properties && (
             <Button open={open} label="child parameters" onToggle={setOpen}>
-              <Properties schema={schema} level={level} />
+              <Properties
+                schema={schema}
+                level={level}
+                groupIsRequired={groupIsRequired}
+              />
             </Button>
           )}
           {types(schema.type).includes('object') && schema.patternProperties && (

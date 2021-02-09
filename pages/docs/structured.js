@@ -4,6 +4,7 @@ import DocsLayout from 'components/DocsLayout';
 import Link from 'next/link';
 import Head from 'next/head';
 import s from './style.module.css';
+import schemaStyles from '../../components/Cma/Schema/style.module.css';
 import { renderMetaTags } from 'react-datocms';
 import { buildStructuredTextDocumentSchema } from 'utils/fetchCma';
 import { JsonSchema } from 'components/Cma/Schema';
@@ -56,7 +57,7 @@ const normalize = (slug) => (slug === 'index' ? '' : `/${slug}`);
 const Sidebar = ({ roots }) => (
   <>
     {roots.map((root) => (
-      <div className={s.group} key={root.slug}>
+      <div className={s.group} key={root.name}>
         <div className={s.groupName}>{root.name}</div>
         <div className={s.guides}>
           {root.children.map((sub, index) => (
@@ -97,15 +98,26 @@ export default function Docs({ roots, preview, page, cma }) {
       <div className={s.container}>
         <h2 className={s.title}>Structured Text Dast Format</h2>
         <p className={s.subtitle}>
-          Whether you’re a startup or a global enterprise, learn how to
-          integrate with DatoCMS to manage your content in a centralized,
-          structured hub.
+          This document defines a format for representing Structured Text as a
+          Dato Abstract Syntax Tree (Dast).
         </p>
 
+        <h3>Nodes</h3>
         {definitions.map((definitionName) => {
           const definition = schema.definitions[definitionName];
+          if (definition.properties && definition.properties.type) {
+            definition.properties.type =
+              definitionName.charAt(0).toLowerCase() + definitionName.slice(1);
+          }
           return (
-            <JsonSchema name={definitionName} schema={definition} level={1} />
+            <JsonSchema
+              key={definitionName}
+              name={definitionName}
+              schema={definition}
+              level={1}
+              required={definitionName === 'Document'}
+              groupIsRequired={true}
+            />
           );
         })}
       </div>
