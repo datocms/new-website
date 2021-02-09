@@ -4,11 +4,11 @@ import DocsLayout from 'components/DocsLayout';
 import Link from 'next/link';
 import Head from 'next/head';
 import s from './style.module.css';
-import schemaStyles from '../../components/Cma/Schema/style.module.css';
 import { renderMetaTags } from 'react-datocms';
-import { buildStructuredTextDocumentSchema } from 'utils/fetchCma';
-import { JsonSchema } from 'components/Cma/Schema';
+import { buildStructuredTextDocumentSchema } from 'utils/fetchStructuredText';
 import { parse } from 'flatted';
+import { Properties } from 'components/Cma/Schema';
+import ReactMarkdown from 'react-markdown';
 
 export const getStaticProps = async function ({ params, preview }) {
   const props = await gqlStaticProps(
@@ -47,8 +47,8 @@ export const getStaticProps = async function ({ params, preview }) {
   `,
   )({ params, preview });
 
-  const cma = await buildStructuredTextDocumentSchema();
-  props.props.cma = cma;
+  const schema = await buildStructuredTextDocumentSchema();
+  props.props.schema = schema;
   return props;
 };
 
@@ -84,13 +84,30 @@ const Sidebar = ({ roots }) => (
   </>
 );
 
-export default function Docs({ roots, preview, page, cma }) {
-  const { schema } = React.useMemo(() => cma && parse(cma), [cma]);
-  const definitions = Object.keys(schema.definitions)
-    .filter((d) => !d.endsWith('Type') && !d.endsWith('Node'))
-    .sort((a, b) => {
-      return a === 'Document' ? -1 : 1;
-    });
+const findAllChildrenDefinitions = (definition, foundDefs = []) => {
+  if (foundDefs.includes(definition)) {
+    return foundDefs;
+  }
+
+  const result = [...foundDefs, definition];
+
+  if (!definition.properties.children) {
+    return result;
+  }
+
+  const children = definition.properties.children.items.anyOf || [
+    definition.properties.children.items,
+  ];
+
+  return children.reduce(
+    (acc, def) => findAllChildrenDefinitions(def, acc),
+    result,
+  );
+};
+
+export default function Docs({ roots, preview, page, schema }) {
+  const result = React.useMemo(() => schema && parse(schema), [schema]);
+  const definitions = findAllChildrenDefinitions(result.definitions.Root);
 
   return (
     <DocsLayout preview={preview} sidebar={<Sidebar roots={roots} />}>
@@ -103,21 +120,22 @@ export default function Docs({ roots, preview, page, cma }) {
         </p>
 
         <h3>Nodes</h3>
-        {definitions.map((definitionName) => {
-          const definition = schema.definitions[definitionName];
-          if (definition.properties && definition.properties.type) {
-            definition.properties.type =
-              definitionName.charAt(0).toLowerCase() + definitionName.slice(1);
-          }
+        {definitions.map((definition) => {
+          const name = definition.properties.type.const;
+
           return (
-            <JsonSchema
-              key={definitionName}
-              name={definitionName}
-              schema={definition}
-              level={1}
-              required={definitionName === 'Document'}
-              groupIsRequired={true}
-            />
+            <>
+              <h2>
+                <code>{name}</code>
+              </h2>
+              <ReactMarkdown source={definition.description} />
+              <Properties
+                key={name}
+                name={name}
+                schema={definition}
+                level={1}
+              />
+            </>
           );
         })}
       </div>

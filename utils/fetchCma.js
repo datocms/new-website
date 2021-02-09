@@ -1,6 +1,4 @@
 import tiny from 'tiny-json-http';
-import sortBy from 'sort-by';
-import path from 'path';
 import parser from 'json-schema-ref-parser';
 import { stringify } from 'flatted';
 
@@ -51,32 +49,6 @@ const normalizeSchema = (resource, resourceSchema) => ({
       ...link,
     })),
 });
-
-export async function buildStructuredTextDocumentSchema() {
-  const {
-    output,
-  } = require('child_process').spawnSync(
-    'ts-json-schema-generator',
-    [
-      '--path',
-      path.resolve(
-        '.',
-        'node_modules',
-        'datocms-structured-text-utils',
-        'dist',
-        'types',
-        'types.d.ts',
-      ),
-      '--type',
-      'Document',
-      '--expose',
-      'all',
-    ],
-    { cwd: __dirname },
-  );
-
-  return stringify({ schema: JSON.parse(output.join(' ')) });
-}
 
 export default async function buildCmaResources(resource) {
   const url = 'https://site-api.datocms.com/docs/site-api-hyperschema.json';

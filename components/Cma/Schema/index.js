@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import s from './style.module.css';
 import { LanguageConsumer } from 'components/LanguagePicker';
-import delve from 'dlv';
 import humps from 'humps';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -48,7 +47,13 @@ function PatternProperties({ prefix, schema, level, hideRequired }) {
   return level >= 1 ? <div className={s.properties}>{content}</div> : content;
 }
 
-function Properties({ prefix, schema, level, groupIsRequired, hideRequired }) {
+export function Properties({
+  prefix,
+  schema,
+  level,
+  groupIsRequired,
+  hideRequired,
+}) {
   const required = groupIsRequired ? schema.required || [] : [];
 
   const content = (
@@ -136,22 +141,7 @@ function Enum({ values, description }) {
   );
 }
 
-function resolveRef(schema, ref) {
-  if (!ref.startsWith('#/definitions/')) {
-    return ref;
-  }
-  let path = ref.replace(/^#/, 'schema').split('/');
-  const refName = path[path.length - 1];
-  const res = delve(schema, path.join('.'), '');
-
-  if (typeof res === 'object' && res.type === 'string' && res.const) {
-    return res.const;
-  }
-
-  return refName;
-}
-
-function Type({ schema, rootSchema = {} }) {
+function Type({ schema }) {
   if (!schema || !schema.type) {
     return null;
   }
@@ -169,29 +159,10 @@ function Type({ schema, rootSchema = {} }) {
           realType = 'enum';
         }
 
-        if (realType.$ref) {
-          realType = resolveRef(rootSchema, realType.$ref);
-        }
-
         if (realType === 'array') {
-          if (schema.items) {
-            if (schema.items.type) {
-              realType = `Array<${types(schema.items.type).join('/')}>`;
-            }
-            if (schema.items['$ref']) {
-              realType = `Array<${resolveRef(
-                rootSchema,
-                schema.items['$ref'],
-              )}>`;
-            }
-            if (schema.items.anyOf) {
-              realType = `Array<${schema.items.anyOf
-                .map((i) => resolveRef(rootSchema, i['$ref']))
-                .join(' | ')}>`;
-            }
-          } else {
-            realType = 'Array';
-          }
+          realType = schema.items
+            ? `Array<${types(schema.items.type).join('/')}>`
+            : 'Array';
         }
 
         return [
@@ -299,7 +270,6 @@ export function JsonSchema({
   name,
   prefix,
   required,
-  groupIsRequired = false,
   hideRequired,
   schema,
 }) {
@@ -316,7 +286,7 @@ export function JsonSchema({
                 {language === 'javascript' ? humps.camelize(name) : name}
               </span>
               &nbsp;&nbsp;
-              <Type schema={schema.type ? schema : { type: schema }} />
+              <Type schema={schema} />
               {schema.deprecated && (
                 <>
                   &nbsp;&nbsp;
@@ -347,11 +317,7 @@ export function JsonSchema({
           )}
           {types(schema.type).includes('object') && schema.properties && (
             <Button open={open} label="child parameters" onToggle={setOpen}>
-              <Properties
-                schema={schema}
-                level={level}
-                groupIsRequired={groupIsRequired}
-              />
+              <Properties schema={schema} level={level} />
             </Button>
           )}
           {types(schema.type).includes('object') && schema.patternProperties && (
