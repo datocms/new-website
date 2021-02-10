@@ -223,6 +223,10 @@ export const getStaticProps = async function ({
     pageData = data.page;
   }
 
+  if (!page) {
+    throw new Error('Invalid page!');
+  }
+
   return {
     props: {
       docGroup,
