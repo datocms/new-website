@@ -159,8 +159,12 @@ function Type({ schema }) {
           realType = 'enum';
         }
 
+        if (type === 'string' && schema.const) {
+          realType = `"${schema.const}"`;
+        }
+
         if (realType === 'array') {
-          realType = schema.items
+          realType = schema.items.type
             ? `Array<${types(schema.items.type).join('/')}>`
             : 'Array';
         }

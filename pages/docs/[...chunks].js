@@ -46,6 +46,10 @@ export const getStaticPaths = gqlStaticPaths(
                     (page.slugOverride || page.page.slug) !==
                     'filtering-records',
                 )
+              : sub.slug === 'structured-text'
+              ? sub.pages.filter(
+                  (page) => (page.slugOverride || page.page.slug) !== 'dast',
+                )
               : sub.pages
             )
               .map((page) =>
@@ -315,7 +319,7 @@ export function Toc({ content, extraEntries: extra }) {
           <div className={s.tocTitle}>In this page</div>
           <div className={s.entries}>
             {nodes.map((node) => (
-              <div className={s.tocEntry} key={node.slug}>
+              <div className={s.tocEntry} key={node.url}>
                 <StructuredText data={node} />
               </div>
             ))}

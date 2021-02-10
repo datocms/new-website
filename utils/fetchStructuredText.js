@@ -1,10 +1,26 @@
 import tmp from 'tmp';
-import tiny from 'tiny-json-http';
 import fs from 'fs';
 import util from 'util';
+import tiny from 'tiny-json-http';
 import { createGenerator } from 'ts-json-schema-generator';
 import parser from 'json-schema-ref-parser';
 import { stringify } from 'flatted';
+import { ExtendedAnnotationsReader } from 'ts-json-schema-generator/dist/src/AnnotationsReader/ExtendedAnnotationsReader';
+import { symbolAtNode } from 'ts-json-schema-generator/dist/src/Utils/symbolAtNode';
+
+ExtendedAnnotationsReader.prototype.getDescriptionAnnotation = function (node) {
+  const symbol = symbolAtNode(node);
+  if (!symbol) {
+    return undefined;
+  }
+  const comments = symbol.getDocumentationComment(this.typeChecker);
+  if (!comments || !comments.length) {
+    return undefined;
+  }
+  return {
+    description: comments.map((comment) => comment.text).join(' '),
+  };
+};
 
 const writeFile = util.promisify(fs.writeFile);
 
@@ -26,7 +42,7 @@ function tmpFile(opts = {}) {
 
 export async function buildStructuredTextDocumentSchema() {
   const url =
-    'https://unpkg.com/datocms-structured-text-utils/dist/types/types.d.ts';
+    'https://unpkg.com/datocms-structured-text-utils@latest/dist/types/types.d.ts';
 
   let response;
 

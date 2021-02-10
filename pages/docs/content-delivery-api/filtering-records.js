@@ -16,9 +16,10 @@ import Heading from 'components/Heading';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ preview }) => {
   const { props } = await docPageGetStaticProps({
     params: { chunks: ['content-delivery-api', 'filtering-records'] },
+    preview,
   });
 
   const {
