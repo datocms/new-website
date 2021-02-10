@@ -1,19 +1,16 @@
 import DocsLayout from 'components/DocsLayout';
-import {
-  Sidebar,
-  getStaticProps as docPageGetStaticProps,
-} from 'pages/docs/[...chunks]';
+import { Sidebar } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
-import docHref from 'utils/docHref';
 import { parse } from 'flatted';
-
+import { request } from 'lib/datocms';
 import { useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Schema } from 'components/Cma/Schema';
 import ReactMarkdown from 'react-markdown';
 import { useRouter } from 'next/router';
+import AppError from 'errors/AppError';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -28,15 +25,48 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params: { resource }, ...other }) => {
-  const { props } = await docPageGetStaticProps({
-    ...other,
-    params: { chunks: ['content-management-api', ''] },
+export const getStaticProps = async function ({
+  params: { resource },
+  preview,
+}) {
+  const {
+    data: { docGroup },
+  } = await request({
+    query: `
+      query($groupSlug: String!) {
+        docGroup(filter: { slug: { eq: $groupSlug } }) {
+          name
+          slug
+          pages {
+            titleOverride
+            slugOverride
+            page {
+              id
+              title
+              slug
+            }
+          }
+        }
+      }
+    `,
+    variables: { groupSlug: 'content-management-api' },
+    preview,
   });
 
   const cma = await fetchCma(resource);
 
-  return { props: { ...props, cma, resourceId: resource } };
+  if (!cma) {
+    throw new AppError(404);
+  }
+
+  return {
+    props: {
+      docGroup,
+      preview: preview ? true : false,
+      cma,
+      resourceId: resource,
+    },
+  };
 };
 
 export default function DocPage({ docGroup, cma, preview, resourceId }) {

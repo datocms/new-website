@@ -1,12 +1,9 @@
 import DocsLayout from 'components/DocsLayout';
-import {
-  Sidebar,
-  getStaticProps as docPageGetStaticProps,
-} from 'pages/docs/[...chunks]';
+import { Sidebar } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
 import { parse } from 'flatted';
-
+import { request } from 'lib/datocms';
 import { useMemo } from 'react';
 import Head from 'next/head';
 import React from 'react';
@@ -20,6 +17,7 @@ import { LanguageConsumer } from 'components/LanguagePicker';
 import { useRouter } from 'next/router';
 import Prism from 'components/Prism';
 import gfm from 'remark-gfm';
+import AppError from 'errors/AppError';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -43,18 +41,49 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps = async function ({
   params: { resource, endpoint },
-  ...other
-}) => {
-  const { props } = await docPageGetStaticProps({
-    ...other,
-    params: { chunks: ['content-management-api', ''] },
+  preview,
+}) {
+  const {
+    data: { docGroup },
+  } = await request({
+    query: `
+      query($groupSlug: String!) {
+        docGroup(filter: { slug: { eq: $groupSlug } }) {
+          name
+          slug
+          pages {
+            titleOverride
+            slugOverride
+            page {
+              id
+              title
+              slug
+            }
+          }
+        }
+      }
+    `,
+    variables: { groupSlug: 'content-management-api' },
+    preview,
   });
 
   const cma = await fetchCma(resource);
+  const link = parse(cma).schema.links.find((link) => link.rel === endpoint);
 
-  return { props: { ...props, cma, endpoint } };
+  if (!link) {
+    throw new AppError(404);
+  }
+
+  return {
+    props: {
+      docGroup,
+      preview: preview ? true : false,
+      cma,
+      endpoint,
+    },
+  };
 };
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
@@ -64,7 +93,6 @@ export default function DocPage({ docGroup, cma, preview, endpoint }) {
   const result = useMemo(() => cma && parse(cma), [cma]);
   const link =
     result && result.schema.links.find((link) => link.rel === endpoint);
-  const path = link && link.href.replace(regexp, ':$1_id');
 
   return (
     <DocsLayout

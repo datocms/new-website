@@ -15,6 +15,7 @@ import cn from 'classnames';
 import filter from 'utils/filterNodes';
 import { isHeading } from 'datocms-structured-text-utils';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import AppError from 'errors/AppError';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -224,7 +225,7 @@ export const getStaticProps = async function ({
   }
 
   if (!page) {
-    throw new Error('Invalid page!');
+    throw new AppError(404);
   }
 
   return {

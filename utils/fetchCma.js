@@ -59,10 +59,14 @@ export default async function buildCmaResources(resource) {
   const resources = Object.keys(schema.properties);
   const resourceId = resource && resource.replace(/\-/g, '_');
 
-  if (!resource || !resources.includes(resourceId)) {
+  if (!resource) {
     return stringify({
       toc: buildToc(schema),
     });
+  }
+
+  if (!resources.includes(resourceId)) {
+    return null;
   }
 
   const result = {
