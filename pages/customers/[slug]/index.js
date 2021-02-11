@@ -48,6 +48,10 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         title { value }
         coverImage {
           url
+          focalPoint {
+            x
+            y
+          }
         }
         logo {
           url
@@ -60,6 +64,10 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
         mainResultsImage {
           url
+          focalPoint {
+            x
+            y
+          }
         }
         mainResults {
           title
@@ -146,7 +154,7 @@ export default function UseCase({ subscription, preview }) {
             <UseCaseHead
               title={post.title}
               logo={post.logo.url}
-              image={`${post.coverImage.url}?${duotone}`}
+              image={`${post.coverImage.url}?fp-y=${post.coverImage.focalPoint.y}&fp-x=${post.coverImage.focalPoint.x}&crop=focalpoint&fit=crop&${duotone}`}
             />
 
             <div id="usecase" />
@@ -164,7 +172,9 @@ export default function UseCase({ subscription, preview }) {
               </Numbers>
             </UseCaseRecap>
 
-            <Results image={`${post.mainResultsImage.url}?${duotone}`}>
+            <Results
+              image={`${post.mainResultsImage.url}?${duotone}&fp-y=${post.mainResultsImage.focalPoint.y}&crop=focalpoint&fp-x=${post.mainResultsImage.focalPoint.x}`}
+            >
               {post.mainResults.map((res) => (
                 <ResultsBlock key={res.title} title={res.title}>
                   <StructuredText data={res.description} />
