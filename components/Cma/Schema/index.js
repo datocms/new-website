@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import PlusIcon from 'public/icons/regular/plus.svg';
 import TimesIcon from 'public/icons/regular/times.svg';
 
-const types = (t) => (Array.isArray(t) ? t : [t]);
+const toArray = (t) => (Array.isArray(t) ? t : [t]);
 
 const Button = ({ children, label, open, onToggle }) => (
   <>
@@ -19,7 +19,7 @@ const Button = ({ children, label, open, onToggle }) => (
   </>
 );
 
-function PatternProperties({ prefix, schema, level, hideRequired }) {
+function PatternProperties({ prefix, schema, level, hideRequiredOptional }) {
   const content = (
     <>
       {Object.entries(schema.patternProperties).map(([keyPattern, schema]) => {
@@ -33,7 +33,7 @@ function PatternProperties({ prefix, schema, level, hideRequired }) {
           <JsonSchema
             key={keyPattern}
             required
-            hideRequired={hideRequired}
+            hideRequiredOptional={hideRequiredOptional}
             name={keyPattern}
             prefix={prefix}
             schema={schema}
@@ -52,7 +52,7 @@ export function Properties({
   schema,
   level,
   groupIsRequired,
-  hideRequired,
+  hideRequiredOptional,
 }) {
   const required = groupIsRequired ? schema.required || [] : [];
 
@@ -62,7 +62,7 @@ export function Properties({
         <JsonSchema
           key={name}
           required
-          hideRequired={hideRequired}
+          hideRequiredOptional={hideRequiredOptional}
           name={name}
           prefix={prefix}
           schema={schema.properties[name]}
@@ -79,7 +79,7 @@ export function Properties({
         .map(([name, schema]) => (
           <JsonSchema
             key={name}
-            hideRequired={hideRequired}
+            hideRequiredOptional={hideRequiredOptional}
             name={name}
             prefix={prefix}
             schema={schema}
@@ -92,7 +92,7 @@ export function Properties({
   return level >= 1 ? <div className={s.properties}>{content}</div> : content;
 }
 
-function Deprecated({ prefix, schema, level, hideRequired }) {
+function Deprecated({ prefix, schema, level, hideRequiredOptional }) {
   const required = schema.required || [];
 
   const deprecated = Object.entries(schema.properties).filter(
@@ -109,7 +109,7 @@ function Deprecated({ prefix, schema, level, hideRequired }) {
       {deprecated.map(([name, schema]) => (
         <JsonSchema
           key={name}
-          hideRequired={hideRequired}
+          hideRequiredOptional={hideRequiredOptional}
           name={name}
           prefix={prefix}
           schema={schema}
@@ -148,7 +148,7 @@ function Type({ schema }) {
 
   return (
     <span className={s.types}>
-      {types(schema.type).map((type, i) => {
+      {toArray(schema.type).map((type, i) => {
         let realType = type;
 
         if (type === 'string' && schema.format) {
@@ -166,7 +166,7 @@ function Type({ schema }) {
         if (realType === 'array') {
           realType =
             schema.items && schema.items.type
-              ? `Array<${types(schema.items.type).join('/')}>`
+              ? `Array<${toArray(schema.items.type).join('/')}>`
               : 'Array';
         }
 
@@ -181,7 +181,7 @@ function Type({ schema }) {
   );
 }
 
-function Relationship({ name, schema, required, hideRequired }) {
+function Relationship({ name, schema, required, hideRequiredOptional }) {
   const dataSchema = schema.properties.data;
 
   const isArray = dataSchema.type === 'array';
@@ -190,7 +190,7 @@ function Relationship({ name, schema, required, hideRequired }) {
   const relationshipTypes = resourceSchema.type
     ? [resourceSchema.properties.type.example]
     : resourceSchema.anyOf.map((s) =>
-        types(s.type).includes('null') ? 'null' : s.properties.type.example,
+        toArray(s.type).includes('null') ? 'null' : s.properties.type.example,
       );
 
   const multipleRelationshipsPossible =
@@ -261,7 +261,7 @@ function Relationship({ name, schema, required, hideRequired }) {
                 })}
               </span>
             )}
-            {!hideRequired && (
+            {!hideRequiredOptional && (
               <>
                 &nbsp;&nbsp;
                 {required ? (
@@ -283,7 +283,11 @@ function Relationship({ name, schema, required, hideRequired }) {
   );
 }
 
-function Relationships({ relationships, groupIsRequired, hideRequired }) {
+function Relationships({
+  relationships,
+  groupIsRequired,
+  hideRequiredOptional,
+}) {
   const required = groupIsRequired ? relationships.required || [] : [];
 
   return (
@@ -292,7 +296,7 @@ function Relationships({ relationships, groupIsRequired, hideRequired }) {
         <Relationship
           key={name}
           required
-          hideRequired={hideRequired}
+          hideRequiredOptional={hideRequiredOptional}
           name={name}
           schema={relationships.properties[name]}
         />
@@ -304,7 +308,7 @@ function Relationships({ relationships, groupIsRequired, hideRequired }) {
             key={name}
             name={name}
             schema={schema}
-            hideRequired={hideRequired}
+            hideRequiredOptional={hideRequiredOptional}
           />
         ))}
     </>
@@ -316,7 +320,7 @@ export function JsonSchema({
   name,
   prefix,
   required,
-  hideRequired,
+  hideRequiredOptional,
   schema,
 }) {
   const [open, setOpen] = useState(false);
@@ -339,7 +343,7 @@ export function JsonSchema({
                   <span className={s.required}>Deprecated</span>
                 </>
               )}
-              {!hideRequired && (
+              {!hideRequiredOptional && (
                 <>
                   &nbsp;&nbsp;
                   {required ? (
@@ -361,14 +365,22 @@ export function JsonSchema({
               <ReactMarkdown source={schema.deprecated} />
             </div>
           )}
-          {types(schema.type).includes('object') && schema.properties && (
-            <Button open={open} label="child parameters" onToggle={setOpen}>
-              <Properties schema={schema} level={level} />
+          {toArray(schema.type).includes('object') && schema.properties && (
+            <Button open={open} label="object format" onToggle={setOpen}>
+              <Properties
+                schema={schema}
+                level={level}
+                hideRequiredOptional={hideRequiredOptional}
+              />
             </Button>
           )}
-          {types(schema.type).includes('object') && schema.patternProperties && (
-            <Button open={open} label="child parameters" onToggle={setOpen}>
-              <PatternProperties schema={schema} level={level} />
+          {toArray(schema.type).includes('object') && schema.patternProperties && (
+            <Button open={open} label="object format" onToggle={setOpen}>
+              <PatternProperties
+                schema={schema}
+                level={level}
+                hideRequiredOptional={hideRequiredOptional}
+              />
             </Button>
           )}
           {schema.enum && (
@@ -381,11 +393,19 @@ export function JsonSchema({
               </Button>
             </>
           )}
-          {types(schema.type).includes('array') &&
-            types(schema.items).includes('object') &&
+          {toArray(schema.type).includes('array') &&
+            schema.items.type === 'object' &&
             schema.items.properties && (
-              <Button open={open} onToggle={setOpen} label="items parameters">
-                <Properties schema={schema.items} level={level} />
+              <Button
+                open={open}
+                onToggle={setOpen}
+                label="objects format inside array"
+              >
+                <Properties
+                  schema={schema.items}
+                  level={level}
+                  hideRequiredOptional={hideRequiredOptional}
+                />
               </Button>
             )}
         </div>
@@ -409,7 +429,7 @@ export function HrefSchema({ schema }) {
   );
 }
 
-export function Schema({ title, schema, showId, hideRequired }) {
+export function Schema({ title, schema, showId, hideRequiredOptional }) {
   return (
     <LanguageConsumer>
       {(language) => (
@@ -443,7 +463,7 @@ export function Schema({ title, schema, showId, hideRequired }) {
                 level={0}
                 prefix={language === 'http' ? 'attributes.' : null}
                 groupIsRequired={schema.required.includes('attributes')}
-                hideRequired={hideRequired}
+                hideRequiredOptional={hideRequiredOptional}
                 schema={schema.properties.attributes}
               />
             )}
@@ -452,7 +472,7 @@ export function Schema({ title, schema, showId, hideRequired }) {
               level={0}
               prefix="meta."
               groupIsRequired={schema.required.includes('meta')}
-              hideRequired={hideRequired}
+              hideRequiredOptional={hideRequiredOptional}
               schema={schema.properties.meta}
             />
           )}
@@ -460,7 +480,7 @@ export function Schema({ title, schema, showId, hideRequired }) {
             <Relationships
               groupIsRequired={schema.required.includes('relationships')}
               relationships={schema.properties.relationships}
-              hideRequired={hideRequired}
+              hideRequiredOptional={hideRequiredOptional}
             />
           )}
           {schema.properties.attributes &&
@@ -468,7 +488,7 @@ export function Schema({ title, schema, showId, hideRequired }) {
               <Deprecated
                 level={0}
                 prefix={language === 'http' ? 'attributes.' : null}
-                hideRequired={hideRequired}
+                hideRequiredOptional={hideRequiredOptional}
                 schema={schema.properties.attributes}
               />
             )}

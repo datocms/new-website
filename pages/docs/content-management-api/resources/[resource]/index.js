@@ -124,7 +124,7 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
                 <Schema
                   title="Object payload"
                   showId
-                  hideRequired
+                  hideRequiredOptional
                   schema={result.schema}
                 />
 
