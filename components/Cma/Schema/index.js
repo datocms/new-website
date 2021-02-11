@@ -193,33 +193,74 @@ function Relationship({ name, schema, required, hideRequired }) {
         types(s.type).includes('null') ? 'null' : s.properties.type.example,
       );
 
+  const multipleRelationshipsPossible =
+    relationshipTypes.filter((t) => t !== 'null').length > 1;
+
   return (
     <LanguageConsumer>
       {(language) => (
         <div className={s.schema}>
           <div className={s.header}>
-            {language === 'http' && (
+            {(language === 'http' || multipleRelationshipsPossible) && (
               <span className={s.prefix}>relationships.</span>
             )}
             <span className={s.name}>
               {language === 'javascript' ? humps.camelize(name) : name}
             </span>
-            {language === 'http' && <span className={s.prefix}>.data.id</span>}
+            {language === 'http' && <span className={s.prefix}>.data</span>}
             &nbsp;&nbsp;
-            <span className={s.types}>
-              {relationshipTypes.map((type, i) => {
-                const url = `/docs/content-management-api/resources/${type}`;
+            {language === 'http' || multipleRelationshipsPossible ? (
+              <span className={s.types}>
+                {isArray && (
+                  <>
+                    <span className={s.type}>Array</span> of{' '}
+                  </>
+                )}
+                {relationshipTypes.map((type, i) => {
+                  const url = `/docs/content-management-api/resources/${type}`;
 
-                return [
-                  i > 0 && ', ',
-                  <Link href={url} key={type}>
-                    <a className={s.type}>
-                      {isArray ? `Array<${type}.id>` : `${type}.id`}
-                    </a>
-                  </Link>,
-                ];
-              })}
-            </span>
+                  return (
+                    <React.Fragment key={type}>
+                      {i > 0 && ', '}
+                      {type === 'null' ? (
+                        <span className={s.type}>null</span>
+                      ) : (
+                        <span className={s.type}>
+                          {'{ type: "'}
+                          {type}
+                          {'", id: '}
+                          <Link href={url}>
+                            <a>{type}.id</a>
+                          </Link>
+                          {' }'}
+                        </span>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
+              </span>
+            ) : (
+              <span className={s.types}>
+                {relationshipTypes.map((type, i) => {
+                  const url = `/docs/content-management-api/resources/${type}`;
+
+                  return (
+                    <React.Fragment key={type}>
+                      {i > 0 && ', '}
+                      {type === 'null' ? (
+                        <span className={s.type}>null</span>
+                      ) : (
+                        <Link href={url}>
+                          <a className={s.type}>
+                            {isArray ? `Array<${type}.id>` : `${type}.id`}
+                          </a>
+                        </Link>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
+              </span>
+            )}
             {!hideRequired && (
               <>
                 &nbsp;&nbsp;
