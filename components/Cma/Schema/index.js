@@ -394,6 +394,7 @@ export function JsonSchema({
             </>
           )}
           {toArray(schema.type).includes('array') &&
+            schema.items &&
             schema.items.type === 'object' &&
             schema.items.properties && (
               <Button
