@@ -56,6 +56,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           value
         }
         coverImage {
+          url(imgixParams: { w: 550 })
           responsiveImage(imgixParams: { w: 550 }) {
             ...imageFields
           }
@@ -108,11 +109,14 @@ export default function Blog({ preview, subscription }) {
             posts.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <a className={s.post}>
-                  {post.coverImage && (
+                  {post.coverImage && post.coverImage.responsiveImage && (
                     <Image
                       className={s.image}
                       data={post.coverImage.responsiveImage}
                     />
+                  )}
+                  {post.coverImage && !post.coverImage.responsiveImage && (
+                    <img className={s.image} src={post.coverImage.url} />
                   )}
                   <div className={s.postBody}>
                     <h6 className={s.title}>{post.title}</h6>
