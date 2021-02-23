@@ -1,10 +1,36 @@
+import Layout from 'components/Layout';
+import Hero from 'components/Hero';
+import Highlight from 'components/Highlight';
+import Head from 'next/head';
+
 function Error({ statusCode }) {
+  let title;
+
+  if (statusCode === 404) {
+    title = (
+      <>
+        Sorry, the page you requested <Highlight>was not found</Highlight>!
+      </>
+    );
+  } else if (statusCode) {
+    title = (
+      <>
+        A <Highlight>{statusCode} error</Highlight>
+        <br />
+        occurred on server!
+      </>
+    );
+  } else {
+    title = <>An error occurred on client!</>;
+  }
+
   return (
-    <p>
-      {statusCode
-        ? `An error ${statusCode} occurred on server`
-        : 'An error occurred on client'}
-    </p>
+    <Layout noCta>
+      <Head>
+        <title>Error {statusCode}</title>
+      </Head>
+      <Hero kicker="Application error" title={title} />
+    </Layout>
   );
 }
 

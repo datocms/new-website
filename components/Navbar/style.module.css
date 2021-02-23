@@ -136,7 +136,7 @@
 
   .grid2 {
     display: grid;
-    grid-gap: 25px;
+    grid-gap: 25px 50px;
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -181,7 +181,7 @@
     color: inherit;
     display: flex;
     align-items: center;
-    min-width: 250px;
+    min-width: 260px;
 
     &:last-child {
       margin-bottom: 0;
@@ -192,6 +192,10 @@
 
       .flagTitle {
         color: var(--accent-color);
+      }
+
+      .isNew {
+        color: var(--base-body-color);
       }
     }
   }
@@ -254,20 +258,21 @@
       .titleDescTitle {
         color: var(--accent-color);
 
-        .titleDescNew {
+        .isNew {
           color: var(--base-body-color);
         }
       }
     }
   }
 
-  .titleDescNew {
+  .isNew {
     background: #f4cf58;
     border-radius: 3px;
     text-transform: uppercase;
     vertical-align: super;
-    font-size: 0.7em;
+    font-size: 0.6em;
     padding: 0.2em 0.4em 0.1em;
+    margin-left: 0.2em;
   }
 
   .titleDescDescription {

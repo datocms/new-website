@@ -119,7 +119,12 @@ function WorldwideCdn({ page, preview, review1 }) {
         <Bullets
           style="good"
           icon={SuccessIcon}
-          bullets={['Content GraphQL API', 'Images API', 'Video streaming API']}
+          bullets={[
+            'Content GraphQL API',
+            'Real-time updates API',
+            'Images API',
+            'Video streaming API',
+          ]}
         />
       </Flag>
     </Layout>

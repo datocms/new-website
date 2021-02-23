@@ -16,6 +16,8 @@ import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 import Developers from 'public/images/illustrations/developers-2.svg';
 import Marketers from 'public/images/illustrations/marketers.svg';
 import ContentCreators from 'public/images/illustrations/content-editors2.svg';
+import RealTime from 'public/images/illustrations/live-31.svg';
+import StructuredText from 'public/images/illustrations/scontent.svg';
 
 import External from 'public/icons/regular/external-link.svg';
 
@@ -28,7 +30,7 @@ const TitleDesc = ({ href, title, description, target, isNew }) =>
           {isNew && (
             <>
               {' '}
-              <span className={s.titleDescNew}>New</span>
+              <span className={s.isNew}>New</span>
             </>
           )}
         </div>
@@ -44,7 +46,7 @@ const TitleDesc = ({ href, title, description, target, isNew }) =>
             {isNew && (
               <>
                 {' '}
-                <span className={s.titleDescNew}>New</span>
+                <span className={s.isNew}>New</span>
               </>
             )}
           </div>
@@ -54,14 +56,22 @@ const TitleDesc = ({ href, title, description, target, isNew }) =>
     </Link>
   );
 
-const Feature = ({ href, icon: Icon, title, description }) => (
+const Feature = ({ href, icon: Icon, title, description, isNew }) => (
   <Link href={href}>
     <a className={s.flag}>
       <div className={s.flagIcon}>
         <Icon />
       </div>
       <div className={s.flagBody}>
-        <div className={s.flagTitle}>{title}</div>
+        <div className={s.flagTitle}>
+          {title}
+          {isNew && (
+            <>
+              {' '}
+              <span className={s.isNew}>New</span>
+            </>
+          )}
+        </div>
         <div className={s.flagDescription}>{description}</div>
       </div>
     </a>
@@ -182,6 +192,22 @@ export default function Navbar() {
                           title="Dynamic layouts"
                           href="/features/dynamic-layouts"
                           description="Easily build dynamic layouts for landing pages"
+                        />
+
+                        <Feature
+                          icon={RealTime}
+                          title="Real-time updates"
+                          isNew
+                          href="/features/real-time"
+                          description="Live changes to content on production website"
+                        />
+
+                        <Feature
+                          icon={StructuredText}
+                          title="Structured text"
+                          isNew
+                          href="/features/structured-text"
+                          description="Freedom for editors, control for developers"
                         />
                       </div>
                     </div>
