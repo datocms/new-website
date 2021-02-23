@@ -1,6 +1,4 @@
 .root {
-  display: flex;
-  justify-content: center;
   margin: 0 calc(var(--page-margin) * -0.5);
 
   @media (width > 900px) {
@@ -9,19 +7,13 @@
 }
 
 .container {
-  width: 45vw;
+  width: 70wv;
   margin: 0 5px;
 
   @media (width > 900px) {
-    width: 22vw;
+    width: 100%;
     margin: 0 rfs(40px);
   }
-}
-
-.label {
-  text-align: center;
-  margin-bottom: rfs(30px);
-  font-weight: bold;
 }
 
 .window {
@@ -68,31 +60,6 @@
   width: 0;
 }
 
-.progressLoading {
-  animation: load 1000ms ease-in;
-  animation-iteration-count: 1;
-  animation-fill-mode: both;
-}
-
-@keyframes load {
-  0% {
-    opacity: 1;
-    background: #0e6dcc;
-    width: 0;
-  }
-
-  95% {
-    width: 100%;
-    background: #0e6dcc;
-    opacity: 1;
-  }
-
-  100% {
-    width: 100%;
-    opacity: 0;
-  }
-}
-
 .browserBar {
   height: 1.8vw;
   background: #f0f1f2;
@@ -120,66 +87,42 @@
 }
 
 .page {
-  height: 50vw;
+  height: 650px;
   position: relative;
   overflow: hidden;
   display: block;
   background: white;
-
-  @media (width > 900px) {
-    height: 30vw;
-  }
+  padding: 30px;
 }
 
-.pageInner {
-  position: absolute;
-  left: 0;
-  right: 0;
-  padding: 4vw 3vw;
-  transition: all 1400ms ease-in-out;
+.post {
+  height: 220px;
+  transition: height 200ms ease-in-out, opacity 200ms 200ms ease-in-out;
 }
 
-.pageInnerEnter {
-  top: 200%;
+.postEnter {
+  height: 0;
+  opacity: 0;
 }
 
-.pageInnerEnterActive {
-  top: 0%;
+.postEnterActive {
+  height: 220px;
+  opacity: 1;
 }
 
-.pageInnerLeave {
-  top: 0%;
+.postLeave {
+  top: 170px;
 }
 
-.pageInnerLeaveActive {
-  top: -200%;
+.postLeaveActive {
+  top: 0;
 }
 
-.header {
-  margin-bottom: 15px;
-}
-
-.title {
-  height: 1vw;
-  min-height: 10px;
-  background: #bbb;
-  margin-bottom: 0.3vw;
-}
-
-.copy,
-.kicker {
+.copy {
   height: 0.4vw;
   min-height: 5px;
   background: #ddd;
   margin-bottom: 0.2vw;
-}
-
-.paragraph {
-  margin-bottom: 0.5vw;
-}
-
-.kicker {
-  margin-bottom: 0.4vw;
 }
 
 .image {
@@ -189,6 +132,13 @@
   display: block;
   width: 100%;
   background-size: cover;
+  margin-bottom: 10px;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 40%;
+  }
 
   img {
     position: absolute;
@@ -198,36 +148,4 @@
     object-fit: cover;
     width: 100%;
   }
-}
-
-.imageDelayed {
-  transition: all 0.01s 700ms linear;
-}
-
-.imageLoaded {
-  margin: 0.7vw 0;
-
-  &:before {
-    content: '';
-    display: block;
-    padding-top: 40%;
-  }
-}
-
-.progressiveEnter {
-  transition: all 200ms ease-in-out;
-  opacity: 0;
-}
-
-.progressiveEnterActive {
-  opacity: 1;
-}
-
-.progressiveLeave {
-  transition: all 250ms 250ms ease-in-out;
-  opacity: 1;
-}
-
-.progressiveLeaveActive {
-  opacity: 0;
 }
