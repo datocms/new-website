@@ -74,6 +74,8 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
   const result = useMemo(() => cma && parse(cma), [cma]);
   const url = `/docs/content-management-api/resources/${resourceId}`;
 
+  const links = result && result.schema.links.filter((link) => !link.private);
+
   return (
     <DocsLayout
       languageSwitch
@@ -128,11 +130,11 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
                   schema={result.schema}
                 />
 
-                {result.schema.links.length > 0 && (
+                {links && (
                   <>
                     <h4>Available endpoints</h4>
                     <ul>
-                      {result.schema.links.map((link) => (
+                      {links.map((link) => (
                         <li key={link.rel}>
                           <Link href={`${url}/${link.rel}`}>
                             <a>{link.title}</a>
