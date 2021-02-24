@@ -19,6 +19,8 @@ import s from './style.module.css';
 import CodeExcerpt from 'components/CodeExcerpt';
 import Space from 'components/Space';
 import InterstitialTitle from 'components/InterstitialTitle';
+import IntegrationsBanner from 'components/IntegrationsBanner';
+import LazyImage from 'components/LazyImage';
 
 export const getStaticProps = gqlStaticProps(
   `
@@ -30,6 +32,20 @@ export const getStaticProps = gqlStaticProps(
       }
       review: review(filter: { name: { eq: "Martijn Theuwissen" } }) {
         ...reviewFields
+      }
+      integrations: allIntegrations(
+        first: 100
+      ) {
+        id
+        logo {
+          url
+        }
+        integrationType {
+          slug
+        }
+        squareLogo {
+          url
+        }
       }
     }
     ${seoMetaTagsFields}
@@ -52,7 +68,7 @@ const VideoBrowser = (props) => {
   );
 };
 
-function ImagesApi({ page, preview, review }) {
+function ImagesApi({ page, preview, integrations }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -222,7 +238,45 @@ function ImagesApi({ page, preview, review }) {
         </p>
       </Flag>
 
-      <Quote review={review} />
+      <IntegrationsBanner
+        title={<>Easily integrable by&nbsp;design</>}
+        bubbles={integrations
+          .filter((i) =>
+            ['static-generator', 'language', 'framework'].includes(
+              i.integrationType.slug,
+            ),
+          )
+          .slice(0, 30)
+          .map((integration) => (
+            <LazyImage
+              key={integration.id}
+              src={
+                integration.squareLogo
+                  ? integration.squareLogo.url
+                  : integration.logo.url
+              }
+            />
+          ))}
+      >
+        <p>
+          Structured Text format adheres to the{' '}
+          <a href="https://unifiedjs.com/">Unified collective</a>, which offers
+          a big ecosystem of utilities to parse, transform, manipulate, convert
+          and serialize content of any kind. This allows to convert from/to
+          Structured Text extremely easy.
+        </p>
+        <p>
+          <Button
+            as="a"
+            fs="small"
+            p="small"
+            s="invert"
+            href="https://github.com/datocms/structured-text"
+          >
+            Explore all the Structured Text utilities
+          </Button>
+        </p>
+      </IntegrationsBanner>
     </Layout>
   );
 }
