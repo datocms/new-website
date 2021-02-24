@@ -6,13 +6,7 @@ import Head from 'next/head';
 function Error({ statusCode }) {
   let title;
 
-  if (statusCode === 404) {
-    title = (
-      <>
-        Sorry, the page you requested <Highlight>was not found</Highlight>!
-      </>
-    );
-  } else if (statusCode) {
+  if (statusCode) {
     title = (
       <>
         A <Highlight>{statusCode} error</Highlight>
