@@ -7,11 +7,9 @@
 }
 
 .container {
-  width: 70wv;
   margin: 0 5px;
 
   @media (width > 900px) {
-    width: 100%;
     margin: 0 rfs(40px);
   }
 }
@@ -87,35 +85,117 @@
 }
 
 .page {
-  height: 650px;
+  min-height: 450px;
+  height: 35vh;
   position: relative;
   overflow: hidden;
   display: block;
   background: white;
-  padding: 30px;
+  padding: rfs(30px);
+}
+
+.pageTitle {
+  font-weight: bold;
+  text-align: center;
+  font-size: 23px;
+  margin-bottom: 5px;
+}
+
+.pageSubtitle {
+  margin-bottom: 20px;
+  font-size: rfs(15px);
+  text-align: center;
+  color: var(--light-body-color);
 }
 
 .post {
-  height: 220px;
-  transition: height 200ms ease-in-out, opacity 200ms 200ms ease-in-out;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 300ms 300ms ease-in-out;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 53%;
+    transition: padding-top 300ms ease-in-out;
+  }
 }
 
 .postEnter {
-  height: 0;
   opacity: 0;
+
+  img {
+    opacity: 0;
+  }
+
+  &:before {
+    padding-top: 0;
+  }
 }
 
 .postEnterActive {
-  height: 220px;
   opacity: 1;
+
+  img {
+    opacity: 1;
+  }
+
+  &:before {
+    padding-top: 53%;
+  }
 }
 
 .postLeave {
-  top: 170px;
+  opacity: 1;
+  &:before {
+    padding-top: 50%;
+  }
 }
 
 .postLeaveActive {
+  opacity: 0;
+  &:before {
+    padding-top: 0%;
+  }
+}
+
+.postInner {
+  position: absolute;
   top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.ping {
+  position: relative;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  display: inline-block;
+  margin-right: 0.1em;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--accent-color);
+    opacity: 0.3;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+}
+
+@keyframes ping {
+  75%,
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 .copy {
@@ -133,6 +213,7 @@
   width: 100%;
   background-size: cover;
   margin-bottom: 10px;
+  border-radius: 5px;
 
   &:before {
     content: '';
@@ -147,5 +228,6 @@
     bottom: 0;
     object-fit: cover;
     width: 100%;
+    transition: opacity 200ms 600ms ease-in-out;
   }
 }

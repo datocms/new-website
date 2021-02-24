@@ -1,0 +1,82 @@
+.video {
+  margin: 0 0 rfs(200px);
+  box-shadow: var(--box-shadow);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--base-body-color);
+
+  video {
+    width: 100%;
+    display: block;
+  }
+}
+
+.window {
+  box-shadow: var(--box-shadow);
+  background: #e2e3e5;
+  border-radius: 3px 3px 0 0;
+}
+
+.windowBar {
+  position: relative;
+  height: 2vw;
+  max-height: 30px;
+  padding: 0.2vw 0.5vw;
+  display: flex;
+  align-items: center;
+
+  &:before,
+  &:after,
+  div {
+    content: '';
+    width: 0.7vw;
+    height: 0.7vw;
+    max-width: 12px;
+    max-height: 12px;
+    border-radius: 50%;
+    margin-right: 0.3vw;
+  }
+
+  &:before {
+    background: #f6615a;
+  }
+
+  div {
+    background: #f9bf2f;
+  }
+
+  &:after {
+    background: #3bce41;
+  }
+}
+
+.progress {
+  height: 4px;
+  width: 0;
+}
+
+.browserBar {
+  height: 1.8vw;
+  background: #f0f1f2;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.2vw;
+  display: flex;
+  align-items: center;
+
+  &:before,
+  &:after {
+    content: '';
+    background: #dedede;
+    width: 1vw;
+    height: 1vw;
+    border-radius: 3px;
+    margin: 0 0.3vw;
+  }
+}
+
+.addressBar {
+  background: white;
+  border-radius: 3px;
+  flex: 1;
+  height: 1vw;
+}

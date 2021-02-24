@@ -125,7 +125,7 @@ function MultiLanguage({ page, preview }) {
         style="good"
         title={
           <>
-            <FlagHighlight>Translated interface</FlagHighlight>
+            <FlagHighlight>Translated</FlagHighlight> interface
           </>
         }
         image={TranslatedUI}

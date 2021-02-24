@@ -9,7 +9,9 @@ export default function Flag({
   style = 'neutral',
   title,
   subtitle,
+  hideDot,
   image,
+  imageProps,
   children,
 }) {
   const seed = useMemo(() => seedrandom(title + subtitle + style)(), [
@@ -26,7 +28,7 @@ export default function Flag({
     typeof image === 'string' ? (
       <LazyImage src={`/images/illustrations/${image}.svg`} />
     ) : image ? (
-      React.createElement(image)
+      React.createElement(image, imageProps)
     ) : (
       <span />
     );
@@ -35,15 +37,18 @@ export default function Flag({
     <Wrapper>
       <div className={cn(s.root, s[`${style}Root`])}>
         <div className={s.imageContainer}>
-          <div
-            className={s[`${style}Dot`]}
-            style={{
-              left: `${x}%`,
-              top: `${y}%`,
-              height: `calc(var(--dotBaseUnit) * ${size})`,
-              width: `calc(var(--dotBaseUnit) * ${size})`,
-            }}
-          />
+          {!hideDot && (
+            <div
+              className={s[`${style}Dot`]}
+              style={{
+                left: `${x}%`,
+                top: `${y}%`,
+                height: `calc(var(--dotBaseUnit) * ${size})`,
+                width: `calc(var(--dotBaseUnit) * ${size})`,
+              }}
+            />
+          )}
+
           <div className={s.image}>{imageEl}</div>
         </div>
         <div className={s.content}>

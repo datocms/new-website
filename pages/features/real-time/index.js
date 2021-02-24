@@ -14,6 +14,7 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import VideoPlayer from 'components/VideoPlayer';
+import Button from 'components/Button';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
@@ -98,17 +99,28 @@ function ImagesApi({ page, preview, review }) {
           visitors. Our infrastructure can easily handle thousands of live users
           with multiple updates per minute.
         </p>
+        <p>
+          <Button
+            as="a"
+            fs="small"
+            p="small"
+            s="invert"
+            href="/marketplace/starters/next-js-event-coverage-liveblog"
+          >
+            Try the Live-blog demo for Next.js
+          </Button>
+        </p>
       </Flag>
 
       <Flag
         style="good"
         title={
           <>
-            GraphQL and Server-Sent Events to deliver the{' '}
+            GraphQL and Server-Sent Events, to deliver the{' '}
             <FlagHighlight>best developer ergonomic</FlagHighlight>
           </>
         }
-        image="live-31"
+        image="live"
       >
         <p>
           The Real-time Updates API uses <em>Server-Sent Events</em>, which is a
@@ -116,6 +128,15 @@ function ImagesApi({ page, preview, review }) {
           your regular GraphQL into streaming subscriptions. Using our our
           libraries for React and Vue you can get started in literally seconds.
         </p>
+        <Button
+          as="a"
+          fs="small"
+          p="small"
+          s="invert"
+          href="/docs/real-time-updates-api"
+        >
+          Learn more in the Docs
+        </Button>
       </Flag>
     </Layout>
   );
