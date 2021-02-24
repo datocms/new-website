@@ -1,5 +1,4 @@
 import gravatar from 'utils/gravatar';
-import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
 import Link from 'next/link';
 import s from './style.module.css';
@@ -33,7 +32,6 @@ export const NameWithGravatar = ({ name, email }) => (
     {name}
   </>
 );
-
 export const Badge = ({ children }) => (
   <span className={s.badge}>{children}</span>
 );

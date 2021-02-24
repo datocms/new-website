@@ -6,7 +6,7 @@
   font-family: var(--font-sans);
   font-weight: bold;
   border-radius: 3px;
-  border: 0;
+  border: 1px solid var(--accent-color);
   font-size: inherit;
   transition: opacity 150ms ease-in-out;
   cursor: pointer;
@@ -14,6 +14,13 @@
 
   &:hover {
     opacity: 0.8;
+  }
+
+  svg {
+    fill: white;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.3em;
   }
 }
 
@@ -25,6 +32,10 @@
   background: white;
   border: 1px solid var(--accent-color);
   color: var(--accent-color) !important;
+
+  svg {
+    fill: var(--accent-color);
+  }
 }
 
 .pSmall {

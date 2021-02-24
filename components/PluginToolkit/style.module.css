@@ -35,7 +35,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50px;
-  display: inline-block;
+  display: inline-block !important;
   vertical-align: middle;
   margin-right: 6px;
   border: 1px solid var(--border-color);
