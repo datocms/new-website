@@ -15,6 +15,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import React from 'react';
 import { Image, useQuerySubscription } from 'react-datocms';
 import s from './style.module.css';
+import Head from 'next/head';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   `
@@ -55,6 +56,7 @@ export default function Customers({ subscription, preview }) {
 
   return (
     <Layout preview={preview}>
+      <Head>Customers — DatoCMS Success Stories</Head>
       <Wrapper>
         <Hero
           kicker="Success stories"
