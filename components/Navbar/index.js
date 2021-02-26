@@ -216,9 +216,11 @@ export default function Navbar() {
               </div>
 
               <div className={s.group}>
-                <div className={s.groupTitle}>
-                  <span>Customers</span>
-                </div>
+                <Link href="/customers">
+                  <a className={s.groupTitle}>
+                    <span>Customers</span>
+                  </a>
+                </Link>
 
                 <Pane>
                   <div className={s.cols}>
@@ -289,6 +291,11 @@ export default function Navbar() {
                           description="Why DatoCMS is their headless CMS of choice"
                         />
                       </div>
+                      <Link href="/customers">
+                        <a className={s.viewAll}>
+                          Browse all the case studies &raquo;
+                        </a>
+                      </Link>
                     </div>
                   </div>
                 </Pane>

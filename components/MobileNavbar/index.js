@@ -1,20 +1,20 @@
-import Wrapper from 'components/Wrapper';
-import FullLogo from 'public/images/full_logo.svg';
-import Link from 'next/link';
-import s from './style.module.css';
-import classnames from 'classnames';
-import { useCallback, useState, useEffect } from 'react';
-import { getCookie } from 'utils/cookies';
-import Hamburger from 'public/icons/regular/bars.svg';
+import { default as classnames, default as cn } from 'classnames';
 import Button from 'components/Button';
-import cn from 'classnames';
-
+import Wrapper from 'components/Wrapper';
+import Link from 'next/link';
+import Hamburger from 'public/icons/regular/bars.svg';
+import FullLogo from 'public/images/full_logo.svg';
+import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import Image from 'public/images/illustrations/image-api.svg';
-import Video from 'public/images/illustrations/video-encoding.svg';
 import Languages from 'public/images/illustrations/multilanguage-2.svg';
-import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
+import Video from 'public/images/illustrations/video-encoding.svg';
+import RealTime from 'public/images/illustrations/live-31.svg';
+import StructuredText from 'public/images/illustrations/scontent.svg';
+import { useCallback, useEffect, useState } from 'react';
+import { getCookie } from 'utils/cookies';
+import s from './style.module.css';
 
 const Group = ({ title, children }) => {
   const [open, setOpen] = useState(false);
@@ -71,6 +71,7 @@ const Feature = ({ href, icon: Icon, title, description }) => (
       </div>
       <div className={s.featureBody}>
         <div className={s.featureTitle}>{title}</div>
+        <div className={s.featureDescription}>{description}</div>
       </div>
     </a>
   </Link>
@@ -166,45 +167,29 @@ export default function Navbar() {
                     description="Easily build dynamic layouts for landing pages"
                   />
 
+                  <Feature
+                    icon={RealTime}
+                    title="Real-time updates"
+                    isNew
+                    href="/features/real-time"
+                    description="Live changes to content on production website"
+                  />
+
+                  <Feature
+                    icon={StructuredText}
+                    title="Structured text"
+                    isNew
+                    href="/features/structured-text"
+                    description="Freedom for editors, control for developers"
+                  />
+
                   <div className={s.sectionTitle}>Enterprise</div>
                   <Link href="/enterprise">
                     <a className={s.extraLink}>DatoCMS for Enterprise</a>
                   </Link>
                 </Group>
 
-                <Group title="Customers">
-                  <div className={s.onecol}>
-                    <LearnResource
-                      href="/customers/oberlo"
-                      title="Shopify Orberlo"
-                      description="Painless switch to static from Wordpress"
-                    />
-
-                    <LearnResource
-                      href="/customers/hashicorp"
-                      title="Hashicorp"
-                      description="How HashiCorp built a reliable and secure editorial workflow"
-                    />
-
-                    <LearnResource
-                      href="/customers/matter-supply"
-                      title="Matter Supply"
-                      description="How to deliver an Emmy award-campaign in 4 weeks"
-                    />
-
-                    <LearnResource
-                      href="/customers/chillys"
-                      title="Chilly's Bottles"
-                      description="How Rotate built a 2M users a month e-commerce for Chilly’s"
-                    />
-
-                    <LearnResource
-                      href="/customers/wonderland"
-                      title="Wonderland"
-                      description="How to setup dozens of visually-stunning projects in minutes"
-                    />
-                  </div>
-                </Group>
+                <BigLink href="/customers">Customers</BigLink>
 
                 <Group title="Learn">
                   <div className={s.twocols}>

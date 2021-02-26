@@ -102,7 +102,6 @@
 .feature {
   margin-bottom: 10px;
   font-size: 16px;
-  white-space: nowrap;
   text-decoration: none;
   color: var(--base-body-color);
   display: flex;
@@ -122,6 +121,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  flex-shrink: 0;
 
   svg {
     width: 25px;
@@ -132,6 +132,11 @@
 
 .featureTitle {
   font-weight: bold;
+}
+
+.featureDescription {
+  color: var(--light-body-color);
+  font-size: 13px;
 }
 
 .extraLink {

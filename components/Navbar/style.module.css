@@ -53,6 +53,7 @@
   .groupTitle {
     padding: 13px 14px;
     font-size: 17px;
+    display: block;
 
     span {
       position: relative;
@@ -90,7 +91,8 @@
     }
   }
 
-  .entry {
+  .entry,
+  a.groupTitle {
     text-decoration: none;
     color: var(--base-body-color);
   }
@@ -323,5 +325,20 @@
         fill: rgba(255, 255, 255, 0.8);
       }
     }
+  }
+}
+
+.viewAll {
+  display: block;
+  margin-top: 25px;
+  padding-top: 10px;
+  font-size: 16px;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  font-weight: bold;
+
+  &:hover {
+    color: var(--accent-color);
   }
 }
