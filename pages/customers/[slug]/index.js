@@ -139,6 +139,8 @@ export default function UseCase({ subscription, preview }) {
       .join(',');
   const duotone = `duotone=${colors}`;
 
+  console.log(renderMetaTags(post.seo));
+
   return (
     <Layout preview={preview}>
       {post && (

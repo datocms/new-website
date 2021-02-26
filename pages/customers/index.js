@@ -56,7 +56,9 @@ export default function Customers({ subscription, preview }) {
 
   return (
     <Layout preview={preview}>
-      <Head>Customers — DatoCMS Success Stories</Head>
+      <Head>
+        <title>DatoCMS Success Stories</title>
+      </Head>
       <Wrapper>
         <Hero
           kicker="Success stories"
