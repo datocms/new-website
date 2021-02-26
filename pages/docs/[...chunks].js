@@ -209,6 +209,11 @@ export const getStaticProps = async function ({
                     }
                   }
                 }
+                ... on GraphiqlEditorRecord {
+                  id
+                  _modelApiKey
+                  query
+                }
               }
             }
           }

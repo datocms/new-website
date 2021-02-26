@@ -14,6 +14,7 @@ import { isBlockquote, isCode, isHeading } from 'datocms-structured-text-utils';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import slugify from 'utils/slugify';
 import Heading from 'components/Heading';
+import queryString from 'qs';
 
 function renderBlock(s, block) {
   switch (block._modelApiKey) {
@@ -105,6 +106,19 @@ function renderBlock(s, block) {
               </div>
             ))}
           </div>
+        </div>
+      );
+
+    case 'graphiql_editor':
+      return (
+        <div className={s.unwrap}>
+          <iframe
+            src={`https://cda-explorer.datocms.com/?${queryString.stringify({
+              embed: true,
+              apitoken: 'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
+              query: block.query,
+            })}`}
+          />
         </div>
       );
 
