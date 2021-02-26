@@ -39,6 +39,16 @@ export default function Layout({ preview, children }) {
           title="DatoCMS Product Changelog"
           href="/product-changelog.xml"
         />
+        <meta
+          property="og:image"
+          content="https://www.datocms-assets.com/205/1614353889-social.png?fit=max&amp;fm=jpg&amp;w=1000"
+        />
+        <meta property="og:image:width" content="1450" />
+        <meta property="og:image:height" content="1452" />
+        <meta
+          name="twitter:image"
+          content="https://www.datocms-assets.com/205/1614353889-social.png?fit=max&amp;fm=jpg&amp;w=1000"
+        />
       </Head>
       <NProgress />
       {preview && (
