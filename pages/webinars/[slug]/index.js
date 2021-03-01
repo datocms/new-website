@@ -143,34 +143,38 @@ export default function Webinar({ preview, subscription }) {
                   {<StructuredText data={webinar.description} />}
                 </Info>
               </div>
-              {webinar.url && (
-                <div className={s.action}>
+              <div className={s.action}>
+                {webinar.url && (
                   <div className={s.actionButton}>
                     <Button as="a" href={webinar.url} target="_blank">
                       <VideoIcon /> Enter the webinar!
                     </Button>
                   </div>
-                  <div className={s.actionButton}>
-                    <Button
-                      as="a"
-                      href={calendarLink}
-                      target="_blank"
-                      className={s.addToCalendar}
-                      s="invert"
-                    >
-                      Add to your calendar!
-                    </Button>
-                  </div>
-                  <div className={s.actionWhen}>
-                    <FormattedDate date={webinar.date} /> —{' '}
-                    {new Date(webinar.date).toLocaleTimeString('en-US', {
-                      hour: 'numeric',
-                      minute: '2-digit',
-                      timeZoneName: 'short',
-                    })}
-                  </div>
-                </div>
-              )}
+                )}
+                {!webinar.url && (
+                  <>
+                    <div className={s.actionButton}>
+                      <Button
+                        as="a"
+                        href={calendarLink}
+                        target="_blank"
+                        className={s.addToCalendar}
+                        s="invert"
+                      >
+                        Add to your calendar!
+                      </Button>
+                    </div>
+                    <div className={s.actionWhen}>
+                      <FormattedDate date={webinar.date} /> —{' '}
+                      {new Date(webinar.date).toLocaleTimeString('en-US', {
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        timeZoneName: 'short',
+                      })}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
           <div className={s.sidebar}>
@@ -186,19 +190,21 @@ export default function Webinar({ preview, subscription }) {
                     timeZoneName: 'short',
                   })}
                 </div>
-                <div className={s.add}>
-                  <Button
-                    as="a"
-                    href={calendarLink}
-                    target="_blank"
-                    className={s.addToCalendar}
-                    p="small"
-                    fs="small"
-                    s="invert"
-                  >
-                    Add to your calendar!
-                  </Button>
-                </div>
+                {!webinar.url && (
+                  <div className={s.add}>
+                    <Button
+                      as="a"
+                      href={calendarLink}
+                      target="_blank"
+                      className={s.addToCalendar}
+                      p="small"
+                      fs="small"
+                      s="invert"
+                    >
+                      Add to your calendar!
+                    </Button>
+                  </div>
+                )}
               </Info>
               <Info icon={<DurationIcon />} title="Duration">
                 {webinar.durationMinutes} min
