@@ -28,3 +28,75 @@
   color: var(--light-body-color);
   font-size: 0.9em;
 }
+
+.chart {
+  position: relative;
+}
+
+.chartSvg {
+  width: 100%;
+
+  path {
+    fill: transparent;
+    stroke: var(--accent-color);
+    stroke-width: 10px;
+    stroke-linecap: round;
+  }
+
+  .trendLine {
+    opacity: 0.4;
+    stroke: var(--azure-color);
+    stroke-dashoffset: 80;
+    stroke-dasharray: 7;
+    stroke-width: 2px;
+    animation: dash 2s linear infinite;
+  }
+
+  circle {
+    fill: #efefef;
+  }
+
+  line {
+    stroke: #e1e1e1;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 40;
+  }
+}
+
+.chartContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.chartLabels {
+  position: absolute;
+  top: 0;
+  left: 1%;
+  right: 1%;
+  bottom: 0;
+  color: var(--light-body-color);
+}
+
+.chartLabel {
+  position: absolute;
+  font-size: 14px;
+
+  @media screen and (width < 900px) {
+    span {
+      display: none;
+    }
+  }
+}
+
+.chartSubtitle {
+  max-width: 800px;
+  margin: 0 auto rfs(40px);
+  text-align: center;
+}
