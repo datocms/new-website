@@ -56,6 +56,23 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         content {
           value
           blocks {
+            ... on InternalVideoRecord {
+              id
+              _modelApiKey
+              autoplay
+              loop
+              thumbTimeSeconds
+              video {
+                title
+                width
+                height
+                video {
+                  duration
+                  streamingUrl
+                  thumbnailUrl
+                }
+              }
+            }
             ... on ImageRecord {
               id
               _modelApiKey
