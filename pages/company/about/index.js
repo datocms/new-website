@@ -337,7 +337,7 @@ export default function About({ members, page, review1, review2 }) {
       {data && (
         <Space bottom={3}>
           <Wrapper>
-            <InterstitialTitle style="two">An Open Startup</InterstitialTitle>
+            <InterstitialTitle style="two">An Open Company</InterstitialTitle>
             <p className={s.chartSubtitle}>
               Transparency is one of the core values that guide our work. Here's
               our annual run rate (ARR), updated in real-time, pulled straight
