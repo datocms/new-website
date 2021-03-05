@@ -67,6 +67,7 @@
     "react-toast-notifications": "^2.4.0",
     "react-transition-group": "^4.4.1",
     "react-use-gesture": "^7.0.16",
+    "regression": "^2.0.1",
     "remark-gfm": "^1.0.0",
     "scroll-into-view-if-needed": "^2.2.25",
     "seedrandom": "^3.0.5",

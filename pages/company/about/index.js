@@ -29,6 +29,7 @@ import parseISO from 'date-fns/parseISO';
 import { addMonths } from 'date-fns';
 import { range } from 'range';
 import InterstitialTitle from 'components/InterstitialTitle';
+import regression from 'regression';
 
 export const getStaticProps = gqlStaticProps(
   `
@@ -65,73 +66,39 @@ export const getStaticProps = gqlStaticProps(
 
 const fetcher = (url) => wretch(url).get().json();
 
-function regression(data) {
-  var sum_x = 0,
-    sum_y = 0,
-    sum_xy = 0,
-    sum_xx = 0,
-    count = 0,
-    m,
-    b;
-
-  if (data.length === 0) {
-    throw new Error('Empty data');
-  }
-
-  for (var i = 0, len = data.length; i < len; i++) {
-    var point = data[i];
-    sum_x += point[0];
-    sum_y += point[1];
-    sum_xx += point[0] * point[0];
-    sum_xy += point[0] * point[1];
-    count++;
-  }
-
-  m = (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
-  b = sum_y / count - (m * sum_x) / count;
-
-  return function (m, b, x) {
-    return m * x + b;
-  }.bind(null, m, b);
-}
-
-const Chart = ({ data, children }) => {
-  if (!data) {
+const Chart = ({ data: rawData, children }) => {
+  if (!rawData) {
     return null;
   }
 
   const width = 800;
-  const height = 300;
+  const height = 350;
 
-  const mangledData = data.map((point) => ({
+  const data = rawData.map((point) => ({
     value: (point.value + 25000.0) * 12,
     date: parseISO(point.date),
   }));
 
-  const firstDate = mangledData[mangledData.length - 1].date;
+  const coefficients = regression
+    .polynomial(
+      data.map((point, i) => [i, point.value]),
+      { order: 2, precision: 10 },
+    )
+    .equation.reverse();
 
-  const regressionFn = regression(
-    mangledData.map((point, i) => [i, point.value]),
+  const trend = range(0, data.length + 9).map((x) =>
+    coefficients.reduce((sum, coeff, power) => sum + coeff * x ** power, 0),
   );
 
-  const dataWithTrend = [
-    ...mangledData,
-    ...range(mangledData.length, mangledData.length + 8).map((i) => ({
-      date: addMonths(firstDate, i),
-      value: regressionFn(i),
-      trend: true,
-    })),
-  ];
+  const maxValue = Math.max.apply(null, [
+    ...data.map((p) => p.value),
+    ...trend,
+  ]);
 
-  const maxValue = dataWithTrend.reduce(
-    (acc, point) => (point.value > acc ? point.value : acc),
-    0,
-  );
-
-  const minValue = dataWithTrend.reduce(
-    (acc, point) => (point.value < acc ? point.value : acc),
-    10000000,
-  );
+  const minValue = Math.min.apply(null, [
+    ...data.map((p) => p.value),
+    ...trend,
+  ]);
 
   return (
     <div className={s.chart}>
@@ -146,16 +113,12 @@ const Chart = ({ data, children }) => {
             className={s.trendLine}
             d={
               `M 0 ${height} ` +
-              dataWithTrend
-                .filter((point) => point.trend)
+              trend
                 .map(
-                  (point, i) =>
-                    `L ${
-                      ((i + data.length) * width) / (dataWithTrend.length - 1)
-                    } ${
+                  (value, i) =>
+                    `L ${(i * width) / (trend.length - 1)} ${
                       height -
-                      ((point.value - minValue) / (maxValue - minValue)) *
-                        height
+                      ((value - minValue) / (maxValue - minValue)) * height
                     }`,
                 )
                 .join(' ')
@@ -165,11 +128,10 @@ const Chart = ({ data, children }) => {
           <path
             d={
               `M 0 ${height} ` +
-              dataWithTrend
-                .filter((point) => !point.trend)
+              data
                 .map(
                   (point, i) =>
-                    `L ${(i * width) / (dataWithTrend.length - 1)} ${
+                    `L ${(i * width) / (trend.length - 1)} ${
                       height -
                       ((point.value - minValue) / (maxValue - minValue)) *
                         height
@@ -179,69 +141,62 @@ const Chart = ({ data, children }) => {
             }
           />
 
-          {dataWithTrend
-            .filter((point) => !point.trend)
-            .map((point, i) => {
-              return (
-                i % 3 === 0 && (
-                  <line
-                    x1={(i * width) / (dataWithTrend.length - 1)}
-                    x2={(i * width) / (dataWithTrend.length - 1)}
-                    y1={
-                      height -
-                      ((point.value - minValue) / (maxValue - minValue)) *
-                        height
-                    }
-                    y2={
-                      height -
-                      ((point.value - minValue) / (maxValue - minValue)) *
-                        height +
-                      ((i / 3) % 2 === 0 ? 20 : -50)
-                    }
-                  />
-                )
-              );
-            })}
-
-          {dataWithTrend
-            .filter((point) => !point.trend)
-            .map((point, i) => {
-              return (
-                <circle
-                  cx={(i * width) / (dataWithTrend.length - 1)}
-                  cy={
+          {data.map((point, i) => {
+            return (
+              i % 3 === 0 && (
+                <line
+                  x1={(i * width) / (trend.length - 1)}
+                  x2={(i * width) / (trend.length - 1)}
+                  y1={
                     height -
                     ((point.value - minValue) / (maxValue - minValue)) * height
                   }
-                  r="2"
+                  y2={
+                    height -
+                    ((point.value - minValue) / (maxValue - minValue)) *
+                      height +
+                    ((i / 3) % 2 === 0 ? 20 : -50)
+                  }
                 />
-              );
-            })}
+              )
+            );
+          })}
+
+          {data.map((point, i) => {
+            return (
+              <circle
+                cx={(i * width) / (trend.length - 1)}
+                cy={
+                  height -
+                  ((point.value - minValue) / (maxValue - minValue)) * height
+                }
+                r="2"
+              />
+            );
+          })}
         </svg>
+
         <div className={s.chartLabels}>
-          {dataWithTrend
-            .filter((point) => !point.trend)
-            .map((point, i) => {
-              return (
-                i % 3 === 0 && (
-                  <div
-                    className={s.chartLabel}
-                    style={{
-                      left: `${(i / (dataWithTrend.length - 1)) * 100.0}%`,
-                      top: `${
-                        100 -
-                        ((point.value - minValue) / (maxValue - minValue)) *
-                          100 +
-                        ((i / 3) % 2 === 0 ? 5 : -25)
-                      }%`,
-                    }}
-                  >
-                    <span>{format(point.date, 'MMM yyyy')}: </span>€
-                    {parseInt(point.value).toLocaleString()}
-                  </div>
-                )
-              );
-            })}
+          {data.map((point, i) => {
+            return (
+              i % 3 === 0 && (
+                <div
+                  className={s.chartLabel}
+                  style={{
+                    left: `${(i / (trend.length - 1)) * 100.0}%`,
+                    top: `${
+                      100 -
+                      ((point.value - minValue) / (maxValue - minValue)) * 100 +
+                      ((i / 3) % 2 === 0 ? 5 : -25)
+                    }%`,
+                  }}
+                >
+                  <span>{format(point.date, 'MMM yyyy')}: </span>€
+                  {parseInt(point.value).toLocaleString()}
+                </div>
+              )
+            );
+          })}
         </div>
       </div>
     </div>
