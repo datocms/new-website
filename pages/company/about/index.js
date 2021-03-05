@@ -30,6 +30,7 @@ import { addMonths } from 'date-fns';
 import { range } from 'range';
 import InterstitialTitle from 'components/InterstitialTitle';
 import regression from 'regression';
+import cn from 'classnames';
 
 export const getStaticProps = gqlStaticProps(
   `
@@ -100,13 +101,23 @@ const Chart = ({ data: rawData, children }) => {
     ...trend,
   ]);
 
+  const project = (x, y) => [
+    (x * width) / (trend.length - 1),
+    height - ((y - minValue) / (maxValue - minValue)) * height,
+  ];
+
+  const projectLabel = (x, y) => [
+    (x * 100.0) / (trend.length - 1),
+    100.0 - ((y - minValue) / (maxValue - minValue)) * 100.0,
+  ];
+
   return (
     <div className={s.chart}>
       <div className={s.chartSvgAround}>
         <svg
-          viewBox={`-${width * 0.01} ${height * 0.02} ${
-            width * 1.02
-          } ${height}`}
+          viewBox={`-${width * 0.01} ${height * 0.02} ${width * 1.02} ${
+            height * 1.1
+          }`}
           className={s.chartSvg}
         >
           <path
@@ -114,13 +125,7 @@ const Chart = ({ data: rawData, children }) => {
             d={
               `M 0 ${height} ` +
               trend
-                .map(
-                  (value, i) =>
-                    `L ${(i * width) / (trend.length - 1)} ${
-                      height -
-                      ((value - minValue) / (maxValue - minValue)) * height
-                    }`,
-                )
+                .map((value, i) => `L ${project(i, value).join(' ')}`)
                 .join(' ')
             }
           />
@@ -129,70 +134,55 @@ const Chart = ({ data: rawData, children }) => {
             d={
               `M 0 ${height} ` +
               data
-                .map(
-                  (point, i) =>
-                    `L ${(i * width) / (trend.length - 1)} ${
-                      height -
-                      ((point.value - minValue) / (maxValue - minValue)) *
-                        height
-                    }`,
-                )
+                .map((point, i) => `L ${project(i, point.value).join(' ')}`)
                 .join(' ')
             }
           />
 
           {data.map((point, i) => {
-            return (
-              i % 3 === 0 && (
-                <line
-                  x1={(i * width) / (trend.length - 1)}
-                  x2={(i * width) / (trend.length - 1)}
-                  y1={
-                    height -
-                    ((point.value - minValue) / (maxValue - minValue)) * height
-                  }
-                  y2={
-                    height -
-                    ((point.value - minValue) / (maxValue - minValue)) *
-                      height +
-                    ((i / 3) % 2 === 0 ? 20 : -50)
-                  }
-                />
-              )
+            const up = (i / 3) % 2 === 0;
+
+            const [x1, y1] = project(i, point.value);
+            const [x2, y2] = project(
+              i,
+              point.value + maxValue * (up ? 0.1 : -0.1),
             );
+
+            return i % 3 === 0 && <line x1={x1} x2={x2} y1={y1} y2={y2} />;
           })}
 
           {data.map((point, i) => {
-            return (
-              <circle
-                cx={(i * width) / (trend.length - 1)}
-                cy={
-                  height -
-                  ((point.value - minValue) / (maxValue - minValue)) * height
-                }
-                r="2"
-              />
-            );
+            const [x, y] = project(i, point.value);
+            return <circle cx={x} cy={y} r="2" />;
           })}
         </svg>
 
         <div className={s.chartLabels}>
           {data.map((point, i) => {
+            const up = (i / 3) % 2 === 0;
+
+            const [x, y] = projectLabel(
+              i,
+              point.value + maxValue * (up ? 0.1 : -0.1),
+            );
+
             return (
               i % 3 === 0 && (
                 <div
-                  className={s.chartLabel}
+                  className={s.chartLabelAnchor}
                   style={{
-                    left: `${(i / (trend.length - 1)) * 100.0}%`,
-                    top: `${
-                      100 -
-                      ((point.value - minValue) / (maxValue - minValue)) * 100 +
-                      ((i / 3) % 2 === 0 ? 5 : -25)
-                    }%`,
+                    left: `${x}%`,
+                    top: `${y}%`,
                   }}
                 >
-                  <span>{format(point.date, 'MMM yyyy')}: </span>€
-                  {parseInt(point.value).toLocaleString()}
+                  <div
+                    className={cn(s.chartLabel, {
+                      [s.chartLabelUp]: up,
+                    })}
+                  >
+                    <span>{format(point.date, 'MMM yyyy')}: </span>€
+                    {parseInt(point.value).toLocaleString()}
+                  </div>
                 </div>
               )
             );

@@ -77,14 +77,14 @@
 
 .chartLabels {
   position: absolute;
-  top: 0;
+  top: -2%;
   left: 1%;
   right: 1%;
-  bottom: 0;
+  height: 90%;
   color: var(--light-body-color);
 }
 
-.chartLabel {
+.chartLabelAnchor {
   position: absolute;
   font-size: 14px;
 
@@ -93,6 +93,18 @@
       display: none;
     }
   }
+}
+
+.chartLabel {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  white-space: nowrap;
+}
+
+.chartLabelUp {
+  top: auto;
+  bottom: 10px;
 }
 
 .chartSubtitle {
