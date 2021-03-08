@@ -70,6 +70,10 @@
 .description {
   font-size: rfs(20px);
   margin-bottom: rfs(40px);
+
+  a {
+    color: var(--accent-color);
+  }
 }
 
 .header {

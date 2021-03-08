@@ -8,16 +8,13 @@
 
 @media screen and (width > 1050px) {
   .root {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    background: white;
+    background: linear-gradient(to bottom, white 80%, rgba(255, 255, 255, 0));
+    padding-bottom: 20px;
     z-index: 1000;
-  }
-
-  .placeholder {
-    height: 140px;
   }
 
   .logo {
@@ -341,4 +338,14 @@
   &:hover {
     color: var(--accent-color);
   }
+}
+
+.notice {
+  background: #fff0e8;
+  padding: 10px 0;
+  text-decoration: none;
+  display: block;
+  color: black;
+  font-size: 14px;
+  text-align: center;
 }
