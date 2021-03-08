@@ -58,7 +58,7 @@ export default function DocsLayout({
                   📅 Want to learn how to use our new Structured Text field with
                   Next.js?
                 </strong>{' '}
-                Follow our webinar tomorrow,{' '}
+                Follow our webinar on Wednesday,{' '}
                 {new Date('2021-03-10T18:00:00+01:00').toLocaleTimeString(
                   'en-US',
                   {
