@@ -52,6 +52,23 @@ export default function DocsLayout({
           </Link>
           <div className={s.innerSidebar} data-datocms-noindex>
             {sidebar}
+            <Link href="/webinars/how-to-use-structured-text-on-datocms">
+              <a className={s.notice}>
+                <strong>
+                  📅 Want to learn how to use our new Structured Text field with
+                  Next.js?
+                </strong>{' '}
+                Follow our webinar tomorrow,{' '}
+                {new Date('2021-03-10T18:00:00+01:00').toLocaleTimeString(
+                  'en-US',
+                  {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    timeZoneName: 'short',
+                  },
+                )}
+              </a>
+            </Link>
           </div>
         </div>
         <div className={s.contentWrapper}>

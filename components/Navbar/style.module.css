@@ -4,9 +4,23 @@
     height: 0;
     overflow: hidden;
   }
+
+  .notice {
+    display: none;
+  }
 }
 
 @media screen and (width > 1050px) {
+  .notice {
+    background: #fff0e8;
+    padding: 10px 0;
+    text-decoration: none;
+    display: block;
+    color: black;
+    font-size: 14px;
+    text-align: center;
+  }
+
   .root {
     position: sticky;
     top: 0;
@@ -338,14 +352,4 @@
   &:hover {
     color: var(--accent-color);
   }
-}
-
-.notice {
-  background: #fff0e8;
-  padding: 10px 0;
-  text-decoration: none;
-  display: block;
-  color: black;
-  font-size: 14px;
-  text-align: center;
 }

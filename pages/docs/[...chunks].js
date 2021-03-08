@@ -293,8 +293,6 @@ export const Sidebar = ({ title, entries }) => {
       {entries.map((entry) => (
         <SidebarEntry key={entry.label} level={0} {...entry} />
       ))}
-
-      <div style={{ height: '80px' }} />
     </>
   );
 };
