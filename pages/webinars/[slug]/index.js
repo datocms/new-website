@@ -205,6 +205,20 @@ export default function Webinar({ preview, subscription }) {
                     </Button>
                   </div>
                 )}
+                {webinar.url && (
+                  <div className={s.add}>
+                    <Button
+                      as="a"
+                      href={webinar.url}
+                      className={s.addToCalendar}
+                      target="_blank"
+                      p="small"
+                      fs="small"
+                    >
+                      <VideoIcon /> Enter the webinar!
+                    </Button>
+                  </div>
+                )}
               </Info>
               <Info icon={<DurationIcon />} title="Duration">
                 {webinar.durationMinutes} min

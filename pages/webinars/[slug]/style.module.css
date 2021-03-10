@@ -123,6 +123,10 @@
 
 .add {
   margin-top: 10px;
+
+  @media (width <= 900px) {
+    display: none;
+  }
 }
 
 .speakerImage {
