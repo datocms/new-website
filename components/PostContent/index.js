@@ -9,6 +9,8 @@ import { Image, StructuredText, renderRule } from 'react-datocms';
 import UiChrome from 'components/UiChrome';
 import PluginBox from 'components/PluginBox';
 import Button from 'components/Button';
+import CloneButtonGenerator from 'components/CloneButtonGenerator';
+import DeployButtonGenerator from 'components/DeployButtonGenerator';
 import cn from 'classnames';
 import { isBlockquote, isCode, isHeading } from 'datocms-structured-text-utils';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
@@ -147,6 +149,20 @@ function renderBlock(s, block) {
               />
             )}
           </figure>
+        </div>
+      );
+
+    case 'clone_button_form':
+      return (
+        <div className={s.unwrap}>
+          <CloneButtonGenerator />
+        </div>
+      );
+
+    case 'deploy_button_form':
+      return (
+        <div className={s.unwrap}>
+          <DeployButtonGenerator />
         </div>
       );
   }

@@ -1,0 +1,8 @@
+.button {
+  display: inline-block;
+}
+.code {
+  display: block;
+  overflow-y: auto;
+  white-space: pre;
+}

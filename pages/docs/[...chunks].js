@@ -214,6 +214,14 @@ export const getStaticProps = async function ({
                   _modelApiKey
                   query
                 }
+                ... on CloneButtonFormRecord {
+                  id
+                  _modelApiKey
+                }
+                ... on DeployButtonFormRecord {
+                  id
+                  _modelApiKey
+                }
               }
             }
           }

@@ -1,0 +1,11 @@
+.button {
+  display: inline-block;
+}
+.code {
+  display: block;
+  overflow-y: auto;
+  white-space: pre;
+}
+.datocmsJsonContainer :global(pre) {
+  max-width: 100%;
+}
