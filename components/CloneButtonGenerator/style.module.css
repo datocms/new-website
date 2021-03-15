@@ -6,3 +6,6 @@
   overflow-y: auto;
   white-space: pre;
 }
+.formField:invalid {
+  border-color: var(--accent-color);
+}

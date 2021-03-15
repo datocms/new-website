@@ -5,6 +5,8 @@ import CodeExcerpt from 'components/CodeExcerpt';
 import Tabs, { Tab } from 'components/Tabs';
 
 export default function CloneButtonGenerator() {
+  const [touched, setTouched] = React.useState();
+
   const [deployUrl, setDeployUrl] = React.useState(
     'https://dashboard.datocms.com/deploy?repo=datocms/structured-text-demo:main',
   );
@@ -30,6 +32,13 @@ export default function CloneButtonGenerator() {
       }
     }
     setDatocmsJson(json);
+    setTouched((touched) => {
+      // Accounts for the initial call to onJsonFormChange on mount.
+      if (typeof touched === 'undefined') {
+        return false;
+      }
+      return true;
+    });
   }, []);
 
   React.useEffect(() => {
@@ -52,6 +61,9 @@ export default function CloneButtonGenerator() {
             name="repo"
             placeholder="orgName/repoName:branchName"
             id="dbg-repo"
+            pattern="[^/]+\/[^:]+:.*"
+            required
+            className={style.formField}
           />
         </div>
       </form>
@@ -81,7 +93,7 @@ export default function CloneButtonGenerator() {
         </Tab>
         <Tab title="HTML">
           <code className={style.code}>
-            {`<a href={${deployUrl}} target="_blank" rel="noopener">
+            {`<a href="${deployUrl}" target="_blank" rel="noopener">
   <img
     src="https://dashboard.datocms.com/deploy/button.svg"
     alt="deploy project button"
@@ -107,6 +119,7 @@ export default function CloneButtonGenerator() {
             name="name"
             placeholder="Project Template Name"
             id="dbg-name"
+            className={touched ? style.formField : undefined}
           />
         </div>
         <div className={styleForm.field}>
@@ -117,6 +130,7 @@ export default function CloneButtonGenerator() {
             name="description"
             placeholder="Fully customizable starter kit for your site."
             id="dbg-description"
+            className={touched ? style.formField : undefined}
           />
         </div>
         <div className={styleForm.field}>
@@ -127,6 +141,7 @@ export default function CloneButtonGenerator() {
             name="previewImage"
             placeholder="https://acme.com/preview.png"
             id="dbg-previewImage"
+            className={touched ? style.formField : undefined}
           />
         </div>
         <div className={styleForm.field}>
@@ -136,6 +151,7 @@ export default function CloneButtonGenerator() {
             name="livePreviewUrl"
             placeholder="https://demo.acme.com"
             id="dbg-livePreviewUrl"
+            className={touched ? style.formField : undefined}
           />
         </div>
         <div className={styleForm.field}>
@@ -146,6 +162,7 @@ export default function CloneButtonGenerator() {
             name="datocmsProjectId"
             placeholder="54321"
             id="dbg-datocmsProjectId"
+            className={touched ? style.formField : undefined}
           />
         </div>
         <div className={styleForm.field}>
@@ -158,15 +175,20 @@ export default function CloneButtonGenerator() {
             name="datocmsApiTokenEnvName"
             placeholder="DATOCMS_READ_ONLY_API_TOKEN"
             id="dbg-datocmsApiTokenEnvName"
+            className={touched ? style.formField : undefined}
           />
         </div>
         <div className={styleForm.field}>
           <label htmlFor="dbg-deploymentType">Deployment Type</label>
-          <select name="deploymentType" required>
+          <select
+            name="deploymentType"
+            required
+            className={touched ? style.formField : undefined}
+          >
             <option value="copyRepo">copyRepo</option>
-            <option value="Vercel">Vercel</option>
-            <option value="Netlify">Netlify</option>
-            <option value="Heroku">Heroku</option>
+            <option value="vercel">Vercel</option>
+            <option value="netlify">Netlify</option>
+            <option value="heroku">Heroku</option>
           </select>
         </div>
         <div className={styleForm.field}>
@@ -176,6 +198,7 @@ export default function CloneButtonGenerator() {
             name="buildCommand"
             placeholder="npm run build"
             id="dbg-buildCommand"
+            className={touched ? style.formField : undefined}
           />
         </div>
       </form>
