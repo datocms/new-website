@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import style from './style.module.css';
 import styleForm from 'components/Form/style.module.css';
 import CodeExcerpt from 'components/CodeExcerpt';
