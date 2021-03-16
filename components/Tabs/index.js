@@ -12,7 +12,10 @@ export default function Tabs({ children }) {
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={cn(s.handle, { [s.handleCurrent]: activeTab === index })}
+            className={cn(s.handle, {
+              [s.handleCurrent]: activeTab === index,
+              [s.handleCode]: child.props.code,
+            })}
           >
             <span>{child.props.title}</span>
           </button>

@@ -1,5 +1,6 @@
 import DocsLayout from 'components/DocsLayout';
 import PostContent from 'components/PostContent';
+import Space from 'components/Space';
 import Tabs, { Tab } from 'components/Tabs';
 import {
   Toc,
@@ -33,17 +34,19 @@ export const getStaticProps = async ({ preview }) => {
 
 const Filters = ({ name, attrs }) => {
   return (
-    <Tabs>
-      {Object.keys(attrs).map((key) => (
-        <Tab key={key} title={camelize(key)}>
-          <div className={s.filterDescription}>{attrs[key].description}</div>
-          <Prism
-            code={gqlExampleForField(name, key, attrs[key].input)}
-            language={'graphql'}
-          />
-        </Tab>
-      ))}
-    </Tabs>
+    <Space both={1}>
+      <Tabs>
+        {Object.keys(attrs).map((key) => (
+          <Tab key={key} title={camelize(key)} code>
+            <div className={s.filterDescription}>{attrs[key].description}</div>
+            <Prism
+              code={gqlExampleForField(name, key, attrs[key].input)}
+              language={'graphql'}
+            />
+          </Tab>
+        ))}
+      </Tabs>
+    </Space>
   );
 };
 

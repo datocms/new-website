@@ -1,11 +1,24 @@
 .button {
   display: inline-block;
 }
+
 .code {
   display: block;
   overflow-y: auto;
-  white-space: pre;
 }
+
 .formField:invalid {
   border-color: var(--accent-color);
+}
+
+.form {
+  font-family: var(--font-sans);
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--light-bg-color);
+}
+
+.result pre {
+  margin: 0 !important;
 }

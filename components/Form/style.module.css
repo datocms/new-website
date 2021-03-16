@@ -28,6 +28,7 @@
     width: 100%;
     border-left: 4px solid transparent;
     appearance: none;
+    box-shadow: none;
 
     &:focus {
       outline: none;
