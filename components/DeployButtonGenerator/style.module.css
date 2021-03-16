@@ -8,6 +8,7 @@
 }
 .datocmsJsonContainer :global(pre) {
   max-width: 100%;
+  box-sizing: border-box;
 }
 .formField:invalid {
   border-color: var(--accent-color);
