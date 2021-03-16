@@ -220,6 +220,7 @@
     display: inline-block;
     box-shadow: var(--box-shadow);
     width: 100%;
+    box-sizing: border-box;
   }
 
   .videoWrapper {

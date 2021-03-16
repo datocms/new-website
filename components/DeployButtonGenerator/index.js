@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './style.module.css';
 import styleForm from 'components/Form/style.module.css';
-import CodeExcerpt from 'components/CodeExcerpt';
+import Prism from 'components/Prism';
 import Tabs, { Tab } from 'components/Tabs';
 import Space from 'components/Space';
 
@@ -184,10 +184,7 @@ export default function CloneButtonGenerator() {
           called <code>datocms.json</code>:
         </p>
         <div className={style.datocmsJsonContainer}>
-          <CodeExcerpt
-            language="json"
-            code={JSON.stringify(datocmsJson, null, 2)}
-          />
+          <Prism code={JSON.stringify(datocmsJson, null, 2)} language="json" />
         </div>
       </Space>
       <Space top={1} bottom={1}>
