@@ -65,6 +65,8 @@ So to Stripe we send:
 - credit card details, which we cannot read ourselves apart the last 4 digits,
 - email
 
+[Stripe GDPR Compliance](https://stripe.com/guides/general-data-protection-regulation)
+
 ### Fatture in Cloud
 
 Our company needs to send certified digital invoices to our Italian customers and to
@@ -85,7 +87,7 @@ The information passed on to _Fatture in Cloud_ are:
 
 When you open a support ticket, via email or support form, we supply them the email address.
 
-[Front privacy policy](https://frontapp.com/privacy-policy)
+[Front GDPR Compliance](https://help.frontapp.com/t/m22vyb/is-front-compliant-with-gdpr)
 
 ### Mailchimp
 
