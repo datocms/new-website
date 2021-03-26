@@ -243,6 +243,11 @@ export default function Pricing({
                   (l) => l.id === hint.apiId,
                 );
 
+                const isScaleProjectsLimit =
+                  limit.id === 'sites' &&
+                  limit.free_of_charge_usage > 1 &&
+                  plan.attributes.monthly_price > 0;
+
                 return (
                   <div
                     key={plan.id}
@@ -250,15 +255,14 @@ export default function Pricing({
                       [s.limitPlanWithExtra]: !!limit.extra_packet_amount,
                     })}
                   >
+                    {isScaleProjectsLimit && <div className={s.circle} />}
                     {formatLimit(limit)}
-                    {limit.id === 'sites' &&
-                      limit.free_of_charge_usage > 1 &&
-                      plan.attributes.monthly_price > 0 && (
-                        <>
-                          {' '}
-                          <Badge>NEW!</Badge>
-                        </>
-                      )}
+                    {isScaleProjectsLimit && (
+                      <>
+                        {' '}
+                        <Badge>NEW!</Badge>
+                      </>
+                    )}
                   </div>
                 );
               })}

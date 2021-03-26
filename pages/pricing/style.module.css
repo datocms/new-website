@@ -1,13 +1,13 @@
 .limit,
 .plansContainer {
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: 930px) {
     display: grid;
     grid-template-columns: 150px repeat(3, minmax(200px, 5fr));
     align-items: center;
     column-gap: 30px;
   }
 
-  @media screen and (max-width: 649px) {
+  @media screen and (max-width: 929px) {
     > * {
       margin-bottom: 40px;
     }
@@ -92,7 +92,7 @@
 .planLimits {
   margin-bottom: 30px;
 
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: 930px) {
     display: none;
   }
 }
@@ -122,7 +122,7 @@
   border-radius: 10px;
   display: none;
 
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: 930px) {
     display: grid;
   }
 
@@ -144,6 +144,7 @@
 
 .limitPlan {
   grid-row: 1 / span 2;
+  position: relative;
 }
 
 .limitPlanWithExtra {
@@ -155,6 +156,8 @@
   flex: 8;
   color: var(--light-body-color);
   font-size: 0.8em;
+  position: relative;
+  z-index: 1;
 }
 
 .limitExtraWide span {
@@ -267,7 +270,7 @@
   padding: rfs(40px);
   background: white;
 
-  @media screen and (width > 650px) {
+  @media screen and (width > 930px) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 40px;
@@ -281,7 +284,7 @@
     margin-bottom: 0;
   }
 
-  @media screen and (width > 650px) {
+  @media screen and (width > 930px) {
     margin-bottom: 0;
   }
 }
@@ -318,4 +321,14 @@
   &:hover svg {
     left: 3px;
   }
+}
+
+.circle {
+  position: absolute;
+  top: -34px;
+  left: -20px;
+  right: -20px;
+  bottom: -59px;
+  background: url('/images/circle.svg') no-repeat center center;
+  background-size: contain;
 }

@@ -72,7 +72,7 @@
     "scroll-into-view-if-needed": "^2.2.25",
     "seedrandom": "^3.0.5",
     "sitemap": "^6.2.0",
-    "sort-by": "^1.2.0",
+    "sort-by": "^0.0.2",
     "sort-object": "^3.0.3",
     "swr": "^0.3.1",
     "tiny-json-http": "^7.2.2",
