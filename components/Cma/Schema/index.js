@@ -441,6 +441,16 @@ export function Schema({ title, schema, showId, hideRequiredOptional }) {
               <div className={s.header}>
                 <span className={s.name}>id</span>&nbsp;&nbsp;
                 <Type schema={schema.properties.id} />
+                {!hideRequiredOptional && (
+                  <>
+                    &nbsp;&nbsp;
+                    {schema.required.includes('id') ? (
+                      <span className={s.required}>Required</span>
+                    ) : (
+                      <span className={s.optional}>Optional</span>
+                    )}
+                  </>
+                )}
               </div>
               <div className={s.description}>
                 {schema.properties.id.description}
@@ -452,6 +462,16 @@ export function Schema({ title, schema, showId, hideRequiredOptional }) {
               <div className={s.header}>
                 <span className={s.name}>type</span>&nbsp;&nbsp;
                 <Type schema={schema.properties.type} />
+                {!hideRequiredOptional && (
+                  <>
+                    &nbsp;&nbsp;
+                    {schema.required.includes('type') ? (
+                      <span className={s.required}>Required</span>
+                    ) : (
+                      <span className={s.optional}>Optional</span>
+                    )}
+                  </>
+                )}
               </div>
               <div className={s.description}>
                 Must be exactly <code>"{schema.properties.type.example}"</code>
