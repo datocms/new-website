@@ -5,6 +5,7 @@ export default {
   parent: 'Parent',
   position: 'Position',
   _publication_scheduled_at: 'Publication scheduled at',
+  _unpublishing_scheduled_at: 'Unpublishing scheduled at',
   _published_at: 'Published at',
   _status: 'Status',
   _updated_at: 'Updated at',

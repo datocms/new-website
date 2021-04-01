@@ -17,5 +17,6 @@ export default {
   slug: 'Slug',
   string: 'Single-line string',
   text: 'Multiple-paragraph text',
+  structured_text: 'Structured text',
   video: 'Video',
 };
