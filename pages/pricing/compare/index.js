@@ -103,7 +103,12 @@ export default function ComparePricing({ hints, plans, preview }) {
                   return (
                     <React.Fragment key={limit.id}>
                       <tr>
-                        <th>{hint ? hint.name : limit.id}</th>
+                        <th>
+                          {hint ? hint.name : limit.id}
+                          <div className={s.hintDescription}>
+                            {hint.description}
+                          </div>
+                        </th>
                         {plans.map((plan) => {
                           const planLimit = plan.attributes.limits.find(
                             (l) => l.id === limit.id,

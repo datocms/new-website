@@ -66,6 +66,10 @@ export const formatValue = (name, value) => {
     return `${value} days`;
   }
 
+  if (name.endsWith('minutes')) {
+    return `${value} minutes`;
+  }
+
   if (name.endsWith('seconds')) {
     return value / 60 >= 5000
       ? `${parseInt(value / 60 / 60, 10)} hrs`

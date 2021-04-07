@@ -43,3 +43,10 @@
     font-size: 0.8em;
   }
 }
+
+.hintDescription {
+  font-size: 12px;
+  font-weight: normal;
+  color: var(--light-body-color);
+  margin-top: 5px;
+}
