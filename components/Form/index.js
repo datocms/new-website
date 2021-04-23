@@ -73,13 +73,19 @@ export const Field = ({
     );
   }
 
+  if (type === 'hidden') {
+    return input;
+  }
+
   return (
     <div
       className={cn(s.field, {
         [s.fieldError]: errors[name] && errors[name].message,
       })}
     >
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>
+        {label} {validations && <span className={s.required}> *</span>}
+      </label>
 
       {errors[name] && <div className={s.error}>← {errors[name].message}</div>}
       {input}

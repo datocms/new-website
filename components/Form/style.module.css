@@ -51,18 +51,19 @@
     top: 25px;
     left: rfs(33px);
     width: 40%;
-    font-size: 12px;
     line-height: 1;
   }
 
   label {
     color: var(--light-body-color);
-    text-transform: uppercase;
     font-weight: bold;
     width: 60%;
+    font-size: 15px;
+    pointer-events: none;
   }
 
   .error {
+    font-size: 12px;
     right: rfs(29px);
     left: auto;
     text-align: right;
@@ -101,4 +102,8 @@
   a {
     color: inherit;
   }
+}
+
+.required {
+  color: var(--accent-color);
 }

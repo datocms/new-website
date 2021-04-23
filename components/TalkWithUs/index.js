@@ -16,22 +16,16 @@ export default function TalkWithUs({
     phoneNumber: '',
     companyName: '',
     country: '',
-    jobTitle: '',
+    industry: '',
+    jobFunction: '',
+    useCase: '',
+    referral: '',
     companyRevenue: '',
-    numberEmployees: '',
     body: '',
     errorId: '',
     issueType: issueType,
     ...initialValues,
   };
-
-  function salesForm(contactFormType) {
-    return contactFormType == 'sales';
-  }
-
-  function supportForm(contactFormType) {
-    return contactFormType == 'support';
-  }
 
   function frontUrl(contactFormType) {
     if (contactFormType == 'sales') {
@@ -48,7 +42,7 @@ export default function TalkWithUs({
         defaultValues={defaultValues}
         submitLabel="Get in touch"
       >
-        {supportForm(contactFormType) && (
+        {contactFormType === 'support' && (
           <>
             <div className={s.formCols}>
               <Field
@@ -73,56 +67,13 @@ export default function TalkWithUs({
           </>
         )}
 
-        {salesForm(contactFormType) && (
+        {contactFormType === 'sales' && (
           <>
             <div className={s.formCols}>
               <Field
                 name="name"
                 label="Full name"
                 placeholder="Your full name"
-                validations={{ required: 'Required' }}
-              />
-              <Field
-                name="email"
-                label="Work email"
-                placeholder="Your work email"
-                validations={{
-                  required: 'Required',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
-                    message: 'Invalid email',
-                  },
-                }}
-              />
-            </div>
-            <div className={s.formCols}>
-              <Field
-                name="jobTitle"
-                label="Job title"
-                validations={{ required: 'Required' }}
-                options={[
-                  'Owner',
-                  'C-Level',
-                  'Vice President',
-                  'Director',
-                  'Manager',
-                  'Individual Contributor',
-                  'Consultant',
-                  'Other',
-                ]}
-              />
-              <Field
-                name="phoneNumber"
-                label="Phone number"
-                placeholder="Your phone number"
-                validations={{ required: 'Required' }}
-              />
-            </div>
-            <div className={s.formCols}>
-              <Field
-                name="companyName"
-                label="Company name"
-                placeholder="Your company name"
                 validations={{ required: 'Required' }}
               />
               <Field
@@ -137,22 +88,80 @@ export default function TalkWithUs({
                   .sort((a, b) => a.label.localeCompare(b.label))}
               />
             </div>
+
             <div className={s.formCols}>
               <Field
-                name="numberEmployees"
-                label="# of employees"
+                name="companyName"
+                label="Company name"
+                placeholder="Your company name"
                 validations={{ required: 'Required' }}
-                options={['1-20', '21-100', '101-1000', '1000+']}
               />
               <Field
-                name="companyRevenue"
-                label="Company revenue"
+                name="industry"
+                label="Industry"
+                options={[
+                  'Agency',
+                  'Software Development',
+                  'Ecommerce/Retail',
+                  'FinTech',
+                  'Media/Publishing',
+                  'Services',
+                  'CleanTech',
+                  'Automotive',
+                  'Utility',
+                  'Food & Beverage',
+                  'Education',
+                  'Non-Profit & Culture',
+                  'Government',
+                  'Other',
+                ]}
+              />
+            </div>
+
+            <div className={s.formCols}>
+              <Field
+                name="email"
+                label="Work email"
+                placeholder="Your work email"
+                validations={{
+                  required: 'Required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
+                    message: 'Invalid email',
+                  },
+                }}
+              />
+              <Field
+                name="phoneNumber"
+                label="Phone number"
+                placeholder="Your phone number"
+              />
+            </div>
+
+            <div className={s.formCols}>
+              <Field
+                name="jobFunction"
+                label="Job function"
                 validations={{ required: 'Required' }}
                 options={[
-                  'under $100M',
-                  '$100M - $500M',
-                  '$500M - $1B',
-                  'over $1B',
+                  'Editorial & Content',
+                  'Developer/Engineering',
+                  'Product & Project',
+                  'Sales & Marketing',
+                  'Other',
+                ]}
+              />
+
+              <Field
+                name="useCase"
+                label="Use case"
+                options={[
+                  'Ecommerce',
+                  'Moving to headless',
+                  'Migrating from other headless CMS',
+                  'Documentation',
+                  'Multi-project',
+                  'Other',
                 ]}
               />
             </div>
@@ -171,12 +180,31 @@ export default function TalkWithUs({
           <Field name="errorId" label="Error ID" readOnly />
         )}
 
-        <Field
-          name="uploads"
-          label="Add any additional attachments"
-          type="file"
-          multiple
-        />
+        {contactFormType === 'support' && (
+          <Field
+            name="uploads"
+            label="Add any additional attachments"
+            type="file"
+            multiple
+          />
+        )}
+
+        {contactFormType === 'sales' && (
+          <div className={s.formCols}>
+            <Field
+              name="referral"
+              label="How did you hear about us?"
+              options={[
+                'A colleague/recommendation/forum',
+                'Software review platform (G2, Capterra...)',
+                'Our partners (Jamstack, Next.js...)',
+                'Social Media (Twitter, LinkedIn...)',
+                'Search',
+                'Other',
+              ]}
+            />
+          </div>
+        )}
 
         <Field name="issueType" type="hidden" />
       </Form>

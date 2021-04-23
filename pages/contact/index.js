@@ -39,6 +39,11 @@ export default function Support() {
                 </p>
 
                 <p className={s.support}>
+                  To learn more about our self-service plans, visit our{' '}
+                  <Link href="/support">Pricing page</Link>.
+                </p>
+
+                <p className={s.support}>
                   Need support? Please visit our{' '}
                   <Link href="/support">
                     <a>Support page</a>
