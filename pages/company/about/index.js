@@ -140,7 +140,7 @@ const Chart = ({ data: rawData, children }) => {
           />
 
           {data.map((point, i) => {
-            const up = (i / 3) % 2 === 0;
+            const up = ((i + (data.length % 3)) / 3) % 2 === 0;
 
             const [x1, y1] = project(i, point.value);
             const [x2, y2] = project(
@@ -148,7 +148,11 @@ const Chart = ({ data: rawData, children }) => {
               point.value + maxValue * (up ? 0.1 : -0.1),
             );
 
-            return i % 3 === 0 && <line x1={x1} x2={x2} y1={y1} y2={y2} />;
+            return (
+              (i + (data.length % 3)) % 3 === 0 && (
+                <line x1={x1} x2={x2} y1={y1} y2={y2} />
+              )
+            );
           })}
 
           {data.map((point, i) => {
@@ -159,7 +163,7 @@ const Chart = ({ data: rawData, children }) => {
 
         <div className={s.chartLabels}>
           {data.map((point, i) => {
-            const up = (i / 3) % 2 === 0;
+            const up = ((i + (data.length % 3)) / 3) % 2 === 0;
 
             const [x, y] = projectLabel(
               i,
@@ -167,7 +171,7 @@ const Chart = ({ data: rawData, children }) => {
             );
 
             return (
-              i % 3 === 0 && (
+              (i + (data.length % 3)) % 3 === 0 && (
                 <div
                   className={s.chartLabelAnchor}
                   style={{
@@ -180,8 +184,12 @@ const Chart = ({ data: rawData, children }) => {
                       [s.chartLabelUp]: up,
                     })}
                   >
-                    <span>{format(point.date, 'MMM yyyy')}: </span>€
-                    {parseInt(point.value).toLocaleString()}
+                    <span className={s.chartLabelAnchorDate}>
+                      {format(point.date, 'MMM yyyy')}:<br />
+                    </span>
+                    <span className={s.chartLabelAnchorAmount}>
+                      €{parseInt(point.value).toLocaleString()}
+                    </span>
                   </div>
                 </div>
               )

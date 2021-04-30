@@ -88,9 +88,20 @@
 .chartLabelAnchor {
   position: absolute;
   font-size: 14px;
+  margin-left: -20px;
+
+  .chartLabelAnchorAmount {
+    color: var(--base-body-color);
+    font-weight: bold;
+    font-size: 1.4em;
+  }
 
   @media screen and (width < 900px) {
-    span {
+    .chartLabelAnchorAmount {
+      font-size: 1em;
+    }
+
+    .chartLabelAnchorDate {
       display: none;
     }
   }
