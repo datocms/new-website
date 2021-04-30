@@ -18,3 +18,7 @@
     }
   }
 }
+
+.formCols label[for='referral'] {
+  width: 80%;
+}

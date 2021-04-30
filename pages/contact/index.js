@@ -38,6 +38,15 @@ export default function Support() {
                   in touch as soon as possible.
                 </p>
 
+                <p>
+                  <b>
+                    Filling all the fields helps us giving you a more informed
+                    answer with less back and forth.
+                  </b>{' '}
+                  Also helps you thinking about your project in terms that are
+                  useful for us to understand what you are up to.
+                </p>
+
                 <p className={s.support}>
                   To learn more about our self-service plans, visit our{' '}
                   <Link href="/support">Pricing page</Link>.

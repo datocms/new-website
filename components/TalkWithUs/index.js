@@ -76,45 +76,12 @@ export default function TalkWithUs({
                 placeholder="Your full name"
                 validations={{ required: 'Required' }}
               />
-              <Field
-                name="country"
-                label="Country"
-                validations={{ required: 'Required' }}
-                options={getData()
-                  .map(({ code, name }) => ({
-                    value: code,
-                    label: name,
-                  }))
-                  .sort((a, b) => a.label.localeCompare(b.label))}
-              />
-            </div>
 
-            <div className={s.formCols}>
               <Field
                 name="companyName"
                 label="Company name"
                 placeholder="Your company name"
                 validations={{ required: 'Required' }}
-              />
-              <Field
-                name="industry"
-                label="Industry"
-                options={[
-                  'Agency',
-                  'Software Development',
-                  'Ecommerce/Retail',
-                  'FinTech',
-                  'Media/Publishing',
-                  'Services',
-                  'CleanTech',
-                  'Automotive',
-                  'Utility',
-                  'Food & Beverage',
-                  'Education',
-                  'Non-Profit & Culture',
-                  'Government',
-                  'Other',
-                ]}
               />
             </div>
 
@@ -131,10 +98,17 @@ export default function TalkWithUs({
                   },
                 }}
               />
+
               <Field
-                name="phoneNumber"
-                label="Phone number"
-                placeholder="Your phone number"
+                name="country"
+                label="Country"
+                validations={{ required: 'Required' }}
+                options={getData()
+                  .map(({ code, name }) => ({
+                    value: code,
+                    label: name,
+                  }))
+                  .sort((a, b) => a.label.localeCompare(b.label))}
               />
             </div>
 
@@ -153,17 +127,54 @@ export default function TalkWithUs({
               />
 
               <Field
+                name="industry"
+                label="Industry"
+                options={[
+                  'Agency / Freelancer',
+                  'Ecommerce / Retail',
+                  'FinTech',
+                  'Media / Publishing',
+                  'SaaS',
+                  'Automotive',
+                  'CleanTech / Utility',
+                  'Food & Beverage',
+                  'Education',
+                  'Non-Profit & Culture',
+                  'Other',
+                ]}
+                validations={{ required: 'Required' }}
+              />
+            </div>
+
+            <div className={s.formCols}>
+              <Field
                 name="useCase"
                 label="Use case"
                 options={[
                   'Ecommerce',
                   'Moving to headless',
                   'Migrating from other headless CMS',
-                  'Documentation',
-                  'Multi-project',
+                  'Agency',
                   'Other',
                 ]}
+                validations={{ required: 'Required' }}
               />
+
+              {contactFormType === 'sales' && (
+                <Field
+                  name="referral"
+                  label="How did you hear about us?"
+                  options={[
+                    'A colleague/recommendation/forum',
+                    'Software review platform (G2, Capterra...)',
+                    'Our partners (Gatsby, Next.js...)',
+                    'Social Media (Twitter, LinkedIn...)',
+                    'Search',
+                    'Other',
+                  ]}
+                  validations={{ required: 'Required' }}
+                />
+              )}
             </div>
           </>
         )}
@@ -187,23 +198,6 @@ export default function TalkWithUs({
             type="file"
             multiple
           />
-        )}
-
-        {contactFormType === 'sales' && (
-          <div className={s.formCols}>
-            <Field
-              name="referral"
-              label="How did you hear about us?"
-              options={[
-                'A colleague/recommendation/forum',
-                'Software review platform (G2, Capterra...)',
-                'Our partners (Jamstack, Next.js...)',
-                'Social Media (Twitter, LinkedIn...)',
-                'Search',
-                'Other',
-              ]}
-            />
-          </div>
         )}
 
         <Field name="issueType" type="hidden" />
