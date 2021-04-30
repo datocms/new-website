@@ -1,8 +1,9 @@
 .members {
   display: grid;
   grid-gap: 30px;
+
   @media (width > 900px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
     grid-auto-rows: auto;
   }
