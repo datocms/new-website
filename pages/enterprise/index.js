@@ -142,7 +142,7 @@ function Enterprise({ page, review1, review2 }) {
                 available in a number of ways, any time that you need us.
               </div>
             </div>
-            <TalkWithUs contactFormType="sales" issueType="sales" />
+            <TalkWithUs contactFormType="sales" issueType="enterprise" />
           </div>
         </Wrapper>
       </div>
