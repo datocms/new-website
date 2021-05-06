@@ -140,14 +140,14 @@ export default function Blog({ preview, subscription }) {
       <Wrapper>
         <div>
           <div className={s.changelogIntro}>
-            Latest from our Product Updates changelog:
+            Latest from our Product Updates changelog →
           </div>
           <Link href={`/product-updates`}>
             <a className={s.changelogEntry}>
               <div className={s.changelogEntryTitle}>
                 {latestChangelogEntry.title}
               </div>
-              <div>
+              <div className={s.changelogEntryDate}>
                 <FormattedDate date={latestChangelogEntry._firstPublishedAt} />
               </div>
             </a>

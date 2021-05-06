@@ -66,10 +66,13 @@
   text-decoration: none;
   margin-bottom: 60px;
   transition: all 200ms ease-in-out;
-  padding: 25px;
+  padding: rfs(30px);
   border-radius: 5px;
   color: inherit;
-  display: flex;
+
+  @media (width > 600px) {
+    display: flex;
+  }
 
   &:hover {
     transform: translateY(-5px);
@@ -80,4 +83,14 @@
   font-weight: 600;
   flex: 1;
   letter-spacing: -0.02em;
+  margin-bottom: 10px;
+
+  @media (width > 600px) {
+    margin-bottom: 0;
+  }
+}
+
+.changelogEntryDate {
+  font-size: 15px;
+  color: var(--light-body-color);
 }
