@@ -45,6 +45,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           ...seoMetaTagsFields
         }
       }
+
       posts: allBlogPosts(
         first: $first
         skip: $skip
@@ -67,6 +68,46 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       meta: _allBlogPostsMeta {
         count
       }
+
+      latestChangelogEntry: changelogEntry(
+        orderBy: publicationDate_DESC
+      ) {
+        title
+        slug
+        _firstPublishedAt
+        content {
+          value
+          blocks {
+            ... on InternalVideoRecord {
+              id
+              _modelApiKey
+              autoplay
+              loop
+              thumbTimeSeconds
+              video {
+                title
+                width
+                height
+                video {
+                  duration
+                  streamingUrl
+                  thumbnailUrl
+                }
+              }
+            }
+            ... on ImageRecord {
+              id
+              _modelApiKey
+            }
+          }
+        }
+        categories {
+          name
+          color {
+            hex
+          }
+        }
+      }
     }
 
     ${imageFields}
@@ -82,7 +123,7 @@ export default function Blog({ preview, subscription }) {
   const router = useRouter();
 
   const {
-    data: { posts, blog, meta },
+    data: { posts, blog, meta, latestChangelogEntry },
   } = useQuerySubscription(subscription);
 
   return (
@@ -97,6 +138,22 @@ export default function Blog({ preview, subscription }) {
         subtitle={<>News, tips and highlights from the team at DatoCMS</>}
       />
       <Wrapper>
+        <div>
+          <div className={s.changelogIntro}>
+            Latest from our Product Updates changelog:
+          </div>
+          <Link href={`/product-updates`}>
+            <a className={s.changelogEntry}>
+              <div className={s.changelogEntryTitle}>
+                {latestChangelogEntry.title}
+              </div>
+              <div>
+                <FormattedDate date={latestChangelogEntry._firstPublishedAt} />
+              </div>
+            </a>
+          </Link>
+        </div>
+
         <Masonry
           breakpointCols={{
             default: 2,

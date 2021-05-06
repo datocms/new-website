@@ -52,3 +52,32 @@
 .image {
   display: block !important;
 }
+
+.changelogIntro {
+  color: var(--light-body-color);
+  margin-bottom: 15px;
+  font-size: 0.9em;
+  margin-left: 25px;
+}
+
+.changelogEntry {
+  display: block;
+  box-shadow: var(--box-shadow);
+  text-decoration: none;
+  margin-bottom: 60px;
+  transition: all 200ms ease-in-out;
+  padding: 25px;
+  border-radius: 5px;
+  color: inherit;
+  display: flex;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.changelogEntryTitle {
+  font-weight: 600;
+  flex: 1;
+  letter-spacing: -0.02em;
+}
