@@ -93,7 +93,13 @@ export const Field = ({
   );
 };
 
-export function FormInner({ children, defaultValues, action, submitLabel }) {
+export function FormInner({
+  children,
+  defaultValues,
+  action,
+  submitLabel,
+  onSubmit,
+}) {
   const { addToast } = useToasts();
 
   useEffect(() => {
@@ -121,15 +127,19 @@ export function FormInner({ children, defaultValues, action, submitLabel }) {
   });
   const { handleSubmit } = methods;
 
-  const onSubmit = (values, event) => {
-    event.nativeEvent.currentTarget.submit();
+  const defaultOnSubmit = (values, event) => {
+    if (onSubmit) {
+      onSubmit(values, event);
+    } else {
+      event.nativeEvent.currentTarget.submit();
+    }
   };
 
   return (
     <FormProvider {...methods}>
       <form
         className={s.form}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(defaultOnSubmit)}
         method="POST"
         action={action}
         encType="multipart/form-data"
