@@ -157,7 +157,9 @@ const Chart = ({ data: rawData, children }) => {
 
           {data.map((point, i) => {
             const [x, y] = project(i, point.value);
-            return <circle cx={x} cy={y} r="2" />;
+            return (
+              <circle cx={x} cy={y} r="2" data-value={parseInt(point.value)} />
+            );
           })}
         </svg>
 
