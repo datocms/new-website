@@ -98,7 +98,7 @@ export function FormInner({
   defaultValues,
   action,
   submitLabel,
-  onPreSubmit,
+  onSubmit,
 }) {
   const { addToast } = useToasts();
 
@@ -127,18 +127,19 @@ export function FormInner({
   });
   const { handleSubmit } = methods;
 
-  const onSubmit = (values, event) => {
-    if (onPreSubmit) {
-      onPreSubmit(event);
+  const defaultOnSubmit = (values, event) => {
+    if (onSubmit) {
+      onSubmit(event);
+    } else {
+      event.nativeEvent.currentTarget.submit();
     }
-    event.nativeEvent.currentTarget.submit();
   };
 
   return (
     <FormProvider {...methods}>
       <form
         className={s.form}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(defaultOnSubmit)}
         method="POST"
         action={action}
         encType="multipart/form-data"
