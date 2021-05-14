@@ -12,30 +12,30 @@ export default async (req, res) => {
     }
 
     const {
-      fullName,
+      name,
       companyName,
-      workEmail,
+      email,
       country,
       jobFunction,
       industry,
       useCase,
-      howDidYouHearAboutUs,
-      question,
+      referral,
+      body,
     } = req.body;
 
     const organization = await findOrCreateOrgByName(companyName, industry);
 
     const person = await findOrCreatePerson(
-      workEmail,
-      fullName,
+      email,
+      name,
       country,
       jobFunction,
-      howDidYouHearAboutUs,
+      referral,
       organization,
     );
 
     const lead = await createLead(person, organization, useCase);
-    await createNote(lead, question);
+    await createNote(lead, body);
 
     res.status(200).json({ success: true });
   } catch (e) {
@@ -75,20 +75,19 @@ async function findOrCreateOrgByName(name, industry) {
 }
 
 async function findOrCreatePerson(
-  workEmail,
-  fullName,
+  email,
+  name,
   country,
   jobFunction,
-  howDidYouHearAboutUs,
+  referral,
   organization,
 ) {
   try {
     const personsController = pipedrive.PersonsController;
     const jobFunctionCustomField = 'c28a0aa1a4c02699ca8617d8241b4451cb6348d7';
-    const howDidYouHearAboutUsCustomField =
-      '8d682dcba3c78ba24d802f3391d7fbbc10adeb8e';
+    const referralCustomField = '8d682dcba3c78ba24d802f3391d7fbbc10adeb8e';
     const result = await personsController.searchPersons({
-      term: workEmail,
+      term: email,
       fields: 'email',
       exact_match: true,
     });
@@ -104,11 +103,11 @@ async function findOrCreatePerson(
       return person;
     } else {
       const data = {
-        name: fullName,
-        email: workEmail,
+        name: name,
+        email: email,
         postal_address: country,
         [jobFunctionCustomField]: jobFunction,
-        [howDidYouHearAboutUsCustomField]: howDidYouHearAboutUs,
+        [referralCustomField]: referral,
         org_id: organization.id,
         visible_to: 3,
       };
@@ -141,10 +140,10 @@ async function createLead(person, organization, useCase) {
   }
 }
 
-async function createNote(lead, question) {
+async function createNote(lead, body) {
   try {
     const data = {
-      content: question,
+      content: body,
       lead_id: lead.id,
       org_id: lead.organization_id,
       person_id: lead.person_id,

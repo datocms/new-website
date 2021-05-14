@@ -129,7 +129,7 @@ export function FormInner({
 
   const defaultOnSubmit = (values, event) => {
     if (onSubmit) {
-      onSubmit(event);
+      onSubmit(values, event);
     } else {
       event.nativeEvent.currentTarget.submit();
     }

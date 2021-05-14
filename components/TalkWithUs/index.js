@@ -28,23 +28,12 @@ export default function TalkWithUs({
     ...initialValues,
   };
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (values, event) => {
     event.preventDefault();
     const target = event.nativeEvent.currentTarget;
     let result = null;
     if (contactFormType == 'sales') {
-      const body = JSON.stringify({
-        fullName: event.target.name.value,
-        companyName: event.target.companyName.value,
-        workEmail: event.target.email.value,
-        country: event.target.country.value,
-        jobFunction: event.target.jobFunction.value,
-        industry: event.target.industry.value,
-        useCase: event.target.useCase.value,
-        howDidYouHearAboutUs: event.target.referral.value,
-        question: event.target.body.value,
-      });
-
+      const body = JSON.stringify(values);
       const res = await fetch('/api/pipedrive/submit', {
         body: body,
         headers: {
