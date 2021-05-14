@@ -35,12 +35,39 @@ export default function TalkWithUs({
     }
   }
 
+  const submitToPipedrive = async (event) => {
+    if (contactFormType == 'sales') {
+      const body = JSON.stringify({
+        fullName: event.target.name.value,
+        companyName: event.target.companyName.value,
+        workEmail: event.target.email.value,
+        country: event.target.country.value,
+        jobFunction: event.target.jobFunction.value,
+        industry: event.target.industry.value,
+        useCase: event.target.useCase.value,
+        howDidYouHearAboutUs: event.target.referral.value,
+        question: event.target.body.value,
+      });
+
+      const res = await fetch('/api/pipedrive/submit', {
+        body: body,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      });
+
+      const result = await res.json();
+    }
+  };
+
   return (
     <div className={s.root}>
       <Form
         action={frontUrl(contactFormType)}
         defaultValues={defaultValues}
         submitLabel="Get in touch"
+        onPreSubmit={submitToPipedrive}
       >
         {contactFormType === 'support' && (
           <>

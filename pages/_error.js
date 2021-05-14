@@ -30,6 +30,23 @@ function Error({ statusCode }) {
 
 Error.getInitialProps = ({ res, err }) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+  if (!process.browser) {
+    console.log('Reporting error to Rollbar...');
+    const Rollbar = require('rollbar');
+    const rollbar = new Rollbar({
+      accessToken: process.env.ROLLBAR_TOKEN,
+      captureUncaught: true,
+      captureUnhandledRejections: true,
+    });
+    rollbar.error(err, req, (rollbarError) => {
+      if (rollbarError) {
+        console.error('Rollbar error reporting failed:');
+        console.error(rollbarError);
+        return;
+      }
+      console.log('Reported error to Rollbar');
+    });
+  }
   return { statusCode };
 };
 

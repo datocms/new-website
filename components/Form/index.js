@@ -93,7 +93,13 @@ export const Field = ({
   );
 };
 
-export function FormInner({ children, defaultValues, action, submitLabel }) {
+export function FormInner({
+  children,
+  defaultValues,
+  action,
+  submitLabel,
+  onPreSubmit,
+}) {
   const { addToast } = useToasts();
 
   useEffect(() => {
@@ -122,6 +128,9 @@ export function FormInner({ children, defaultValues, action, submitLabel }) {
   const { handleSubmit } = methods;
 
   const onSubmit = (values, event) => {
+    if (onPreSubmit) {
+      onPreSubmit(event);
+    }
     event.nativeEvent.currentTarget.submit();
   };
 
