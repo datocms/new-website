@@ -232,4 +232,8 @@ module.exports = [
     source: '/marketplace/hosting/zeit',
     destination: '/marketplace/hosting/vercel',
   },
+  {
+    source: '/security',
+    destination: '/legal/security',
+  },
 ];

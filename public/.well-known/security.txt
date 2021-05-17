@@ -1,4 +1,5 @@
 Contact: security@datocms.com
+Encryption: https://www.datocms.com/.well-known/DatoCMS_security_pub.asc
 Preferred-Languages: en
 Canonical: https://www.datocms.com/.well-known/security.txt
 Policy: https://www.datocms.com/legal/security

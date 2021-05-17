@@ -1,4 +1,3 @@
-
 In this document we are going to analyze how DatoCMS works, what are the main security choices that we've taken and what are our main security policies in the company.
 
 ### Infrastructure
@@ -9,8 +8,8 @@ Our hard infrastructure is made of servers running our main application and its 
 
 Our application run on the best data centers in the world, all of them ensure compliance with the most known industry standards:
 
- - **ISO 27001**
- - **SOC 1 and SOC 2**
+- **ISO 27001**
+- **SOC 1 and SOC 2**
 
 Physical security of the data centers is also certified at various levels by all the data centers we use.
 
@@ -37,13 +36,13 @@ All our servers and services are protected by firewalls that let traffic through
 #### More details
 
 Read more about the security policies of the infrastructure providers that we use:
- - [Heroku](https://www.heroku.com/policy/security)
- - [Digital Ocean](https://www.digitalocean.com/legal/compliance/)
- - [AWS](https://aws.amazon.com/security/)
- - [Netlify](https://www.netlify.com/security/)
- - [Cloudflare](https://www.cloudflare.com/security/)
- - [Fastly](https://docs.fastly.com/en/guides/security-program)
 
+- [Heroku](https://www.heroku.com/policy/security)
+- [Digital Ocean](https://www.digitalocean.com/legal/compliance/)
+- [AWS](https://aws.amazon.com/security/)
+- [Netlify](https://www.netlify.com/security/)
+- [Cloudflare](https://www.cloudflare.com/security/)
+- [Fastly](https://docs.fastly.com/en/guides/security-program)
 
 ### Application
 
@@ -69,9 +68,8 @@ We make sure that every third party that we use is as careful as we are on secur
 
 Here's the list of the third parties that we are using with links to their security or compliance page and why we use them:
 
- - [Redis Labs](https://redislabs.com/company/compliance-and-privacy/) as a caching layer and as a volatile database
- - [Scout APM](https://docs.scoutapm.com/#security) to find performance bottlenecks on our server
-
+- [Redis Labs](https://redislabs.com/company/compliance-and-privacy/) as a caching layer and as a volatile database
+- [Scout APM](https://docs.scoutapm.com/#security) to find performance bottlenecks on our server
 
 ### Data
 
@@ -95,7 +93,6 @@ From the CMS interface you can very **easily rotate the API tokens** used to acc
 
 **Each user can have a specific role** attached which allows a very granular configuration on what is visible and editable for each role. The roles can be customised and created by the project admins.
 
-
 ### Reliability
 
 **Our entire infrastructure is highly reliable and easy to reproduce by design**. We rely on Heroku's platform-as-a-service which means that we are able to reprovision our entire application in a single deploy.
@@ -106,15 +103,18 @@ In case of incidents we have a team of developers getting notifications on their
 
 We collect status metrics both on our servers and from third parties making checks from servers spread all across the globe, giving us a good visibility on our CDN current status. We expose a public report on our [status page](https://status.datocms.com/).
 
-
 ### People
 
 DatoCMS's team is made of highly trained professionals that are very careful with their own personal security.
 
 Nevertheless we have the following team policies:
 
- - **2FA**: we access all the services hosting DatoCMS with 2FA-enabled accounts
- - **remote access**: we minimise the access points to our production environment
- - **computer security**: we enforce strong passwords for our computers, we encrypt disks, we use password managers to create strong passwords and store them safely.
+- **2FA**: we access all the services hosting DatoCMS with 2FA-enabled accounts
+- **remote access**: we minimise the access points to our production environment
+- **computer security**: we enforce strong passwords for our computers, we encrypt disks, we use password managers to create strong passwords and store them safely.
 
 Our offices are also secured with CCTVs and alarm systems.
+
+### Vulnerability disclosure
+
+If you have found a security vulnerability, please get in touch via [security@datocms.com](mailto:security@datocms.com). You can encrypt the message with our PGP key that you can find [on our site](https://www.datocms.com/.well-known/DatoCMS_security_pub.asc) and on [keys.openpgp.org](https://keys.openpgp.org/search?q=3FBD73EFD6C5268A21C33FE27B94FBC69CD5C678).
