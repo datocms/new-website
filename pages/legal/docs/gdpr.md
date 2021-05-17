@@ -67,6 +67,22 @@ So to Stripe we send:
 
 [Stripe GDPR Compliance](https://stripe.com/guides/general-data-protection-regulation)
 
+### Pipedrive
+
+When you submit a contact form or when you become a paying customer we create a record on our CRM platform, Pipedrive.
+
+We only collect the information that you provide or that is publicly available online.
+
+The information is:
+
+- email,
+- first name,
+- last name,
+- company,
+- any additional information that you provide on the contact form.
+
+[Pipedrive GDPR Compliance](https://www.pipedrive.com/en/privacy)
+
 ### Fatture in Cloud
 
 Our company needs to send certified digital invoices to our Italian customers and to
