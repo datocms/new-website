@@ -9,7 +9,6 @@ import {
 } from 'react-hook-form';
 import cn from 'classnames';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
-import { useEffect } from 'react';
 
 export const Field = ({
   name,
@@ -100,36 +99,16 @@ export function FormInner({
   submitLabel,
   onSubmit,
 }) {
-  const { addToast } = useToasts();
-
-  useEffect(() => {
-    var urlParams = new URLSearchParams(window.location.search);
-
-    if (urlParams.has('code')) {
-      const code = urlParams.get('code');
-
-      if (code === 'ok') {
-        addToast('Thank you! We will get in touch as soon as possible.', {
-          appearance: 'success',
-          autoDismiss: true,
-        });
-      } else {
-        addToast('Ouch! There was an error submitting the form!', {
-          appearance: 'error',
-          autoDismiss: true,
-        });
-      }
-    }
-  }, []);
-
   const methods = useForm({
     defaultValues,
   });
   const { handleSubmit } = methods;
 
+  const toastHelpers = useToasts();
+
   const defaultOnSubmit = (values, event) => {
     if (onSubmit) {
-      onSubmit(values, event);
+      onSubmit(values, event, toastHelpers);
     } else {
       event.nativeEvent.currentTarget.submit();
     }
