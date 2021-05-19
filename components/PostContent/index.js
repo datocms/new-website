@@ -17,9 +17,32 @@ import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import slugify from 'utils/slugify';
 import Heading from 'components/Heading';
 import queryString from 'qs';
+import Corona from 'public/images/illustrations/live-4.svg';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 
 function renderBlock(s, block) {
   switch (block._modelApiKey) {
+    case 'in_depth_cta_block':
+      return (
+        <div className={s.unwrap}>
+          <a href={block.cta.ctaUrl} className={s.inDepth}>
+            <div className={s.inDepthImage}>
+              <Corona />
+            </div>
+            <div className={s.inDepthBody}>
+              <div className={s.inDepthTitle}>{block.cta.title}</div>
+
+              <div className={s.inDepthDescription}>
+                <StructuredText data={block.cta.description} />
+              </div>
+              <div className={s.inDepthCta}>
+                {block.cta.ctaLabel} <ArrowIcon />
+              </div>
+            </div>
+          </a>
+        </div>
+      );
+
     case 'internal_video':
       return (
         <div className={s.unwrap}>

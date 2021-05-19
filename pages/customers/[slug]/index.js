@@ -88,6 +88,18 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 url
               }
             }
+            ... on InDepthCtaBlockRecord {
+              id
+              _modelApiKey
+              cta {
+                title
+                description {
+                  value
+                }
+                ctaLabel
+                ctaUrl
+              }
+            }
             ... on VideoRecord {
               id
               _modelApiKey
