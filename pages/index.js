@@ -90,7 +90,7 @@ function Homepage({ successStories, preview, page }) {
         }
         subtitle={
           <>
-            It's the CMS for the modern web. More than 25.000 businesses use
+            It's the CMS for the modern web. More than 25,000 businesses use
             DatoCMS to create online content at scale from a central hub and
             distribute it via API.
           </>
