@@ -14,18 +14,21 @@
     }
   }
 
+  h2,
   h3,
   h4,
   h5,
   h6 {
-    font-family: var(--font-headline);
+    font-family: var(--font-sans);
     font-size: 130%;
-    line-height: 1.25;
+    line-height: 1.1;
     margin: rfs(70px) 0 rfs(40px);
+    letter-spacing: -0.03em;
   }
 
+  h2,
   h3 {
-    font-size: 160%;
+    font-size: 170%;
   }
 
   p,

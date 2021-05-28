@@ -19,7 +19,7 @@ import { useQuerySubscription } from 'react-datocms';
 export const getStaticPaths = gqlStaticPaths(
   `
     query {
-      posts: allBlogPosts(first: 10, orderBy: _firstPublishedAt_DESC) {
+      posts: allBlogPosts(first: 10, orderBy: [_firstPublishedAt_DESC, _createdAt_DESC]) {
         slug
       }
     }
@@ -48,7 +48,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               width
               title
               alt
-              responsiveImage(imgixParams: { w: 1200 }) {
+              responsiveImage(imgixParams: { w: 1200 }, sizes: "(max-width: 810px) 100vw, (max-width: 1000px) 750px, (min-width: 1001px) 950px") {
                 ...imageFields
               }
               url
@@ -141,6 +141,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
       }
       _firstPublishedAt
+      _createdAt
       author {
         name
         avatar {
@@ -196,8 +197,9 @@ export default function Article({ preview, subscription }) {
             <Line />
           ) : (
             <>
-              Posted on <FormattedDate date={post._firstPublishedAt} /> by{' '}
-              {post.author.name}
+              Posted on{' '}
+              <FormattedDate date={post._firstPublishedAt || post._createdAt} />{' '}
+              by {post.author.name}
             </>
           )}
         </div>

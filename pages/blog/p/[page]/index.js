@@ -49,7 +49,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       posts: allBlogPosts(
         first: $first
         skip: $skip
-        orderBy: _firstPublishedAt_DESC
+        orderBy: [_firstPublishedAt_DESC, _createdAt_DESC]
       ) {
         slug
         title
@@ -63,6 +63,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           }
         }
         _firstPublishedAt
+        _createdAt
       }
 
       meta: _allBlogPostsMeta {
@@ -70,11 +71,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       }
 
       latestChangelogEntry: changelogEntry(
-        orderBy: _firstPublishedAt_DESC
+        orderBy: [_firstPublishedAt_DESC, _createdAt_DESC]
       ) {
         title
         slug
         _firstPublishedAt
+        _createdAt
         content {
           value
           blocks {
@@ -148,7 +150,12 @@ export default function Blog({ preview, subscription }) {
                 {latestChangelogEntry.title}
               </div>
               <div className={s.changelogEntryDate}>
-                <FormattedDate date={latestChangelogEntry._firstPublishedAt} />
+                <FormattedDate
+                  date={
+                    latestChangelogEntry._firstPublishedAt ||
+                    latestChangelogEntry._createdAt
+                  }
+                />
               </div>
             </a>
           </Link>
@@ -183,7 +190,9 @@ export default function Blog({ preview, subscription }) {
                     <div className={s.footer}>
                       <div className={s.date}>
                         Posted on{' '}
-                        <FormattedDate date={post._firstPublishedAt} />
+                        <FormattedDate
+                          date={post._firstPublishedAt || post._createdAt}
+                        />
                       </div>
                     </div>
                   </div>
