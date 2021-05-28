@@ -70,7 +70,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       }
 
       latestChangelogEntry: changelogEntry(
-        orderBy: publicationDate_DESC
+        orderBy: _firstPublishedAt_DESC
       ) {
         title
         slug

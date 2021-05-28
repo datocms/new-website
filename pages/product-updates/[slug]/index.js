@@ -22,7 +22,7 @@ import s from 'pages/product-updates/p/[page]/style.module.css';
 export const getStaticPaths = gqlStaticPaths(
   `
     query {
-      posts: allChangelogEntries(first: 10, orderBy: publicationDate_DESC) {
+      posts: allChangelogEntries(first: 10, orderBy: _firstPublishedAt_DESC) {
         slug
       }
     }
@@ -76,7 +76,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             }
           }
         }
-        publicationDate
+        _firstPublishedAt
         categories {
           name
           color {
@@ -119,7 +119,7 @@ export default function Changelog({ preview, subscription }) {
             {isFallback ? (
               <Line />
             ) : (
-              <FormattedDate date={post.publicationDate} />
+              <FormattedDate date={post._firstPublishedAt} />
             )}
           </div>
           <h6 className={s.title}>

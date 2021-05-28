@@ -49,7 +49,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       posts: allChangelogEntries(
         first: $first
         skip: $skip
-        orderBy: publicationDate_DESC
+        orderBy: _firstPublishedAt_DESC
       ) {
         title
         slug
@@ -89,7 +89,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             }
           }
         }
-        publicationDate
+        _firstPublishedAt
         categories {
           name
           color {
@@ -143,7 +143,7 @@ export default function Changelog({ preview, subscription }) {
             posts.map((post) => (
               <div key={post.slug} className={s.post}>
                 <div className={s.info}>
-                  <FormattedDate date={post.publicationDate} />
+                  <FormattedDate date={post._firstPublishedAt} />
                 </div>
                 <h6 className={s.title}>
                   <Link key={post.slug} href={`/product-updates/${post.slug}`}>
