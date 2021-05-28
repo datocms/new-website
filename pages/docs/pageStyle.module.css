@@ -194,6 +194,10 @@
     margin: 2.5em 0;
   }
 
+  iframe {
+    margin: 0;
+  }
+
   figcaption {
     color: var(--light-body-color);
     font-size: 0.9em;

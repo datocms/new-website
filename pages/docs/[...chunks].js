@@ -132,6 +132,9 @@ export const getStaticProps = async function ({
                     responsiveImage(imgixParams: { w: 1000 }) {
                       ...imageFields
                     }
+                    zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
+                      ...imageFields
+                    }
                     url
                   }
                 }

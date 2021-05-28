@@ -81,7 +81,10 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 width
                 title
                 alt
-                responsiveImage(imgixParams: { w: 1200 }) {
+                responsiveImage(imgixParams: { w: 950 }) {
+                  ...imageFields
+                }
+                zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
                   ...imageFields
                 }
                 url
