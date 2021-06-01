@@ -97,53 +97,56 @@ export default function ComparePricing({ hints, plans, preview }) {
                     Enterprise
                   </th>
                 </tr>
-                {limits.map((limit) => {
-                  const hint = hints.find((h) => h.apiId === limit.id);
+                {limits
+                  .filter((l) => l.id !== 'workflows_count')
+                  .map((limit) => {
+                    const hint = hints.find((h) => h.apiId === limit.id);
 
-                  return (
-                    <React.Fragment key={limit.id}>
-                      <tr>
-                        <th>
-                          {hint ? hint.name : limit.id}
-                          <div className={s.hintDescription}>
-                            {hint.description}
-                          </div>
-                        </th>
-                        {plans.map((plan) => {
-                          const planLimit = plan.attributes.limits.find(
-                            (l) => l.id === limit.id,
-                          );
-                          return (
-                            <td key={plan.id}>
-                              {formatLimitRaw(planLimit)}
-                              {[
-                                'account_managed_resource',
-                                'per_site_quota_managed_site_resource',
-                                'per_environment_quota_managed_site_resource',
-                                'shared_quota_managed_site_resource',
-                                'shared_quota_metered_site_resource',
-                              ].includes(limit.type) &&
-                                planLimit.extra_packet_amount && (
-                                  <div className={s.extra}>
-                                    {formatExtra(planLimit)}
-                                  </div>
-                                )}
-                            </td>
-                          );
-                        })}
-                        <td>
-                          {limit.type.includes('resource') && 'Custom'}
-                          {limit.type === 'countable_system_limit' && 'Custom'}
-                          {[
-                            'activable_feature',
-                            'boolean_system_limit',
-                          ].includes(limit.type) &&
-                            formatLimitRaw({ ...limit, available: true })}
-                        </td>
-                      </tr>
-                    </React.Fragment>
-                  );
-                })}
+                    return (
+                      <React.Fragment key={limit.id}>
+                        <tr>
+                          <th>
+                            {hint ? hint.name : limit.id}
+                            <div className={s.hintDescription}>
+                              {hint && hint.description}
+                            </div>
+                          </th>
+                          {plans.map((plan) => {
+                            const planLimit = plan.attributes.limits.find(
+                              (l) => l.id === limit.id,
+                            );
+                            return (
+                              <td key={plan.id}>
+                                {formatLimitRaw(planLimit)}
+                                {[
+                                  'account_managed_resource',
+                                  'per_site_quota_managed_site_resource',
+                                  'per_environment_quota_managed_site_resource',
+                                  'shared_quota_managed_site_resource',
+                                  'shared_quota_metered_site_resource',
+                                ].includes(limit.type) &&
+                                  planLimit.extra_packet_amount && (
+                                    <div className={s.extra}>
+                                      {formatExtra(planLimit)}
+                                    </div>
+                                  )}
+                              </td>
+                            );
+                          })}
+                          <td>
+                            {limit.type.includes('resource') && 'Custom'}
+                            {limit.type === 'countable_system_limit' &&
+                              'Custom'}
+                            {[
+                              'activable_feature',
+                              'boolean_system_limit',
+                            ].includes(limit.type) &&
+                              formatLimitRaw({ ...limit, available: true })}
+                          </td>
+                        </tr>
+                      </React.Fragment>
+                    );
+                  })}
               </React.Fragment>
             ))}
           </tbody>
