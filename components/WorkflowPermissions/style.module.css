@@ -1,0 +1,39 @@
+.title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.button {
+  background: var(--azure-color);
+  padding: 10px;
+  margin-top: 15px;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.body {
+  padding: 40px 30px;
+  background: #f3f3f3;
+}
+
+.field {
+  background: white;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+
+  strong {
+    border: 1px solid var(--border-color);
+    padding: 2px 4px 1px;
+    &:after {
+      content: '↲';
+      font-weight: normal;
+      color: var(--light-body-color);
+      padding-left: 3px;
+    }
+  }
+}

@@ -1,0 +1,187 @@
+.grid {
+  padding: 0 0 rfs(120px);
+
+  @media screen and (width > 650px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, auto);
+    column-gap: 30px;
+    row-gap: 50px;
+
+    grid-template-areas:
+      'draft draft'
+      'review review'
+      'approved  changes'
+      'published published';
+  }
+
+  @media screen and (width > 950px) {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    column-gap: 30px;
+    row-gap: 50px;
+
+    grid-template-areas:
+      'draft review approved published'
+      '.     .      changes  .';
+  }
+
+  @media screen and (width > 1300px) {
+    margin: rfs(120px) -60px;
+  }
+}
+
+.draft {
+  grid-area: draft;
+}
+
+.review {
+  grid-area: review;
+}
+
+.approved {
+  grid-area: approved;
+}
+
+.published {
+  grid-area: published;
+}
+
+.changes {
+  grid-area: changes;
+}
+
+.stage {
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 50px;
+
+  @media screen and (width > 650px) {
+    margin: 0;
+  }
+}
+
+.stageLabel {
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 20px;
+  color: var(--light-body-color);
+}
+
+.stageContainer {
+  position: relative;
+  border: 3px dashed rgba(140, 140, 140, 0.1);
+  color: #999;
+  background: rgba(140, 140, 140, 0.1);
+  height: rfs(80px);
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.stageConfetti {
+  margin-left: 50%;
+}
+
+.activeStage .stageContainer {
+  border-color: #aaa;
+}
+
+.activeStage .stageLabel {
+  color: var(--base-body-color);
+}
+
+.wrapper {
+  position: relative;
+}
+
+.record {
+  position: absolute;
+  opacity: 1;
+  transition: all 0.2s 0.3s ease-in-out;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.recordHidden {
+  opacity: 0;
+}
+
+.recordBody {
+  padding: 20px 20px 15px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 1.3em;
+
+  @media screen and (width >= 1000px) {
+    padding: 30px 30px 25px;
+  }
+}
+
+.personContainer {
+  position: relative;
+  height: 60px;
+  background: var(--light-bg-color);
+}
+
+.person {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+}
+
+.personEnter {
+  transform: translateY(-50%) translateX(-50%);
+  opacity: 0;
+}
+
+.personEnterActive {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+}
+
+.personLeave {
+  transform: translateY(-50%) translateX(50%);
+  opacity: 1;
+}
+
+.personLeaveActive {
+  transform: translateY(-50%) translateX(0);
+  opacity: 0;
+}
+
+.personIcon {
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+
+  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #fdece5, #fefae4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.personName {
+  font-size: 0.7em;
+}
+
+.personRole {
+  font-weight: bold;
+  line-height: 1;
+  font-size: 0.9em;
+}
