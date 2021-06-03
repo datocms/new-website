@@ -13,7 +13,8 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import WorkflowPermissions from 'components/WorkflowPermissions';
 import FieldValidations from 'components/FieldValidations';
 import InterstitialTitle from 'components/InterstitialTitle';
-import VideoPlayer from 'components/VideoPlayer';
+import Workflow from 'components/Workflow';
+import Button from 'components/Button';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
@@ -21,6 +22,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
+import SandboxEnvironmentsDemo from 'components/SandboxEnvironmentsDemo';
 import Space from 'components/Space';
 
 import s from './style.module.css';
@@ -54,37 +56,18 @@ function Validations({ page, preview, review }) {
         kicker="Data integrity"
         title={
           <>
-            Clean data equals <Highlight>timeless&nbsp;data</Highlight>
+            <Highlight>Safety &amp; content integrity</Highlight>, at the core
+            of every choice
           </>
         }
         subtitle={
           <>
-            Put data cleanliness, content validations and security enforcement
-            at the centre of all content creation process, across all price
-            plans.
+            Clean data is timeless data. Discover how DatoCMS enables you to
+            achieve peace of mind by taking care of everything that can
+            jeopardize the health and longevity of your content.
           </>
         }
       />
-
-      <TitleStripWithContent
-        title={<>Safety &amp; content integrity, at the core of every choice</>}
-        subtitle={
-          <>
-            Discover how DatoCMS enables you to achieve peace of mind by taking
-            care of everything that can jeopardize the health and longevity of
-            your content for you.
-          </>
-        }
-      >
-        <div className={s.video}>
-          <VideoPlayer
-            controls
-            muted
-            loop
-            src="https://stream.mux.com/FcwaLceO4tvoUKflRIt0176Lli5llFLwW.m3u8"
-          />
-        </div>
-      </TitleStripWithContent>
 
       <Space top={2} bottom={2}>
         <InterstitialTitle style="two">
@@ -96,8 +79,8 @@ function Validations({ page, preview, review }) {
         style="good"
         title={
           <>
-            Field validations, to ensure{' '}
-            <FlagHighlight>clean content, at every stage</FlagHighlight>
+            <FlagHighlight>Clean content, at every stage</FlagHighlight> with
+            field validations
           </>
         }
         image={FieldValidations}
@@ -111,61 +94,39 @@ function Validations({ page, preview, review }) {
         </p>
       </Flag>
 
-      <Flag
-        style="good"
+      <TitleStripWithContent
         title={
+          <>Test upcoming website updates, without breaking the live website</>
+        }
+        subtitle={
           <>
-            Sandbox environments, to put you{' '}
-            <FlagHighlight>in control of website updates</FlagHighlight>
+            <p>
+              Using migration scripts, you can test changes in the structure of
+              your content <strong>in a safe sandbox environment</strong>, and
+              replay the same exact changes in production once you're ready to
+              go live.
+            </p>
+            <Button
+              as="a"
+              fs="small"
+              p="small"
+              s="invert"
+              href="/docs/scripting-migrations/introduction"
+            >
+              Learn more about Sandbox Environments
+            </Button>
           </>
         }
-        image={WorkflowPermissions}
-        imageProps={{
-          children: (
-            <>
-              <p>
-                Can <strong>create</strong> new <strong>Articles</strong>
-              </p>
-
-              <p>
-                Can move new <strong>Articles</strong> from{' '}
-                <strong>Draft</strong> stage to <strong>In review</strong>
-              </p>
-
-              <p>
-                Can publish <strong>Articles</strong> in{' '}
-                <strong>Approved</strong> stage
-              </p>
-            </>
-          ),
-        }}
       >
-        <p>
-          Traditional CMSs often treat content as a one-off effort, but that's
-          just naive, wishful thinking. DatoCMS make it easy for your
-          development team to{' '}
-          <strong>
-            test website updates without breaking the live website
-          </strong>
-          .
-        </p>
-        <p>
-          Writing migration scripts, you can{' '}
-          <strong>
-            make changes in the structure of your content in a safe sandbox
-            environment
-          </strong>
-          , and replay the same exact changes in production once you're ready to
-          deploy.
-        </p>
-      </Flag>
+        <SandboxEnvironmentsDemo />
+      </TitleStripWithContent>
 
       <Flag
         style="good"
         title={
           <>
-            Custom permissions, to let you specify{' '}
-            <FlagHighlight>who can do what, and when</FlagHighlight>
+            Specify <FlagHighlight>who can do what, and when</FlagHighlight>{' '}
+            with custom permissions
           </>
         }
         image={WorkflowPermissions}
@@ -201,6 +162,38 @@ function Validations({ page, preview, review }) {
           projects, languages, environments, timezones and modules.
         </p>
       </Flag>
+
+      <TitleStripWithContent
+        title={<>Ensure nothing gets published by mistake</>}
+        subtitle={
+          <>
+            <p>
+              With Workflows, you can set up a precise state machine to bring a
+              draft content up to the final publication through a series of
+              intermediate, fully customizable approval steps.
+            </p>
+            <p>
+              Define clear tasks for each team members, specifying exactly{' '}
+              <strong>
+                who is in charge of performing the necessary checks
+              </strong>{' '}
+              and operations on the content so that it can advance to the next
+              step in the approval chain.
+            </p>
+            <Button
+              as="a"
+              fs="small"
+              p="small"
+              s="invert"
+              href="/docs/general-concepts/workflows"
+            >
+              Learn more about Workflows
+            </Button>
+          </>
+        }
+      >
+        <Workflow />
+      </TitleStripWithContent>
 
       <Space top={2} bottom={2}>
         <LogosBar

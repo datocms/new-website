@@ -128,7 +128,11 @@ const Workflow = () => {
         })}
         ref={articleRef}
       >
-        <div className={s.recordBody}>
+        <div
+          className={cn(s.recordBody, {
+            [s.recordBodyChanged]: transition >= 3,
+          })}
+        >
           {transition >= 3 ? 'Changed article' : 'New article'}
         </div>
         <TransitionGroup className={s.personContainer}>

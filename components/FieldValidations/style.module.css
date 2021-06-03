@@ -24,7 +24,9 @@
   background: white;
   border-radius: 5px;
   padding: 20px;
-  min-height: 370px;
+  @media screen and (min-width: 1000px) {
+    min-height: 370px;
+  }
 }
 
 .validation {
@@ -84,5 +86,7 @@
 }
 
 .validationOptionsActive {
-  max-height: 30px;
+  @media screen and (min-width: 1000px) {
+    max-height: 30px;
+  }
 }

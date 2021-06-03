@@ -6,7 +6,7 @@
 .root {
   text-align: center;
 
-  @media screen and (width > 650px) {
+  @media screen and (width > 800px) {
     display: grid;
     text-align: center;
     grid-template-columns: 45% 1fr;
@@ -24,7 +24,7 @@
   margin-bottom: 40px;
   text-align: left;
 
-  @media screen and (width > 650px) {
+  @media screen and (width > 800px) {
     margin-bottom: 0;
   }
 
@@ -33,11 +33,11 @@
     display: block;
     margin: 0 auto;
 
-    @media screen and (width < 650px) {
+    @media screen and (width < 800px) {
       width: 50vw;
     }
 
-    @media screen and (width >= 650px) {
+    @media screen and (width >= 800px) {
       width: 100%;
       height: 50vh;
       min-height: 100%;
@@ -73,7 +73,7 @@
 }
 
 .content {
-  @media screen and (width > 650px) {
+  @media screen and (width > 800px) {
     text-align: left;
   }
 

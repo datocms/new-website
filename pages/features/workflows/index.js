@@ -19,6 +19,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
+import Button from 'components/Button';
 import Space from 'components/Space';
 
 import s from './style.module.css';
@@ -53,7 +54,7 @@ function Workflows({ page, preview, review }) {
           kicker="Editorial workflows"
           title={
             <>
-              <Highlight>Supercharge</Highlight> your content approval workflows
+              <Highlight>Supercharge</Highlight> your content approval workflow
             </>
           }
           subtitle={
@@ -69,9 +70,20 @@ function Workflows({ page, preview, review }) {
           title={<>Build your perfectly oiled content machine</>}
           subtitle={
             <>
-              Set up a precise state machine to bring a draft content up to the
-              final publication through a series of intermediate, fully
-              customizable approval steps.
+              <p>
+                Set up a precise state machine to bring a draft content up to
+                the final publication through a series of intermediate, fully
+                customizable approval steps.
+              </p>
+              <Button
+                as="a"
+                fs="small"
+                p="small"
+                s="invert"
+                href="/docs/general-concepts/workflows"
+              >
+                Learn more about Workflows
+              </Button>
             </>
           }
         >

@@ -24,8 +24,8 @@
     row-gap: 50px;
 
     grid-template-areas:
-      'draft review approved published'
-      '.     .      changes  .';
+      'draft review  approved published'
+      '.     changes .        .';
   }
 
   @media screen and (width > 1300px) {
@@ -78,6 +78,10 @@
   height: rfs(80px);
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
+
+  @media screen and (min-height: 800px) {
+    height: 140px;
+  }
 }
 
 .stageConfetti {
@@ -120,6 +124,10 @@
   @media screen and (width >= 1000px) {
     padding: 30px 30px 25px;
   }
+}
+
+.recordBodyChanged {
+  color: var(--azure-color);
 }
 
 .personContainer {
