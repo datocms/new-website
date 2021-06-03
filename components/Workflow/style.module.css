@@ -1,5 +1,5 @@
 .grid {
-  padding: 0 0 rfs(120px);
+  padding: 0 0 rfs(100px);
 
   @media screen and (width > 650px) {
     display: grid;

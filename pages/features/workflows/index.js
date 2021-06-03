@@ -13,7 +13,13 @@ import Workflow from 'components/Workflow';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import WorkflowPermissions from 'components/WorkflowPermissions';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Quote from 'components/Quote';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import Nike from 'public/images/logos/nike.svg';
+import Vercel from 'public/images/logos/vercel.svg';
+import LogosBar from 'components/LogosBar';
+import Space from 'components/Space';
 
 import s from './style.module.css';
 
@@ -47,8 +53,7 @@ function Workflows({ page, preview, review }) {
           kicker="Editorial workflows"
           title={
             <>
-              Keep the whole editorial team{' '}
-              <Highlight>on the same page</Highlight>
+              <Highlight>Supercharge</Highlight> your content approval workflows
             </>
           }
           subtitle={
@@ -59,6 +64,7 @@ function Workflows({ page, preview, review }) {
             </>
           }
         />
+
         <TitleStripWithContent
           title={<>Build your perfectly oiled content machine</>}
           subtitle={
@@ -73,26 +79,76 @@ function Workflows({ page, preview, review }) {
         </TitleStripWithContent>
 
         <Flag
-          style="good"
+          style="bad"
           title={
             <>
-              Define clear tasks{' '}
-              <FlagHighlight>for every team member</FlagHighlight>
+              Say goodbye to{' '}
+              <FlagHighlight style="bad">
+                content creation bottlenecks
+              </FlagHighlight>
             </>
           }
-          image={WorkflowPermissions}
+          image="faces"
         >
           <p>
-            Using our improved roles and permissions system, you can specify
-            exactly which team members are in charge of performing the necessary
-            checks and operations on the content so that it can advance to the
-            next step in the approval chain and the team never publishes
-            something by mistake.
+            Larger teams often stumble into disconnected systems, duplicate
+            content, and inefficient workflows. Organizations invest more in
+            content,{' '}
+            <strong>but their ROI remains lower due to friction</strong>, and
+            their content engines stall.
           </p>
         </Flag>
       </div>
 
-      <Quote review={review} />
+      <Flag
+        style="good"
+        title={
+          <>
+            Define clear tasks{' '}
+            <FlagHighlight>for every team member</FlagHighlight>
+          </>
+        }
+        image={WorkflowPermissions}
+      >
+        <p>
+          Using our improved roles and permissions system,{' '}
+          <strong>
+            you can specify exactly which team members are in charge
+          </strong>{' '}
+          of performing the necessary checks and operations on the content so
+          that it can advance to the next step in the approval chain and the
+          team never publishes something by mistake.
+        </p>
+      </Flag>
+
+      <Flag
+        style="good"
+        title={
+          <>
+            Different content requires{' '}
+            <FlagHighlight>different processes</FlagHighlight>
+          </>
+        }
+        image="dato-svg-4-02"
+      >
+        <p>
+          A system that is too rigid will only drive your team away from using
+          it. With DatoCMS you don't have to follow the same processes for each
+          content, but{' '}
+          <strong>
+            you can specify different workflows depending on the type of
+            resource
+          </strong>
+          .
+        </p>
+      </Flag>
+
+      <Space top={2} bottom={2}>
+        <LogosBar
+          title="We power experiences for over half a billion users"
+          clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
+        />
+      </Space>
     </Layout>
   );
 }
