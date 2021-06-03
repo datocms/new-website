@@ -18,22 +18,22 @@
 .body {
   padding: 40px 30px;
   background: #f3f3f3;
-}
 
-.field {
-  background: white;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  padding: 10px;
+  p {
+    background: white;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
 
-  strong {
-    border: 1px solid var(--border-color);
-    padding: 2px 4px 1px;
-    &:after {
-      content: '↲';
-      font-weight: normal;
-      color: var(--light-body-color);
-      padding-left: 3px;
+    strong {
+      border: 1px solid var(--border-color);
+      padding: 2px 4px 1px;
+      &:after {
+        content: '↲';
+        font-weight: normal;
+        color: var(--light-body-color);
+        padding-left: 3px;
+      }
     }
   }
 }

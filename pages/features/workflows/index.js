@@ -109,6 +109,25 @@ function Workflows({ page, preview, review }) {
           </>
         }
         image={WorkflowPermissions}
+        imageProps={{
+          children: (
+            <>
+              <p>
+                Can <strong>create</strong> new <strong>Articles</strong>
+              </p>
+
+              <p>
+                Can move new <strong>Articles</strong> from{' '}
+                <strong>Draft</strong> stage to <strong>In review</strong>
+              </p>
+
+              <p>
+                Can publish <strong>Articles</strong> in{' '}
+                <strong>Approved</strong> stage
+              </p>
+            </>
+          ),
+        }}
       >
         <p>
           Using our improved roles and permissions system,{' '}

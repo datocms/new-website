@@ -1,0 +1,88 @@
+.button {
+  background: var(--azure-color);
+  padding: 10px;
+  margin-top: 15px;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+
+.body {
+  padding: 40px 30px;
+  background: #f3f3f3;
+}
+
+.validations {
+  background: white;
+  border-radius: 5px;
+  padding: 20px;
+  min-height: 370px;
+}
+
+.validation {
+  display: flex;
+  margin-bottom: 10px;
+  pointer-events: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.validationCheck {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.validationLabel {
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.validationHint {
+  color: var(--light-body-color);
+}
+
+.validationOptions {
+  margin-top: 5px;
+  font-size: 0.9em;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+
+  input[type='text'],
+  .dropdown {
+    border: 1px solid var(--border-color);
+    padding: 4px 8px 3px;
+    display: inline-block;
+    margin-right: 3px;
+  }
+
+  input[type='text'][disabled] {
+    width: 50px;
+    font-family: inherit;
+    background: white;
+    color: inherit;
+  }
+
+  .dropdown {
+    &:after {
+      content: '↲';
+      font-weight: normal;
+      color: var(--light-body-color);
+      padding-left: 3px;
+    }
+  }
+}
+
+.validationOptionsActive {
+  max-height: 30px;
+}
