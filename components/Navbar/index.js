@@ -18,7 +18,7 @@ import Marketers from 'public/images/illustrations/marketers.svg';
 import Workflows from 'public/images/illustrations/workflows.svg';
 import ContentCreators from 'public/images/illustrations/content-editors2.svg';
 import RealTime from 'public/images/illustrations/live-31.svg';
-import DataIntegrity from 'public/images/illustrations/lock-icon.svg';
+import DataIntegrity from 'public/images/illustrations/lock2.svg';
 import StructuredText from 'public/images/illustrations/scontent.svg';
 
 import External from 'public/icons/regular/external-link.svg';
@@ -218,9 +218,9 @@ export default function Navbar() {
 
                         <Feature
                           icon={DataIntegrity}
-                          title="Data-integrity"
+                          title="Content integrity"
                           href="/features/data-integrity"
-                          description="Clean content is timeless content"
+                          description="Validations, sandbox environments and roles"
                         />
 
                         <Feature

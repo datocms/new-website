@@ -12,7 +12,7 @@ import Languages from 'public/images/illustrations/multilanguage-2.svg';
 import Video from 'public/images/illustrations/video-encoding.svg';
 import RealTime from 'public/images/illustrations/live-31.svg';
 import StructuredText from 'public/images/illustrations/scontent.svg';
-import DataIntegrity from 'public/images/illustrations/lock-icon.svg';
+import DataIntegrity from 'public/images/illustrations/lock2.svg';
 import Workflows from 'public/images/illustrations/workflows.svg';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -172,7 +172,7 @@ export default function Navbar() {
 
                   <Feature
                     icon={DataIntegrity}
-                    title="Data-integrity"
+                    title="Content integrity"
                     href="/features/data-integrity"
                     description="Clean content is timeless content"
                   />
