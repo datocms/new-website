@@ -49,7 +49,7 @@ export default function Support() {
 
                 <p className={s.support}>
                   To learn more about our self-service plans, visit our{' '}
-                  <Link href="/support">Pricing page</Link>.
+                  <Link href="/pricing">Pricing page</Link>.
                 </p>
 
                 <p className={s.support}>
