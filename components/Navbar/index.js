@@ -15,8 +15,10 @@ import Languages from 'public/images/illustrations/multilanguage-2.svg';
 import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 import Developers from 'public/images/illustrations/developers-2.svg';
 import Marketers from 'public/images/illustrations/marketers.svg';
+import Workflows from 'public/images/illustrations/workflows.svg';
 import ContentCreators from 'public/images/illustrations/content-editors2.svg';
 import RealTime from 'public/images/illustrations/live-31.svg';
+import DataIntegrity from 'public/images/illustrations/lock-icon.svg';
 import StructuredText from 'public/images/illustrations/scontent.svg';
 
 import External from 'public/icons/regular/external-link.svg';
@@ -212,6 +214,21 @@ export default function Navbar() {
                           title="Dynamic layouts"
                           href="/features/dynamic-layouts"
                           description="Easily build dynamic layouts for landing pages"
+                        />
+
+                        <Feature
+                          icon={DataIntegrity}
+                          title="Data-integrity"
+                          href="/features/data-integrity"
+                          description="Clean content is timeless content"
+                        />
+
+                        <Feature
+                          icon={Workflows}
+                          title="Workflows"
+                          isNew
+                          href="/features/workflows"
+                          description="Supercharge your content approval process"
                         />
 
                         <Feature

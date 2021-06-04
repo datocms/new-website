@@ -91,13 +91,11 @@ function Workflows({ page, preview, review }) {
         </TitleStripWithContent>
 
         <Flag
-          style="bad"
+          style="good"
           title={
             <>
               Say goodbye to{' '}
-              <FlagHighlight style="bad">
-                content creation bottlenecks
-              </FlagHighlight>
+              <FlagHighlight>content creation bottlenecks</FlagHighlight>
             </>
           }
           image="faces"
@@ -107,79 +105,79 @@ function Workflows({ page, preview, review }) {
             content, and inefficient workflows. Organizations invest more in
             content,{' '}
             <strong>but their ROI remains lower due to friction</strong>, and
-            their content engines stall.
+            their content engines stall. Our Workflows feature fixes all this.
           </p>
         </Flag>
-      </div>
 
-      <Flag
-        style="good"
-        title={
-          <>
-            Define clear tasks{' '}
-            <FlagHighlight>for every team member</FlagHighlight>
-          </>
-        }
-        image={WorkflowPermissions}
-        imageProps={{
-          children: (
+        <Flag
+          style="good"
+          title={
             <>
-              <p>
-                Can <strong>create</strong> new <strong>Articles</strong>
-              </p>
-
-              <p>
-                Can move new <strong>Articles</strong> from{' '}
-                <strong>Draft</strong> stage to <strong>In review</strong>
-              </p>
-
-              <p>
-                Can publish <strong>Articles</strong> in{' '}
-                <strong>Approved</strong> stage
-              </p>
+              Define clear tasks{' '}
+              <FlagHighlight>for every team member</FlagHighlight>
             </>
-          ),
-        }}
-      >
-        <p>
-          Using our improved roles and permissions system,{' '}
-          <strong>
-            you can specify exactly which team members are in charge
-          </strong>{' '}
-          of performing the necessary checks and operations on the content so
-          that it can advance to the next step in the approval chain and the
-          team never publishes something by mistake.
-        </p>
-      </Flag>
+          }
+          image={WorkflowPermissions}
+          imageProps={{
+            children: (
+              <>
+                <p>
+                  Can <strong>create</strong> new <strong>Articles</strong>
+                </p>
 
-      <Flag
-        style="good"
-        title={
-          <>
-            Different content requires{' '}
-            <FlagHighlight>different processes</FlagHighlight>
-          </>
-        }
-        image="dato-svg-4-02"
-      >
-        <p>
-          A system that is too rigid will only drive your team away from using
-          it. With DatoCMS you don't have to follow the same processes for each
-          content, but{' '}
-          <strong>
-            you can specify different workflows depending on the type of
-            resource
-          </strong>
-          .
-        </p>
-      </Flag>
+                <p>
+                  Can move new <strong>Articles</strong> from{' '}
+                  <strong>Draft</strong> stage to <strong>In review</strong>
+                </p>
 
-      <Space top={2} bottom={2}>
-        <LogosBar
-          title="We power experiences for over half a billion users"
-          clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
-        />
-      </Space>
+                <p>
+                  Can publish <strong>Articles</strong> in{' '}
+                  <strong>Approved</strong> stage
+                </p>
+              </>
+            ),
+          }}
+        >
+          <p>
+            Using our improved roles and permissions system,{' '}
+            <strong>
+              you can specify exactly which team members are in charge
+            </strong>{' '}
+            of performing the necessary checks and operations on the content so
+            that it can advance to the next step in the approval chain and the
+            team never publishes something by mistake.
+          </p>
+        </Flag>
+
+        <Flag
+          style="good"
+          title={
+            <>
+              Different content requires{' '}
+              <FlagHighlight>different processes</FlagHighlight>
+            </>
+          }
+          image="dato-svg-4-02"
+        >
+          <p>
+            A system that is too rigid will only drive your team away from using
+            it. With DatoCMS you don't have to follow the same processes for
+            each content, but{' '}
+            <strong>
+              you can specify different workflows depending on the type of
+              resource
+            </strong>
+            .
+          </p>
+        </Flag>
+
+        <Space top={4}>
+          <LogosBar
+            title="We power experiences for over half a billion users"
+            clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
+          />
+        </Space>
+      </div>
     </Layout>
   );
 }
