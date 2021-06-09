@@ -107,7 +107,10 @@ export default function ImageFigure({ data, imageClassName }) {
           <Image
             className={imageClassName}
             data={data.responsiveImage}
-            style={{ display: 'inline-block' }}
+            style={{
+              display: 'inline-block',
+              maxWidth: `${data.responsiveImage.width}px`,
+            }}
           />
         </Zoomable>
       )}

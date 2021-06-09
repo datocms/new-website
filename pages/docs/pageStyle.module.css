@@ -218,7 +218,8 @@
   .responsiveImage,
   .videoWrapper,
   iframe,
-  img {
+  img,
+  video {
     border-radius: 5px;
     overflow: hidden;
     display: inline-block;

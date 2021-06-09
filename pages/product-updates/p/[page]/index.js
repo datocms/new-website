@@ -17,6 +17,7 @@ import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'react-datocms';
 import PostContent from 'components/PostContent';
+import pageStyle from 'pages/docs/pageStyle.module.css';
 
 import { range } from 'range';
 
@@ -81,7 +82,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 width
                 title
                 alt
-                responsiveImage(imgixParams: { w: 950 }) {
+                responsiveImage(imgixParams: { w: 950, fit: max }) {
                   ...imageFields
                 }
                 zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
@@ -145,14 +146,6 @@ export default function Changelog({ preview, subscription }) {
           {posts &&
             posts.map((post) => (
               <div key={post.slug} className={s.post}>
-                <div className={s.info}>
-                  <FormattedDate date={post._firstPublishedAt} />
-                </div>
-                <h6 className={s.title}>
-                  <Link key={post.slug} href={`/product-updates/${post.slug}`}>
-                    <a>{post.title}</a>
-                  </Link>
-                </h6>
                 <div className={s.categories}>
                   {post.categories.map((cat) => (
                     <span
@@ -165,10 +158,21 @@ export default function Changelog({ preview, subscription }) {
                   ))}
                 </div>
 
+                <h6 className={s.title}>
+                  <Link key={post.slug} href={`/product-updates/${post.slug}`}>
+                    <a>{post.title}</a>
+                  </Link>
+                </h6>
+
+                <div className={s.info}>
+                  <FormattedDate date={post._firstPublishedAt} />
+                </div>
+
                 <div className={s.body}>
                   <PostContent
                     isFallback={router.isFallback}
                     content={post && post.content}
+                    style={pageStyle}
                   />
                 </div>
               </div>

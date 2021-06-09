@@ -18,6 +18,7 @@ import { useQuerySubscription } from 'react-datocms';
 import PostContent from 'components/PostContent';
 
 import s from 'pages/product-updates/p/[page]/style.module.css';
+import pageStyle from 'pages/docs/pageStyle.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -118,22 +119,6 @@ export default function Changelog({ preview, subscription }) {
 
       <Wrapper>
         <div className={s.post}>
-          <div className={s.info}>
-            {isFallback ? (
-              <Line />
-            ) : (
-              <FormattedDate date={post._firstPublishedAt} />
-            )}
-          </div>
-          <h6 className={s.title}>
-            {isFallback ? (
-              <Copy lines={2} />
-            ) : (
-              <Link key={post.slug} href={`/product-updates/${post.slug}`}>
-                <a>{post.title}</a>
-              </Link>
-            )}
-          </h6>
           <div className={s.categories}>
             {post &&
               post.categories.map((cat) => (
@@ -147,10 +132,29 @@ export default function Changelog({ preview, subscription }) {
               ))}
           </div>
 
+          <h6 className={s.title}>
+            {isFallback ? (
+              <Copy lines={2} />
+            ) : (
+              <Link key={post.slug} href={`/product-updates/${post.slug}`}>
+                <a>{post.title}</a>
+              </Link>
+            )}
+          </h6>
+
+          <div className={s.info}>
+            {isFallback ? (
+              <Line />
+            ) : (
+              <FormattedDate date={post._firstPublishedAt} />
+            )}
+          </div>
+
           <div className={s.body}>
             <PostContent
               isFallback={isFallback}
               content={post && post.content}
+              style={pageStyle}
             />
           </div>
         </div>
