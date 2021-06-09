@@ -11,6 +11,22 @@ import wretch from 'wretch';
 
 wretch().errorType('json');
 
+const Feature = ({ href, isNew, title }) => (
+  <div className={s.groupLink}>
+    <Link href={href}>
+      <a>
+        {title}
+        {isNew && (
+          <>
+            {' '}
+            <span className={s.isNew}>New</span>
+          </>
+        )}
+      </a>
+    </Link>
+  </div>
+);
+
 export default function Footer({ noCta }) {
   const {
     register,
@@ -126,36 +142,68 @@ export default function Footer({ noCta }) {
                 <div className={s.group}>
                   <div className={s.groupTitle}>Features</div>
                   <div className={s.groupLinks}>
-                    <div className={s.groupLink}>
-                      <Link href="/features/worldwide-cdn">
-                        <a>Worldwide CDN</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <Link href="/features/graphql-content-api">
-                        <a>GraphQL Content API</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <Link href="/features/images-api">
-                        <a>Images API</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <Link href="/features/video-streaming-encoding">
-                        <a>Video streaming/encoding</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <Link href="/features/multi-language">
-                        <a>Multi-language</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <Link href="/features/dynamic-layouts">
-                        <a>Dynamic layouts</a>
-                      </Link>
-                    </div>
+                    <Feature
+                      title="Worldwide CDN"
+                      href="/features/worldwide-cdn"
+                      description="Performant, secure, and close to every customer"
+                    />
+
+                    <Feature
+                      title="GraphQL Content API"
+                      href="/features/graphql-content-api"
+                      description="Develop faster with powerful developer tools"
+                    />
+
+                    <Feature
+                      title="Images API"
+                      href="/features/images-api"
+                      description="Endless transformations at your disposal"
+                    />
+
+                    <Feature
+                      title="Video API"
+                      href="/features/video-streaming-encoding"
+                      description="Produce videos and serve them fast to any device"
+                    />
+
+                    <Feature
+                      title="Multi-language"
+                      href="/features/multi-language"
+                      description="Reach global audience with localized content"
+                    />
+
+                    <Feature
+                      title="Dynamic layouts"
+                      href="/features/dynamic-layouts"
+                      description="Easily build dynamic layouts for landing pages"
+                    />
+
+                    <Feature
+                      title="Content integrity"
+                      href="/features/data-integrity"
+                      description="Validations, sandbox environments and roles"
+                    />
+
+                    <Feature
+                      title="Workflows"
+                      isNew
+                      href="/features/workflows"
+                      description="Supercharge your content approval process"
+                    />
+
+                    <Feature
+                      title="Real-time updates"
+                      isNew
+                      href="/features/real-time"
+                      description="Live changes to content on production website"
+                    />
+
+                    <Feature
+                      title="Structured text"
+                      isNew
+                      href="/features/structured-text"
+                      description="Freedom for editors, control for developers"
+                    />
                   </div>
                 </div>
               </div>
