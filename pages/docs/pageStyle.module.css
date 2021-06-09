@@ -90,6 +90,7 @@
     margin: rfs(70px) 0 rfs(23px);
     font-weight: bold;
     font-family: var(--font-sans);
+    letter-spacing: -0.03em;
   }
 
   h4 {
