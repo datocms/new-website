@@ -162,7 +162,8 @@ function ImagesApi({ page, preview, integrations }) {
           autoPlay: true,
           muted: true,
           loop: true,
-          src: 'https://stream.mux.com/kgKny6B1uPoE01catGgWkMiICk6eUkfcf.m3u8',
+          src:
+            'https://stream.mux.com/HWUevVMYGa01WRKd00nB5hHKe7GT1k10102n.m3u8',
         }}
       >
         <p>

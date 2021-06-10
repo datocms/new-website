@@ -8,9 +8,9 @@ export default function VideoPlayer({ src, autoPlay, ...other }) {
     var hls = new Hls();
     hls.attachMedia(ref.current);
 
-    hls.on(Hls.Events.MEDIA_ATTACHED, function() {
+    hls.on(Hls.Events.MEDIA_ATTACHED, function () {
       hls.loadSource(src);
-      hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
+      hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
         if (autoPlay) {
           ref.current.play();
         }
@@ -18,5 +18,5 @@ export default function VideoPlayer({ src, autoPlay, ...other }) {
     });
   }, []);
 
-  return <video {...other} ref={ref} />;
+  return <video {...other} ref={ref} style={{ display: 'block' }} />;
 }
