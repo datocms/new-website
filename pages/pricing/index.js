@@ -121,13 +121,13 @@ const PlanBox = ({ plan, hints, icon: Icon }) => {
       <div className={s.planDescription}>{plan.attributes.description}</div>
 
       <div className={s.planPriceContainer}>
-        <span className={s.planPrice}>€{formatNumber(monthlyPrice)}</span>
+        <span className={s.planPrice}>€{formatNumber(yearlyPrice)}</span>
         <span className={s.planPricePerMonth}>/month</span>
 
         {monthlyPrice > 0 ? (
           <span className={s.planYearlyPrice}>
-            or <strong>€{formatNumber(yearlyPrice)}/month</strong> if paying
-            annually
+            if paying annually, or{' '}
+            <strong>€{formatNumber(monthlyPrice)}/month</strong>
           </span>
         ) : (
           <span className={s.planYearlyPrice}>No credit card required</span>
