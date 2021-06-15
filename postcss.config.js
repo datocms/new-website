@@ -5,10 +5,7 @@ module.exports = {
   plugins: {
     // Customizations:
     'postcss-advanced-variables': {},
-    'postcss-property-lookup': {},
     'postcss-nested': {},
-    'postcss-custom-media': {},
-    'postcss-media-minmax': {},
     rfs: {
       baseValue: '16px',
       unit: 'px',
