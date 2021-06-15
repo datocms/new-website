@@ -2,7 +2,7 @@
   text-align: center;
   display: none;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (width >= 800px) {
     display: block;
     margin-bottom: rfs(150px);
   }
