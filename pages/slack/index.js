@@ -9,6 +9,7 @@ import Highlight from 'components/Highlight';
 import wretch from 'wretch';
 import { useState } from 'react';
 import { useRecaptcha } from 'react-recaptcha-hook';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 import Head from 'next/head';
 
 wretch().errorType('json');
@@ -20,22 +21,17 @@ const errorLabels = {
     'You have already been invited! Check for an email from feedback@slack.com.',
 };
 
-export default function Slack() {
+function Slack() {
   const { data: stats } = useSWR('/api/slack/info', fetcher);
   const execute = useRecaptcha({
     sitekey: '6LcU1dwUAAAAADe2gkTfPNlG3xoybrgx_ulxVbF3',
     hideDefaultBadge: true,
   });
 
-  const [success, setSuccess] = useState(false);
-  const {
-    register,
-    reset,
-    setError,
-    handleSubmit,
-    formState,
-    errors,
-  } = useForm();
+  const { addToast } = useToasts();
+
+  const { register, reset, setError, handleSubmit, formState, errors } =
+    useForm();
 
   const onSubmit = async ({ email }) => {
     try {
@@ -45,7 +41,9 @@ export default function Slack() {
         .json();
 
       reset();
-      setSuccess(true);
+      addToast(
+        '🎉 Awesome, welcome on board! Check your email for the invitation!',
+      );
     } catch (e) {
       setError('email', {
         message: errorLabels[e.json.error] || `Slack error: ${e.json.error}`,
@@ -74,14 +72,6 @@ export default function Slack() {
         }
       />
       <Wrapper>
-        {success && (
-          <div className={s.success}>
-            <div className={s.successTitle}>
-              Awesome, welcome on board! <span>🎉</span>
-            </div>
-            Check your email for the invitation!
-          </div>
-        )}
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <input
             name="email"
@@ -113,5 +103,13 @@ export default function Slack() {
         </form>
       </Wrapper>
     </Layout>
+  );
+}
+
+export default function SlackWrapper(props) {
+  return (
+    <ToastProvider>
+      <Slack {...props} />
+    </ToastProvider>
   );
 }

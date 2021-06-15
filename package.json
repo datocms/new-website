@@ -15,7 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.47",
-    "@n8tb1t/use-scroll-position": "^1.0.43",
     "@rehooks/component-size": "^1.0.3",
     "@slack/web-api": "^5.11.0",
     "@svgr/webpack": "^5.5.0",
@@ -37,8 +36,8 @@
     "front-matter": "^4.0.2",
     "glob": "^7.1.7",
     "graphql": "^15.5.0",
-    "hls.js": "^0.14.11",
-    "html-react-parser": "^0.13.0",
+    "hls.js": "^1.0.7",
+    "html-react-parser": "^1.2.6",
     "humps": "^2.0.1",
     "json-schema-ref-parser": "^9.0.9",
     "keyword-highlighter": "^1.0.6",
