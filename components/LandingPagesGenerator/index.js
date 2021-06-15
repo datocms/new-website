@@ -1,6 +1,5 @@
 import UIChrome from 'components/UiChrome';
 import s from './style.module.css';
-import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 
@@ -51,18 +50,6 @@ export default function UseModularBlocks() {
     },
   );
 
-  // rows.forEach((row) => {
-  //   row.y = height;
-  //   height += row.height;
-  // });
-
-  // const transitions = useTransition(rows, {
-  //   from: { height: 0, opacity: 0 },
-  //   leave: { height: 0, opacity: 0 },
-  //   enter: ({ y, height }) => ({ y, height, opacity: 1 }),
-  //   update: ({ y, height }) => ({ y, height }),
-  // });
-
   return (
     <UIChrome>
       <div className={s.body}>
@@ -86,16 +73,6 @@ export default function UseModularBlocks() {
               </div>
             </animated.div>
           ))}
-          {/* {transitions((style, item) => (
-            <animated.div className={s.card} style={style}>
-              <div className={s.cell}>
-                <div
-                  className={s.details}
-                  style={{ backgroundImage: item.css }}
-                />
-              </div>
-            </animated.div>
-          ))} */}
         </div>
       </div>
     </UIChrome>
