@@ -29,7 +29,7 @@ const BackgroundImage = ({ src, scale = 1.0, ...other }) => {
         setUrl(parsedSrc.toString());
       };
     }
-  }, [src, dpr, width, height]);
+  }, [src, dpr, width, height, scale, size]);
 
   return (
     <div

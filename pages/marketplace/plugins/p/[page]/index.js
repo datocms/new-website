@@ -7,7 +7,7 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import Link from 'next/link';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import FormattedDate from 'components/FormattedDate';
 import { PLUGINS_PER_PAGE } from 'lib/pages';
 import Head from 'next/head';
@@ -111,7 +111,7 @@ export default function Plugins({
                 href={`/marketplace/plugins/i/${post.packageName}`}
                 image={
                   post.coverImage && post.coverImage.responsiveImage ? (
-                    <Image
+                    <DatoImage
                       className={s.image}
                       data={post.coverImage.responsiveImage}
                     />

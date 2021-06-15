@@ -3,7 +3,7 @@ import LazyImage from 'components/LazyImage';
 import Head from 'next/head';
 import { request, imageFields } from 'lib/datocms';
 import s from './style.module.css';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import truncate from 'truncate';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import Link from 'next/link';
@@ -180,7 +180,7 @@ export default function IntegrationsPage({
               </div>
             }
             image={
-              <Image
+              <DatoImage
                 className={s.boxImageImage}
                 data={item.screenshot.responsiveImage}
               />
@@ -207,11 +207,10 @@ export default function IntegrationsPage({
         {page.plugins.map((item) => (
           <Box
             key={item.packageName}
-            href="/marketplace/plugins/i/[...chunks]"
             href={`/marketplace/plugins/i/${item.packageName}`}
             description={truncate(item.description, 55)}
             image={
-              <Image
+              <DatoImage
                 className={s.boxImageImage}
                 data={item.coverImage.responsiveImage}
               />
@@ -223,8 +222,8 @@ export default function IntegrationsPage({
         title="Hosting &amp; CI Building"
         description={
           <>
-            Server, serverless or static: no matter the stack you're using,
-            we've got you covered
+            Server, serverless or static: no matter the stack you&#39;re using,
+            we&#39;ve got you covered
           </>
         }
         browse={

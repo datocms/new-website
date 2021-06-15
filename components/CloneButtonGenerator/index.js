@@ -89,7 +89,7 @@ export default function CloneButtonGenerator() {
               <a
                 href={cloneUrl}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className={style.button}
               >
                 <img

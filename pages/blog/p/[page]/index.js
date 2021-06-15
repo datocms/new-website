@@ -9,7 +9,7 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import Link from 'next/link';
-import { Image, StructuredText } from 'react-datocms';
+import { Image as DatoImage, StructuredText } from 'react-datocms';
 import Masonry from 'react-masonry-css';
 import FormattedDate from 'components/FormattedDate';
 import { BLOG_POSTS_PER_PAGE } from 'lib/pages';
@@ -174,7 +174,7 @@ export default function Blog({ preview, subscription }) {
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <a className={s.post}>
                   {post.coverImage && post.coverImage.responsiveImage && (
-                    <Image
+                    <DatoImage
                       className={s.image}
                       data={post.coverImage.responsiveImage}
                     />

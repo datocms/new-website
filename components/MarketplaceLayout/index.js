@@ -13,7 +13,7 @@ export default function IntegrationsLayout({ children, preview }) {
   const [visible, setVisible] = useState(false);
   const toggleVisibility = useCallback(() => {
     setVisible((v) => !v);
-  });
+  }, [setVisible]);
 
   return (
     <BaseLayout preview={preview}>

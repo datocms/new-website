@@ -5,7 +5,7 @@ import Prism from 'components/Prism';
 import defaultStyles from './style.module.css';
 import { Copy, Image as FakeImage } from 'components/FakeContent';
 import LazyImage from 'components/LazyImage';
-import { Image, StructuredText, renderRule } from 'react-datocms';
+import { Image as DatoImage, StructuredText, renderRule } from 'react-datocms';
 import UiChrome from 'components/UiChrome';
 import PluginBox from 'components/PluginBox';
 import Button from 'components/Button';
@@ -83,7 +83,7 @@ function renderBlock(s, block) {
           <div className={s.demo}>
             <div className={s.demoPreview}>
               <UiChrome title={block.demo.name}>
-                <Image
+                <DatoImage
                   className={s.demoImage}
                   data={block.demo.screenshot.responsiveImage}
                 />
@@ -120,7 +120,7 @@ function renderBlock(s, block) {
                 <PluginBox
                   description="Try this demo »"
                   image={
-                    <Image
+                    <DatoImage
                       className={s.pluginBoxImage}
                       data={item.screenshot.responsiveImage}
                     />

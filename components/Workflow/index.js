@@ -65,6 +65,7 @@ const Workflow = () => {
     articleRef.current.style.left = `${newRef.current.offsetLeft + 10}px`;
     articleRef.current.style.top = `${newRef.current.offsetTop + 10}px`;
     articleRef.current.style.width = `${newRef.current.offsetWidth}px`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
   useEffect(() => {

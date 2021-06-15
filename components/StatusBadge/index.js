@@ -26,6 +26,7 @@ export default function StatusBadge() {
       href="https://status.datocms.com"
       target="_blank"
       className={cn(s.status, { [s.ok]: !firstDownStatus })}
+      rel="noreferrer"
     >
       {firstDownStatus ? statusLabel[firstDownStatus] : 'All systems normal'}
     </a>

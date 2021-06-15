@@ -1,7 +1,7 @@
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import UiChrome from 'components/UiChrome';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import s from './style.module.css';
 import Link from 'next/link';
 
@@ -20,7 +20,7 @@ export default function TryDemoCta({
         <div className={s.left}>
           <div className={s.chrometop}>
             <UiChrome title={windowTitle}>
-              <Image data={image} className={s.screenshot} />
+              <DatoImage data={image} className={s.screenshot} />
             </UiChrome>
           </div>
           <div className={s.chromebottom}>

@@ -1,3 +1,4 @@
+import React from 'react';
 import Layout from 'components/Layout';
 import {
   gqlStaticPaths,
@@ -37,7 +38,7 @@ import TryDemoCta from 'components/TryDemoCta';
 import Space from 'components/Space';
 import VideoPlayer from 'components/VideoPlayer';
 import UiChrome from 'components/UiChrome';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
@@ -269,7 +270,7 @@ export default function UseCase({ landing, websites, preview }) {
                       }
                     >
                       <UiChrome title={website.title} url={website.url}>
-                        <Image
+                        <DatoImage
                           className={s.websiteScreen}
                           data={website.image.responsiveImage}
                         />

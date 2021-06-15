@@ -5,7 +5,7 @@ import Layout from 'components/MarketplaceLayout';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import UiChrome from 'components/UiChrome';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import { LogoImage } from 'components/PluginBox';
 import {
   PluginInfo,
@@ -135,14 +135,18 @@ export default function EnterpriseApp({ page, preview }) {
           <PluginInfo>
             <Info title="Preview URL" isFallback={isFallback}>
               {!isFallback && (
-                <a href={page.livePreviewUrl} target="_blank">
+                <a href={page.livePreviewUrl} target="_blank" rel="noreferrer">
                   Visit preview website
                 </a>
               )}
             </Info>
             <Info title="Github repo" isFallback={isFallback}>
               {!isFallback && (
-                <a href={githubRepoToUrl(page.githubRepo)} target="_blank">
+                <a
+                  href={githubRepoToUrl(page.githubRepo)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {page.githubRepo.split(':')[0]}
                 </a>
               )}
@@ -159,14 +163,14 @@ export default function EnterpriseApp({ page, preview }) {
           !isFallback &&
           [
             <UiChrome key="front" title={page.demoName}>
-              <Image
+              <DatoImage
                 style={{ display: 'block ' }}
                 data={page.screenshot.responsiveImage}
               />
             </UiChrome>,
             page.backendScreenshot && (
               <UiChrome key="back">
-                <Image
+                <DatoImage
                   style={{ display: 'block ' }}
                   data={page.backendScreenshot.responsiveImage}
                 />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import s from './style.module.css';
 import { LanguageConsumer } from 'components/LanguagePicker';
 import humps from 'humps';
@@ -474,7 +474,8 @@ export function Schema({ title, schema, showId, hideRequiredOptional }) {
                 )}
               </div>
               <div className={s.description}>
-                Must be exactly <code>"{schema.properties.type.example}"</code>
+                Must be exactly{' '}
+                <code>&quot;{schema.properties.type.example}&quot;</code>
               </div>
             </div>
           )}

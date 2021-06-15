@@ -1,3 +1,4 @@
+import React from 'react';
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
@@ -64,7 +65,7 @@ function Slack() {
         subtitle={
           <>
             Become a part of DatoCMS community, try out new product updates
-            before they're widely released, help us test and improve the
+            before they&apos;re widely released, help us test and improve the
             product.
           </>
         }

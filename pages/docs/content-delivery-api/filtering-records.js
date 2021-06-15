@@ -1,3 +1,4 @@
+import React from 'react';
 import DocsLayout from 'components/DocsLayout';
 import PostContent from 'components/PostContent';
 import Space from 'components/Space';

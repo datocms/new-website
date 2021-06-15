@@ -21,7 +21,9 @@ const RequestResponse = ({ title, description, chunks }) => (
           remarkPlugins={[gfm]}
           rehypePlugins={[rehypeRaw]}
           components={{
+            // eslint-disable-next-line react/display-name
             pre: ({ children }) => <>{children}</>,
+            // eslint-disable-next-line react/display-name
             code: ({ inline, className, children }) => {
               const match = /language-(\w+)/.exec(className || '');
               return inline ? (

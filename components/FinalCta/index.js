@@ -13,7 +13,7 @@ export default function FinalCta() {
             <div className={s.title}>Start using DatoCMS today</div>
             <div className={s.subtitle}>
               According to Gartner 89% of companies plan to compete primarily on
-              the basis of customer experience this year. Don't get caught
+              the basis of customer experience this year. Don&#39;t get caught
               unprepared.
             </div>
           </div>

@@ -3,7 +3,7 @@ import s from './style.module.css';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const allBlocks = ['Text', 'Gallery', 'Quote', 'Call to action'];
 
 export default function FieldSettings() {
@@ -14,7 +14,7 @@ export default function FieldSettings() {
       while (true) {
         for (let x = 0; x < allBlocks.length; x++) {
           await wait(100);
-          setBlockCount(i => i + 1);
+          setBlockCount((i) => i + 1);
         }
         await wait(800);
         setBlockCount(-1);
@@ -26,7 +26,7 @@ export default function FieldSettings() {
   return (
     <UIChrome>
       <div className={s.body}>
-        <div className={s.title}>Edit "Blog post" model</div>
+        <div className={s.title}>Edit &quot;Blog post&quot; model</div>
 
         <div className={s.field}>
           <div className={s.fieldInner}>

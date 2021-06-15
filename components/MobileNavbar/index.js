@@ -90,7 +90,7 @@ export default function Navbar() {
 
   const toggleVisibility = useCallback(() => {
     setVisible((v) => !v);
-  });
+  }, [setVisible]);
 
   return (
     <>

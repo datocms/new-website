@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from 'react';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import { Portal } from 'utils/usePortal';
 import s from './style.module.css';
 
@@ -31,7 +31,7 @@ function Zoom({ children, onClose }) {
     return () => {
       document.removeEventListener('keydown', escFunction, false);
     };
-  }, []);
+  }, [escFunction]);
 
   return (
     <Portal>
@@ -70,10 +70,9 @@ export default function ImageFigure({ data, imageClassName }) {
             data.width > 900 && (
               <video
                 poster={`${data.url}?fm=jpg&fit=max&w=1500`}
-                style={{ width: `${data.width}px` }}
                 autoPlay
                 loop
-                style={{ display: 'block' }}
+                style={{ width: `${data.width}px`, display: 'block' }}
               >
                 <source src={`${data.url}?fm=webm&w=1500`} type="video/webm" />
                 <source src={`${data.url}?fm=mp4&w=1500`} type="video/mp4" />
@@ -97,14 +96,14 @@ export default function ImageFigure({ data, imageClassName }) {
           content={
             data.zoomableResponsiveImage &&
             data.width > 900 && (
-              <Image
+              <DatoImage
                 className={imageClassName}
                 data={data.zoomableResponsiveImage}
               />
             )
           }
         >
-          <Image
+          <DatoImage
             className={imageClassName}
             data={data.responsiveImage}
             style={{

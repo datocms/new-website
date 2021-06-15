@@ -289,7 +289,7 @@ export default function InterstitialTitle() {
     reset();
     setStarted(true);
     setInterval(reset, steps.length * stepTime);
-  }, []);
+  }, [reset, setStarted]);
 
   return (
     <Wrapper>

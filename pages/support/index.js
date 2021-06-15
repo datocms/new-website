@@ -107,7 +107,7 @@ export default function Support({ preview, topics }) {
             <>
               Got&nbsp;issues?
               <br />
-              <Highlight>We're&nbsp;here to&nbsp;help!</Highlight>
+              <Highlight>We&apos;re&nbsp;here to&nbsp;help!</Highlight>
             </>
           }
         />
@@ -164,7 +164,7 @@ export default function Support({ preview, topics }) {
                 </p>
                 <ul>
                   {leafTopic.commonQuestions.map((q) => (
-                    <li id={q.url}>
+                    <li id={q.url} key={q.url}>
                       <a href={q.url}>{q.title}</a>
                     </li>
                   ))}
@@ -173,7 +173,7 @@ export default function Support({ preview, topics }) {
                   leafTopic.children.length === 0 &&
                   !leafTopic.disableContactForm && (
                     <>
-                      <h3>Didn't find what you're looking for?</h3>
+                      <h3>Didn&#39;t find what you&#39;re looking for?</h3>
                       <ul>
                         <li>
                           <a

@@ -135,8 +135,7 @@ function ImagesApi({ page, preview, integrations }) {
           autoPlay: true,
           muted: true,
           loop: true,
-          src:
-            'https://stream.mux.com/5hKbBhhU7TF202HRvbivd1WWAKuGgmP0100.m3u8',
+          src: 'https://stream.mux.com/5hKbBhhU7TF202HRvbivd1WWAKuGgmP0100.m3u8',
         }}
       >
         <p>
@@ -162,16 +161,16 @@ function ImagesApi({ page, preview, integrations }) {
           autoPlay: true,
           muted: true,
           loop: true,
-          src:
-            'https://stream.mux.com/HWUevVMYGa01WRKd00nB5hHKe7GT1k10102n.m3u8',
+          src: 'https://stream.mux.com/HWUevVMYGa01WRKd00nB5hHKe7GT1k10102n.m3u8',
         }}
       >
         <p>
           When you need to deliver content not only through the web, but on an
           ever-growing number of different mediums ranging from native apps,
-          voice assistants, e-books, IoT, etc... that's when being able to only
-          create hyperlinks to fixed web addresses starts to get to you. What
-          you need is clear separation between between content and presentation.
+          voice assistants, e-books, IoT, etc... that&#39;s when being able to
+          only create hyperlinks to fixed web addresses starts to get to you.
+          What you need is clear separation between between content and
+          presentation.
         </p>
       </Flag>
 

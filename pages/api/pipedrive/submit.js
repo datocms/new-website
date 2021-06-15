@@ -8,7 +8,7 @@ const rollbar = process.env.ROLLBAR_TOKEN
 
 pipedrive.Configuration.apiToken = process.env.PIPEDRIVE_TOKEN;
 
-export default async (req, res) => {
+const handler = async (req, res) => {
   try {
     if (req.method !== 'POST') {
       return res.status(404).send('Invalid endpoint!');
@@ -200,3 +200,5 @@ function httpPost(endpoint, data) {
     req.end();
   });
 }
+
+export default handler;

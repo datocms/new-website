@@ -1,7 +1,7 @@
 import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import { request, imageFields } from 'lib/datocms';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import Head from 'next/head';
 import PluginBox from 'components/PluginBox';
 import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
@@ -89,7 +89,7 @@ export default function Plugins({ starters, preview }) {
                   </div>
                 }
                 image={
-                  <Image
+                  <DatoImage
                     className={s.boxImageImage}
                     data={item.screenshot.responsiveImage}
                   />

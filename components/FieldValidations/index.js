@@ -26,8 +26,8 @@ export default function FieldValidations() {
             <div className={s.validationBody}>
               <div className={s.validationLabel}>Required</div>
               <div className={s.validationHint}>
-                You won't be able to save or publish a record if this field is
-                empty
+                You won&#39;t be able to save or publish a record if this field
+                is empty
               </div>
             </div>
           </div>
@@ -63,8 +63,8 @@ export default function FieldValidations() {
                 Accept only specified extensions
               </div>
               <div className={s.validationHint}>
-                You won't be able to save or publish a record if the file
-                doesn't end with one the specified values
+                You won&#39;t be able to save or publish a record if the file
+                doesn&#39;t end with one the specified values
               </div>
 
               <div

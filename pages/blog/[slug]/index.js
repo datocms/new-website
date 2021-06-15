@@ -6,7 +6,7 @@ import {
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { Image, renderMetaTags } from 'react-datocms';
+import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import FormattedDate from 'components/FormattedDate';
 import InterstitialTitle from 'components/InterstitialTitle';
 import PostContent from 'components/PostContent';
@@ -191,7 +191,7 @@ export default function Article({ preview, subscription }) {
           {isFallback ? (
             <Rect className={s.avatar} />
           ) : (
-            <Image
+            <DatoImage
               className={s.avatar}
               data={post.author.avatar.responsiveImage}
             />

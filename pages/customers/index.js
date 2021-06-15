@@ -13,7 +13,7 @@ import Nhs from 'public/images/logos/new/nhs.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import React from 'react';
-import { Image, useQuerySubscription } from 'react-datocms';
+import { Image as DatoImage, useQuerySubscription } from 'react-datocms';
 import s from './style.module.css';
 import Head from 'next/head';
 
@@ -93,7 +93,7 @@ export default function Customers({ subscription, preview }) {
             <Link href={`/customers/${post.slug}`} key={post.slug}>
               <a className={s.post}>
                 <div className={s.postImage}>
-                  <Image data={post.coverImage.responsiveImage} />
+                  <DatoImage data={post.coverImage.responsiveImage} />
                 </div>
                 <div className={s.postBody}>
                   <div className={s.postTitle}>

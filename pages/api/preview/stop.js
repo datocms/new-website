@@ -1,6 +1,6 @@
 import url from 'url';
 
-export default (req, res) => {
+const handler = (req, res) => {
   const uri = url.parse(req.query.page || '/', true);
   const sanitizedUrl = `${uri.pathname}${uri.search || ''}`;
 
@@ -10,3 +10,5 @@ export default (req, res) => {
   res.setHeader('Location', sanitizedUrl);
   res.end();
 };
+
+export default handler;

@@ -234,7 +234,11 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <a href="https://community.datocms.com" target="_blank">
+                      <a
+                        href="https://community.datocms.com"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         Community forum
                       </a>
                     </div>
@@ -244,7 +248,11 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <a href="https://www.twitter.com/datocms" target="_blank">
+                      <a
+                        href="https://www.twitter.com/datocms"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         Twitter
                       </a>
                     </div>

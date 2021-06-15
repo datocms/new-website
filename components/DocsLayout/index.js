@@ -19,7 +19,7 @@ export default function DocsLayout({
       <div className={s.footer} data-datocms-noindex>
         <div className={s.footerTitle}>Questions?</div>
         <div className={s.footerBody}>
-          We're always happy to help with code or other questions you might
+          We&#39;re always happy to help with code or other questions you might
           have. Search our{' '}
           <Link href="/docs">
             <a>documentation</a>
@@ -86,7 +86,11 @@ export default function DocsLayout({
                 </Link>
               </li>
               <li>
-                <a href="https://status.datocms.com" target="_blank">
+                <a
+                  href="https://status.datocms.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <StatusIcon />
                   Status page
                 </a>
