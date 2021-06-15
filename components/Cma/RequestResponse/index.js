@@ -1,8 +1,10 @@
 import Prism from 'components/Prism';
-import ReactMarkdownWithHtml from 'react-markdown/with-html';
+import ReactMarkdown from 'react-markdown';
 import slugify from 'utils/slugify';
 import gfm from 'remark-gfm';
 import Heading from 'components/Heading';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 import s from './style.module.css';
 
@@ -15,22 +17,27 @@ const RequestResponse = ({ title, description, chunks }) => (
     )}
     {description && (
       <div className={s.description}>
-        <ReactMarkdownWithHtml
-          allowDangerousHtml
-          plugins={[gfm]}
-          source={description}
-          renderers={{
-            code: ({ language, value }) => {
-              return (
+        <ReactMarkdown
+          remarkPlugins={[gfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={{
+            pre: ({ children }) => <>{children}</>,
+            code: ({ inline, className, children }) => {
+              const match = /language-(\w+)/.exec(className || '');
+              return inline ? (
+                <code>{children}</code>
+              ) : (
                 <Prism
-                  code={value}
-                  language={language || 'unknown'}
+                  code={String(children).replace(/\n$/, '')}
+                  language={match[1] || 'unknown'}
                   showLineNumbers
                 />
               );
             },
           }}
-        />
+        >
+          {description}
+        </ReactMarkdown>
       </div>
     )}
 

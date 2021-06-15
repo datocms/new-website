@@ -10,7 +10,7 @@ import React from 'react';
 import HttpExample from 'components/Cma/HttpExample';
 import JsExample from 'components/Cma/JsExample';
 import RubyExample from 'components/Cma/RubyExample';
-import ReactMarkdownWithHtml from 'react-markdown/with-html';
+import ReactMarkdown from 'react-markdown';
 import { HrefSchema, Schema } from 'components/Cma/Schema';
 import TargetSchema from 'components/Cma/TargetSchema';
 import { LanguageConsumer } from 'components/LanguagePicker';
@@ -18,6 +18,8 @@ import { useRouter } from 'next/router';
 import Prism from 'components/Prism';
 import gfm from 'remark-gfm';
 import AppError from 'errors/AppError';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -143,22 +145,27 @@ export default function DocPage({ docGroup, cma, preview, endpoint }) {
               <div className={s.title}>{link.title}</div>
               <div className={s.body}>
                 {link.description && (
-                  <ReactMarkdownWithHtml
-                    allowDangerousHtml
-                    plugins={[gfm]}
-                    source={link.description}
-                    renderers={{
-                      code: ({ language, value }) => {
-                        return (
+                  <ReactMarkdown
+                    remarkPlugins={[gfm]}
+                    rehypePlugins={[rehypeRaw]}
+                    components={{
+                      pre: ({ children }) => <>{children}</>,
+                      code: ({ inline, className, children }) => {
+                        const match = /language-(\w+)/.exec(className || '');
+                        return inline ? (
+                          <code>{children}</code>
+                        ) : (
                           <Prism
-                            code={value}
-                            language={language || 'unknown'}
+                            code={String(children).replace(/\n$/, '')}
+                            language={match[1] || 'unknown'}
                             showLineNumbers
                           />
                         );
                       },
                     }}
-                  />
+                  >
+                    {link.description}
+                  </ReactMarkdown>
                 )}
                 {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
                 {link.schema && (

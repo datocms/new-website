@@ -122,7 +122,7 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
             <div className={s.article}>
               <div className={s.title}>{result.schema.title}</div>
               <div className={s.body}>
-                <ReactMarkdown source={result.schema.description} />
+                <ReactMarkdown>{result.schema.description}</ReactMarkdown>
                 <Schema
                   title="Object payload"
                   showId
