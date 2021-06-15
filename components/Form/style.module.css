@@ -20,9 +20,9 @@
     border: 0;
     margin: 0;
     background-color: white;
-    padding: 45px rfs(29px) 20px;
+    padding: 45px 29px 20px;
     font-family: inherit;
-    font-size: rfs(17px);
+    font-size: 17px;
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -49,7 +49,7 @@
   .error {
     position: absolute;
     top: 25px;
-    left: rfs(33px);
+    left: 33px;
     width: 40%;
     line-height: 1;
   }
@@ -64,7 +64,7 @@
 
   .error {
     font-size: 12px;
-    right: rfs(29px);
+    right: 29px;
     left: auto;
     text-align: right;
     color: var(--accent-color);

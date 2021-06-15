@@ -30,7 +30,7 @@ function Error({ statusCode }) {
 
 Error.getInitialProps = ({ res, err }) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  if (!process.browser) {
+  if (!process.browser && process.env.ROLLBAR_TOKEN) {
     console.log('Reporting error to Rollbar...');
     const Rollbar = require('rollbar');
     const rollbar = new Rollbar({

@@ -30,15 +30,13 @@ function Slack() {
 
   const { addToast } = useToasts();
 
-  const { register, reset, setError, handleSubmit, formState, errors } =
-    useForm();
+  const { register, reset, setError, handleSubmit, formState } = useForm();
 
   const onSubmit = async ({ email }) => {
     try {
       const token = await execute('slack');
-      const result = await wretch('/api/slack/invite')
-        .post({ email, token })
-        .json();
+
+      await wretch('/api/slack/invite').post({ email, token }).json();
 
       reset();
       addToast(
@@ -74,9 +72,8 @@ function Slack() {
       <Wrapper>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <input
-            name="email"
             placeholder="Enter your email"
-            ref={register({
+            {...register('email', {
               required: 'Please, enter your email! 😊',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
@@ -84,8 +81,8 @@ function Slack() {
               },
             })}
           />
-          {errors.email && (
-            <span className={s.error}>{errors.email.message}</span>
+          {formState.errors.email && (
+            <span className={s.error}>{formState.errors.email.message}</span>
           )}
           <Button as="button" block disabled={formState.isSubmitting}>
             {formState.isSubmitting ? 'Submitting...' : 'Get my invite!'}

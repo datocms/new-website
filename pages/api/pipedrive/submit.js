@@ -1,7 +1,10 @@
 const pipedrive = require('pipedrive');
 const https = require('https');
 const Rollbar = require('rollbar');
-const rollbar = new Rollbar(process.env.ROLLBAR_TOKEN);
+
+const rollbar = process.env.ROLLBAR_TOKEN
+  ? new Rollbar(process.env.ROLLBAR_TOKEN)
+  : { error: () => {} };
 
 pipedrive.Configuration.apiToken = process.env.PIPEDRIVE_TOKEN;
 
@@ -9,6 +12,11 @@ export default async (req, res) => {
   try {
     if (req.method !== 'POST') {
       return res.status(404).send('Invalid endpoint!');
+    }
+
+    if (!process.env.PIPEDRIVE_TOKEN) {
+      res.status(200).json({ success: true });
+      return;
     }
 
     const {
