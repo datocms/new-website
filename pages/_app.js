@@ -32,19 +32,27 @@ function App({ Component, pageProps }) {
     }
 
     function onRouteChangeComplete() {
+      Fathom.trackPageview();
+    }
+
+    function onRouteChangeStart() {
       window.scroll({
         top: 0,
         left: 0,
         behavior: 'smooth',
       });
-      Fathom.trackPageview();
     }
+
+    // Scroll to top
+    router.events.on('routeChangeStart', onRouteChangeStart);
+
     // Record a pageview when route changes
     router.events.on('routeChangeComplete', onRouteChangeComplete);
 
     // Unassign event listener
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
+      router.events.off('routeChangeStart', onRouteChangeStart);
     };
   }, [router.events]);
 
