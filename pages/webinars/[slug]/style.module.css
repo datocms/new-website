@@ -137,7 +137,7 @@
 .speaker {
   margin-top: 10px;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .speakerName,

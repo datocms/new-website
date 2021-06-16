@@ -290,7 +290,7 @@ export default function Pricing({
         })}
 
         <div className={s.fullComparison}>
-          <Link href="/pricing/compare">
+          <Link href="/pricing/compare" passHref>
             <Button p="small" s="invert">
               See a full plan comparison <ArrowIcon />
             </Button>
@@ -368,12 +368,12 @@ export default function Pricing({
                 business unit to your whole organization.
               </p>
               <div className={s.buttonGroup}>
-                <Link href="/enterprise">
+                <Link href="/enterprise" passHref>
                   <Button p="small" s="invert">
                     Learn more
                   </Button>
                 </Link>
-                <Link href="/enterprise#form">
+                <Link href="/enterprise#form" passHref>
                   <Button p="small">Contact sales</Button>
                 </Link>
               </div>

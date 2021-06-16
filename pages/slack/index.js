@@ -1,3 +1,4 @@
+import React from 'react';
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
@@ -9,6 +10,7 @@ import Highlight from 'components/Highlight';
 import wretch from 'wretch';
 import { useState } from 'react';
 import { useRecaptcha } from 'react-recaptcha-hook';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 import Head from 'next/head';
 
 wretch().errorType('json');
@@ -20,32 +22,27 @@ const errorLabels = {
     'You have already been invited! Check for an email from feedback@slack.com.',
 };
 
-export default function Slack() {
+function Slack() {
   const { data: stats } = useSWR('/api/slack/info', fetcher);
   const execute = useRecaptcha({
     sitekey: '6LcU1dwUAAAAADe2gkTfPNlG3xoybrgx_ulxVbF3',
     hideDefaultBadge: true,
   });
 
-  const [success, setSuccess] = useState(false);
-  const {
-    register,
-    reset,
-    setError,
-    handleSubmit,
-    formState,
-    errors,
-  } = useForm();
+  const { addToast } = useToasts();
+
+  const { register, reset, setError, handleSubmit, formState } = useForm();
 
   const onSubmit = async ({ email }) => {
     try {
       const token = await execute('slack');
-      const result = await wretch('/api/slack/invite')
-        .post({ email, token })
-        .json();
+
+      await wretch('/api/slack/invite').post({ email, token }).json();
 
       reset();
-      setSuccess(true);
+      addToast(
+        '🎉 Awesome, welcome on board! Check your email for the invitation!',
+      );
     } catch (e) {
       setError('email', {
         message: errorLabels[e.json.error] || `Slack error: ${e.json.error}`,
@@ -68,25 +65,16 @@ export default function Slack() {
         subtitle={
           <>
             Become a part of DatoCMS community, try out new product updates
-            before they're widely released, help us test and improve the
+            before they&apos;re widely released, help us test and improve the
             product.
           </>
         }
       />
       <Wrapper>
-        {success && (
-          <div className={s.success}>
-            <div className={s.successTitle}>
-              Awesome, welcome on board! <span>🎉</span>
-            </div>
-            Check your email for the invitation!
-          </div>
-        )}
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <input
-            name="email"
             placeholder="Enter your email"
-            ref={register({
+            {...register('email', {
               required: 'Please, enter your email! 😊',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
@@ -94,8 +82,8 @@ export default function Slack() {
               },
             })}
           />
-          {errors.email && (
-            <span className={s.error}>{errors.email.message}</span>
+          {formState.errors.email && (
+            <span className={s.error}>{formState.errors.email.message}</span>
           )}
           <Button as="button" block disabled={formState.isSubmitting}>
             {formState.isSubmitting ? 'Submitting...' : 'Get my invite!'}
@@ -113,5 +101,13 @@ export default function Slack() {
         </form>
       </Wrapper>
     </Layout>
+  );
+}
+
+export default function SlackWrapper(props) {
+  return (
+    <ToastProvider>
+      <Slack {...props} />
+    </ToastProvider>
   );
 }

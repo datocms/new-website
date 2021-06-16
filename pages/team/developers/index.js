@@ -110,7 +110,7 @@ function Developers({ integrations, preview, page, review }) {
         title={
           <>
             Your architecture{' '}
-            <FlagHighlight style="bad">doesn't&nbsp;scale</FlagHighlight>
+            <FlagHighlight style="bad">doesn&apos;t&nbsp;scale</FlagHighlight>
           </>
         }
         subtitle="Can it handle massive spikes and adapt costs in real-time?"
@@ -148,7 +148,8 @@ function Developers({ integrations, preview, page, review }) {
         style="bad"
         title={
           <>
-            You're <FlagHighlight style="bad">wasting&nbsp;time</FlagHighlight>
+            You&#39;re{' '}
+            <FlagHighlight style="bad">wasting&nbsp;time</FlagHighlight>
           </>
         }
         subtitle="Are your projects reusing code and good practices?"

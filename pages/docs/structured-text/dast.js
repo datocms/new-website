@@ -127,11 +127,13 @@ export default function DocPage({ docGroup, titleOverride, page, schema }) {
                     <code>{name}</code>
                   </Heading>
                   <ReactMarkdown
-                    source={definition.description}
-                    renderers={{
+                    components={{
+                      pre: () => null,
                       code: () => null,
                     }}
-                  />
+                  >
+                    {definition.description}
+                  </ReactMarkdown>
                   {definition.properties.children ? (
                     <p>
                       It allows the following children nodes :{' '}

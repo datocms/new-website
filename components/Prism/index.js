@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import theme from 'custom-prism-react-renderer/themes/palenight';
 import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 import cn from 'classnames';

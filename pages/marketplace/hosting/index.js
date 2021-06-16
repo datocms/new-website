@@ -32,8 +32,8 @@ export default function Hosting({ items, preview }) {
         <div className={s.hero}>
           <div className={s.heroTitle}>Hosting &amp; CI Building</div>
           <div className={s.heroDesc}>
-            Server, serverless or static: no matter the stack you're using,
-            we've got you covered
+            Server, serverless or static: no matter the stack you&#39;re using,
+            we&#39;ve got you covered
           </div>
         </div>
         <div className={s.grid}>

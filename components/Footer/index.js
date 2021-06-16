@@ -28,14 +28,7 @@ const Feature = ({ href, isNew, title }) => (
 );
 
 export default function Footer({ noCta }) {
-  const {
-    register,
-    reset,
-    setError,
-    handleSubmit,
-    formState,
-    errors,
-  } = useForm();
+  const { register, reset, setError, handleSubmit, formState } = useForm();
 
   const [success, setSuccess] = useState(false);
 
@@ -74,9 +67,8 @@ export default function Footer({ noCta }) {
             <div className={s.formContainer} onSubmit={handleSubmit(onSubmit)}>
               <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
                 <input
-                  name="email"
                   placeholder="Enter your email"
-                  ref={register({
+                  {...register('email', {
                     required: 'Please, enter your email! 😊',
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
@@ -94,7 +86,7 @@ export default function Footer({ noCta }) {
                 </Button>
               </form>
               <div className={s.formMessage}>
-                {errors.email && errors.email.message}
+                {formState.errors.email && formState.errors.email.message}
                 {success &&
                   'You successfully subscribed to our newsletter. Welcome on board! 🎉'}
               </div>
@@ -242,7 +234,11 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <a href="https://community.datocms.com" target="_blank">
+                      <a
+                        href="https://community.datocms.com"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         Community forum
                       </a>
                     </div>
@@ -252,7 +248,11 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <a href="https://www.twitter.com/datocms" target="_blank">
+                      <a
+                        href="https://www.twitter.com/datocms"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         Twitter
                       </a>
                     </div>

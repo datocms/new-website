@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import s from './style.module.css';
 import cn from 'classnames';
 import theme from 'custom-prism-react-renderer/themes/palenight';

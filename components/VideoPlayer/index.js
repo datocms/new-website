@@ -16,7 +16,7 @@ export default function VideoPlayer({ src, autoPlay, ...other }) {
         }
       });
     });
-  }, []);
+  }, [autoPlay, src]);
 
   return <video {...other} ref={ref} style={{ display: 'block' }} />;
 }

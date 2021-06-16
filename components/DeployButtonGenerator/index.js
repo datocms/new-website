@@ -43,7 +43,7 @@ export default function CloneButtonGenerator() {
     if (formRef.current) {
       onFormChange({ target: { form: formRef.current } });
     }
-  }, []);
+  }, [onFormChange]);
 
   return (
     <div>
@@ -223,7 +223,7 @@ export default function CloneButtonGenerator() {
             <a
               href={deployUrl}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className={style.button}
             >
               <img

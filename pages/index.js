@@ -90,7 +90,7 @@ function Homepage({ successStories, preview, page }) {
         }
         subtitle={
           <>
-            It's the CMS for the modern web. More than 25,000 businesses use
+            It&#39;s the CMS for the modern web. More than 25,000 businesses use
             DatoCMS to create online content at scale from a central hub and
             distribute it via API.
           </>
@@ -257,7 +257,7 @@ function Homepage({ successStories, preview, page }) {
 
       <Space top={4} bottom={2}>
         <InterstitialTitle style="two">
-          Here's how an Headless&nbsp;CMS can&nbsp;help&nbsp;your company
+          Here&apos;s how an Headless&nbsp;CMS can&nbsp;help&nbsp;your company
         </InterstitialTitle>
       </Space>
 

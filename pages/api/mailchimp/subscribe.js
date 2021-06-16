@@ -5,7 +5,7 @@ client.setConfig({
   server: 'us13',
 });
 
-export default async ({ method, body }, res) => {
+const subscribe = async ({ method, body }, res) => {
   if (method !== 'POST') {
     return res.status(404).send('Invalid endpoint!');
   }
@@ -25,12 +25,10 @@ export default async ({ method, body }, res) => {
     res.status(200).json({ success: true });
   } catch (e) {
     if (e.status === 400 && e.response.body.title === 'Member Exists') {
-      res
-        .status(e.status)
-        .json({
-          success: false,
-          error: "You're already subscribed to the newsletter!",
-        });
+      res.status(e.status).json({
+        success: false,
+        error: "You're already subscribed to the newsletter!",
+      });
     } else {
       res
         .status(e.status)
@@ -38,3 +36,5 @@ export default async ({ method, body }, res) => {
     }
   }
 };
+
+export default subscribe;

@@ -16,21 +16,25 @@ export const Field = ({
   placeholder,
   validations,
   options,
-  as,
+  render,
   type,
   multiple,
   readOnly,
 }) => {
-  const { register, control, watch, errors } = useFormContext();
-  const ref = register(validations);
+  const {
+    register,
+    control,
+    watch,
+    formState: { errors },
+  } = useFormContext();
   const value = watch(name);
+  const field = register(name, validations);
 
   let input = (
     <input
-      name={name}
+      {...field}
       id={name}
       placeholder={placeholder}
-      ref={ref}
       type={type}
       multiple={multiple}
       readOnly={readOnly}
@@ -43,7 +47,7 @@ export const Field = ({
         {!value && (
           <div className={s.selectPlaceholder}>Please select one...</div>
         )}
-        <select name={name} id={name} ref={ref}>
+        <select id={name} {...field}>
           <option value=""></option>
           {options.map((option) => {
             const value = typeof option === 'string' ? option : option.value;
@@ -59,10 +63,10 @@ export const Field = ({
     );
   }
 
-  if (as) {
+  if (render) {
     input = (
       <Controller
-        as={as}
+        render={render}
         name={name}
         id={name}
         control={control}

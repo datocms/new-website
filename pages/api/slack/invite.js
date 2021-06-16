@@ -3,7 +3,7 @@ import { WebClient } from '@slack/web-api';
 
 const web = new WebClient(process.env.SLACK_TOKEN);
 
-export default async ({ method, body }, res) => {
+const handler = async ({ method, body }, res) => {
   if (method !== 'POST') {
     return res.status(404).send('Invalid endpoint!');
   }
@@ -47,3 +47,5 @@ export default async ({ method, body }, res) => {
     res.status(422).json({ success: false, error: e.data.error });
   }
 };
+
+export default handler;

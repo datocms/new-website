@@ -89,8 +89,9 @@ function MultiLanguage({ page, preview }) {
         image={ProjectSettings}
       >
         <p>
-          Add languages you'd like to support and start providing translations.
-          Translations are delivered using the same scalable platform.
+          Add languages you&#39;d like to support and start providing
+          translations. Translations are delivered using the same scalable
+          platform.
         </p>
       </Flag>
 

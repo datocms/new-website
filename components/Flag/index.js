@@ -1,3 +1,4 @@
+import React from 'react';
 import Wrapper from 'components/Wrapper';
 import s from './style.module.css';
 import { useMemo, useState } from 'react';
@@ -14,11 +15,10 @@ export default function Flag({
   imageProps,
   children,
 }) {
-  const seed = useMemo(() => seedrandom(title + subtitle + style)(), [
-    title,
-    subtitle,
-    style,
-  ]);
+  const seed = useMemo(
+    () => seedrandom(title + subtitle + style)(),
+    [title, subtitle, style],
+  );
 
   const [size] = useState(seed * 1.5 + 2);
   const [x] = useState(Math.floor(seed * 30));

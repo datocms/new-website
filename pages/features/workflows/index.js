@@ -60,8 +60,8 @@ function Workflows({ page, preview, review }) {
           subtitle={
             <>
               Stop spreading your editorial life-cycle around tens of different
-              products. DatoCMS's Workflows allow all eyes to be concentrated in
-              one place.
+              products. DatoCMS&#39;s Workflows allow all eyes to be
+              concentrated in one place.
             </>
           }
         />
@@ -161,7 +161,7 @@ function Workflows({ page, preview, review }) {
         >
           <p>
             A system that is too rigid will only drive your team away from using
-            it. With DatoCMS you don't have to follow the same processes for
+            it. With DatoCMS you don&#39;t have to follow the same processes for
             each content, but{' '}
             <strong>
               you can specify different workflows depending on the type of

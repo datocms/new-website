@@ -9,7 +9,7 @@ import Wrapper from 'components/Wrapper';
 import s from 'pages/marketplace/plugins/i/[...chunks]/style.module.css';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import PluginBox, { LogoImage } from 'components/PluginBox';
 import {
   PluginInfo,
@@ -37,7 +37,11 @@ export default function EnterpriseApp({ page, preview }) {
         gallery={
           !isFallback &&
           page.gallery.map((image) => (
-            <Image key={image.id} explicitWidth data={image.responsiveImage} />
+            <DatoImage
+              key={image.id}
+              explicitWidth
+              data={image.responsiveImage}
+            />
           ))
         }
         content={

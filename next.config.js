@@ -22,14 +22,15 @@ module.exports = withNextEnv({
   async redirects() {
     return redirects.map((r) => ({ ...r, statusCode: 301 }));
   },
+  images: {
+    disableStaticImages: true,
+  },
   webpack(config) {
     config.resolve.modules.push(path.resolve('./'));
 
     config.module.rules.push({
       test: /\.svg$/,
-      issuer: {
-        test: /\.jsx?$/,
-      },
+      issuer: /\.jsx?$/,
       include: [path.resolve('./public/images')],
       use: [
         {
@@ -44,9 +45,7 @@ module.exports = withNextEnv({
 
     config.module.rules.push({
       test: /\.svg$/,
-      issuer: {
-        test: /\.jsx?$/,
-      },
+      issuer: /\.jsx?$/,
       include: [path.resolve('./public/icons')],
       use: [
         {

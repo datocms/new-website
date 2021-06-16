@@ -1,6 +1,6 @@
 import tiny from 'tiny-json-http';
 
-export default async (_req, res) => {
+const metrics = async (_req, res) => {
   const { body: data } = await tiny.get({
     url: `https://api.profitwell.com/v2/metrics/monthly/?metrics=recurring_revenue`,
     headers: {
@@ -12,3 +12,5 @@ export default async (_req, res) => {
 
   res.status(200).json(data);
 };
+
+export default metrics;

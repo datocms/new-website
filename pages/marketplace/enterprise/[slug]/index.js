@@ -7,7 +7,7 @@ import docPageStyles from 'pages/docs/pageStyle.module.css';
 import Layout from 'components/MarketplaceLayout';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import PluginBox, { LogoImage } from 'components/PluginBox';
 import {
   PluginInfo,
@@ -41,8 +41,12 @@ export default function EnterpriseApp({ page, preview }) {
         description={!isFallback && page.description}
         gallery={
           !isFallback &&
-          page.gallery.map(image => (
-            <Image key={image.id} explicitWidth data={image.responsiveImage} />
+          page.gallery.map((image) => (
+            <DatoImage
+              key={image.id}
+              explicitWidth
+              data={image.responsiveImage}
+            />
           ))
         }
         content={

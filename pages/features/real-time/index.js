@@ -65,7 +65,7 @@ function ImagesApi({ page, preview, review }) {
         subtitle={
           <>
             Instead of the API consumer only getting the new data upon their
-            next query, with DatoCMS's Real-time Updates API, new data is
+            next query, with DatoCMS&#39;s Real-time Updates API, new data is
             instantly pushed to them.
           </>
         }
@@ -95,7 +95,7 @@ function ImagesApi({ page, preview, review }) {
       >
         <p>
           The same Real-time Updates API used to preview draft content can also
-          be applied to offer real-time updates to your website's final
+          be applied to offer real-time updates to your website&#39;s final
           visitors. Our infrastructure can easily handle thousands of live users
           with multiple updates per minute.
         </p>

@@ -17,7 +17,7 @@ import {
   reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { Image } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
 import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
 import Head from 'next/head';
@@ -158,7 +158,13 @@ const Chart = ({ data: rawData, children }) => {
           {data.map((point, i) => {
             const [x, y] = project(i, point.value);
             return (
-              <circle cx={x} cy={y} r="2" data-value={parseInt(point.value)} />
+              <circle
+                key={i}
+                cx={x}
+                cy={y}
+                r="2"
+                data-value={parseInt(point.value)}
+              />
             );
           })}
         </svg>
@@ -284,8 +290,8 @@ export default function About({ members, page, review1, review2 }) {
           We don’t want venture capital funding. We don’t have an outbound sales
           team. We like dogs more than unicorns, sharing instead of disrupting
           and we’re here to stay. We owe only our best efforts to you and
-          ourselves. We've put down our roots and we want them to grow. Slowly
-          but steadily.
+          ourselves. We&#39;ve put down our roots and we want them to grow.
+          Slowly but steadily.
         </p>
       </Flag>
 
@@ -294,9 +300,9 @@ export default function About({ members, page, review1, review2 }) {
           <Wrapper>
             <InterstitialTitle style="two">An Open Company</InterstitialTitle>
             <p className={s.chartSubtitle}>
-              Transparency is one of the core values that guide our work. Here's
-              our annual run rate (ARR), updated in real-time, pulled straight
-              from the source.
+              Transparency is one of the core values that guide our work.
+              Here&#39;s our annual run rate (ARR), updated in real-time, pulled
+              straight from the source.
             </p>
             <Chart data={data.data.recurring_revenue} />
           </Wrapper>
@@ -307,7 +313,7 @@ export default function About({ members, page, review1, review2 }) {
         <div className={s.members}>
           {members.map((member) => (
             <div className={s.member} key={member.name}>
-              <Image
+              <DatoImage
                 className={s.memberImage}
                 data={member.avatar.responsiveImage}
               />

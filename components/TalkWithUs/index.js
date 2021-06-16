@@ -219,7 +219,7 @@ export default function TalkWithUs({
           label="What's your question?"
           placeholder="Please tell us how we can help"
           validations={{ required: 'Required' }}
-          as={<Textarea />}
+          render={({ field }) => <Textarea {...field} />}
         />
 
         {initialValues.errorId && (

@@ -1,5 +1,5 @@
 import {
-  Image,
+  Image as DatoImage,
   renderMetaTags,
   StructuredText,
   useQuerySubscription,
@@ -27,13 +27,13 @@ import DurationIcon from 'public/icons/regular/clock.svg';
 
 import s from './style.module.css';
 
-export const Info = ({ title, icon, children, isFallback }) => {
+export const Info = ({ title, icon, children }) => {
   return (
     <div className={s.block}>
       <div className={s.blockTitle}>
         {icon} {title}
       </div>
-      {isFallback ? <Line /> : children}
+      {children}
     </div>
   );
 };
@@ -133,7 +133,7 @@ export default function Webinar({ preview, subscription }) {
           <div className={s.content}>
             <div className={s.header}>
               <div className={s.title}>{webinar.title}</div>
-              <Image
+              <DatoImage
                 style={{ display: 'block' }}
                 className={s.coverImage}
                 data={webinar.coverImage.responsiveImage}
@@ -225,9 +225,9 @@ export default function Webinar({ preview, subscription }) {
               </Info>
               <Info icon={<SpeakersIcon />} title="Speakers">
                 {webinar.speakers.map((speaker) => (
-                  <div className={s.speaker}>
+                  <div className={s.speaker} key={speaker.name}>
                     <div className={s.speakerImage}>
-                      <Image
+                      <DatoImage
                         className={s.avatar}
                         data={speaker.avatar.responsiveImage}
                       />
@@ -243,22 +243,21 @@ export default function Webinar({ preview, subscription }) {
               </Info>
               <Info icon={<CompanyIcon />} title="Brought by">
                 {webinar.speakers.map((speaker) => (
-                  <div className={s.company}>
+                  <div className={s.company} key={speaker.company}>
                     <a
                       href={speaker.companyUrl}
                       target="_blank"
                       className={s.companyImage}
+                      rel="noreferrer"
                     >
-                      <Image
+                      <DatoImage
                         className={s.companyImg}
                         data={speaker.companyLogo.responsiveImage}
                       />
                     </a>
                     <div>
                       <div className={s.companyName}>
-                        <a href={speaker.companyUrl} href="_blank">
-                          {speaker.company}
-                        </a>
+                        <a href={speaker.companyUrl}>{speaker.company}</a>
                       </div>
 
                       <div className={s.companyDescription}>

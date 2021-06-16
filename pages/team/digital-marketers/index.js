@@ -141,8 +141,8 @@ function DigitalMarketers({ integrations, preview, page, review1 }) {
       >
         <p>
           Keep content separate from presentation, uncluttered by code or
-          formatting, so it's ready to flow into new digital experiences without
-          months of effort.
+          formatting, so it&apos;s ready to flow into new digital experiences
+          without months of effort.
         </p>
 
         <Bullets

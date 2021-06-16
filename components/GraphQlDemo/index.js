@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-key */
 import { useState, useEffect } from 'react';
 import s from './style.module.css';
 import cn from 'classnames';
 import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const useTyper = setup => {
+const useTyper = (setup) => {
   const [state, setState] = useState({ text: '', cursor: 0 });
 
   const insert = (t, { moveCursor = true } = {}) => {
@@ -33,13 +34,13 @@ const useTyper = setup => {
     }
   };
 
-  const indent = count => {
+  const indent = (count) => {
     for (let i = 0; i < count; i++) {
       insert('  ');
     }
   };
 
-  const type = async text => {
+  const type = async (text) => {
     for (let i = 0; i < text.length; i++) {
       insert(text[i]);
       await wait(80);
@@ -62,7 +63,7 @@ const useTyper = setup => {
     });
   };
 
-  const deleteForward = async count => {
+  const deleteForward = async (count) => {
     setState(({ text, cursor }) => {
       return {
         text: [text.slice(0, cursor), text.slice(cursor + count)].join(''),
@@ -71,7 +72,7 @@ const useTyper = setup => {
     });
   };
 
-  const typeBackspace = async count => {
+  const typeBackspace = async (count) => {
     for (let i = 0; i < count; i++) {
       backspace();
       await wait(20);
@@ -109,7 +110,7 @@ export default function GraphQlDemo({ height, children }) {
 
   useEffect(() => {
     (async () => {
-      const setter = res => {
+      const setter = (res) => {
         setResult(JSON.stringify(res, null, 2));
       };
 
@@ -117,7 +118,7 @@ export default function GraphQlDemo({ height, children }) {
         await children(typer, setter);
       }
     })();
-  }, []);
+  }, [children, typer]);
 
   const difference =
     text.slice(0, cursor).length -

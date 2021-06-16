@@ -1,13 +1,13 @@
 .limit,
 .plansContainer {
-  @media screen and (min-width: 930px) {
+  @media screen and (width >= 930px) {
     display: grid;
     grid-template-columns: 150px repeat(3, minmax(200px, 5fr));
     align-items: center;
     column-gap: 30px;
   }
 
-  @media screen and (max-width: 929px) {
+  @media screen and (width <= 929px) {
     > * {
       margin-bottom: 40px;
     }
@@ -92,7 +92,7 @@
 .planLimits {
   margin-bottom: 30px;
 
-  @media screen and (min-width: 930px) {
+  @media screen and (width >= 930px) {
     display: none;
   }
 }
@@ -122,7 +122,7 @@
   border-radius: 10px;
   display: none;
 
-  @media screen and (min-width: 930px) {
+  @media screen and (width >= 930px) {
     display: grid;
   }
 

@@ -108,8 +108,8 @@ function Validations({ page, preview, review }) {
                 <p>
                   Using migration scripts, you can test changes in the structure
                   of your content <strong>in a safe sandbox environment</strong>
-                  , and replay the same exact changes in production once you're
-                  ready to go live.
+                  , and replay the same exact changes in production once
+                  you&#39;re ready to go live.
                 </p>
                 <Button
                   as="a"
