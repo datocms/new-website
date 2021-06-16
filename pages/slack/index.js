@@ -8,9 +8,8 @@ import { useForm } from 'react-hook-form';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import wretch from 'wretch';
-import { useState } from 'react';
 import { useRecaptcha } from 'react-recaptcha-hook';
-import { ToastProvider, useToasts } from 'react-toast-notifications';
+import { useToasts } from 'react-toast-notifications';
 import Head from 'next/head';
 
 wretch().errorType('json');
@@ -104,10 +103,4 @@ function Slack() {
   );
 }
 
-export default function SlackWrapper(props) {
-  return (
-    <ToastProvider>
-      <Slack {...props} />
-    </ToastProvider>
-  );
-}
+export default Slack;

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import '../components/BaseLayout/global.css';
 import '../components/NProgress/style.css';
 import { getCookie, setCookie } from 'utils/cookies';
+import { ToastProvider } from 'react-toast-notifications';
 
 function App({ Component, pageProps }) {
   const router = useRouter();
@@ -31,6 +32,11 @@ function App({ Component, pageProps }) {
     }
 
     function onRouteChangeComplete() {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
       Fathom.trackPageview();
     }
     // Record a pageview when route changes
@@ -42,7 +48,11 @@ function App({ Component, pageProps }) {
     };
   }, [router.events]);
 
-  return <Component {...pageProps} />;
+  return (
+    <ToastProvider placement="bottom-right">
+      <Component {...pageProps} />
+    </ToastProvider>
+  );
 }
 
 export default App;

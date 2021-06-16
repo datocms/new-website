@@ -8,7 +8,7 @@ import {
   Controller,
 } from 'react-hook-form';
 import cn from 'classnames';
-import { ToastProvider, useToasts } from 'react-toast-notifications';
+import { useToasts } from 'react-toast-notifications';
 
 export const Field = ({
   name,
@@ -96,12 +96,13 @@ export const Field = ({
   );
 };
 
-export function FormInner({
+function Form({
   children,
   defaultValues,
   action,
   submitLabel,
   onSubmit,
+  nativeSubmitForm,
 }) {
   const methods = useForm({
     defaultValues,
@@ -111,12 +112,27 @@ export function FormInner({
   const toastHelpers = useToasts();
 
   const defaultOnSubmit = async (values, event) => {
+    event.preventDefault();
+
     if (onSubmit) {
-      await onSubmit(values, event, toastHelpers);
-    } else {
+      try {
+        await onSubmit(values, toastHelpers);
+      } catch (e) {
+        addToast('Ouch! There was an error submitting the form!', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      }
+    }
+
+    if (nativeSubmitForm) {
       event.target.submit();
     }
   };
+
+  const waiting =
+    formState.isSubmitting ||
+    (formState.isSubmitSuccessful && nativeSubmitForm);
 
   return (
     <FormProvider {...methods}>
@@ -129,7 +145,6 @@ export function FormInner({
         acceptCharset="utf-8"
       >
         {children}
-
         <div className={s.submit}>
           <div className={s.agree}>
             By submitting you agree to our{' '}
@@ -142,8 +157,8 @@ export function FormInner({
             </Link>
           </div>
 
-          <Button as="button" type="submit" disabled={formState.isSubmitting}>
-            {formState.isSubmitting ? 'Submitting...' : submitLabel}
+          <Button as="button" type="submit" disabled={waiting}>
+            {waiting ? 'Submitting...' : submitLabel}
           </Button>
         </div>
       </form>
@@ -151,10 +166,4 @@ export function FormInner({
   );
 }
 
-export function Form(props) {
-  return (
-    <ToastProvider>
-      <FormInner {...props} />
-    </ToastProvider>
-  );
-}
+export default Form;

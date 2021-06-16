@@ -27,46 +27,21 @@ export default function TalkWithUs({
     ...initialValues,
   };
 
-  const onSubmit = async (values, event, { addToast }) => {
-    const target = event.target;
-
-    if (contactFormType !== 'sales') {
-      target.action =
-        'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/sWPCwvUmu--UpyGfM9hRVfjaIwWCyVh-3I0nJ4gNZKU6fQeDGRdrNfYSsrIyeoqTcGPguYxKX-ULe-OYj08sar17B0gWytpkKNcAZNZB_0HTwk9jBCh5wEQCmsmm';
-
-      target.submit();
-
-      return;
-    }
-
-    event.preventDefault();
-
+  const submitSales = async (values) => {
     const body = JSON.stringify(values);
 
-    try {
-      const res = await fetch('/api/pipedrive/submit', {
-        body: body,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      });
+    const res = await fetch('/api/pipedrive/submit', {
+      body: body,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    });
 
-      const result = await res.json();
+    const result = await res.json();
 
-      if (!result.success) {
-        throw new Error('Ouch!');
-      }
-
-      target.action =
-        'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/dTIFLRUzwsUhDSuSqTsVTadDNiaxdRGAXWcMPc785T1sSFl2FaLg_dh3D3syMHw06ZRO4UDsIYWvxwLolfWYe1kvkhpAxbfb4BK_Bmb_Kxro1oHtw-dCVYEZ-15Q';
-
-      target.submit();
-    } catch (e) {
-      addToast('Ouch! There was an error submitting the form!', {
-        appearance: 'error',
-        autoDismiss: true,
-      });
+    if (!result.success) {
+      throw new Error('Ouch!');
     }
   };
 
@@ -75,7 +50,13 @@ export default function TalkWithUs({
       <Form
         defaultValues={defaultValues}
         submitLabel="Get in touch"
-        onSubmit={onSubmit}
+        nativeSubmitForm
+        onSubmit={contactFormType === 'sales' ? submitSales : undefined}
+        action={
+          contactFormType === 'sales'
+            ? 'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/sWPCwvUmu--UpyGfM9hRVfjaIwWCyVh-3I0nJ4gNZKU6fQeDGRdrNfYSsrIyeoqTcGPguYxKX-ULe-OYj08sar17B0gWytpkKNcAZNZB_0HTwk9jBCh5wEQCmsmm'
+            : 'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/dTIFLRUzwsUhDSuSqTsVTadDNiaxdRGAXWcMPc785T1sSFl2FaLg_dh3D3syMHw06ZRO4UDsIYWvxwLolfWYe1kvkhpAxbfb4BK_Bmb_Kxro1oHtw-dCVYEZ-15Q'
+        }
       >
         {contactFormType === 'support' && (
           <>
