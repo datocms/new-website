@@ -114,7 +114,7 @@ export function FormInner({
     if (onSubmit) {
       onSubmit(values, event, toastHelpers);
     } else {
-      event.nativeEvent.currentTarget.submit();
+      event.target.submit();
     }
   };
 

@@ -28,7 +28,7 @@ export default function TalkWithUs({
   };
 
   const onSubmit = async (values, event, { addToast }) => {
-    const target = event.nativeEvent.currentTarget;
+    const target = event.target;
 
     if (contactFormType !== 'sales') {
       target.action =
