@@ -118,7 +118,8 @@ export default function GraphQlDemo({ height, children }) {
         await children(typer, setter);
       }
     })();
-  }, [children, typer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const difference =
     text.slice(0, cursor).length -
