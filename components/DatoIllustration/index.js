@@ -121,7 +121,7 @@ export default function OmnichannelIllustration() {
         <div>
           <div className={s.people}>
             {people.map((person) => (
-              <div className={s.person} key={person.name}>
+              <div className={s.person} key={person.role}>
                 <div className={s.personIcon}>
                   <LazyImage src={`/images/faces/${person.image}`} />
                 </div>

@@ -9,11 +9,19 @@ export default function Layout({ preview, children }) {
   return (
     <>
       <Head>
-        <link rel="preload" href="/fonts/colfax-web-700.woff2" />
-        <link rel="preload" href="/fonts/colfax-web-bold.woff2" />
-        <link rel="preload" href="/fonts/tiempos-text-web-regular.woff2" />
-        <link rel="preload" href="/fonts/tiempos-headline-web-semibold.woff2" />
-        <link rel="preload" href="/fonts/colfax-web-regular.woff2" />
+        <link rel="preload" href="/fonts/colfax-web-700.woff2" as="font" />
+        <link rel="preload" href="/fonts/colfax-web-bold.woff2" as="font" />
+        <link
+          rel="preload"
+          href="/fonts/tiempos-text-web-regular.woff2"
+          as="font"
+        />
+        <link
+          rel="preload"
+          href="/fonts/tiempos-headline-web-semibold.woff2"
+          as="font"
+        />
+        <link rel="preload" href="/fonts/colfax-web-regular.woff2" as="font" />
         <meta
           name="google-site-verification"
           content="wfOsq57h3qCQUTbHcX-4qEEY07vgi4KgH9rdT1ywwwc"
