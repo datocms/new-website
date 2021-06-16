@@ -44,7 +44,7 @@ function App({ Component, pageProps }) {
     }
 
     // Scroll to top
-    router.events.on('routeChangeStart', onRouteChangeStart);
+    // router.events.on('routeChangeStart', onRouteChangeStart);
 
     // Record a pageview when route changes
     router.events.on('routeChangeComplete', onRouteChangeComplete);
@@ -52,7 +52,7 @@ function App({ Component, pageProps }) {
     // Unassign event listener
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
-      router.events.off('routeChangeStart', onRouteChangeStart);
+      // router.events.off('routeChangeStart', onRouteChangeStart);
     };
   }, [router.events]);
 
