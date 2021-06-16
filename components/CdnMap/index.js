@@ -4,13 +4,9 @@ import useSWR from 'swr';
 import wretch from 'wretch';
 import cn from 'classnames';
 import Wrapper from 'components/Wrapper';
-import { useState } from 'react';
-import useInterval from '@use-it/interval';
+import { useCallback, useState, useEffect } from 'react';
 
-const fetcher = url =>
-  wretch(url)
-    .get()
-    .json();
+const fetcher = (url) => wretch(url).get().json();
 
 function convLatLongToStyle(latitude, longitude) {
   const x = (longitude + 180.0) * (100.0 / 360.0);
@@ -61,25 +57,35 @@ export default function CdnMap() {
     fetcher,
   );
 
-  const setAndScroll = code => {
-    setCurrentDataCenter(code);
-    const el = document.getElementById(`datacenter-${code}`);
+  const setAndScroll = useCallback(
+    (code) => {
+      setCurrentDataCenter(code);
+      const el = document.getElementById(`datacenter-${code}`);
 
-    if (el) {
-      const rect = el.getBoundingClientRect();
+      if (el) {
+        const rect = el.getBoundingClientRect();
 
-      el.parentElement.parentElement.scroll({
-        top: 0,
-        left: el.offsetLeft - (window.innerWidth - rect.width) / 2,
-        behavior: 'smooth',
-      });
-    }
-  };
+        el.parentElement.parentElement.scroll({
+          top: 0,
+          left: el.offsetLeft - (window.innerWidth - rect.width) / 2,
+          behavior: 'smooth',
+        });
+      }
+    },
+    [setCurrentDataCenter],
+  );
 
-  useInterval(() => {
+  useEffect(() => {
+    let stopped = false;
+
     (async () => {
       var start = new Date();
       const data = await fetcher('https://graphql.datocms.com/geo/ping');
+
+      if (stopped) {
+        return;
+      }
+
       var end = new Date();
       setPing({ ...data, latency: parseInt((end - start) * 0.8) });
 
@@ -87,7 +93,11 @@ export default function CdnMap() {
         setAndScroll(data.datacenter);
       }
     })();
-  }, 1000);
+
+    return () => {
+      stopped = true;
+    };
+  }, [setPing, setAndScroll, currentDataCenter]);
 
   return (
     <div className={s.root}>
@@ -105,7 +115,7 @@ export default function CdnMap() {
             </div>
           )}
           {datacenters &&
-            datacenters.map(dc => (
+            datacenters.map((dc) => (
               <div
                 key={dc.code}
                 className={cn(s.datacenter, {
@@ -130,7 +140,7 @@ export default function CdnMap() {
       <div className={s.list}>
         <div className={s.listInner}>
           {datacenters &&
-            datacenters.map(dc => (
+            datacenters.map((dc) => (
               <div
                 key={dc.code}
                 id={`datacenter-${dc.code}`}

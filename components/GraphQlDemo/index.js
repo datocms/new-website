@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import s from './style.module.css';
 import cn from 'classnames';
 import Highlight, { defaultProps } from 'custom-prism-react-renderer';
@@ -7,7 +7,24 @@ import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const useTyper = (setup) => {
-  const [state, setState] = useState({ text: '', cursor: 0 });
+  const [state, rawSetState] = useState({ text: '', cursor: 0 });
+
+  const stopped = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      stopped.current = true;
+    };
+  }, []);
+
+  const setState = useCallback(
+    (state) => {
+      if (!stopped.current) {
+        rawSetState(state);
+      }
+    },
+    [rawSetState, stopped],
+  );
 
   const insert = (t, { moveCursor = true } = {}) => {
     setState(({ text, cursor }) => {
@@ -109,17 +126,25 @@ export default function GraphQlDemo({ height, children }) {
   const [result, setResult] = useState('{}');
 
   useEffect(() => {
+    let stopped = false;
+
     (async () => {
       const setter = (res) => {
-        setResult(JSON.stringify(res, null, 2));
+        if (!stopped) {
+          setResult(JSON.stringify(res, null, 2));
+        }
       };
 
-      while (true) {
+      while (!stopped) {
         await children(typer, setter);
       }
     })();
+
+    return () => {
+      stopped = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setResult]);
 
   const difference =
     text.slice(0, cursor).length -

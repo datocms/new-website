@@ -2,7 +2,7 @@ import UIChrome from 'components/UiChrome';
 import s from './style.module.css';
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const locales = [
   'English (en-US)',
@@ -16,17 +16,27 @@ export default function ProjectSettings() {
   const [blockCount, setBlockCount] = useState(0);
 
   useEffect(() => {
+    let stopped = false;
+
     (async () => {
-      while (true) {
+      while (!stopped) {
         for (let x = 1; x < 5; x++) {
           await wait(200);
-          setBlockCount(i => i + 1);
+          if (!stopped) {
+            setBlockCount((i) => i + 1);
+          }
         }
         await wait(800);
-        setBlockCount(0);
+        if (!stopped) {
+          setBlockCount(0);
+        }
         await wait(500);
       }
     })();
+
+    return () => {
+      stopped = true;
+    };
   }, []);
 
   return (

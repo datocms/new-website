@@ -6,21 +6,31 @@ import { useEffect, useState } from 'react';
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const allBlocks = ['Text', 'Gallery', 'Quote', 'Call to action'];
 
-export default function FieldSettings() {
+export default function CreateModularBlocks() {
   const [blockCount, setBlockCount] = useState(-1);
 
   useEffect(() => {
+    let stopped = false;
+
     (async () => {
-      while (true) {
+      while (!stopped) {
         for (let x = 0; x < allBlocks.length; x++) {
           await wait(100);
-          setBlockCount((i) => i + 1);
+          if (!stopped) {
+            setBlockCount((i) => i + 1);
+          }
         }
         await wait(800);
-        setBlockCount(-1);
+        if (!stopped) {
+          setBlockCount(-1);
+        }
         await wait(500);
       }
     })();
+
+    return () => {
+      stopped = true;
+    };
   }, []);
 
   return (

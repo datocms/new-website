@@ -1,7 +1,7 @@
 import UIChrome from 'components/UiChrome';
 import s from './style.module.css';
 
-export default function FieldSettings({ children }) {
+export default function WorkflowPermissions({ children }) {
   return (
     <UIChrome>
       <div className={s.body}>

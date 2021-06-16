@@ -69,16 +69,21 @@ const Workflow = () => {
   }, [step]);
 
   useEffect(() => {
+    let stopped = false;
+
     setStep(0);
 
     const interval = setInterval(() => {
       setStep((step) => (step + 1) % steps.length);
       setTimeout(() => {
-        setTransition((transition) => (transition + 1) % steps.length);
+        if (!stopped) {
+          setTransition((transition) => (transition + 1) % steps.length);
+        }
       }, speed / 2);
     }, speed);
 
     return () => {
+      stopped = true;
       clearInterval(interval);
     };
   }, [setStep, setTransition]);

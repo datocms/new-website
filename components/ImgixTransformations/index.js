@@ -246,8 +246,15 @@ const height = 631;
 const ar = width / height;
 const url = 'https://assets.imgix.net/hp/snowshoe.jpg?w=1000';
 
-export default function InterstitialTitle() {
+export default function ImgixTransformations() {
   const ref = useRef([]);
+  const stopped = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      stopped.current = true;
+    };
+  }, [stopped]);
 
   const [image, setImage] = useState(url);
   const [ellipse, setEllipse] = useState(false);
@@ -276,14 +283,16 @@ export default function InterstitialTitle() {
 
       ref.current.push(
         setTimeout(() => {
-          setImage(stepImage);
-          setEllipse(isEllipse);
-          setParams(steps[i].transforms);
-          setResult(steps[i].result);
+          if (!stopped.current) {
+            setImage(stepImage);
+            setEllipse(isEllipse);
+            setParams(steps[i].transforms);
+            setResult(steps[i].result);
+          }
         }, i * stepTime),
       );
     }
-  }, []);
+  }, [stopped]);
 
   useEffect(() => {
     reset();

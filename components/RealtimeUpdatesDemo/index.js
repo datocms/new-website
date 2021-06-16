@@ -1,6 +1,6 @@
 import s from './style.module.css';
 import { range } from 'range';
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import useInterval from '@use-it/interval';
 import cn from 'classnames';
@@ -149,11 +149,15 @@ export default function ProgressiveImagesDemo() {
             <div className={s.addressBar} />
           </div>
           <TransitionGroup className={s.page}>
-            <div className={s.pageTitle}>Live blog</div>
-            <div className={s.pageSubtitle}>
-              <div className={s.ping} /> Connected to DatoCMS, receiving live
-              updates!
-            </div>
+            <CSSTransition key="static-1" timeout={100}>
+              <div className={s.pageTitle}>Live blog</div>
+            </CSSTransition>
+            <CSSTransition key="static-2" timeout={100}>
+              <div className={s.pageSubtitle}>
+                <div className={s.ping} /> Connected to DatoCMS, receiving live
+                updates!
+              </div>
+            </CSSTransition>
             {range(post + 3, post, -1).map((i) => {
               const indexInRange =
                 i < 0
