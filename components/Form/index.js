@@ -106,13 +106,13 @@ export function FormInner({
   const methods = useForm({
     defaultValues,
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, formState } = methods;
 
   const toastHelpers = useToasts();
 
-  const defaultOnSubmit = (values, event) => {
+  const defaultOnSubmit = async (values, event) => {
     if (onSubmit) {
-      onSubmit(values, event, toastHelpers);
+      await onSubmit(values, event, toastHelpers);
     } else {
       event.target.submit();
     }
@@ -142,8 +142,8 @@ export function FormInner({
             </Link>
           </div>
 
-          <Button as="button" type="submit">
-            {submitLabel}
+          <Button as="button" type="submit" disabled={formState.isSubmitting}>
+            {formState.isSubmitting ? 'Submitting...' : submitLabel}
           </Button>
         </div>
       </form>
