@@ -1,3 +1,4 @@
+import React from 'react';
 import gravatar from 'utils/gravatar';
 import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
 import Link from 'next/link';

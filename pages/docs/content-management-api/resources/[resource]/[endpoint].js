@@ -159,7 +159,7 @@ export default function DocPage({ docGroup, cma, preview, endpoint }) {
                         ) : (
                           <Prism
                             code={String(children).replace(/\n$/, '')}
-                            language={match[1] || 'unknown'}
+                            language={match ? match[1] : 'unknown'}
                             showLineNumbers
                           />
                         );

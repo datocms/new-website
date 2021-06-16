@@ -31,7 +31,7 @@ const RequestResponse = ({ title, description, chunks }) => (
               ) : (
                 <Prism
                   code={String(children).replace(/\n$/, '')}
-                  language={match[1] || 'unknown'}
+                  language={match ? match[1] : 'unknown'}
                   showLineNumbers
                 />
               );
