@@ -288,7 +288,9 @@ export default function InterstitialTitle() {
   useEffect(() => {
     reset();
     setStarted(true);
-    setInterval(reset, steps.length * stepTime);
+    const interval = setInterval(reset, steps.length * stepTime);
+
+    return () => clearInterval(interval);
   }, [reset, setStarted]);
 
   return (

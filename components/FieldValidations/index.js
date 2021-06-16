@@ -11,7 +11,7 @@ export default function FieldValidations() {
       () => setCount((count) => (count + 1) % 5),
       1000,
     );
-    () => clearInterval(interval);
+    return () => clearInterval(interval);
   }, [setCount]);
 
   return (

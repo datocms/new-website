@@ -33,9 +33,13 @@ const blocks = [
   },
 ];
 
-export default function UseModularBlocks() {
+export default function LandingPagesGenerator() {
   const [rows, set] = useState(blocks);
-  useEffect(() => void setInterval(() => set(shuffle), 800), []);
+
+  useEffect(() => {
+    const interval = setInterval(() => set(shuffle), 800);
+    return () => clearInterval(interval);
+  }, []);
 
   let height = 0;
 
