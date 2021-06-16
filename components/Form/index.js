@@ -96,14 +96,14 @@ export const Field = ({
   );
 };
 
-function Form({
+export const Form = ({
   children,
   defaultValues,
   action,
   submitLabel,
   onSubmit,
   nativeSubmitForm,
-}) {
+}) => {
   const methods = useForm({
     defaultValues,
   });
@@ -164,6 +164,4 @@ function Form({
       </form>
     </FormProvider>
   );
-}
-
-export default Form;
+};
