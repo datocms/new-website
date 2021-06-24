@@ -134,7 +134,7 @@ export const formatLimit = (limit) => {
   );
 };
 
-const successIcon = <SuccessIcon style={{ fill: '#72e8c1' }} />;
+const successIcon = <SuccessIcon style={{ fill: '#ff593d' }} />;
 const warningIcon = <WarningIcon style={{ fill: '#bebebecc' }} />;
 
 export const formatLimitRaw = (limit) => {
