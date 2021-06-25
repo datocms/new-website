@@ -130,7 +130,9 @@ ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
       precode.length > 0 ? '\n' : ''
     }${returnCode ? `\n${returnCode}` : ''}
 ${
-  link.targetSchema && link.targetSchema.properties.meta
+  link.targetSchema &&
+  link.targetSchema.properties.meta &&
+  link.targetSchema.properties.meta.properties.total_count
     ? '\n\n# if you want to fetch all the pages with just one call:\n\n' +
       example(resource, link, true).code
     : ''

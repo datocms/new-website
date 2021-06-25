@@ -142,7 +142,9 @@ client.${namespace}.${action}(${params.join(', ')})${
   console.error(error);
 });
 ${
-  link.targetSchema && link.targetSchema.properties.meta
+  link.targetSchema &&
+  link.targetSchema.properties.meta &&
+  link.targetSchema.properties.meta.properties.total_count
     ? '\n\n// if you want to fetch all the pages with just one call:\n' +
       example(resource, link, true).code
     : ''
