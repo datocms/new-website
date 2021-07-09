@@ -128,8 +128,11 @@ export default function DocPage({ docGroup, titleOverride, page, schema }) {
                   </Heading>
                   <ReactMarkdown
                     components={{
-                      pre: () => null,
-                      code: () => null,
+                      // eslint-disable-next-line react/display-name
+                      pre: ({ children }) => <>{children}</>,
+                      // eslint-disable-next-line react/display-name
+                      code: ({ inline, children }) =>
+                        inline ? <code>{children}</code> : null,
                     }}
                   >
                     {definition.description}
