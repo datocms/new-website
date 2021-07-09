@@ -30,7 +30,7 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
       }
-      review: review(filter: { name: { eq: "Martijn Theuwissen" } }) {
+      review: review(filter: { name: { eq: "Dominic Blain" } }) {
         ...reviewFields
       }
       integrations: allIntegrations(
@@ -68,7 +68,7 @@ const VideoBrowser = (props) => {
   );
 };
 
-function ImagesApi({ page, preview, integrations }) {
+function ImagesApi({ page, preview, integrations, review }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -112,6 +112,8 @@ function ImagesApi({ page, preview, integrations }) {
           />
         </div>
       </TitleStripWithContent>
+
+      <Quote review={review} />
 
       <Space top={2} bottom={1}>
         <InterstitialTitle style="two">
