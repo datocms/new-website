@@ -81,3 +81,32 @@ export default function exampleForField(fieldName, queryFieldName, field) {
   }
 }`;
 }
+
+export function exampleForUpload(fieldName, queryFieldName, field) {
+  let filter = `${camelize(queryFieldName)}: ${exampleForType(
+    queryFieldName,
+    field,
+  )}`;
+
+  if (filter.length > 30) {
+    return `query {
+  allUploads(
+    filter: {
+      ${camelize(fieldName)}: {
+        ${filter}
+      }
+    }
+  ) {
+    blurUpThumb
+    url(imgixParams: { w: 100, h: 100, fit: crop })
+  }
+}`;
+  }
+
+  return `query {
+  allUploads(filter: { ${camelize(fieldName)}: { ${filter} } }) {
+    blurUpThumb
+    url(imgixParams: { w: 100, h: 100, fit: crop })
+  }
+}`;
+}

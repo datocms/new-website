@@ -44,8 +44,9 @@ export const getStaticPaths = gqlStaticPaths(
             (sub.slug === 'content-delivery-api'
               ? sub.pages.filter(
                   (page) =>
-                    (page.slugOverride || page.page.slug) !==
-                    'filtering-records',
+                    !['filtering-records', 'filtering-uploads'].includes(
+                      page.slugOverride || page.page.slug,
+                    ),
                 )
               : sub.slug === 'structured-text'
               ? sub.pages.filter(
