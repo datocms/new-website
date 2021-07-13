@@ -140,7 +140,7 @@ function renderBlock(s, block) {
           <iframe
             src={`https://cda-explorer.datocms.com/?${queryString.stringify({
               embed: true,
-              apitoken: 'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
+              apitoken: process.env.DATO_API_TOKEN,
               query: block.query,
             })}`}
           />
