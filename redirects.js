@@ -236,4 +236,36 @@ module.exports = [
     source: '/security',
     destination: '/legal/security',
   },
+  {
+    source: '/cms/react',
+    destination: '/cms/react-cms',
+  },
+  {
+    source: '/cms/hugo',
+    destination: '/cms/hugo-cms',
+  },
+  {
+    source: '/cms/nextjs',
+    destination: '/cms/nextjs-cms',
+  },
+  {
+    source: '/cms/nuxt-js',
+    destination: '/cms/nuxtjs-cms',
+  },
+  {
+    source: '/cms/jekyll',
+    destination: '/cms/jekyll-cms',
+  },
+  {
+    source: '/cms/middleman',
+    destination: '/cms/middleman-cms',
+  },
+  {
+    source: '/cms/vue',
+    destination: '/cms/vue-js-cms',
+  },
+  {
+    source: '/cms/gatsbyjs',
+    destination: '/cms/gatsbyjs-cms',
+  },
 ];

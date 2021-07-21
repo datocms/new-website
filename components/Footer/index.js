@@ -274,7 +274,7 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/nuxt-js-cms">
+                      <Link href="/cms/nuxtjs-cms">
                         <a className={s.extraLink}>Nuxt.js</a>
                       </Link>
                     </div>
