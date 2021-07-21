@@ -9,7 +9,7 @@ import {
 } from 'lib/datocms';
 import { renderMetaTags, StructuredText } from 'react-datocms';
 import Head from 'next/head';
-import Hero from 'components/Hero';
+import SeoHero from 'components/Hero/Seo';
 import { highlightStructuredText } from 'components/Highlight';
 import Wrapper from 'components/Wrapper';
 import LazyImage from 'components/LazyImage';
@@ -20,10 +20,12 @@ import GitHubButton from 'components/GitHubButton';
 import InterstitialTitle from 'components/InterstitialTitle';
 import s from './style.module.css';
 import TitleStripWithContent from 'components/TitleStripWithContent';
+import SeoTitleStripWithContent from 'components/TitleStripWithContent/Seo';
 import GraphQlDemo from 'components/GraphQlDemo';
 import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
 import Arrow3 from 'public/images/illustrations/arrow-sketch-1.svg';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import { Highlight as FlagHighlight } from 'components/Flag';
+import SeoFlag from 'components/Flag/Seo';
 import UseModularBlocks from 'components/UseModularBlocks';
 import CodeExcerpt from 'components/CodeExcerpt';
 import ImgixTransformations from 'components/ImgixTransformations';
@@ -157,6 +159,13 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
               content { value }
             }
           }
+          seoContent {
+            ... on SeoBlockRecord {
+              keyword
+              h1
+              imagesTitle
+            }
+          }
         }
       }
 
@@ -219,15 +228,21 @@ export default function UseCase({ landing, websites, preview }) {
     }
   }, []);
 
+  const seoBlock = landing && landing.seoContent[0];
+
   return (
     <Layout preview={preview}>
       {landing && (
         <>
           <Head>{renderMetaTags(landing.seo)}</Head>
-          <Hero
-            kicker={
+          <SeoHero
+            kicker={seoBlock.h1}
+            keyword={seoBlock.keyword}
+            image={
               <LazyImage
                 className={s.logo}
+                alt={seoBlock.keyword}
+                title={seoBlock.imagesTitle}
                 src={
                   (landing.integration.squareLogo || landing.integration.logo)
                     .url
@@ -242,20 +257,21 @@ export default function UseCase({ landing, websites, preview }) {
                 <Button
                   fs="big"
                   as="a"
+                  title={seoBlock.imagesTitle}
                   href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
                 >
                   Try our {landing.name} demo project now!
                 </Button>
               </Checks>
             )}
-          </Hero>
+          </SeoHero>
 
           {websites.length > 0 && (
             <div className={s.poweredBy}>
               <Wrapper>
-                <div className={s.poweredByTitle}>
+                <h5 className={s.poweredByTitle}>
                   Proudly powered by <strong>DatoCMS + {landing.name}</strong>:
-                </div>
+                </h5>
               </Wrapper>
               <div className={s.websites}>
                 <div className={s.websitesInner}>
@@ -272,7 +288,11 @@ export default function UseCase({ landing, websites, preview }) {
                       <UiChrome title={website.title} url={website.url}>
                         <DatoImage
                           className={s.websiteScreen}
-                          data={website.image.responsiveImage}
+                          data={{
+                            ...website.image.responsiveImage,
+                            alt: seoBlock.keyword,
+                            title: seoBlock.imagesTitle,
+                          }}
                         />
                       </UiChrome>
                     </div>
@@ -287,7 +307,10 @@ export default function UseCase({ landing, websites, preview }) {
               {block._modelApiKey === 'landing_cdn_map_block' && (
                 <>
                   <Space top={4} bottom={1}>
-                    <InterstitialTitle style="two">
+                    <InterstitialTitle
+                      style="two"
+                      kicker={`${seoBlock.keyword} CDN`}
+                    >
                       {highlightStructuredText(block.title)}
                     </InterstitialTitle>
                   </Space>
@@ -309,24 +332,30 @@ export default function UseCase({ landing, websites, preview }) {
                 </>
               )}
               {block._modelApiKey === 'graphql_demo_block' && (
-                <TitleStripWithContent
+                <SeoTitleStripWithContent
                   kicker={<>GraphQL Content API</>}
                   title={<>Ask for what you need, get exactly that</>}
+                  keyword={seoBlock.keyword}
                   subtitle={
                     <>
-                      <p>
-                        Our Content Delivery API is built with GraphQL. That
-                        means powerful developer tools, multiple resources in a
-                        single request and complete control over the data your
-                        website downloads.
-                      </p>
-                      <p>
-                        <Link href="/features/graphql-content-api">
+                      <span>
+                        Our Content Delivery API is{' '}
+                        <strong>built with GraphQL</strong>. That means powerful
+                        developer tools, multiple resources in a single request
+                        and complete control over the data your website
+                        downloads. The perfect solution for a{' '}
+                        <strong>{seoBlock.keyword}</strong>
+                      </span>
+                      <span>
+                        <Link
+                          href="/features/graphql-content-api"
+                          title={'Graphql CMS'}
+                        >
                           <a className={s.readMoreAbout}>
                             Read more about our GraphQL API <ArrowIcon />
                           </a>
                         </Link>
-                      </p>
+                      </span>
                     </>
                   }
                 >
@@ -397,12 +426,14 @@ export default function UseCase({ landing, websites, preview }) {
                       typer.reset();
                     }}
                   </GraphQlDemo>
-                </TitleStripWithContent>
+                </SeoTitleStripWithContent>
               )}
               {block._modelApiKey === 'landing_progressive_images_block' && (
                 <Space top={3}>
-                  <TitleStripWithContent
+                  <SeoTitleStripWithContent
+                    kicker={seoBlock.keyword + ' images'}
                     title={highlightStructuredText(block.title)}
+                    keyword={seoBlock.keyword}
                     subtitle={
                       <>
                         <StructuredText data={block.content} />
@@ -424,14 +455,16 @@ export default function UseCase({ landing, websites, preview }) {
                       </>
                     }
                   >
-                    <ProgressiveImagesDemo />
-                  </TitleStripWithContent>
+                    <ProgressiveImagesDemo name={landing.name} />
+                  </SeoTitleStripWithContent>
                 </Space>
               )}
               {block._modelApiKey === 'code_excerpt_block' && (
                 <Space top={3}>
-                  <TitleStripWithContent
+                  <SeoTitleStripWithContent
+                    kicker={`${seoBlock.keyword} example`}
                     title={highlightStructuredText(block.title)}
+                    keyword={seoBlock.keyword}
                     subtitle={
                       <>
                         <StructuredText data={block.content} />
@@ -454,12 +487,13 @@ export default function UseCase({ landing, websites, preview }) {
                     }
                   >
                     <CodeExcerpt code={block.code} language={block.language} />
-                  </TitleStripWithContent>
+                  </SeoTitleStripWithContent>
                 </Space>
               )}
               {block._modelApiKey === 'modular_blocks_block' && (
-                <Flag
+                <SeoFlag
                   style="good"
+                  keyword={seoBlock.keyword}
                   title={highlightStructuredText(block.title, {
                     highlightWith: FlagHighlight,
                   })}
@@ -473,7 +507,7 @@ export default function UseCase({ landing, websites, preview }) {
                       </a>
                     </Link>
                   </p>
-                </Flag>
+                </SeoFlag>
               )}
               {block._modelApiKey === 'quote_link' && (
                 <Quote review={block.quote} />
@@ -505,8 +539,9 @@ export default function UseCase({ landing, websites, preview }) {
               )}
               {block._modelApiKey === 'landing_video_block' && (
                 <Space top={3}>
-                  <TitleStripWithContent
+                  <SeoTitleStripWithContent
                     title={highlightStructuredText(block.title)}
+                    keyword={seoBlock.keyword}
                     subtitle={<StructuredText data={block.content} />}
                   >
                     <div className={s.video}>
@@ -518,13 +553,14 @@ export default function UseCase({ landing, websites, preview }) {
                         src={block.video.video.streamingUrl}
                       />
                     </div>
-                  </TitleStripWithContent>
+                  </SeoTitleStripWithContent>
                 </Space>
               )}
               {block._modelApiKey === 'image_transformations_block' && (
                 <Space top={3}>
-                  <TitleStripWithContent
+                  <SeoTitleStripWithContent
                     title={highlightStructuredText(block.title)}
+                    keyword={seoBlock.keyword}
                     subtitle={
                       <>
                         <StructuredText data={block.content} />
@@ -539,7 +575,7 @@ export default function UseCase({ landing, websites, preview }) {
                     }
                   >
                     <ImgixTransformations />
-                  </TitleStripWithContent>
+                  </SeoTitleStripWithContent>
                 </Space>
               )}
             </React.Fragment>
