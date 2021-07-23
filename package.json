@@ -38,6 +38,7 @@
     "graphql": "^15.5.0",
     "hls.js": "^1.0.7",
     "html-react-parser": "^1.2.6",
+    "html-to-text": "^8.0.0",
     "humps": "^2.0.1",
     "json-schema-ref-parser": "^9.0.9",
     "keyword-highlighter": "^1.0.6",

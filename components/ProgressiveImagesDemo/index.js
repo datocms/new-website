@@ -99,7 +99,7 @@ const Scroller = ({ children, loading, duration, label }) => (
   </div>
 );
 
-export default function ProgressiveImagesDemo() {
+export default function ProgressiveImagesDemo({ name }) {
   const [page, setPage] = useState(0);
   const [loadingStarted, setLoadingStarted] = useState(false);
   const [leftLoaded, setLeftLoaded] = useState(true);
@@ -169,7 +169,11 @@ export default function ProgressiveImagesDemo() {
         </CSSTransition>
       </Scroller>
 
-      <Scroller label="With DatoCMS" loading={loadingStarted} duration={1500}>
+      <Scroller
+        label={name + ' with DatoCMS'}
+        loading={loadingStarted}
+        duration={1500}
+      >
         <CSSTransition
           key={page}
           classNames={{

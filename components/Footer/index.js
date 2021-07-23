@@ -264,42 +264,42 @@ export default function Footer({ noCta }) {
                   <div className={s.groupTitle}>Technologies</div>
                   <div className={s.groupLinks}>
                     <div className={s.groupLink}>
-                      <Link href="/cms/nextjs">
+                      <Link href="/cms/nextjs-cms">
                         <a className={s.extraLink}>Next.js</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/gatsbyjs">
+                      <Link href="/cms/gatsbyjs-cms">
                         <a className={s.extraLink}>Gatsby</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/nuxt-js">
+                      <Link href="/cms/nuxtjs-cms">
                         <a className={s.extraLink}>Nuxt.js</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/hugo">
+                      <Link href="/cms/hugo-cms">
                         <a className={s.extraLink}>Hugo</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/jekyll">
+                      <Link href="/cms/jekyll-cms">
                         <a className={s.extraLink}>Jekyll</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/react">
+                      <Link href="/cms/react-cms">
                         <a className={s.extraLink}>React</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/vue">
+                      <Link href="/cms/vue-js-cms">
                         <a className={s.extraLink}>Vue.js</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/middleman">
+                      <Link href="/cms/middleman-cms">
                         <a className={s.extraLink}>Middleman</a>
                       </Link>
                     </div>
