@@ -7,45 +7,66 @@ import {
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Hero from 'components/Hero';
+import SeoHero from 'components/Hero/Seo';
 import Highlight from 'components/Highlight';
 import CdnMap from 'components/CdnMap';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import SeoFlag from 'components/Flag/Seo';
 import Quote from 'components/Quote';
 import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
 import Space from 'components/Space';
+import Link from 'next/link';
 
 export const getStaticProps = gqlStaticProps(
   `
-    {
-      page: homePage {
+    query {
+      feature: feature(filter: { slug: { eq: "worldwide-cdn" } }) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
+        }
+        slug
+        seoContent {
+          ... on SeoBlockRecord {
+            keyword
+            h1
+            imagesTitle
+            metaKeywords
+          }
         }
       }
       review1: review(filter: { name: { eq: "Grace Guzman" } }) {
         ...reviewFields
       }
     }
+
     ${imageFields}
     ${reviewFields}
     ${seoMetaTagsFields}
   `,
 );
 
-function WorldwideCdn({ page, preview, review1 }) {
+function WorldwideCdn({ preview, review1, feature }) {
+  const seoBlock = feature && feature.seoContent[0];
+
   return (
     <Layout preview={preview}>
       <Head>
-        {renderMetaTags(page.seo)}
-        <title>Worldwide smart CDN - Features</title>
+        <link
+          rel="alternate"
+          hreflang={'en'}
+          href={`https://datocms.com/cms/${feature.slug}`}
+        />
+        {renderMetaTags(feature.seo)}
+        {seoBlock.metaKeywords && (
+          <meta name="keywords" content={seoBlock.metaKeywords} />
+        )}
       </Head>
-
-      <Hero
-        kicker="Worldwide smart CDN"
+      <SeoHero
+        kicker={seoBlock.h1}
+        keyword={seoBlock.keyword}
         title={
           <>
             Content, images and videos,{' '}
@@ -83,9 +104,10 @@ function WorldwideCdn({ page, preview, review1 }) {
         <p>
           We built DatoCMS content infrastructure so you don’t have to. Focus on
           writing great content and creating new, innovative digital
-          experiences. We work every day to offer a reliable solution capable of
-          following your growth, globally, and lets you adapt along the journey,
-          with no upfront costs.
+          experiences. We work every day to offer a{' '}
+          <strong>reliable solution capable of following your growth</strong>,
+          globally, and lets you adapt along the journey, with{' '}
+          <strong>no upfront costs</strong>.
         </p>
       </Flag>
 
@@ -98,8 +120,9 @@ function WorldwideCdn({ page, preview, review1 }) {
         <NumbersBlock title="99.99%">Guaranteed uptime</NumbersBlock>
       </Numbers>
 
-      <Flag
+      <SeoFlag
         style="good"
+        keyword={seoBlock.keyword}
         title={
           <>
             A unified set of{' '}
@@ -110,10 +133,12 @@ function WorldwideCdn({ page, preview, review1 }) {
         image="zen"
       >
         <p>
-          DatoCMS offers a coordinated suite of different APIs and tools to work
-          seamlessly with the three fundamental blocks of content: text, images
-          and video. Everything is built on CDN, optimized for speed and
-          scalability.
+          DatoCMS offers a coordinated suite of different{' '}
+          <strong>APIs and tools</strong> to work seamlessly with the three
+          fundamental blocks of content: <strong>text, images and video</strong>
+          . Everything is built on CDN,{' '}
+          <strong>optimized for speed and scalability</strong>, making it the
+          fastest headless CMS.
         </p>
 
         <Bullets
@@ -122,11 +147,33 @@ function WorldwideCdn({ page, preview, review1 }) {
           bullets={[
             'Content GraphQL API',
             'Real-time updates API',
-            'Images API',
-            'Video streaming API',
+            <Link href="/features/images-api" title={'Images API'}>
+              <a>Images API</a>
+            </Link>,
+            <Link href="/features/videos-api" title={'Videos API'}>
+              <a>Videos API</a>
+            </Link>,
           ]}
         />
-      </Flag>
+      </SeoFlag>
+
+      <SeoFlag
+        style="good"
+        keyword={seoBlock.keyword}
+        title={
+          <>
+            Is DatoCMS really the{' '}
+            <FlagHighlight>featest headless CMS?</FlagHighlight>
+          </>
+        }
+        image="corona1"
+      >
+        <p>
+          Being optimized for lazy image serving, video streaming, and
+          depth-first content delivery, DatoCMS can very well compete in the run
+          for the <strong>fastest headless CMS</strong>.
+        </p>
+      </SeoFlag>
     </Layout>
   );
 }

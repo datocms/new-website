@@ -69,6 +69,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
           seo: _seoMetaTags {
             ...seoMetaTagsFields
           }
+          slug
           name
           title { value }
           subtitle
@@ -236,6 +237,11 @@ export default function UseCase({ landing, websites, preview }) {
       {landing && (
         <>
           <Head>
+            <link
+              rel="alternate"
+              hreflang={'en'}
+              href={`https://datocms.com/cms/${landing.slug}`}
+            />
             {renderMetaTags(landing.seo)}
             {seoBlock.metaKeywords && (
               <meta name="keywords" content={seoBlock.metaKeywords} />
