@@ -164,6 +164,7 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
               keyword
               h1
               imagesTitle
+              metaKeywords
             }
           }
         }
@@ -234,7 +235,12 @@ export default function UseCase({ landing, websites, preview }) {
     <Layout preview={preview}>
       {landing && (
         <>
-          <Head>{renderMetaTags(landing.seo)}</Head>
+          <Head>
+            {renderMetaTags(landing.seo)}
+            {seoBlock.metaKeywords && (
+              <meta name="keywords" content={seoBlock.metaKeywords} />
+            )}
+          </Head>
           <SeoHero
             kicker={seoBlock.h1}
             keyword={seoBlock.keyword}
