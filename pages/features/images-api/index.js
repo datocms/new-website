@@ -7,20 +7,29 @@ import {
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Hero from 'components/Hero';
+import Hero from 'components/Hero/Seo';
 import Highlight from 'components/Highlight';
 import ImgixTransformations from 'components/ImgixTransformations';
 import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
-import TitleStripWithContent from 'components/TitleStripWithContent';
+import TitleStripWithContent from 'components/TitleStripWithContent/Seo';
 import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
 
 export const getStaticProps = gqlStaticProps(
   `
     {
-      page: homePage {
+      feature: feature(filter: { slug: { eq: "images-api" } }) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
+        }
+        slug
+        seoContent {
+          ... on SeoBlockRecord {
+            keyword
+            h1
+            imagesTitle
+            metaKeywords
+          }
         }
       }
       review: review(filter: { name: { eq: "Grace Guzman" } }) {
@@ -33,16 +42,26 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-function ImagesApi({ page, preview, review }) {
+function ImagesApi({ feature, preview, review }) {
+  const seoBlock = feature && feature.seoContent[0];
+
   return (
     <Layout preview={preview}>
       <Head>
-        {renderMetaTags(page.seo)}
-        <title>Images API - Features</title>
+        <link
+          rel="alternate"
+          hreflang={'en'}
+          href={`https://datocms.com/cms/${feature.slug}`}
+        />
+        {renderMetaTags(feature.seo)}
+        {seoBlock.metaKeywords && (
+          <meta name="keywords" content={seoBlock.metaKeywords} />
+        )}
       </Head>
 
       <Hero
-        kicker="Images API"
+        kicker={seoBlock.h1}
+        keyword={seoBlock.keyword}
         title={
           <>
             The easiest way to deliver{' '}
@@ -51,20 +70,24 @@ function ImagesApi({ page, preview, review }) {
         }
         subtitle={
           <>
-            Serve lightning fast images for any digital product with a suite of
-            tools built to save both development time and visitor bandwidth.
+            Serve <strong>lightning-fast images</strong> for any digital product
+            with a suite of tools and API built to save both development time
+            and visitor bandwidth.
           </>
         }
       />
 
       <TitleStripWithContent
+        kicker={`Best API for images processing`}
+        keyword={seoBlock.keyword}
         title={<>Endless image transformations at your service</>}
         subtitle={
           <>
-            DatoCMS offers best-in-class image processing and image CDN thanks
-            to the seamless partnership with imgix. Optimize, resize, crop,
-            rotate and watermark images on-the-fly simply adding custom
-            parameters to the URL of your image.
+            DatoCMS offers best-in-class API for{' '}
+            <strong>images processing</strong> and <strong>image CDN</strong>{' '}
+            thanks to the seamless partnership with Imgix.{' '}
+            <strong>Optimize, resize, crop, rotate</strong> and watermark images
+            on-the-fly simply adding custom parameters to the URL of your image.
           </>
         }
       >
@@ -73,6 +96,8 @@ function ImagesApi({ page, preview, review }) {
 
       <Flag
         style="good"
+        keyword={seoBlock.keyword}
+        kicker={`Optimized images API`}
         title={
           <>
             Automatically serve{' '}
@@ -82,29 +107,35 @@ function ImagesApi({ page, preview, review }) {
         image="key"
       >
         <p>
-          Thanks to automatic Content Negotiation, you are able to serve WebP
-          (and other modern formats as we add them) to browsers that support
-          them without any additional work, reducing the average file size by
-          50%.
+          Thanks to <strong>DatoCMS API's automatic Content Negotiation</strong>
+          , you are able to serve WebP and other modern images formats to
+          browsers that support them without any additional work,{' '}
+          <strong>reducing the average file size by 50%</strong>.
         </p>
       </Flag>
 
       <TitleStripWithContent
+        kicker={`Images preview API`}
+        keyword={seoBlock.keyword}
         title={<>State of the art for responsive and progressive images</>}
         subtitle={
           <>
             Serving optimized images is incredibly hard, but using our GraphQL
-            Content API you can implement lazy loaded, responsive images in one
-            line of code. Avoid any layout jumping, offer instant previews of
-            images while they load. It’s like magic.
+            Content API you can implement{' '}
+            <strong>lazy loaded, responsive images</strong> in{' '}
+            <strong>one line of code</strong>. Avoid any layout jumping, offer
+            instant <strong>previews of images while they load</strong>. It’s
+            like magic.
           </>
         }
       >
-        <ProgressiveImagesDemo />
+        <ProgressiveImagesDemo name={`with Dato images API`} />
       </TitleStripWithContent>
 
       <Flag
         style="good"
+        keyword={seoBlock.keyword}
+        kicker={`Images API Metadata`}
         title={
           <>
             All the <FlagHighlight>metadata</FlagHighlight> you need
@@ -114,8 +145,10 @@ function ImagesApi({ page, preview, review }) {
       >
         <p>
           Dominant colors, EXIF data, aspect ratio, filesize, copyright
-          information, geolocation. Every possible information about your images
-          is stored in DatoCMS and ready to be used in your websites.
+          information, geolocation.{' '}
+          <strong>Every possible information about your images</strong> is
+          stored in DatoCMS and ready to be used in your websites through our
+          API.
         </p>
       </Flag>
 

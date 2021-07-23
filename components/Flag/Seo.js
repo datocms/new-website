@@ -12,6 +12,7 @@ export default function SeoFlag({
   title,
   subtitle,
   keyword,
+  kicker,
   hideDot,
   image,
   imageProps,
@@ -26,14 +27,20 @@ export default function SeoFlag({
   const [x] = useState(Math.floor(seed * 30));
   const [y] = useState(Math.floor(seed * 30) + 20);
 
+  const kickerWithSeo = containsKeyword(kicker, keyword) ? (
+    <h2 className={s.kicker}>{kicker}</h2>
+  ) : (
+    <p className={s.kicker}>{kicker}</p>
+  );
+
   const titleWithSeo = containsKeyword(title, keyword) ? (
-    <h2 className={s.title}>{title}</h2>
+    <h3 className={s.title}>{title}</h3>
   ) : (
     <p className={s.title}>{title}</p>
   );
 
   const subtitleWithSeo = containsKeyword(subtitle, keyword) ? (
-    <h3 className={s.subtitle}>{subtitle}</h3>
+    <h4 className={s.subtitle}>{subtitle}</h4>
   ) : (
     <div className={s.subtitle}>{subtitle}</div>
   );
@@ -66,6 +73,7 @@ export default function SeoFlag({
           <div className={s.image}>{imageEl}</div>
         </div>
         <div className={s.content}>
+          {kicker && kickerWithSeo}
           {title && titleWithSeo}
           {subtitle && subtitleWithSeo}
           <div className={s.body}>{children}</div>

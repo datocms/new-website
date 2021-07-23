@@ -134,3 +134,11 @@
     }
   }
 }
+
+.kicker {
+  font-size: rfs(20px);
+  margin-bottom: rfs(30px);
+  font-weight: bold;
+  color: var(--extra-light-body-color);
+  text-transform: uppercase;
+}

@@ -7,7 +7,7 @@ import {
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import SeoHero from 'components/Hero/Seo';
+import Hero from 'components/Hero/Seo';
 import Highlight from 'components/Highlight';
 import CdnMap from 'components/CdnMap';
 import InterstitialTitle from 'components/InterstitialTitle';
@@ -64,7 +64,7 @@ function WorldwideCdn({ preview, review1, feature }) {
           <meta name="keywords" content={seoBlock.metaKeywords} />
         )}
       </Head>
-      <SeoHero
+      <Hero
         kicker={seoBlock.h1}
         keyword={seoBlock.keyword}
         title={
@@ -76,12 +76,14 @@ function WorldwideCdn({ preview, review1, feature }) {
         subtitle={
           <>
             It’s the all-encompassing CDN-backed API for content you wish your
-            company had: accessible, performant, secure, and close to every
-            customer.
+            company had:{' '}
+            <strong>
+              accessible, performant, secure, and close to every customer
+            </strong>
+            .
           </>
         }
       />
-
       <CdnMap />
 
       <Space top={2} bottom={1}>
@@ -163,15 +165,15 @@ function WorldwideCdn({ preview, review1, feature }) {
         title={
           <>
             Is DatoCMS really the{' '}
-            <FlagHighlight>featest headless CMS?</FlagHighlight>
+            <FlagHighlight>fastest headless CMS?</FlagHighlight>
           </>
         }
-        image="corona1"
+        image="corona2"
       >
         <p>
           Being optimized for lazy image serving, video streaming, and
-          depth-first content delivery, DatoCMS can very well compete in the run
-          for the <strong>fastest headless CMS</strong>.
+          depth-first content delivery, DatoCMS is surely one of the{' '}
+          <strong>fastest headless CMSs</strong>.
         </p>
       </SeoFlag>
     </Layout>
