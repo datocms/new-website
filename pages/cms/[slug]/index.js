@@ -461,7 +461,9 @@ export default function UseCase({ landing, websites, preview }) {
                       </>
                     }
                   >
-                    <ProgressiveImagesDemo name={landing.name} />
+                    <ProgressiveImagesDemo
+                      name={`${landing.name} with DatoCMS`}
+                    />
                   </SeoTitleStripWithContent>
                 </Space>
               )}

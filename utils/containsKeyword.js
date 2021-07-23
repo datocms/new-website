@@ -8,6 +8,10 @@ export default function containsKeyword(element, keyword) {
   });
 
   return (
-    element && keyword && keyword.split(' ').every((w) => converted.includes(w))
+    element &&
+    keyword &&
+    keyword
+      .split(' ')
+      .every((w) => converted.toLowerCase().includes(w.toLowerCase()))
   );
 }

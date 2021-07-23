@@ -170,7 +170,7 @@ export default function ProgressiveImagesDemo({ name }) {
       </Scroller>
 
       <Scroller
-        label={name + ' with DatoCMS'}
+        label={name ? name : 'With DatoCMS'}
         loading={loadingStarted}
         duration={1500}
       >
