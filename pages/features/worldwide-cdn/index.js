@@ -56,7 +56,7 @@ function WorldwideCdn({ preview, review1, feature }) {
       <Head>
         <link
           rel="alternate"
-          hreflang={'en'}
+          hrefLang="en"
           href={`https://datocms.com/cms/${feature.slug}`}
         />
         {renderMetaTags(feature.seo)}
@@ -149,10 +149,18 @@ function WorldwideCdn({ preview, review1, feature }) {
           bullets={[
             'Content GraphQL API',
             'Real-time updates API',
-            <Link href="/features/images-api" title={'Images API'}>
+            <Link
+              href="/features/images-api"
+              title={'Images API'}
+              key="images-api"
+            >
               <a>Images API</a>
             </Link>,
-            <Link href="/features/videos-api" title={'Videos API'}>
+            <Link
+              href="/features/videos-api"
+              title={'Videos API'}
+              key="videos-api"
+            >
               <a>Videos API</a>
             </Link>,
           ]}

@@ -239,7 +239,7 @@ export default function UseCase({ landing, websites, preview }) {
           <Head>
             <link
               rel="alternate"
-              hreflang={'en'}
+              hrefLang="en"
               href={`https://datocms.com/cms/${landing.slug}`}
             />
             {renderMetaTags(landing.seo)}

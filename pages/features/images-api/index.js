@@ -50,7 +50,7 @@ function ImagesApi({ feature, preview, review }) {
       <Head>
         <link
           rel="alternate"
-          hreflang={'en'}
+          hrefLang="en"
           href={`https://datocms.com/cms/${feature.slug}`}
         />
         {renderMetaTags(feature.seo)}
@@ -107,9 +107,10 @@ function ImagesApi({ feature, preview, review }) {
         image="key"
       >
         <p>
-          Thanks to <strong>DatoCMS API's automatic Content Negotiation</strong>
-          , you are able to serve WebP and other modern images formats to
-          browsers that support them without any additional work,{' '}
+          Thanks to{' '}
+          <strong>DatoCMS API&apos;s automatic Content Negotiation</strong>, you
+          are able to serve WebP and other modern images formats to browsers
+          that support them without any additional work,{' '}
           <strong>reducing the average file size by 50%</strong>.
         </p>
       </Flag>
