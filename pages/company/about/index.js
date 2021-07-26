@@ -246,23 +246,24 @@ export default function About({ members, page, review1, review2 }) {
         }
       >
         <p>
-          DatoCMS started in 2015 as an internal tool of our{' '}
-          <a href="https://www.leanpanda.com/">web agency</a> and since then it
-          has grown under our loving care to make our customers happy... and
-          their customers too.
-        </p>
-        <p>
+          DatoCMS started in 2015 as an internal tool for our italian{' '}
+          <a href="https://www.leanpanda.com/">web agency</a>.{' '}
           <strong>
             We understand the needs of your clients and partners because they
             are just like ours.
           </strong>{' '}
-          We know what worries you because we too choke up the night before that
-          deploy.
+          We know what worries you, because we too choke up the night before
+          that deploy.
         </p>
         <p>
           We don’t follow trends and we keep our things simple; we design every
           feature from the practical, real-world needs we see every day in our
           job.
+        </p>
+        <p>
+          Since 2019, DatoCMS is an independent, profitable company with a fully
+          dedicated team behind it, committed in giving you the best headless
+          CMS in the market.
         </p>
       </Flag>
 
@@ -293,6 +294,7 @@ export default function About({ members, page, review1, review2 }) {
           ourselves. We&#39;ve put down our roots and we want them to grow.
           Slowly but steadily.
         </p>
+        <a id="arr" />
       </Flag>
 
       {data && (
