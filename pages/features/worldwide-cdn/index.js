@@ -12,7 +12,6 @@ import Highlight from 'components/Highlight';
 import CdnMap from 'components/CdnMap';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import SeoFlag from 'components/Flag/Seo';
 import Quote from 'components/Quote';
 import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
@@ -57,7 +56,7 @@ function WorldwideCdn({ preview, review1, feature }) {
         <link
           rel="alternate"
           hrefLang="en"
-          href={`https://datocms.com/cms/${feature.slug}`}
+          href={`https://datocms.com/features/${feature.slug}`}
         />
         {renderMetaTags(feature.seo)}
         {seoBlock.metaKeywords && (
@@ -95,6 +94,7 @@ function WorldwideCdn({ preview, review1, feature }) {
 
       <Flag
         style="good"
+        keyword={seoBlock.keyword}
         title={
           <>
             An infrastructure that{' '}
@@ -122,7 +122,7 @@ function WorldwideCdn({ preview, review1, feature }) {
         <NumbersBlock title="99.99%">Guaranteed uptime</NumbersBlock>
       </Numbers>
 
-      <SeoFlag
+      <Flag
         style="good"
         keyword={seoBlock.keyword}
         title={
@@ -157,17 +157,17 @@ function WorldwideCdn({ preview, review1, feature }) {
               <a>Images API</a>
             </Link>,
             <Link
-              href="/features/videos-api"
+              href="/features/video-api"
               title={'Videos API'}
-              key="videos-api"
+              key="video-api"
             >
               <a>Videos API</a>
             </Link>,
           ]}
         />
-      </SeoFlag>
+      </Flag>
 
-      <SeoFlag
+      <Flag
         style="good"
         keyword={seoBlock.keyword}
         title={
@@ -183,7 +183,7 @@ function WorldwideCdn({ preview, review1, feature }) {
           depth-first content delivery, DatoCMS is surely one of the{' '}
           <strong>fastest headless CMSs</strong>.
         </p>
-      </SeoFlag>
+      </Flag>
     </Layout>
   );
 }

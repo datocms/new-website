@@ -154,7 +154,7 @@ export default function Footer({ noCta }) {
 
                     <Feature
                       title="Video API"
-                      href="/features/video-streaming-encoding"
+                      href="/features/video-api"
                       description="Produce videos and serve them fast to any device"
                     />
 

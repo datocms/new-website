@@ -268,4 +268,8 @@ module.exports = [
     source: '/cms/gatsbyjs',
     destination: '/cms/gatsbyjs-cms',
   },
+  {
+    source: '/features/video-streaming-encoding',
+    destination: '/features/video-api',
+  },
 ];

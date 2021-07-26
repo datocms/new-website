@@ -152,7 +152,7 @@ export default function Navbar() {
                   <Feature
                     icon={Video}
                     title="Video streaming/encoding"
-                    href="/features/video-streaming-encoding"
+                    href="/features/video-api"
                     description="Produce videos and serve them fast to any device"
                   />
 

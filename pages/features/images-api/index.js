@@ -51,7 +51,7 @@ function ImagesApi({ feature, preview, review }) {
         <link
           rel="alternate"
           hrefLang="en"
-          href={`https://datocms.com/cms/${feature.slug}`}
+          href={`https://datocms.com/features/${feature.slug}`}
         />
         {renderMetaTags(feature.seo)}
         {seoBlock.metaKeywords && (
