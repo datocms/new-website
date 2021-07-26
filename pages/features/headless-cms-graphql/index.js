@@ -1,27 +1,39 @@
 import Layout from 'components/Layout';
-import Head from 'next/head';
-import { renderMetaTags } from 'react-datocms';
+import Head from 'components/Head';
 import {
   imageFields,
   reviewFields,
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Hero from 'components/Hero';
+import Hero from 'components/Hero/Seo';
 import Highlight from 'components/Highlight';
 import GraphQlDemo from 'components/GraphQlDemo';
-import TitleStripWithContent from 'components/TitleStripWithContent';
+import TitleStripWithContent from 'components/TitleStripWithContent/Seo';
 import VideoPlayer from 'components/VideoPlayer';
 import Quote from 'components/Quote';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
+import Bullets from 'components/Bullets';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Link from 'next/link';
 
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   `
     {
-      page: homePage {
+      feature: feature(filter: { slug: { eq: "headless-cms-graphql" } }) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
+        }
+        slug
+        seoContent {
+          ... on SeoBlockRecord {
+            keyword
+            h1
+            imagesTitle
+            metaKeywords
+          }
         }
       }
       review(filter: { name: { eq: "Ryan Harris" } }) {
@@ -34,16 +46,20 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-function GraphQlContentApi({ page, preview, review }) {
+function GraphQlContentApi({ feature, preview, review }) {
+  const seoBlock = feature && feature.seoContent[0];
+
   return (
     <Layout preview={preview}>
-      <Head>
-        {renderMetaTags(page.seo)}
-        <title>GraphQL Content API - Features</title>
-      </Head>
+      <Head
+        metaKeywords={seoBlock.metaKeywords}
+        seo={feature.seo}
+        slug={feature.slug}
+      />
 
       <Hero
-        kicker="GraphQL Content API"
+        keyword={seoBlock.keyword}
+        kicker={seoBlock.h1}
         title={
           <>
             GraphQL means <Highlight>superior developer experience</Highlight>
@@ -51,21 +67,30 @@ function GraphQlContentApi({ page, preview, review }) {
         }
         subtitle={
           <>
-            GraphQL provides a complete and understandable description of your
-            API, gives clients the power to ask for exactly what they need and
-            nothing more, and enables powerful developer tools.
+            <strong>
+              GraphQL, in combination with a powerful headless CMS
+            </strong>
+            , provides <strong>faster responses</strong>, a complete and
+            understandable <strong>description of your API</strong>, and enables
+            great developer tools.
           </>
         }
       />
 
       <TitleStripWithContent
+        kicker={'The headless cms graphql revolution'}
+        keyword={seoBlock.keyword}
         title={<>Ask for what you need, get exactly that</>}
         subtitle={
           <>
-            Send a GraphQL query to your API and get exactly what you need,
-            nothing more and nothing less. GraphQL queries always return
-            predictable results. Apps using GraphQL are fast and stable because
-            they control the data they get, not the server.
+            Contrary to the REST API dogma, a{' '}
+            <strong>
+              GraphQL query to your API gets exactly what you ask for
+            </strong>
+            , nothing more and nothing less.{' '}
+            <strong>GraphQL queries always return predictable results</strong>.
+            Apps using GraphQL are <strong>fast and stable</strong> because they
+            control the data they get, not the server.
           </>
         }
       >
@@ -140,11 +165,12 @@ function GraphQlContentApi({ page, preview, review }) {
         title={<>Move faster with powerful developer tools</>}
         subtitle={
           <>
-            Know exactly what data you can request from your API without leaving
-            your editor, highlight potential issues before sending a query, and
-            take advantage of improved code intelligence. GraphQL makes it easy
-            to build powerful tools like GraphiQL by leveraging your API’s type
-            system.
+            Know exactly what data you can request from your API{' '}
+            <strong>without leaving your editor</strong>, highlight potential
+            issues before sending a query, and take advantage of improved code
+            intelligence. GraphQL makes it easy to build{' '}
+            <strong>powerful tools like GraphiQL</strong> by leveraging your
+            API’s type system.
           </>
         }
       >
@@ -154,6 +180,7 @@ function GraphQlContentApi({ page, preview, review }) {
             autoPlay
             muted
             loop
+            title={seoBlock.keyword}
             src="https://stream.mux.com/41n005I01cshC02vPeSunBhVOYGomfIUOd02.m3u8"
           />
         </div>
@@ -164,10 +191,11 @@ function GraphQlContentApi({ page, preview, review }) {
         subtitle={
           <>
             GraphQL queries access not just the properties of one resource but
-            also smoothly follow references between them. While typical REST
-            APIs require loading from multiple URLs, GraphQL APIs get all the
-            data your app needs in a single request. Apps using GraphQL can be
-            quick even on slow mobile network connections.
+            also <strong>smoothly follow references between them</strong>. While{' '}
+            typical REST APIs require loading from multiple URLs, GraphQL APIs
+            get <strong>all the data your app needs in a single request</strong>
+            . Apps using GraphQL can be{' '}
+            <strong>quick even on slow mobile network connections</strong>.
           </>
         }
       >
@@ -270,6 +298,73 @@ function GraphQlContentApi({ page, preview, review }) {
           }}
         </GraphQlDemo>
       </TitleStripWithContent>
+      <Flag
+        style="good"
+        keyword={seoBlock.keyword}
+        kicker={`#1 ${seoBlock.keyword}`}
+        title={<>GraphQL + Dato headless CMS = 🚀 </>}
+        image="rocket"
+      >
+        <p>
+          <strong>
+            DatoCMS headless CMS was envisioned with GraphQL in mind
+          </strong>
+          . We integrated a useful GraphQL API explorer directly in the editor
+          backend, to make it even more natural to use it and experiment with
+          it!
+        </p>
+      </Flag>
+
+      <Flag
+        style="good"
+        keyword={seoBlock.keyword}
+        kicker={`${seoBlock.keyword} + Worldwide CDN`}
+        title={
+          <>
+            A complete set of{' '}
+            <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight>
+          </>
+        }
+        image="zen-garden"
+      >
+        <p>
+          DatoCMS headless CMS does not only offer a{' '}
+          <strong>powerful GraphQL API</strong> but a full coordinated suite of
+          different <strong>APIs and tools</strong> to work seamlessly with the
+          three fundamental blocks of content:{' '}
+          <strong>text, images and video</strong>. Everything is built on CDN,{' '}
+          <strong>optimized for speed and scalability</strong>.
+        </p>
+
+        <Bullets
+          style="good"
+          icon={SuccessIcon}
+          bullets={[
+            <Link
+              href="/features/images-api"
+              title={'Images API'}
+              key="images-api"
+            >
+              <a>Images API</a>
+            </Link>,
+            <Link
+              href="/features/worldwide-cdn"
+              title={'Fastest headless CMS CDN'}
+              key="worldwide-cdn"
+            >
+              <a>Worldwide CDN</a>
+            </Link>,
+            <Link
+              href="/features/headless-cms-graphql"
+              title={'Headless CMS GraphQL'}
+              key="graphql-api"
+            >
+              <a>Content GraphQL API</a>
+            </Link>,
+            'Real-time updates API',
+          ]}
+        />
+      </Flag>
     </Layout>
   );
 }

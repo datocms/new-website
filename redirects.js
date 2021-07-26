@@ -272,4 +272,8 @@ module.exports = [
     source: '/features/video-streaming-encoding',
     destination: '/features/video-api',
   },
+  {
+    source: '/features/graphql-content-api',
+    destination: '/features/headless-cms-graphql',
+  },
 ];

@@ -184,7 +184,7 @@ export default function Navbar() {
                         <Feature
                           icon={GraphQl}
                           title="GraphQL Content API"
-                          href="/features/graphql-content-api"
+                          href="/features/headless-cms-graphql"
                           description="Develop faster with powerful developer tools"
                         />
 

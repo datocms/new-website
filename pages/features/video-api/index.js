@@ -215,7 +215,13 @@ function VideoStreamingEncoding({ feature, preview }) {
             >
               <a>Worldwide CDN</a>
             </Link>,
-            'Content GraphQL API',
+            <Link
+              href="/features/headless-cms-graphql"
+              title={'Headless CMS GraphQL'}
+              key="graphql-api"
+            >
+              <a>Content GraphQL API</a>
+            </Link>,
             'Real-time updates API',
           ]}
         />

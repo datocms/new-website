@@ -147,7 +147,13 @@ function WorldwideCdn({ preview, review1, feature }) {
           style="good"
           icon={SuccessIcon}
           bullets={[
-            'Content GraphQL API',
+            <Link
+              href="/features/headless-cms-graphql"
+              title={'Headless CMS GraphQL'}
+              key="graphql-api"
+            >
+              <a>Content GraphQL API</a>
+            </Link>,
             'Real-time updates API',
             <Link
               href="/features/images-api"

@@ -360,7 +360,7 @@ export default function UseCase({ landing, websites, preview }) {
                       </span>
                       <span>
                         <Link
-                          href="/features/graphql-content-api"
+                          href="/features/headless-cms-graphql"
                           title={'Graphql CMS'}
                         >
                           <a className={s.readMoreAbout}>
