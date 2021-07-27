@@ -9,13 +9,10 @@ import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 import slugify from 'utils/slugify';
 import s from 'pages/docs/pageStyle.module.css';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { Line } from 'components/FakeContent';
 import cn from 'classnames';
 import filter from 'utils/filterNodes';
 import { isHeading } from 'datocms-structured-text-utils';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import AppError from 'errors/AppError';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -107,149 +104,148 @@ export const getStaticProps = async function ({
     docGroup.pages.find(
       (page) => (page.slugOverride || page.page.slug) === pageSlug,
     );
-  const titleOverride = page ? page.titleOverride : null;
-  const pageId = page && page.page.id;
 
-  let pageData = null;
+  if (!page) {
+    return { notFound: true };
+  }
 
-  if (pageId) {
-    const { data } = await request({
-      query: `
-        query($pageId: ItemId!) {
-          page: docPage(filter: { id: { eq: $pageId } }) {
-            title
-            _seoMetaTags {
-              ...seoMetaTagsFields
-            }
-            content {
-              value
-              blocks {
-                ... on ImageRecord {
+  const { titleOverride } = page;
+  const pageId = page.page.id;
+
+  const { data } = await request({
+    query: `
+      query($pageId: ItemId!) {
+        page: docPage(filter: { id: { eq: $pageId } }) {
+          title
+          _seoMetaTags {
+            ...seoMetaTagsFields
+          }
+          content {
+            value
+            blocks {
+              ... on ImageRecord {
+                id
+                _modelApiKey
+                image {
+                  format
+                  width
+                  responsiveImage(imgixParams: { w: 1000 }) {
+                    ...imageFields
+                  }
+                  zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
+                    ...imageFields
+                  }
+                  url
+                }
+              }
+              ... on VideoRecord {
+                id
+                _modelApiKey
+                video {
+                  url
+                  title
+                  provider
+                  width
+                  height
+                  providerUid
+                }
+              }
+              ... on DemoRecord {
+                id
+                _modelApiKey
+                demo {
                   id
-                  _modelApiKey
-                  image {
-                    format
-                    width
-                    responsiveImage(imgixParams: { w: 1000 }) {
+                  name
+                  code
+                  githubRepo
+                  technology {
+                    name
+                    logo {
+                      url
+                    }
+                  }
+                  screenshot {
+                    responsiveImage(
+                      imgixParams: { w: 450, h: 350, fit: crop, crop: top }
+                    ) {
                       ...imageFields
                     }
-                    zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
+                  }
+                }
+              }
+              ... on MultipleDemosBlockRecord {
+                id
+                _modelApiKey
+                demos {
+                  id
+                  name
+                  code
+                  technology {
+                    name
+                    logo {
+                      url
+                    }
+                  }
+                  screenshot {
+                    responsiveImage(
+                      imgixParams: { w: 300, h: 200, fit: crop, crop: top }
+                    ) {
                       ...imageFields
                     }
-                    url
                   }
                 }
-                ... on VideoRecord {
-                  id
-                  _modelApiKey
+              }
+              ... on InternalVideoRecord {
+                id
+                _modelApiKey
+                autoplay
+                loop
+                thumbTimeSeconds
+                video {
+                  title
+                  width
+                  height
                   video {
-                    url
-                    title
-                    provider
-                    width
-                    height
-                    providerUid
+                    duration
+                    streamingUrl
+                    thumbnailUrl
                   }
                 }
-                ... on DemoRecord {
-                  id
-                  _modelApiKey
-                  demo {
-                    id
-                    name
-                    code
-                    githubRepo
-                    technology {
-                      name
-                      logo {
-                        url
-                      }
-                    }
-                    screenshot {
-                      responsiveImage(
-                        imgixParams: { w: 450, h: 350, fit: crop, crop: top }
-                      ) {
-                        ...imageFields
-                      }
-                    }
-                  }
-                }
-                ... on MultipleDemosBlockRecord {
-                  id
-                  _modelApiKey
-                  demos {
-                    id
-                    name
-                    code
-                    technology {
-                      name
-                      logo {
-                        url
-                      }
-                    }
-                    screenshot {
-                      responsiveImage(
-                        imgixParams: { w: 300, h: 200, fit: crop, crop: top }
-                      ) {
-                        ...imageFields
-                      }
-                    }
-                  }
-                }
-                ... on InternalVideoRecord {
-                  id
-                  _modelApiKey
-                  autoplay
-                  loop
-                  thumbTimeSeconds
-                  video {
-                    title
-                    width
-                    height
-                    video {
-                      duration
-                      streamingUrl
-                      thumbnailUrl
-                    }
-                  }
-                }
-                ... on GraphiqlEditorRecord {
-                  id
-                  _modelApiKey
-                  query
-                }
-                ... on CloneButtonFormRecord {
-                  id
-                  _modelApiKey
-                }
-                ... on DeployButtonFormRecord {
-                  id
-                  _modelApiKey
-                }
+              }
+              ... on GraphiqlEditorRecord {
+                id
+                _modelApiKey
+                query
+              }
+              ... on CloneButtonFormRecord {
+                id
+                _modelApiKey
+              }
+              ... on DeployButtonFormRecord {
+                id
+                _modelApiKey
               }
             }
           }
         }
+      }
 
-        ${seoMetaTagsFields}
-        ${imageFields}
-      `,
-      variables: { pageId },
-      preview,
-    });
+      ${seoMetaTagsFields}
+      ${imageFields}
+    `,
+    variables: { pageId },
+    preview,
+  });
 
-    pageData = data.page;
-  }
-
-  if (!page) {
-    throw new AppError(404);
+  if (!data.page) {
+    return { notFound: true };
   }
 
   return {
     props: {
       docGroup,
       titleOverride,
-      page: pageData,
+      page: data.page,
       preview: preview ? true : false,
     },
   };
@@ -352,8 +348,6 @@ export function Toc({ content, extraEntries: extra }) {
 }
 
 export default function DocPage({ docGroup, titleOverride, page, preview }) {
-  const { isFallback } = useRouter();
-
   return (
     <DocsLayout
       preview={preview}
@@ -373,8 +367,7 @@ export default function DocPage({ docGroup, titleOverride, page, preview }) {
                       label: page.titleOverride || page.page.title,
                     };
                   })
-                : page &&
-                  page.content &&
+                : page.content &&
                   filter(page.content.value.document, isHeading).map(
                     (heading) => {
                       const innerText = toPlainText(heading);
@@ -390,20 +383,14 @@ export default function DocPage({ docGroup, titleOverride, page, preview }) {
         )
       }
     >
-      <Head>{!isFallback && page && renderMetaTags(page._seoMetaTags)}</Head>
+      <Head>{renderMetaTags(page._seoMetaTags)}</Head>
       <div className={s.articleContainer}>
         {docGroup && docGroup.pages.length > 1 && (
-          <Toc content={page && page.content} />
+          <Toc content={page.content} />
         )}
         <div className={s.article}>
-          <div className={s.title}>
-            {isFallback ? <Line /> : titleOverride || (page && page.title)}
-          </div>
-          <PostContent
-            isFallback={isFallback}
-            content={page && page.content}
-            style={s}
-          />
+          <div className={s.title}>{titleOverride || page.title}</div>
+          <PostContent content={page.content} style={s} />
         </div>
       </div>
     </DocsLayout>

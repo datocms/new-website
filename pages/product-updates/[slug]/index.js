@@ -10,8 +10,6 @@ import {
 } from 'lib/datocms';
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
-import { useRouter } from 'next/router';
-import { Line, Copy, Image } from 'components/FakeContent';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import { useQuerySubscription } from 'react-datocms';
@@ -93,18 +91,19 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     ${imageFields}
     ${seoMetaTagsFields}
   `,
+  {
+    requiredKeys: ['post'],
+  },
 );
 
 export default function Changelog({ preview, subscription }) {
-  const { isFallback } = useRouter();
-
   const {
     data: { post },
   } = useQuerySubscription(subscription);
 
   return (
     <Layout preview={preview}>
-      {!isFallback && <Head>{renderMetaTags(post.seo)}</Head>}
+      <Head>{renderMetaTags(post.seo)}</Head>
 
       <Hero
         title={
@@ -120,42 +119,29 @@ export default function Changelog({ preview, subscription }) {
       <Wrapper>
         <div className={s.post}>
           <div className={s.categories}>
-            {post &&
-              post.categories.map((cat) => (
-                <span
-                  key={cat.name}
-                  className={s.category}
-                  style={{ backgroundColor: cat.color.hex }}
-                >
-                  {cat.name}
-                </span>
-              ))}
+            {post.categories.map((cat) => (
+              <span
+                key={cat.name}
+                className={s.category}
+                style={{ backgroundColor: cat.color.hex }}
+              >
+                {cat.name}
+              </span>
+            ))}
           </div>
 
           <h6 className={s.title}>
-            {isFallback ? (
-              <Copy lines={2} />
-            ) : (
-              <Link key={post.slug} href={`/product-updates/${post.slug}`}>
-                <a>{post.title}</a>
-              </Link>
-            )}
+            <Link key={post.slug} href={`/product-updates/${post.slug}`}>
+              <a>{post.title}</a>
+            </Link>
           </h6>
 
           <div className={s.info}>
-            {isFallback ? (
-              <Line />
-            ) : (
-              <FormattedDate date={post._firstPublishedAt} />
-            )}
+            <FormattedDate date={post._firstPublishedAt} />
           </div>
 
           <div className={s.body}>
-            <PostContent
-              isFallback={isFallback}
-              content={post && post.content}
-              style={pageStyle}
-            />
+            <PostContent content={post.content} style={pageStyle} />
           </div>
         </div>
       </Wrapper>

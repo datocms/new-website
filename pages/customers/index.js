@@ -47,6 +47,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
 
     ${imageFields}
   `,
+  {
+    requiredKeys: ['posts'],
+  },
 );
 
 export default function Customers({ subscription, preview }) {

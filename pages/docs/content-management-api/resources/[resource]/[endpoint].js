@@ -17,9 +17,7 @@ import { LanguageConsumer } from 'components/LanguagePicker';
 import { useRouter } from 'next/router';
 import Prism from 'components/Prism';
 import gfm from 'remark-gfm';
-import AppError from 'errors/AppError';
 import rehypeRaw from 'rehype-raw';
-import rehypeSanitize from 'rehype-sanitize';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -71,11 +69,15 @@ export const getStaticProps = async function ({
     preview,
   });
 
+  if (!docGroup) {
+    return { notFound: true };
+  }
+
   const cma = await fetchCma(resource);
   const link = parse(cma).schema.links.find((link) => link.rel === endpoint);
 
   if (!link) {
-    throw new AppError(404);
+    return { notFound: true };
   }
 
   return {

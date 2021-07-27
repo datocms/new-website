@@ -177,6 +177,10 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
     `,
   });
 
+  if (!landing) {
+    return { notFound: true };
+  }
+
   const {
     data: { websites },
   } = await request({

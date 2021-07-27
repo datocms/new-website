@@ -137,6 +137,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     ${seoMetaTagsFields}
     ${imageFields}
   `,
+  {
+    requiredKeys: ['post'],
+  },
 );
 
 export default function UseCase({ subscription, preview }) {
@@ -153,55 +156,51 @@ export default function UseCase({ subscription, preview }) {
 
   return (
     <Layout preview={preview}>
-      {post && (
-        <>
-          <Head>{renderMetaTags(post.seo)}</Head>
-          <div
-            style={{
-              '--gradient1': post.duotoneColor1.hex,
-              '--gradient2': post.duotoneColor2.hex,
-              '--useCaseAccent': post.accentColor.hex,
-            }}
-          >
-            <UseCaseHead
-              title={post.title}
-              logo={post.logo.url}
-              image={`${post.coverImage.url}?fp-y=${post.coverImage.focalPoint.y}&fp-x=${post.coverImage.focalPoint.x}&crop=focalpoint&fit=crop&${duotone}`}
-            />
+      <Head>{renderMetaTags(post.seo)}</Head>
+      <div
+        style={{
+          '--gradient1': post.duotoneColor1.hex,
+          '--gradient2': post.duotoneColor2.hex,
+          '--useCaseAccent': post.accentColor.hex,
+        }}
+      >
+        <UseCaseHead
+          title={post.title}
+          logo={post.logo.url}
+          image={`${post.coverImage.url}?fp-y=${post.coverImage.focalPoint.y}&fp-x=${post.coverImage.focalPoint.x}&crop=focalpoint&fit=crop&${duotone}`}
+        />
 
-            <div id="usecase" />
+        <div id="usecase" />
 
-            <UseCaseRecap
-              challenge={highlightStructuredText(post.challenge)}
-              result={highlightStructuredText(post.result)}
-            >
-              <Numbers>
-                {post.numbers.map((number) => (
-                  <NumbersBlock key={number.label} title={number.number}>
-                    {number.label}
-                  </NumbersBlock>
-                ))}
-              </Numbers>
-            </UseCaseRecap>
+        <UseCaseRecap
+          challenge={highlightStructuredText(post.challenge)}
+          result={highlightStructuredText(post.result)}
+        >
+          <Numbers>
+            {post.numbers.map((number) => (
+              <NumbersBlock key={number.label} title={number.number}>
+                {number.label}
+              </NumbersBlock>
+            ))}
+          </Numbers>
+        </UseCaseRecap>
 
-            <Results
-              image={`${post.mainResultsImage.url}?${duotone}&fp-y=${post.mainResultsImage.focalPoint.y}&crop=focalpoint&fp-x=${post.mainResultsImage.focalPoint.x}`}
-            >
-              {post.mainResults.map((res) => (
-                <ResultsBlock key={res.title} title={res.title}>
-                  <StructuredText data={res.description} />
-                </ResultsBlock>
-              ))}
-            </Results>
+        <Results
+          image={`${post.mainResultsImage.url}?${duotone}&fp-y=${post.mainResultsImage.focalPoint.y}&crop=focalpoint&fp-x=${post.mainResultsImage.focalPoint.x}`}
+        >
+          {post.mainResults.map((res) => (
+            <ResultsBlock key={res.title} title={res.title}>
+              <StructuredText data={res.description} />
+            </ResultsBlock>
+          ))}
+        </Results>
 
-            <Wrapper>
-              <div className={s.fullStory}>
-                <PostContent content={post.content} />
-              </div>
-            </Wrapper>
+        <Wrapper>
+          <div className={s.fullStory}>
+            <PostContent content={post.content} />
           </div>
-        </>
-      )}
+        </Wrapper>
+      </div>
     </Layout>
   );
 }

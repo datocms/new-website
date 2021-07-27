@@ -1,5 +1,4 @@
 import { generatePaths, generateProps } from 'lib/appQueries';
-import { useRouter } from 'next/router';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import PostContent from 'components/PostContent';
@@ -8,7 +7,7 @@ import Layout from 'components/MarketplaceLayout';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import { Image as DatoImage } from 'react-datocms';
-import PluginBox, { LogoImage } from 'components/PluginBox';
+import { LogoImage } from 'components/PluginBox';
 import {
   PluginInfo,
   Info,
@@ -16,56 +15,35 @@ import {
   PluginDetails,
   Badge,
 } from 'components/PluginToolkit';
-import { Copy, Image as FakeImage } from 'components/FakeContent';
 
 export const getStaticPaths = generatePaths('allEnterpriseApps');
 export const getStaticProps = generateProps('enterpriseApp');
 
 export default function EnterpriseApp({ page, preview }) {
-  const { isFallback } = useRouter();
-
   return (
     <Layout preview={preview}>
-      {!isFallback && <Head>{renderMetaTags(page.seo)}</Head>}
+      <Head>{renderMetaTags(page.seo)}</Head>
 
       <PluginDetails
-        isFallback={isFallback}
         title={
-          !isFallback && (
-            <>
-              {page.title} <Badge>Enterprise integration</Badge>
-            </>
-          )
+          <>
+            {page.title} <Badge>Enterprise integration</Badge>
+          </>
         }
-        shortTitle={!isFallback && page.title}
-        description={!isFallback && page.description}
-        gallery={
-          !isFallback &&
-          page.gallery.map((image) => (
-            <DatoImage
-              key={image.id}
-              explicitWidth
-              data={image.responsiveImage}
-            />
-          ))
-        }
+        shortTitle={page.title}
+        description={page.description}
+        gallery={page.gallery.map((image) => (
+          <DatoImage
+            key={image.id}
+            explicitWidth
+            data={image.responsiveImage}
+          />
+        ))}
         content={
-          isFallback ? (
-            <>
-              <Copy />
-              <FakeImage />
-              <Copy />
-            </>
-          ) : (
-            <PostContent
-              isFallback={isFallback}
-              content={page && page.content}
-              style={docPageStyles}
-            />
-          )
+          <PostContent content={page && page.content} style={docPageStyles} />
         }
-        image={!isFallback && <LogoImage style="azure" logo={page.logo} />}
-        shortDescription={!isFallback && page.shortDescription}
+        image={<LogoImage style="azure" logo={page.logo} />}
+        shortDescription={page.shortDescription}
         actions={
           <Button
             as="a"

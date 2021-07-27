@@ -110,14 +110,13 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     ${imageFields}
     ${seoMetaTagsFields}
   `,
-  ({ page }) => ({
-    first: CHANGELOG_POSTS_PER_PAGE,
-    skip: CHANGELOG_POSTS_PER_PAGE * parseInt(page),
-  }),
-  (data) => ({
-    ...data,
-    perPage: CHANGELOG_POSTS_PER_PAGE,
-  }),
+  {
+    requiredKeys: ['changelog', 'posts'],
+    paramsToVars: ({ page }) => ({
+      first: CHANGELOG_POSTS_PER_PAGE,
+      skip: CHANGELOG_POSTS_PER_PAGE * parseInt(page),
+    }),
+  },
 );
 
 export default function Changelog({ preview, subscription }) {
@@ -129,7 +128,7 @@ export default function Changelog({ preview, subscription }) {
 
   return (
     <Layout preview={preview}>
-      <Head>{!router.isFallback && renderMetaTags(changelog.seo)}</Head>
+      <Head>{renderMetaTags(changelog.seo)}</Head>
 
       <Hero
         title={
@@ -170,7 +169,6 @@ export default function Changelog({ preview, subscription }) {
 
                 <div className={s.body}>
                   <PostContent
-                    isFallback={router.isFallback}
                     content={post && post.content}
                     style={pageStyle}
                   />
@@ -178,16 +176,15 @@ export default function Changelog({ preview, subscription }) {
               </div>
             ))}
         </div>
-        {!router.isFallback && (
-          <Paginator
-            perPage={CHANGELOG_POSTS_PER_PAGE}
-            currentPage={router.query ? parseInt(router.query.page) : 0}
-            totalEntries={meta.count}
-            href={(index) =>
-              index === 0 ? '/product-updates' : `/product-updates/p/${index}`
-            }
-          />
-        )}
+
+        <Paginator
+          perPage={CHANGELOG_POSTS_PER_PAGE}
+          currentPage={router.query ? parseInt(router.query.page) : 0}
+          totalEntries={meta.count}
+          href={(index) =>
+            index === 0 ? '/product-updates' : `/product-updates/p/${index}`
+          }
+        />
       </Wrapper>
     </Layout>
   );

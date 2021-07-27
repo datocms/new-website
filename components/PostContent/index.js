@@ -3,7 +3,6 @@ import VideoPlayer from 'components/VideoPlayer';
 import ImageFigure from 'components/ImageFigure';
 import Prism from 'components/Prism';
 import defaultStyles from './style.module.css';
-import { Copy, Image as FakeImage } from 'components/FakeContent';
 import LazyImage from 'components/LazyImage';
 import { Image as DatoImage, StructuredText, renderRule } from 'react-datocms';
 import UiChrome from 'components/UiChrome';
@@ -191,71 +190,55 @@ function renderBlock(s, block) {
   }
 }
 
-export default function PostContent({ isFallback, content, style, children }) {
+export default function PostContent({ content, style, children }) {
   const s = style || defaultStyles;
 
   return (
     <div className={s.body}>
-      {isFallback ? (
-        <>
-          <div className={s.text}>
-            <Copy lines={4} />
-          </div>
-          <figure>
-            <FakeImage />
-          </figure>
-          <div className={s.text}>
-            <Copy lines={3} />
-          </div>
-        </>
-      ) : (
-        <>
-          <StructuredText
-            data={content}
-            renderBlock={({ record }) => renderBlock(s, record)}
-            customRules={[
-              renderRule(isBlockquote, ({ node, children, key }) => {
-                return (
-                  <div
-                    key={key}
-                    className={cn(s.quote, {
-                      [s.smallerQuote]: toPlainText(node).length > 500,
-                    })}
-                  >
-                    <div className={s.quoteQuote}>{children}</div>
-                    {node.attribution && (
-                      <div className={s.quoteAuthor}>{node.attribution}</div>
-                    )}
-                  </div>
-                );
-              }),
-              renderRule(isCode, ({ node, key }) => {
-                return (
-                  <Prism
-                    key={key}
-                    code={node.code}
-                    language={node.language || 'unknown'}
-                    highlightLines={node.highlight}
-                    showLineNumbers={node.code.split(/\n/).length > 10}
-                  />
-                );
-              }),
-              renderRule(isHeading, ({ node, children, key }) => {
-                return (
-                  <Heading
-                    key={key}
-                    as={`h${node.level}`}
-                    anchor={slugify(toPlainText(node))}
-                  >
-                    {children}
-                  </Heading>
-                );
-              }),
-            ]}
-          />
-          {children}
-        </>
-      )}
+      <StructuredText
+        data={content}
+        renderBlock={({ record }) => renderBlock(s, record)}
+        customRules={[
+          renderRule(isBlockquote, ({ node, children, key }) => {
+            return (
+              <div
+                key={key}
+                className={cn(s.quote, {
+                  [s.smallerQuote]: toPlainText(node).length > 500,
+                })}
+              >
+                <div className={s.quoteQuote}>{children}</div>
+                {node.attribution && (
+                  <div className={s.quoteAuthor}>{node.attribution}</div>
+                )}
+              </div>
+            );
+          }),
+          renderRule(isCode, ({ node, key }) => {
+            return (
+              <Prism
+                key={key}
+                code={node.code}
+                language={node.language || 'unknown'}
+                highlightLines={node.highlight}
+                showLineNumbers={node.code.split(/\n/).length > 10}
+              />
+            );
+          }),
+          renderRule(isHeading, ({ node, children, key }) => {
+            return (
+              <Heading
+                key={key}
+                as={`h${node.level}`}
+                anchor={slugify(toPlainText(node))}
+              >
+                {children}
+              </Heading>
+            );
+          }),
+        ]}
+      />
+      {children}
     </div>
   );
 }

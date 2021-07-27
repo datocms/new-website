@@ -77,6 +77,10 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
     variables: { slug },
   });
 
+  if (!page) {
+    return { notFound: true };
+  }
+
   const { body } = await tiny.get({
     url: githubRepoToManifest(page.githubRepo),
   });
@@ -97,87 +101,71 @@ const deployments = {
 };
 
 export default function EnterpriseApp({ page, preview }) {
-  const { isFallback } = useRouter();
-
   return (
     <Layout preview={preview}>
-      {!isFallback && (
-        <Head>
-          {renderMetaTags(page.seo)}
-          <meta property="og:image" content={page.screenshot.url} />
-          <meta name="twitter:image" content={page.screenshot.url} />
-        </Head>
-      )}
+      <Head>
+        {renderMetaTags(page.seo)}
+        <meta property="og:image" content={page.screenshot.url} />
+        <meta name="twitter:image" content={page.screenshot.url} />
+      </Head>
       <PluginDetails
-        isFallback={isFallback}
-        title={!isFallback && page.name}
-        image={!isFallback && <LogoImage logo={page.technology.logo} />}
-        shortDescription={!isFallback && page.description}
+        title={page.name}
+        image={<LogoImage logo={page.technology.logo} />}
+        shortDescription={page.description}
         description={
-          !isFallback && (
-            <>
-              {page.description}. {deployments[page.deploymentType]}
-            </>
-          )
+          <>
+            {page.description}. {deployments[page.deploymentType]}
+          </>
         }
         actions={
-          !isFallback && (
-            <Button
-              as="a"
-              href={`https://dashboard.datocms.com/deploy?repo=${page.githubRepo}`}
-              target="_blank"
-            >
-              Start free project
-            </Button>
-          )
+          <Button
+            as="a"
+            href={`https://dashboard.datocms.com/deploy?repo=${page.githubRepo}`}
+            target="_blank"
+          >
+            Start free project
+          </Button>
         }
         info={
           <PluginInfo>
-            <Info title="Preview URL" isFallback={isFallback}>
-              {!isFallback && (
-                <a href={page.livePreviewUrl} target="_blank" rel="noreferrer">
-                  Visit preview website
-                </a>
-              )}
+            <Info title="Preview URL">
+              <a href={page.livePreviewUrl} target="_blank" rel="noreferrer">
+                Visit preview website
+              </a>
             </Info>
-            <Info title="Github repo" isFallback={isFallback}>
-              {!isFallback && (
-                <a
-                  href={githubRepoToUrl(page.githubRepo)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {page.githubRepo.split(':')[0]}
-                </a>
-              )}
+            <Info title="Github repo">
+              <a
+                href={githubRepoToUrl(page.githubRepo)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {page.githubRepo.split(':')[0]}
+              </a>
             </Info>
             <Info title="Publisher">
               <NameWithGravatar email="support@datocms.com" name="DatoCMS" />
             </Info>
-            <Info title="First released" isFallback={isFallback}>
-              {!isFallback && <FormattedDate date={page._firstPublishedAt} />}
+            <Info title="First released">
+              <FormattedDate date={page._firstPublishedAt} />
             </Info>
           </PluginInfo>
         }
-        gallery={
-          !isFallback &&
-          [
-            <UiChrome key="front" title={page.demoName}>
+        gallery={[
+          <UiChrome key="front" title={page.demoName}>
+            <DatoImage
+              style={{ display: 'block ' }}
+              data={page.screenshot.responsiveImage}
+            />
+          </UiChrome>,
+          page.backendScreenshot && (
+            <UiChrome key="back">
               <DatoImage
                 style={{ display: 'block ' }}
-                data={page.screenshot.responsiveImage}
+                data={page.backendScreenshot.responsiveImage}
               />
-            </UiChrome>,
-            page.backendScreenshot && (
-              <UiChrome key="back">
-                <DatoImage
-                  style={{ display: 'block ' }}
-                  data={page.backendScreenshot.responsiveImage}
-                />
-              </UiChrome>
-            ),
-          ].filter((i) => !!i)
-        }
+            </UiChrome>
+          ),
+        ].filter((i) => !!i)}
       />
     </Layout>
   );

@@ -97,6 +97,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     ${seoMetaTagsFields}
     ${imageFields}
   `,
+  {
+    requiredKeys: ['webinar'],
+  },
 );
 
 const gcalDate = (date) =>

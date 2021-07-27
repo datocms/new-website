@@ -3,7 +3,6 @@ import Button from 'components/Button';
 import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import SmartMarkdown from 'components/SmartMarkdown';
 import { useRouter } from 'next/router';
-import { Copy, Image } from 'components/FakeContent';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import FormattedDate from 'components/FormattedDate';
@@ -82,7 +81,10 @@ export const getStaticProps = gqlStaticProps(
     }
     ${seoMetaTagsFields}
   `,
-  ({ chunks }) => ({ name: chunks.join('/') }),
+  {
+    paramsToVars: ({ chunks }) => ({ name: chunks.join('/') }),
+    requiredKeys: ['plugin'],
+  },
 );
 
 const fetcher = (packageName) =>
@@ -115,23 +117,20 @@ const fetcher = (packageName) =>
 
 export default function Plugin({ plugin, preview }) {
   const {
-    isFallback,
     query: { chunks },
   } = useRouter();
 
-  const { data } = useSWR(isFallback ? null : chunks.join('/'), fetcher);
+  const { data } = useSWR(chunks.join('/'), fetcher);
   const info = data && data.data.plugin;
 
   return (
     <Layout preview={preview}>
-      {!isFallback && <Head>{renderMetaTags(plugin.seo)}</Head>}
+      <Head>{renderMetaTags(plugin.seo)}</Head>
 
       <PluginDetails
-        isFallback={isFallback}
-        title={!isFallback && plugin.title}
-        description={!isFallback && plugin.description}
+        title={plugin.title}
+        description={plugin.description}
         gallery={
-          !isFallback &&
           plugin.previewImage && (
             <img
               alt="Preview"
@@ -140,19 +139,9 @@ export default function Plugin({ plugin, preview }) {
             />
           )
         }
-        content={
-          isFallback ? (
-            <>
-              <Copy />
-              <Image />
-              <Copy />
-            </>
-          ) : (
-            <SmartMarkdown>{plugin.readme}</SmartMarkdown>
-          )
-        }
+        content={<SmartMarkdown>{plugin.readme}</SmartMarkdown>}
         image={
-          !isFallback && plugin.coverImage ? (
+          plugin.coverImage ? (
             <div className={s.cover}>
               <img alt="Preview" src={plugin.coverImage.url} />
             </div>
@@ -160,16 +149,14 @@ export default function Plugin({ plugin, preview }) {
             <PluginImagePlacehoder />
           )
         }
-        shortDescription={!isFallback && truncate(plugin.description, 55)}
+        shortDescription={truncate(plugin.description, 55)}
         info={
           <PluginInfo>
-            <Info title="Publisher" isFallback={isFallback}>
-              {!isFallback && (
-                <NameWithGravatar
-                  email={plugin.author.email}
-                  name={plugin.author.name}
-                />
-              )}
+            <Info title="Publisher">
+              <NameWithGravatar
+                email={plugin.author.email}
+                name={plugin.author.name}
+              />
             </Info>
             <Info title="Homepage">
               <a
@@ -180,22 +167,16 @@ export default function Plugin({ plugin, preview }) {
                 Visit homepage
               </a>
             </Info>
-            <Info title="Plugin type" isFallback={isFallback}>
-              {!isFallback && plugin.pluginType.name}
+            <Info title="Plugin type">{plugin.pluginType.name}</Info>
+            <Info title="Compatible with fields">
+              {plugin.fieldTypes.map((f) => f.name).join(', ')}
             </Info>
-            <Info title="Compatible with fields" isFallback={isFallback}>
-              {!isFallback && plugin.fieldTypes.map((f) => f.name).join(', ')}
+            <Info title="First released">
+              {<FormattedDate date={plugin.releasedAt} />}
             </Info>
-            <Info title="First released" isFallback={isFallback}>
-              {!isFallback && <FormattedDate date={plugin.releasedAt} />}
-            </Info>
-            <Info title="Current version" isFallback={isFallback}>
-              {!isFallback && plugin.version}
-            </Info>
-            <Info title="Installs count" isFallback={!info}>
-              {info && info.installs}
-            </Info>
-            <Info title="Last update" isFallback={!info}>
+            <Info title="Current version">{plugin.version}</Info>
+            <Info title="Installs count">{info && info.installs}</Info>
+            <Info title="Last update">
               {info && <FormattedDate date={info.lastUpdate} />}
             </Info>
           </PluginInfo>
@@ -203,11 +184,7 @@ export default function Plugin({ plugin, preview }) {
         actions={
           <Button
             as="a"
-            href={
-              isFallback
-                ? '#'
-                : `https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/plugins/install/${plugin.packageName}`
-            }
+            href={`https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/plugins/install/${plugin.packageName}`}
             target="_blank"
           >
             Install this plugin!

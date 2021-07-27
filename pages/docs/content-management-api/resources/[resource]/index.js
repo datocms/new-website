@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { Schema } from 'components/Cma/Schema';
 import ReactMarkdown from 'react-markdown';
 import { useRouter } from 'next/router';
-import AppError from 'errors/AppError';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -56,7 +55,7 @@ export const getStaticProps = async function ({
   const cma = await fetchCma(resource);
 
   if (!cma) {
-    throw new AppError(404);
+    return { notFound: true };
   }
 
   return {

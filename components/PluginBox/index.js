@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import LazyImage from 'components/LazyImage';
 import s from './style.module.css';
-import { Line, Copy, Image } from 'components/FakeContent';
 import PluginIcon from 'public/icons/regular/puzzle-piece.svg';
 import MaybeLink from 'components/MaybeLink';
 
@@ -26,7 +25,6 @@ export const PluginImagePlacehoder = () => (
 );
 
 export default function PluginBox({
-  isFallback,
   title,
   image,
   description,
@@ -36,10 +34,10 @@ export default function PluginBox({
 }) {
   return (
     <MaybeLink href={href} className={s.box}>
-      {isFallback ? <Image /> : image}
+      {image}
       <div className={s.boxBody}>
-        <div className={s.boxTitle}>{isFallback ? <Line /> : title}</div>
-        <div className={s.boxDesc}>{isFallback ? <Copy /> : description}</div>
+        <div className={s.boxTitle}>{title}</div>
+        <div className={s.boxDesc}>{description}</div>
         {actions && <div className={s.boxActions}>{actions}</div>}
         {details && <div className={s.boxDetails}>{details}</div>}
       </div>

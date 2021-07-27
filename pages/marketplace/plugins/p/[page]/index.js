@@ -65,28 +65,21 @@ export const getStaticProps = gqlStaticProps(
     ${imageFields}
     ${seoMetaTagsFields}
   `,
-  ({ page }) => ({
-    first: PLUGINS_PER_PAGE,
-    skip: PLUGINS_PER_PAGE * parseInt(page),
-  }),
-  (data) => ({
-    ...data,
-    perPage: PLUGINS_PER_PAGE,
-  }),
+  {
+    paramsToVars: ({ page }) => ({
+      first: PLUGINS_PER_PAGE,
+      skip: PLUGINS_PER_PAGE * parseInt(page),
+    }),
+    requiredKeys: ['pluginsPage', 'plugins'],
+  },
 );
 
-export default function Plugins({
-  plugins,
-  preview,
-  meta,
-  pluginsPage,
-  perPage,
-}) {
+export default function Plugins({ plugins, preview, meta, pluginsPage }) {
   const router = useRouter();
 
   return (
     <Layout preview={preview}>
-      {!router.isFallback && <Head>{renderMetaTags(pluginsPage.seo)}</Head>}
+      <Head>{renderMetaTags(pluginsPage.seo)}</Head>
       <Wrapper>
         <div className={s.hero}>
           <div className={s.heroTitle}>Community Plugins</div>
@@ -128,18 +121,16 @@ export default function Plugins({
               />
             ))}
         </div>
-        {!router.isFallback && (
-          <Paginator
-            perPage={perPage}
-            currentPage={router.query ? parseInt(router.query.page) : 0}
-            totalEntries={meta.count}
-            href={(index) =>
-              index === 0
-                ? '/marketplace/plugins'
-                : `/marketplace/plugins/p/${index}`
-            }
-          />
-        )}
+        <Paginator
+          perPage={PLUGINS_PER_PAGE}
+          currentPage={router.query ? parseInt(router.query.page) : 0}
+          totalEntries={meta.count}
+          href={(index) =>
+            index === 0
+              ? '/marketplace/plugins'
+              : `/marketplace/plugins/p/${index}`
+          }
+        />
       </Wrapper>
     </Layout>
   );

@@ -115,10 +115,13 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     ${imageFields}
     ${seoMetaTagsFields}
   `,
-  ({ page }) => ({
-    first: BLOG_POSTS_PER_PAGE,
-    skip: BLOG_POSTS_PER_PAGE * parseInt(page),
-  }),
+  {
+    requiredKeys: ['blog', 'posts'],
+    paramsToVars: ({ page }) => ({
+      first: BLOG_POSTS_PER_PAGE,
+      skip: BLOG_POSTS_PER_PAGE * parseInt(page),
+    }),
+  },
 );
 
 export default function Blog({ preview, subscription }) {
@@ -130,7 +133,7 @@ export default function Blog({ preview, subscription }) {
 
   return (
     <Layout preview={preview}>
-      {!router.isFallback && <Head>{renderMetaTags(blog.seo)}</Head>}
+      <Head>{renderMetaTags(blog.seo)}</Head>
       <Hero
         title={
           <>
@@ -140,26 +143,28 @@ export default function Blog({ preview, subscription }) {
         subtitle={<>News, tips and highlights from the team at DatoCMS</>}
       />
       <Wrapper>
-        <div>
-          <div className={s.changelogIntro}>
-            Latest from our Product Updates changelog →
+        {latestChangelogEntry && (
+          <div>
+            <div className={s.changelogIntro}>
+              Latest from our Product Updates changelog →
+            </div>
+            <Link href={`/product-updates`}>
+              <a className={s.changelogEntry}>
+                <div className={s.changelogEntryTitle}>
+                  {latestChangelogEntry.title}
+                </div>
+                <div className={s.changelogEntryDate}>
+                  <FormattedDate
+                    date={
+                      latestChangelogEntry._firstPublishedAt ||
+                      latestChangelogEntry._createdAt
+                    }
+                  />
+                </div>
+              </a>
+            </Link>
           </div>
-          <Link href={`/product-updates`}>
-            <a className={s.changelogEntry}>
-              <div className={s.changelogEntryTitle}>
-                {latestChangelogEntry.title}
-              </div>
-              <div className={s.changelogEntryDate}>
-                <FormattedDate
-                  date={
-                    latestChangelogEntry._firstPublishedAt ||
-                    latestChangelogEntry._createdAt
-                  }
-                />
-              </div>
-            </a>
-          </Link>
-        </div>
+        )}
 
         <Masonry
           breakpointCols={{
@@ -169,45 +174,43 @@ export default function Blog({ preview, subscription }) {
           className={s.grid}
           columnClassName={s.column}
         >
-          {posts &&
-            posts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`}>
-                <a className={s.post}>
-                  {post.coverImage && post.coverImage.responsiveImage && (
-                    <DatoImage
-                      className={s.image}
-                      data={post.coverImage.responsiveImage}
-                    />
-                  )}
-                  {post.coverImage && !post.coverImage.responsiveImage && (
-                    <img className={s.image} src={post.coverImage.url} />
-                  )}
-                  <div className={s.postBody}>
-                    <h6 className={s.title}>{post.title}</h6>
-                    <div className={s.excerpt}>
-                      <StructuredText data={post.excerpt} />
-                    </div>
-                    <div className={s.footer}>
-                      <div className={s.date}>
-                        Posted on{' '}
-                        <FormattedDate
-                          date={post._firstPublishedAt || post._createdAt}
-                        />
-                      </div>
+          {posts.map((post) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`}>
+              <a className={s.post}>
+                {post.coverImage && post.coverImage.responsiveImage && (
+                  <DatoImage
+                    className={s.image}
+                    data={post.coverImage.responsiveImage}
+                  />
+                )}
+                {post.coverImage && !post.coverImage.responsiveImage && (
+                  <img className={s.image} src={post.coverImage.url} />
+                )}
+                <div className={s.postBody}>
+                  <h6 className={s.title}>{post.title}</h6>
+                  <div className={s.excerpt}>
+                    <StructuredText data={post.excerpt} />
+                  </div>
+                  <div className={s.footer}>
+                    <div className={s.date}>
+                      Posted on{' '}
+                      <FormattedDate
+                        date={post._firstPublishedAt || post._createdAt}
+                      />
                     </div>
                   </div>
-                </a>
-              </Link>
-            ))}
+                </div>
+              </a>
+            </Link>
+          ))}
         </Masonry>
-        {!router.isFallback && meta && (
-          <Paginator
-            perPage={BLOG_POSTS_PER_PAGE}
-            currentPage={router.query ? parseInt(router.query.page) : 0}
-            totalEntries={meta.count}
-            href={(index) => (index === 0 ? '/blog' : `/blog/p/${index}`)}
-          />
-        )}
+
+        <Paginator
+          perPage={BLOG_POSTS_PER_PAGE}
+          currentPage={router.query ? parseInt(router.query.page) : 0}
+          totalEntries={meta.count}
+          href={(index) => (index === 0 ? '/blog' : `/blog/p/${index}`)}
+        />
       </Wrapper>
     </Layout>
   );

@@ -3,7 +3,6 @@ import gravatar from 'utils/gravatar';
 import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
 import Link from 'next/link';
 import s from './style.module.css';
-import { Line, Text, Copy, Image } from 'components/FakeContent';
 import Wrapper from 'components/Wrapper';
 import PluginBox from 'components/PluginBox';
 
@@ -11,11 +10,11 @@ export const PluginInfo = ({ children }) => {
   return <div className={s.root}>{children}</div>;
 };
 
-export const Info = ({ title, children, isFallback }) => {
+export const Info = ({ title, children }) => {
   return (
     <div className={s.block}>
       <div className={s.blockTitle}>{title}</div>
-      {isFallback ? <Line /> : children}
+      {children}
     </div>
   );
 };
@@ -46,7 +45,6 @@ export const Announce = ({ href, children }) => (
 );
 
 export const PluginDetails = ({
-  isFallback,
   title,
   shortTitle,
   description,
@@ -62,24 +60,16 @@ export const PluginDetails = ({
     <div className={s.split}>
       <div className={s.content}>
         <div className={s.header}>
-          <div className={s.title}>
-            {isFallback ? <Text width={30} /> : title}
-          </div>
-          <div className={s.description}>
-            {isFallback ? <Copy /> : description}
-          </div>
+          <div className={s.title}>{title}</div>
+          <div className={s.description}>{description}</div>
           <div className={s.action}>{actions}</div>
         </div>
         {gallery && (
           <div className={s.gallery}>
             <div className={s.galleryInner}>
-              {isFallback ? (
-                <Image />
-              ) : (
-                React.Children.map(gallery, (el) => (
-                  <div className={s.galleryImage}>{el}</div>
-                ))
-              )}
+              {React.Children.map(gallery, (el) => (
+                <div className={s.galleryImage}>{el}</div>
+              ))}
             </div>
           </div>
         )}
@@ -91,7 +81,6 @@ export const PluginDetails = ({
         <div className={s.sidebarInner}>
           <div className={s.pluginBox}>
             <PluginBox
-              isFallback={isFallback}
               title={shortTitle || title}
               image={image}
               description={shortDescription}
