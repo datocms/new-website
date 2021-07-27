@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { Schema } from 'components/Cma/Schema';
 import ReactMarkdown from 'react-markdown';
 import { useRouter } from 'next/router';
+import { handleErrors } from 'lib/datocms';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -24,7 +25,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async function ({
+export const getStaticProps = handleErrors(async function ({
   params: { resource },
   preview,
 }) {
@@ -66,7 +67,7 @@ export const getStaticProps = async function ({
       resourceId: resource,
     },
   };
-};
+});
 
 export default function DocPage({ docGroup, cma, preview, resourceId }) {
   const router = useRouter();

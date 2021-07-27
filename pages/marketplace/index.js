@@ -11,8 +11,9 @@ import cn from 'classnames';
 import PluginBox, { LogoImage } from 'components/PluginBox';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';
+import { handleErrors } from 'lib/datocms';
 
-export const getStaticProps = async ({ preview }) => {
+export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
     data: { page, ...other },
   } = await request({
@@ -104,7 +105,7 @@ export const getStaticProps = async ({ preview }) => {
       ...other,
     },
   };
-};
+});
 
 const Category = ({ title, description, children, browse }) => (
   <div className={s.category}>

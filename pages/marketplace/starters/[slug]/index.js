@@ -21,6 +21,7 @@ import {
 } from 'lib/datocms';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest, githubRepoToUrl } from 'utils/githubRepo';
+import { handleErrors } from 'lib/datocms';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -34,11 +35,12 @@ export const getStaticPaths = gqlStaticPaths(
   ({ posts }) => posts.map((p) => p.code),
 );
 
-export const getStaticProps = async ({ params: { slug }, preview }) => {
-  const {
-    data: { page },
-  } = await request({
-    query: `
+export const getStaticProps = handleErrors(
+  async ({ params: { slug }, preview }) => {
+    const {
+      data: { page },
+    } = await request({
+      query: `
       query StarterQuery($slug: String!) {
         page: templateDemo(filter: { code: { eq: $slug } }) {
           seo: _seoMetaTags {
@@ -74,24 +76,25 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
       ${seoMetaTagsFields}
       ${imageFields}
     `,
-    variables: { slug },
-  });
+      variables: { slug },
+    });
 
-  if (!page) {
-    return { notFound: true };
-  }
+    if (!page) {
+      return { notFound: true };
+    }
 
-  const { body } = await tiny.get({
-    url: githubRepoToManifest(page.githubRepo),
-  });
+    const { body } = await tiny.get({
+      url: githubRepoToManifest(page.githubRepo),
+    });
 
-  return {
-    props: {
-      preview: preview || false,
-      page: { ...JSON.parse(body), ...page },
-    },
-  };
-};
+    return {
+      props: {
+        preview: preview || false,
+        page: { ...JSON.parse(body), ...page },
+      },
+    };
+  },
+);
 
 const deployments = {
   static: 'Deployable on Netlify or Vercel.',
