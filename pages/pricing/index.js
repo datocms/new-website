@@ -34,10 +34,11 @@ import { Badge } from 'components/PluginToolkit';
 import Tier1 from 'public/images/tiers/tier-1.svg';
 import Tier2 from 'public/images/tiers/tier-2.svg';
 import Tier3 from 'public/images/tiers/tier-3.svg';
+import { handleErrors } from 'lib/datocms';
 
 const TierIcons = [Tier1, Tier2, Tier3];
 
-export const getStaticProps = async ({ preview }) => {
+export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
     body: { data: datoPlans },
   } = await tiny.get({
@@ -106,7 +107,7 @@ export const getStaticProps = async ({ preview }) => {
       }),
     },
   };
-};
+});
 
 const PlanBox = ({ plan, hints, icon: Icon }) => {
   const monthlyPrice = plan.attributes.monthly_price;

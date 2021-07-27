@@ -1,6 +1,11 @@
-import { request, seoMetaTagsFields, imageFields } from 'lib/datocms';
+import {
+  request,
+  seoMetaTagsFields,
+  imageFields,
+  handleErrors,
+  gqlStaticPaths,
+} from 'lib/datocms';
 import { renderMetaTags, StructuredText } from 'react-datocms';
-import { gqlStaticPaths } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
 import PostContent from 'components/PostContent';
 import Link from 'next/link';
@@ -67,7 +72,7 @@ export const getStaticPaths = gqlStaticPaths(
   },
 );
 
-export const getStaticProps = async function ({
+export const getStaticProps = handleErrors(async function ({
   params: { chunks: rawChunks },
   preview,
 }) {
@@ -249,7 +254,7 @@ export const getStaticProps = async function ({
       preview: preview ? true : false,
     },
   };
-};
+});
 
 const SidebarEntry = ({ url, level, label, children }) => {
   if (!url && level === 0) {

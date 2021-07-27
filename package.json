@@ -16,6 +16,7 @@
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.47",
     "@rehooks/component-size": "^1.0.3",
+    "@rollbar/react": "^0.8.0",
     "@slack/web-api": "^5.11.0",
     "@svgr/webpack": "^5.5.0",
     "@use-it/interval": "^1.0.0",

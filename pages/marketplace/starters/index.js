@@ -8,8 +8,9 @@ import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';
+import { handleErrors } from 'lib/datocms';
 
-export const getStaticProps = async ({ preview }) => {
+export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
     data: { starters },
   } = await request({
@@ -54,7 +55,7 @@ export const getStaticProps = async ({ preview }) => {
       starters: startersData,
     },
   };
-};
+});
 
 export default function Plugins({ starters, preview }) {
   return (

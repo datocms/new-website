@@ -8,6 +8,7 @@ import {
   Sidebar,
   getStaticProps as docPageGetStaticProps,
 } from 'pages/docs/[...chunks]';
+import { handleErrors } from 'lib/datocms';
 import tiny from 'tiny-json-http';
 import Prism from 'components/Prism';
 import s from 'pages/docs/pageStyle.module.css';
@@ -16,7 +17,7 @@ import Heading from 'components/Heading';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 
-export const getStaticProps = async ({ preview }) => {
+export const getStaticProps = handleErrors(async ({ preview }) => {
   const { props } = await docPageGetStaticProps({
     params: { chunks: ['content-delivery-api', 'filtering-uploads'] },
     preview,
@@ -29,7 +30,7 @@ export const getStaticProps = async ({ preview }) => {
   });
 
   return { props: { ...props, filters } };
-};
+});
 
 const Filters = ({ name, attrs }) => {
   return (

@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import Prism from 'components/Prism';
 import gfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import { handleErrors } from 'lib/datocms';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -41,7 +42,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async function ({
+export const getStaticProps = handleErrors(async function ({
   params: { resource, endpoint },
   preview,
 }) {
@@ -88,7 +89,7 @@ export const getStaticProps = async function ({
       endpoint,
     },
   };
-};
+});
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 

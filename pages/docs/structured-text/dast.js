@@ -15,8 +15,9 @@ import ReactMarkdown from 'react-markdown';
 import { parse } from 'flatted';
 import { Properties } from 'components/Cma/Schema';
 import Prism from 'components/Prism';
+import { handleErrors } from 'lib/datocms';
 
-export const getStaticProps = async ({ preview }) => {
+export const getStaticProps = handleErrors(async ({ preview }) => {
   const { props } = await docPageGetStaticProps({
     params: { chunks: ['structured-text', 'dast'] },
     preview,
@@ -25,7 +26,7 @@ export const getStaticProps = async ({ preview }) => {
   const schema = await buildStructuredTextDocumentSchema();
 
   return { props: { ...props, schema } };
-};
+});
 
 function intersperse(arr, sep, endSep = sep) {
   if (arr.length === 0) {

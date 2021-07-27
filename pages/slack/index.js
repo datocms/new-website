@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
@@ -31,6 +31,7 @@ function Slack() {
   const { addToast } = useToasts();
 
   const { register, reset, setError, handleSubmit, formState } = useForm();
+  const setState = useState()[1];
 
   const onSubmit = async ({ email }) => {
     try {
@@ -43,9 +44,15 @@ function Slack() {
         '🎉 Awesome, welcome on board! Check your email for the invitation!',
       );
     } catch (e) {
-      setError('email', {
-        message: errorLabels[e.json.error] || `Slack error: ${e.json.error}`,
-      });
+      if (e.json && e.json.error) {
+        setError('email', {
+          message: errorLabels[e.json.error] || `Slack error: ${e.json.error}`,
+        });
+      } else {
+        setState(() => {
+          throw e;
+        });
+      }
     }
   };
 

@@ -5,6 +5,38 @@ import '../components/BaseLayout/global.css';
 import '../components/NProgress/style.css';
 import { getCookie, setCookie } from 'utils/cookies';
 import { ToastProvider } from 'react-toast-notifications';
+import { Provider, ErrorBoundary } from '@rollbar/react';
+import Hero from 'components/Hero';
+import Wrapper from 'components/Wrapper';
+import Head from 'next/head';
+import Highlight from 'components/Highlight';
+
+const rollbarConfig = {
+  accessToken: process.env.NEXT_PUBLIC_ROLLBAR_TOKEN,
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+};
+
+const ErrorDisplay = ({ error, resetError }) => (
+  <div style={{ margin: '0 40px' }}>
+    <Head>
+      <title>Website error</title>
+    </Head>
+    <Hero
+      kicker="Website error"
+      title={
+        <>
+          <Highlight>Ouch!</Highlight> This should not have happened...
+        </>
+      }
+    />
+    <Wrapper>
+      Sorry, but an error prevented the requested page from rendering.
+      We&apos;ve already been alerted about this and we&apos;ll try to fix this
+      as soon as possible!
+    </Wrapper>
+  </div>
+);
 
 function App({ Component, pageProps }) {
   const router = useRouter();
@@ -35,30 +67,22 @@ function App({ Component, pageProps }) {
       Fathom.trackPageview();
     }
 
-    function onRouteChangeStart() {
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-    }
-
-    // Scroll to top
-    // router.events.on('routeChangeStart', onRouteChangeStart);
-
     // Record a pageview when route changes
     router.events.on('routeChangeComplete', onRouteChangeComplete);
 
     // Unassign event listener
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
-      // router.events.off('routeChangeStart', onRouteChangeStart);
     };
   }, [router.events]);
 
   return (
     <ToastProvider placement="bottom-right">
-      <Component {...pageProps} />
+      <Provider config={rollbarConfig}>
+        <ErrorBoundary fallbackUI={ErrorDisplay}>
+          <Component {...pageProps} />
+        </ErrorBoundary>
+      </Provider>
     </ToastProvider>
   );
 }

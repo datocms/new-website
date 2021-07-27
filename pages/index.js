@@ -26,9 +26,6 @@ import Vercel from 'public/images/logos/vercel.svg';
 import Dropbox from 'public/images/logos/dropbox.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Vmware from 'public/images/logos/vmware.svg';
-import Wonderland from 'public/images/logos/wonderland.svg';
-import Chillys from 'public/images/logos/chillys.svg';
-import MatterSupply from 'public/images/logos/matter-supply.svg';
 
 import Arduino from 'public/images/logos/arduino.svg';
 import CityOfSidney from 'public/images/logos/cityofsidney.svg';

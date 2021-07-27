@@ -17,8 +17,9 @@ import metaTypes from 'utils/metaTypes';
 import Heading from 'components/Heading';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
+import { handleErrors } from 'lib/datocms';
 
-export const getStaticProps = async ({ preview }) => {
+export const getStaticProps = handleErrors(async ({ preview }) => {
   const { props } = await docPageGetStaticProps({
     params: { chunks: ['content-delivery-api', 'filtering-records'] },
     preview,
@@ -31,7 +32,7 @@ export const getStaticProps = async ({ preview }) => {
   });
 
   return { props: { ...props, fieldsMetaInfo, fieldTypesInfo } };
-};
+});
 
 const Filters = ({ name, attrs }) => {
   return (

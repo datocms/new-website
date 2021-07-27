@@ -11,6 +11,7 @@ import {
   formatExtra,
   limitType,
 } from 'utils/planLimitsHelpers';
+import { handleErrors } from 'lib/datocms';
 
 const groupBy = (items, fn) =>
   items.reduce((result, item) => {
@@ -22,7 +23,7 @@ const groupBy = (items, fn) =>
     };
   }, {});
 
-export const getStaticProps = async ({ preview }) => {
+export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
     body: { data: datoPlans },
   } = await tiny.get({
@@ -55,7 +56,7 @@ export const getStaticProps = async ({ preview }) => {
       hints,
     },
   };
-};
+});
 
 export default function ComparePricing({ hints, plans, preview }) {
   return (

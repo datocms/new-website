@@ -3,6 +3,7 @@ import Layout from 'components/Layout';
 import {
   gqlStaticPaths,
   request,
+  handleErrors,
   imageFields,
   reviewFields,
   seoMetaTagsFields,
@@ -57,13 +58,14 @@ export const getStaticPaths = gqlStaticPaths(
   ({ landingPages }) => landingPages.map((p) => p.slug),
 );
 
-export const getStaticProps = async ({ params: { slug }, preview }) => {
-  const {
-    data: { landing },
-  } = await request({
-    preview,
-    variables: { slug },
-    query: `
+export const getStaticProps = handleErrors(
+  async ({ params: { slug }, preview }) => {
+    const {
+      data: { landing },
+    } = await request({
+      preview,
+      variables: { slug },
+      query: `
       query($slug: String!) {
         landing: landingPage(filter: { slug: { eq: $slug } }) {
           seo: _seoMetaTags {
@@ -175,18 +177,18 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
       ${imageFields}
       ${reviewFields}
     `,
-  });
+    });
 
-  if (!landing) {
-    return { notFound: true };
-  }
+    if (!landing) {
+      return { notFound: true };
+    }
 
-  const {
-    data: { websites },
-  } = await request({
-    preview,
-    variables: { technologyId: landing.integration.id },
-    query: `
+    const {
+      data: { websites },
+    } = await request({
+      preview,
+      variables: { technologyId: landing.integration.id },
+      query: `
       query($technologyId: ItemId!) {
         websites: allWebsites(
           filter: { technologies: { allIn: [$technologyId] } }
@@ -205,20 +207,21 @@ export const getStaticProps = async ({ params: { slug }, preview }) => {
       }
       ${imageFields}
     `,
-  });
+    });
 
-  const sortedWebsites = websites.reduce((acc, website, i) => {
-    if (i % 2 === 0) {
-      return [...acc, website];
-    } else {
-      return [website, ...acc];
-    }
-  }, []);
+    const sortedWebsites = websites.reduce((acc, website, i) => {
+      if (i % 2 === 0) {
+        return [...acc, website];
+      } else {
+        return [website, ...acc];
+      }
+    }, []);
 
-  return {
-    props: { preview: preview || false, landing, websites: sortedWebsites },
-  };
-};
+    return {
+      props: { preview: preview || false, landing, websites: sortedWebsites },
+    };
+  },
+);
 
 export default function UseCase({ landing, websites, preview }) {
   useEffect(() => {

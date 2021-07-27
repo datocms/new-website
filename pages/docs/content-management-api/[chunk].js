@@ -13,6 +13,7 @@ import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from 'components/PostContent';
 import { gqlStaticPaths } from 'lib/datocms';
+import { handleErrors } from 'lib/datocms';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -30,16 +31,18 @@ export const getStaticPaths = gqlStaticPaths(
   ({ root }) => root.pages.map((p) => p.page.slug),
 );
 
-export const getStaticProps = async ({ params: { chunk }, ...other }) => {
-  const { props } = await docPageGetStaticProps({
-    ...other,
-    params: { chunks: ['content-management-api', chunk] },
-  });
+export const getStaticProps = handleErrors(
+  async ({ params: { chunk }, ...other }) => {
+    const { props } = await docPageGetStaticProps({
+      ...other,
+      params: { chunks: ['content-management-api', chunk] },
+    });
 
-  const cma = await fetchCma();
+    const cma = await fetchCma();
 
-  return { props: { ...props, cma } };
-};
+    return { props: { ...props, cma } };
+  },
+);
 
 export default function DocPage(props) {
   const { docGroup, titleOverride, page, cma, preview } = props;

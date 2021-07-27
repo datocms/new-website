@@ -118,7 +118,7 @@ export const Form = ({
       try {
         await onSubmit(values, toastHelpers);
       } catch (e) {
-        addToast('Ouch! There was an error submitting the form!', {
+        toastHelpers.addToast('Ouch! There was an error submitting the form!', {
           appearance: 'error',
           autoDismiss: true,
         });
