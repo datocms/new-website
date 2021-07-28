@@ -166,10 +166,9 @@ In compliance with any applicable laws and to these terms, you may not do any of
 while accessing or using DatoCMS:
 
 1. allow sharing of a User account by more than one individual/entity;
-2. use bots or automated systems to create account, unless you are an Enterprise subscriber.
+2. use bots or automated systems to create account, unless otherwise agreed expressly with DATO SRL;
 3. resell, sublicense, lease, time-share or otherwise make the DatoCMS Services available
-   to any third party unless otherwise agreed expressly with DATO SRL or if you are an
-   Enterprise subscriber;
+   to any third party unless otherwise agreed expressly with DATO SRL;
 4. access, tamper with, or use non-customer-designated areas of DatoCMS, and/or of our
    service providers;
 5. reverse engineer DatoCMS;
