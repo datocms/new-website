@@ -1,17 +1,19 @@
 import { SiteClient } from 'datocms-client';
 import got from 'got';
+import { JSDOM } from 'jsdom';
+import { Readability } from '@mozilla/readability';
 
 // this "routing" function knows how to convert a DatoCMS record
 // into its canonical URL within the website
 
-const recordToUrl = async (record, model) => {
+const recordToSlugAndUrl = async (record, model) => {
   switch (model.apiKey) {
     case 'blog_post':
-      return `/blog/${record.slug}`;
+      return [record.slug, `/blog/${record.slug}`];
     case 'landing_page':
-      return `/cms/${record.slug}`;
+      return [record.slug, `/cms/${record.slug}`];
     case 'changelog_entry':
-      return `/product-updates/${record.slug}`;
+      return [record.slug, `/product-updates/${record.slug}`];
     default:
       return null;
   }
@@ -40,7 +42,7 @@ const handler = async (req, res) => {
   // we can now get the URL for the record using a routing function
   // that knows which record is linked to which URL in the website
 
-  const url = await recordToUrl(record, model);
+  const [slug, url] = await recordToSlugAndUrl(record, model);
 
   if (!url) {
     res.status(422).json({
@@ -69,11 +71,23 @@ const handler = async (req, res) => {
     headers: { cookie },
   });
 
+  const { document } = new JSDOM(body).window;
+  const reader = new Readability(document);
+  const analysis = reader.parse();
+
+  const locale = document.querySelector('html').getAttribute('lang') || 'en';
+  const title = document.querySelector('title').textContent;
+  const description = document
+    .querySelector('meta[name="description"]')
+    .getAttribute('content');
+
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
-  res.status(200).json({ body });
+  res
+    .status(200)
+    .json({ locale, slug, title, description, content: analysis.content });
 };
 
 export default handler;

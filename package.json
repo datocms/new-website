@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.47",
+    "@mozilla/readability": "^0.4.1",
     "@rehooks/component-size": "^1.0.3",
     "@rollbar/react": "^0.8.0",
     "@slack/web-api": "^5.11.0",
@@ -42,6 +43,7 @@
     "html-react-parser": "^1.2.6",
     "html-to-text": "^8.0.0",
     "humps": "^2.0.1",
+    "jsdom": "^16.6.0",
     "json-schema-ref-parser": "^9.0.9",
     "keyword-highlighter": "^1.0.6",
     "min-md5": "^1.0.0",
