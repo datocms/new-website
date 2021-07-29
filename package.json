@@ -36,6 +36,7 @@
     "fontfaceobserver": "^2.1.0",
     "front-matter": "^4.0.2",
     "glob": "^7.1.7",
+    "got": "^10.7.0",
     "graphql": "^15.5.0",
     "hls.js": "^1.0.7",
     "html-react-parser": "^1.2.6",
