@@ -1,50 +1,57 @@
 import { SiteClient } from 'datocms-client';
 import got from 'got';
 import { JSDOM } from 'jsdom';
-import { Readability } from '@mozilla/readability';
+
+const client = new SiteClient(
+  'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
+);
 
 // this "routing" function knows how to convert a DatoCMS record
-// into its canonical URL within the website
+// into its slug and canonical URL within the website
 
-const recordToSlugAndUrl = async (record, model) => {
-  switch (model.apiKey) {
+const findSlugAndPermalink = async ({ item, itemTypeApiKey }) => {
+  switch (itemTypeApiKey) {
     case 'blog_post':
-      return [record.slug, `/blog/${record.slug}`];
+      return [item.slug, `/blog/${item.slug}`];
     case 'landing_page':
-      return [record.slug, `/cms/${record.slug}`];
+      return [item.slug, `/cms/${item.slug}`];
     case 'changelog_entry':
-      return [record.slug, `/product-updates/${record.slug}`];
+      return [item.slug, `/product-updates/${item.slug}`];
     default:
       return null;
   }
 };
 
 const handler = async (req, res) => {
-  // this endpoint requires an itemId parameter, which represent the
-  // ID of the record we want to get the preview for
+  // this endpoint requires the following parameters parameter, which represent the
+  // the record we want to get the preview for
 
-  const itemId = req.query.itemId;
+  const missingParams = ['itemId', 'itemTypeId', 'itemTypeApiKey'].filter(
+    (paramName) => !req.query[paramName],
+  );
 
-  if (!itemId) {
-    res.status(422).json({ message: 'Missing itemId parameter!' });
+  if (missingParams.length > 0) {
+    res.status(422).json({
+      message: `Missing required parameters! ${missingParams.join(', ')}`,
+    });
     return;
   }
 
+  const { itemId, itemTypeId, itemTypeApiKey } = req.query;
+
   // given the itemId, we can now get the record (and it's model) from the Datocms API
-
-  const client = new SiteClient(
-    'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
-  );
-
-  const record = await client.items.find(itemId);
-  const model = await client.itemTypes.find(record.itemType);
+  const item = await client.items.find(itemId);
 
   // we can now get the URL for the record using a routing function
   // that knows which record is linked to which URL in the website
 
-  const [slug, url] = await recordToSlugAndUrl(record, model);
+  const [slug, permalink] = await findSlugAndPermalink({
+    item,
+    itemTypeId,
+    itemTypeApiKey,
+  });
 
-  if (!url) {
+  if (!permalink) {
     res.status(422).json({
       message: `Don\'t know which route corresponds to record #${itemId}!`,
     });
@@ -53,28 +60,28 @@ const handler = async (req, res) => {
 
   // let's start a Next.js Preview Mode (and get the authentication cookies)
 
-  const { headers } = await got(
-    new URL('/api/preview/start', process.env.BASE_URL).toString(),
-    {
-      followRedirect: false,
-    },
-  );
+  res.setPreviewData({});
 
-  const cookie = headers['set-cookie']
+  const cookie = res
+    .getHeader('Set-Cookie')
     .map((cookie) => cookie.split(';')[0])
     .join(';');
+
+  res.clearPreviewData();
 
   // final step is to get the HTML of the webpage associated with the record
   // and return it to the client
 
-  const { body } = await got(new URL(url, process.env.BASE_URL).toString(), {
-    headers: { cookie },
-  });
+  const { body } = await got(
+    new URL(permalink, process.env.BASE_URL).toString(),
+    {
+      headers: { cookie },
+    },
+  );
 
   const { document } = new JSDOM(body).window;
-  const reader = new Readability(document);
-  const analysis = reader.parse();
 
+  const content = document.getElementById('main-page-content').innerHTML;
   const locale = document.querySelector('html').getAttribute('lang') || 'en';
   const title = document.querySelector('title').textContent;
   const description = document
@@ -85,9 +92,14 @@ const handler = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
-  res
-    .status(200)
-    .json({ locale, slug, title, description, content: analysis.content });
+  res.status(200).json({
+    locale,
+    slug,
+    permalink,
+    title,
+    description,
+    content,
+  });
 };
 
 export default handler;

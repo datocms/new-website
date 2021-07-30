@@ -9,7 +9,7 @@ export default function Layout({ noCta, children, preview }) {
       <Navbar />
       <MobileNavbar />
 
-      {children}
+      <div id="main-page-content">{children}</div>
       <Footer noCta={noCta} />
     </BaseLayout>
   );
