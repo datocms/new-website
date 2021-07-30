@@ -160,7 +160,7 @@ export default function Footer({ noCta }) {
 
                     <Feature
                       title="Multi-language"
-                      href="/features/multi-language"
+                      href="/features/headless-cms-multi-language"
                       description="Reach global audience with localized content"
                     />
 

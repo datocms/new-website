@@ -205,7 +205,7 @@ export default function Navbar() {
                         <Feature
                           icon={Languages}
                           title="Multi-language"
-                          href="/features/multi-language"
+                          href="/features/headless-cms-multi-language"
                           description="Reach global audience with localized content"
                         />
 

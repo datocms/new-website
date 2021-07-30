@@ -1,15 +1,15 @@
 import Layout from 'components/Layout';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
-import Hero from 'components/Hero';
+import Hero from 'components/Hero/Seo';
 import Highlight from 'components/Highlight';
 import IntegrationsBanner from 'components/IntegrationsBanner';
 import LazyImage from 'components/LazyImage';
 import ProjectSettings from 'components/ProjectSettings';
 import FieldSettings from 'components/FieldSettings';
 import TranslatedUI from 'components/TranslatedUI';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
 
 const icons = [
   '/images/flags/argentina.svg',
@@ -44,9 +44,18 @@ const icons = [
 export const getStaticProps = gqlStaticProps(
   `
     {
-      page: homePage {
+      feature: feature(filter: { slug: { eq: "headless-cms-multi-language" } }) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
+        }
+        slug
+        seoContent {
+          ... on SeoBlockRecord {
+            keyword
+            h1
+            imagesTitle
+            metaKeywords
+          }
         }
       }
     }
@@ -54,16 +63,20 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-function MultiLanguage({ page, preview }) {
+function MultiLanguage({ feature, preview }) {
+  const seoBlock = feature && feature.seoContent[0];
+
   return (
     <Layout preview={preview}>
-      <Head>
-        {renderMetaTags(page.seo)}
-        <title>Multi-language - Features</title>
-      </Head>
+      <Head
+        metaKeywords={seoBlock.metaKeywords}
+        seo={feature.seo}
+        slug={feature.slug}
+      />
 
       <Hero
-        kicker="Multi-language"
+        keyword={seoBlock.keyword}
+        kicker={seoBlock.h1}
         title={
           <>
             Easily localize <Highlight>all&nbsp;your&nbsp;content</Highlight>,
@@ -72,15 +85,19 @@ function MultiLanguage({ page, preview }) {
         }
         subtitle={
           <>
-            Reach your global audience by publishing multiple versions of your
-            content in different languages. Select from +400 different locales
-            to serve your content to the world.
+            Reach your <strong>global audience</strong> by choosing a{' '}
+            <strong>headless CMS focused on multi language</strong>. Select from{' '}
+            <strong>+400 different locales</strong> and publish multiple
+            versions of your content in different languages to serve your
+            content to the world.
           </>
         }
       />
 
       <Flag
+        keyword={seoBlock.keyword}
         style="good"
+        kicker={'Multi language & multi site headless cms'}
         title={
           <>
             Translate your <FlagHighlight>websites and apps</FlagHighlight>
@@ -89,24 +106,33 @@ function MultiLanguage({ page, preview }) {
         image={ProjectSettings}
       >
         <p>
-          Add languages you&#39;d like to support and start providing
-          translations. Translations are delivered using the same scalable
-          platform.
+          <strong>Add all the languages you&#39;d like to support</strong> and
+          start translating your content. Dato headless CMS will deliver your
+          multi language content to your net of projects, using the same{' '}
+          <strong>fast and scalable platform</strong>.
         </p>
       </Flag>
 
       <IntegrationsBanner
         title={<>Localize both content&nbsp;and&nbsp;assets</>}
         bubbles={icons.map((path) => (
-          <LazyImage key={path} src={path} />
+          <LazyImage
+            key={path}
+            src={path}
+            title={seoBlock.imagesTitle}
+            alt={seoBlock.imagesTitle}
+          />
         ))}
       >
-        All your content and assets are localizable, including rich text,
-        responsive images, geo-points, SEO metadata and especially your URLs.
+        <strong>All your content and assets can be multi language</strong>,
+        including rich text, responsive images, geo-points, SEO metadata and
+        especially your URLs.
       </IntegrationsBanner>
 
       <Flag
+        keyword={seoBlock.keyword}
         style="good"
+        kicker="Multi language & flexible"
         title={
           <>
             Great <FlagHighlight>flexibility and granularity</FlagHighlight>
@@ -115,15 +141,19 @@ function MultiLanguage({ page, preview }) {
         image={FieldSettings}
       >
         <p>
-          Specify which types of content need to be translated or not, and in
-          which languages, on a per-field level. Feel free to set a field as
-          localized, or change settings at any time, with no complex data
-          migrations.
+          Dato headless CMS gives you a{' '}
+          <strong>great deal of customization</strong> for your multi language
+          project. Specify which types of content need to be translated or not,
+          and in which languages, on a per-field level. Feel free to set a field
+          as localized, or change settings at any time, with{' '}
+          <strong>no complex data migrations</strong>.
         </p>
       </Flag>
 
       <Flag
+        keyword={seoBlock.keyword}
         style="good"
+        kicker="Multi language headless CMS interface"
         title={
           <>
             <FlagHighlight>Translated</FlagHighlight> interface
@@ -132,7 +162,8 @@ function MultiLanguage({ page, preview }) {
         image={TranslatedUI}
       >
         <p>
-          It’s super important to offer an easy-to-understand editing experience
+          It’s super important to offer an{' '}
+          <strong>easy-to-understand editing experience</strong>
           to your non-technical editors. That’s why the interface is available
           in English, Spanish, German, French, Italian, Dutch, Russian and
           Turkish (and counting!).

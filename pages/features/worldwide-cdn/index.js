@@ -11,7 +11,7 @@ import Hero from 'components/Hero/Seo';
 import Highlight from 'components/Highlight';
 import CdnMap from 'components/CdnMap';
 import InterstitialTitle from 'components/InterstitialTitle';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
 import Quote from 'components/Quote';
 import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
@@ -89,6 +89,7 @@ function WorldwideCdn({ preview, review1, feature }) {
       <Flag
         style="good"
         keyword={seoBlock.keyword}
+        kicker="Fast & scalable headless CMS"
         title={
           <>
             An infrastructure that{' '}
@@ -170,10 +171,10 @@ function WorldwideCdn({ preview, review1, feature }) {
       <Flag
         style="good"
         keyword={seoBlock.keyword}
+        kicker="Is Dato the fastest headless CMS?"
         title={
           <>
-            Is DatoCMS really the{' '}
-            <FlagHighlight>fastest headless CMS?</FlagHighlight>
+            Obsessed by <FlagHighlight>Performance and speed</FlagHighlight>
           </>
         }
         image="corona2"
@@ -181,7 +182,8 @@ function WorldwideCdn({ preview, review1, feature }) {
         <p>
           Being optimized for lazy image serving, video streaming, and
           depth-first content delivery, DatoCMS is surely one of the{' '}
-          <strong>fastest headless CMSs</strong>.
+          <strong>fastest headless CMSs</strong>. On top of that performance is
+          one of our top day-by-day concerns.
         </p>
       </Flag>
     </Layout>

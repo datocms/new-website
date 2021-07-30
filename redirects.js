@@ -276,4 +276,8 @@ module.exports = [
     source: '/features/graphql-content-api',
     destination: '/features/headless-cms-graphql',
   },
+  {
+    source: '/features/multi-language',
+    destination: '/features/headless-cms-multi-language',
+  },
 ];

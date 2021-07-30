@@ -1,11 +1,13 @@
 import React from 'react';
 import Wrapper from 'components/Wrapper';
+import Heading from 'components/Heading';
 import s from './style.module.css';
 import { useMemo, useState } from 'react';
 import LazyImage from 'components/LazyImage';
 import cn from 'classnames';
 import seedrandom from 'seedrandom';
 import containsKeyword from 'utils/containsKeyword';
+import slugify from 'utils/slugify';
 
 export default function SeoFlag({
   style = 'neutral',
@@ -27,16 +29,10 @@ export default function SeoFlag({
   const [x] = useState(Math.floor(seed * 30));
   const [y] = useState(Math.floor(seed * 30) + 20);
 
-  const kickerWithSeo = containsKeyword(kicker, keyword) ? (
-    <h2 className={s.kicker}>{kicker}</h2>
-  ) : (
-    <p className={s.kicker}>{kicker}</p>
-  );
-
   const titleWithSeo = containsKeyword(title, keyword) ? (
     <h3 className={s.title}>{title}</h3>
   ) : (
-    <p className={s.title}>{title}</p>
+    <h5 className={s.title}>{title}</h5>
   );
 
   const subtitleWithSeo = containsKeyword(subtitle, keyword) ? (
@@ -73,7 +69,15 @@ export default function SeoFlag({
           <div className={s.image}>{imageEl}</div>
         </div>
         <div className={s.content}>
-          {kicker && kickerWithSeo}
+          {kicker && (
+            <Heading
+              as={containsKeyword(kicker, keyword) ? 'h2' : 'h4'}
+              className={s.kicker}
+              anchor={slugify(kicker)}
+            >
+              {kicker}
+            </Heading>
+          )}
           {title && titleWithSeo}
           {subtitle && subtitleWithSeo}
           <div className={s.body}>{children}</div>
