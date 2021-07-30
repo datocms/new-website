@@ -321,286 +321,291 @@ export default function UseCase({ landing, websites, preview }) {
             </div>
           )}
 
-          {landing.content.map((block) => (
-            <React.Fragment key={block.id}>
-              {block._modelApiKey === 'landing_cdn_map_block' && (
-                <>
-                  <Space top={4} bottom={1}>
-                    <InterstitialTitle
-                      style="two"
-                      kicker={`${seoBlock.keyword} CDN`}
-                    >
-                      {highlightStructuredText(block.title)}
-                    </InterstitialTitle>
-                  </Space>
-                  <Wrapper>
-                    <div className={s.copy}>
-                      <StructuredText data={block.description} />
-                      <p>
-                        <Link href="/features/worldwide-cdn">
-                          <a className={s.readMoreAbout}>
-                            Read more about our Worldwide CDN <ArrowIcon />
-                          </a>
-                        </Link>
-                      </p>
-                    </div>
-                  </Wrapper>
-                  <Space bottom={2}>
-                    <CdnMap />
-                  </Space>
-                </>
-              )}
-              {block._modelApiKey === 'graphql_demo_block' && (
-                <SeoTitleStripWithContent
-                  kicker={<>GraphQL Content API</>}
-                  title={<>Ask for what you need, get exactly that</>}
-                  keyword={seoBlock.keyword}
-                  subtitle={
-                    <>
-                      <span>
-                        Our Content Delivery API is{' '}
-                        <strong>built with GraphQL</strong>. That means powerful
-                        developer tools, multiple resources in a single request
-                        and complete control over the data your website
-                        downloads. The perfect solution for a{' '}
-                        <strong>{seoBlock.keyword}</strong>
-                      </span>
-                      <span>
-                        <Link
-                          href="/features/headless-cms-graphql"
-                          title={'Graphql CMS'}
-                        >
-                          <a className={s.readMoreAbout}>
-                            Read more about our GraphQL API <ArrowIcon />
-                          </a>
-                        </Link>
-                      </span>
-                    </>
-                  }
-                >
-                  <GraphQlDemo height={11}>
-                    {async (typer, setResult) => {
-                      typer.insert('{\n  blogPost {}\n}');
-                      typer.moveTo(-3);
-
-                      await typer.wait(1000);
-
-                      typer.insert('\n');
-                      typer.insert('\n  ', { moveCursor: false });
-                      typer.indent(2);
-                      await typer.type('title');
-                      setResult({ blogPost: { title: 'Awesome post!' } });
-
-                      await typer.wait(800);
-                      typer.insert('\n');
-                      typer.indent(2);
-
-                      await typer.type('coverImage {');
-                      typer.insert('}', { moveCursor: false });
-                      await typer.wait(300);
-                      typer.insert('\n');
-                      typer.insert('\n    ', { moveCursor: false });
-                      typer.indent(3);
-                      await typer.wait(150);
-                      await typer.type('url');
-                      setResult({
-                        blogPost: {
-                          title: 'Awesome post!',
-                          coverImage: {
-                            url: 'https://datocms-assets.com/cover.png',
-                          },
-                        },
-                      });
-                      await typer.wait(1000);
-
-                      await typer.moveTo(6, { animate: true });
-
-                      await typer.type('\n');
-                      typer.indent(2);
-
-                      await typer.type('author {');
-                      typer.insert('}', { moveCursor: false });
-                      await typer.wait(300);
-                      typer.insert('\n');
-                      typer.indent(3);
-                      typer.insert('\n    ', { moveCursor: false });
-                      await typer.wait(150);
-                      await typer.type('name');
-                      setResult({
-                        blogPost: {
-                          title: 'Awesome post!',
-                          coverImage: {
-                            url: 'https://datocms-assets.com/cover.png',
-                          },
-                          author: { name: 'Mark Smith' },
-                        },
-                      });
-                      await typer.wait(2000);
-
-                      await typer.typeBackspace(12);
-                      await typer.deleteForward(6);
-                      await typer.typeBackspace(55);
-                      await typer.deleteForward(3);
-
-                      typer.reset();
-                    }}
-                  </GraphQlDemo>
-                </SeoTitleStripWithContent>
-              )}
-              {block._modelApiKey === 'landing_progressive_images_block' && (
-                <Space top={3}>
-                  <SeoTitleStripWithContent
-                    kicker={seoBlock.keyword + ' images'}
-                    title={highlightStructuredText(block.title)}
-                    keyword={seoBlock.keyword}
-                    subtitle={
-                      <>
-                        <StructuredText data={block.content} />
-                        {block.githubPackageName && (
-                          <div>
-                            <div className={s.readMoreAbout}>
-                              {block.githubRepoTitle}
-                            </div>
-                            <div className={s.button}>
-                              <Arrow3 />
-                              <GitHubButton
-                                href={`https://github.com/datocms/${block.githubPackageName}`}
-                              >
-                                {block.githubPackageName}
-                              </GitHubButton>
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    }
-                  >
-                    <ProgressiveImagesDemo
-                      name={`${landing.name} with DatoCMS`}
-                    />
-                  </SeoTitleStripWithContent>
-                </Space>
-              )}
-              {block._modelApiKey === 'code_excerpt_block' && (
-                <Space top={3}>
-                  <SeoTitleStripWithContent
-                    kicker={`${seoBlock.keyword} example`}
-                    title={highlightStructuredText(block.title)}
-                    keyword={seoBlock.keyword}
-                    subtitle={
-                      <>
-                        <StructuredText data={block.content} />
-                        {block.githubPackageName && (
-                          <div>
-                            <div className={s.readMoreAbout}>
-                              {block.githubRepoTitle}
-                            </div>
-                            <div className={s.button}>
-                              <Arrow3 />
-                              <GitHubButton
-                                href={`https://github.com/datocms/${block.githubPackageName}`}
-                              >
-                                {block.githubPackageName}
-                              </GitHubButton>
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    }
-                  >
-                    <CodeExcerpt code={block.code} language={block.language} />
-                  </SeoTitleStripWithContent>
-                </Space>
-              )}
-              {block._modelApiKey === 'modular_blocks_block' && (
-                <SeoFlag
-                  style="good"
-                  keyword={seoBlock.keyword}
-                  title={highlightStructuredText(block.title, {
-                    highlightWith: FlagHighlight,
-                  })}
-                  image={UseModularBlocks}
-                >
-                  <StructuredText data={block.content} />
-                  <p>
-                    <Link href="/features/dynamic-layouts">
-                      <a className={s.readMoreAbout}>
-                        Read more about DatoCMS modular blocks <ArrowIcon />
-                      </a>
-                    </Link>
-                  </p>
-                </SeoFlag>
-              )}
-              {block._modelApiKey === 'quote_link' && (
-                <Quote review={block.quote} />
-              )}
-              {block._modelApiKey === 'try_demo_block' && landing.demo && (
-                <>
-                  <TryDemoCta
-                    image={landing.demo.screenshot.responsiveImage}
-                    title={highlightStructuredText(block.title)}
-                    windowTitle={`${landing.name} + DatoCMS demo`}
-                    description={<StructuredText data={block.content} />}
-                    href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
-                    docsAs={landing.docsUrl}
-                    cta={`Try our ${landing.name} demo project now!`}
-                  />
-                  <Space top={2} bottom={2}>
-                    <LogosBar
-                      title="We power experiences for over half a billion users"
-                      clients={[
-                        DeutscheTelekom,
-                        Hashicorp,
-                        Verizon,
-                        Nike,
-                        Vercel,
-                      ]}
-                    />
-                  </Space>
-                </>
-              )}
-              {block._modelApiKey === 'landing_video_block' && (
-                <Space top={3}>
-                  <SeoTitleStripWithContent
-                    title={highlightStructuredText(block.title)}
-                    keyword={seoBlock.keyword}
-                    subtitle={<StructuredText data={block.content} />}
-                  >
-                    <div className={s.video}>
-                      <VideoPlayer
-                        controls
-                        autoPlay
-                        muted
-                        loop
-                        src={block.video.video.streamingUrl}
-                      />
-                    </div>
-                  </SeoTitleStripWithContent>
-                </Space>
-              )}
-              {block._modelApiKey === 'image_transformations_block' && (
-                <Space top={3}>
-                  <SeoTitleStripWithContent
-                    title={highlightStructuredText(block.title)}
-                    keyword={seoBlock.keyword}
-                    subtitle={
-                      <>
-                        <StructuredText data={block.content} />
+          <div id="main-content">
+            {landing.content.map((block) => (
+              <React.Fragment key={block.id}>
+                {block._modelApiKey === 'landing_cdn_map_block' && (
+                  <>
+                    <Space top={4} bottom={1}>
+                      <InterstitialTitle
+                        style="two"
+                        kicker={`${seoBlock.keyword} CDN`}
+                      >
+                        {highlightStructuredText(block.title)}
+                      </InterstitialTitle>
+                    </Space>
+                    <Wrapper>
+                      <div className={s.copy}>
+                        <StructuredText data={block.description} />
                         <p>
-                          <Link href="/features/images-api">
+                          <Link href="/features/worldwide-cdn">
                             <a className={s.readMoreAbout}>
-                              Read more about DatoCMS Image API <ArrowIcon />
+                              Read more about our Worldwide CDN <ArrowIcon />
                             </a>
                           </Link>
                         </p>
+                      </div>
+                    </Wrapper>
+                    <Space bottom={2}>
+                      <CdnMap />
+                    </Space>
+                  </>
+                )}
+                {block._modelApiKey === 'graphql_demo_block' && (
+                  <SeoTitleStripWithContent
+                    kicker={<>GraphQL Content API</>}
+                    title={<>Ask for what you need, get exactly that</>}
+                    keyword={seoBlock.keyword}
+                    subtitle={
+                      <>
+                        <span>
+                          Our Content Delivery API is{' '}
+                          <strong>built with GraphQL</strong>. That means
+                          powerful developer tools, multiple resources in a
+                          single request and complete control over the data your
+                          website downloads. The perfect solution for a{' '}
+                          <strong>{seoBlock.keyword}</strong>
+                        </span>
+                        <span>
+                          <Link
+                            href="/features/headless-cms-graphql"
+                            title={'Graphql CMS'}
+                          >
+                            <a className={s.readMoreAbout}>
+                              Read more about our GraphQL API <ArrowIcon />
+                            </a>
+                          </Link>
+                        </span>
                       </>
                     }
                   >
-                    <ImgixTransformations />
+                    <GraphQlDemo height={11}>
+                      {async (typer, setResult) => {
+                        typer.insert('{\n  blogPost {}\n}');
+                        typer.moveTo(-3);
+
+                        await typer.wait(1000);
+
+                        typer.insert('\n');
+                        typer.insert('\n  ', { moveCursor: false });
+                        typer.indent(2);
+                        await typer.type('title');
+                        setResult({ blogPost: { title: 'Awesome post!' } });
+
+                        await typer.wait(800);
+                        typer.insert('\n');
+                        typer.indent(2);
+
+                        await typer.type('coverImage {');
+                        typer.insert('}', { moveCursor: false });
+                        await typer.wait(300);
+                        typer.insert('\n');
+                        typer.insert('\n    ', { moveCursor: false });
+                        typer.indent(3);
+                        await typer.wait(150);
+                        await typer.type('url');
+                        setResult({
+                          blogPost: {
+                            title: 'Awesome post!',
+                            coverImage: {
+                              url: 'https://datocms-assets.com/cover.png',
+                            },
+                          },
+                        });
+                        await typer.wait(1000);
+
+                        await typer.moveTo(6, { animate: true });
+
+                        await typer.type('\n');
+                        typer.indent(2);
+
+                        await typer.type('author {');
+                        typer.insert('}', { moveCursor: false });
+                        await typer.wait(300);
+                        typer.insert('\n');
+                        typer.indent(3);
+                        typer.insert('\n    ', { moveCursor: false });
+                        await typer.wait(150);
+                        await typer.type('name');
+                        setResult({
+                          blogPost: {
+                            title: 'Awesome post!',
+                            coverImage: {
+                              url: 'https://datocms-assets.com/cover.png',
+                            },
+                            author: { name: 'Mark Smith' },
+                          },
+                        });
+                        await typer.wait(2000);
+
+                        await typer.typeBackspace(12);
+                        await typer.deleteForward(6);
+                        await typer.typeBackspace(55);
+                        await typer.deleteForward(3);
+
+                        typer.reset();
+                      }}
+                    </GraphQlDemo>
                   </SeoTitleStripWithContent>
-                </Space>
-              )}
-            </React.Fragment>
-          ))}
+                )}
+                {block._modelApiKey === 'landing_progressive_images_block' && (
+                  <Space top={3}>
+                    <SeoTitleStripWithContent
+                      kicker={seoBlock.keyword + ' images'}
+                      title={highlightStructuredText(block.title)}
+                      keyword={seoBlock.keyword}
+                      subtitle={
+                        <>
+                          <StructuredText data={block.content} />
+                          {block.githubPackageName && (
+                            <div>
+                              <div className={s.readMoreAbout}>
+                                {block.githubRepoTitle}
+                              </div>
+                              <div className={s.button}>
+                                <Arrow3 />
+                                <GitHubButton
+                                  href={`https://github.com/datocms/${block.githubPackageName}`}
+                                >
+                                  {block.githubPackageName}
+                                </GitHubButton>
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      }
+                    >
+                      <ProgressiveImagesDemo
+                        name={`${landing.name} with DatoCMS`}
+                      />
+                    </SeoTitleStripWithContent>
+                  </Space>
+                )}
+                {block._modelApiKey === 'code_excerpt_block' && (
+                  <Space top={3}>
+                    <SeoTitleStripWithContent
+                      kicker={`${seoBlock.keyword} example`}
+                      title={highlightStructuredText(block.title)}
+                      keyword={seoBlock.keyword}
+                      subtitle={
+                        <>
+                          <StructuredText data={block.content} />
+                          {block.githubPackageName && (
+                            <div>
+                              <div className={s.readMoreAbout}>
+                                {block.githubRepoTitle}
+                              </div>
+                              <div className={s.button}>
+                                <Arrow3 />
+                                <GitHubButton
+                                  href={`https://github.com/datocms/${block.githubPackageName}`}
+                                >
+                                  {block.githubPackageName}
+                                </GitHubButton>
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      }
+                    >
+                      <CodeExcerpt
+                        code={block.code}
+                        language={block.language}
+                      />
+                    </SeoTitleStripWithContent>
+                  </Space>
+                )}
+                {block._modelApiKey === 'modular_blocks_block' && (
+                  <SeoFlag
+                    style="good"
+                    keyword={seoBlock.keyword}
+                    title={highlightStructuredText(block.title, {
+                      highlightWith: FlagHighlight,
+                    })}
+                    image={UseModularBlocks}
+                  >
+                    <StructuredText data={block.content} />
+                    <p>
+                      <Link href="/features/dynamic-layouts">
+                        <a className={s.readMoreAbout}>
+                          Read more about DatoCMS modular blocks <ArrowIcon />
+                        </a>
+                      </Link>
+                    </p>
+                  </SeoFlag>
+                )}
+                {block._modelApiKey === 'quote_link' && (
+                  <Quote review={block.quote} />
+                )}
+                {block._modelApiKey === 'try_demo_block' && landing.demo && (
+                  <>
+                    <TryDemoCta
+                      image={landing.demo.screenshot.responsiveImage}
+                      title={highlightStructuredText(block.title)}
+                      windowTitle={`${landing.name} + DatoCMS demo`}
+                      description={<StructuredText data={block.content} />}
+                      href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
+                      docsAs={landing.docsUrl}
+                      cta={`Try our ${landing.name} demo project now!`}
+                    />
+                    <Space top={2} bottom={2}>
+                      <LogosBar
+                        title="We power experiences for over half a billion users"
+                        clients={[
+                          DeutscheTelekom,
+                          Hashicorp,
+                          Verizon,
+                          Nike,
+                          Vercel,
+                        ]}
+                      />
+                    </Space>
+                  </>
+                )}
+                {block._modelApiKey === 'landing_video_block' && (
+                  <Space top={3}>
+                    <SeoTitleStripWithContent
+                      title={highlightStructuredText(block.title)}
+                      keyword={seoBlock.keyword}
+                      subtitle={<StructuredText data={block.content} />}
+                    >
+                      <div className={s.video}>
+                        <VideoPlayer
+                          controls
+                          autoPlay
+                          muted
+                          loop
+                          src={block.video.video.streamingUrl}
+                        />
+                      </div>
+                    </SeoTitleStripWithContent>
+                  </Space>
+                )}
+                {block._modelApiKey === 'image_transformations_block' && (
+                  <Space top={3}>
+                    <SeoTitleStripWithContent
+                      title={highlightStructuredText(block.title)}
+                      keyword={seoBlock.keyword}
+                      subtitle={
+                        <>
+                          <StructuredText data={block.content} />
+                          <p>
+                            <Link href="/features/images-api">
+                              <a className={s.readMoreAbout}>
+                                Read more about DatoCMS Image API <ArrowIcon />
+                              </a>
+                            </Link>
+                          </p>
+                        </>
+                      }
+                    >
+                      <ImgixTransformations />
+                    </SeoTitleStripWithContent>
+                  </Space>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
         </>
       )}
     </Layout>

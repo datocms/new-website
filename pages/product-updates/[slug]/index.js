@@ -140,7 +140,7 @@ export default function Changelog({ preview, subscription }) {
             <FormattedDate date={post._firstPublishedAt} />
           </div>
 
-          <div className={s.body}>
+          <div className={s.body} id="main-content">
             <PostContent content={post.content} style={pageStyle} />
           </div>
         </div>

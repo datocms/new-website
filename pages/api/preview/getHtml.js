@@ -87,7 +87,7 @@ const handler = async (req, res) => {
 
   const { document } = new JSDOM(body).window;
 
-  const content = document.getElementById('main-page-content').innerHTML;
+  const content = document.getElementById('main-content').innerHTML;
   const locale = document.querySelector('html').getAttribute('lang') || 'en';
   const title = document.querySelector('title').textContent;
   const description = document

@@ -195,7 +195,9 @@ export default function Article({ preview, subscription }) {
           {post.author.name}
         </div>
 
-        <PostContent content={post.content} />
+        <div id="main-content">
+          <PostContent content={post.content} />
+        </div>
       </Wrapper>
     </Layout>
   );
