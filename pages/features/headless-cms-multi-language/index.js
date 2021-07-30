@@ -86,7 +86,7 @@ function MultiLanguage({ feature, preview }) {
         subtitle={
           <>
             Reach your <strong>global audience</strong> by choosing a{' '}
-            <strong>headless CMS focused on multi language</strong>. Select from{' '}
+            <strong>headless CMS focused on multi-language</strong>. Select from{' '}
             <strong>+400 different locales</strong> and publish multiple
             versions of your content in different languages to serve your
             content to the world.
@@ -97,7 +97,7 @@ function MultiLanguage({ feature, preview }) {
       <Flag
         keyword={seoBlock.keyword}
         style="good"
-        kicker={'Multi language & multi site headless cms'}
+        kicker={'multi-language & multi-site headless cms'}
         title={
           <>
             Translate your <FlagHighlight>websites and apps</FlagHighlight>
@@ -108,7 +108,7 @@ function MultiLanguage({ feature, preview }) {
         <p>
           <strong>Add all the languages you&#39;d like to support</strong> and
           start translating your content. Dato headless CMS will deliver your
-          multi language content to your net of projects, using the same{' '}
+          multi-language content to your net of projects, using the same{' '}
           <strong>fast and scalable platform</strong>.
         </p>
       </Flag>
@@ -124,7 +124,7 @@ function MultiLanguage({ feature, preview }) {
           />
         ))}
       >
-        <strong>All your content and assets can be multi language</strong>,
+        <strong>All your content and assets can be multi-language</strong>,
         including rich text, responsive images, geo-points, SEO metadata and
         especially your URLs.
       </IntegrationsBanner>
@@ -132,7 +132,7 @@ function MultiLanguage({ feature, preview }) {
       <Flag
         keyword={seoBlock.keyword}
         style="good"
-        kicker="Multi language & flexible"
+        kicker="multi-language & flexible"
         title={
           <>
             Great <FlagHighlight>flexibility and granularity</FlagHighlight>
@@ -142,7 +142,7 @@ function MultiLanguage({ feature, preview }) {
       >
         <p>
           Dato headless CMS gives you a{' '}
-          <strong>great deal of customization</strong> for your multi language
+          <strong>great deal of customization</strong> for your multi-language
           project. Specify which types of content need to be translated or not,
           and in which languages, on a per-field level. Feel free to set a field
           as localized, or change settings at any time, with{' '}
@@ -153,7 +153,7 @@ function MultiLanguage({ feature, preview }) {
       <Flag
         keyword={seoBlock.keyword}
         style="good"
-        kicker="Multi language headless CMS interface"
+        kicker="multi-language headless CMS interface"
         title={
           <>
             <FlagHighlight>Translated</FlagHighlight> interface

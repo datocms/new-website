@@ -1,6 +1,8 @@
 import Wrapper from 'components/Wrapper';
 import s from './style.module.css';
 import containsKeyword from 'utils/containsKeyword';
+import slugify from 'utils/slugify';
+import Heading from 'components/Heading';
 
 export default function SeoTitleStripWithContent({
   kicker,
@@ -9,13 +11,6 @@ export default function SeoTitleStripWithContent({
   keyword,
   children,
 }) {
-  const kickerWithSeo =
-    keyword && containsKeyword(kicker, keyword) ? (
-      <h2 className={s.kicker}>{kicker}</h2>
-    ) : (
-      <div className={s.kicker}>{kicker}</div>
-    );
-
   const titleWithSeo =
     keyword && containsKeyword(title, keyword) ? (
       <h3 className={s.title}>{title}</h3>
@@ -34,7 +29,15 @@ export default function SeoTitleStripWithContent({
     <div className={s.root}>
       <Wrapper>
         <div className={s.rootInner}>
-          {kicker && kickerWithSeo}
+          {kicker && (
+            <Heading
+              as={containsKeyword(kicker, keyword) ? 'h2' : 'div'}
+              className={s.kicker}
+              anchor={slugify(kicker)}
+            >
+              {kicker}
+            </Heading>
+          )}
           {title && titleWithSeo}
           {subtitle && subtitleWithSeo}
         </div>

@@ -10,7 +10,7 @@ const DatoHead = ({ metaKeywords, slug, seo }) => (
         href={`https://datocms.com/features/${slug}`}
       />
     )}
-    {renderMetaTags(seo)}
+    {seo && renderMetaTags(seo)}
     {metaKeywords && <meta name="keywords" content={metaKeywords} />}
   </Head>
 );
