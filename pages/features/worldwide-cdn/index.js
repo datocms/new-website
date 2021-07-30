@@ -1,5 +1,5 @@
 import Layout from 'components/Layout';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import {
   imageFields,
@@ -52,17 +52,11 @@ function WorldwideCdn({ preview, review1, feature }) {
 
   return (
     <Layout preview={preview}>
-      <Head>
-        <link
-          rel="alternate"
-          hrefLang="en"
-          href={`https://datocms.com/features/${feature.slug}`}
-        />
-        {renderMetaTags(feature.seo)}
-        {seoBlock.metaKeywords && (
-          <meta name="keywords" content={seoBlock.metaKeywords} />
-        )}
-      </Head>
+      <Head
+        metaKeywords={seoBlock.metaKeywords}
+        seo={feature.seo}
+        slug={feature.slug}
+      />
       <Hero
         kicker={seoBlock.h1}
         keyword={seoBlock.keyword}

@@ -1,5 +1,5 @@
 import Layout from 'components/Layout';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import {
   imageFields,
@@ -47,6 +47,11 @@ function ImagesApi({ feature, preview, review }) {
 
   return (
     <Layout preview={preview}>
+      <Head
+        metaKeywords={seoBlock.metaKeywords}
+        seo={feature.seo}
+        slug={feature.slug}
+      />
       <Head>
         <link
           rel="alternate"

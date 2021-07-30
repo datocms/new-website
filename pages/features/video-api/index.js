@@ -1,5 +1,5 @@
 import Layout from 'components/Layout';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero/Seo';
@@ -42,17 +42,11 @@ function VideoStreamingEncoding({ feature, preview }) {
 
   return (
     <Layout preview={preview}>
-      <Head>
-        <link
-          rel="alternate"
-          hrefLang="en"
-          href={`https://datocms.com/features/${feature.slug}`}
-        />
-        {renderMetaTags(feature.seo)}
-        {seoBlock.metaKeywords && (
-          <meta name="keywords" content={seoBlock.metaKeywords} />
-        )}
-      </Head>
+      <Head
+        metaKeywords={seoBlock.metaKeywords}
+        seo={feature.seo}
+        slug={feature.slug}
+      />
 
       <Hero
         keyword={seoBlock.keyword}
