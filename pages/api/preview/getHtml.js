@@ -23,6 +23,12 @@ const findSlugAndPermalink = async ({ item, itemTypeApiKey }) => {
 };
 
 const handler = async (req, res) => {
+  // Setup relaxed CORS permissions
+
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+
   // this endpoint requires the following parameters parameter, which represent the
   // the record we want to get the preview for
 
@@ -87,10 +93,6 @@ const handler = async (req, res) => {
   const description = document
     .querySelector('meta[name="description"]')
     .getAttribute('content');
-
-  res.setHeader('Content-Type', 'text/html');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET');
 
   res.status(200).json({
     locale,
