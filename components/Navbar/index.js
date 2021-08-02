@@ -243,7 +243,7 @@ export default function Navbar() {
                           icon={StructuredText}
                           title="Structured text"
                           isNew
-                          href="/features/structured-text"
+                          href="/features/structured-content-cms"
                           description="Freedom for editors, control for developers"
                         />
                       </div>

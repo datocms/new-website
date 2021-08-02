@@ -1,5 +1,5 @@
 import Layout from 'components/Layout';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import {
   imageFields,
@@ -7,12 +7,12 @@ import {
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Hero from 'components/Hero';
+import Hero from 'components/Hero/Seo';
 import Highlight from 'components/Highlight';
 import RealtimeUpdatesDemo from 'components/RealtimeUpdatesDemo';
-import TitleStripWithContent from 'components/TitleStripWithContent';
+import TitleStripWithContent from 'components/TitleStripWithContent/Seo';
 import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
 import VideoPlayer from 'components/VideoPlayer';
 import Button from 'components/Button';
 import s from './style.module.css';
@@ -25,9 +25,18 @@ import LazyImage from 'components/LazyImage';
 export const getStaticProps = gqlStaticProps(
   `
     {
-      page: homePage {
+      feature: feature(filter: { slug: { eq: "structured-content-cms" } }) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
+        }
+        slug
+        seoContent {
+          ... on SeoBlockRecord {
+            keyword
+            h1
+            imagesTitle
+            metaKeywords
+          }
         }
       }
       review: review(filter: { name: { eq: "Dominic Blain" } }) {
@@ -68,16 +77,19 @@ const VideoBrowser = (props) => {
   );
 };
 
-function ImagesApi({ page, preview, integrations, review }) {
+function StructuredText({ feature, preview, integrations, review }) {
+  const seoBlock = feature && feature.seoContent[0];
+
   return (
     <Layout preview={preview}>
-      <Head>
-        {renderMetaTags(page.seo)}
-        <title>Structured Text - Features</title>
-      </Head>
-
+      <Head
+        metaKeywords={seoBlock.metaKeywords}
+        seo={feature.seo}
+        slug={feature.slug}
+      />
       <Hero
-        kicker="Structured Text"
+        keyword={seoBlock.keyword}
+        kicker={seoBlock.h1}
         title={
           <>
             The smart way to store{' '}
@@ -86,20 +98,28 @@ function ImagesApi({ page, preview, integrations, review }) {
         }
         subtitle={
           <>
-            Meet our all-encompassing solution designed with omnichannel in
-            mind. It combines a powerful and flexible rich-text editor with a
-            portable JSON format to store your content.
+            Meet our all-encompassing solution designed with{' '}
+            <strong>omnichannel</strong> in mind.{' '}
+            <strong>Dato CMS structured content</strong>
+            combines a powerful and flexible{' '}
+            <strong>rich-text editor with a portable JSON format</strong> to
+            store your content.
           </>
         }
       />
 
       <TitleStripWithContent
+        keyword={seoBlock.keyword}
+        kicker="Notion-like Structured content CMS"
         title={<>A delightfully focused writing&nbsp;experience</>}
         subtitle={
           <>
-            Structured Text offers a beautiful, Notion-like editor designed for
-            focus, with slash commands, markdown/keyboard shortcuts, and drag
-            &amp; drop. Forget the mouse, and just start typing.
+            Structured Text offers a beautiful,{' '}
+            <strong>Notion-like editor</strong> designed for focus, with{' '}
+            <strong>
+              slash commands, markdown/keyboard shortcuts, and drag &amp; drop
+            </strong>
+            . Forget the mouse, and just start typing.
           </>
         }
       >
@@ -109,6 +129,7 @@ function ImagesApi({ page, preview, integrations, review }) {
             muted
             loop
             src="https://stream.mux.com/FcwaLceO4tvoUKflRIt0176Lli5llFLwW.m3u8"
+            title="Notion headless CMS"
           />
         </div>
       </TitleStripWithContent>
@@ -117,13 +138,15 @@ function ImagesApi({ page, preview, integrations, review }) {
 
       <Space top={2} bottom={1}>
         <InterstitialTitle style="two">
-          What problems solve <Highlight>Structured&nbsp;Text</Highlight>{' '}
-          content?
+          What problems does <Highlight>Structured&nbsp;Content</Highlight>{' '}
+          solve?
         </InterstitialTitle>
       </Space>
 
       <Flag
         style="good"
+        keyword={seoBlock.keyword}
+        kicker="Customizable structured content CMS"
         title={
           <>
             Easily embed 100%{' '}
@@ -137,19 +160,24 @@ function ImagesApi({ page, preview, integrations, review }) {
           autoPlay: true,
           muted: true,
           loop: true,
+          title: seoBlock.keyword,
           src: 'https://stream.mux.com/5hKbBhhU7TF202HRvbivd1WWAKuGgmP0100.m3u8',
         }}
       >
         <p>
           Galleries, call-to-actions, polls, third-party embeds and widgets for
           YouTube, Twitter... these things have always been a problem to handle.
-          Not with DatoCMS: blocks are completely custom, can be composed in any
-          way you want, and creating them is a matter of seconds.
+          Not with Dato CMS structured content: blocks are completely custom,
+          can be{' '}
+          <strong>moved around, edited and composed in any way you want</strong>
+          , and creating them is a matter of seconds.
         </p>
       </Flag>
 
       <Flag
         style="good"
+        keyword={seoBlock.keyword}
+        kicker="Linking structured content"
         title={
           <>
             Hyper-link and reference{' '}
@@ -164,15 +192,16 @@ function ImagesApi({ page, preview, integrations, review }) {
           muted: true,
           loop: true,
           src: 'https://stream.mux.com/HWUevVMYGa01WRKd00nB5hHKe7GT1k10102n.m3u8',
+          title: seoBlock.imagesTitle,
         }}
       >
         <p>
           When you need to deliver content not only through the web, but on an
-          ever-growing number of different mediums ranging from native apps,
-          voice assistants, e-books, IoT, etc... that&#39;s when being able to
-          only create hyperlinks to fixed web addresses starts to get to you.
-          What you need is clear separation between between content and
-          presentation.
+          <strong>ever-growing number of different mediums</strong> ranging from
+          native apps, voice assistants, e-books, IoT, etc... that&#39;s when
+          being able to only create hyperlinks to fixed web addresses starts to
+          get to you. What you need is{' '}
+          <strong>clear separation between content and presentation</strong>.
         </p>
       </Flag>
 
@@ -184,6 +213,8 @@ function ImagesApi({ page, preview, integrations, review }) {
 
       <Flag
         style="good"
+        keyword={seoBlock.keyword}
+        kicker="omnichannel CMS"
         title={
           <>
             Highly structured and <FlagHighlight>deeply typed</FlagHighlight>
@@ -222,9 +253,11 @@ function ImagesApi({ page, preview, integrations, review }) {
         }}
       >
         <p>
-          Structured Text saves content in a JSON format called{' '}
-          <code>dast</code> to ensure control of the information and the ability
-          to unambiguously parse and serialize the content to any medium, with
+          The Structured Text field saves content in a JSON format called{' '}
+          <code>dast</code> to{' '}
+          <strong>ensure control of the information</strong> and the ability to
+          unambiguously{' '}
+          <strong>parse and serialize the content to any medium</strong>, with
           clear separation from presentation concerns.
         </p>
         <p>
@@ -234,6 +267,7 @@ function ImagesApi({ page, preview, integrations, review }) {
             p="small"
             s="invert"
             href="/docs/structured-text/dast#datocms-abstract-syntax-tree--dast--specification"
+            title="Structured text"
           >
             Learn about Structured Text format
           </Button>
@@ -264,8 +298,8 @@ function ImagesApi({ page, preview, integrations, review }) {
           Structured Text format adheres to the{' '}
           <a href="https://unifiedjs.com/">Unified collective</a>, which offers
           a big ecosystem of utilities to parse, transform, manipulate, convert
-          and serialize content of any kind. This allows to convert from/to
-          Structured Text extremely easy.
+          and serialize content of any kind. This makes{' '}
+          <strong>converting from/to Structured Content extremely easy</strong>.
         </p>
         <p>
           <Button
@@ -274,6 +308,7 @@ function ImagesApi({ page, preview, integrations, review }) {
             p="small"
             s="invert"
             href="https://github.com/datocms/structured-text"
+            title="Structured text"
           >
             Explore all the Structured Text utilities
           </Button>
@@ -283,4 +318,4 @@ function ImagesApi({ page, preview, integrations, review }) {
   );
 }
 
-export default ImagesApi;
+export default StructuredText;

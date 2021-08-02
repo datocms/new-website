@@ -288,4 +288,8 @@ module.exports = [
     source: '/features/real-time',
     destination: '/features/real-time-api',
   },
+  {
+    source: '/features/structured-text',
+    destination: '/features/structured-content-cms',
+  },
 ];
