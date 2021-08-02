@@ -58,9 +58,9 @@ const TitleDesc = ({ href, title, description, target, isNew }) =>
     </Link>
   );
 
-const Feature = ({ href, icon: Icon, title, description, isNew }) => (
+const Feature = ({ href, icon: Icon, title, description, keyword, isNew }) => (
   <Link href={href}>
-    <a className={s.flag}>
+    <a className={s.flag} title={keyword}>
       <div className={s.flagIcon}>
         <Icon />
       </div>
@@ -177,6 +177,7 @@ export default function Navbar() {
                         <Feature
                           icon={Cdn}
                           title="Worldwide CDN"
+                          keyword="fastest-headless-cms"
                           href="/features/worldwide-cdn"
                           description="Performant, secure, and close to every customer"
                         />
@@ -184,6 +185,7 @@ export default function Navbar() {
                         <Feature
                           icon={GraphQl}
                           title="GraphQL Content API"
+                          keyword="Headless CMS Graphql"
                           href="/features/headless-cms-graphql"
                           description="Develop faster with powerful developer tools"
                         />
@@ -191,6 +193,7 @@ export default function Navbar() {
                         <Feature
                           icon={Image}
                           title="Images API"
+                          keyword="Images API"
                           href="/features/images-api"
                           description="Endless transformations at your disposal"
                         />
@@ -198,6 +201,7 @@ export default function Navbar() {
                         <Feature
                           icon={Video}
                           title="Video API"
+                          keyword="Video API"
                           href="/features/video-api"
                           description="Produce videos and serve them fast to any device"
                         />
@@ -205,6 +209,7 @@ export default function Navbar() {
                         <Feature
                           icon={Languages}
                           title="Multi-language"
+                          keyword="Headless CMS multi language"
                           href="/features/headless-cms-multi-language"
                           description="Reach global audience with localized content"
                         />
@@ -212,6 +217,7 @@ export default function Navbar() {
                         <Feature
                           icon={Layouts}
                           title="Dynamic layouts"
+                          keyword="Dynamic layouts CMS"
                           href="/features/dynamic-layouts"
                           description="Easily build dynamic layouts for landing pages"
                         />
@@ -219,6 +225,7 @@ export default function Navbar() {
                         <Feature
                           icon={DataIntegrity}
                           title="Content integrity"
+                          keyword="Content integrity CMS"
                           href="/features/data-integrity"
                           description="Validations, sandbox environments and roles"
                         />
@@ -226,6 +233,7 @@ export default function Navbar() {
                         <Feature
                           icon={Workflows}
                           title="Workflows"
+                          keyword="Workflow CMS"
                           isNew
                           href="/features/workflow-cms"
                           description="Supercharge your content approval process"
@@ -234,6 +242,7 @@ export default function Navbar() {
                         <Feature
                           icon={RealTime}
                           title="Real-time updates"
+                          keyword="Real-time API"
                           isNew
                           href="/features/real-time-api"
                           description="Live changes to content on production website"
@@ -242,6 +251,7 @@ export default function Navbar() {
                         <Feature
                           icon={StructuredText}
                           title="Structured text"
+                          keyword="Structured content CMS"
                           isNew
                           href="/features/structured-content-cms"
                           description="Freedom for editors, control for developers"

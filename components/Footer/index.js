@@ -11,10 +11,10 @@ import wretch from 'wretch';
 
 wretch().errorType('json');
 
-const Feature = ({ href, isNew, title }) => (
+const Feature = ({ href, isNew, title, keyword }) => (
   <div className={s.groupLink}>
     <Link href={href}>
-      <a>
+      <a title={keyword}>
         {title}
         {isNew && (
           <>
@@ -136,48 +136,56 @@ export default function Footer({ noCta }) {
                   <div className={s.groupLinks}>
                     <Feature
                       title="Worldwide CDN"
+                      keyword="Fastest headless CMS"
                       href="/features/worldwide-cdn"
                       description="Performant, secure, and close to every customer"
                     />
 
                     <Feature
                       title="GraphQL Content API"
+                      keyword="Headless CMS Graphql"
                       href="/features/headless-cms-graphql"
                       description="Develop faster with powerful developer tools"
                     />
 
                     <Feature
                       title="Images API"
+                      keyword="Images API"
                       href="/features/images-api"
                       description="Endless transformations at your disposal"
                     />
 
                     <Feature
                       title="Video API"
+                      keyword="Video API"
                       href="/features/video-api"
                       description="Produce videos and serve them fast to any device"
                     />
 
                     <Feature
                       title="Multi-language"
+                      keyword="Headless CMS multi language"
                       href="/features/headless-cms-multi-language"
                       description="Reach global audience with localized content"
                     />
 
                     <Feature
                       title="Dynamic layouts"
+                      keyword="Dynamic layouts CMS"
                       href="/features/dynamic-layouts"
                       description="Easily build dynamic layouts for landing pages"
                     />
 
                     <Feature
                       title="Content integrity"
+                      keyword="Content integrity CMS"
                       href="/features/data-integrity"
                       description="Validations, sandbox environments and roles"
                     />
 
                     <Feature
                       title="Workflows"
+                      keyword="Workflow CMS"
                       isNew
                       href="/features/workflow-cms"
                       description="Supercharge your content approval process"
@@ -185,6 +193,7 @@ export default function Footer({ noCta }) {
 
                     <Feature
                       title="Real-time updates"
+                      keyword="Real-time API"
                       isNew
                       href="/features/real-time-api"
                       description="Live changes to content on production website"
@@ -192,6 +201,7 @@ export default function Footer({ noCta }) {
 
                     <Feature
                       title="Structured text"
+                      keyword="Structured content CMS"
                       isNew
                       href="/features/structured-content-cms"
                       description="Freedom for editors, control for developers"
