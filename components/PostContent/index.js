@@ -226,10 +226,12 @@ export default function PostContent({ content, style, children }) {
             );
           }),
           renderRule(isHeading, ({ node, children, key }) => {
+            const nodeLevel = node.level === 1 ? 2 : node.level;
+
             return (
               <Heading
                 key={key}
-                as={`h${node.level}`}
+                as={`h${nodeLevel}`}
                 anchor={slugify(toPlainText(node))}
               >
                 {children}
