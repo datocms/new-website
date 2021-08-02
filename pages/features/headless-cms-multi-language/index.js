@@ -2,14 +2,14 @@ import Layout from 'components/Layout';
 import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
-import Hero from 'components/Hero/Seo';
+import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import IntegrationsBanner from 'components/IntegrationsBanner';
 import LazyImage from 'components/LazyImage';
 import ProjectSettings from 'components/ProjectSettings';
 import FieldSettings from 'components/FieldSettings';
 import TranslatedUI from 'components/TranslatedUI';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 
 const icons = [
   '/images/flags/argentina.svg',

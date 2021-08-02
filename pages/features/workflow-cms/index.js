@@ -7,12 +7,12 @@ import {
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Hero from 'components/Hero/Seo';
+import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Workflow from 'components/Workflow';
-import TitleStripWithContent from 'components/TitleStripWithContent/Seo';
+import TitleStripWithContent from 'components/TitleStripWithContent';
 import WorkflowPermissions from 'components/WorkflowPermissions';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Verizon from 'public/images/logos/verizon.svg';

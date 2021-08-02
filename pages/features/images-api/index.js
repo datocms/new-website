@@ -7,13 +7,13 @@ import {
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Hero from 'components/Hero/Seo';
+import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import ImgixTransformations from 'components/ImgixTransformations';
 import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
-import TitleStripWithContent from 'components/TitleStripWithContent/Seo';
+import TitleStripWithContent from 'components/TitleStripWithContent';
 import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 
 export const getStaticProps = gqlStaticProps(
   `

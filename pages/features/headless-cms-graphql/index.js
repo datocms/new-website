@@ -6,13 +6,13 @@ import {
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Hero from 'components/Hero/Seo';
+import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import GraphQlDemo from 'components/GraphQlDemo';
-import TitleStripWithContent from 'components/TitleStripWithContent/Seo';
+import TitleStripWithContent from 'components/TitleStripWithContent';
 import VideoPlayer from 'components/VideoPlayer';
 import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import Link from 'next/link';

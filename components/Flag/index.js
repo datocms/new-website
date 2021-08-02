@@ -5,11 +5,16 @@ import { useMemo, useState } from 'react';
 import LazyImage from 'components/LazyImage';
 import cn from 'classnames';
 import seedrandom from 'seedrandom';
+import containsKeyword from 'utils/containsKeyword';
+import slugify from 'utils/slugify';
+import Heading from 'components/Heading';
 
 export default function Flag({
   style = 'neutral',
   title,
   subtitle,
+  keyword,
+  kicker,
   hideDot,
   image,
   imageProps,
@@ -24,9 +29,26 @@ export default function Flag({
   const [x] = useState(Math.floor(seed * 30));
   const [y] = useState(Math.floor(seed * 30) + 20);
 
+  let Title;
+  let Subtitle;
+  let Kicker;
+
+  if (keyword) {
+    Kicker = containsKeyword(kicker, keyword) ? 'h2' : 'h4';
+    Title = containsKeyword(children, keyword) ? 'h3' : 'h5';
+    Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'div';
+  } else {
+    Kicker = 'h2';
+    Title = 'h3';
+    Subtitle = 'div';
+  }
+
   const imageEl =
     typeof image === 'string' ? (
-      <LazyImage src={`/images/illustrations/${image}.svg`} />
+      <LazyImage
+        src={`/images/illustrations/${image}.svg`}
+        title={keyword || image}
+      />
     ) : image ? (
       React.createElement(image, imageProps)
     ) : (
@@ -52,8 +74,13 @@ export default function Flag({
           <div className={s.image}>{imageEl}</div>
         </div>
         <div className={s.content}>
-          <h3 className={s.title}>{title}</h3>
-          {subtitle && <div className={s.subtitle}>{subtitle}</div>}
+          {kicker && (
+            <Heading as={Kicker} className={s.kicker} anchor={slugify(kicker)}>
+              {kicker}
+            </Heading>
+          )}
+          {title && <Title className={s.title}>{title}</Title>}
+          {subtitle && <Subtitle className={s.subtitle}>{subtitle}</Subtitle>}
           <div className={s.body}>{children}</div>
         </div>
       </div>
