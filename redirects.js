@@ -280,4 +280,8 @@ module.exports = [
     source: '/features/multi-language',
     destination: '/features/headless-cms-multi-language',
   },
+  {
+    source: '/features/workflows',
+    destination: '/features/workflow-cms',
+  },
 ];

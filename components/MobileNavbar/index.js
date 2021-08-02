@@ -181,7 +181,7 @@ export default function Navbar() {
                     icon={Workflows}
                     title="Workflows"
                     isNew
-                    href="/features/workflows"
+                    href="/features/workflow-cms"
                     description="Supercharge your content approval process"
                   />
 

@@ -1,5 +1,5 @@
 import Layout from 'components/Layout';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import {
   imageFields,
@@ -7,12 +7,12 @@ import {
   gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Hero from 'components/Hero';
+import Hero from 'components/Hero/Seo';
 import Highlight from 'components/Highlight';
 import Workflow from 'components/Workflow';
-import TitleStripWithContent from 'components/TitleStripWithContent';
+import TitleStripWithContent from 'components/TitleStripWithContent/Seo';
 import WorkflowPermissions from 'components/WorkflowPermissions';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag/Seo';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Verizon from 'public/images/logos/verizon.svg';
@@ -27,9 +27,18 @@ import s from './style.module.css';
 export const getStaticProps = gqlStaticProps(
   `
     {
-      page: homePage {
+      feature: feature(filter: { slug: { eq: "workflow-cms" } }) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
+        }
+        slug
+        seoContent {
+          ... on SeoBlockRecord {
+            keyword
+            h1
+            imagesTitle
+            metaKeywords
+          }
         }
       }
       review: review(filter: { name: { eq: "Martijn Theuwissen" } }) {
@@ -42,38 +51,47 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-function Workflows({ page, preview, review }) {
+function Workflows({ feature, preview, review }) {
+  const seoBlock = feature && feature.seoContent[0];
+
   return (
     <Layout preview={preview}>
-      <Head>
-        {renderMetaTags(page.seo)}
-        <title>Workflows - Features</title>
-      </Head>
+      <Head
+        metaKeywords={seoBlock.metaKeywords}
+        seo={feature.seo}
+        slug={feature.slug}
+      />
+
       <div className={s.wrapper}>
         <Hero
-          kicker="Editorial workflows"
+          keyword={seoBlock.keyword}
+          kicker={seoBlock.h1}
           title={
             <>
-              <Highlight>Supercharge</Highlight> your content approval workflow
+              <Highlight>Dato CMS supercharges</Highlight> your content approval
+              workflow
             </>
           }
           subtitle={
             <>
-              Stop spreading your editorial life-cycle around tens of different
-              products. DatoCMS&#39;s Workflows allow all eyes to be
-              concentrated in one place.
+              Stop spreading your <strong>editorial life-cycle</strong> around
+              tens of different products.{' '}
+              <strong>Dato CMS Workflow feature</strong> concentrates all eyes
+              in one place.
             </>
           }
         />
 
         <TitleStripWithContent
+          keyword={seoBlock.keyword}
+          kicker={`Publishing workflow in your CMS`}
           title={<>Build your perfectly oiled content machine</>}
           subtitle={
             <>
               <p>
                 Set up a precise state machine to bring a draft content up to
-                the final publication through a series of intermediate, fully
-                customizable approval steps.
+                the final publication through a series of intermediate,{' '}
+                <strong>fully customizable approval steps</strong>.
               </p>
               <Button
                 as="a"
@@ -91,6 +109,8 @@ function Workflows({ page, preview, review }) {
         </TitleStripWithContent>
 
         <Flag
+          keyword={seoBlock.keyword}
+          kicker={`Content management workflow`}
           style="good"
           title={
             <>
@@ -105,11 +125,14 @@ function Workflows({ page, preview, review }) {
             content, and inefficient workflows. Organizations invest more in
             content,{' '}
             <strong>but their ROI remains lower due to friction</strong>, and
-            their content engines stall. Our Workflows feature fixes all this.
+            their content engines stall. Dato CMS{' '}
+            <strong>Workflow feature fixes all this</strong>.
           </p>
         </Flag>
 
         <Flag
+          keyword={seoBlock.keyword}
+          kicker={`CMS approval workflow`}
           style="good"
           title={
             <>
@@ -150,6 +173,8 @@ function Workflows({ page, preview, review }) {
         </Flag>
 
         <Flag
+          keyword={seoBlock.keyword}
+          kicker="Customizable workflow"
           style="good"
           title={
             <>

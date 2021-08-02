@@ -179,7 +179,7 @@ export default function Footer({ noCta }) {
                     <Feature
                       title="Workflows"
                       isNew
-                      href="/features/workflows"
+                      href="/features/workflow-cms"
                       description="Supercharge your content approval process"
                     />
 

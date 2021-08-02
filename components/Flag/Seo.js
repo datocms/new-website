@@ -43,7 +43,7 @@ export default function SeoFlag({
 
   const imageEl =
     typeof image === 'string' ? (
-      <LazyImage src={`/images/illustrations/${image}.svg`} title={image} />
+      <LazyImage src={`/images/illustrations/${image}.svg`} title={keyword} />
     ) : image ? (
       React.createElement(image, imageProps)
     ) : (
