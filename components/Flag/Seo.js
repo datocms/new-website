@@ -30,17 +30,8 @@ export default function SeoFlag({
   const [x] = useState(Math.floor(seed * 30));
   const [y] = useState(Math.floor(seed * 30) + 20);
 
-  const titleWithSeo = containsKeyword(title, keyword) ? (
-    <h3 className={s.title}>{title}</h3>
-  ) : (
-    <h5 className={s.title}>{title}</h5>
-  );
-
-  const subtitleWithSeo = containsKeyword(subtitle, keyword) ? (
-    <h4 className={s.subtitle}>{subtitle}</h4>
-  ) : (
-    <div className={s.subtitle}>{subtitle}</div>
-  );
+  const Title = containsKeyword(children, keyword) ? 'h3' : 'h5';
+  const Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'div';
 
   const imageEl =
     typeof image === 'string' ? (
@@ -82,8 +73,8 @@ export default function SeoFlag({
               {kicker}
             </Heading>
           )}
-          {title && titleWithSeo}
-          {subtitle && subtitleWithSeo}
+          {title && <Title className={s.title}>{title}</Title>}
+          {subtitle && <Subtitle className={s.subtitle}>{subtitle}</Subtitle>}
           <div className={s.body}>{children}</div>
         </div>
       </div>

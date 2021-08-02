@@ -10,25 +10,19 @@ export default function SeoHero({
   keyword,
   children,
 }) {
-  const titleWithSeo = containsKeyword(title, keyword) ? (
-    <h2 className={styles.title}>{title}</h2>
-  ) : (
-    <p className={styles.title}>{title}</p>
-  );
-
-  const subtitleWithSeo = containsKeyword(subtitle, keyword) ? (
-    <h3 className={styles.subtitle}>{subtitle}</h3>
-  ) : (
-    <p className={styles.subtitle}>{subtitle}</p>
-  );
+  const Kicker = containsKeyword(kicker, keyword) ? 'h1' : 'p';
+  const Title = containsKeyword(children, keyword) ? 'h2' : 'p';
+  const Subtitle = containsKeyword(subtitle, keyword) ? 'h3' : 'p';
 
   return (
     <Wrapper>
       <div className={styles.root}>
-        {kicker && <h1 className={styles.kicker}>{kicker}</h1>}
+        {kicker && <Kicker className={styles.kicker}>{kicker}</Kicker>}
         {image && <div className={styles.kicker}>{image}</div>}
-        {title && titleWithSeo}
-        {subtitle && subtitleWithSeo}
+        {title && <Title className={styles.title}>{title}</Title>}
+        {subtitle && (
+          <Subtitle className={styles.subtitle}>{subtitle}</Subtitle>
+        )}
         {children && <div className={styles.children}>{children}</div>}
       </div>
     </Wrapper>

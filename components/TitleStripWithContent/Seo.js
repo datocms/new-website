@@ -11,19 +11,8 @@ export default function SeoTitleStripWithContent({
   keyword,
   children,
 }) {
-  const titleWithSeo =
-    keyword && containsKeyword(title, keyword) ? (
-      <h3 className={s.title}>{title}</h3>
-    ) : (
-      <p className={s.title}>{title}</p>
-    );
-
-  const subtitleWithSeo =
-    keyword && containsKeyword(subtitle, keyword) ? (
-      <h4 className={s.subtitle}>{subtitle}</h4>
-    ) : (
-      <div className={s.subtitle}>{subtitle}</div>
-    );
+  const Title = containsKeyword(children, keyword) ? 'h3' : 'p';
+  const Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'div';
 
   return (
     <div className={s.root}>
@@ -38,8 +27,8 @@ export default function SeoTitleStripWithContent({
               {kicker}
             </Heading>
           )}
-          {title && titleWithSeo}
-          {subtitle && subtitleWithSeo}
+          {title && <Title className={s.title}>{title}</Title>}
+          {subtitle && <Subtitle className={s.subtitle}>{subtitle}</Subtitle>}
         </div>
         {children && <div className={s.content}>{children}</div>}
       </Wrapper>
