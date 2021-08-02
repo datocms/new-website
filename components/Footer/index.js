@@ -186,7 +186,7 @@ export default function Footer({ noCta }) {
                     <Feature
                       title="Real-time updates"
                       isNew
-                      href="/features/real-time"
+                      href="/features/real-time-api"
                       description="Live changes to content on production website"
                     />
 

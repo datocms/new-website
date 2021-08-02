@@ -189,7 +189,7 @@ export default function Navbar() {
                     icon={RealTime}
                     title="Real-time updates"
                     isNew
-                    href="/features/real-time"
+                    href="/features/real-time-api"
                     description="Live changes to content on production website"
                   />
 

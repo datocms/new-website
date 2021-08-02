@@ -284,4 +284,8 @@ module.exports = [
     source: '/features/workflows',
     destination: '/features/workflow-cms',
   },
+  {
+    source: '/features/real-time',
+    destination: '/features/real-time-api',
+  },
 ];
