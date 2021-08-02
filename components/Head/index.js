@@ -11,7 +11,6 @@ const DatoHead = ({ metaKeywords, slug, seo }) => (
       />
     )}
     {seo && renderMetaTags(seo)}
-    {metaKeywords && <meta name="keywords" content={metaKeywords} />}
   </Head>
 );
 

@@ -34,8 +34,6 @@ export const getStaticProps = gqlStaticProps(
           ... on SeoBlockRecord {
             keyword
             h1
-            imagesTitle
-            metaKeywords
           }
         }
       }
@@ -82,11 +80,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
   return (
     <Layout preview={preview}>
-      <Head
-        metaKeywords={seoBlock.metaKeywords}
-        seo={feature.seo}
-        slug={feature.slug}
-      />
+      <Head seo={feature.seo} slug={feature.slug} />
       <Hero
         keyword={seoBlock.keyword}
         kicker={seoBlock.h1}
@@ -192,7 +186,7 @@ function StructuredText({ feature, preview, integrations, review }) {
           muted: true,
           loop: true,
           src: 'https://stream.mux.com/HWUevVMYGa01WRKd00nB5hHKe7GT1k10102n.m3u8',
-          title: seoBlock.imagesTitle,
+          title: seoBlock.keyword,
         }}
       >
         <p>

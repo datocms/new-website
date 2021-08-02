@@ -31,8 +31,6 @@ export const getStaticProps = gqlStaticProps(
           ... on SeoBlockRecord {
             keyword
             h1
-            imagesTitle
-            metaKeywords
           }
         }
       }
@@ -52,11 +50,7 @@ function WorldwideCdn({ preview, review1, feature }) {
 
   return (
     <Layout preview={preview}>
-      <Head
-        metaKeywords={seoBlock.metaKeywords}
-        seo={feature.seo}
-        slug={feature.slug}
-      />
+      <Head seo={feature.seo} slug={feature.slug} />
       <Hero
         kicker={seoBlock.h1}
         keyword={seoBlock.keyword}

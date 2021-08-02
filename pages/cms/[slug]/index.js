@@ -9,7 +9,7 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import { renderMetaTags, StructuredText } from 'react-datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';
 import Wrapper from 'components/Wrapper';
@@ -165,8 +165,6 @@ export const getStaticProps = handleErrors(
             ... on SeoBlockRecord {
               keyword
               h1
-              imagesTitle
-              metaKeywords
             }
           }
         }
@@ -242,25 +240,13 @@ export default function UseCase({ landing, websites, preview }) {
     <Layout preview={preview}>
       {landing && (
         <>
-          <Head>
-            <link
-              rel="alternate"
-              hrefLang="en"
-              href={`https://datocms.com/cms/${landing.slug}`}
-            />
-            {renderMetaTags(landing.seo)}
-            {seoBlock.metaKeywords && (
-              <meta name="keywords" content={seoBlock.metaKeywords} />
-            )}
-          </Head>
+          <Head seo={landing.seo} slug={landing.slug} />
           <Hero
             kicker={seoBlock.h1}
             keyword={seoBlock.keyword}
             image={
               <LazyImage
                 className={s.logo}
-                alt={seoBlock.keyword}
-                title={seoBlock.imagesTitle}
                 src={
                   (landing.integration.squareLogo || landing.integration.logo)
                     .url
@@ -275,7 +261,7 @@ export default function UseCase({ landing, websites, preview }) {
                 <Button
                   fs="big"
                   as="a"
-                  title={seoBlock.imagesTitle}
+                  title={seoBlock.keyword}
                   href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
                 >
                   Try our {landing.name} demo project now!
@@ -308,8 +294,6 @@ export default function UseCase({ landing, websites, preview }) {
                           className={s.websiteScreen}
                           data={{
                             ...website.image.responsiveImage,
-                            alt: seoBlock.keyword,
-                            title: seoBlock.imagesTitle,
                           }}
                         />
                       </UiChrome>

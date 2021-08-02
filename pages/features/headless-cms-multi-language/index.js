@@ -53,8 +53,6 @@ export const getStaticProps = gqlStaticProps(
           ... on SeoBlockRecord {
             keyword
             h1
-            imagesTitle
-            metaKeywords
           }
         }
       }
@@ -68,11 +66,7 @@ function MultiLanguage({ feature, preview }) {
 
   return (
     <Layout preview={preview}>
-      <Head
-        metaKeywords={seoBlock.metaKeywords}
-        seo={feature.seo}
-        slug={feature.slug}
-      />
+      <Head seo={feature.seo} slug={feature.slug} />
 
       <Hero
         keyword={seoBlock.keyword}
@@ -116,12 +110,7 @@ function MultiLanguage({ feature, preview }) {
       <IntegrationsBanner
         title={<>Localize both content&nbsp;and&nbsp;assets</>}
         bubbles={icons.map((path) => (
-          <LazyImage
-            key={path}
-            src={path}
-            title={seoBlock.imagesTitle}
-            alt={seoBlock.imagesTitle}
-          />
+          <LazyImage key={path} src={path} />
         ))}
       >
         <strong>All your content and assets can be multi-language</strong>,

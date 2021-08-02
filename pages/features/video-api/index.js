@@ -27,8 +27,6 @@ export const getStaticProps = gqlStaticProps(
           ... on SeoBlockRecord {
             keyword
             h1
-            imagesTitle
-            metaKeywords
           }
         }
       }
@@ -42,11 +40,7 @@ function VideoStreamingEncoding({ feature, preview }) {
 
   return (
     <Layout preview={preview}>
-      <Head
-        metaKeywords={seoBlock.metaKeywords}
-        seo={feature.seo}
-        slug={feature.slug}
-      />
+      <Head seo={feature.seo} slug={feature.slug} />
 
       <Hero
         keyword={seoBlock.keyword}
@@ -136,7 +130,7 @@ function VideoStreamingEncoding({ feature, preview }) {
             <div key={t} className={s.frame}>
               <img
                 src={`https://image.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i/thumbnail.jpg?width=400&amp;time=${t}`}
-                title={seoBlock.imagesTitle}
+                title={seoBlock.h1}
               />
               <div className={s.frameLabel}>
                 /video/thumb.jpg?

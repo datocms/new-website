@@ -31,8 +31,6 @@ export const getStaticProps = gqlStaticProps(
           ... on SeoBlockRecord {
             keyword
             h1
-            imagesTitle
-            metaKeywords
           }
         }
       }
@@ -51,11 +49,7 @@ function GraphQlContentApi({ feature, preview, review }) {
 
   return (
     <Layout preview={preview}>
-      <Head
-        metaKeywords={seoBlock.metaKeywords}
-        seo={feature.seo}
-        slug={feature.slug}
-      />
+      <Head seo={feature.seo} slug={feature.slug} />
 
       <Hero
         keyword={seoBlock.keyword}
