@@ -147,14 +147,7 @@ export default function Webinar({ preview, subscription }) {
                 </Info>
               </div>
               <div className={s.action}>
-                {webinar.url && (
-                  <div className={s.actionButton}>
-                    <Button as="a" href={webinar.url} target="_blank">
-                      <VideoIcon /> Enter the webinar!
-                    </Button>
-                  </div>
-                )}
-                {!webinar.url && (
+                {(!webinar.url || new Date(webinar.date) > new Date()) && (
                   <>
                     <div className={s.actionButton}>
                       <Button
@@ -177,6 +170,13 @@ export default function Webinar({ preview, subscription }) {
                     </div>
                   </>
                 )}
+                {webinar.url && new Date(webinar.date) <= new Date() && (
+                  <div className={s.actionButton}>
+                    <Button as="a" href={webinar.url} target="_blank">
+                      <VideoIcon /> Enter the webinar! SUCA
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -193,7 +193,7 @@ export default function Webinar({ preview, subscription }) {
                     timeZoneName: 'short',
                   })}
                 </div>
-                {!webinar.url && (
+                {(!webinar.url || new Date(webinar.date) > new Date()) && (
                   <div className={s.add}>
                     <Button
                       as="a"
@@ -208,7 +208,7 @@ export default function Webinar({ preview, subscription }) {
                     </Button>
                   </div>
                 )}
-                {webinar.url && (
+                {webinar.url && new Date(webinar.date) <= new Date() && (
                   <div className={s.add}>
                     <Button
                       as="a"
@@ -245,30 +245,32 @@ export default function Webinar({ preview, subscription }) {
                 ))}
               </Info>
               <Info icon={<CompanyIcon />} title="Brought by">
-                {webinar.speakers.map((speaker) => (
-                  <div className={s.company} key={speaker.company}>
-                    <a
-                      href={speaker.companyUrl}
-                      target="_blank"
-                      className={s.companyImage}
-                      rel="noreferrer"
-                    >
-                      <DatoImage
-                        className={s.companyImg}
-                        data={speaker.companyLogo.responsiveImage}
-                      />
-                    </a>
-                    <div>
-                      <div className={s.companyName}>
-                        <a href={speaker.companyUrl}>{speaker.company}</a>
-                      </div>
+                {webinar.speakers
+                  .filter((s) => s.company !== 'DatoCMS')
+                  .map((speaker) => (
+                    <div className={s.company} key={speaker.company}>
+                      <a
+                        href={speaker.companyUrl}
+                        target="_blank"
+                        className={s.companyImage}
+                        rel="noreferrer"
+                      >
+                        <DatoImage
+                          className={s.companyImg}
+                          data={speaker.companyLogo.responsiveImage}
+                        />
+                      </a>
+                      <div>
+                        <div className={s.companyName}>
+                          <a href={speaker.companyUrl}>{speaker.company}</a>
+                        </div>
 
-                      <div className={s.companyDescription}>
-                        {speaker.companyDescription}
+                        <div className={s.companyDescription}>
+                          {speaker.companyDescription}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </Info>
             </div>
           </div>
