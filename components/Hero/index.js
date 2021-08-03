@@ -16,7 +16,7 @@ export default function Hero({
 
   if (keyword) {
     Kicker = containsKeyword(kicker, keyword) ? 'h1' : 'p';
-    Title = containsKeyword(children, keyword) ? 'h2' : 'p';
+    Title = containsKeyword(title, keyword) ? 'h2' : 'p';
     Subtitle = containsKeyword(subtitle, keyword) ? 'h3' : 'p';
   } else {
     Kicker = 'h2';

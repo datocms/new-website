@@ -1,11 +1,9 @@
-import { convert } from 'html-to-text';
+import striptags from 'striptags';
 import ReactDOMServer from 'react-dom/server';
 
 export default function containsKeyword(element, keyword) {
   const extracted = ReactDOMServer.renderToString(element);
-  const converted = convert(extracted, {
-    wordwrap: null,
-  });
+  const converted = striptags(extracted);
 
   return (
     element &&

@@ -17,7 +17,7 @@ export default function TitleStripWithContent({
 
   if (keyword) {
     Kicker = containsKeyword(kicker, keyword) ? 'h2' : 'div';
-    Title = containsKeyword(children, keyword) ? 'h3' : 'p';
+    Title = containsKeyword(title, keyword) ? 'h3' : 'p';
     Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'div';
   } else {
     Kicker = 'div';

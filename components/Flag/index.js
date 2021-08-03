@@ -35,7 +35,7 @@ export default function Flag({
 
   if (keyword) {
     Kicker = containsKeyword(kicker, keyword) ? 'h2' : 'h4';
-    Title = containsKeyword(children, keyword) ? 'h3' : 'h5';
+    Title = containsKeyword(title, keyword) ? 'h3' : 'h5';
     Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'div';
   } else {
     Kicker = 'h2';
