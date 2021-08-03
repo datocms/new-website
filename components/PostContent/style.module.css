@@ -22,13 +22,19 @@
     font-family: var(--font-sans);
     font-size: 130%;
     line-height: 1.1;
-    margin: rfs(70px) 0 rfs(40px);
+    margin: rfs(70px) 0 rfs(30px);
     letter-spacing: -0.03em;
   }
 
   h2,
   h3 {
     font-size: 170%;
+  }
+
+  h4,
+  h5,
+  h6 {
+    margin: rfs(50px) 0 rfs(20px);
   }
 
   p,
