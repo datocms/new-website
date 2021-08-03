@@ -420,7 +420,7 @@ export default function Navbar() {
                           />
                           <TitleDesc
                             href="/marketplace/plugins"
-                            title="Community plugins"
+                            title="Plugins"
                             description="Easily expand the capabilities of DatoCMS"
                           />
                         </div>

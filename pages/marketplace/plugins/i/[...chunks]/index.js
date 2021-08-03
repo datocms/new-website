@@ -11,6 +11,7 @@ import useSWR from 'swr';
 import wretch from 'wretch';
 import { PluginImagePlacehoder } from 'components/PluginBox';
 import truncate from 'truncate';
+import VideoPlayer from 'components/VideoPlayer';
 import {
   PluginInfo,
   Info,
@@ -66,6 +67,11 @@ export const getStaticProps = gqlStaticProps(
           url
           width
           height
+          video {
+            duration
+            streamingUrl
+            thumbnailUrl
+          }
         }
         fieldTypes {
           name
@@ -131,13 +137,20 @@ export default function Plugin({ plugin, preview }) {
         title={plugin.title}
         description={plugin.description}
         gallery={
-          plugin.previewImage && (
+          plugin.previewImage &&
+          (plugin.previewImage.video ? (
+            <VideoPlayer
+              controls
+              src={plugin.previewImage.video.streamingUrl}
+              poster={plugin.previewImage.video.thumbnailUrl}
+            />
+          ) : (
             <img
               alt="Preview"
               className={s.previewImage}
               src={plugin.previewImage.url}
             />
-          )
+          ))
         }
         content={<SmartMarkdown>{plugin.readme}</SmartMarkdown>}
         image={
