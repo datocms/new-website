@@ -64,7 +64,7 @@
 }
 
 .kicker {
-  font-size: 25px;
+  font-size: rfs(20px);
   font-weight: bold;
   color: var(--light-body-color);
   text-transform: uppercase;
