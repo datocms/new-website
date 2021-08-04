@@ -6,7 +6,6 @@ import {
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Link from 'next/link';
 import { Image as DatoImage } from 'react-datocms';
 import FormattedDate from 'components/FormattedDate';
 import { PLUGINS_PER_PAGE } from 'lib/pages';
@@ -17,8 +16,8 @@ import { range } from 'range';
 import { useRouter } from 'next/router';
 import s from './style.module.css';
 import truncate from 'truncate';
-import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
 import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
+import { Announce } from 'components/PluginToolkit';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -88,13 +87,10 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
             community plugins
           </div>
         </div>
-        <Link href="/docs/building-plugins">
-          <a className={s.announce}>
-            <MegaphoneIcon /> <strong>Want to be in catalog?</strong> Learn how
-            create your own plugin, or copy and remix existing ones in our
-            documentation! →
-          </a>
-        </Link>
+        <Announce href="/docs/building-plugins" center>
+          <strong>Want to be in catalog?</strong> Learn how create your own
+          plugin, or copy and remix existing ones in our documentation!
+        </Announce>
         <div className={s.grid}>
           {plugins &&
             plugins.map((post) => (
@@ -109,15 +105,10 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                       data={post.coverImage.responsiveImage}
                     />
                   ) : (
-                    <PluginImagePlacehoder />
+                    <PluginImagePlacehoder hash={post.packageName} />
                   )
                 }
                 description={truncate(post.description, 120)}
-                details={
-                  <>
-                    Released on <FormattedDate date={post.releasedAt} />
-                  </>
-                }
               />
             ))}
         </div>

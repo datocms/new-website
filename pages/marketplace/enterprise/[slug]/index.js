@@ -45,11 +45,7 @@ export default function EnterpriseApp({ page, preview }) {
         image={<LogoImage style="azure" logo={page.logo} />}
         shortDescription={page.shortDescription}
         actions={
-          <Button
-            as="a"
-            href="/support?topics=business-partnerships/general-requests"
-            target="_blank"
-          >
+          <Button as="a" href="/contact" target="_blank">
             Request activation
           </Button>
         }
@@ -57,9 +53,6 @@ export default function EnterpriseApp({ page, preview }) {
           <PluginInfo>
             <Info title="Publisher">
               <NameWithGravatar email="support@datocms.com" name="DatoCMS" />
-            </Info>
-            <Info title="First released">
-              <FormattedDate date={'2019-03-12'} />
             </Info>
           </PluginInfo>
         }

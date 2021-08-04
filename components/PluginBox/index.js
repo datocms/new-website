@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import cn from 'classnames';
 import LazyImage from 'components/LazyImage';
 import s from './style.module.css';
@@ -16,13 +17,31 @@ export const LogoImage = ({ logo, style = 'pink' }) => (
   </div>
 );
 
-export const PluginImagePlacehoder = () => (
-  <div className={cn(s.logo, s[`grayLogo`], s.square)}>
-    <div className={s.logoInner}>
-      <PluginIcon height="100" />
+const colours = [
+  'azureLogo',
+  'pinkLogo',
+  'blueLogo',
+  'greenLogo',
+  'yellowLogo',
+];
+
+export const PluginImagePlacehoder = ({ hash }) => {
+  const style = useMemo(() => {
+    let sum = 0;
+    for (let i = 0; i < hash.length; i++) {
+      sum += hash.charCodeAt(i);
+    }
+    return colours[sum % colours.length];
+  }, [hash]);
+
+  return (
+    <div className={cn(s.logo, s[style], s.square)}>
+      <div className={s.logoInner}>
+        <PluginIcon height="100" />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function PluginBox({
   title,

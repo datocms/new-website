@@ -52,9 +52,6 @@ export default function EnterpriseApp({ page, preview }) {
             <Info title="Publisher">
               <NameWithGravatar email="support@datocms.com" name="DatoCMS" />
             </Info>
-            <Info title="First released">
-              <FormattedDate date={'2019-03-12'} />
-            </Info>
           </PluginInfo>
         }
       />

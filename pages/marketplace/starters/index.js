@@ -9,6 +9,7 @@ import LazyImage from 'components/LazyImage';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';
 import { handleErrors } from 'lib/datocms';
+import { Announce } from 'components/PluginToolkit';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
@@ -71,6 +72,13 @@ export default function Plugins({ starters, preview }) {
             frontend and free hosting
           </div>
         </div>
+        <Announce
+          href="/docs/project-starters-and-templates#generate-a-project-starter-button"
+          center
+        >
+          <strong>Want create your own starter project?</strong> Learn how to do
+          that in our documentation!
+        </Announce>
         <div className={s.grid}>
           {starters &&
             starters.map((item) => (

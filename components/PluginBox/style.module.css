@@ -73,6 +73,18 @@ a.box {
   background: linear-gradient(45deg, #e9fcff, white);
 }
 
+.blueLogo {
+  background: linear-gradient(45deg, #e9e9ff, white);
+}
+
+.greenLogo {
+  background: linear-gradient(45deg, #e9ffed, white);
+}
+
+.yellowLogo {
+  background: linear-gradient(45deg, #feffe9, white);
+}
+
 .logoInner {
   position: absolute;
   top: 0;
@@ -98,7 +110,7 @@ a.box {
   }
 
   svg {
-    fill: var(--extra-light-body-color);
+    fill: rgba(0, 0, 0, 0.1);
   }
 }
 

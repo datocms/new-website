@@ -158,7 +158,7 @@ export default function Plugin({ plugin, preview }) {
               <img alt="Preview" src={plugin.coverImage.url} />
             </div>
           ) : (
-            <PluginImagePlacehoder />
+            <PluginImagePlacehoder hash={plugin.packageName} />
           )
         }
         shortDescription={truncate(plugin.description, 55)}
@@ -182,9 +182,6 @@ export default function Plugin({ plugin, preview }) {
             <Info title="Plugin type">{plugin.pluginType.name}</Info>
             <Info title="Compatible with fields">
               {plugin.fieldTypes.map((f) => f.name).join(', ')}
-            </Info>
-            <Info title="First released">
-              {<FormattedDate date={plugin.releasedAt} />}
             </Info>
             <Info title="Current version">{plugin.version}</Info>
             <Info title="Installs count">{info && info.installs}</Info>

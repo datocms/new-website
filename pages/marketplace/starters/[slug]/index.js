@@ -22,6 +22,7 @@ import {
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest, githubRepoToUrl } from 'utils/githubRepo';
 import { handleErrors } from 'lib/datocms';
+import { Announce } from 'components/PluginToolkit';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -129,6 +130,15 @@ export default function EnterpriseApp({ page, preview }) {
             Start free project
           </Button>
         }
+        announce={
+          <Announce
+            href="/docs/project-starters-and-templates#generate-a-project-starter-button"
+            center
+          >
+            <strong>Want create your own starter project?</strong> Learn how to
+            do that in our documentation!
+          </Announce>
+        }
         info={
           <PluginInfo>
             <Info title="Preview URL">
@@ -147,9 +157,6 @@ export default function EnterpriseApp({ page, preview }) {
             </Info>
             <Info title="Publisher">
               <NameWithGravatar email="support@datocms.com" name="DatoCMS" />
-            </Info>
-            <Info title="First released">
-              <FormattedDate date={page._firstPublishedAt} />
             </Info>
           </PluginInfo>
         }

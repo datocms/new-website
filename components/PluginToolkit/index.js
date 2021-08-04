@@ -5,6 +5,7 @@ import Link from 'next/link';
 import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
 import PluginBox from 'components/PluginBox';
+import cn from 'classnames';
 
 export const PluginInfo = ({ children }) => {
   return <div className={s.root}>{children}</div>;
@@ -36,9 +37,9 @@ export const Badge = ({ children }) => (
   <span className={s.badge}>{children}</span>
 );
 
-export const Announce = ({ href, children }) => (
+export const Announce = ({ href, children, center }) => (
   <Link href={href}>
-    <a className={s.announce}>
+    <a className={cn(s.announce, { [s.announceCenter]: center })}>
       <MegaphoneIcon /> {children} →
     </a>
   </Link>
