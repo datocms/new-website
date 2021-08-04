@@ -2,9 +2,7 @@ import { SiteClient } from 'datocms-client';
 import got from 'got';
 import { JSDOM } from 'jsdom';
 
-const client = new SiteClient(
-  'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
-);
+const client = new SiteClient(process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN);
 
 // this "routing" function knows how to convert a DatoCMS record
 // into its slug and canonical URL within the website
