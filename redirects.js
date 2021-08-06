@@ -4,6 +4,11 @@ module.exports = [
     destination: '/:path+',
   },
   {
+    source: '/marketplace/plugins/i/datocms-plugin-yoast-seo',
+    destination:
+      '/marketplace/plugins/i/datocms-plugin-seo-readability-analysis',
+  },
+  {
     source: '/docs/introduction/custom-assets-domain',
     destination: '/marketplace/enterprise/aws-s3',
   },
