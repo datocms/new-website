@@ -15,8 +15,10 @@ const findSlugAndPermalink = async ({ item, itemTypeApiKey }) => {
       return [item.slug, `/cms/${item.slug}`];
     case 'changelog_entry':
       return [item.slug, `/product-updates/${item.slug}`];
+    case 'feature':
+      return [item.slug, `/features/${item.slug}`];
     default:
-      return null;
+      return [null, null];
   }
 };
 
@@ -57,7 +59,7 @@ const handler = async (req, res) => {
 
   if (!permalink) {
     res.status(422).json({
-      message: `Don\'t know which route corresponds to record #${itemId}!`,
+      message: `Don\'t know which route corresponds to record #${itemId} of model "${itemTypeApiKey}"!`,
     });
     return;
   }
@@ -76,16 +78,12 @@ const handler = async (req, res) => {
   // final step is to get the HTML of the webpage associated with the record
   // and return it to the client
 
-  console.log('before request...');
-
   const { body } = await got(
     new URL(permalink, process.env.BASE_URL).toString(),
     {
       headers: { cookie },
     },
   );
-
-  console.log('after request...');
 
   const { document } = new JSDOM(body).window;
 
@@ -95,8 +93,6 @@ const handler = async (req, res) => {
   const description = document
     .querySelector('meta[name="description"]')
     .getAttribute('content');
-
-  console.log('after analysis...');
 
   res.status(200).json({
     locale,
