@@ -87,7 +87,16 @@ const handler = async (req, res) => {
 
   const { document } = new JSDOM(body).window;
 
-  const content = document.getElementById('main-content').innerHTML;
+  const contentEl = document.getElementById('main-content');
+
+  if (!contentEl) {
+    res.status(422).json({
+      message: `Can't find any div with ID=main-content on page ${permalink}, please fix this!`,
+    });
+    return;
+  }
+
+  const content = contentEl.innerHTML;
   const locale = document.querySelector('html').getAttribute('lang') || 'en';
   const title = document.querySelector('title').textContent;
   const description = document
