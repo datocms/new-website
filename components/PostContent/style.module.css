@@ -3,7 +3,7 @@
   font-family: var(--font-serif);
   line-height: 1.6;
   letter-spacing: -0.02em;
-  max-width: 750px;
+  max-width: 700px;
   margin: 0 auto;
 
   a {
@@ -123,8 +123,8 @@
 
 .unwrap {
   @media (width > 1100px) {
-    margin-left: -100px;
-    margin-right: -100px;
+    margin-left: -80px;
+    margin-right: -80px;
   }
 }
 

@@ -148,7 +148,15 @@ function renderBlock(s, block) {
 
     case 'image':
       return (
-        <div className={s.unwrap}>
+        <div
+          className={
+            block.image.width && block.image.height
+              ? block.image.width / block.image.height > 1.3
+                ? s.unwrap
+                : null
+              : null
+          }
+        >
           <ImageFigure imageClassName={s.responsiveImage} data={block.image} />
         </div>
       );

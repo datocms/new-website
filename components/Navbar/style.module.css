@@ -26,8 +26,7 @@
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to bottom, white 80%, rgba(255, 255, 255, 0));
-    padding-bottom: 20px;
+    background: white;
     z-index: 1000;
   }
 

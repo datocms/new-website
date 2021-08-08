@@ -44,6 +44,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               image {
                 format
                 width
+                height
                 title
                 alt
                 responsiveImage(imgixParams: { w: 950 }, sizes: "(max-width: 810px) 100vw, (max-width: 1000px) 750px, (min-width: 1001px) 950px") {
