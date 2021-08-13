@@ -31,6 +31,7 @@ export default function Button({
       {...other}
       className={cn(
         style.root,
+        other.className,
         {
           [style.disabled]: disabled,
           [style.block]: block,
