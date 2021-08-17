@@ -58,160 +58,163 @@ function VideoStreamingEncoding({ feature, preview }) {
           </>
         }
       />
+      <div id="main-content">
+        <TitleStripWithContent
+          keyword={seoBlock.keyword}
+          kicker={`Fastest API for any video size`}
+          title={<>Adaptive bitrate means fast on every device</>}
+          subtitle={
+            <>
+              Thanks to HLS Adaptive Bitrate (ABR) streaming, every viewer will
+              always{' '}
+              <strong>
+                download the right video size for their device and connection
+                speed
+              </strong>
+              .
+            </>
+          }
+        >
+          <div className={s.video}>
+            <VideoPlayer
+              controls
+              autoPlay
+              muted
+              loop
+              src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8"
+              title={seoBlock.keyword}
+              description="DatoCMS video API allows you to make your videos immediately streamable"
+              tag={seoBlock.keyword}
+              translate="no"
+            />
+          </div>
+        </TitleStripWithContent>
 
-      <TitleStripWithContent
-        keyword={seoBlock.keyword}
-        kicker={`Fastest API for any video size`}
-        title={<>Adaptive bitrate means fast on every device</>}
-        subtitle={
-          <>
-            Thanks to HLS Adaptive Bitrate (ABR) streaming, every viewer will
-            always{' '}
-            <strong>
-              download the right video size for their device and connection
-              speed
-            </strong>
-            .
-          </>
-        }
-      >
-        <div className={s.video}>
-          <VideoPlayer
-            controls
-            autoPlay
-            src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8"
-            title={seoBlock.keyword}
-            description="DatoCMS video API allows you to make your videos immediately streamable"
-            tag={seoBlock.keyword}
-            translate="no"
-          />
-        </div>
-      </TitleStripWithContent>
-
-      <Flag
-        style="good"
-        keyword={seoBlock.keyword}
-        kicker="API for all video formats"
-        title={
-          <>
-            Any video format,{' '}
-            <FlagHighlight>instantly&nbsp;streamable</FlagHighlight>
-          </>
-        }
-        image="go-mobile"
-      >
-        <p>
-          We can ingest almost <strong>every available codec</strong> —
-          including those for broadcast and professional applications like
-          H.264, H.265, VP9, and Apple ProRes — and{' '}
-          <strong>make videos instantly available for streaming</strong>.
-        </p>
-      </Flag>
-
-      <TitleStripWithContent
-        keyword={seoBlock.keyword}
-        title={<>Thumbnails? Included.</>}
-        subtitle={
-          <>
-            Thumbnails are entry level when it comes to video, yet implementing
-            them is far from simple. With a{' '}
-            <strong>
-              single request through our API you can get a thumbnail or an
-              entire storyboard
-            </strong>{' '}
-            to use in your player to scrub preview images.
-          </>
-        }
-      >
-        <div className={s.frames}>
-          {range(1, 12, 2).map((t) => (
-            <div key={t} className={s.frame}>
-              <img
-                src={`https://image.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i/thumbnail.jpg?width=400&amp;time=${t}`}
-                title={seoBlock.h1}
-              />
-              <div className={s.frameLabel}>
-                /video/thumb.jpg?
-                <span className={s.paramName}>width</span>=
-                <span className={s.paramValue}>400</span>&amp;
-                <span className={s.paramName}>time</span>=
-                <span className={s.paramValue}>{t}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </TitleStripWithContent>
-
-      <Flag
-        style="good"
-        image="video-player"
-        keyword={seoBlock.keyword}
-        kicker={`a flexible ${seoBlock.keyword}`}
-        title={
-          <>
-            An API that works with{' '}
-            <FlagHighlight>any&nbsp;video&nbsp;player</FlagHighlight>
-          </>
-        }
-      >
-        <p>
-          Rather than require you to use a proprietary player, we made it{' '}
-          <strong>
-            easy to integrate with all major web and mobile video players
-          </strong>
-          , open-source or professional, web or native.
-        </p>
-      </Flag>
-
-      <Flag
-        style="good"
-        keyword={seoBlock.keyword}
-        kicker={`${seoBlock.keyword} + Images API + CDN`}
-        title={
-          <>
-            A complete set of{' '}
-            <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight>
-          </>
-        }
-        image="zen"
-      >
-        <p>
-          DatoCMS does not only offer a powerful video API but a full
-          coordinated suite of different <strong>APIs and tools</strong> to work
-          seamlessly with the three fundamental blocks of content:{' '}
-          <strong>text, images and video</strong>. Everything is built on CDN,{' '}
-          <strong>optimized for speed and scalability</strong>.
-        </p>
-
-        <Bullets
+        <Flag
           style="good"
-          icon={SuccessIcon}
-          bullets={[
-            <Link
-              href="/features/images-api"
-              title={'Images API'}
-              key="images-api"
-            >
-              <a>Images API</a>
-            </Link>,
-            <Link
-              href="/features/worldwide-cdn"
-              title={'Fastest headless CMS CDN'}
-              key="worldwide-cdn"
-            >
-              <a>Worldwide CDN</a>
-            </Link>,
-            <Link
-              href="/features/headless-cms-graphql"
-              title={'Headless CMS GraphQL'}
-              key="graphql-api"
-            >
-              <a>Content GraphQL API</a>
-            </Link>,
-            'Real-time updates API',
-          ]}
-        />
-      </Flag>
+          keyword={seoBlock.keyword}
+          kicker="API for all video formats"
+          title={
+            <>
+              Any video format,{' '}
+              <FlagHighlight>instantly&nbsp;streamable</FlagHighlight>
+            </>
+          }
+          image="go-mobile"
+        >
+          <p>
+            We can ingest almost <strong>every available codec</strong> —
+            including those for broadcast and professional applications like
+            H.264, H.265, VP9, and Apple ProRes — and{' '}
+            <strong>make videos instantly available for streaming</strong>.
+          </p>
+        </Flag>
+
+        <TitleStripWithContent
+          keyword={seoBlock.keyword}
+          title={<>Thumbnails? Included.</>}
+          subtitle={
+            <>
+              Thumbnails are entry level when it comes to video, yet
+              implementing them is far from simple. With a{' '}
+              <strong>
+                single request through our API you can get a thumbnail or an
+                entire storyboard
+              </strong>{' '}
+              to use in your player to scrub preview images.
+            </>
+          }
+        >
+          <div className={s.frames}>
+            {range(1, 12, 2).map((t) => (
+              <div key={t} className={s.frame}>
+                <img
+                  src={`https://image.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i/thumbnail.jpg?width=400&amp;time=${t}`}
+                  title={seoBlock.h1}
+                />
+                <div className={s.frameLabel}>
+                  /video/thumb.jpg?
+                  <span className={s.paramName}>width</span>=
+                  <span className={s.paramValue}>400</span>&amp;
+                  <span className={s.paramName}>time</span>=
+                  <span className={s.paramValue}>{t}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </TitleStripWithContent>
+
+        <Flag
+          style="good"
+          image="video-player"
+          keyword={seoBlock.keyword}
+          kicker={`a flexible ${seoBlock.keyword}`}
+          title={
+            <>
+              An API that works with{' '}
+              <FlagHighlight>any&nbsp;video&nbsp;player</FlagHighlight>
+            </>
+          }
+        >
+          <p>
+            Rather than require you to use a proprietary player, we made it{' '}
+            <strong>
+              easy to integrate with all major web and mobile video players
+            </strong>
+            , open-source or professional, web or native.
+          </p>
+        </Flag>
+
+        <Flag
+          style="good"
+          keyword={seoBlock.keyword}
+          kicker={`${seoBlock.keyword} + Images API + CDN`}
+          title={
+            <>
+              A complete set of{' '}
+              <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight>
+            </>
+          }
+          image="zen"
+        >
+          <p>
+            DatoCMS does not only offer a powerful video API but a full
+            coordinated suite of different <strong>APIs and tools</strong> to
+            work seamlessly with the three fundamental blocks of content:{' '}
+            <strong>text, images and video</strong>. Everything is built on CDN,{' '}
+            <strong>optimized for speed and scalability</strong>.
+          </p>
+
+          <Bullets
+            style="good"
+            icon={SuccessIcon}
+            bullets={[
+              <Link
+                href="/features/images-api"
+                title={'Images API'}
+                key="images-api"
+              >
+                <a>Images API</a>
+              </Link>,
+              <Link
+                href="/features/worldwide-cdn"
+                title={'Fastest headless CMS CDN'}
+                key="worldwide-cdn"
+              >
+                <a>Worldwide CDN</a>
+              </Link>,
+              <Link
+                href="/features/headless-cms-graphql"
+                title={'Headless CMS GraphQL'}
+                key="graphql-api"
+              >
+                <a>Content GraphQL API</a>
+              </Link>,
+              'Real-time updates API',
+            ]}
+          />
+        </Flag>
+      </div>
     </Layout>
   );
 }

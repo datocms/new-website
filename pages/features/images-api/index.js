@@ -75,84 +75,88 @@ function ImagesApi({ feature, preview, review }) {
           </>
         }
       />
+      <div id="main-content">
+        <TitleStripWithContent
+          kicker={`Best API for images processing`}
+          keyword={seoBlock.keyword}
+          title={<>Endless image transformations at your service</>}
+          subtitle={
+            <>
+              DatoCMS offers best-in-class API for{' '}
+              <strong>images processing</strong> and <strong>image CDN</strong>{' '}
+              thanks to the seamless partnership with Imgix.{' '}
+              <strong>Optimize, resize, crop, rotate</strong> and watermark
+              images on-the-fly simply adding custom parameters to the URL of
+              your image.
+            </>
+          }
+        >
+          <ImgixTransformations />
+        </TitleStripWithContent>
 
-      <TitleStripWithContent
-        kicker={`Best API for images processing`}
-        keyword={seoBlock.keyword}
-        title={<>Endless image transformations at your service</>}
-        subtitle={
-          <>
-            DatoCMS offers best-in-class API for{' '}
-            <strong>images processing</strong> and <strong>image CDN</strong>{' '}
-            thanks to the seamless partnership with Imgix.{' '}
-            <strong>Optimize, resize, crop, rotate</strong> and watermark images
-            on-the-fly simply adding custom parameters to the URL of your image.
-          </>
-        }
-      >
-        <ImgixTransformations />
-      </TitleStripWithContent>
+        <Flag
+          style="good"
+          keyword={seoBlock.keyword}
+          kicker={`Optimized images API`}
+          title={
+            <>
+              Automatically serve{' '}
+              <FlagHighlight>
+                the&nbsp;best&nbsp;output&nbsp;format
+              </FlagHighlight>
+            </>
+          }
+          image="key"
+        >
+          <p>
+            Thanks to{' '}
+            <strong>DatoCMS API&apos;s automatic Content Negotiation</strong>,
+            you are able to serve WebP and other modern images formats to
+            browsers that support them without any additional work,{' '}
+            <strong>reducing the average file size by 50%</strong>.
+          </p>
+        </Flag>
 
-      <Flag
-        style="good"
-        keyword={seoBlock.keyword}
-        kicker={`Optimized images API`}
-        title={
-          <>
-            Automatically serve{' '}
-            <FlagHighlight>the&nbsp;best&nbsp;output&nbsp;format</FlagHighlight>
-          </>
-        }
-        image="key"
-      >
-        <p>
-          Thanks to{' '}
-          <strong>DatoCMS API&apos;s automatic Content Negotiation</strong>, you
-          are able to serve WebP and other modern images formats to browsers
-          that support them without any additional work,{' '}
-          <strong>reducing the average file size by 50%</strong>.
-        </p>
-      </Flag>
+        <TitleStripWithContent
+          kicker={`Images preview API`}
+          keyword={seoBlock.keyword}
+          title={<>State of the art for responsive and progressive images</>}
+          subtitle={
+            <>
+              Serving optimized images is incredibly hard, but using our GraphQL
+              Content API you can implement{' '}
+              <strong>lazy loaded, responsive images</strong> in{' '}
+              <strong>one line of code</strong>. Avoid any layout jumping, offer
+              instant <strong>previews of images while they load</strong>. It’s
+              like magic.
+            </>
+          }
+        >
+          <ProgressiveImagesDemo name={`with Dato images API`} />
+        </TitleStripWithContent>
 
-      <TitleStripWithContent
-        kicker={`Images preview API`}
-        keyword={seoBlock.keyword}
-        title={<>State of the art for responsive and progressive images</>}
-        subtitle={
-          <>
-            Serving optimized images is incredibly hard, but using our GraphQL
-            Content API you can implement{' '}
-            <strong>lazy loaded, responsive images</strong> in{' '}
-            <strong>one line of code</strong>. Avoid any layout jumping, offer
-            instant <strong>previews of images while they load</strong>. It’s
-            like magic.
-          </>
-        }
-      >
-        <ProgressiveImagesDemo name={`with Dato images API`} />
-      </TitleStripWithContent>
+        <Flag
+          style="good"
+          keyword={seoBlock.keyword}
+          kicker={`Images API Metadata`}
+          title={
+            <>
+              All the <FlagHighlight>metadata</FlagHighlight> you need
+            </>
+          }
+          image="eye-gazing"
+        >
+          <p>
+            Dominant colors, EXIF data, aspect ratio, filesize, copyright
+            information, geolocation.{' '}
+            <strong>Every possible information about your images</strong> is
+            stored in DatoCMS and ready to be used in your websites through our
+            API.
+          </p>
+        </Flag>
 
-      <Flag
-        style="good"
-        keyword={seoBlock.keyword}
-        kicker={`Images API Metadata`}
-        title={
-          <>
-            All the <FlagHighlight>metadata</FlagHighlight> you need
-          </>
-        }
-        image="eye-gazing"
-      >
-        <p>
-          Dominant colors, EXIF data, aspect ratio, filesize, copyright
-          information, geolocation.{' '}
-          <strong>Every possible information about your images</strong> is
-          stored in DatoCMS and ready to be used in your websites through our
-          API.
-        </p>
-      </Flag>
-
-      <Quote review={review} />
+        <Quote review={review} />
+      </div>
     </Layout>
   );
 }

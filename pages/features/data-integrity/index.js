@@ -71,145 +71,149 @@ function Validations({ page, preview, review }) {
           }
         />
 
-        <Space top={2} bottom={2}>
-          <InterstitialTitle style="two">
-            Is your CMS worrying about all this stuff for you?
-          </InterstitialTitle>
-        </Space>
+        <div id="main-content">
+          <Space top={2} bottom={2}>
+            <InterstitialTitle style="two">
+              Is your CMS worrying about all this stuff for you?
+            </InterstitialTitle>
+          </Space>
 
-        <Flag
-          style="good"
-          title={
-            <>
-              <FlagHighlight>Clean content, at every stage</FlagHighlight> with
-              field validations
-            </>
-          }
-          image={FieldValidations}
-        >
-          <p>
-            Each and every content type in modules and blocks can be restricted
-            to allow only specific types of content. Be it a picture of a
-            certain size, a data range, a color, a unique slug or a pre-built
-            value, DatoCMS allows workflow creation{' '}
-            <strong>that ensures mistakes cannot be made</strong>.
-          </p>
-        </Flag>
-
-        <Space bottom={4}>
-          <TitleStripWithContent
+          <Flag
+            style="good"
             title={
               <>
-                Test upcoming website updates, without breaking the live website
+                <FlagHighlight>Clean content, at every stage</FlagHighlight>{' '}
+                with field validations
               </>
             }
+            image={FieldValidations}
+          >
+            <p>
+              Each and every content type in modules and blocks can be
+              restricted to allow only specific types of content. Be it a
+              picture of a certain size, a data range, a color, a unique slug or
+              a pre-built value, DatoCMS allows workflow creation{' '}
+              <strong>that ensures mistakes cannot be made</strong>.
+            </p>
+          </Flag>
+
+          <Space bottom={4}>
+            <TitleStripWithContent
+              title={
+                <>
+                  Test upcoming website updates, without breaking the live
+                  website
+                </>
+              }
+              subtitle={
+                <>
+                  <p>
+                    Using migration scripts, you can test changes in the
+                    structure of your content{' '}
+                    <strong>in a safe sandbox environment</strong>, and replay
+                    the same exact changes in production once you&#39;re ready
+                    to go live.
+                  </p>
+                  <Button
+                    as="a"
+                    fs="small"
+                    p="small"
+                    s="invert"
+                    href="/docs/scripting-migrations/introduction"
+                  >
+                    Learn more about Sandbox Environments
+                  </Button>
+                </>
+              }
+            >
+              <SandboxEnvironmentsDemo />
+            </TitleStripWithContent>
+          </Space>
+
+          <Flag
+            style="good"
+            title={
+              <>
+                Specify <FlagHighlight>who can do what, and when</FlagHighlight>{' '}
+                with custom permissions
+              </>
+            }
+            image={WorkflowPermissions}
+            imageProps={{
+              children: (
+                <>
+                  <p>
+                    Can <strong>perform all actions</strong> on{' '}
+                    <strong>Articles</strong>
+                  </p>
+                  <p>
+                    Can <strong>create</strong> new <strong>Products</strong>
+                  </p>
+                  <p>
+                    Can <strong>publish</strong> existing{' '}
+                    <strong>Products</strong>
+                  </p>
+                  <p>
+                    Cannot <strong>delete</strong> existing{' '}
+                    <strong>Products</strong>
+                  </p>
+                </>
+              ),
+            }}
+          >
+            <p>
+              Roles can be customized to have explicit rules to perform specific
+              actions. These can be assigned to multiple users to create team
+              permissions.
+            </p>
+            <p>
+              Specify exactly what each role can do and cannot do.{' '}
+              <strong>Build your editorial workflow role by role</strong>,
+              across projects, languages, environments, timezones and modules.
+            </p>
+          </Flag>
+
+          <TitleStripWithContent
+            title={<>Ensure nothing gets published by mistake</>}
             subtitle={
               <>
                 <p>
-                  Using migration scripts, you can test changes in the structure
-                  of your content <strong>in a safe sandbox environment</strong>
-                  , and replay the same exact changes in production once
-                  you&#39;re ready to go live.
+                  With our Workflows feature you can set up a precise state
+                  machine to bring a draft content up to the final publication
+                  through a series of intermediate, fully customizable approval
+                  steps.
+                </p>
+                <p>
+                  Define clear tasks for each team members, specifying exactly{' '}
+                  <strong>
+                    who is in charge of performing the necessary checks
+                  </strong>{' '}
+                  and operations on the content so that it can advance to the
+                  next step in the approval chain.
                 </p>
                 <Button
                   as="a"
                   fs="small"
                   p="small"
                   s="invert"
-                  href="/docs/scripting-migrations/introduction"
+                  href="/docs/general-concepts/workflows"
                 >
-                  Learn more about Sandbox Environments
+                  Learn more about Workflows
                 </Button>
               </>
             }
           >
-            <SandboxEnvironmentsDemo />
+            <Workflow />
           </TitleStripWithContent>
+        </div>
+
+        <Space top={2} bottom={2}>
+          <LogosBar
+            title="We power experiences for over half a billion users"
+            clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
+          />
         </Space>
-
-        <Flag
-          style="good"
-          title={
-            <>
-              Specify <FlagHighlight>who can do what, and when</FlagHighlight>{' '}
-              with custom permissions
-            </>
-          }
-          image={WorkflowPermissions}
-          imageProps={{
-            children: (
-              <>
-                <p>
-                  Can <strong>perform all actions</strong> on{' '}
-                  <strong>Articles</strong>
-                </p>
-                <p>
-                  Can <strong>create</strong> new <strong>Products</strong>
-                </p>
-                <p>
-                  Can <strong>publish</strong> existing{' '}
-                  <strong>Products</strong>
-                </p>
-                <p>
-                  Cannot <strong>delete</strong> existing{' '}
-                  <strong>Products</strong>
-                </p>
-              </>
-            ),
-          }}
-        >
-          <p>
-            Roles can be customized to have explicit rules to perform specific
-            actions. These can be assigned to multiple users to create team
-            permissions.
-          </p>
-          <p>
-            Specify exactly what each role can do and cannot do.{' '}
-            <strong>Build your editorial workflow role by role</strong>, across
-            projects, languages, environments, timezones and modules.
-          </p>
-        </Flag>
-
-        <TitleStripWithContent
-          title={<>Ensure nothing gets published by mistake</>}
-          subtitle={
-            <>
-              <p>
-                With our Workflows feature you can set up a precise state
-                machine to bring a draft content up to the final publication
-                through a series of intermediate, fully customizable approval
-                steps.
-              </p>
-              <p>
-                Define clear tasks for each team members, specifying exactly{' '}
-                <strong>
-                  who is in charge of performing the necessary checks
-                </strong>{' '}
-                and operations on the content so that it can advance to the next
-                step in the approval chain.
-              </p>
-              <Button
-                as="a"
-                fs="small"
-                p="small"
-                s="invert"
-                href="/docs/general-concepts/workflows"
-              >
-                Learn more about Workflows
-              </Button>
-            </>
-          }
-        >
-          <Workflow />
-        </TitleStripWithContent>
       </div>
-
-      <Space top={2} bottom={2}>
-        <LogosBar
-          title="We power experiences for over half a billion users"
-          clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
-        />
-      </Space>
     </Layout>
   );
 }

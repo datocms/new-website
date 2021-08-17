@@ -69,102 +69,106 @@ function RealTime({ feature, preview, review }) {
           </>
         }
       />
+      <div id="main-content">
+        <TitleStripWithContent
+          keyword={seoBlock.keyword}
+          kicker="Real-time API content preview"
+          title={<>Preview changes as they get authored, no refresh needed</>}
+          subtitle={
+            <>
+              Instead of the API consumer only getting the new data upon their
+              next query, with{' '}
+              <strong>
+                DatoCMS&#39;s Real-time API, new data is instantly pushed to
+                them
+              </strong>
+              .
+            </>
+          }
+        >
+          <div className={s.video}>
+            <VideoPlayer
+              controls
+              autoPlay
+              muted
+              loop
+              title={seoBlock.keyword}
+              src="https://stream.mux.com/5Tz902WgAavFoB025U5eNZ5fHubUk6tzwa.m3u8"
+            />
+          </div>
+        </TitleStripWithContent>
 
-      <TitleStripWithContent
-        keyword={seoBlock.keyword}
-        kicker="Real-time API content preview"
-        title={<>Preview changes as they get authored, no refresh needed</>}
-        subtitle={
-          <>
-            Instead of the API consumer only getting the new data upon their
-            next query, with{' '}
+        <Quote review={review} />
+
+        <Flag
+          keyword={seoBlock.keyword}
+          style="good"
+          kicker="Live real-time API"
+          title={
+            <>
+              Need to <FlagHighlight>cover live events</FlagHighlight> as they
+              happen?
+            </>
+          }
+          image={RealtimeUpdatesDemo}
+        >
+          <p>
+            The same Real-time Updates API used to preview draft content can
+            also be applied to offer{' '}
             <strong>
-              DatoCMS&#39;s Real-time API, new data is instantly pushed to them
+              real-time updates to your website&#39;s final visitors
             </strong>
-            .
-          </>
-        }
-      >
-        <div className={s.video}>
-          <VideoPlayer
-            controls
-            autoPlay
-            title={seoBlock.keyword}
-            src="https://stream.mux.com/5Tz902WgAavFoB025U5eNZ5fHubUk6tzwa.m3u8"
-          />
-        </div>
-      </TitleStripWithContent>
+            . Our infrastructure can{' '}
+            <strong>easily handle thousands of live users</strong> with multiple
+            updates per minute.
+          </p>
+          <p>
+            <Button
+              as="a"
+              fs="small"
+              p="small"
+              s="invert"
+              href="/marketplace/starters/next-js-event-coverage-liveblog"
+              title="Next.js real-time"
+            >
+              Try the Live-blog demo for Next.js
+            </Button>
+          </p>
+        </Flag>
 
-      <Quote review={review} />
-
-      <Flag
-        keyword={seoBlock.keyword}
-        style="good"
-        kicker="Live real-time API"
-        title={
-          <>
-            Need to <FlagHighlight>cover live events</FlagHighlight> as they
-            happen?
-          </>
-        }
-        image={RealtimeUpdatesDemo}
-      >
-        <p>
-          The same Real-time Updates API used to preview draft content can also
-          be applied to offer{' '}
-          <strong>
-            real-time updates to your website&#39;s final visitors
-          </strong>
-          . Our infrastructure can{' '}
-          <strong>easily handle thousands of live users</strong> with multiple
-          updates per minute.
-        </p>
-        <p>
+        <Flag
+          keyword={seoBlock.keyword}
+          kicker={'Real-time GraphQL API'}
+          style="good"
+          title={
+            <>
+              GraphQL and Server-Sent Events, to deliver the{' '}
+              <FlagHighlight>best developer ergonomic</FlagHighlight>
+            </>
+          }
+          image="live"
+        >
+          <p>
+            The Real-time Updates API uses <em>Server-Sent Events</em>, which is
+            a protocol supported natively from all modern browsers, to{' '}
+            <strong>
+              transform your regular GraphQL into streaming subscriptions
+            </strong>
+            . Using our React and Vue libraries you can{' '}
+            <strong>get started in literally seconds</strong>.
+          </p>
           <Button
             as="a"
             fs="small"
             p="small"
             s="invert"
-            href="/marketplace/starters/next-js-event-coverage-liveblog"
-            title="Next.js real-time"
+            href="/docs/real-time-updates-api"
+            title="Real-time API docs"
           >
-            Try the Live-blog demo for Next.js
+            Learn more in the Docs
           </Button>
-        </p>
-      </Flag>
-
-      <Flag
-        keyword={seoBlock.keyword}
-        kicker={'Real-time GraphQL API'}
-        style="good"
-        title={
-          <>
-            GraphQL and Server-Sent Events, to deliver the{' '}
-            <FlagHighlight>best developer ergonomic</FlagHighlight>
-          </>
-        }
-        image="live"
-      >
-        <p>
-          The Real-time Updates API uses <em>Server-Sent Events</em>, which is a
-          protocol supported natively from all modern browsers, to{' '}
-          <strong>
-            transform your regular GraphQL into streaming subscriptions
-          </strong>
-          . Using our React and Vue libraries you can{' '}
-          <strong>get started in literally seconds</strong>.
-        </p>
-        <Button
-          as="a"
-          fs="small"
-          p="small"
-          s="invert"
-          href="/docs/real-time-updates-api"
-          title="Real-time API docs"
-        >
-          Learn more in the Docs
-        </Button>
-      </Flag>
+        </Flag>
+      </div>
     </Layout>
   );
 }

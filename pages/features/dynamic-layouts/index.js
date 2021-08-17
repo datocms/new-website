@@ -60,56 +60,58 @@ function DynamicLayouts({ page, preview, review1, review2 }) {
           </>
         }
       />
+      <div id="main-content">
+        <Flag
+          style="good"
+          title={
+            <>
+              Create <FlagHighlight>modular&nbsp;blocks</FlagHighlight>
+            </>
+          }
+          image={CreateModularBlocks}
+        >
+          <p>
+            Modular blocks allow you to define reusable custom components that
+            enable your writers to build rich stories.
+          </p>
+        </Flag>
 
-      <Flag
-        style="good"
-        title={
-          <>
-            Create <FlagHighlight>modular&nbsp;blocks</FlagHighlight>
-          </>
-        }
-        image={CreateModularBlocks}
-      >
-        <p>
-          Modular blocks allow you to define reusable custom components that
-          enable your writers to build rich stories.
-        </p>
-      </Flag>
+        <Quote review={review2} />
 
-      <Quote review={review2} />
+        <Flag
+          style="good"
+          title={
+            <>
+              <FlagHighlight>Organize and structure</FlagHighlight> your content
+            </>
+          }
+          image={UseModularBlocks}
+        >
+          <p>
+            Modular blocks are very flexible and easy to use. You can stack
+            &amp; reorganize them on the fly with drag and drop functionality.
+          </p>
+        </Flag>
 
-      <Flag
-        style="good"
-        title={
-          <>
-            <FlagHighlight>Organize and structure</FlagHighlight> your content
-          </>
-        }
-        image={UseModularBlocks}
-      >
-        <p>
-          Modular blocks are very flexible and easy to use. You can stack &amp;
-          reorganize them on the fly with drag and drop functionality.
-        </p>
-      </Flag>
+        <Quote review={review1} />
 
-      <Quote review={review1} />
-
-      <Flag
-        style="good"
-        title={
-          <>
-            Easily build landing pages with{' '}
-            <FlagHighlight>dynamic&nbsp;templates</FlagHighlight>
-          </>
-        }
-        image={LandingPagesGenerator}
-      >
-        <p>
-          Boost your acquisition and SEO by quickly creating rich and inspiring
-          campaign pages featuring trends or events thanks to dynamic layouts.
-        </p>
-      </Flag>
+        <Flag
+          style="good"
+          title={
+            <>
+              Easily build landing pages with{' '}
+              <FlagHighlight>dynamic&nbsp;templates</FlagHighlight>
+            </>
+          }
+          image={LandingPagesGenerator}
+        >
+          <p>
+            Boost your acquisition and SEO by quickly creating rich and
+            inspiring campaign pages featuring trends or events thanks to
+            dynamic layouts.
+          </p>
+        </Flag>
+      </div>
     </Layout>
   );
 }

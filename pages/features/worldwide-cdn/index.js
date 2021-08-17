@@ -27,12 +27,8 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
         slug
-        seoContent {
-          ... on SeoBlockRecord {
-            keyword
-            h1
-          }
-        }
+        seoH1
+        yoastAnalysis
       }
       review1: review(filter: { name: { eq: "Grace Guzman" } }) {
         ...reviewFields
@@ -46,8 +42,8 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function WorldwideCdn({ preview, review1, feature }) {
-  const seoBlock = feature && feature.seoContent[0];
-
+  const seoBlock = feature && feature.yoastAnalysis;
+  const keyword = yoastAnalysis;
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
@@ -71,115 +67,117 @@ function WorldwideCdn({ preview, review1, feature }) {
           </>
         }
       />
-      <CdnMap />
+      <div id="main-content">
+        <CdnMap />
 
-      <Space top={2} bottom={1}>
-        <InterstitialTitle style="two">
-          Delight your customers with{' '}
-          <Highlight>lightning fast responses</Highlight>
-        </InterstitialTitle>
-      </Space>
+        <Space top={2} bottom={1}>
+          <InterstitialTitle style="two">
+            Delight your customers with{' '}
+            <Highlight>lightning fast responses</Highlight>
+          </InterstitialTitle>
+        </Space>
 
-      <Flag
-        style="good"
-        keyword={seoBlock.keyword}
-        kicker="Fast & scalable headless CMS"
-        title={
-          <>
-            An infrastructure that{' '}
-            <FlagHighlight>scales&nbsp;infinitely</FlagHighlight>
-          </>
-        }
-        image="space"
-      >
-        <p>
-          We built DatoCMS content infrastructure so you don’t have to. Focus on
-          writing great content and creating new, innovative digital
-          experiences. We work every day to offer a{' '}
-          <strong>reliable solution capable of following your growth</strong>,
-          globally, and lets you adapt along the journey, with{' '}
-          <strong>no upfront costs</strong>.
-        </p>
-      </Flag>
-
-      <Quote review={review1} />
-
-      <Numbers>
-        <NumbersBlock title="74">CDN Edges</NumbersBlock>
-        <NumbersBlock title="50TB">Data served daily</NumbersBlock>
-        <NumbersBlock title="150M">Requests per week</NumbersBlock>
-        <NumbersBlock title="99.99%">Guaranteed uptime</NumbersBlock>
-      </Numbers>
-
-      <Flag
-        style="good"
-        keyword={seoBlock.keyword}
-        title={
-          <>
-            A unified set of{' '}
-            <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight> to cover
-            every need
-          </>
-        }
-        image="zen"
-      >
-        <p>
-          DatoCMS offers a coordinated suite of different{' '}
-          <strong>APIs and tools</strong> to work seamlessly with the three
-          fundamental blocks of content: <strong>text, images and video</strong>
-          . Everything is built on CDN,{' '}
-          <strong>optimized for speed and scalability</strong>, making it the
-          fastest headless CMS.
-        </p>
-
-        <Bullets
+        <Flag
           style="good"
-          icon={SuccessIcon}
-          bullets={[
-            <Link
-              href="/features/headless-cms-graphql"
-              title={'Headless CMS GraphQL'}
-              key="graphql-api"
-            >
-              <a>Content GraphQL API</a>
-            </Link>,
-            'Real-time updates API',
-            <Link
-              href="/features/images-api"
-              title={'Images API'}
-              key="images-api"
-            >
-              <a>Images API</a>
-            </Link>,
-            <Link
-              href="/features/video-api"
-              title={'Videos API'}
-              key="video-api"
-            >
-              <a>Videos API</a>
-            </Link>,
-          ]}
-        />
-      </Flag>
+          keyword={seoBlock.keyword}
+          kicker="Fast & scalable headless CMS"
+          title={
+            <>
+              An infrastructure that{' '}
+              <FlagHighlight>scales&nbsp;infinitely</FlagHighlight>
+            </>
+          }
+          image="space"
+        >
+          <p>
+            We built DatoCMS content infrastructure so you don’t have to. Focus
+            on writing great content and creating new, innovative digital
+            experiences. We work every day to offer a{' '}
+            <strong>reliable solution capable of following your growth</strong>,
+            globally, and lets you adapt along the journey, with{' '}
+            <strong>no upfront costs</strong>.
+          </p>
+        </Flag>
 
-      <Flag
-        style="good"
-        keyword={seoBlock.keyword}
-        kicker="Is Dato the fastest headless CMS?"
-        title={
-          <>
-            Obsessed by <FlagHighlight>Performance and speed</FlagHighlight>
-          </>
-        }
-        image="corona2"
-      >
-        <p>
-          Being optimized for lazy image serving, video streaming, and
-          depth-first content delivery, DatoCMS is surely one of the{' '}
-          <strong>fastest headless CMSs</strong>. On top of that performance is
-          one of our top day-by-day concerns.
-        </p>
-      </Flag>
+        <Quote review={review1} />
+
+        <Numbers>
+          <NumbersBlock title="74">CDN Edges</NumbersBlock>
+          <NumbersBlock title="50TB">Data served daily</NumbersBlock>
+          <NumbersBlock title="150M">Requests per week</NumbersBlock>
+          <NumbersBlock title="99.99%">Guaranteed uptime</NumbersBlock>
+        </Numbers>
+
+        <Flag
+          style="good"
+          keyword={seoBlock.keyword}
+          title={
+            <>
+              A unified set of{' '}
+              <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight> to
+              cover every need
+            </>
+          }
+          image="zen"
+        >
+          <p>
+            DatoCMS offers a coordinated suite of different{' '}
+            <strong>APIs and tools</strong> to work seamlessly with the three
+            fundamental blocks of content:{' '}
+            <strong>text, images and video</strong>. Everything is built on CDN,{' '}
+            <strong>optimized for speed and scalability</strong>, making it the
+            fastest headless CMS.
+          </p>
+
+          <Bullets
+            style="good"
+            icon={SuccessIcon}
+            bullets={[
+              <Link
+                href="/features/headless-cms-graphql"
+                title={'Headless CMS GraphQL'}
+                key="graphql-api"
+              >
+                <a>Content GraphQL API</a>
+              </Link>,
+              'Real-time updates API',
+              <Link
+                href="/features/images-api"
+                title={'Images API'}
+                key="images-api"
+              >
+                <a>Images API</a>
+              </Link>,
+              <Link
+                href="/features/video-api"
+                title={'Videos API'}
+                key="video-api"
+              >
+                <a>Videos API</a>
+              </Link>,
+            ]}
+          />
+        </Flag>
+
+        <Flag
+          style="good"
+          keyword={seoBlock.keyword}
+          kicker="Is Dato the fastest headless CMS?"
+          title={
+            <>
+              Obsessed by <FlagHighlight>Performance and speed</FlagHighlight>
+            </>
+          }
+          image="corona2"
+        >
+          <p>
+            Being optimized for lazy image serving, video streaming, and
+            depth-first content delivery, DatoCMS is surely one of the{' '}
+            <strong>fastest headless CMSs</strong>. On top of that performance
+            is one of our top day-by-day concerns.
+          </p>
+        </Flag>
+      </div>
     </Layout>
   );
 }

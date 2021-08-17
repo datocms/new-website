@@ -88,76 +88,78 @@ function MultiLanguage({ feature, preview }) {
         }
       />
 
-      <Flag
-        keyword={seoBlock.keyword}
-        style="good"
-        kicker={'multi-language & multi-site headless cms'}
-        title={
-          <>
-            Translate your <FlagHighlight>websites and apps</FlagHighlight>
-          </>
-        }
-        image={ProjectSettings}
-      >
-        <p>
-          <strong>Add all the languages you&#39;d like to support</strong> and
-          start translating your content. Dato headless CMS will deliver your
-          multi-language content to your net of projects, using the same{' '}
-          <strong>fast and scalable platform</strong>.
-        </p>
-      </Flag>
+      <div id="main-content">
+        <Flag
+          keyword={seoBlock.keyword}
+          style="good"
+          kicker={'multi-language & multi-site headless cms'}
+          title={
+            <>
+              Translate your <FlagHighlight>websites and apps</FlagHighlight>
+            </>
+          }
+          image={ProjectSettings}
+        >
+          <p>
+            <strong>Add all the languages you&#39;d like to support</strong> and
+            start translating your content. Dato headless CMS will deliver your
+            multi-language content to your net of projects, using the same{' '}
+            <strong>fast and scalable platform</strong>.
+          </p>
+        </Flag>
 
-      <IntegrationsBanner
-        title={<>Localize both content&nbsp;and&nbsp;assets</>}
-        bubbles={icons.map((path) => (
-          <LazyImage key={path} src={path} />
-        ))}
-      >
-        <strong>All your content and assets can be multi-language</strong>,
-        including rich text, responsive images, geo-points, SEO metadata and
-        especially your URLs.
-      </IntegrationsBanner>
+        <IntegrationsBanner
+          title={<>Localize both content&nbsp;and&nbsp;assets</>}
+          bubbles={icons.map((path) => (
+            <LazyImage key={path} src={path} />
+          ))}
+        >
+          <strong>All your content and assets can be multi-language</strong>,
+          including rich text, responsive images, geo-points, SEO metadata and
+          especially your URLs.
+        </IntegrationsBanner>
 
-      <Flag
-        keyword={seoBlock.keyword}
-        style="good"
-        kicker="multi-language & flexible"
-        title={
-          <>
-            Great <FlagHighlight>flexibility and granularity</FlagHighlight>
-          </>
-        }
-        image={FieldSettings}
-      >
-        <p>
-          Dato headless CMS gives you a{' '}
-          <strong>great deal of customization</strong> for your multi-language
-          project. Specify which types of content need to be translated or not,
-          and in which languages, on a per-field level. Feel free to set a field
-          as localized, or change settings at any time, with{' '}
-          <strong>no complex data migrations</strong>.
-        </p>
-      </Flag>
+        <Flag
+          keyword={seoBlock.keyword}
+          style="good"
+          kicker="multi-language & flexible"
+          title={
+            <>
+              Great <FlagHighlight>flexibility and granularity</FlagHighlight>
+            </>
+          }
+          image={FieldSettings}
+        >
+          <p>
+            Dato headless CMS gives you a{' '}
+            <strong>great deal of customization</strong> for your multi-language
+            project. Specify which types of content need to be translated or
+            not, and in which languages, on a per-field level. Feel free to set
+            a field as localized, or change settings at any time, with{' '}
+            <strong>no complex data migrations</strong>.
+          </p>
+        </Flag>
 
-      <Flag
-        keyword={seoBlock.keyword}
-        style="good"
-        kicker="multi-language headless CMS interface"
-        title={
-          <>
-            <FlagHighlight>Translated</FlagHighlight> interface
-          </>
-        }
-        image={TranslatedUI}
-      >
-        <p>
-          It’s super important to offer an{' '}
-          <strong>easy-to-understand editing experience</strong>
-          to your non-technical editors. That’s why the interface is available
-          in English, Spanish, German, French, Italian, Dutch, Russian and
-          Turkish (and counting!).
-        </p>
-      </Flag>
+        <Flag
+          keyword={seoBlock.keyword}
+          style="good"
+          kicker="multi-language headless CMS interface"
+          title={
+            <>
+              <FlagHighlight>Translated</FlagHighlight> interface
+            </>
+          }
+          image={TranslatedUI}
+        >
+          <p>
+            It’s super important to offer an{' '}
+            <strong>easy-to-understand editing experience</strong>
+            to your non-technical editors. That’s why the interface is available
+            in English, Spanish, German, French, Italian, Dutch, Russian and
+            Turkish (and counting!).
+          </p>
+        </Flag>
+      </div>
     </Layout>
   );
 }

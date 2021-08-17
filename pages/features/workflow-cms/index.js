@@ -75,127 +75,128 @@ function Workflows({ feature, preview, review }) {
             </>
           }
         />
-
-        <TitleStripWithContent
-          keyword={seoBlock.keyword}
-          kicker={`Publishing workflow in your CMS`}
-          title={<>Build your perfectly oiled content machine</>}
-          subtitle={
-            <>
-              <p>
-                Set up a precise state machine to bring a draft content up to
-                the final publication through a series of intermediate,{' '}
-                <strong>fully customizable approval steps</strong>.
-              </p>
-              <Button
-                as="a"
-                fs="small"
-                p="small"
-                s="invert"
-                href="/docs/general-concepts/workflows"
-              >
-                Learn more about Workflows
-              </Button>
-            </>
-          }
-        >
-          <Workflow />
-        </TitleStripWithContent>
-
-        <Flag
-          keyword={seoBlock.keyword}
-          kicker={`Content management workflow`}
-          style="good"
-          title={
-            <>
-              Say goodbye to{' '}
-              <FlagHighlight>content creation bottlenecks</FlagHighlight>
-            </>
-          }
-          image="faces"
-        >
-          <p>
-            Larger teams often stumble into disconnected systems, duplicate
-            content, and inefficient workflows. Organizations invest more in
-            content,{' '}
-            <strong>but their ROI remains lower due to friction</strong>, and
-            their content engines stall. Dato CMS{' '}
-            <strong>Workflow feature fixes all this</strong>.
-          </p>
-        </Flag>
-
-        <Flag
-          keyword={seoBlock.keyword}
-          kicker={`CMS approval workflow`}
-          style="good"
-          title={
-            <>
-              Define clear tasks{' '}
-              <FlagHighlight>for every team member</FlagHighlight>
-            </>
-          }
-          image={WorkflowPermissions}
-          imageProps={{
-            children: (
+        <div id="main-content">
+          <TitleStripWithContent
+            keyword={seoBlock.keyword}
+            kicker={`Publishing workflow in your CMS`}
+            title={<>Build your perfectly oiled content machine</>}
+            subtitle={
               <>
                 <p>
-                  Can <strong>create</strong> new <strong>Articles</strong>
+                  Set up a precise state machine to bring a draft content up to
+                  the final publication through a series of intermediate,{' '}
+                  <strong>fully customizable approval steps</strong>.
                 </p>
-
-                <p>
-                  Can move new <strong>Articles</strong> from{' '}
-                  <strong>Draft</strong> stage to <strong>In review</strong>
-                </p>
-
-                <p>
-                  Can publish <strong>Articles</strong> in{' '}
-                  <strong>Approved</strong> stage
-                </p>
+                <Button
+                  as="a"
+                  fs="small"
+                  p="small"
+                  s="invert"
+                  href="/docs/general-concepts/workflows"
+                >
+                  Learn more about Workflows
+                </Button>
               </>
-            ),
-          }}
-        >
-          <p>
-            Using our improved roles and permissions system,{' '}
-            <strong>
-              you can specify exactly which team members are in charge
-            </strong>{' '}
-            of performing the necessary checks and operations on the content so
-            that it can advance to the next step in the approval chain and the
-            team never publishes something by mistake.
-          </p>
-        </Flag>
+            }
+          >
+            <Workflow />
+          </TitleStripWithContent>
 
-        <Flag
-          keyword={seoBlock.keyword}
-          kicker="Customizable workflow"
-          style="good"
-          title={
-            <>
-              Different content requires{' '}
-              <FlagHighlight>different processes</FlagHighlight>
-            </>
-          }
-          image="dato-svg-4-02"
-        >
-          <p>
-            A system that is too rigid will only drive your team away from using
-            it. With DatoCMS you don&#39;t have to follow the same processes for
-            each content, but{' '}
-            <strong>
-              you can specify different workflows depending on the type of
-              resource
-            </strong>
-            .
-          </p>
-        </Flag>
+          <Flag
+            keyword={seoBlock.keyword}
+            kicker={`Content management workflow`}
+            style="good"
+            title={
+              <>
+                Say goodbye to{' '}
+                <FlagHighlight>content creation bottlenecks</FlagHighlight>
+              </>
+            }
+            image="faces"
+          >
+            <p>
+              Larger teams often stumble into disconnected systems, duplicate
+              content, and inefficient workflows. Organizations invest more in
+              content,{' '}
+              <strong>but their ROI remains lower due to friction</strong>, and
+              their content engines stall. Dato CMS{' '}
+              <strong>Workflow feature fixes all this</strong>.
+            </p>
+          </Flag>
 
-        <Space top={4}>
-          <LogosBar
-            title="We power experiences for over half a billion users"
-            clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
-          />
-        </Space>
+          <Flag
+            keyword={seoBlock.keyword}
+            kicker={`CMS approval workflow`}
+            style="good"
+            title={
+              <>
+                Define clear tasks{' '}
+                <FlagHighlight>for every team member</FlagHighlight>
+              </>
+            }
+            image={WorkflowPermissions}
+            imageProps={{
+              children: (
+                <>
+                  <p>
+                    Can <strong>create</strong> new <strong>Articles</strong>
+                  </p>
+
+                  <p>
+                    Can move new <strong>Articles</strong> from{' '}
+                    <strong>Draft</strong> stage to <strong>In review</strong>
+                  </p>
+
+                  <p>
+                    Can publish <strong>Articles</strong> in{' '}
+                    <strong>Approved</strong> stage
+                  </p>
+                </>
+              ),
+            }}
+          >
+            <p>
+              Using our improved roles and permissions system,{' '}
+              <strong>
+                you can specify exactly which team members are in charge
+              </strong>{' '}
+              of performing the necessary checks and operations on the content
+              so that it can advance to the next step in the approval chain and
+              the team never publishes something by mistake.
+            </p>
+          </Flag>
+
+          <Flag
+            keyword={seoBlock.keyword}
+            kicker="Customizable workflow"
+            style="good"
+            title={
+              <>
+                Different content requires{' '}
+                <FlagHighlight>different processes</FlagHighlight>
+              </>
+            }
+            image="dato-svg-4-02"
+          >
+            <p>
+              A system that is too rigid will only drive your team away from
+              using it. With DatoCMS you don&#39;t have to follow the same
+              processes for each content, but{' '}
+              <strong>
+                you can specify different workflows depending on the type of
+                resource
+              </strong>
+              .
+            </p>
+          </Flag>
+
+          <Space top={4}>
+            <LogosBar
+              title="We power experiences for over half a billion users"
+              clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
+            />
+          </Space>
+        </div>
       </div>
     </Layout>
   );
