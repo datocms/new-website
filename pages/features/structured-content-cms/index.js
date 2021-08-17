@@ -121,7 +121,6 @@ function StructuredText({ feature, preview, integrations, review }) {
           <VideoPlayer
             controls
             muted
-            loop
             src="https://stream.mux.com/FcwaLceO4tvoUKflRIt0176Lli5llFLwW.m3u8"
             title="Notion headless CMS"
           />
@@ -152,8 +151,6 @@ function StructuredText({ feature, preview, integrations, review }) {
         imageProps={{
           controls: false,
           autoPlay: true,
-          muted: true,
-          loop: true,
           title: seoBlock.keyword,
           src: 'https://stream.mux.com/5hKbBhhU7TF202HRvbivd1WWAKuGgmP0100.m3u8',
         }}
@@ -183,8 +180,6 @@ function StructuredText({ feature, preview, integrations, review }) {
         imageProps={{
           controls: false,
           autoPlay: true,
-          muted: true,
-          loop: true,
           src: 'https://stream.mux.com/HWUevVMYGa01WRKd00nB5hHKe7GT1k10102n.m3u8',
           title: seoBlock.keyword,
         }}

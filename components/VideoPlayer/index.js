@@ -18,5 +18,13 @@ export default function VideoPlayer({ src, autoPlay, ...other }) {
     });
   }, [autoPlay, src]);
 
-  return <video {...other} ref={ref} style={{ display: 'block' }} />;
+  return (
+    <video
+      playsinline
+      muted={autoPlay}
+      {...other}
+      ref={ref}
+      style={{ display: 'block' }}
+    />
+  );
 }

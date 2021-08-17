@@ -172,8 +172,6 @@ function GraphQlContentApi({ feature, preview, review }) {
           <VideoPlayer
             controls
             autoPlay
-            muted
-            loop
             title={seoBlock.keyword}
             src="https://stream.mux.com/41n005I01cshC02vPeSunBhVOYGomfIUOd02.m3u8"
           />

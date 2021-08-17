@@ -557,7 +557,6 @@ export default function UseCase({ landing, websites, preview }) {
                           controls
                           autoPlay
                           muted
-                          loop
                           src={block.video.video.streamingUrl}
                         />
                       </div>

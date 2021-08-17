@@ -50,7 +50,6 @@ function renderBlock(s, block) {
               <VideoPlayer
                 controls
                 autoPlay={block.autoplay}
-                loop={block.loop}
                 src={block.video.video.streamingUrl}
                 poster={`${block.video.video.thumbnailUrl}?time=${
                   block.thumbTimeSeconds !== null

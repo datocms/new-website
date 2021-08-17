@@ -204,7 +204,6 @@ export const getStaticProps = handleErrors(async function ({
                 id
                 _modelApiKey
                 autoplay
-                loop
                 thumbTimeSeconds
                 video {
                   title
