@@ -32,12 +32,8 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
         slug
-        seoContent {
-          ... on SeoBlockRecord {
-            keyword
-            h1
-          }
-        }
+        seoH1
+        yoastAnalysis
       }
       review: review(filter: { name: { eq: "Martijn Theuwissen" } }) {
         ...reviewFields
@@ -50,16 +46,15 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function Workflows({ feature, preview, review }) {
-  const seoBlock = feature && feature.seoContent[0];
+  const { keyword } = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
-
       <div className={s.wrapper}>
         <Hero
-          keyword={seoBlock.keyword}
-          kicker={seoBlock.h1}
+          keyword={keyword}
+          kicker={feature.seoH1}
           title={
             <>
               <Highlight>Dato CMS supercharges</Highlight> your content approval
@@ -77,7 +72,7 @@ function Workflows({ feature, preview, review }) {
         />
         <div id="main-content">
           <TitleStripWithContent
-            keyword={seoBlock.keyword}
+            keyword={keyword}
             kicker={`Publishing workflow in your CMS`}
             title={<>Build your perfectly oiled content machine</>}
             subtitle={
@@ -103,7 +98,7 @@ function Workflows({ feature, preview, review }) {
           </TitleStripWithContent>
 
           <Flag
-            keyword={seoBlock.keyword}
+            keyword={keyword}
             kicker={`Content management workflow`}
             style="good"
             title={
@@ -125,7 +120,7 @@ function Workflows({ feature, preview, review }) {
           </Flag>
 
           <Flag
-            keyword={seoBlock.keyword}
+            keyword={keyword}
             kicker={`CMS approval workflow`}
             style="good"
             title={
@@ -167,7 +162,7 @@ function Workflows({ feature, preview, review }) {
           </Flag>
 
           <Flag
-            keyword={seoBlock.keyword}
+            keyword={keyword}
             kicker="Customizable workflow"
             style="good"
             title={

@@ -15,9 +15,11 @@ export default function Hero({
   let Kicker;
 
   if (keyword) {
-    Kicker = containsKeyword(kicker, keyword) ? 'h1' : 'p';
-    Title = containsKeyword(title, keyword) ? 'h2' : 'p';
-    Subtitle = containsKeyword(subtitle, keyword) ? 'h3' : 'p';
+    const kickerContainsKeyword = containsKeyword(kicker, keyword);
+
+    Kicker = kickerContainsKeyword ? 'h1' : 'h2';
+    Title = kickerContainsKeyword ? 'h2' : 'h1';
+    Subtitle = 'h3';
   } else {
     Kicker = 'h2';
     Title = 'h1';

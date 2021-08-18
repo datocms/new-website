@@ -161,12 +161,8 @@ export const getStaticProps = handleErrors(
               content { value }
             }
           }
-          seoContent {
-            ... on SeoBlockRecord {
-              keyword
-              h1
-            }
-          }
+          seoH1
+          yoastAnalysis
         }
       }
 
@@ -234,7 +230,8 @@ export default function UseCase({ landing, websites, preview }) {
     }
   }, []);
 
-  const seoBlock = landing && landing.seoContent[0];
+  const keyword =
+    landing && landing.yoastAnalysis && landing.yoastAnalysis.keyword;
 
   return (
     <Layout preview={preview}>
@@ -242,11 +239,12 @@ export default function UseCase({ landing, websites, preview }) {
         <>
           <Head seo={landing.seo} slug={landing.slug} />
           <Hero
-            kicker={seoBlock.h1}
-            keyword={seoBlock.keyword}
+            kicker={landing.seoH1}
+            keyword={keyword}
             image={
               <LazyImage
                 className={s.logo}
+                alt={keyword + 'logo'}
                 src={
                   (landing.integration.squareLogo || landing.integration.logo)
                     .url
@@ -261,7 +259,7 @@ export default function UseCase({ landing, websites, preview }) {
                 <Button
                   fs="big"
                   as="a"
-                  title={seoBlock.keyword}
+                  title={keyword}
                   href={`https://dashboard.datocms.com/deploy?repo=${landing.demo.githubRepo}`}
                 >
                   Try our {landing.name} demo project now!
@@ -310,10 +308,7 @@ export default function UseCase({ landing, websites, preview }) {
                 {block._modelApiKey === 'landing_cdn_map_block' && (
                   <>
                     <Space top={4} bottom={1}>
-                      <InterstitialTitle
-                        style="two"
-                        kicker={`${seoBlock.keyword} CDN`}
-                      >
+                      <InterstitialTitle style="two" kicker={`Worldwide CDN`}>
                         {highlightStructuredText(block.title)}
                       </InterstitialTitle>
                     </Space>
@@ -338,7 +333,7 @@ export default function UseCase({ landing, websites, preview }) {
                   <TitleStripWithContent
                     kicker={`GraphQL Content API`}
                     title={<>Ask for what you need, get exactly that</>}
-                    keyword={seoBlock.keyword}
+                    keyword={keyword}
                     subtitle={
                       <>
                         <span>
@@ -347,7 +342,7 @@ export default function UseCase({ landing, websites, preview }) {
                           powerful developer tools, multiple resources in a
                           single request and complete control over the data your
                           website downloads. The perfect solution for a{' '}
-                          <strong>{seoBlock.keyword}</strong>
+                          <strong>{keyword}</strong>
                         </span>
                         <span>
                           <Link
@@ -434,9 +429,9 @@ export default function UseCase({ landing, websites, preview }) {
                 {block._modelApiKey === 'landing_progressive_images_block' && (
                   <Space top={3}>
                     <TitleStripWithContent
-                      kicker={seoBlock.keyword + ' images'}
+                      kicker={landing.name + ' images'}
                       title={highlightStructuredText(block.title)}
-                      keyword={seoBlock.keyword}
+                      keyword={keyword}
                       subtitle={
                         <>
                           <StructuredText data={block.content} />
@@ -467,9 +462,9 @@ export default function UseCase({ landing, websites, preview }) {
                 {block._modelApiKey === 'code_excerpt_block' && (
                   <Space top={3}>
                     <TitleStripWithContent
-                      kicker={`${seoBlock.keyword} example`}
+                      kicker={`${keyword} example`}
                       title={highlightStructuredText(block.title)}
-                      keyword={seoBlock.keyword}
+                      keyword={keyword}
                       subtitle={
                         <>
                           <StructuredText data={block.content} />
@@ -501,7 +496,7 @@ export default function UseCase({ landing, websites, preview }) {
                 {block._modelApiKey === 'modular_blocks_block' && (
                   <Flag
                     style="good"
-                    keyword={seoBlock.keyword}
+                    keyword={keyword}
                     title={highlightStructuredText(block.title, {
                       highlightWith: FlagHighlight,
                     })}
@@ -549,7 +544,7 @@ export default function UseCase({ landing, websites, preview }) {
                   <Space top={3}>
                     <TitleStripWithContent
                       title={highlightStructuredText(block.title)}
-                      keyword={seoBlock.keyword}
+                      keyword={keyword}
                       subtitle={<StructuredText data={block.content} />}
                     >
                       <div className={s.video}>
@@ -567,7 +562,7 @@ export default function UseCase({ landing, websites, preview }) {
                   <Space top={3}>
                     <TitleStripWithContent
                       title={highlightStructuredText(block.title)}
-                      keyword={seoBlock.keyword}
+                      keyword={keyword}
                       subtitle={
                         <>
                           <StructuredText data={block.content} />

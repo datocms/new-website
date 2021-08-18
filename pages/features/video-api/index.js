@@ -23,12 +23,8 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
         slug
-        seoContent {
-          ... on SeoBlockRecord {
-            keyword
-            h1
-          }
-        }
+        seoH1
+        yoastAnalysis
       }
     }
     ${seoMetaTagsFields}
@@ -36,15 +32,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function VideoStreamingEncoding({ feature, preview }) {
-  const seoBlock = feature && feature.seoContent[0];
+  const { keyword } = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
-
       <Hero
-        keyword={seoBlock.keyword}
-        kicker={seoBlock.h1}
+        keyword={keyword}
+        kicker={feature.seoH1}
         title={
           <>
             Stream beautifully, <Highlight>everywhere</Highlight>
@@ -60,7 +55,7 @@ function VideoStreamingEncoding({ feature, preview }) {
       />
       <div id="main-content">
         <TitleStripWithContent
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker={`Fastest API for any video size`}
           title={<>Adaptive bitrate means fast on every device</>}
           subtitle={
@@ -82,9 +77,9 @@ function VideoStreamingEncoding({ feature, preview }) {
               muted
               loop
               src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8"
-              title={seoBlock.keyword}
+              title={keyword}
               description="DatoCMS video API allows you to make your videos immediately streamable"
-              tag={seoBlock.keyword}
+              tag={keyword}
               translate="no"
             />
           </div>
@@ -92,7 +87,7 @@ function VideoStreamingEncoding({ feature, preview }) {
 
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker="API for all video formats"
           title={
             <>
@@ -111,7 +106,7 @@ function VideoStreamingEncoding({ feature, preview }) {
         </Flag>
 
         <TitleStripWithContent
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           title={<>Thumbnails? Included.</>}
           subtitle={
             <>
@@ -130,7 +125,7 @@ function VideoStreamingEncoding({ feature, preview }) {
               <div key={t} className={s.frame}>
                 <img
                   src={`https://image.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i/thumbnail.jpg?width=400&amp;time=${t}`}
-                  title={seoBlock.h1}
+                  title={feature.seoH1}
                 />
                 <div className={s.frameLabel}>
                   /video/thumb.jpg?
@@ -147,8 +142,8 @@ function VideoStreamingEncoding({ feature, preview }) {
         <Flag
           style="good"
           image="video-player"
-          keyword={seoBlock.keyword}
-          kicker={`a flexible ${seoBlock.keyword}`}
+          keyword={keyword}
+          kicker={`a flexible ${keyword}`}
           title={
             <>
               An API that works with{' '}
@@ -167,8 +162,8 @@ function VideoStreamingEncoding({ feature, preview }) {
 
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
-          kicker={`${seoBlock.keyword} + Images API + CDN`}
+          keyword={keyword}
+          kicker={`${keyword} + Images API + CDN`}
           title={
             <>
               A complete set of{' '}

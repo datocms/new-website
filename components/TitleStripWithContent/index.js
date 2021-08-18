@@ -16,9 +16,10 @@ export default function TitleStripWithContent({
   let Kicker;
 
   if (keyword) {
-    Kicker = containsKeyword(kicker, keyword) ? 'h2' : 'div';
-    Title = containsKeyword(title, keyword) ? 'h3' : 'p';
-    Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'div';
+    const kickerContainsKeyword = containsKeyword(kicker, keyword);
+    Kicker = kickerContainsKeyword ? 'h2' : 'h3';
+    Title = kickerContainsKeyword ? 'h3' : 'h2';
+    Subtitle = 'p';
   } else {
     Kicker = 'div';
     Title = 'h2';

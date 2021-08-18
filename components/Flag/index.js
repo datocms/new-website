@@ -34,9 +34,10 @@ export default function Flag({
   let Kicker;
 
   if (keyword) {
-    Kicker = containsKeyword(kicker, keyword) ? 'h2' : 'h4';
-    Title = containsKeyword(title, keyword) ? 'h3' : 'h5';
-    Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'div';
+    const kickerContainsKeyword = containsKeyword(kicker, keyword);
+    Kicker = kickerContainsKeyword ? 'h2' : 'h3';
+    Title = kicker && kickerContainsKeyword ? 'h3' : 'h2';
+    Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'p';
   } else {
     Kicker = 'h2';
     Title = 'h3';

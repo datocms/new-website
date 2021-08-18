@@ -27,12 +27,8 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
         slug
-        seoContent {
-          ... on SeoBlockRecord {
-            keyword
-            h1
-          }
-        }
+        seoH1
+        yoastAnalysis
       }
       review(filter: { name: { eq: "Ryan Harris" } }) {
         ...reviewFields
@@ -45,15 +41,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function GraphQlContentApi({ feature, preview, review }) {
-  const seoBlock = feature && feature.seoContent[0];
+  const { keyword } = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
-
       <Hero
-        keyword={seoBlock.keyword}
-        kicker={seoBlock.h1}
+        keyword={keyword}
+        kicker={feature.seoH1}
         title={
           <>
             GraphQL means <Highlight>superior developer experience</Highlight>
@@ -73,7 +68,7 @@ function GraphQlContentApi({ feature, preview, review }) {
       <div id="main-content">
         <TitleStripWithContent
           kicker={'The headless cms graphql revolution'}
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           title={<>Ask for what you need, get exactly that</>}
           subtitle={
             <>
@@ -174,7 +169,7 @@ function GraphQlContentApi({ feature, preview, review }) {
               autoPlay
               muted
               loop
-              title={seoBlock.keyword}
+              title={keyword}
               src="https://stream.mux.com/41n005I01cshC02vPeSunBhVOYGomfIUOd02.m3u8"
             />
           </div>
@@ -295,8 +290,8 @@ function GraphQlContentApi({ feature, preview, review }) {
         </TitleStripWithContent>
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
-          kicker={`#1 ${seoBlock.keyword}`}
+          keyword={keyword}
+          kicker={`#1 ${keyword}`}
           title={<>GraphQL + Dato headless CMS = 🚀 </>}
           image="rocket"
         >
@@ -312,8 +307,8 @@ function GraphQlContentApi({ feature, preview, review }) {
 
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
-          kicker={`${seoBlock.keyword} + Worldwide CDN`}
+          keyword={keyword}
+          kicker={`${keyword} + Worldwide CDN`}
           title={
             <>
               A complete set of{' '}

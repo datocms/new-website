@@ -49,12 +49,9 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
         slug
-        seoContent {
-          ... on SeoBlockRecord {
-            keyword
-            h1
-          }
-        }
+        seoH1
+        yoastAnalysis
+
       }
     }
     ${seoMetaTagsFields}
@@ -62,15 +59,15 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function MultiLanguage({ feature, preview }) {
-  const seoBlock = feature && feature.seoContent[0];
+  const { keyword } = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
 
       <Hero
-        keyword={seoBlock.keyword}
-        kicker={seoBlock.h1}
+        keyword={keyword}
+        kicker={feature.seoH1}
         title={
           <>
             Easily localize <Highlight>all&nbsp;your&nbsp;content</Highlight>,
@@ -90,7 +87,7 @@ function MultiLanguage({ feature, preview }) {
 
       <div id="main-content">
         <Flag
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           style="good"
           kicker={'multi-language & multi-site headless cms'}
           title={
@@ -120,7 +117,7 @@ function MultiLanguage({ feature, preview }) {
         </IntegrationsBanner>
 
         <Flag
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           style="good"
           kicker="multi-language & flexible"
           title={
@@ -141,7 +138,7 @@ function MultiLanguage({ feature, preview }) {
         </Flag>
 
         <Flag
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           style="good"
           kicker="multi-language headless CMS interface"
           title={

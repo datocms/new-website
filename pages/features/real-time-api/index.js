@@ -25,12 +25,9 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
         slug
-        seoContent {
-          ... on SeoBlockRecord {
-            keyword
-            h1
-          }
-        }
+        seoH1
+        yoastAnalysis
+
       }
       review: review(filter: { name: { eq: "Martijn Theuwissen" } }) {
         ...reviewFields
@@ -43,15 +40,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function RealTime({ feature, preview, review }) {
-  const seoBlock = feature && feature.seoContent[0];
+  const { keyword } = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
-
       <Hero
-        keyword={seoBlock.keyword}
-        kicker={seoBlock.h1}
+        keyword={keyword}
+        kicker={feature.seoH1}
         title={
           <>
             Real-time edits, on&nbsp;your{' '}
@@ -71,7 +67,7 @@ function RealTime({ feature, preview, review }) {
       />
       <div id="main-content">
         <TitleStripWithContent
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker="Real-time API content preview"
           title={<>Preview changes as they get authored, no refresh needed</>}
           subtitle={
@@ -92,7 +88,7 @@ function RealTime({ feature, preview, review }) {
               autoPlay
               muted
               loop
-              title={seoBlock.keyword}
+              title={keyword}
               src="https://stream.mux.com/5Tz902WgAavFoB025U5eNZ5fHubUk6tzwa.m3u8"
             />
           </div>
@@ -101,7 +97,7 @@ function RealTime({ feature, preview, review }) {
         <Quote review={review} />
 
         <Flag
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           style="good"
           kicker="Live real-time API"
           title={
@@ -137,7 +133,7 @@ function RealTime({ feature, preview, review }) {
         </Flag>
 
         <Flag
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker={'Real-time GraphQL API'}
           style="good"
           title={

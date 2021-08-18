@@ -23,12 +23,9 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
         slug
-        seoContent {
-          ... on SeoBlockRecord {
-            keyword
-            h1
-          }
-        }
+        seoH1
+        yoastAnalysis
+
       }
       review: review(filter: { name: { eq: "Grace Guzman" } }) {
         ...reviewFields
@@ -41,26 +38,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function ImagesApi({ feature, preview, review }) {
-  const seoBlock = feature && feature.seoContent[0];
+  const { keyword } = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
-      <Head>
-        <link
-          rel="alternate"
-          hrefLang="en"
-          href={`https://datocms.com/features/${feature.slug}`}
-        />
-        {renderMetaTags(feature.seo)}
-        {seoBlock.metaKeywords && (
-          <meta name="keywords" content={seoBlock.metaKeywords} />
-        )}
-      </Head>
-
       <Hero
-        kicker={seoBlock.h1}
-        keyword={seoBlock.keyword}
+        kicker={feature.seoH1}
+        keyword={keyword}
         title={
           <>
             The easiest way to deliver{' '}
@@ -78,7 +63,7 @@ function ImagesApi({ feature, preview, review }) {
       <div id="main-content">
         <TitleStripWithContent
           kicker={`Best API for images processing`}
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           title={<>Endless image transformations at your service</>}
           subtitle={
             <>
@@ -96,7 +81,7 @@ function ImagesApi({ feature, preview, review }) {
 
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker={`Optimized images API`}
           title={
             <>
@@ -119,7 +104,7 @@ function ImagesApi({ feature, preview, review }) {
 
         <TitleStripWithContent
           kicker={`Images preview API`}
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           title={<>State of the art for responsive and progressive images</>}
           subtitle={
             <>
@@ -137,7 +122,7 @@ function ImagesApi({ feature, preview, review }) {
 
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker={`Images API Metadata`}
           title={
             <>

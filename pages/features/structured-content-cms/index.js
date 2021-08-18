@@ -30,12 +30,8 @@ export const getStaticProps = gqlStaticProps(
           ...seoMetaTagsFields
         }
         slug
-        seoContent {
-          ... on SeoBlockRecord {
-            keyword
-            h1
-          }
-        }
+        seoH1
+        yoastAnalysis
       }
       review: review(filter: { name: { eq: "Dominic Blain" } }) {
         ...reviewFields
@@ -76,14 +72,14 @@ const VideoBrowser = (props) => {
 };
 
 function StructuredText({ feature, preview, integrations, review }) {
-  const seoBlock = feature && feature.seoContent[0];
+  const { keyword } = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
       <Hero
-        keyword={seoBlock.keyword}
-        kicker={seoBlock.h1}
+        keyword={keyword}
+        kicker={feature.seoH1}
         title={
           <>
             The smart way to store{' '}
@@ -104,7 +100,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
       <div id="main-content">
         <TitleStripWithContent
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker="Notion-like Structured content CMS"
           title={<>A delightfully focused writing&nbsp;experience</>}
           subtitle={
@@ -140,7 +136,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker="Customizable structured content CMS"
           title={
             <>
@@ -155,7 +151,7 @@ function StructuredText({ feature, preview, integrations, review }) {
             autoPlay: true,
             muted: true,
             loop: true,
-            title: seoBlock.keyword,
+            title: keyword,
             src: 'https://stream.mux.com/5hKbBhhU7TF202HRvbivd1WWAKuGgmP0100.m3u8',
           }}
         >
@@ -173,7 +169,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker="Linking structured content"
           title={
             <>
@@ -190,7 +186,7 @@ function StructuredText({ feature, preview, integrations, review }) {
             muted: true,
             loop: true,
             src: 'https://stream.mux.com/HWUevVMYGa01WRKd00nB5hHKe7GT1k10102n.m3u8',
-            title: seoBlock.keyword,
+            title: keyword,
           }}
         >
           <p>
@@ -211,7 +207,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
         <Flag
           style="good"
-          keyword={seoBlock.keyword}
+          keyword={keyword}
           kicker="omnichannel CMS"
           title={
             <>
