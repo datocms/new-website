@@ -86,8 +86,6 @@ function RealTime({ feature, preview, review }) {
             <VideoPlayer
               controls
               autoPlay
-              muted
-              loop
               title={keyword}
               src="https://stream.mux.com/5Tz902WgAavFoB025U5eNZ5fHubUk6tzwa.m3u8"
             />

@@ -74,8 +74,6 @@ function VideoStreamingEncoding({ feature, preview }) {
             <VideoPlayer
               controls
               autoPlay
-              muted
-              loop
               src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8"
               title={keyword}
               description="DatoCMS video API allows you to make your videos immediately streamable"
