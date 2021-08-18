@@ -22,6 +22,35 @@ module.exports = withNextEnv({
   async redirects() {
     return redirects.map((r) => ({ ...r, statusCode: 301 }));
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)?', // Matches all pages
+        headers: [
+          {
+            key: 'strict-transport-security',
+            value: 'max-age=63072000; includeSubdomains; preload',
+          },
+          {
+            key: 'x-content-type-options',
+            value: 'nosniff',
+          },
+          {
+            key: 'x-frame-options',
+            value: 'DENY',
+          },
+          {
+            key: 'x-xss-protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'referrer-policy',
+            value: 'same-origin',
+          },
+        ],
+      },
+    ];
+  },
   images: {
     disableStaticImages: true,
   },
