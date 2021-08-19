@@ -43,10 +43,6 @@ module.exports = withNextEnv({
             key: 'x-xss-protection',
             value: '1; mode=block',
           },
-          {
-            key: 'referrer-policy',
-            value: 'same-origin',
-          },
         ],
       },
     ];
