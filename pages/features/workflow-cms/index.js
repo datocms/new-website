@@ -99,7 +99,7 @@ function Workflows({ feature, preview, review }) {
 
           <Flag
             keyword={keyword}
-            kicker={`Content management workflow`}
+            kicker={`Manage workflow CMS`}
             style="good"
             title={
               <>
