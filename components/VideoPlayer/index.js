@@ -20,7 +20,7 @@ export default function VideoPlayer({ src, autoPlay, ...other }) {
 
   return (
     <video
-      playsinline
+      playsInline
       muted={autoPlay}
       {...other}
       ref={ref}
