@@ -10,6 +10,10 @@ import ProjectSettings from 'components/ProjectSettings';
 import FieldSettings from 'components/FieldSettings';
 import TranslatedUI from 'components/TranslatedUI';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Bullets from 'components/Bullets';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Button from 'components/Button';
+import Link from 'next/link';
 
 const icons = [
   '/images/flags/argentina.svg',
@@ -155,6 +159,59 @@ function MultiLanguage({ feature, preview }) {
             in English, Spanish, German, French, Italian, Dutch, Russian and
             Turkish (and counting!).
           </p>
+        </Flag>
+        <Flag
+          style="good"
+          keyword={keyword}
+          kicker={`The most user-friendly CMS`}
+          title={
+            <>
+              A complete set of{' '}
+              <FlagHighlight>smart,&nbsp;modern&nbsp;tools</FlagHighlight>
+            </>
+          }
+          image="box-things"
+        >
+          <p>
+            DatoCMS does not only offer powerful multi-language features, but a
+            full, coordinated <strong>suite of different tools</strong> to give
+            you you the best editing and development experience. Find out why we
+            are famous for being <strong>the most user-friendly CMS</strong>:
+          </p>
+          <Bullets
+            style="good"
+            icon={SuccessIcon}
+            bullets={[
+              <Link
+                href="/features/data-integrity"
+                title={'Fastest headless CMS CDN'}
+                key="data-integrity"
+              >
+                <a>Safety and integrity of your content</a>
+              </Link>,
+              <Link
+                href="/features/structured-content-cms"
+                title={'Structured Content CMS'}
+                key="structured-content-cms"
+              >
+                <a>A flowless editing experience</a>
+              </Link>,
+              <Link
+                href="/features/workflow-cms"
+                title={'workflow CMS'}
+                key="workflow-cms"
+              >
+                <a>Organization of your workflow</a>
+              </Link>,
+              <Link
+                href="/features/dynamic-layouts"
+                title={'Dynamic Layouts'}
+                key="dynamic-layouts"
+              >
+                <a>Dynamic & composable layouts</a>
+              </Link>,
+            ]}
+          />
         </Flag>
       </div>
     </Layout>

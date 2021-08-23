@@ -24,7 +24,9 @@ import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
 import SandboxEnvironmentsDemo from 'components/SandboxEnvironmentsDemo';
 import Space from 'components/Space';
-
+import Bullets from 'components/Bullets';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Link from 'next/link';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
@@ -205,6 +207,58 @@ function Validations({ page, preview, review }) {
           >
             <Workflow />
           </TitleStripWithContent>
+          <Flag
+            style="good"
+            kicker={`The most user-friendly CMS`}
+            title={
+              <>
+                A complete set of{' '}
+                <FlagHighlight>smart,&nbsp;modern&nbsp;tools</FlagHighlight>
+              </>
+            }
+            image="box-things"
+          >
+            <p>
+              DatoCMS does not only offer a powerful editor, but a full,
+              coordinated <strong>suite of different tools</strong> to give you
+              the best writing and development experience. Find out why we are
+              famous for being <strong>the most user-friendly CMS</strong>:
+            </p>
+            <Bullets
+              style="good"
+              icon={SuccessIcon}
+              bullets={[
+                <Link
+                  href="/features/headless-cms-multi-language"
+                  title={'Headless CMS multilanguage'}
+                  key="headless-cms-multi-language"
+                >
+                  <a>A complete set of multilanguage features</a>
+                </Link>,
+                <Link
+                  href="/features/workflow-cms"
+                  title={'workflow CMS'}
+                  key="workflow-cms"
+                >
+                  <a>Organization of your workflow</a>
+                </Link>,
+                <Link
+                  href="/features/structured-content-cms"
+                  title={'Structured Content CMS'}
+                  key="structured-content-cms"
+                >
+                  <a>A flowless editing experience</a>
+                </Link>,
+                <Link
+                  href="/features/dynamic-layouts"
+                  title={'Dynamic Layouts'}
+                  key="dynamic-layouts"
+                >
+                  <a>Dynamic & composable layouts</a>
+                </Link>,
+              ]}
+            />
+          </Flag>
         </div>
 
         <Space top={2} bottom={2}>

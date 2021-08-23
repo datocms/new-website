@@ -21,6 +21,9 @@ import Space from 'components/Space';
 import InterstitialTitle from 'components/InterstitialTitle';
 import IntegrationsBanner from 'components/IntegrationsBanner';
 import LazyImage from 'components/LazyImage';
+import Bullets from 'components/Bullets';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Link from 'next/link';
 
 export const getStaticProps = gqlStaticProps(
   `
@@ -105,7 +108,7 @@ function StructuredText({ feature, preview, integrations, review }) {
           title={<>A delightfully focused writing&nbsp;experience</>}
           subtitle={
             <>
-              Structured Text offers a beautiful,{' '}
+              Dato CMS Structured Content offers a beautiful,{' '}
               <strong>Notion-like editor</strong> designed for focus, with{' '}
               <strong>
                 slash commands, markdown/keyboard shortcuts, and drag &amp; drop
@@ -306,6 +309,59 @@ function StructuredText({ feature, preview, integrations, review }) {
             </Button>
           </p>
         </IntegrationsBanner>
+        <Flag
+          style="good"
+          keyword={keyword}
+          kicker={`The most user-friendly CMS`}
+          title={
+            <>
+              A complete set of{' '}
+              <FlagHighlight>smart,&nbsp;modern&nbsp;tools</FlagHighlight>
+            </>
+          }
+          image="box-things"
+        >
+          <p>
+            DatoCMS does not only offer a powerful editor, but a full,
+            coordinated <strong>suite of different tools</strong> to give you
+            the best writing and development experience. Find out why we are
+            famous for being <strong>the most user-friendly CMS</strong>:
+          </p>
+          <Bullets
+            style="good"
+            icon={SuccessIcon}
+            bullets={[
+              <Link
+                href="/features/data-integrity"
+                title={'Fastest headless CMS CDN'}
+                key="data-integrity"
+              >
+                <a>Safety and integrity of your content</a>
+              </Link>,
+              <Link
+                href="/features/headless-cms-multi-language"
+                title={'Headless CMS multilanguage'}
+                key="headless-cms-multi-language"
+              >
+                <a>A complete set of multilanguage features</a>
+              </Link>,
+              <Link
+                href="/features/workflow-cms"
+                title={'workflow CMS'}
+                key="workflow-cms"
+              >
+                <a>Organization of your workflow</a>
+              </Link>,
+              <Link
+                href="/features/dynamic-layouts"
+                title={'Dynamic Layouts'}
+                key="dynamic-layouts"
+              >
+                <a>Dynamic & composable layouts</a>
+              </Link>,
+            ]}
+          />
+        </Flag>
       </div>
     </Layout>
   );
