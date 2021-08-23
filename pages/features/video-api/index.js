@@ -60,8 +60,8 @@ function VideoStreamingEncoding({ feature, preview }) {
           title={<>Adaptive bitrate means fast on every device</>}
           subtitle={
             <>
-              Thanks to HLS Adaptive Bitrate (ABR) streaming, every viewer will
-              always{' '}
+              Thanks to our API's HLS Adaptive Bitrate (ABR) streaming, every
+              viewer will always{' '}
               <strong>
                 download the right video size for their device and connection
                 speed
@@ -123,7 +123,7 @@ function VideoStreamingEncoding({ feature, preview }) {
               <div key={t} className={s.frame}>
                 <img
                   src={`https://image.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i/thumbnail.jpg?width=400&amp;time=${t}`}
-                  title={feature.seoH1}
+                  alt={feature.seoH1}
                 />
                 <div className={s.frameLabel}>
                   /video/thumb.jpg?
@@ -154,14 +154,22 @@ function VideoStreamingEncoding({ feature, preview }) {
             <strong>
               easy to integrate with all major web and mobile video players
             </strong>
-            , open-source or professional, web or native.
+            , open-source or professional, web or native. Check out what else we
+            can do thanks to{' '}
+            <a
+              href="https://mux.com/features/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Mux
+            </a>
           </p>
         </Flag>
 
         <Flag
           style="good"
           keyword={keyword}
-          kicker={`${keyword} + Images API + CDN`}
+          kicker={`The best digital experience`}
           title={
             <>
               A complete set of{' '}

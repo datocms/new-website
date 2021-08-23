@@ -90,11 +90,12 @@ function WorldwideCdn({ preview, review1, feature }) {
           image="space"
         >
           <p>
-            We built DatoCMS content infrastructure so you don’t have to. Focus
-            on writing great content and creating new, innovative digital
-            experiences. We work every day to offer a{' '}
+            We built Dato headless CMS content infrastructure so you don’t have
+            to. Focus on writing great content and creating new, innovative
+            digital experiences. We work every day to offer the fastest
+            performance and a{' '}
             <strong>reliable solution capable of following your growth</strong>,
-            globally, and lets you adapt along the journey, with{' '}
+            globally, while letting you adapt along the journey, with{' '}
             <strong>no upfront costs</strong>.
           </p>
         </Flag>

@@ -102,9 +102,12 @@ function MultiLanguage({ feature, preview }) {
           image={ProjectSettings}
         >
           <p>
-            <strong>Add all the languages you&#39;d like to support</strong> and
-            start translating your content. Dato headless CMS will deliver your
-            multi-language content to your net of projects, using the same{' '}
+            <strong>
+              Add all the languages you&#39;d like to support in your app
+            </strong>{' '}
+            and start translating your content, with our user-friendly
+            multi-language interface. Dato headless CMS will deliver your
+            content to your net of projects, using the same{' '}
             <strong>fast and scalable platform</strong>.
           </p>
         </Flag>
@@ -123,7 +126,7 @@ function MultiLanguage({ feature, preview }) {
         <Flag
           keyword={keyword}
           style="good"
-          kicker="multi-language & flexible"
+          kicker="Headless CMS multi-language & flexible"
           title={
             <>
               Great <FlagHighlight>flexibility and granularity</FlagHighlight>
@@ -144,7 +147,7 @@ function MultiLanguage({ feature, preview }) {
         <Flag
           keyword={keyword}
           style="good"
-          kicker="multi-language headless CMS interface"
+          kicker="Multi-language headless CMS interface"
           title={
             <>
               <FlagHighlight>Translated</FlagHighlight> interface
@@ -163,7 +166,7 @@ function MultiLanguage({ feature, preview }) {
         <Flag
           style="good"
           keyword={keyword}
-          kicker={`The most user-friendly CMS`}
+          kicker={`The most user-friendly headless CMS`}
           title={
             <>
               A complete set of{' '}

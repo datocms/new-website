@@ -59,7 +59,7 @@ function ImagesApi({ feature, preview, review }) {
         subtitle={
           <>
             Serve <strong>lightning-fast images</strong> for any digital product
-            with a suite of tools and API built to save both development time
+            with a suite of tools and APIs built to save both development time
             and visitor bandwidth.
           </>
         }
@@ -73,8 +73,11 @@ function ImagesApi({ feature, preview, review }) {
             <>
               DatoCMS offers best-in-class API for{' '}
               <strong>images processing</strong> and <strong>image CDN</strong>{' '}
-              thanks to the seamless partnership with Imgix.{' '}
-              <strong>Optimize, resize, crop, rotate</strong> and watermark
+              thanks to the seamless{' '}
+              <a href="https://imgix.com/" target="_blank" rel="noopener">
+                partnership with Imgix
+              </a>
+              . <strong>Optimize, resize, crop, rotate</strong> and watermark
               images on-the-fly simply adding custom parameters to the URL of
               your image.
             </>
@@ -86,7 +89,7 @@ function ImagesApi({ feature, preview, review }) {
         <Flag
           style="good"
           keyword={keyword}
-          kicker={`Optimized images API`}
+          kicker={`Optimized images`}
           title={
             <>
               Automatically serve{' '}
@@ -98,8 +101,7 @@ function ImagesApi({ feature, preview, review }) {
           image="key"
         >
           <p>
-            Thanks to{' '}
-            <strong>DatoCMS API&apos;s automatic Content Negotiation</strong>,
+            Thanks to <strong>DatoCMS automatic Content Negotiation</strong>,
             you are able to serve WebP and other modern images formats to
             browsers that support them without any additional work,{' '}
             <strong>reducing the average file size by 50%</strong>.
@@ -107,7 +109,7 @@ function ImagesApi({ feature, preview, review }) {
         </Flag>
 
         <TitleStripWithContent
-          kicker={`Images preview API`}
+          kicker={`Images preview`}
           keyword={keyword}
           title={<>State of the art for responsive and progressive images</>}
           subtitle={
@@ -121,13 +123,13 @@ function ImagesApi({ feature, preview, review }) {
             </>
           }
         >
-          <ProgressiveImagesDemo name={`with Dato images API`} />
+          <ProgressiveImagesDemo name={`with Dato API`} />
         </TitleStripWithContent>
 
         <Flag
           style="good"
           keyword={keyword}
-          kicker={`Images API Metadata`}
+          kicker={`Images Metadata`}
           title={
             <>
               All the <FlagHighlight>metadata</FlagHighlight> you need
@@ -139,8 +141,7 @@ function ImagesApi({ feature, preview, review }) {
             Dominant colors, EXIF data, aspect ratio, filesize, copyright
             information, geolocation.{' '}
             <strong>Every possible information about your images</strong> is
-            stored in DatoCMS and ready to be used in your websites through our
-            API.
+            stored in DatoCMS and ready to be used in your websites.
           </p>
         </Flag>
 
@@ -158,7 +159,7 @@ function ImagesApi({ feature, preview, review }) {
           image="zen"
         >
           <p>
-            DatoCMS does not only offer a powerful images API but a full,
+            DatoCMS does not only offer a powerful images API/CDN but a full,
             coordinated suite of different <strong>APIs and tools</strong> to
             work seamlessly with the three fundamental blocks of content:{' '}
             <strong>text, images and video</strong>. Everything is built on CDN,{' '}
