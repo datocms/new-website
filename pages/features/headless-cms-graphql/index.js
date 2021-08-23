@@ -72,14 +72,29 @@ function GraphQlContentApi({ feature, preview, review }) {
           title={<>Ask for what you need, get exactly that</>}
           subtitle={
             <>
-              Contrary to the REST API dogma, a{' '}
-              <strong>
-                GraphQL query to your API gets exactly what you ask for
-              </strong>
-              , nothing more and nothing less.{' '}
-              <strong>GraphQL queries always return predictable results</strong>
-              . Apps using GraphQL are <strong>fast and stable</strong> because
-              they control the data they get, not the server.
+              <p>
+                Apps using GraphQL combined with an headless CMS are{' '}
+                <strong>fast and stable</strong> because it is not the server
+                which controls the data they get, <em>they</em> are.
+              </p>
+              <p>
+                Contrary to the REST API dogma, a{' '}
+                <strong>
+                  GraphQL query to your API gets exactly what you ask for
+                </strong>
+                , nothing more and nothing less, that is why{' '}
+                <strong>
+                  GraphQL queries always return predictable results
+                </strong>
+                . Read more about the advantages of the GraphQL API on their{' '}
+                <a
+                  href="https://graphql.org/faq/#why-should-i-use-graphql"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  official website
+                </a>
+              </p>
             </>
           }
         >
@@ -296,10 +311,8 @@ function GraphQlContentApi({ feature, preview, review }) {
           image="rocket"
         >
           <p>
-            <strong>
-              DatoCMS headless CMS was envisioned with GraphQL in mind
-            </strong>
-            . We integrated a useful GraphQL API explorer directly in the editor
+            <strong>DatoCMS was envisioned with GraphQL in mind</strong>. We
+            integrated a useful GraphQL API explorer directly in the editor
             backend, to make it even more natural to use it and experiment with
             it!
           </p>
@@ -318,10 +331,10 @@ function GraphQlContentApi({ feature, preview, review }) {
           image="zen-garden"
         >
           <p>
-            DatoCMS headless CMS does not only offer a{' '}
-            <strong>powerful GraphQL API</strong> but a full coordinated suite
-            of different <strong>APIs and tools</strong> to work seamlessly with
-            the three fundamental blocks of content:{' '}
+            DatoCMS does not only offer a <strong>powerful GraphQL API</strong>{' '}
+            but a full coordinated suite of different{' '}
+            <strong>APIs and tools</strong> to work seamlessly with the three
+            fundamental blocks of content:{' '}
             <strong>text, images and video</strong>. Everything is built on CDN,{' '}
             <strong>optimized for speed and scalability</strong>.
           </p>
