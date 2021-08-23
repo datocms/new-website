@@ -332,7 +332,7 @@ function GraphQlContentApi({ feature, preview, review }) {
         >
           <p>
             DatoCMS does not only offer a <strong>powerful GraphQL API</strong>{' '}
-            but a full coordinated suite of different{' '}
+            but a full, coordinated suite of different{' '}
             <strong>APIs and tools</strong> to work seamlessly with the three
             fundamental blocks of content:{' '}
             <strong>text, images and video</strong>. Everything is built on CDN,{' '}
@@ -351,6 +351,13 @@ function GraphQlContentApi({ feature, preview, review }) {
                 <a>Images API</a>
               </Link>,
               <Link
+                href="/features/video-api"
+                title={'Video API'}
+                key="video-api"
+              >
+                <a>Video API</a>
+              </Link>,
+              <Link
                 href="/features/worldwide-cdn"
                 title={'Fastest headless CMS CDN'}
                 key="worldwide-cdn"
@@ -358,13 +365,12 @@ function GraphQlContentApi({ feature, preview, review }) {
                 <a>Worldwide CDN</a>
               </Link>,
               <Link
-                href="/features/headless-cms-graphql"
-                title={'Headless CMS GraphQL'}
-                key="graphql-api"
+                href="/features/real-time-api"
+                title={'Real-time API'}
+                key="real-time-api"
               >
-                <a>Content GraphQL API</a>
+                <a>Real-time updates API</a>
               </Link>,
-              'Real-time updates API',
             ]}
           />
         </Flag>

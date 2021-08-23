@@ -48,7 +48,7 @@ export default function Flag({
     typeof image === 'string' ? (
       <LazyImage
         src={`/images/illustrations/${image}.svg`}
-        title={keyword || image}
+        alt={keyword || image}
       />
     ) : image ? (
       React.createElement(image, imageProps)

@@ -14,7 +14,10 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import VideoPlayer from 'components/VideoPlayer';
+import Bullets from 'components/Bullets';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import Button from 'components/Button';
+import Link from 'next/link';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
@@ -68,14 +71,14 @@ function RealTime({ feature, preview, review }) {
       <div id="main-content">
         <TitleStripWithContent
           keyword={keyword}
-          kicker="Real-time API content preview"
+          kicker="Real-time content preview"
           title={<>Preview changes as they get authored, no refresh needed</>}
           subtitle={
             <>
               Instead of the API consumer only getting the new data upon their
               next query, with{' '}
               <strong>
-                DatoCMS&#39;s Real-time API, new data is instantly pushed to
+                DatoCMS&#39;s Real-time Updates, new data is instantly pushed to
                 them
               </strong>
               .
@@ -107,8 +110,8 @@ function RealTime({ feature, preview, review }) {
           image={RealtimeUpdatesDemo}
         >
           <p>
-            The same Real-time Updates API used to preview draft content can
-            also be applied to offer{' '}
+            The same API used to preview draft content can also be applied to
+            offer{' '}
             <strong>
               real-time updates to your website&#39;s final visitors
             </strong>
@@ -161,6 +164,61 @@ function RealTime({ feature, preview, review }) {
           >
             Learn more in the Docs
           </Button>
+        </Flag>
+        <Flag
+          style="good"
+          keyword={keyword}
+          kicker={`APIs + Worldwide CDN`}
+          title={
+            <>
+              A complete set of{' '}
+              <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight>
+            </>
+          }
+          image="zen"
+        >
+          <p>
+            DatoCMS does not only offer a powerful real-time API but a full
+            coordinated suite of different <strong>APIs and tools</strong> to
+            work seamlessly with the three fundamental blocks of content:{' '}
+            <strong>text, images and video</strong>. Everything is built on CDN,{' '}
+            <strong>optimized for speed and scalability</strong>.
+          </p>
+
+          <Bullets
+            style="good"
+            icon={SuccessIcon}
+            bullets={[
+              <Link
+                href="/features/images-api"
+                title={'Images API'}
+                key="images-api"
+              >
+                <a>Images API</a>
+              </Link>,
+              <Link
+                href="/features/video-api"
+                title={'Video API'}
+                key="video-api"
+              >
+                <a>Video API</a>
+              </Link>,
+              <Link
+                href="/features/worldwide-cdn"
+                title={'Fastest headless CMS CDN'}
+                key="worldwide-cdn"
+              >
+                <a>Worldwide CDN</a>
+              </Link>,
+              <Link
+                href="/features/headless-cms-graphql"
+                title={'Headless CMS GraphQL'}
+                key="graphql-api"
+              >
+                <a>Content GraphQL API</a>
+              </Link>,
+            ]}
+          />
         </Flag>
       </div>
     </Layout>

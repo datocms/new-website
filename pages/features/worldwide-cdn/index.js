@@ -140,7 +140,13 @@ function WorldwideCdn({ preview, review1, feature }) {
               >
                 <a>Content GraphQL API</a>
               </Link>,
-              'Real-time updates API',
+              <Link
+                href="/features/real-time-api"
+                title={'Real-time API'}
+                key="real-time-api"
+              >
+                <a>Real-time updates API</a>
+              </Link>,
               <Link
                 href="/features/images-api"
                 title={'Images API'}

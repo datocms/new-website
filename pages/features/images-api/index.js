@@ -14,6 +14,10 @@ import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Bullets from 'components/Bullets';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Button from 'components/Button';
+import Link from 'next/link';
 
 export const getStaticProps = gqlStaticProps(
   `
@@ -141,6 +145,61 @@ function ImagesApi({ feature, preview, review }) {
         </Flag>
 
         <Quote review={review} />
+        <Flag
+          style="good"
+          keyword={keyword}
+          kicker={`All the tools you need`}
+          title={
+            <>
+              A complete set of{' '}
+              <FlagHighlight>smart,&nbsp;modern&nbsp;APIs</FlagHighlight>
+            </>
+          }
+          image="zen"
+        >
+          <p>
+            DatoCMS does not only offer a powerful images API but a full,
+            coordinated suite of different <strong>APIs and tools</strong> to
+            work seamlessly with the three fundamental blocks of content:{' '}
+            <strong>text, images and video</strong>. Everything is built on CDN,{' '}
+            <strong>optimized for speed and scalability</strong>.
+          </p>
+
+          <Bullets
+            style="good"
+            icon={SuccessIcon}
+            bullets={[
+              <Link
+                href="/features/video-api"
+                title={'Video API'}
+                key="video-api"
+              >
+                <a>Video API</a>
+              </Link>,
+              <Link
+                href="/features/worldwide-cdn"
+                title={'Fastest headless CMS CDN'}
+                key="worldwide-cdn"
+              >
+                <a>Worldwide CDN</a>
+              </Link>,
+              <Link
+                href="/features/headless-cms-graphql"
+                title={'Headless CMS GraphQL'}
+                key="graphql-api"
+              >
+                <a>Content GraphQL API</a>
+              </Link>,
+              <Link
+                href="/features/real-time-api"
+                title={'Real-time API'}
+                key="real-time-api"
+              >
+                <a>Real-time updates API</a>
+              </Link>,
+            ]}
+          />
+        </Flag>
       </div>
     </Layout>
   );

@@ -203,7 +203,13 @@ function VideoStreamingEncoding({ feature, preview }) {
               >
                 <a>Content GraphQL API</a>
               </Link>,
-              'Real-time updates API',
+              <Link
+                href="/features/real-time-api"
+                title={'Real-time API'}
+                key="real-time-api"
+              >
+                <a>Real-time updates API</a>
+              </Link>,
             ]}
           />
         </Flag>
