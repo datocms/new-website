@@ -71,7 +71,7 @@ function RealTime({ feature, preview, review }) {
       <div id="main-content">
         <TitleStripWithContent
           keyword={keyword}
-          kicker="Real-time content preview"
+          kicker="Real-time API + content preview"
           title={<>Preview changes as they get authored, no refresh needed</>}
           subtitle={
             <>
