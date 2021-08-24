@@ -34,7 +34,7 @@ export default function PersonasPicker({ title, currentPersonas }) {
           )}
 
           {currentPersonas !== 'digital-marketers' && (
-            <Link href="/team/digital-marketers">
+            <Link href="/team/cms-digital-marketing">
               <a className={s.personas}>
                 <div className={s.personasImage}>
                   <LazyImage src={`/images/illustrations/marketers.svg`} />

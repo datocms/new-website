@@ -154,7 +154,7 @@ export default function Navbar() {
                       />
 
                       <Team
-                        href="/team/digital-marketers"
+                        href="/team/cms-digital-marketing"
                         icon={Marketers}
                         title="For digital marketers"
                       />

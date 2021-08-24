@@ -297,4 +297,8 @@ module.exports = [
     source: '/features/structured-text',
     destination: '/features/structured-content-cms',
   },
+  {
+    source: '/team/digital-marketers',
+    destination: '/team/cms-digital-marketing',
+  },
 ];

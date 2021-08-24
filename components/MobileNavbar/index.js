@@ -120,7 +120,7 @@ export default function Navbar() {
                   <Link href="/team/developers">
                     <a className={s.extraLink}>For developers</a>
                   </Link>
-                  <Link href="/team/digital-marketers">
+                  <Link href="/team/cms-digital-marketing">
                     <a className={s.extraLink}>For digital marketers</a>
                   </Link>
                   <Link href="/team/content-creators">
