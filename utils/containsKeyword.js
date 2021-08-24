@@ -4,6 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 function containsKeyword(element, keyword) {
   const extracted = ReactDOMServer.renderToString(element);
   const converted = striptags(extracted);
+
   return (
     element &&
     keyword &&
@@ -26,12 +27,14 @@ function allKeywords(seoAnalysis) {
 export function containsKeywords(element, seoAnalysis) {
   return (
     seoAnalysis &&
+    element &&
     allKeywords(seoAnalysis).some((k) => containsKeyword(element, k))
   );
 }
 export function containedKeyword(element, seoAnalysis) {
   return (
     seoAnalysis &&
+    element &&
     allKeywords(seoAnalysis).find((k) => containsKeyword(element, k))
   );
 }

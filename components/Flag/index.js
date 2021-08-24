@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import LazyImage from 'components/LazyImage';
 import cn from 'classnames';
 import seedrandom from 'seedrandom';
-import { containsKeywords, containedKeyword } from 'utils/containsKeyword';
+import { containsKeywords } from 'utils/containsKeyword';
 import slugify from 'utils/slugify';
 import Heading from 'components/Heading';
 
@@ -33,12 +33,15 @@ export default function Flag({
   let Subtitle;
   let Kicker;
 
+  const alt = kicker || title;
+
   if (seoAnalysis) {
     const kickerContainsKeywords = containsKeywords(kicker, seoAnalysis);
 
     Kicker = kickerContainsKeywords ? 'h2' : 'h3';
     Title = kicker && kickerContainsKeywords ? 'h3' : 'h2';
-    Subtitle = containsKeywords(subtitle, seoAnalysis) ? 'h4' : 'p';
+    Subtitle =
+      subtitle && containsKeywords(subtitle, seoAnalysis) ? 'h4' : 'h6';
   } else {
     Kicker = 'h2';
     Title = 'h3';
@@ -47,12 +50,9 @@ export default function Flag({
 
   const imageEl =
     typeof image === 'string' ? (
-      <LazyImage
-        src={`/images/illustrations/${image}.svg`}
-        alt={containedKeyword(subtitle, seoAnalysis) || image}
-      />
+      <LazyImage src={`/images/illustrations/${image}.svg`} alt={alt} />
     ) : image ? (
-      React.createElement(image, imageProps)
+      React.createElement(image, { ...imageProps, alt })
     ) : (
       <span />
     );
