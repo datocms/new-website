@@ -60,8 +60,8 @@ function VideoStreamingEncoding({ feature, preview }) {
           title={<>Adaptive bitrate means fast on every device</>}
           subtitle={
             <>
-              Thanks to our API's HLS Adaptive Bitrate (ABR) streaming, every
-              viewer will always{' '}
+              Thanks to our API&apos;s HLS Adaptive Bitrate (ABR) streaming,
+              every viewer will always{' '}
               <strong>
                 download the right video size for their device and connection
                 speed

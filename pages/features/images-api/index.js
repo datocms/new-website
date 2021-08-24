@@ -74,7 +74,7 @@ function ImagesApi({ feature, preview, review }) {
               DatoCMS offers best-in-class API for{' '}
               <strong>images processing</strong> and <strong>image CDN</strong>{' '}
               thanks to the seamless{' '}
-              <a href="https://imgix.com/" target="_blank" rel="noopener">
+              <a href="https://imgix.com/" target="_blank" rel="noreferrer">
                 partnership with Imgix
               </a>
               . <strong>Optimize, resize, crop, rotate</strong> and watermark
