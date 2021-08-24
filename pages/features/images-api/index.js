@@ -42,14 +42,15 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function ImagesApi({ feature, preview, review }) {
-  const { keyword } = feature.yoastAnalysis;
+  const seoAnalysis = feature.yoastAnalysis;
+  const { keyword } = seoAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
       <Hero
         kicker={feature.seoH1}
-        keyword={keyword}
+        seoAnalysis={seoAnalysis}
         title={
           <>
             The easiest way to deliver{' '}
@@ -67,7 +68,7 @@ function ImagesApi({ feature, preview, review }) {
       <div id="main-content">
         <TitleStripWithContent
           kicker={`Best API for images processing`}
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           title={<>Endless image transformations at your service</>}
           subtitle={
             <>
@@ -88,7 +89,7 @@ function ImagesApi({ feature, preview, review }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`Optimized images`}
           title={
             <>
@@ -110,7 +111,7 @@ function ImagesApi({ feature, preview, review }) {
 
         <TitleStripWithContent
           kicker={`Images preview`}
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           title={<>State of the art for responsive and progressive images</>}
           subtitle={
             <>
@@ -128,7 +129,7 @@ function ImagesApi({ feature, preview, review }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`Images Metadata`}
           title={
             <>
@@ -148,7 +149,7 @@ function ImagesApi({ feature, preview, review }) {
         <Quote review={review} />
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`All the tools you need`}
           title={
             <>

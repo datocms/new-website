@@ -229,9 +229,8 @@ export default function UseCase({ landing, websites, preview }) {
       });
     }
   }, []);
-
-  const keyword =
-    landing && landing.yoastAnalysis && landing.yoastAnalysis.keyword;
+  const seoAnalysis = landing && landing.yoastAnalysis;
+  const keyword = seoAnalysis.keyword;
 
   return (
     <Layout preview={preview}>
@@ -240,7 +239,7 @@ export default function UseCase({ landing, websites, preview }) {
           <Head seo={landing.seo} slug={landing.slug} />
           <Hero
             kicker={landing.seoH1}
-            keyword={keyword}
+            seoAnalysis={seoAnalysis}
             image={
               <LazyImage
                 className={s.logo}
@@ -333,7 +332,7 @@ export default function UseCase({ landing, websites, preview }) {
                   <TitleStripWithContent
                     kicker={`GraphQL Content API`}
                     title={<>Ask for what you need, get exactly that</>}
-                    keyword={keyword}
+                    seoAnalysis={seoAnalysis}
                     subtitle={
                       <>
                         <span>
@@ -431,7 +430,7 @@ export default function UseCase({ landing, websites, preview }) {
                     <TitleStripWithContent
                       kicker={landing.name + ' images'}
                       title={highlightStructuredText(block.title)}
-                      keyword={keyword}
+                      seoAnalysis={seoAnalysis}
                       subtitle={
                         <>
                           <StructuredText data={block.content} />
@@ -464,7 +463,7 @@ export default function UseCase({ landing, websites, preview }) {
                     <TitleStripWithContent
                       kicker={`${keyword} example`}
                       title={highlightStructuredText(block.title)}
-                      keyword={keyword}
+                      seoAnalysis={seoAnalysis}
                       subtitle={
                         <>
                           <StructuredText data={block.content} />
@@ -496,7 +495,7 @@ export default function UseCase({ landing, websites, preview }) {
                 {block._modelApiKey === 'modular_blocks_block' && (
                   <Flag
                     style="good"
-                    keyword={keyword}
+                    seoAnalysis={seoAnalysis}
                     title={highlightStructuredText(block.title, {
                       highlightWith: FlagHighlight,
                     })}
@@ -544,7 +543,7 @@ export default function UseCase({ landing, websites, preview }) {
                   <Space top={3}>
                     <TitleStripWithContent
                       title={highlightStructuredText(block.title)}
-                      keyword={keyword}
+                      seoAnalysis={seoAnalysis}
                       subtitle={<StructuredText data={block.content} />}
                     >
                       <div className={s.video}>
@@ -562,7 +561,7 @@ export default function UseCase({ landing, websites, preview }) {
                   <Space top={3}>
                     <TitleStripWithContent
                       title={highlightStructuredText(block.title)}
-                      keyword={keyword}
+                      seoAnalysis={seoAnalysis}
                       subtitle={
                         <>
                           <StructuredText data={block.content} />

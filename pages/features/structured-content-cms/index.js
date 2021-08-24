@@ -75,13 +75,14 @@ const VideoBrowser = (props) => {
 };
 
 function StructuredText({ feature, preview, integrations, review }) {
-  const { keyword } = feature.yoastAnalysis;
+  const seoAnalysis = feature.yoastAnalysis;
+  const { keyword } = seoAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
       <Hero
-        keyword={keyword}
+        seoAnalysis={seoAnalysis}
         kicker={feature.seoH1}
         title={
           <>
@@ -103,7 +104,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
       <div id="main-content">
         <TitleStripWithContent
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker="Notion-like Structured content CMS"
           title={<>A delightfully focused writing&nbsp;experience</>}
           subtitle={
@@ -138,7 +139,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker="Customizable structured content CMS"
           title={
             <>
@@ -169,7 +170,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker="Linking structured content"
           title={
             <>
@@ -205,7 +206,7 @@ function StructuredText({ feature, preview, integrations, review }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker="omnichannel CMS"
           title={
             <>
@@ -311,7 +312,7 @@ function StructuredText({ feature, preview, integrations, review }) {
         </IntegrationsBanner>
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`The most user-friendly CMS`}
           title={
             <>

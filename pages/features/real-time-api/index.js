@@ -43,13 +43,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function RealTime({ feature, preview, review }) {
-  const { keyword } = feature.yoastAnalysis;
+  const seoAnalysis = feature.yoastAnalysis;
+  const { keyword } = seoAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
       <Hero
-        keyword={keyword}
+        seoAnalysis={seoAnalysis}
         kicker={feature.seoH1}
         title={
           <>
@@ -70,7 +71,7 @@ function RealTime({ feature, preview, review }) {
       />
       <div id="main-content">
         <TitleStripWithContent
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker="Real-time API + content preview"
           title={<>Preview changes as they get authored, no refresh needed</>}
           subtitle={
@@ -98,7 +99,7 @@ function RealTime({ feature, preview, review }) {
         <Quote review={review} />
 
         <Flag
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           style="good"
           kicker="Live real-time API"
           title={
@@ -134,7 +135,7 @@ function RealTime({ feature, preview, review }) {
         </Flag>
 
         <Flag
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={'Real-time GraphQL API'}
           style="good"
           title={
@@ -167,7 +168,7 @@ function RealTime({ feature, preview, review }) {
         </Flag>
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`APIs + Worldwide CDN`}
           title={
             <>

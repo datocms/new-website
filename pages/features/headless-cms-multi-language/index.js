@@ -63,14 +63,15 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function MultiLanguage({ feature, preview }) {
-  const { keyword } = feature.yoastAnalysis;
+  const seoAnalysis = feature.yoastAnalysis;
+  const { keyword } = seoAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
 
       <Hero
-        keyword={keyword}
+        seoAnalysis={seoAnalysis}
         kicker={feature.seoH1}
         title={
           <>
@@ -91,7 +92,7 @@ function MultiLanguage({ feature, preview }) {
 
       <div id="main-content">
         <Flag
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           style="good"
           kicker={'multi-language & multi-site headless cms'}
           title={
@@ -124,7 +125,7 @@ function MultiLanguage({ feature, preview }) {
         </IntegrationsBanner>
 
         <Flag
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           style="good"
           kicker="Headless CMS multi-language & flexible"
           title={
@@ -145,7 +146,7 @@ function MultiLanguage({ feature, preview }) {
         </Flag>
 
         <Flag
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           style="good"
           kicker="Multi-language headless CMS interface"
           title={
@@ -165,7 +166,7 @@ function MultiLanguage({ feature, preview }) {
         </Flag>
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`The most user-friendly headless CMS`}
           title={
             <>

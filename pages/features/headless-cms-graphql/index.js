@@ -41,13 +41,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function GraphQlContentApi({ feature, preview, review }) {
-  const { keyword } = feature.yoastAnalysis;
+  const seoAnalysis = feature.yoastAnalysis;
+  const { keyword } = seoAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
       <Hero
-        keyword={keyword}
+        seoAnalysis={seoAnalysis}
         kicker={feature.seoH1}
         title={
           <>
@@ -68,7 +69,7 @@ function GraphQlContentApi({ feature, preview, review }) {
       <div id="main-content">
         <TitleStripWithContent
           kicker={'The headless cms graphql revolution'}
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           title={<>Ask for what you need, get exactly that</>}
           subtitle={
             <>
@@ -305,7 +306,7 @@ function GraphQlContentApi({ feature, preview, review }) {
         </TitleStripWithContent>
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`#1 ${keyword}`}
           title={<>GraphQL + Dato headless CMS = 🚀 </>}
           image="rocket"
@@ -320,7 +321,7 @@ function GraphQlContentApi({ feature, preview, review }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`${keyword} + Worldwide CDN`}
           title={
             <>

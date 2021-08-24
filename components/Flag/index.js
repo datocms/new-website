@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import LazyImage from 'components/LazyImage';
 import cn from 'classnames';
 import seedrandom from 'seedrandom';
-import containsKeyword from 'utils/containsKeyword';
+import { containsKeywords, containedKeyword } from 'utils/containsKeyword';
 import slugify from 'utils/slugify';
 import Heading from 'components/Heading';
 
@@ -13,12 +13,12 @@ export default function Flag({
   style = 'neutral',
   title,
   subtitle,
-  keyword,
   kicker,
   hideDot,
   image,
   imageProps,
   children,
+  seoAnalysis,
 }) {
   const seed = useMemo(
     () => seedrandom(title + subtitle + style)(),
@@ -33,11 +33,12 @@ export default function Flag({
   let Subtitle;
   let Kicker;
 
-  if (keyword) {
-    const kickerContainsKeyword = containsKeyword(kicker, keyword);
-    Kicker = kickerContainsKeyword ? 'h2' : 'h3';
-    Title = kicker && kickerContainsKeyword ? 'h3' : 'h2';
-    Subtitle = containsKeyword(subtitle, keyword) ? 'h4' : 'p';
+  if (seoAnalysis) {
+    const kickerContainsKeywords = containsKeywords(kicker, seoAnalysis);
+
+    Kicker = kickerContainsKeywords ? 'h2' : 'h3';
+    Title = kicker && kickerContainsKeywords ? 'h3' : 'h2';
+    Subtitle = containsKeywords(subtitle, seoAnalysis) ? 'h4' : 'p';
   } else {
     Kicker = 'h2';
     Title = 'h3';
@@ -48,7 +49,7 @@ export default function Flag({
     typeof image === 'string' ? (
       <LazyImage
         src={`/images/illustrations/${image}.svg`}
-        alt={keyword || image}
+        alt={containedKeyword(subtitle, seoAnalysis) || image}
       />
     ) : image ? (
       React.createElement(image, imageProps)

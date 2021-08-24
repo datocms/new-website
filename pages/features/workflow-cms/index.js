@@ -49,14 +49,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function Workflows({ feature, preview, review }) {
-  const { keyword } = feature.yoastAnalysis;
+  const seoAnalysis = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
       <div className={s.wrapper}>
         <Hero
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={feature.seoH1}
           title={
             <>
@@ -75,7 +75,7 @@ function Workflows({ feature, preview, review }) {
         />
         <div id="main-content">
           <TitleStripWithContent
-            keyword={keyword}
+            seoAnalysis={seoAnalysis}
             kicker={`Publishing workflow in your CMS`}
             title={<>Build your perfectly oiled content machine</>}
             subtitle={
@@ -101,7 +101,7 @@ function Workflows({ feature, preview, review }) {
           </TitleStripWithContent>
 
           <Flag
-            keyword={keyword}
+            seoAnalysis={seoAnalysis}
             kicker={`Manage workflow CMS`}
             style="good"
             title={
@@ -123,7 +123,7 @@ function Workflows({ feature, preview, review }) {
           </Flag>
 
           <Flag
-            keyword={keyword}
+            seoAnalysis={seoAnalysis}
             kicker={`CMS approval workflow`}
             style="good"
             title={
@@ -165,7 +165,7 @@ function Workflows({ feature, preview, review }) {
           </Flag>
 
           <Flag
-            keyword={keyword}
+            seoAnalysis={seoAnalysis}
             kicker="Customizable workflow"
             style="good"
             title={
@@ -189,7 +189,7 @@ function Workflows({ feature, preview, review }) {
           </Flag>
           <Flag
             style="good"
-            keyword={keyword}
+            seoAnalysis={seoAnalysis}
             kicker={`The most user-friendly CMS`}
             title={
               <>

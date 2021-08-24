@@ -20,6 +20,39 @@
       z-index: -1;
     }
   }
+
+  [data-with-anchor] {
+    position: relative;
+
+    [data-anchor] {
+      position: absolute;
+      top: -70px;
+    }
+
+    &:hover {
+      [data-permalink] {
+        opacity: 0.5;
+      }
+    }
+
+    [data-permalink] {
+      transition: all 100ms ease-in-out;
+      opacity: 0;
+      background: url('../../public/icons/regular/link.svg');
+      background-size: contain;
+      height: 0.7em;
+      width: 0.7em;
+      display: inline-block;
+
+      svg {
+        fill: var(--accent-color);
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .rootInner {
@@ -58,6 +91,15 @@
 
 .subtitle {
   line-height: 1.4;
+}
+
+.kicker {
+  font-size: rfs(20px);
+  font-weight: bold;
+  color: var(--light-body-color);
+  text-transform: uppercase;
+  margin: 40px auto 20px;
+  max-width: 700px;
 }
 
 .image {

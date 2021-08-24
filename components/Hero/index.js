@@ -1,24 +1,24 @@
 import Wrapper from 'components/Wrapper';
 import styles from './style.module.css';
-import containsKeyword from 'utils/containsKeyword';
+import { containsKeywords } from 'utils/containsKeyword';
 
 export default function Hero({
   image,
   kicker,
   title,
   subtitle,
-  keyword,
+  seoAnalysis,
   children,
 }) {
   let Title;
   let Subtitle;
   let Kicker;
 
-  if (keyword) {
-    const kickerContainsKeyword = containsKeyword(kicker, keyword);
+  if (seoAnalysis) {
+    const kickerContainsKeywords = containsKeywords(kicker, seoAnalysis);
 
-    Kicker = kickerContainsKeyword ? 'h1' : 'h2';
-    Title = kickerContainsKeyword ? 'h2' : 'h1';
+    Kicker = kickerContainsKeywords ? 'h1' : 'h2';
+    Title = kickerContainsKeywords ? 'h2' : 'h1';
     Subtitle = 'h3';
   } else {
     Kicker = 'h2';

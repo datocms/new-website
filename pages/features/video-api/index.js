@@ -32,13 +32,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function VideoStreamingEncoding({ feature, preview }) {
-  const { keyword } = feature.yoastAnalysis;
+  const seoAnalysis = feature.yoastAnalysis;
+  const { keyword } = seoAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
       <Hero
-        keyword={keyword}
+        seoAnalysis={seoAnalysis}
         kicker={feature.seoH1}
         title={
           <>
@@ -55,7 +56,7 @@ function VideoStreamingEncoding({ feature, preview }) {
       />
       <div id="main-content">
         <TitleStripWithContent
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`Fastest API for any video size`}
           title={<>Adaptive bitrate means fast on every device</>}
           subtitle={
@@ -85,7 +86,7 @@ function VideoStreamingEncoding({ feature, preview }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker="API for all video formats"
           title={
             <>
@@ -104,7 +105,7 @@ function VideoStreamingEncoding({ feature, preview }) {
         </Flag>
 
         <TitleStripWithContent
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           title={<>Thumbnails? Included.</>}
           subtitle={
             <>
@@ -140,7 +141,7 @@ function VideoStreamingEncoding({ feature, preview }) {
         <Flag
           style="good"
           image="video-player"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`a flexible ${keyword}`}
           title={
             <>
@@ -168,7 +169,7 @@ function VideoStreamingEncoding({ feature, preview }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker={`The best digital experience`}
           title={
             <>

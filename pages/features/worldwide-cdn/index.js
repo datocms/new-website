@@ -42,14 +42,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function WorldwideCdn({ preview, review1, feature }) {
-  const { keyword } = feature.yoastAnalysis;
+  const seoAnalysis = feature.yoastAnalysis;
 
   return (
     <Layout preview={preview}>
       <Head seo={feature.seo} slug={feature.slug} />
       <Hero
         kicker={feature.seoH1}
-        keyword={keyword}
+        seoAnalysis={seoAnalysis}
         title={
           <>
             Content, images and videos,{' '}
@@ -79,7 +79,7 @@ function WorldwideCdn({ preview, review1, feature }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker="Fast & scalable headless CMS"
           title={
             <>
@@ -111,7 +111,7 @@ function WorldwideCdn({ preview, review1, feature }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           title={
             <>
               A unified set of{' '}
@@ -168,7 +168,7 @@ function WorldwideCdn({ preview, review1, feature }) {
 
         <Flag
           style="good"
-          keyword={keyword}
+          seoAnalysis={seoAnalysis}
           kicker="Is Dato the fastest headless CMS?"
           title={
             <>
