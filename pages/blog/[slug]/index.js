@@ -60,6 +60,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               id
               _modelApiKey
             }
+            ... on CodesandboxEmbedBlockRecord {
+              id
+              _modelApiKey
+              slug
+            }
             ... on VideoRecord {
               id
               _modelApiKey
