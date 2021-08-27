@@ -76,8 +76,8 @@ export default function Plugins({ starters, preview }) {
           href="/docs/project-starters-and-templates#generate-a-project-starter-button"
           center
         >
-          <strong>Want create your own starter project?</strong> Learn how to do
-          that in our documentation!
+          <strong>Want to create your own starter project?</strong> Learn how to
+          do that in our documentation!
         </Announce>
         <div className={s.grid}>
           {starters &&
