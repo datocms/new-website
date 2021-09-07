@@ -301,4 +301,8 @@ module.exports = [
     source: '/team/digital-marketers',
     destination: '/team/cms-digital-marketing',
   },
+  {
+    source: '/blog/what-is-an-headless-cms',
+    destination: '/blog/what-is-a-headless-cms',
+  },
 ];
