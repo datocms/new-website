@@ -80,8 +80,6 @@ function Developers({ integrations, preview, page, review }) {
             your websites and apps painfully slow and{' '}
             <strong>impossibly hard to build</strong>, maintain and improve.
             This needs to stop, now.
-            <br /> Find out why DatoCMS is considered one of the{' '}
-            <strong>best CMS for developers</strong>.
           </>
         }
       />
@@ -123,7 +121,8 @@ function Developers({ integrations, preview, page, review }) {
             . Unoptimized images, heavy pages and a shameful overall score?
             Well, it’s not your fault. The web is much harder than it was, and
             you’re using legacy tools that force devs to solve performance
-            issues on their own.
+            issues on their own. <br /> Find out why DatoCMS is considered one
+            of the <strong>best CMS for developers</strong>.
           </p>
         </Flag>
 
@@ -285,9 +284,17 @@ function Developers({ integrations, preview, page, review }) {
           <strong>
             DatoCMS easily integrates with any third-party platform or service
           </strong>
-          . Build your digital products by composing the best tools in the
-          market: we offer plugins, webhooks, templates and SDKs to get you
-          started in no time.
+          . DatoCMS is considered to be the best CMS for developers because it
+          offers some of the best tools in the market: plugins, webhooks,
+          templates and SDKs to get you started in no time. Check them out on
+          our{' '}
+          <a
+            href="https://github.com/datocms/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            official Github page
+          </a>
         </IntegrationsBanner>
 
         <Flag
