@@ -125,7 +125,7 @@ export default function Footer({ noCta }) {
                 </div>
 
                 <div className={s.monoLink}>
-                  <Link href="/enterprise">
+                  <Link href="/enterprise-headless-cms">
                     <a>DatoCMS for Enterprise</a>
                   </Link>
                 </div>

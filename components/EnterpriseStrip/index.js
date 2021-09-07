@@ -1,13 +1,19 @@
 import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
 
-export default function EnterpriseStrip({ title, description, children }) {
+export default function EnterpriseStrip({
+  kicker,
+  title,
+  description,
+  children,
+}) {
   return (
     <div className={s.root}>
       <Wrapper>
         <div className={s.rootInner}>
           <div className={s.intro}>
-            <div className={s.introTitle}>{title}</div>
+            {kicker && <h2 className={s.kicker}>{kicker}</h2>}
+            <h3 className={s.introTitle}>{title}</h3>
             <div className={s.introBody}>{description}</div>
           </div>
           <div className={s.picker}>{children}</div>
@@ -20,7 +26,7 @@ export default function EnterpriseStrip({ title, description, children }) {
 export function Point({ title, description }) {
   return (
     <div className={s.personas}>
-      <div className={s.personasTitle}>{title}</div>
+      <h4 className={s.personasTitle}>{title}</h4>
       <div className={s.personasBody}>{description}</div>
     </div>
   );

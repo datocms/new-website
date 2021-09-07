@@ -40,6 +40,10 @@ a.root {
   line-height: 1.4;
 }
 
+.body a {
+  color: #444;
+}
+
 .goto {
   margin-top: rfs(25px);
   font-size: 0.8em;

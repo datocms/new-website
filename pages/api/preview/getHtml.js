@@ -8,6 +8,10 @@ const client = new SiteClient(process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN);
 // into its slug and canonical URL within the website
 
 const findSlugAndPermalink = async ({ item, itemTypeApiKey }) => {
+  if (item.slug === 'enterprise-headless-cms') {
+    return [item.slug, `/${item.slug}`];
+  }
+
   switch (itemTypeApiKey) {
     case 'blog_post':
       return [item.slug, `/blog/${item.slug}`];

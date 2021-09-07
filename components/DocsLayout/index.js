@@ -29,7 +29,7 @@ export default function DocsLayout({
             <a>contact support</a>
           </Link>
           , or{' '}
-          <Link href="/enterprise#form">
+          <Link href="/enterprise-headless-cms#form">
             <a>connect with our sales team</a>
           </Link>
           . You can chat live with other developers in our{' '}

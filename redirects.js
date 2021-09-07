@@ -309,4 +309,8 @@ module.exports = [
     source: '/team/developers',
     destination: '/team/best-cms-for-developers',
   },
+  {
+    source: '/enterprise',
+    destination: '/enterprise-headless-cms',
+  },
 ];

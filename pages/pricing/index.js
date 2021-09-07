@@ -369,12 +369,12 @@ export default function Pricing({
                 business unit to your whole organization.
               </p>
               <div className={s.buttonGroup}>
-                <Link href="/enterprise" passHref>
+                <Link href="/enterprise-headless-cms" passHref>
                   <Button p="small" s="invert">
                     Learn more
                   </Button>
                 </Link>
-                <Link href="/enterprise#form" passHref>
+                <Link href="/enterprise-headless-cms#form" passHref>
                   <Button p="small">Contact sales</Button>
                 </Link>
               </div>

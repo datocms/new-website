@@ -212,7 +212,7 @@ export default function Navbar() {
                   />
 
                   <div className={s.sectionTitle}>Enterprise</div>
-                  <Link href="/enterprise">
+                  <Link href="/enterprise-headless-cms">
                     <a className={s.extraLink}>DatoCMS for Enterprise</a>
                   </Link>
                 </Group>
