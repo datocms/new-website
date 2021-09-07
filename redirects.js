@@ -30,7 +30,7 @@ module.exports = [
   },
   {
     source: '/features',
-    destination: '/team/developers',
+    destination: '/team/best-cms-for-developers',
   },
   {
     source: '/docs/guides/custom-assets-domain/:rest*',
@@ -304,5 +304,9 @@ module.exports = [
   {
     source: '/blog/what-is-an-headless-cms',
     destination: '/blog/what-is-a-headless-cms',
+  },
+  {
+    source: '/team/developers',
+    destination: '/team/best-cms-for-developers',
   },
 ];

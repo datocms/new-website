@@ -1,5 +1,5 @@
 import Layout from 'components/Layout';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import {
   imageFields,
@@ -28,10 +28,13 @@ import styles from './style.module.css';
 export const getStaticProps = gqlStaticProps(
   `
     query {
-      page: homePage {
+      page: teamPage(filter: { slug: { eq: "best-cms-for-developers" } }) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
+        slug
+        seoH1
+        yoastAnalysis
       }
       integrations: allIntegrations(
         first: 100
@@ -60,12 +63,10 @@ export const getStaticProps = gqlStaticProps(
 function Developers({ integrations, preview, page, review }) {
   return (
     <Layout preview={preview}>
-      <Head>
-        {renderMetaTags(page.seo)}
-        <title>DatoCMS for Developers - Team</title>
-      </Head>
+      <Head seo={page.seo} slug={page.slug} />
       <Hero
-        kicker="DatoCMS for Developers"
+        seoAnalysis={page.yoastAnalysis}
+        kicker={page.seoH1}
         title={
           <>
             Your tech stack is literally{' '}
@@ -74,9 +75,13 @@ function Developers({ integrations, preview, page, review }) {
         }
         subtitle={
           <>
-            That’s right. You’re stuck with legacy web technologies that make
-            all your websites and apps painfully slow and impossibly hard to
-            build, maintain and improve. This needs to stop, now.
+            That’s right. You’re{' '}
+            <strong>stuck with legacy web technologies</strong> that make all
+            your websites and apps painfully slow and{' '}
+            <strong>impossibly hard to build</strong>, maintain and improve.
+            This needs to stop, now.
+            <br /> Find out why DatoCMS is considered one of the{' '}
+            <strong>best CMS for developers</strong>.
           </>
         }
       />
@@ -88,25 +93,43 @@ function Developers({ integrations, preview, page, review }) {
         </Space>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
           style="bad"
+          kicker="A CMS should be fast"
           title={
             <>
               Your website is <FlagHighlight style="bad">slow</FlagHighlight>
             </>
           }
-          subtitle="Got the guts to run PageSpeed?"
+          subtitle={
+            <>
+              Got the guts to run{' '}
+              <a
+                href="https://developers.google.com/speed/pagespeed/insights/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                PageSpeed
+              </a>
+              ?
+            </>
+          }
           image="rock-balloons"
         >
           <p>
-            Try to check the performance of your site, we’ll wait. Unoptimized
-            images, heavy pages and a shameful overall score? Well, it’s not
-            your fault. The web is much harder than it was, and you’re using
-            legacy tools that force devs to solve performance issues on their
-            own.
+            <strong>
+              Try to check the performance of your site, we’ll wait
+            </strong>
+            . Unoptimized images, heavy pages and a shameful overall score?
+            Well, it’s not your fault. The web is much harder than it was, and
+            you’re using legacy tools that force devs to solve performance
+            issues on their own.
           </p>
         </Flag>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
+          kicker="A CMS should grow with you"
           style="bad"
           title={
             <>
@@ -119,14 +142,19 @@ function Developers({ integrations, preview, page, review }) {
         >
           <p>
             As long as you’re receiving the usual amount of web traffic, pretty
-            much any solution can work. But is your stack capable of handling
-            prime-time TV website traffic without becoming completely unusable?
+            much any solution can work. But{' '}
+            <strong>
+              is your stack capable of handling prime-time TV website traffic
+              without becoming completely unusable?
+            </strong>{' '}
             And if so, what’s the up-front cost you’re paying for that?
           </p>
         </Flag>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
           style="bad"
+          kicker="A CMS should be tameable"
           title={
             <>
               Your CMS{' '}
@@ -141,13 +169,19 @@ function Developers({ integrations, preview, page, review }) {
           <p>
             It should not be your job to constantly make tiny changes to
             copy/images as asked by marketing/content teams. Yet, to delegate
-            the job directly to them, your CMS must be able to enforce strict
-            validation rules to editors, and have a fast way to continuously
-            adapt the backend to their needs. Is that the case?
+            the job directly to them,{' '}
+            <strong>
+              your CMS must be able to enforce strict validation rules to
+              editors, and have a fast way to continuously adapt the backend to
+              their needs
+            </strong>
+            . Is that the case?
           </p>
         </Flag>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
+          kicker="A CMS should be efficient"
           style="bad"
           title={
             <>
@@ -162,16 +196,24 @@ function Developers({ integrations, preview, page, review }) {
             Most enterprises have many teams working on very similar dev
             projects, yet successful approaches learnt from deploying one
             product need to be manually rebuilt in each new product. How
-            efficient is that? Teams should have a fast, standardized way of
-            working.
+            efficient is that?{' '}
+            <strong>
+              Teams should have a fast, standardized way of working.
+            </strong>
           </p>
         </Flag>
 
-        <TitleStripWithContent title={<>Stop the madness, try&nbsp;headless</>}>
+        <TitleStripWithContent
+          seoAnalysis={page.yoastAnalysis}
+          kicker="Dato CMS makes developers happy"
+          title={<>Stop the madness, try&nbsp;headless</>}
+        >
           <DatoIllustration />
         </TitleStripWithContent>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
+          kicker="DatoCMS is composable"
           style="good"
           title={
             <>
@@ -183,15 +225,19 @@ function Developers({ integrations, preview, page, review }) {
         >
           <p>
             React, Vue, Gatsby, Next.js: take advantage of the best frameworks
-            around, without carrying around CMS technical debt. Your content is
-            reusable via API across any digital product — websites, apps,
-            chatbots, IoT — any technology.
+            around, without carrying around CMS technical debt.{' '}
+            <strong>
+              Your content is reusable via API across any digital product
+            </strong>{' '}
+            — websites, apps, chatbots, IoT — any technology.
           </p>
         </Flag>
 
         <Quote review={review} />
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
+          kicker="DatoCMS is user-friendly"
           style="good"
           title={
             <>
@@ -203,8 +249,11 @@ function Developers({ integrations, preview, page, review }) {
           <p>
             By making your editorial team write content using a structured,
             presentation-free format with a strict set of validation rules,
-            you’ll remove any content bottleneck when shipping new digital
-            projects.
+            <strong>
+              you’ll remove any content bottleneck when shipping new digital
+              projects
+            </strong>
+            .
           </p>
         </Flag>
 
@@ -232,13 +281,18 @@ function Developers({ integrations, preview, page, review }) {
               />
             ))}
         >
-          Being a API-first headless CMS, DatoCMS easily integrates with any
-          third-party platform or service. Build your digital products by
-          composing the best tools in the market: we offer plugins, webhooks,
-          templates and SDKs to get you started in no time.
+          Being a API-first headless CMS,{' '}
+          <strong>
+            DatoCMS easily integrates with any third-party platform or service
+          </strong>
+          . Build your digital products by composing the best tools in the
+          market: we offer plugins, webhooks, templates and SDKs to get you
+          started in no time.
         </IntegrationsBanner>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
+          kicker="DatoCMS is flexible"
           style="good"
           title={
             <>
@@ -250,8 +304,12 @@ function Developers({ integrations, preview, page, review }) {
         >
           <p>
             From business-critical product pages, to dynamic landing-pages or
-            tiny microcopy: we give you all the flexibility you need to model
-            any kind of content. And, most importantly, to change it over time.
+            tiny microcopy:{' '}
+            <strong>
+              we give you all the flexibility you need to model any kind of
+              content
+            </strong>
+            . And, most importantly, to change it over time.
           </p>
         </Flag>
 
@@ -276,6 +334,8 @@ function Developers({ integrations, preview, page, review }) {
         </Numbers>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
+          kicker="DatoCMS is built by developers for developers"
           style="good"
           title={
             <>
@@ -286,13 +346,18 @@ function Developers({ integrations, preview, page, review }) {
         >
           <p>
             You’re not the one that should worry about traffic spikes,
-            performance or maintenance: our managed global CDN will always
-            ensure that your content is accessible, secure, and close to every
-            visitor.
+            performance or maintenance:{' '}
+            <strong>
+              our managed global CDN will always ensure that your content is
+              accessible, secure, and close
+            </strong>{' '}
+            to every visitor.
           </p>
         </Flag>
 
         <TitleStripWithContent
+          seoAnalysis={page.yoastAnalysis}
+          kicker="DatoCMS dev experience empowers all team"
           title={
             <>
               A technology investment that doubles performace and dev team

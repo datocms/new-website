@@ -148,7 +148,7 @@ export default function Navbar() {
                       <div className={s.sectionTitle}>Happy team</div>
 
                       <Team
-                        href="/team/developers"
+                        href="/team/best-cms-for-developers"
                         icon={Developers}
                         title="For developers"
                       />

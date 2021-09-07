@@ -22,7 +22,7 @@ export default function PersonasPicker() {
           </div>
         </div>
         <div className={s.picker}>
-          <Link href="/team/developers">
+          <Link href="/team/best-cms-for-developers">
             <a className={s.personas}>
               <div className={s.personasImage}>
                 <LazyImage src={`/images/illustrations/developers-2.svg`} />
