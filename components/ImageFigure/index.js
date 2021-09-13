@@ -105,7 +105,7 @@ export default function ImageFigure({ data, imageClassName }) {
         >
           <DatoImage
             className={imageClassName}
-            data={data.responsiveImage}
+            data={{ ...data.responsiveImage, alt: data.alt, title: data.title }}
             style={{
               display: 'inline-block',
               maxWidth: `${data.responsiveImage.width}px`,
