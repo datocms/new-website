@@ -121,6 +121,39 @@
   .responsiveImage {
     margin: 0 auto;
   }
+
+  [data-with-anchor] {
+    position: relative;
+
+    [data-anchor] {
+      position: absolute;
+      top: -70px;
+    }
+
+    &:hover {
+      [data-permalink] {
+        opacity: 0.5;
+      }
+    }
+
+    [data-permalink] {
+      transition: all 100ms ease-in-out;
+      opacity: 0;
+      background: url('../../public/icons/regular/link.svg');
+      background-size: contain;
+      height: 0.6em;
+      width: 0.6em;
+      display: inline-block;
+
+      svg {
+        fill: var(--accent-color);
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .qa {
