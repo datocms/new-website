@@ -10,7 +10,7 @@ import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import FormattedDate from 'components/FormattedDate';
 import BlogHero from 'components/BlogHero';
 import PostContent from 'components/PostContent';
-import Head from 'components/Head';
+import Head from 'next/head';
 import s from './style.module.css';
 import { useQuerySubscription } from 'react-datocms';
 
