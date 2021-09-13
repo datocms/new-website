@@ -8,9 +8,9 @@ import {
 } from 'lib/datocms';
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import FormattedDate from 'components/FormattedDate';
-import InterstitialTitle from 'components/InterstitialTitle';
+import BlogHero from 'components/BlogHero';
 import PostContent from 'components/PostContent';
-import Head from 'next/head';
+import Head from 'components/Head';
 import s from './style.module.css';
 import { useQuerySubscription } from 'react-datocms';
 
@@ -35,6 +35,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
         slug
         title
+        seoH1
+        yoastAnalysis
         content {
           value
           blocks {
@@ -186,9 +188,13 @@ export default function Article({ preview, subscription }) {
         )}
       </Head>
 
-      <InterstitialTitle kicker="The DatoCMS Blog" style="two">
+      <BlogHero
+        seoAnalysis={post.yoastAnalysis}
+        kicker={post.seoH1 || 'The DatoCMS Blog'}
+        style="two"
+      >
         {post.title}
-      </InterstitialTitle>
+      </BlogHero>
       <Wrapper>
         <div className={s.info}>
           <DatoImage
