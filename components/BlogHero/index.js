@@ -1,10 +1,8 @@
 import Wrapper from 'components/Wrapper';
 import styles from './style.module.css';
 import { containsKeywords } from 'utils/containsKeyword';
-import slugify from 'utils/slugify';
-import Heading from 'components/Heading';
 
-export default function InterstitialTitle({
+export default function BlogHero({
   style = 'one',
   children,
   kicker,
@@ -18,28 +16,19 @@ export default function InterstitialTitle({
   if (seoAnalysis) {
     const kickerContainsKeywords = containsKeywords(kicker, seoAnalysis);
 
-    Kicker = kickerContainsKeywords ? 'h2' : 'h3';
-    Title = kicker && kickerContainsKeywords ? 'h3' : 'h2';
-    Subtitle =
-      subtitle && containsKeywords(subtitle, seoAnalysis) ? 'h4' : 'h6';
+    Kicker = kickerContainsKeywords ? 'h1' : 'h2';
+    Title = kicker && kickerContainsKeywords ? 'h2' : 'h1';
+    Subtitle = 'h3';
   } else {
     Kicker = 'h2';
-    Title = 'h3';
+    Title = 'h1';
     Subtitle = 'div';
   }
 
   return (
     <Wrapper>
       <div className={styles.root}>
-        {kicker && (
-          <Heading
-            as={Kicker}
-            className={styles.kicker}
-            anchor={slugify(kicker)}
-          >
-            {kicker}
-          </Heading>
-        )}
+        {kicker && <Kicker className={styles.kicker}>{kicker}</Kicker>}
         <div className={styles[style]}>
           <Title className={styles.title}>{children}</Title>
         </div>
