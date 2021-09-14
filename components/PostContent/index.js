@@ -19,7 +19,7 @@ import queryString from 'qs';
 import Corona from 'public/images/illustrations/live-4.svg';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 
-function renderBlock(s, block) {
+function renderBlock(s, block, defaultAltForImages) {
   switch (block._modelApiKey) {
     case 'in_depth_cta_block':
       return (
@@ -146,17 +146,24 @@ function renderBlock(s, block) {
       );
 
     case 'image':
+      const { width, height, responsiveImage, alt, title } = block.image;
+
       return (
         <div
           className={
-            block.image.width && block.image.height
-              ? block.image.width / block.image.height > 1.3
-                ? s.unwrap
-                : null
-              : null
+            width && height ? (width / height > 1.3 ? s.unwrap : null) : null
           }
         >
-          <ImageFigure imageClassName={s.responsiveImage} data={block.image} />
+          <ImageFigure
+            imageClassName={s.responsiveImage}
+            data={block.image}
+            alt={
+              (responsiveImage && responsiveImage.alt) ||
+              alt ||
+              defaultAltForImages
+            }
+            title={(responsiveImage && responsiveImage.title) || title}
+          />
         </div>
       );
 
@@ -208,14 +215,21 @@ function renderBlock(s, block) {
   }
 }
 
-export default function PostContent({ content, style, children }) {
+export default function PostContent({
+  content,
+  style,
+  children,
+  defaultAltForImages,
+}) {
   const s = style || defaultStyles;
 
   return (
     <div className={s.body}>
       <StructuredText
         data={content}
-        renderBlock={({ record }) => renderBlock(s, record)}
+        renderBlock={({ record }) =>
+          renderBlock(s, record, defaultAltForImages)
+        }
         customRules={[
           renderRule(isBlockquote, ({ node, children, key }) => {
             return (

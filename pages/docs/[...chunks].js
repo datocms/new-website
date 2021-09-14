@@ -352,6 +352,28 @@ export function Toc({ content, extraEntries: extra }) {
 }
 
 export default function DocPage({ docGroup, titleOverride, page, preview }) {
+  const pageTitle = titleOverride || (page && page.title);
+  const defaultSeoTitle = `${
+    docGroup ? `${docGroup.name} - ` : '-'
+  }${pageTitle} - DatoCMS Docs`;
+
+  let seo = [...page._seoMetaTags];
+
+  if (
+    page._seoMetaTags.find(
+      // This is the Dato default title which is not descriptive enough for SEO
+      (t) => t.tag === 'title' && t.content === `${pageTitle} - DatoCMS`,
+    )
+  ) {
+    seo = [
+      ...seo,
+      {
+        content: defaultSeoTitle,
+        tag: 'title',
+      },
+    ];
+  }
+
   return (
     <DocsLayout
       preview={preview}
@@ -360,7 +382,7 @@ export default function DocPage({ docGroup, titleOverride, page, preview }) {
           <Sidebar
             title={docGroup.name}
             entries={
-              docGroup && docGroup.pages.length > 1
+              docGroup.pages.length > 1
                 ? docGroup.pages.map((page) => {
                     return {
                       url: `/docs/${docGroup.slug}${
@@ -387,14 +409,21 @@ export default function DocPage({ docGroup, titleOverride, page, preview }) {
         )
       }
     >
-      <Head>{renderMetaTags(page._seoMetaTags)}</Head>
+      <Head>{renderMetaTags(seo)}</Head>
       <div className={s.articleContainer}>
         {docGroup && docGroup.pages.length > 1 && (
           <Toc content={page.content} />
         )}
         <div className={s.article}>
-          <div className={s.title}>{titleOverride || page.title}</div>
-          <PostContent content={page.content} style={s} />
+          <h1 className={s.kicker}>{`${
+            docGroup && `${docGroup.name} > `
+          }${pageTitle}`}</h1>
+          <div className={s.title}>{pageTitle}</div>
+          <PostContent
+            content={page.content}
+            style={s}
+            defaultAltForImages={defaultSeoTitle}
+          />
         </div>
       </div>
     </DocsLayout>

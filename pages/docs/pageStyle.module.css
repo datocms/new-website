@@ -512,3 +512,11 @@
     border-radius: 0;
   }
 }
+
+.kicker {
+  font-size: rfs(16px);
+  font-weight: bold;
+  color: var(--extra-light-body-color);
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
+}

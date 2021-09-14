@@ -61,7 +61,7 @@ function Zoomable({ children, content }) {
   );
 }
 
-export default function ImageFigure({ data, imageClassName }) {
+export default function ImageFigure({ data, imageClassName, alt, title }) {
   return (
     <figure>
       {data.format === 'gif' && (
@@ -105,7 +105,7 @@ export default function ImageFigure({ data, imageClassName }) {
         >
           <DatoImage
             className={imageClassName}
-            data={{ ...data.responsiveImage, alt: data.alt, title: data.title }}
+            data={{ ...data.responsiveImage, alt, title }}
             style={{
               display: 'inline-block',
               maxWidth: `${data.responsiveImage.width}px`,
