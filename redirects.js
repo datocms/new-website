@@ -313,4 +313,8 @@ module.exports = [
     source: '/enterprise',
     destination: '/enterprise-headless-cms',
   },
+  {
+    source: '/marketplace/starters/nextjs-blog',
+    destination: '/marketplace/starters/nextjs-template-blog',
+  },
 ];
