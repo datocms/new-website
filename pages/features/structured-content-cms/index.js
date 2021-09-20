@@ -189,7 +189,7 @@ function StructuredText({ feature, preview, integrations, review }) {
           }}
         >
           <p>
-            When you need to deliver content not only through the web, but on an
+            When you need to deliver content not only through the web, but on an&nbsp;
             <strong>ever-growing number of different mediums</strong> ranging
             from native apps, voice assistants, e-books, IoT, etc... that&#39;s
             when being able to only create hyperlinks to fixed web addresses
