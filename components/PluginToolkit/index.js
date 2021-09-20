@@ -64,7 +64,7 @@ export const PluginDetails = ({
         <div className={s.header}>
           {kicker && <h1 className={s.kicker}>{kicker}</h1>}
           <h2 className={s.title}>{title}</h2>
-          <div className={s.description}>{description}</div>
+          <p className={s.description}>{description}</p>
           <div className={s.action}>{actions}</div>
         </div>
         {gallery && (

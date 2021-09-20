@@ -48,6 +48,7 @@ export const getStaticProps = handleErrors(
           seo: _seoMetaTags {
             ...seoMetaTagsFields
           }
+          cmsDescription
           seoH1
           yoastAnalysis
           readme(markdown: true)
@@ -109,6 +110,7 @@ const deployments = {
 };
 
 export default function Starters({ page, preview }) {
+  const description = page.cmsDescription || page.description;
   return (
     <Layout preview={preview}>
       <Head>
@@ -120,11 +122,11 @@ export default function Starters({ page, preview }) {
         kicker={page.seoH1}
         title={page.name}
         image={<LogoImage logo={page.technology.logo} />}
-        shortDescription={page.description}
+        shortDescription={description}
         content={page.readme && <SmartMarkdown>{page.readme}</SmartMarkdown>}
         description={
           <>
-            {page.description}. {deployments[page.deploymentType]}
+            {description}. {deployments[page.deploymentType]}
           </>
         }
         actions={
