@@ -59,7 +59,7 @@ export const PluginDetails = ({
   gallery,
 }) => (
   <Wrapper>
-    <div className={s.split}>
+    <div className={s.split} id="main-content">
       <div className={s.content}>
         <div className={s.header}>
           {kicker && <h1 className={s.kicker}>{kicker}</h1>}
@@ -67,20 +67,18 @@ export const PluginDetails = ({
           <div className={s.description}>{description}</div>
           <div className={s.action}>{actions}</div>
         </div>
-        <div id="main-content">
-          {gallery && (
-            <div className={s.gallery}>
-              <div className={s.galleryInner}>
-                {React.Children.map(gallery, (el) => (
-                  <div className={s.galleryImage}>{el}</div>
-                ))}
-              </div>
+        {gallery && (
+          <div className={s.gallery}>
+            <div className={s.galleryInner}>
+              {React.Children.map(gallery, (el) => (
+                <div className={s.galleryImage}>{el}</div>
+              ))}
             </div>
-          )}
-          {announce}
+          </div>
+        )}
+        {announce}
 
-          {content && <div className={s.readme}>{content}</div>}
-        </div>
+        {content && <div className={s.readme}>{content}</div>}
       </div>
       <div className={s.sidebar}>
         <div className={s.sidebarInner}>
