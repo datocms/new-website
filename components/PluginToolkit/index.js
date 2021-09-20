@@ -47,6 +47,7 @@ export const Announce = ({ href, children, center }) => (
 
 export const PluginDetails = ({
   title,
+  kicker,
   shortTitle,
   description,
   shortDescription,
@@ -61,22 +62,25 @@ export const PluginDetails = ({
     <div className={s.split}>
       <div className={s.content}>
         <div className={s.header}>
-          <div className={s.title}>{title}</div>
+          {kicker && <h1 className={s.kicker}>{kicker}</h1>}
+          <h2 className={s.title}>{title}</h2>
           <div className={s.description}>{description}</div>
           <div className={s.action}>{actions}</div>
         </div>
-        {gallery && (
-          <div className={s.gallery}>
-            <div className={s.galleryInner}>
-              {React.Children.map(gallery, (el) => (
-                <div className={s.galleryImage}>{el}</div>
-              ))}
+        <div id="main-content">
+          {gallery && (
+            <div className={s.gallery}>
+              <div className={s.galleryInner}>
+                {React.Children.map(gallery, (el) => (
+                  <div className={s.galleryImage}>{el}</div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-        {announce}
+          )}
+          {announce}
 
-        {content && <div className={s.readme}>{content}</div>}
+          {content && <div className={s.readme}>{content}</div>}
+        </div>
       </div>
       <div className={s.sidebar}>
         <div className={s.sidebarInner}>

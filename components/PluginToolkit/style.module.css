@@ -17,7 +17,8 @@
 
 .title {
   font-weight: bold;
-  font-size: rfs(45px);
+  font-size: rfs(48px);
+  margin: 0;
   margin-bottom: 20px;
   letter-spacing: -0.03em;
 
@@ -383,4 +384,13 @@
   @media (width > 900px) {
     text-align: left;
   }
+}
+
+.kicker {
+  font-size: rfs(18px);
+  margin: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: var(--extra-light-body-color);
+  text-transform: uppercase;
 }

@@ -23,6 +23,8 @@ const findSlugAndPermalink = async ({ item, itemTypeApiKey }) => {
       return [item.slug, `/features/${item.slug}`];
     case 'team_page':
       return [item.slug, `/team/${item.slug}`];
+    case 'template_demo':
+      return [item.slug, `/marketplace/starters/${item.slug}`];
     default:
       return [null, null];
   }

@@ -47,6 +47,8 @@ export const getStaticProps = handleErrors(
           seo: _seoMetaTags {
             ...seoMetaTagsFields
           }
+          seoH1
+          yoastAnalysis
           _firstPublishedAt
           code
           githubRepo
@@ -104,7 +106,7 @@ const deployments = {
   copyRepo: '',
 };
 
-export default function EnterpriseApp({ page, preview }) {
+export default function Starters({ page, preview }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -113,6 +115,7 @@ export default function EnterpriseApp({ page, preview }) {
         <meta name="twitter:image" content={page.screenshot.url} />
       </Head>
       <PluginDetails
+        kicker={page.seoH1}
         title={page.name}
         image={<LogoImage logo={page.technology.logo} />}
         shortDescription={page.description}
