@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import Layout from 'components/MarketplaceLayout';
+import SmartMarkdown from 'components/SmartMarkdown';
 import Button from 'components/Button';
 import FormattedDate from 'components/FormattedDate';
 import UiChrome from 'components/UiChrome';
@@ -49,6 +50,7 @@ export const getStaticProps = handleErrors(
           }
           seoH1
           yoastAnalysis
+          readme(markdown: true)
           _firstPublishedAt
           code
           githubRepo
@@ -119,6 +121,7 @@ export default function Starters({ page, preview }) {
         title={page.name}
         image={<LogoImage logo={page.technology.logo} />}
         shortDescription={page.description}
+        content={page.readme && <SmartMarkdown>{page.readme}</SmartMarkdown>}
         description={
           <>
             {page.description}. {deployments[page.deploymentType]}
