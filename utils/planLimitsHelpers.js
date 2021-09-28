@@ -107,7 +107,12 @@ export const formatLimit = (limit) => {
     return formatLimitRaw(limit);
   }
 
-  if (limit.type === 'countable_system_limit') {
+  if (
+    [
+      'countable_system_limit',
+      'possibly_incompatible_countable_system_limit',
+    ].includes(limit.type)
+  ) {
     return formatLimitRaw(limit);
   }
 
@@ -142,7 +147,12 @@ export const formatLimitRaw = (limit) => {
     return limit.available ? successIcon : warningIcon;
   }
 
-  if (limit.type === 'countable_system_limit') {
+  if (
+    [
+      'countable_system_limit',
+      'possibly_incompatible_countable_system_limit',
+    ].includes(limit.type)
+  ) {
     return formatValue(limit.id, limit.limit);
   }
 
@@ -194,6 +204,9 @@ export const limitType = (type) => {
       return 'Available features';
     }
     case 'countable_system_limit': {
+      return 'Plan limits';
+    }
+    case 'possibly_incompatible_countable_system_limit': {
       return 'Plan limits';
     }
     case 'per_environment_quota_managed_site_resource': {

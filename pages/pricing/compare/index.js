@@ -80,7 +80,10 @@ export default function ComparePricing({ hints, plans, preview }) {
                         limit.type,
                       )
                     ? 'boolean_system_limit'
-                    : limit.type === 'countable_system_limit'
+                    : [
+                        'countable_system_limit',
+                        'possibly_incompatible_countable_system_limit',
+                      ].includes(limit.type)
                     ? 'per_site_quota_managed_site_resource'
                     : limit.type,
               ),
@@ -137,8 +140,10 @@ export default function ComparePricing({ hints, plans, preview }) {
                           })}
                           <td>
                             {limit.type.includes('resource') && 'Custom'}
-                            {limit.type === 'countable_system_limit' &&
-                              'Custom'}
+                            {[
+                              'possibly_incompatible_countable_system_limit',
+                              'countable_system_limit',
+                            ].includes(limit.type) && 'Custom'}
                             {[
                               'activable_feature',
                               'boolean_system_limit',
