@@ -126,7 +126,7 @@ function Enterprise({ page, review1, review2 }) {
           />
         </EnterpriseStrip>
 
-        <Quote review={review1} />
+        <Quote review={review2} />
 
         <EnterpriseStrip
           kicker={page.yoastAnalysis.relatedKeywords[0].keyword}
@@ -151,7 +151,7 @@ function Enterprise({ page, review1, review2 }) {
           />
         </EnterpriseStrip>
 
-        <Quote review={review2} />
+        <Quote review={review1} />
 
         <EnterpriseStrip
           kicker="Safest CMS for enterprise"
