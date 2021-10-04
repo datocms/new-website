@@ -317,4 +317,8 @@ module.exports = [
     source: '/marketplace/starters/nextjs-blog',
     destination: '/marketplace/starters/nextjs-template-blog',
   },
+  {
+    source: '/blog/offer-responsive-progressive-lqip-images-in-2020',
+    destination: '/blog/best-way-of-handling-react-images',
+  },
 ];
