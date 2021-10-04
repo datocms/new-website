@@ -319,6 +319,6 @@ module.exports = [
   },
   {
     source: '/blog/offer-responsive-progressive-lqip-images-in-2020',
-    destination: '/blog/best-way-of-handling-react-images',
+    destination: '/blog/best-way-for-handling-react-images',
   },
 ];
