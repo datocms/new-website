@@ -1,7 +1,7 @@
 import url from 'url';
 
 const handler = (req, res) => {
-  const uri = url.parse(req.query.page || '/', true);
+  const uri = url.parse(req.query.page || req.query.slug || '/', true);
   const sanitizedUrl = `${uri.pathname}${uri.search || ''}`;
 
   res.setPreviewData({});
