@@ -1,0 +1,69 @@
+.action {
+  margin-top: rfs(40px);
+  margin-bottom: rfs(40px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.actionButton {
+  margin-right: 5px;
+
+  @media (width <= 500px) {
+    display: none;
+
+    &:first-child {
+      display: block;
+    }
+  }
+}
+
+.description {
+  a {
+    color: var(--accent-color);
+  }
+}
+
+.logo {
+  height: rfs(150px);
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  font-size: 1.1em;
+
+  li {
+    margin: 0;
+  }
+}
+
+.techLogo {
+  height: 25px;
+  margin-top: 20px;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: 1fr;
+
+  @media (width > 450px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pluginsGrid {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: 1fr;
+
+  @media (width > 450px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (width > 850px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

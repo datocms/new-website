@@ -1,0 +1,30 @@
+.block {
+  margin-bottom: rfs(35px);
+}
+
+.blockTitle {
+  font-weight: bold;
+  margin-bottom: 15px;
+  display: flex;
+  color: var(--light-body-color);
+  position: relative;
+
+  svg {
+    fill: var(--light-body-color);
+    margin-right: 10px;
+
+    @media (width > 1200px) {
+      position: absolute;
+      right: 100%;
+    }
+  }
+}
+
+.separateMoreFromContent {
+  margin-bottom: rfs(70px);
+
+  .blockTitle {
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+}

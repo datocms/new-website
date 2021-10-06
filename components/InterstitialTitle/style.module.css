@@ -4,38 +4,6 @@
   max-width: 800px;
   text-align: center;
   position: relative;
-  [data-with-anchor] {
-    position: relative;
-
-    [data-anchor] {
-      position: absolute;
-      top: -70px;
-    }
-
-    &:hover {
-      [data-permalink] {
-        opacity: 0.5;
-      }
-    }
-
-    [data-permalink] {
-      transition: all 100ms ease-in-out;
-      opacity: 0;
-      background: url('../../public/icons/regular/link.svg');
-      background-size: contain;
-      height: 0.7em;
-      width: 0.7em;
-      display: inline-block;
-
-      svg {
-        fill: var(--accent-color);
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
 }
 
 .one {
@@ -116,4 +84,12 @@
 
 .subtitle {
   margin-top: rfs(60px);
+}
+
+.bigSubtitle {
+  text-align: center;
+  font-size: rfs(27px);
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: bold;
 }

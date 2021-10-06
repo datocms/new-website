@@ -5,6 +5,7 @@ import {
   GoogleCalendar,
   OutlookCalendar,
 } from 'datebook';
+import Space from 'components/Space';
 import {
   Image as DatoImage,
   renderMetaTags,
@@ -30,6 +31,8 @@ import CompanyIcon from 'public/icons/regular/building.svg';
 import VideoIcon from 'public/icons/regular/video.svg';
 import DescriptionIcon from 'public/icons/regular/info.svg';
 import DurationIcon from 'public/icons/regular/clock.svg';
+import SidebarPane from 'components/SidebarPane';
+import StickySidebar from 'components/StickySidebar';
 
 import s from './style.module.css';
 
@@ -133,17 +136,6 @@ const AddCalendar = ({ webinar, p, fs, s: otherS }) => {
   );
 };
 
-export const Info = ({ title, icon, children }) => {
-  return (
-    <div className={s.block}>
-      <div className={s.blockTitle}>
-        {icon} {title}
-      </div>
-      {children}
-    </div>
-  );
-};
-
 export const getStaticPaths = gqlStaticPaths(
   `
     query {
@@ -217,51 +209,14 @@ export default function Webinar({ preview, subscription }) {
     <Layout preview={preview} noCta>
       <Head>{renderMetaTags(webinar._seoMetaTags)}</Head>
       <Wrapper>
-        <div className={s.kicker}>Webinar</div>
+        <Space top={2}>
+          <div className={s.kicker}>Webinar</div>
+        </Space>
 
-        <div className={s.split}>
-          <div className={s.content}>
-            <div className={s.header}>
-              <div className={s.title}>{webinar.title}</div>
-              <DatoImage
-                style={{ display: 'block' }}
-                className={s.coverImage}
-                data={webinar.coverImage.responsiveImage}
-              />
-              <div className={s.description}>
-                <Info icon={<DescriptionIcon />} title="Topic">
-                  {<StructuredText data={webinar.description} />}
-                </Info>
-              </div>
-              <div className={s.action}>
-                {(!webinar.url || new Date(webinar.date) > new Date()) && (
-                  <>
-                    <div className={s.actionButton}>
-                      <AddCalendar webinar={webinar} s="invert" />
-                    </div>
-                    <div className={s.actionWhen}>
-                      <FormattedDate date={webinar.date} /> —{' '}
-                      {new Date(webinar.date).toLocaleTimeString('en-US', {
-                        hour: 'numeric',
-                        minute: '2-digit',
-                        timeZoneName: 'short',
-                      })}
-                    </div>
-                  </>
-                )}
-                {webinar.url && new Date(webinar.date) <= new Date() && (
-                  <div className={s.actionButton}>
-                    <Button as="a" href={webinar.url} target="_blank">
-                      <VideoIcon /> Enter the webinar!
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-          <div className={s.sidebar}>
-            <div className={s.sidebarInner}>
-              <Info icon={<CalendarIcon />} title="When">
+        <StickySidebar
+          sidebar={
+            <>
+              <SidebarPane icon={<CalendarIcon />} title="When">
                 <div className={s.when}>
                   <FormattedDate date={webinar.date} />
                 </div>
@@ -296,11 +251,11 @@ export default function Webinar({ preview, subscription }) {
                     </Button>
                   </div>
                 )}
-              </Info>
-              <Info icon={<DurationIcon />} title="Duration">
+              </SidebarPane>
+              <SidebarPane icon={<DurationIcon />} title="Duration">
                 {webinar.durationMinutes} min
-              </Info>
-              <Info icon={<SpeakersIcon />} title="Speakers">
+              </SidebarPane>
+              <SidebarPane icon={<SpeakersIcon />} title="Speakers">
                 {webinar.speakers.map((speaker) => (
                   <div className={s.speaker} key={speaker.name}>
                     <div className={s.speakerImage}>
@@ -319,8 +274,8 @@ export default function Webinar({ preview, subscription }) {
                     </div>
                   </div>
                 ))}
-              </Info>
-              <Info icon={<CompanyIcon />} title="Brought by">
+              </SidebarPane>
+              <SidebarPane icon={<CompanyIcon />} title="Brought by">
                 {webinar.speakers
                   .filter((s) => s.company !== 'DatoCMS')
                   .map((speaker) => (
@@ -347,10 +302,48 @@ export default function Webinar({ preview, subscription }) {
                       </div>
                     </div>
                   ))}
-              </Info>
+              </SidebarPane>
+            </>
+          }
+        >
+          <>
+            <div className={s.title}>{webinar.title}</div>
+            <DatoImage
+              style={{ display: 'block' }}
+              className={s.coverImage}
+              data={webinar.coverImage.responsiveImage}
+            />
+            <div className={s.description}>
+              <SidebarPane icon={<DescriptionIcon />} title="Topic">
+                {<StructuredText data={webinar.description} />}
+              </SidebarPane>
             </div>
-          </div>
-        </div>
+            <div className={s.action}>
+              {(!webinar.url || new Date(webinar.date) > new Date()) && (
+                <>
+                  <div className={s.actionButton}>
+                    <AddCalendar webinar={webinar} s="invert" />
+                  </div>
+                  <div className={s.actionWhen}>
+                    <FormattedDate date={webinar.date} /> —{' '}
+                    {new Date(webinar.date).toLocaleTimeString('en-US', {
+                      hour: 'numeric',
+                      minute: '2-digit',
+                      timeZoneName: 'short',
+                    })}
+                  </div>
+                </>
+              )}
+              {webinar.url && new Date(webinar.date) <= new Date() && (
+                <div className={s.actionButton}>
+                  <Button as="a" href={webinar.url} target="_blank">
+                    <VideoIcon /> Enter the webinar!
+                  </Button>
+                </div>
+              )}
+            </div>
+          </>
+        </StickySidebar>
       </Wrapper>
     </Layout>
   );

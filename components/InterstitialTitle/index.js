@@ -9,22 +9,31 @@ export default function InterstitialTitle({
   children,
   kicker,
   subtitle,
+  bigSubtitle,
   seoAnalysis,
+  mainTitleOfPage,
+  below,
 }) {
   let Title;
   let Subtitle;
   let Kicker;
 
+  const ifMainTitle = (a, b) => (mainTitleOfPage ? a : b);
+
   if (seoAnalysis) {
     const kickerContainsKeywords = containsKeywords(kicker, seoAnalysis);
-
-    Kicker = kickerContainsKeywords ? 'h2' : 'h3';
-    Title = kicker && kickerContainsKeywords ? 'h3' : 'h2';
+    Kicker = kickerContainsKeywords
+      ? ifMainTitle('h1', 'h2')
+      : ifMainTitle('h2', 'h3');
+    Title =
+      kicker && kickerContainsKeywords
+        ? ifMainTitle('h2', 'h3')
+        : ifMainTitle('h1', 'h2');
     Subtitle =
       subtitle && containsKeywords(subtitle, seoAnalysis) ? 'h4' : 'h6';
   } else {
     Kicker = 'h2';
-    Title = 'h3';
+    Title = ifMainTitle('h1', 'h3');
     Subtitle = 'div';
   }
 
@@ -35,7 +44,7 @@ export default function InterstitialTitle({
           <Heading
             as={Kicker}
             className={styles.kicker}
-            anchor={slugify(kicker)}
+            anchor={ifMainTitle(null, slugify(kicker))}
           >
             {kicker}
           </Heading>
@@ -44,8 +53,13 @@ export default function InterstitialTitle({
           <Title className={styles.title}>{children}</Title>
         </div>
         {subtitle && (
-          <Subtitle className={styles.subtitle}>{subtitle}</Subtitle>
+          <Subtitle
+            className={bigSubtitle ? styles.bigSubtitle : styles.subtitle}
+          >
+            {subtitle}
+          </Subtitle>
         )}
+        {below}
       </div>
     </Wrapper>
   );

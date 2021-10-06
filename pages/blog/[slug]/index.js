@@ -8,7 +8,7 @@ import {
 } from 'lib/datocms';
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import FormattedDate from 'components/FormattedDate';
-import BlogHero from 'components/BlogHero';
+import InterstitialTitle from 'components/InterstitialTitle';
 import PostContent from 'components/PostContent';
 import Head from 'next/head';
 import s from './style.module.css';
@@ -188,13 +188,14 @@ export default function Article({ preview, subscription }) {
         )}
       </Head>
 
-      <BlogHero
+      <InterstitialTitle
         seoAnalysis={post.yoastAnalysis}
         kicker={post.seoH1 || 'The DatoCMS Blog'}
         style="two"
+        mainTitleOfPage
       >
         {post.title}
-      </BlogHero>
+      </InterstitialTitle>
       <Wrapper>
         <div className={s.info}>
           <DatoImage

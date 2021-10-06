@@ -1,0 +1,29 @@
+.split {
+  @media (width > 900px) {
+    display: flex;
+  }
+}
+
+.content {
+  margin-bottom: 30px;
+
+  @media (width > 900px) {
+    margin-right: rfs(110px);
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.sidebar {
+  @media (width <= 900px) {
+    width: auto !important;
+  }
+}
+
+.sidebarInner {
+  @media (width > 900px) {
+    position: sticky;
+    top: 90px;
+  }
+}

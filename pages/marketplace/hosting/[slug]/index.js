@@ -5,7 +5,6 @@ import PostContent from 'components/PostContent';
 import docPageStyles from 'pages/docs/pageStyle.module.css';
 import Layout from 'components/MarketplaceLayout';
 import Button from 'components/Button';
-import FormattedDate from 'components/FormattedDate';
 import { Image as DatoImage } from 'react-datocms';
 import { LogoImage } from 'components/PluginBox';
 import {
