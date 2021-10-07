@@ -127,6 +127,7 @@ export const getStaticProps = handleErrors(
     });
 
     return {
+      revalidate: 60 * 10,
       props: {
         preview: preview || false,
         subscription: preview

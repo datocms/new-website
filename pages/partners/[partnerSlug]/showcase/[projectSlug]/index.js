@@ -142,6 +142,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     ${imageFields}
     ${seoMetaTagsFields}
   `,
+  { revalidate: 60 * 10 },
 );
 
 export default function PartnerPage({ preview, subscription }) {
