@@ -45,35 +45,38 @@ export const getStaticPaths = gqlStaticPaths(
 
 export const getStaticProps = handleErrors(
   async ({ params: { partnerSlug }, preview }) => {
-    const { data } = await request({
+    const gqlRequest = {
       query: `
-      query PartnerQuery($partnerSlug: String!) {
-        partner(filter: { slug: { eq: $partnerSlug }, hidden: { eq: false } }) {
-          id
-          slug
-          _seoMetaTags {
-            ...seoMetaTagsFields
-          }
-          name
-          shortDescription { value }
-          logo { url }
-          description { value }
-          publicContactEmail
-          websiteUrl
-          areasOfExpertise { name slug }
-          technologies {
-            name
+        query PartnerQuery($partnerSlug: String!) {
+          partner(filter: { slug: { eq: $partnerSlug }, hidden: { eq: false } }) {
+            id
             slug
+            _seoMetaTags {
+              ...seoMetaTagsFields
+            }
+            name
+            shortDescription { value }
+            logo { url }
+            description { value }
+            publicContactEmail
+            websiteUrl
+            areasOfExpertise { name slug }
+            technologies {
+              name
+              slug
+            }
+            locations { name emoji continent { name } }
+            npmUser { id }
           }
-          locations { name emoji continent { name } }
-          npmUser { id }
         }
-      }
 
-      ${seoMetaTagsFields}
-    `,
+        ${seoMetaTagsFields}
+      `,
       variables: { partnerSlug },
-    });
+      preview: preview || false,
+    };
+
+    const { data } = await request(gqlRequest);
 
     if (!data.partner) {
       return { notFound: true };
@@ -128,9 +131,8 @@ export const getStaticProps = handleErrors(
         preview: preview || false,
         subscription: preview
           ? {
-              query,
+              ...gqlRequest,
               token: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
-              preview: true,
               enabled: true,
               initialData: data,
             }
