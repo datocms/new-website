@@ -19,6 +19,7 @@
 }
 
 .description {
+  max-width: 600px;
   a {
     color: var(--accent-color);
   }
