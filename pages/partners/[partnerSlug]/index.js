@@ -82,11 +82,15 @@ export const getStaticProps = handleErrors(
       return { notFound: true };
     }
 
+    const authorId = data.partner.npmUser?.id;
+
     const {
       data: { projects, plugins },
     } = await request({
       query: `
-        query ExtraProjectsQuery($partnerId: ItemId!, $authorId: ItemId!) {
+        query ExtraProjectsQuery($partnerId: ItemId! ${
+          authorId ? `, $authorId: ItemId!` : ''
+        }) {
           projects: allShowcaseProjects(filter: { partner: { eq: $partnerId }, hidden: { eq: false } }) {
             name
             slug
@@ -105,16 +109,22 @@ export const getStaticProps = handleErrors(
               }
             }
           }
-          plugins: allPlugins(filter: { author: { eq: $authorId }, manuallyDeprecated: { eq: false } }, orderBy: installs_DESC) {
-            title
-            description
-            releasedAt
-            packageName
-            coverImage {
-              responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
-                ...imageFields
-              }
-            }
+          ${
+            authorId
+              ? `
+                plugins: allPlugins(filter: { author: { eq: $authorId }, manuallyDeprecated: { eq: false } }, orderBy: installs_DESC) {
+                  title
+                  description
+                  releasedAt
+                  packageName
+                  coverImage {
+                    responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
+                      ...imageFields
+                    }
+                  }
+                }
+              `
+              : ''
           }
         }
 
@@ -122,7 +132,7 @@ export const getStaticProps = handleErrors(
     `,
       variables: {
         partnerId: data.partner.id,
-        authorId: data.partner.npmUser.id,
+        authorId,
       },
     });
 
@@ -139,7 +149,7 @@ export const getStaticProps = handleErrors(
             }
           : { enabled: false, initialData: data },
         projects,
-        plugins,
+        plugins: plugins || [],
       },
     };
   },
@@ -183,7 +193,12 @@ export default function PartnerPage({
           <StickySidebar
             sidebar={
               <>
-                <SidebarPane icon={<MapPinIcon />} title="Locations">
+                <SidebarPane
+                  icon={<MapPinIcon />}
+                  title={
+                    partner.locations.length > 1 ? 'Locations' : 'Location'
+                  }
+                >
                   <ul className={s.list}>
                     {partner.locations.map((area) => (
                       <li key={area.slug}>{area.name}</li>
