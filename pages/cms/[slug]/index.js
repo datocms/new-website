@@ -8,7 +8,7 @@ import {
   reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { renderMetaTags, StructuredText } from 'react-datocms';
+import { StructuredText, useQuerySubscription } from 'react-datocms';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';
@@ -59,9 +59,7 @@ export const getStaticPaths = gqlStaticPaths(
 
 export const getStaticProps = handleErrors(
   async ({ params: { slug }, preview }) => {
-    const {
-      data: { landing },
-    } = await request({
+    const gqlRequest = {
       preview,
       variables: { slug },
       query: `
@@ -170,9 +168,11 @@ export const getStaticProps = handleErrors(
       ${imageFields}
       ${reviewFields}
     `,
-    });
+    };
 
-    if (!landing) {
+    const { data } = await request(gqlRequest);
+
+    if (!data.landing) {
       return { notFound: true };
     }
 
@@ -180,7 +180,7 @@ export const getStaticProps = handleErrors(
       data: { websites },
     } = await request({
       preview,
-      variables: { technologyId: landing.integration.id },
+      variables: { technologyId: data.landing.integration.id },
       query: `
       query($technologyId: ItemId!) {
         websites: allWebsites(
@@ -211,12 +211,27 @@ export const getStaticProps = handleErrors(
     }, []);
 
     return {
-      props: { preview: preview || false, landing, websites: sortedWebsites },
+      props: {
+        preview: preview || false,
+        subscription: preview
+          ? {
+              ...gqlRequest,
+              token: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
+              enabled: true,
+              initialData: data,
+            }
+          : { enabled: false, initialData: data },
+        websites: sortedWebsites,
+      },
     };
   },
 );
 
-export default function UseCase({ landing, websites, preview }) {
+export default function UseCase({ subscription, websites, preview }) {
+  const {
+    data: { landing },
+  } = useQuerySubscription(subscription);
+
   useEffect(() => {
     const el = document.getElementById(`centerwebsite`);
 
