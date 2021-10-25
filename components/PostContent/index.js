@@ -1,5 +1,6 @@
 import ResponsiveEmbed from 'react-responsive-embed';
 import VideoPlayer from 'components/VideoPlayer';
+import Link from 'next/link';
 import ImageFigure from 'components/ImageFigure';
 import Prism from 'components/Prism';
 import defaultStyles from './style.module.css';
@@ -18,6 +19,7 @@ import Heading from 'components/Heading';
 import queryString from 'qs';
 import Corona from 'public/images/illustrations/live-4.svg';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import CodeSandboxIcon from 'public/icons/brands/codesandbox.svg';
 
 function renderBlock(s, block, defaultAltForImages) {
   switch (block._modelApiKey) {
@@ -206,12 +208,20 @@ function renderBlock(s, block, defaultAltForImages) {
     case 'codesandbox_embed_block':
       return (
         <div className={s.unwrap}>
-          <iframe
-            loading="lazy"
-            src={`https://codesandbox.io/embed/${block.slug}?codemirror=1&hidedevtools=1&fontsize=13&editorsize=20`}
-            allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-            sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-          />
+          <Link href={`https://codesandbox.io/s/${block.slug}`} target="_blank">
+            <a className={s.link} target="_blank" rel="noreferrer">
+              <DatoImage
+                className={s.responsiveImage}
+                data={block.preview.responsiveImage}
+              />
+              <div className={s.lightbox}>
+                <button className={s.lightboxButton}>
+                  <CodeSandboxIcon />
+                  Try it on CodeSandbox!
+                </button>
+              </div>
+            </a>
+          </Link>
         </div>
       );
   }

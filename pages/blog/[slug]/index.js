@@ -66,6 +66,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               id
               _modelApiKey
               slug
+              preview {
+                responsiveImage(imgixParams: { h: 500 }) {
+                  ...imageFields
+                }
+              }
             }
             ... on VideoRecord {
               id
