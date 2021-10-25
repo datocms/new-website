@@ -136,6 +136,7 @@ function renderBlock(s, block, defaultAltForImages) {
       return (
         <div className={s.unwrap}>
           <iframe
+            loading="lazy"
             src={`https://cda-explorer.datocms.com/?${queryString.stringify({
               embed: true,
               apitoken: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
@@ -206,6 +207,7 @@ function renderBlock(s, block, defaultAltForImages) {
       return (
         <div className={s.unwrap}>
           <iframe
+            loading="lazy"
             src={`https://codesandbox.io/embed/${block.slug}?codemirror=1&hidedevtools=1&fontsize=13&editorsize=20`}
             allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
             sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
