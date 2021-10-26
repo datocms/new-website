@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react';
-import Hls from 'hls.js';
 
 export default function VideoPlayer({ src, autoPlay, ...other }) {
   const ref = useRef();
@@ -18,27 +17,37 @@ export default function VideoPlayer({ src, autoPlay, ...other }) {
       return;
     }
 
-    if (!Hls.isSupported()) {
-      console.log('HLS not supported and HLS is not supported natively!');
-      return;
-    }
+    let destroy;
 
-    const hls = new Hls();
+    const attachHls = async () => {
+      const { default: Hls } = await import('hls.js');
 
-    hls.attachMedia(ref.current);
+      if (!Hls.isSupported()) {
+        console.log('HLS not supported and HLS is not supported natively!');
+        return;
+      }
 
-    hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-      hls.loadSource(src);
-      hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-        if (autoPlay) {
-          ref.current.play();
-        }
+      const hls = new Hls();
+
+      hls.attachMedia(ref.current);
+
+      hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+        hls.loadSource(src);
+        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+          if (autoPlay) {
+            ref.current.play();
+          }
+        });
       });
-    });
+
+      destroy = () => hls.destroy();
+    };
+
+    attachHls();
 
     return () => {
-      if (hls) {
-        hls.destroy();
+      if (destroy) {
+        destroy();
       }
     };
   }, [autoPlay, src]);

@@ -3,6 +3,10 @@ const dotenvLoad = require('dotenv-load');
 const path = require('path');
 const redirects = require('./redirects');
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 dotenvLoad();
 
 const withNextEnv = nextEnv();
@@ -18,71 +22,73 @@ const svgTemplate = (
   `;
 };
 
-module.exports = withNextEnv({
-  async redirects() {
-    return redirects.map((r) => ({ ...r, statusCode: 301 }));
-  },
-  async headers() {
-    return [
-      {
-        source: '/(.*)?', // Matches all pages
-        headers: [
+module.exports = withNextEnv(
+  withBundleAnalyzer({
+    async redirects() {
+      return redirects.map((r) => ({ ...r, statusCode: 301 }));
+    },
+    async headers() {
+      return [
+        {
+          source: '/(.*)?', // Matches all pages
+          headers: [
+            {
+              key: 'strict-transport-security',
+              value: 'max-age=63072000; includeSubdomains; preload',
+            },
+            {
+              key: 'x-content-type-options',
+              value: 'nosniff',
+            },
+            {
+              key: 'x-frame-options',
+              value: 'DENY',
+            },
+            {
+              key: 'x-xss-protection',
+              value: '1; mode=block',
+            },
+          ],
+        },
+      ];
+    },
+    images: {
+      disableStaticImages: true,
+    },
+    webpack(config) {
+      config.resolve.modules.push(path.resolve('./'));
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        issuer: /\.jsx?$/,
+        include: [path.resolve('./public/images')],
+        use: [
           {
-            key: 'strict-transport-security',
-            value: 'max-age=63072000; includeSubdomains; preload',
-          },
-          {
-            key: 'x-content-type-options',
-            value: 'nosniff',
-          },
-          {
-            key: 'x-frame-options',
-            value: 'DENY',
-          },
-          {
-            key: 'x-xss-protection',
-            value: '1; mode=block',
+            loader: '@svgr/webpack',
+            options: {
+              icon: false,
+              template: svgTemplate,
+            },
           },
         ],
-      },
-    ];
-  },
-  images: {
-    disableStaticImages: true,
-  },
-  webpack(config) {
-    config.resolve.modules.push(path.resolve('./'));
+      });
 
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: /\.jsx?$/,
-      include: [path.resolve('./public/images')],
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            icon: false,
-            template: svgTemplate,
+      config.module.rules.push({
+        test: /\.svg$/,
+        issuer: /\.jsx?$/,
+        include: [path.resolve('./public/icons')],
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              icon: true,
+              template: svgTemplate,
+            },
           },
-        },
-      ],
-    });
+        ],
+      });
 
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: /\.jsx?$/,
-      include: [path.resolve('./public/icons')],
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            icon: true,
-            template: svgTemplate,
-          },
-        },
-      ],
-    });
-
-    return config;
-  },
-});
+      return config;
+    },
+  }),
+);
