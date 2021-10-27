@@ -48,7 +48,7 @@
     "json-schema-ref-parser": "^9.0.9",
     "keyword-highlighter": "^1.0.6",
     "min-md5": "^1.0.0",
-    "next": "^11.0.0",
+    "next": "^12.0.0",
     "next-env": "^1.1.1",
     "nprogress": "^0.2.0",
     "paginator": "^1.0.0",
@@ -107,5 +107,8 @@
     "unified": "^9.2.1",
     "unist-util-inspect": "^7.0.0",
     "unist-util-map": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=14.x"
   }
 }
