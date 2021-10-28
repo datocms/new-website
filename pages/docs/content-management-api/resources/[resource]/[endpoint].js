@@ -74,10 +74,9 @@ export const getStaticProps = handleErrors(async function ({
     return { notFound: true };
   }
 
-  const cma = await fetchCma(resource);
-  const link = parse(cma).schema.links.find((link) => link.rel === endpoint);
+  const cma = await fetchCma(resource, endpoint);
 
-  if (!link) {
+  if (!cma) {
     return { notFound: true };
   }
 
@@ -91,124 +90,114 @@ export const getStaticProps = handleErrors(async function ({
   };
 });
 
-const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
-
 export default function DocPage({ docGroup, cma, preview, endpoint }) {
   const router = useRouter();
-  const result = useMemo(() => cma && parse(cma), [cma]);
-  const link =
-    result && result.schema.links.find((link) => link.rel === endpoint);
+  const result = useMemo(() => parse(cma), [cma]);
+  const link = result.schema.links.find((link) => link.rel === endpoint);
 
   return (
     <DocsLayout
       languageSwitch
       preview={preview}
       sidebar={
-        docGroup &&
-        result && (
-          <Sidebar
-            title={docGroup.name}
-            entries={[].concat(
-              docGroup.pages.map((page) => {
-                return {
-                  url: `/docs/${docGroup.slug}${
-                    page.page.slug === 'index' ? '' : `/${page.page.slug}`
-                  }`,
-                  label: page.titleOverride || page.page.title,
-                };
-              }),
-              result.toc.map((entry) => {
-                return {
-                  ...entry,
-                  children: entry.children.map((resourceEntry) => {
-                    return {
-                      ...resourceEntry,
-                      children:
-                        router.query.resource === resourceEntry.slug
-                          ? resourceEntry.children
-                          : [],
-                    };
-                  }),
-                };
-              }),
-            )}
-          />
-        )
+        <Sidebar
+          title={docGroup.name}
+          entries={[].concat(
+            docGroup.pages.map((page) => {
+              return {
+                url: `/docs/${docGroup.slug}${
+                  page.page.slug === 'index' ? '' : `/${page.page.slug}`
+                }`,
+                label: page.titleOverride || page.page.title,
+              };
+            }),
+            result.toc.map((entry) => {
+              return {
+                ...entry,
+                children: entry.children.map((resourceEntry) => {
+                  return {
+                    ...resourceEntry,
+                    children:
+                      router.query.resource === resourceEntry.slug
+                        ? resourceEntry.children
+                        : [],
+                  };
+                }),
+              };
+            }),
+          )}
+        />
       }
     >
-      {result && (
-        <>
-          <Head>
-            <title>
-              {link.title} - {result.schema.title} - Content Management API
-            </title>
-          </Head>
-          <div className={s.articleContainer}>
-            <div className={s.article}>
-              <div className={s.title}>{link.title}</div>
-              <div className={s.body}>
-                {link.description && (
-                  <ReactMarkdown
-                    remarkPlugins={[gfm]}
-                    rehypePlugins={[rehypeRaw]}
-                    components={{
-                      // eslint-disable-next-line react/display-name
-                      pre: ({ children }) => <>{children}</>,
-                      // eslint-disable-next-line react/display-name
-                      code: ({ inline, className, children }) => {
-                        const match = /language-(\w+)/.exec(className || '');
-                        return inline ? (
-                          <code>{children}</code>
-                        ) : (
-                          <Prism
-                            code={String(children).replace(/\n$/, '')}
-                            language={match ? match[1] : 'unknown'}
-                            showLineNumbers
-                          />
-                        );
-                      },
-                    }}
-                  >
-                    {link.description}
-                  </ReactMarkdown>
-                )}
-                {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
-                {link.schema && (
-                  <Schema
-                    title="Parameters"
-                    schema={link.schema.properties.data}
-                    showId={link.method !== 'PUT'}
-                  />
-                )}
-                {link && <TargetSchema link={link} />}
+      <Head>
+        <title>
+          {link.title} - {result.schema.title} - Content Management API
+        </title>
+      </Head>
+      <div className={s.articleContainer}>
+        <div className={s.article}>
+          <div className={s.title}>{link.title}</div>
+          <div className={s.body}>
+            {link.description && (
+              <ReactMarkdown
+                remarkPlugins={[gfm]}
+                rehypePlugins={[rehypeRaw]}
+                components={{
+                  // eslint-disable-next-line react/display-name
+                  pre: ({ children }) => <>{children}</>,
+                  // eslint-disable-next-line react/display-name
+                  code: ({ inline, className, children }) => {
+                    const match = /language-(\w+)/.exec(className || '');
+                    return inline ? (
+                      <code>{children}</code>
+                    ) : (
+                      <Prism
+                        code={String(children).replace(/\n$/, '')}
+                        language={match ? match[1] : 'unknown'}
+                        showLineNumbers
+                      />
+                    );
+                  },
+                }}
+              >
+                {link.description}
+              </ReactMarkdown>
+            )}
+            {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
+            {link.schema && (
+              <Schema
+                title="Parameters"
+                schema={link.schema.properties.data}
+                showId={link.method !== 'PUT'}
+              />
+            )}
+            {link && <TargetSchema link={link} />}
 
-                <h4>Examples</h4>
-                <LanguageConsumer>
-                  {(language) => (
-                    <>
-                      {language === 'http' && (
-                        <HttpExample
-                          resource={result.schema}
-                          link={link}
-                          jobRetrieveLink={result.jobRetrieveLink}
-                        />
-                      )}
-
-                      {language === 'javascript' && (
-                        <JsExample resource={result.schema} link={link} />
-                      )}
-
-                      {language === 'ruby' && (
-                        <RubyExample resource={result.schema} link={link} />
-                      )}
-                    </>
+            <h4>Examples</h4>
+            <LanguageConsumer>
+              {(language) => (
+                <>
+                  {language === 'http' && (
+                    <HttpExample
+                      resource={result.schema}
+                      link={link}
+                      jobRetrieveLink={result.jobRetrieveLink}
+                    />
                   )}
-                </LanguageConsumer>
-              </div>
-            </div>
+
+                  {language === 'javascript' && (
+                    <JsExample resource={result.schema} link={link} />
+                  )}
+
+                  {language === 'ruby' && (
+                    <RubyExample resource={result.schema} link={link} />
+                  )}
+                </>
+              )}
+            </LanguageConsumer>
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </DocsLayout>
   );
 }

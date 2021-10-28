@@ -40,20 +40,28 @@ export const getStaticProps = handleErrors(
 
     const cma = await fetchCma();
 
+    if (!cma) {
+      return { notFound: true };
+    }
+
     return { props: { ...props, cma } };
   },
 );
 
-export default function DocPage(props) {
-  const { docGroup, titleOverride, page, cma, preview } = props;
-  const result = useMemo(() => cma && parse(cma), [cma]);
+export default function DocPage({
+  docGroup,
+  titleOverride,
+  page,
+  cma,
+  preview,
+}) {
+  const result = useMemo(() => parse(cma), [cma]);
 
   return (
     <DocsLayout
       preview={preview}
       sidebar={
-        docGroup &&
-        result && (
+        docGroup && (
           <Sidebar
             title={docGroup.name}
             entries={[].concat(
@@ -81,18 +89,14 @@ export default function DocPage(props) {
         )
       }
     >
-      {page && (
-        <>
-          <Head>{renderMetaTags(page._seoMetaTags)}</Head>
-          <div className={s.articleContainer}>
-            <Toc content={page.content} />
-            <div className={s.article}>
-              <div className={s.title}>{titleOverride || page.title}</div>
-              <PostContent content={page.content} style={s} />
-            </div>
-          </div>
-        </>
-      )}
+      <Head>{renderMetaTags(page._seoMetaTags)}</Head>
+      <div className={s.articleContainer}>
+        <Toc content={page.content} />
+        <div className={s.article}>
+          <div className={s.title}>{titleOverride || page.title}</div>
+          <PostContent content={page.content} style={s} />
+        </div>
+      </div>
     </DocsLayout>
   );
 }

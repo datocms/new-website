@@ -48,7 +48,13 @@ function JsonSchemaObjectWithPatternProperties({ prefix, schema, depth }) {
   return depth >= 1 ? <div className={s.properties}>{content}</div> : content;
 }
 
-export function JsonSchemaObject({ prefix, schema, depth, objectIsOptional }) {
+export function JsonSchemaObject({
+  prefix,
+  schema,
+  depth,
+  objectIsOptional,
+  showProperties = 'all',
+}) {
   const isDefinition = useContext(DefinitionContext);
 
   // in definitions all properties are always required, and
@@ -102,45 +108,47 @@ export function JsonSchemaObject({ prefix, schema, depth, objectIsOptional }) {
 
   const content = (
     <>
-      {[...requiredProperties, ...optionalProperties].map((name) => {
-        const property = schema.properties[name];
+      {['all', 'requiredAndOptional'].includes(showProperties) &&
+        [...requiredProperties, ...optionalProperties].map((name) => {
+          const property = schema.properties[name];
 
-        return (
-          <JsonSchemaProperty
-            key={name}
-            requird={requiredProperties.includes(name)}
-            name={name}
-            prefix={prefix}
-            schema={property}
-            depth={depth + 1}
-          />
-        );
-      })}
-      {deprecatedProperties.length > 0 && (
-        <div className={s.deprecatedBlock}>
-          <ExpandablePane
-            label="deprecated"
-            onToggle={() => setOpen((x) => !x)}
-            open={isOpen}
-          >
-            <div className={s.deprecatedBlockInner}>
-              {deprecatedProperties.map((name) => {
-                const property = schema.properties[name];
+          return (
+            <JsonSchemaProperty
+              key={name}
+              requird={requiredProperties.includes(name)}
+              name={name}
+              prefix={prefix}
+              schema={property}
+              depth={depth + 1}
+            />
+          );
+        })}
+      {['all', 'deprecated'].includes(showProperties) &&
+        deprecatedProperties.length > 0 && (
+          <div className={s.deprecatedBlock}>
+            <ExpandablePane
+              label="deprecated"
+              onToggle={() => setOpen((x) => !x)}
+              open={isOpen}
+            >
+              <div className={s.deprecatedBlockInner}>
+                {deprecatedProperties.map((name) => {
+                  const property = schema.properties[name];
 
-                return (
-                  <JsonSchemaProperty
-                    key={name}
-                    name={name}
-                    prefix={prefix}
-                    schema={property}
-                    depth={depth + 1}
-                  />
-                );
-              })}
-            </div>
-          </ExpandablePane>
-        </div>
-      )}
+                  return (
+                    <JsonSchemaProperty
+                      key={name}
+                      name={name}
+                      prefix={prefix}
+                      schema={property}
+                      depth={depth + 1}
+                    />
+                  );
+                })}
+              </div>
+            </ExpandablePane>
+          </div>
+        )}
     </>
   );
 
@@ -516,6 +524,7 @@ export function Schema({ title, schema, showId }) {
                 depth={0}
                 prefix={language === 'http' ? 'attributes.' : null}
                 objectIsOptional={!schema.required.includes('attributes')}
+                showProperties="requiredAndOptional"
                 schema={schema.properties.attributes}
               />
             )}
@@ -533,6 +542,16 @@ export function Schema({ title, schema, showId }) {
               relationships={schema.properties.relationships}
             />
           )}
+          {schema.properties.attributes &&
+            schema.properties.attributes.properties && (
+              <JsonSchemaObject
+                depth={0}
+                prefix={language === 'http' ? 'attributes.' : null}
+                objectIsOptional={!schema.required.includes('attributes')}
+                showProperties="deprecated"
+                schema={schema.properties.attributes}
+              />
+            )}
         </>
       )}
     </LanguageConsumer>

@@ -37,47 +37,78 @@ const buildToc = (schema) => {
   });
 };
 
-const normalizeSchema = (resource, resourceSchema) => ({
-  id: resource,
-  ...resourceSchema,
-  attributes: resourceSchema.definitions.attributes
-    ? resourceSchema.definitions.attributes.properties
-    : {},
-  links: resourceSchema.links
-    .filter((l) => !l.private)
-    .map((link) => ({
-      ...link,
-    })),
-});
+function trimSchema(schema, exceptResourceId) {
+  Object.keys(schema.properties).forEach((nthResourceId) => {
+    if (exceptResourceId === nthResourceId) {
+      return;
+    }
 
-export default async function buildCmaResources(resource) {
-  const url = 'http://localhost:3001/docs/site-api-hyperschema.json';
-  // const url = 'https://site-api.datocms.com/docs/site-api-hyperschema.json';
+    delete schema.properties[nthResourceId].links;
+    delete schema.properties[nthResourceId].description;
+    delete schema.properties[nthResourceId].definitions.data;
+    delete schema.properties[nthResourceId].definitions.attributes;
+    delete schema.properties[nthResourceId].definitions.relationships;
+    delete schema.properties[nthResourceId].definitions.meta;
+  });
+}
+
+export default async function buildCmaResources(resourceSlug, linkRel) {
+  // const url = 'http://localhost:3001/docs/site-api-hyperschema.json';
+  const url = 'https://site-api.datocms.com/docs/site-api-hyperschema.json';
 
   const { body: unreferencedSchema } = await tiny.get({ url });
 
-  const schema = await parser.dereference(unreferencedSchema);
-  const resources = Object.keys(schema.properties);
-  const resourceId = resource && resource.replace(/\-/g, '_');
+  const completeSchema = await parser.dereference(unreferencedSchema);
+  const jobRetrieveLink = completeSchema.properties['job_result'].links.find(
+    (link) => link.rel === 'self',
+  );
+  const toc = buildToc(completeSchema);
 
-  if (!resource) {
-    return stringify({
-      toc: buildToc(schema),
-    });
+  if (!resourceSlug) {
+    return stringify({ toc });
   }
+
+  const resourceId = resourceSlug.replace(/\-/g, '_');
+  const resources = Object.keys(completeSchema.properties);
 
   if (!resources.includes(resourceId)) {
     return null;
   }
 
-  const result = {
-    toc: buildToc(schema, resourceId),
-    schema: normalizeSchema(resourceId, schema.properties[resourceId]),
-    jobRetrieveLink: normalizeSchema(
-      'job_result',
-      schema.properties['job_result'],
-    ).links.find((link) => link.rel === 'self'),
-  };
+  trimSchema(completeSchema, resourceId);
 
-  return stringify(result);
+  const schema = completeSchema.properties[resourceId];
+
+  if (!linkRel) {
+    return stringify({
+      toc,
+      schema: {
+        ...schema,
+        id: resourceId,
+        attributes: schema.definitions.attributes
+          ? schema.definitions.attributes.properties
+          : {},
+        links: schema.links.map(({ rel, title }) => ({ rel, title })),
+      },
+    });
+  }
+
+  const link = schema.links.find((link) => link.rel === linkRel);
+
+  if (!link) {
+    return null;
+  }
+
+  return stringify({
+    toc,
+    jobRetrieveLink,
+    schema: {
+      ...schema,
+      id: resourceId,
+      attributes: schema.definitions.attributes
+        ? schema.definitions.attributes.properties
+        : {},
+      links: schema.links.filter((l) => l.rel === linkRel),
+    },
+  });
 }
