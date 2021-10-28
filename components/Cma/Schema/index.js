@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import s from './style.module.css';
 import { LanguageConsumer } from 'components/LanguagePicker';
 import humps from 'humps';
@@ -7,9 +7,11 @@ import ReactMarkdown from 'react-markdown';
 import PlusIcon from 'public/icons/regular/plus.svg';
 import TimesIcon from 'public/icons/regular/times.svg';
 
+const DefinitionContext = createContext(false);
+
 const toArray = (t) => (Array.isArray(t) ? t : [t]);
 
-const Button = ({ children, label, open, onToggle }) => (
+const ExpandablePane = ({ children, label, open, onToggle }) => (
   <>
     <button className={s.button} onClick={() => onToggle((open) => !open)}>
       {open ? <TimesIcon /> : <PlusIcon />}
@@ -19,7 +21,7 @@ const Button = ({ children, label, open, onToggle }) => (
   </>
 );
 
-function PatternProperties({ prefix, schema, level, hideRequiredOptional }) {
+function JsonSchemaObjectWithPatternProperties({ prefix, schema, depth }) {
   const content = (
     <>
       {Object.entries(schema.patternProperties).map(([keyPattern, schema]) => {
@@ -30,94 +32,119 @@ function PatternProperties({ prefix, schema, level, hideRequiredOptional }) {
         }
 
         return (
-          <JsonSchema
+          <JsonSchemaProperty
             key={keyPattern}
             required
-            hideRequiredOptional={hideRequiredOptional}
             name={keyPattern}
             prefix={prefix}
             schema={schema}
-            level={level + 1}
+            depth={depth + 1}
           />
         );
       })}
     </>
   );
 
-  return level >= 1 ? <div className={s.properties}>{content}</div> : content;
+  return depth >= 1 ? <div className={s.properties}>{content}</div> : content;
 }
 
-export function Properties({
-  prefix,
-  schema,
-  level,
-  groupIsRequired,
-  hideRequiredOptional,
-}) {
-  const required = groupIsRequired ? schema.required || [] : [];
+export function JsonSchemaObject({ prefix, schema, depth, objectIsOptional }) {
+  const isDefinition = useContext(DefinitionContext);
+
+  // in definitions all properties are always required, and
+  // objectIsOptional is always false (that is, responses are all
+  // with the same format). So in an endpoint schema it is important
+  // to show deprecated properties that are required, while they can
+  // be hidden in definitions
+
+  // but even if in definitions required properties are not important,
+  // (they all are), we want to use it to sort properties
+
+  const required = objectIsOptional ? [] : schema.required || [];
+
+  const allProperties = Object.keys(schema.properties).filter((name) => {
+    const property = schema.properties[name];
+    return !property.hideFromDocs;
+  });
+
+  const requiredProperties = required.filter((name) => {
+    const property = schema.properties[name];
+
+    if (property.hideFromDocs) {
+      return false;
+    }
+
+    if (!isDefinition) {
+      return true;
+    }
+
+    return !property.deprecated;
+  });
+
+  const optionalProperties = [];
+  const deprecatedProperties = [];
+
+  allProperties.forEach((name) => {
+    if (requiredProperties.includes(name)) {
+      return;
+    }
+
+    const property = schema.properties[name];
+
+    if (property.deprecated) {
+      deprecatedProperties.push(name);
+    } else {
+      optionalProperties.push(name);
+    }
+  });
+
+  const [isOpen, setOpen] = useState(false);
 
   const content = (
     <>
-      {required.map((name) => (
-        <JsonSchema
-          key={name}
-          required
-          hideRequiredOptional={hideRequiredOptional}
-          name={name}
-          prefix={prefix}
-          schema={schema.properties[name]}
-          level={level + 1}
-        />
-      ))}
-      {Object.entries(schema.properties)
-        .filter(
-          ([name, schema]) =>
-            !required.includes(name) &&
-            !schema.deprecated &&
-            !schema.hideFromDocs,
-        )
-        .map(([name, schema]) => (
-          <JsonSchema
+      {[...requiredProperties, ...optionalProperties].map((name) => {
+        const property = schema.properties[name];
+
+        return (
+          <JsonSchemaProperty
             key={name}
-            hideRequiredOptional={hideRequiredOptional}
+            requird={requiredProperties.includes(name)}
             name={name}
             prefix={prefix}
-            schema={schema}
-            level={level + 1}
+            schema={property}
+            depth={depth + 1}
           />
-        ))}
+        );
+      })}
+      {deprecatedProperties.length > 0 && (
+        <div className={s.deprecatedBlock}>
+          <ExpandablePane
+            label="deprecated"
+            onToggle={() => setOpen((x) => !x)}
+            open={isOpen}
+          >
+            <div className={s.deprecatedBlockInner}>
+              {deprecatedProperties.map((name) => {
+                const property = schema.properties[name];
+
+                return (
+                  <JsonSchemaProperty
+                    key={name}
+                    name={name}
+                    prefix={prefix}
+                    schema={property}
+                    depth={depth + 1}
+                  />
+                );
+              })}
+            </div>
+          </ExpandablePane>
+        </div>
+      )}
     </>
   );
 
-  return level >= 1 ? <div className={s.properties}>{content}</div> : content;
-}
-
-function Deprecated({ prefix, schema, level, hideRequiredOptional }) {
-  const required = schema.required || [];
-
-  const deprecated = Object.entries(schema.properties).filter(
-    ([name, schema]) => !required.includes(name) && schema.deprecated,
-  );
-
-  if (deprecated.length == 0) {
-    return null;
-  }
-
-  return (
-    <>
-      <div className={s.deprecatedTitle}>Deprecated</div>
-      {deprecated.map(([name, schema]) => (
-        <JsonSchema
-          key={name}
-          hideRequiredOptional={hideRequiredOptional}
-          name={name}
-          prefix={prefix}
-          schema={schema}
-          level={level + 1}
-        />
-      ))}
-    </>
-  );
+  return depth >= 1 ? <div className={s.properties}>{content}</div> : content;
 }
 
 function Enum({ values, description }) {
@@ -181,7 +208,8 @@ function Type({ schema }) {
   );
 }
 
-function Relationship({ name, schema, required, hideRequiredOptional }) {
+function Relationship({ name, schema, required }) {
+  const isDefinition = useContext(DefinitionContext);
   const dataSchema = schema.properties.data;
 
   const isArray = dataSchema.type === 'array';
@@ -261,7 +289,7 @@ function Relationship({ name, schema, required, hideRequiredOptional }) {
                 })}
               </span>
             )}
-            {!hideRequiredOptional && (
+            {!isDefinition && (
               <>
                 &nbsp;&nbsp;
                 {required ? (
@@ -283,12 +311,8 @@ function Relationship({ name, schema, required, hideRequiredOptional }) {
   );
 }
 
-function Relationships({
-  relationships,
-  groupIsRequired,
-  hideRequiredOptional,
-}) {
-  const required = groupIsRequired ? relationships.required || [] : [];
+function Relationships({ relationships, objectIsOptional }) {
+  const required = objectIsOptional ? relationships.required || [] : [];
 
   return (
     <>
@@ -296,7 +320,6 @@ function Relationships({
         <Relationship
           key={name}
           required
-          hideRequiredOptional={hideRequiredOptional}
           name={name}
           schema={relationships.properties[name]}
         />
@@ -304,26 +327,21 @@ function Relationships({
       {Object.entries(relationships.properties)
         .filter(([name]) => !required.includes(name))
         .map(([name, schema]) => (
-          <Relationship
-            key={name}
-            name={name}
-            schema={schema}
-            hideRequiredOptional={hideRequiredOptional}
-          />
+          <Relationship key={name} name={name} schema={schema} />
         ))}
     </>
   );
 }
 
-export function JsonSchema({
-  level = 0,
+export function JsonSchemaProperty({
+  depth = 0,
   name,
   prefix,
   required,
-  hideRequiredOptional,
   schema,
 }) {
   const [open, setOpen] = useState(false);
+  const isDefinition = useContext(DefinitionContext);
 
   return (
     <LanguageConsumer>
@@ -343,7 +361,7 @@ export function JsonSchema({
                   <span className={s.required}>Deprecated</span>
                 </>
               )}
-              {!hideRequiredOptional && (
+              {!isDefinition && (
                 <>
                   &nbsp;&nbsp;
                   {required ? (
@@ -366,48 +384,51 @@ export function JsonSchema({
             </div>
           )}
           {toArray(schema.type).includes('object') && schema.properties && (
-            <Button open={open} label="object format" onToggle={setOpen}>
-              <Properties
-                schema={schema}
-                level={level}
-                hideRequiredOptional={hideRequiredOptional}
-              />
-            </Button>
+            <ExpandablePane
+              open={open}
+              label="object format"
+              onToggle={setOpen}
+            >
+              <JsonSchemaObject schema={schema} depth={depth} />
+            </ExpandablePane>
           )}
           {toArray(schema.type).includes('object') && schema.patternProperties && (
-            <Button open={open} label="object format" onToggle={setOpen}>
-              <PatternProperties
+            <ExpandablePane
+              open={open}
+              label="object format"
+              onToggle={setOpen}
+            >
+              <JsonSchemaObjectWithPatternProperties
                 schema={schema}
-                level={level}
-                hideRequiredOptional={hideRequiredOptional}
+                depth={depth}
               />
-            </Button>
+            </ExpandablePane>
           )}
           {schema.enum && (
             <>
-              <Button open={open} onToggle={setOpen} label="enum values">
+              <ExpandablePane
+                open={open}
+                onToggle={setOpen}
+                label="enum values"
+              >
                 <Enum
                   values={schema.enum}
                   description={schema.enumDescription}
                 />
-              </Button>
+              </ExpandablePane>
             </>
           )}
           {toArray(schema.type).includes('array') &&
             schema.items &&
             schema.items.type === 'object' &&
             schema.items.properties && (
-              <Button
+              <ExpandablePane
                 open={open}
                 onToggle={setOpen}
                 label="objects format inside array"
               >
-                <Properties
-                  schema={schema.items}
-                  level={level}
-                  hideRequiredOptional={hideRequiredOptional}
-                />
-              </Button>
+                <JsonSchemaObject schema={schema.items} depth={depth} />
+              </ExpandablePane>
             )}
         </div>
       )}
@@ -424,13 +445,23 @@ export function HrefSchema({ schema }) {
     <>
       <h6>Query parameters</h6>
       <div>
-        <Properties level={0} schema={schema} />
+        <JsonSchemaObject depth={0} schema={schema} />
       </div>
     </>
   );
 }
 
-export function Schema({ title, schema, showId, hideRequiredOptional }) {
+export function Definition(props) {
+  return (
+    <DefinitionContext.Provider value={true}>
+      <Schema {...props} />
+    </DefinitionContext.Provider>
+  );
+}
+
+export function Schema({ title, schema, showId }) {
+  const isDefinition = useContext(DefinitionContext);
+
   return (
     <LanguageConsumer>
       {(language) => (
@@ -441,7 +472,7 @@ export function Schema({ title, schema, showId, hideRequiredOptional }) {
               <div className={s.header}>
                 <span className={s.name}>id</span>&nbsp;&nbsp;
                 <Type schema={schema.properties.id} />
-                {!hideRequiredOptional && (
+                {!isDefinition && (
                   <>
                     &nbsp;&nbsp;
                     {schema.required.includes('id') ? (
@@ -462,7 +493,7 @@ export function Schema({ title, schema, showId, hideRequiredOptional }) {
               <div className={s.header}>
                 <span className={s.name}>type</span>&nbsp;&nbsp;
                 <Type schema={schema.properties.type} />
-                {!hideRequiredOptional && (
+                {!isDefinition && (
                   <>
                     &nbsp;&nbsp;
                     {schema.required.includes('type') ? (
@@ -481,39 +512,27 @@ export function Schema({ title, schema, showId, hideRequiredOptional }) {
           )}
           {schema.properties.attributes &&
             schema.properties.attributes.properties && (
-              <Properties
-                level={0}
+              <JsonSchemaObject
+                depth={0}
                 prefix={language === 'http' ? 'attributes.' : null}
-                groupIsRequired={schema.required.includes('attributes')}
-                hideRequiredOptional={hideRequiredOptional}
+                objectIsOptional={!schema.required.includes('attributes')}
                 schema={schema.properties.attributes}
               />
             )}
           {schema.properties.meta && schema.properties.meta.properties && (
-            <Properties
-              level={0}
+            <JsonSchemaObject
+              depth={0}
               prefix="meta."
-              groupIsRequired={schema.required.includes('meta')}
-              hideRequiredOptional={hideRequiredOptional}
+              objectIsOptional={!schema.required.includes('meta')}
               schema={schema.properties.meta}
             />
           )}
           {schema.properties.relationships && (
             <Relationships
-              groupIsRequired={schema.required.includes('relationships')}
+              objectIsOptional={!schema.required.includes('relationships')}
               relationships={schema.properties.relationships}
-              hideRequiredOptional={hideRequiredOptional}
             />
           )}
-          {schema.properties.attributes &&
-            schema.properties.attributes.properties && (
-              <Deprecated
-                level={0}
-                prefix={language === 'http' ? 'attributes.' : null}
-                hideRequiredOptional={hideRequiredOptional}
-                schema={schema.properties.attributes}
-              />
-            )}
         </>
       )}
     </LanguageConsumer>

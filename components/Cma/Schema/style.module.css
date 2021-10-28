@@ -36,10 +36,12 @@
   }
 }
 
-.deprecatedTitle {
-  font-family: var(--font-sans);
-  font-weight: bold;
+.deprecatedBlock {
   margin-top: 30px;
+}
+
+.deprecatedBlockInner {
+  margin-top: 20px;
 }
 
 .deprecatedDescription {
