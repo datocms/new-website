@@ -13,7 +13,7 @@ import { renderMetaTags } from 'react-datocms';
 import { buildStructuredTextDocumentSchema } from 'utils/fetchStructuredText';
 import ReactMarkdown from 'react-markdown';
 import { parse } from 'flatted';
-import { Properties } from 'components/Cma/Schema';
+import { JsonSchemaObject } from 'components/Cma/Schema';
 import Prism from 'components/Prism';
 import { handleErrors } from 'lib/datocms';
 
@@ -164,11 +164,10 @@ export default function DocPage({ docGroup, titleOverride, page, schema }) {
                   ) : (
                     <p>It does not allow children nodes.</p>
                   )}
-                  <Properties
+                  <JsonSchemaObject
                     key={name}
                     name={name}
                     schema={definition}
-                    groupIsRequired
                     level={1}
                   />
                   {exampleCode && <Prism {...exampleCode} />}
