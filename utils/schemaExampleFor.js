@@ -5,7 +5,8 @@ export default function schemaExampleFor(schema, pagination = true) {
 
   if (
     schema.hasOwnProperty('deprecated') ||
-    schema.hasOwnProperty('hideFromDocs')
+    schema.hasOwnProperty('hideFromDocs') ||
+    schema.hasOwnProperty('hideFromExample')
   ) {
     return;
   }
