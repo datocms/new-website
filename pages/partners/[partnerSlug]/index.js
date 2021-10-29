@@ -201,7 +201,9 @@ export default function PartnerPage({
                 >
                   <ul className={s.list}>
                     {partner.locations.map((area) => (
-                      <li key={area.slug}>{area.name}</li>
+                      <li key={area.slug}>
+                        {area.emoji} {area.name}
+                      </li>
                     ))}
                   </ul>
                 </SidebarPane>
