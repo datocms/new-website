@@ -41,7 +41,10 @@ export const getStaticPaths = gqlStaticPaths(
     const results = roots
       .map((root) =>
         root.children
-          .filter((c) => c.slug !== 'content-management-api')
+          .filter(
+            (c) =>
+              c.slug !== 'content-management-api' && c.slug !== 'plugin-sdk',
+          )
           .map((sub) =>
             (sub.slug === 'content-delivery-api'
               ? sub.pages.filter(
@@ -103,6 +106,10 @@ export const getStaticProps = handleErrors(async function ({
     variables: { groupSlug },
     preview,
   });
+
+  if (!docGroup) {
+    return { notFound: true };
+  }
 
   const page =
     docGroup &&
@@ -310,16 +317,16 @@ export const Sidebar = ({ title, entries }) => {
 };
 
 export function Toc({ content, extraEntries: extra }) {
-  const nodes =
-    content &&
-    filter(content.value.document, isHeading).map((heading) => {
-      const slug = slugify(toPlainText(heading));
-      return {
-        type: 'link',
-        url: `#${slug}`,
-        children: heading.children,
-      };
-    });
+  const nodes = content
+    ? filter(content.value.document, isHeading).map((heading) => {
+        const slug = slugify(toPlainText(heading));
+        return {
+          type: 'link',
+          url: `#${slug}`,
+          children: heading.children,
+        };
+      })
+    : [];
 
   const extraEntries =
     extra &&

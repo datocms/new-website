@@ -83,15 +83,15 @@ module.exports = [
   },
   {
     source: '/docs/plugins/entry-point',
-    destination: '/docs/building-plugins/entry-point',
+    destination: '/docs/plugin-sdk/entry-point',
   },
   {
     source: '/docs/plugins/creating-a-new-plugin',
-    destination: '/docs/building-plugins/creating-a-new-plugin',
+    destination: '/docs/plugin-sdk/creating-a-new-plugin',
   },
   {
     source: '/docs/plugins/publishing',
-    destination: '/docs/building-plugins/publishing',
+    destination: '/docs/plugin-sdk/publishing',
   },
   {
     source: '/docs/guides/offline-backups',

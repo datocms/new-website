@@ -4,7 +4,6 @@ import slugify from 'utils/slugify';
 import gfm from 'remark-gfm';
 import Heading from 'components/Heading';
 import rehypeRaw from 'rehype-raw';
-import rehypeSanitize from 'rehype-sanitize';
 
 import s from './style.module.css';
 

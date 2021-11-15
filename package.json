@@ -41,6 +41,7 @@
     "glob": "^7.1.7",
     "got": "^10.7.0",
     "graphql": "^15.5.0",
+    "group-array": "^1.0.0",
     "hls.js": "^1.0.7",
     "html-react-parser": "^1.2.6",
     "humps": "^2.0.1",

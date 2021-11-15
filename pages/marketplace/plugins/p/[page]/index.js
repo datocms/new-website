@@ -87,7 +87,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
             community plugins
           </div>
         </div>
-        <Announce href="/docs/building-plugins" center>
+        <Announce href="/docs/plugin-sdk" center>
           <strong>Want to be in catalog?</strong> Learn how create your own
           plugin, or copy and remix existing ones in our documentation!
         </Announce>
