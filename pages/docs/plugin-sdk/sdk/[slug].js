@@ -185,17 +185,18 @@ export default function DocPage({
         <title>{sdkPage.title} - Building plugins</title>
       </Head>
       <div className={s.articleContainer}>
-        <Toc
+        {/* <Toc
           extraEntries={hooks.map((hook) => ({
             anchor: hook.name,
             label: <code>{hook.name}</code>,
             tag: 'h4',
           }))}
-        />
+        /> */}
         <div className={s.article}>
           <div className={s.title}>{sdkPage.title}</div>
           <div className={s.body}>
             <Markdown>{content}</Markdown>
+            <hr />
             {hooks
               .sort((a, b) => a.lineNumber - b.lineNumber)
               .map((hook) => {

@@ -1,7 +1,7 @@
 import tiny from 'tiny-json-http';
 
-// 'https://unpkg.com/datocms-plugins-sdk@0.2.0-alpha.39'
-const baseUrl = 'http://localhost:5000';
+// const baseUrl = 'http://localhost:5000';
+const baseUrl = 'https://unpkg.com/datocms-plugins-sdk@next';
 
 function findChildrenById(manifest, id) {
   return manifest.children.find((child) => child.id === id);
@@ -177,9 +177,8 @@ function buildCtx(manifest, definition) {
 }
 
 export async function fetchPluginSdkHooks() {
-  const { body: manifest } = await tiny.get({
-    url: `${baseUrl}/types.json`,
-  });
+  const response = await fetch(`${baseUrl}/types.json`);
+  const manifest = await response.json();
 
   const connectParameters = manifest.children.find(
     (child) => child.name === 'FullConnectParameters',
@@ -213,10 +212,8 @@ export async function fetchPluginSdkHooks() {
 }
 
 export async function fetchSdkPages() {
-  const { body: manifest } = await tiny.get({
-    url: `${baseUrl}/docs/index.json`,
-  });
-
+  const response = await fetch(`${baseUrl}/docs/index.json`);
+  const manifest = await response.json();
   return manifest.pages;
 }
 
