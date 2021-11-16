@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'tiempos-headline';
   font-display: swap;
+  font-weight: bold;
   src: url('/fonts/tiempos-headline-web-semibold.woff2') format('woff2'),
     url('/fonts/tiempos-headline-web-semibold.woff') format('woff');
 }
