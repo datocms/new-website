@@ -1,0 +1,28 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 12000px;
+  > div {
+    width: 33%;
+    flex: 1 0 auto;
+    margin: 0 1rem 1rem 0;
+  }
+}
+
+.sitemapLink {
+  display: block;
+  margin-bottom: 7px;
+  display: block;
+  color: inherit;
+  font-size: 0.9em;
+}
+
+.sitemapTitle {
+  font-family: var(--font-sans);
+  color: var(--light-body-color);
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

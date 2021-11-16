@@ -351,6 +351,17 @@ export default function Footer({ noCta }) {
                     </div>
                   </div>
                 </div>
+
+                <div className={s.group}>
+                  <div className={s.groupTitle}>Internal</div>
+                  <div className={s.groupLinks}>
+                    <div className={s.groupLink}>
+                      <Link href="/internal/sitemap">
+                        <a>Sitemap</a>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
