@@ -3,7 +3,7 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Legal from 'components/Legal';
 import ReactMarkdown from 'react-markdown';
-import Head from 'next/head';
+import Head from 'components/Head';
 
 import fs from 'fs';
 import util from 'util';

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { renderMetaTags } from 'react-datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Layout from 'components/MarketplaceLayout';
 import SmartMarkdown from 'components/SmartMarkdown';
 import Button from 'components/Button';

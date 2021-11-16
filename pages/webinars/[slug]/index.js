@@ -12,7 +12,7 @@ import {
   StructuredText,
   useQuerySubscription,
 } from 'react-datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Layout from 'components/Layout';
 import Button from 'components/Button';
 import addMinutes from 'date-fns/addMinutes';

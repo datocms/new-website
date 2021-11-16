@@ -11,7 +11,7 @@ import {
 import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import { renderMetaTags } from 'react-datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { useQuerySubscription } from 'react-datocms';
 import PostContent from 'components/PostContent';
 

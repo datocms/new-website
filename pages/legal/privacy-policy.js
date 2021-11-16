@@ -3,7 +3,7 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Legal from 'components/Legal';
 import tiny from 'tiny-json-http';
-import Head from 'next/head';
+import Head from 'components/Head';
 
 export async function getStaticProps() {
   const {

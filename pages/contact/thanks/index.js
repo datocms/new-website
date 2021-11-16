@@ -4,7 +4,7 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Showcase from 'components/Showcase';
 import s from '../style.module.css';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Link from 'next/link';
 
 export default function Support({ preview, topics }) {

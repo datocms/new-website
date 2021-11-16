@@ -5,7 +5,7 @@ import fetchCma from 'utils/fetchCma';
 import { parse } from 'flatted';
 import { request } from 'lib/datocms';
 import { useMemo } from 'react';
-import Head from 'next/head';
+import Head from 'components/Head';
 import React from 'react';
 import HttpExample from 'components/Cma/HttpExample';
 import JsExample from 'components/Cma/JsExample';

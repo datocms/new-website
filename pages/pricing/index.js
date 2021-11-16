@@ -4,7 +4,7 @@ import Highlight from 'components/Highlight';
 import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import Quote from 'components/Quote';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags, StructuredText } from 'react-datocms';
 import s from './style.module.css';
 import {

@@ -15,7 +15,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import React from 'react';
 import { Image as DatoImage, useQuerySubscription } from 'react-datocms';
 import s from './style.module.css';
-import Head from 'next/head';
+import Head from 'components/Head';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   `

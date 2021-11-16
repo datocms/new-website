@@ -15,7 +15,7 @@ import gqlExampleForField, { camelize } from 'utils/gqlExampleForField';
 import fieldTypes from 'utils/fieldTypes';
 import metaTypes from 'utils/metaTypes';
 import Heading from 'components/Heading';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import { handleErrors } from 'lib/datocms';
 

@@ -9,7 +9,7 @@ import fetchCma from 'utils/fetchCma';
 import { parse } from 'flatted';
 
 import { useMemo } from 'react';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import PostContent from 'components/PostContent';
 import { gqlStaticPaths } from 'lib/datocms';

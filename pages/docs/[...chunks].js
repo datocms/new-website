@@ -13,7 +13,7 @@ import ActiveLink from 'components/ActiveLink';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 import slugify from 'utils/slugify';
 import s from 'pages/docs/pageStyle.module.css';
-import Head from 'next/head';
+import Head from 'components/Head';
 import cn from 'classnames';
 import filter from 'utils/filterNodes';
 import { isHeading } from 'datocms-structured-text-utils';

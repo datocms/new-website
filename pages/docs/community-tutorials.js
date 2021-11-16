@@ -1,7 +1,7 @@
 import { gqlStaticProps } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
 import { Sidebar } from 'pages/docs/[...chunks]';
-import Head from 'next/head';
+import Head from 'components/Head';
 import s from 'pages/docs/pageStyle.module.css';
 import Anchor from 'public/icons/regular/link.svg';
 import { StructuredText } from 'react-datocms';

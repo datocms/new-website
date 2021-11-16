@@ -10,7 +10,7 @@ import Highlight from 'components/Highlight';
 import wretch from 'wretch';
 import { useRecaptcha } from 'react-recaptcha-hook';
 import { useToasts } from 'react-toast-notifications';
-import Head from 'next/head';
+import Head from 'components/Head';
 
 wretch().errorType('json');
 

@@ -5,7 +5,7 @@ import Legal from 'components/Legal';
 import ReactMarkdown from 'react-markdown';
 import fs from 'fs';
 import util from 'util';
-import Head from 'next/head';
+import Head from 'components/Head';
 
 export async function getStaticProps() {
   const readFile = util.promisify(fs.readFile);

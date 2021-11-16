@@ -8,7 +8,7 @@ import {
 } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
 import Heading from 'components/Heading';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import { buildStructuredTextDocumentSchema } from 'utils/fetchStructuredText';
 import ReactMarkdown from 'react-markdown';

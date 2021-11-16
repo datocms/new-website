@@ -1,6 +1,6 @@
 import Layout from 'components/MarketplaceLayout';
 import LazyImage from 'components/LazyImage';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { request, imageFields } from 'lib/datocms';
 import s from './style.module.css';
 import { Image as DatoImage } from 'react-datocms';

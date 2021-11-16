@@ -15,7 +15,7 @@ import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
 import { useRouter } from 'next/router';
 import scrollIntoView from 'scroll-into-view-if-needed';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { StructuredText } from 'react-datocms';
 
 export const getStaticProps = gqlStaticProps(
