@@ -52,6 +52,9 @@ module.exports = withNextEnv(
         },
       ];
     },
+    experimental: {
+      optimizeCss: true,
+    },
     images: {
       disableStaticImages: true,
     },

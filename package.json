@@ -87,6 +87,7 @@
     "wretch": "^1.7.4"
   },
   "devDependencies": {
+    "critters": "^0.0.14",
     "datocms-client": "^3.4.11",
     "datocms-html-to-structured-text": "^1.1.3",
     "eslint": "^7.28.0",
