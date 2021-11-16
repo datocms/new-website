@@ -39,6 +39,14 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         yoastAnalysis
         content {
           value
+          links {
+            ... on BlogPostRecord {
+              id
+              slug
+              title
+              __typename
+            }
+          }
           blocks {
             ... on ImageRecord {
               id

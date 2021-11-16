@@ -242,6 +242,18 @@ export default function PostContent({
         renderBlock={({ record }) =>
           renderBlock(s, record, defaultAltForImages)
         }
+        renderLinkToRecord={({ record, transformedMeta }) => {
+          switch (record.__typename) {
+            case 'BlogPostRecord':
+              return (
+                <a {...transformedMeta} href={`/blog/${record.slug}`}>
+                  {record.title}
+                </a>
+              );
+            default:
+              return null;
+          }
+        }}
         customRules={[
           renderRule(isBlockquote, ({ node, children, key }) => {
             return (
