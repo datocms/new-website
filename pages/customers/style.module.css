@@ -26,6 +26,7 @@
 
   @media (width > 600px) {
     font-family: var(--font-headline);
+    font-weight: bold;
   }
 }
 

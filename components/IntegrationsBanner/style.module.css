@@ -135,6 +135,7 @@
   font-family: var(--font-headline);
   margin-bottom: 30px;
   font-size: rfs(50px);
+  font-weight: bold;
 }
 
 .content {

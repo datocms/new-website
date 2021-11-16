@@ -76,7 +76,7 @@
 
 .title {
   margin: 0;
-  font-weight: normal;
+  font-weight: bold;
   font-family: var(--font-headline);
   font-size: rfs(50px);
   margin-bottom: 10px;

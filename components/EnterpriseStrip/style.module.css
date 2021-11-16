@@ -49,6 +49,7 @@
 .introTitle {
   margin: 0;
   font-family: var(--font-headline);
+  font-weight: bold;
   line-height: 1;
   font-size: rfs(60px);
   margin-bottom: rfs(40px);

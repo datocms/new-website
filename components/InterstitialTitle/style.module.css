@@ -74,7 +74,7 @@
   font-family: var(--font-headline);
   font-size: rfs(60px);
   margin: 0;
-  font-weight: normal;
+  font-weight: bold;
   align-items: center;
 }
 

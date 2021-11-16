@@ -23,7 +23,7 @@
   margin: rfs(40px) auto;
   line-height: 1;
   letter-spacing: -0.02em;
-  font-weight: normal;
+  font-weight: bold;
 
   @media (width > 800px) {
     max-width: 70%;

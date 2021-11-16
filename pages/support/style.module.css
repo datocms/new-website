@@ -70,6 +70,7 @@
   line-height: 1.2;
   font-size: rfs(60px);
   margin-bottom: rfs(40px);
+  font-weight: bold;
 }
 
 .root {
@@ -111,7 +112,7 @@
     line-height: 1;
     margin: 40px 0 15px;
     font-family: var(--font-headline);
-    font-weight: 500;
+    font-weight: bold;
 
     &:first-child {
       margin-top: 0;

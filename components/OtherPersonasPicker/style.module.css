@@ -12,6 +12,7 @@
   line-height: 1.2;
   font-size: rfs(60px);
   margin-bottom: rfs(20px);
+  font-weight: bold;
 }
 
 .picker {

@@ -65,6 +65,7 @@
   color: inherit;
   display: block;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .groupTitleHandle {

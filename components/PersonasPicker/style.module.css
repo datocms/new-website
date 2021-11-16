@@ -35,7 +35,7 @@
 
 .introTitle {
   margin: 0;
-  font-weight: normal;
+  font-weight: bold;
   font-family: var(--font-headline);
   line-height: 1;
   font-size: rfs(60px);

@@ -26,6 +26,7 @@
 
 .blockTitle {
   font-family: var(--font-headline);
+  font-weight: bold;
   font-size: 40px;
   margin-bottom: 30px;
 }

@@ -30,6 +30,7 @@
 
 .title {
   font-family: var(--font-headline);
+  font-weight: bold;
   font-size: rfs(50px);
   margin-bottom: 20px;
   line-height: 1.1;
