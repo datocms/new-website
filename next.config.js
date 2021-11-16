@@ -54,7 +54,9 @@ module.exports = withNextEnv(
     },
     experimental: {
       optimizeCss: {
-        fonts: true,
+        inlineFonts: true,
+        preloadFonts: true,
+        logLevel: 'error',
       },
     },
     images: {
