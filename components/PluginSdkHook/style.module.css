@@ -1,0 +1,102 @@
+.hook {
+  font-size: 15px;
+  font-family: var(--font-sans);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  line-height: 1.2;
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  pre {
+    padding: 15px;
+    font-size: 0.95em;
+    margin-top: 15px;
+  }
+}
+
+.hookName {
+  font-weight: bold;
+  color: #555;
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  margin-bottom: 5px;
+
+  svg {
+    fill: #777;
+    display: inline-block;
+    margin-left: 5px;
+  }
+
+  &:hover svg {
+    fill: #555;
+  }
+}
+
+.required {
+  color: var(--accent-color);
+  font-size: 0.95em;
+  font-family: var(--font-sans);
+  font-weight: normal;
+}
+
+.optional {
+  color: var(--light-body-color);
+  font-size: 0.95em;
+  font-family: var(--font-sans);
+  font-weight: normal;
+}
+
+.subchapter {
+  font-size: 110% !important;
+  color: #555;
+}
+
+.button {
+  background: white;
+  color: var(--light-body-color);
+  border: 1px solid var(--border-color);
+  margin-top: 10px;
+  padding: 5px 13px;
+  font-family: var(--font-sans);
+  border-radius: 3px;
+  font-size: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+
+  svg {
+    margin-right: 5px;
+    fill: var(--extra-light-body-color);
+  }
+
+  &:hover {
+    color: var(--base-body-color);
+  }
+}
+
+.propertyGroup {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.groupDescription {
+  margin-top: 20px;
+  font-family: var(--font-sans);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-size: 16px;
+}

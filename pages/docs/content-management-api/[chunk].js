@@ -20,8 +20,10 @@ export const getStaticPaths = gqlStaticPaths(
     query {
       root: docGroup(filter: { slug: { eq: "content-management-api" } }) {
         pages {
-          page {
-            slug
+          ... on DocGroupPageRecord {
+            page {
+              slug
+            }
           }
         }
       }

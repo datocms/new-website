@@ -232,6 +232,7 @@ export default function PostContent({
   style,
   children,
   defaultAltForImages,
+  renderBlock: customRenderBlock,
 }) {
   const s = style || defaultStyles;
 
@@ -240,7 +241,8 @@ export default function PostContent({
       <StructuredText
         data={content}
         renderBlock={({ record }) =>
-          renderBlock(s, record, defaultAltForImages)
+          renderBlock(s, record, defaultAltForImages) ||
+          (customRenderBlock ? customRenderBlock(record) : undefined)
         }
         renderLinkToRecord={({ record, transformedMeta }) => {
           switch (record.__typename) {

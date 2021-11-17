@@ -19,15 +19,8 @@ export const getStaticProps = gqlStaticProps(
           name
           slug
           pages {
-            slugOverride
-            page {
-              slug
-            }
-          }
-          children {
-            name
-            slug
-            pages {
+            __typename
+            ... on DocGroupPageRecord {
               slugOverride
               page {
                 slug

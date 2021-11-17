@@ -18,6 +18,8 @@ import cn from 'classnames';
 import filter from 'utils/filterNodes';
 import { isHeading } from 'datocms-structured-text-utils';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import { fetchPluginSdkHooks } from 'utils/fetchPluginSdk';
+import PluginSdkHook from 'components/PluginSdkHook';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -27,9 +29,20 @@ export const getStaticPaths = gqlStaticPaths(
         children {
           slug
           pages {
-            slugOverride
-            page {
-              slug
+            __typename
+            ... on DocGroupPageRecord {
+              slugOverride
+              page {
+                slug
+              }
+            }
+            ... on DocGroupSectionRecord {
+              pages {
+                slugOverride
+                page {
+                  slug
+                }
+              }
             }
           }
         }
@@ -56,6 +69,12 @@ export const getStaticPaths = gqlStaticPaths(
                 )
               : sub.pages
             )
+              .reduce((acc, pageOrSection) => {
+                if (pageOrSection.__typename === 'DocGroupPageRecord') {
+                  return [...acc, pageOrSection];
+                }
+                return [...acc, ...pageOrSection.pages];
+              }, [])
               .map((page) =>
                 (page.slugOverride || page.page.slug) === 'index'
                   ? [sub.slug]
@@ -89,12 +108,27 @@ export const getStaticProps = handleErrors(async function ({
           name
           slug
           pages {
-            titleOverride
-            slugOverride
-            page {
-              id
+            __typename
+            ... on DocGroupPageRecord {
+              titleOverride
+              slugOverride
+              page {
+                id
+                title
+                slug
+              }
+            }
+            ... on DocGroupSectionRecord {
               title
-              slug
+              pages {
+                titleOverride
+                slugOverride
+                page {
+                  id
+                  title
+                  slug
+                }
+              }
             }
           }
         }
@@ -104,11 +138,18 @@ export const getStaticProps = handleErrors(async function ({
     preview,
   });
 
-  const page =
+  const allPages =
     docGroup &&
-    docGroup.pages.find(
-      (page) => (page.slugOverride || page.page.slug) === pageSlug,
-    );
+    docGroup.pages.reduce((acc, pageOrSection) => {
+      if (pageOrSection.__typename === 'DocGroupPageRecord') {
+        return [...acc, pageOrSection];
+      }
+      return [...acc, ...pageOrSection.pages];
+    }, []);
+
+  const page =
+    allPages &&
+    allPages.find((page) => (page.slugOverride || page.page.slug) === pageSlug);
 
   if (!page) {
     return { notFound: true };
@@ -229,6 +270,11 @@ export const getStaticProps = handleErrors(async function ({
                 id
                 _modelApiKey
               }
+              ... on PluginSdkHookGroupRecord {
+                id
+                _modelApiKey
+                groupName
+              }
             }
           }
         }
@@ -245,11 +291,28 @@ export const getStaticProps = handleErrors(async function ({
     return { notFound: true };
   }
 
+  const additionalData = {};
+
+  const interestingHookGroups = data.page.content.blocks
+    .filter((block) => block._modelApiKey === 'plugin_sdk_hook_group')
+    .map((block) => block.groupName);
+
+  if (interestingHookGroups.length > 0) {
+    const allHooks = await fetchPluginSdkHooks();
+
+    additionalData.pluginSdkHooks = allHooks.filter((hook) =>
+      interestingHookGroups.some((interestingHookGroup) =>
+        hook.groups.includes(interestingHookGroup),
+      ),
+    );
+  }
+
   return {
     props: {
       docGroup,
       titleOverride,
       page: data.page,
+      additionalData,
       preview: preview ? true : false,
     },
   };
@@ -351,7 +414,13 @@ export function Toc({ content, extraEntries: extra }) {
   ) : null;
 }
 
-export default function DocPage({ docGroup, titleOverride, page, preview }) {
+export default function DocPage({
+  docGroup,
+  titleOverride,
+  page,
+  preview,
+  additionalData,
+}) {
   const pageTitle = titleOverride || (page && page.title);
   const defaultSeoTitle = `${
     docGroup ? `${docGroup.name} - ` : '-'
@@ -383,14 +452,25 @@ export default function DocPage({ docGroup, titleOverride, page, preview }) {
             title={docGroup.name}
             entries={
               docGroup.pages.length > 1
-                ? docGroup.pages.map((page) => {
-                    return {
+                ? docGroup.pages.map((pageOrSection) => {
+                    const pageToEntry = (page) => ({
                       url: `/docs/${docGroup.slug}${
                         (page.slugOverride || page.page.slug) === 'index'
                           ? ''
                           : `/${page.slugOverride || page.page.slug}`
                       }`,
                       label: page.titleOverride || page.page.title,
+                    });
+
+                    if (pageOrSection.__typename === 'DocGroupPageRecord') {
+                      return pageToEntry(pageOrSection);
+                    }
+
+                    const section = pageOrSection;
+
+                    return {
+                      label: section.title,
+                      children: section.pages.map(pageToEntry),
                     };
                   })
                 : page.content &&
@@ -423,6 +503,22 @@ export default function DocPage({ docGroup, titleOverride, page, preview }) {
             content={page.content}
             style={s}
             defaultAltForImages={defaultSeoTitle}
+            renderBlock={(block) => {
+              switch (block._modelApiKey) {
+                case 'plugin_sdk_hook_group': {
+                  return (
+                    <>
+                      <hr />
+                      {additionalData.pluginSdkHooks
+                        .sort((a, b) => a.lineNumber - b.lineNumber)
+                        .map((hook) => (
+                          <PluginSdkHook key={hook.name} hook={hook} />
+                        ))}
+                    </>
+                  );
+                }
+              }
+            }}
           />
         </div>
       </div>

@@ -38,12 +38,15 @@ export const getStaticProps = handleErrors(async function ({
           name
           slug
           pages {
-            titleOverride
-            slugOverride
-            page {
-              id
-              title
-              slug
+            __typename
+            ... on DocGroupPageRecord {
+              titleOverride
+              slugOverride
+              page {
+                id
+                title
+                slug
+              }
             }
           }
         }
