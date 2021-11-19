@@ -2,11 +2,10 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-height: 12000px;
-  > div {
-    width: 33%;
+  > a {
+    width: 32%;
     flex: 1 0 auto;
-    margin: 0 1rem 1rem 0;
+    margin: 0 1rem 0.5rem 0;
   }
 }
 
