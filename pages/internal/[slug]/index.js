@@ -44,7 +44,7 @@ export async function getStaticProps({ params: { slug } }) {
     case 'sitemap-marketplace':
       routes = await marketplaceRoutes();
       break;
-    case 'sitemap-updates':
+    case 'sitemap-product-updates':
       routes = await productUpdatesRoutes();
       break;
     default:
@@ -72,7 +72,7 @@ function slugToReadable(slug) {
 }
 
 export default function Sitemap({ routes, slug }) {
-  const title = slug.replace('sitemap-', '');
+  const title = slug.replace('sitemap-', '').replace(/-|\//g, ' ');
 
   return (
     <Layout preview={false}>
