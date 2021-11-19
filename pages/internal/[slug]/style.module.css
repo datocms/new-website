@@ -4,7 +4,6 @@
   flex-wrap: wrap;
   > a {
     width: 32%;
-    flex: 1 0 auto;
     margin: 0 1rem 0.5rem 0;
   }
 }
