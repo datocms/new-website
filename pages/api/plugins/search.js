@@ -15,7 +15,7 @@ const handler = async (req, res) => {
   const response = await request({
     query: `
       query PluginsFind($ids: [ItemId]!) {
-        allPlugins(filter: {id: {in: $ids}}) {
+        allPlugins(filter: {id: {in: $ids}}, first: 50) {
           id
           title
           description
