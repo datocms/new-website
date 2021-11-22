@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import {
@@ -7,7 +8,6 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import { Image as DatoImage } from 'react-datocms';
-import FormattedDate from 'components/FormattedDate';
 import { PLUGINS_PER_PAGE } from 'lib/pages';
 import Head from 'next/head';
 import { renderMetaTags } from 'react-datocms';
@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 import s from './style.module.css';
 import truncate from 'truncate';
 import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
-import { Announce } from 'components/PluginToolkit';
+import { useDebounce } from 'use-debounce';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -45,6 +45,7 @@ export const getStaticProps = gqlStaticProps(
         orderBy: installs_DESC
         filter: { manuallyDeprecated: { eq: false } }
       ) {
+        id
         title
         description
         releasedAt
@@ -75,6 +76,50 @@ export const getStaticProps = gqlStaticProps(
 
 export default function Plugins({ plugins, preview, meta, pluginsPage }) {
   const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState(
+    new URLSearchParams(router.asPath.split('?')[1]).get('s') || '',
+  );
+  const cache = useRef({});
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 200);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchResults, setSearchResults] = useState(plugins);
+
+  useEffect(() => {
+    if (router.query.s != encodeURIComponent(debouncedSearchTerm)) {
+      router.push(
+        `/marketplace/plugins?s=${encodeURIComponent(debouncedSearchTerm)}`,
+        null,
+        { shallow: true },
+      );
+    }
+
+    if (!debouncedSearchTerm) {
+      setSearchResults(plugins);
+      return;
+    }
+
+    let aborted = false;
+
+    if (!cache.current[debouncedSearchTerm]) {
+      setIsLoading(true);
+      setSearchResults([]);
+
+      cache.current[debouncedSearchTerm] = fetch(
+        `/api/plugins/search?term=${encodeURIComponent(debouncedSearchTerm)}`,
+      ).then((res) => res.json());
+    }
+
+    cache.current[debouncedSearchTerm].then((newSearchResults) => {
+      if (!aborted) {
+        setSearchResults(newSearchResults);
+        setIsLoading(false);
+      }
+    });
+
+    return () => {
+      aborted = true;
+    };
+  }, [router, debouncedSearchTerm, plugins, setIsLoading, setSearchResults]);
 
   return (
     <Layout preview={preview}>
@@ -87,41 +132,82 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
             community plugins
           </div>
         </div>
-        <Announce href="/docs/building-plugins" center>
-          <strong>Want to be in catalog?</strong> Learn how create your own
-          plugin, or copy and remix existing ones in our documentation!
-        </Announce>
-        <div className={s.grid}>
-          {plugins &&
-            plugins.map((post) => (
-              <PluginBox
-                key={post.packageName}
-                title={post.title}
-                href={`/marketplace/plugins/i/${post.packageName}`}
-                image={
-                  post.coverImage && post.coverImage.responsiveImage ? (
-                    <DatoImage
-                      className={s.image}
-                      data={post.coverImage.responsiveImage}
-                    />
-                  ) : (
-                    <PluginImagePlacehoder hash={post.packageName} />
-                  )
-                }
-                description={truncate(post.description, 120)}
-              />
-            ))}
+        <div className={s.search}>
+          <input
+            className={s.searchInput}
+            placeholder="Search plugins..."
+            type="search"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
         </div>
-        <Paginator
-          perPage={PLUGINS_PER_PAGE}
-          currentPage={router.query ? parseInt(router.query.page) : 0}
-          totalEntries={meta.count}
-          href={(index) =>
-            index === 0
-              ? '/marketplace/plugins'
-              : `/marketplace/plugins/p/${index}`
-          }
-        />
+        {searchTerm ? (
+          <>
+            {isLoading ? (
+              <div className={s.loading}>Loading results...</div>
+            ) : searchResults.length === 0 ? (
+              <div className={s.noResults}>
+                No results found... try broaden your search!
+              </div>
+            ) : (
+              <div className={s.grid}>
+                {searchResults.map((post) => (
+                  <PluginBox
+                    key={post.packageName}
+                    title={post.title}
+                    href={`/marketplace/plugins/i/${post.packageName}`}
+                    image={
+                      post.coverImage && post.coverImage.responsiveImage ? (
+                        <DatoImage
+                          className={s.image}
+                          data={post.coverImage.responsiveImage}
+                        />
+                      ) : (
+                        <PluginImagePlacehoder hash={post.packageName} />
+                      )
+                    }
+                    description={truncate(post.description, 120)}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            <div className={s.grid}>
+              {plugins.map((post) => (
+                <PluginBox
+                  key={post.packageName}
+                  title={post.title}
+                  href={`/marketplace/plugins/i/${post.packageName}`}
+                  image={
+                    post.coverImage && post.coverImage.responsiveImage ? (
+                      <DatoImage
+                        className={s.image}
+                        data={post.coverImage.responsiveImage}
+                      />
+                    ) : (
+                      <PluginImagePlacehoder hash={post.packageName} />
+                    )
+                  }
+                  description={truncate(post.description, 120)}
+                />
+              ))}
+            </div>
+            <Paginator
+              perPage={PLUGINS_PER_PAGE}
+              currentPage={router.query ? parseInt(router.query.page) : 0}
+              totalEntries={meta.count}
+              href={(index) =>
+                index === 0
+                  ? '/marketplace/plugins'
+                  : `/marketplace/plugins/p/${index}`
+              }
+            />
+          </>
+        )}
       </Wrapper>
     </Layout>
   );
