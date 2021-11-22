@@ -117,7 +117,7 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
       }
     >
       <Head>
-        <title>{result.schema.title} - Content Management API</title>
+        <title>{result.schema.title} - Content Management API - DatoCMS</title>
       </Head>
       <div className={s.articleContainer}>
         <div className={s.article}>

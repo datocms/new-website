@@ -89,11 +89,18 @@ export const getStaticProps = handleErrors(async function ({
       preview: preview ? true : false,
       cma,
       endpoint,
+      resource,
     },
   };
 });
 
-export default function DocPage({ docGroup, cma, preview, endpoint }) {
+export default function DocPage({
+  docGroup,
+  cma,
+  preview,
+  endpoint,
+  resource,
+}) {
   const router = useRouter();
   const result = useMemo(() => parse(cma), [cma]);
   const link = result.schema.links.find((link) => link.rel === endpoint);
@@ -132,7 +139,7 @@ export default function DocPage({ docGroup, cma, preview, endpoint }) {
         />
       }
     >
-      <Head>
+      <Head canonicalUrl={`/docs/${docGroup.slug}/resources/${resource}`}>
         <title>
           {link.title} - {result.schema.title} - Content Management API
         </title>
