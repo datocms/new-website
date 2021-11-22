@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 const DatoHead = ({ seo, children, canonicalUrl }) => {
   const router = useRouter();
-  const pageUrl = `https://datocms.com${router.asPath}`;
+  const pageUrl = `https://datocms.com${router.asPath.split('?')[0]}`;
 
   return (
     <Head>
