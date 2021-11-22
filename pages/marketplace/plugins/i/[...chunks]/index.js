@@ -123,10 +123,15 @@ const fetcher = (packageName) =>
 export default function Plugin({ plugin, preview }) {
   const {
     query: { chunks },
+    asPath,
   } = useRouter();
 
   const { data } = useSWR(chunks.join('/'), fetcher);
   const info = data && data.data.plugin;
+
+  const projectDomain = new URLSearchParams(asPath.split('?')[1]).get(
+    'projectDomain',
+  );
 
   return (
     <Layout preview={preview}>
@@ -193,7 +198,11 @@ export default function Plugin({ plugin, preview }) {
         actions={
           <Button
             as="a"
-            href={`https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/plugins/install/${plugin.packageName}`}
+            href={
+              projectDomain
+                ? `https://${projectDomain}/admin/plugins/install/${plugin.packageName}`
+                : `https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/plugins/install/${plugin.packageName}`
+            }
             target="_blank"
           >
             Install this plugin!

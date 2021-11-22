@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import {
@@ -84,10 +84,27 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState(plugins);
 
+  const generateUrl = useCallback(
+    (url, additionalParams = {}) => {
+      const params = new URLSearchParams(router.asPath.split('?')[1]);
+      Object.entries(additionalParams).forEach(([k, v]) => {
+        params.set(k, v);
+      });
+      if (params.toString()) {
+        return `${url}?${params.toString()}`;
+      }
+      return url;
+    },
+    [router.asPath],
+  );
+
   useEffect(() => {
-    if (router.query.s != encodeURIComponent(debouncedSearchTerm)) {
+    if (
+      (new URLSearchParams(router.asPath.split('?')[1]).get('s') || '') !==
+      debouncedSearchTerm
+    ) {
       router.push(
-        `/marketplace/plugins?s=${encodeURIComponent(debouncedSearchTerm)}`,
+        generateUrl(`/marketplace/plugins`, { s: debouncedSearchTerm }),
         null,
         { shallow: true },
       );
@@ -119,7 +136,14 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
     return () => {
       aborted = true;
     };
-  }, [router, debouncedSearchTerm, plugins, setIsLoading, setSearchResults]);
+  }, [
+    router,
+    debouncedSearchTerm,
+    plugins,
+    setIsLoading,
+    setSearchResults,
+    generateUrl,
+  ]);
 
   return (
     <Layout preview={preview}>
@@ -157,7 +181,9 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                   <PluginBox
                     key={post.packageName}
                     title={post.title}
-                    href={`/marketplace/plugins/i/${post.packageName}`}
+                    href={generateUrl(
+                      `/marketplace/plugins/i/${post.packageName}`,
+                    )}
                     image={
                       post.coverImage && post.coverImage.responsiveImage ? (
                         <DatoImage
@@ -181,7 +207,9 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                 <PluginBox
                   key={post.packageName}
                   title={post.title}
-                  href={`/marketplace/plugins/i/${post.packageName}`}
+                  href={generateUrl(
+                    `/marketplace/plugins/i/${post.packageName}`,
+                  )}
                   image={
                     post.coverImage && post.coverImage.responsiveImage ? (
                       <DatoImage
