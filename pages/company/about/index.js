@@ -20,7 +20,7 @@ import {
 import { Image as DatoImage } from 'react-datocms';
 import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import Space from 'components/Space';
 import wretch from 'wretch';

@@ -13,7 +13,7 @@ import FormattedDate from 'components/FormattedDate';
 import { CHANGELOG_POSTS_PER_PAGE } from 'lib/pages';
 import Paginator from 'components/Paginator';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'react-datocms';
 import PostContent from 'components/PostContent';

@@ -9,7 +9,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
 import LogosBar from 'components/LogosBar';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Link from 'next/link';
 
 export default function Support({ preview, topics }) {

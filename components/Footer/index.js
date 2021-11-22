@@ -98,6 +98,15 @@ export default function Footer({ noCta }) {
             <div className={s.cols}>
               <div className={s.col}>
                 <div className={s.group}>
+                  <div className={s.groupTitle}>Status</div>
+                  <div className={s.groupLinks}>
+                    <div className={s.groupLink}>
+                      <StatusBadge />
+                    </div>
+                  </div>
+                </div>
+
+                <div className={s.group}>
                   <div className={s.groupTitle}>Team</div>
                   <div className={s.groupLinks}>
                     <div className={s.groupLink}>
@@ -318,15 +327,6 @@ export default function Footer({ noCta }) {
               </div>
               <div className={s.col}>
                 <div className={s.group}>
-                  <div className={s.groupTitle}>Status</div>
-                  <div className={s.groupLinks}>
-                    <div className={s.groupLink}>
-                      <StatusBadge />
-                    </div>
-                  </div>
-                </div>
-
-                <div className={s.group}>
                   <div className={s.groupTitle}>Company</div>
                   <div className={s.groupLinks}>
                     <div className={s.groupLink}>
@@ -347,6 +347,37 @@ export default function Footer({ noCta }) {
                     <div className={s.groupLink}>
                       <Link href="/legal/security">
                         <a>Security</a>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={s.group}>
+                  <div className={s.groupTitle}>Sitemaps</div>
+                  <div className={s.groupLinks}>
+                    <div className={s.groupLink}>
+                      <Link href="/internal/sitemap-static">
+                        <a>Main pages</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/internal/sitemap-blog">
+                        <a>Blog</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/internal/sitemap-docs">
+                        <a>Documentation</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/internal/sitemap-marketplace">
+                        <a>Marketplace</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/internal/sitemap-product-updates">
+                        <a>Product updates</a>
                       </Link>
                     </div>
                   </div>

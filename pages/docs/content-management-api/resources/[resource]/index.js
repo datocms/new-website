@@ -5,7 +5,7 @@ import fetchCma from 'utils/fetchCma';
 import { parse } from 'flatted';
 import { request } from 'lib/datocms';
 import { useMemo } from 'react';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Link from 'next/link';
 import { Definition } from 'components/Cma/Schema';
 import ReactMarkdown from 'react-markdown';
@@ -117,7 +117,7 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
       }
     >
       <Head>
-        <title>{result.schema.title} - Content Management API</title>
+        <title>{result.schema.title} - Content Management API - DatoCMS</title>
       </Head>
       <div className={s.articleContainer}>
         <div className={s.article}>

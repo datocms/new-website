@@ -9,7 +9,7 @@ import {
 } from 'lib/datocms';
 import { Image as DatoImage } from 'react-datocms';
 import { PLUGINS_PER_PAGE } from 'lib/pages';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import Paginator from 'components/Paginator';
 import { range } from 'range';

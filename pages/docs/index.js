@@ -1,7 +1,7 @@
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
 import Link from 'next/link';
-import Head from 'next/head';
+import Head from 'components/Head';
 import s from './style.module.css';
 import { renderMetaTags } from 'react-datocms';
 

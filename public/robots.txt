@@ -1,5 +1,18 @@
 User-agent: Googlebot
-Disallow:
+Disallow:/legal/
+Disallow:/contact
+Disallow:/customers/
+Disallow:/partners/
+Disallow:/slack
+Disallow:/support
+
+User-agent: *
+Disallow:/legal/
+Disallow:/contact
+Disallow:/customers/
+Disallow:/partners/
+Disallow:/slack
+Disallow:/support
 
 User-Agent: DatoCmsSearchBot
 Disallow: /pricing/compare

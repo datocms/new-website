@@ -1,7 +1,7 @@
 import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import { gqlStaticProps } from 'lib/datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import PluginBox, { LogoImage } from 'components/PluginBox';
 import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
 

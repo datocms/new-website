@@ -3,7 +3,7 @@ import {
   StructuredText,
   useQuerySubscription,
 } from 'react-datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Layout from 'components/Layout';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { Image } from 'react-datocms';

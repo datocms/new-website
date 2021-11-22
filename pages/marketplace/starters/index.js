@@ -2,7 +2,7 @@ import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import { request, imageFields } from 'lib/datocms';
 import { Image as DatoImage } from 'react-datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import PluginBox from 'components/PluginBox';
 import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';

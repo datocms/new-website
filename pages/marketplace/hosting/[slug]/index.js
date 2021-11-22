@@ -1,6 +1,6 @@
 import { generatePaths, generateProps } from 'lib/appQueries';
 import { renderMetaTags } from 'react-datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import PostContent from 'components/PostContent';
 import docPageStyles from 'pages/docs/pageStyle.module.css';
 import Layout from 'components/MarketplaceLayout';

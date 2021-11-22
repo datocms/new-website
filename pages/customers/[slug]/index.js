@@ -14,7 +14,7 @@ import {
 } from 'lib/datocms';
 import { renderMetaTags, StructuredText } from 'react-datocms';
 import PostContent from 'components/PostContent';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { useQuerySubscription } from 'react-datocms';
 
 export const getStaticPaths = gqlStaticPaths(

@@ -14,7 +14,7 @@ import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Bullets from 'components/Bullets';
 import LogosBar from 'components/LogosBar';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import Space from 'components/Space';
 

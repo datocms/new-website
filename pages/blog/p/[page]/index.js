@@ -13,7 +13,7 @@ import { Image as DatoImage, StructuredText } from 'react-datocms';
 import Masonry from 'react-masonry-css';
 import FormattedDate from 'components/FormattedDate';
 import { BLOG_POSTS_PER_PAGE } from 'lib/pages';
-import Head from 'next/head';
+import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
 import Paginator from 'components/Paginator';
 import { range } from 'range';

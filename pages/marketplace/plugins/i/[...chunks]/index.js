@@ -4,7 +4,7 @@ import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import SmartMarkdown from 'components/SmartMarkdown';
 import { useRouter } from 'next/router';
 import { renderMetaTags } from 'react-datocms';
-import Head from 'next/head';
+import Head from 'components/Head';
 import FormattedDate from 'components/FormattedDate';
 import s from './style.module.css';
 import useSWR from 'swr';
