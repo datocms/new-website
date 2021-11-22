@@ -98,6 +98,15 @@ export default function Footer({ noCta }) {
             <div className={s.cols}>
               <div className={s.col}>
                 <div className={s.group}>
+                  <div className={s.groupTitle}>Status</div>
+                  <div className={s.groupLinks}>
+                    <div className={s.groupLink}>
+                      <StatusBadge />
+                    </div>
+                  </div>
+                </div>
+
+                <div className={s.group}>
                   <div className={s.groupTitle}>Team</div>
                   <div className={s.groupLinks}>
                     <div className={s.groupLink}>
@@ -317,15 +326,6 @@ export default function Footer({ noCta }) {
                 </div>
               </div>
               <div className={s.col}>
-                <div className={s.group}>
-                  <div className={s.groupTitle}>Status</div>
-                  <div className={s.groupLinks}>
-                    <div className={s.groupLink}>
-                      <StatusBadge />
-                    </div>
-                  </div>
-                </div>
-
                 <div className={s.group}>
                   <div className={s.groupTitle}>Company</div>
                   <div className={s.groupLinks}>
