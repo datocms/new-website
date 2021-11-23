@@ -1,6 +1,7 @@
 .handles {
   display: flex;
   border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
 }
 
 .handle {
