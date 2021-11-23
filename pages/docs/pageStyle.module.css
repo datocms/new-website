@@ -174,7 +174,7 @@
   }
 
   code {
-    background-color: #f4f4f4;
+    background-color: rgba(0, 0, 0, 0.05);
     margin: 0 0.1em;
     padding: 0 0.1em;
     font-family: var(--font-mono);
@@ -487,4 +487,42 @@
   color: var(--extra-light-body-color);
   text-transform: uppercase;
   margin: 0 0 16px 0;
+}
+
+.docCallout {
+  padding: rfs(30px);
+  border-radius: 5px;
+  font-size: 0.9em;
+  font-family: var(--font-sans);
+  line-height: 1.4;
+  margin: 0 0 1em;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.docCallout--gray {
+  background: var(--light-bg-color);
+}
+
+.docCallout--green {
+  background: #e8f9e9;
+}
+
+.docCallout--yellow {
+  background: #fffadb;
+}
+
+.docCalloutTitle {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+  span {
+    flex: 1;
+    margin-left: 10px;
+  }
 }

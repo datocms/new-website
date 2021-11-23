@@ -11,6 +11,7 @@ import PostContent from 'components/PostContent';
 import Link from 'next/link';
 import ActiveLink from 'components/ActiveLink';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
+import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
 import slugify from 'utils/slugify';
 import s from 'pages/docs/pageStyle.module.css';
 import Head from 'components/Head';
@@ -275,6 +276,15 @@ export const getStaticProps = handleErrors(async function ({
                 _modelApiKey
                 groupName
               }
+              ... on DocCalloutRecord {
+                id
+                _modelApiKey
+                calloutType
+                title
+                text {
+                  value
+                }
+              }
             }
           }
         }
@@ -515,6 +525,23 @@ export default function DocPage({
                           <PluginSdkHook key={hook.name} hook={hook} />
                         ))}
                     </>
+                  );
+                }
+                case 'doc_callout': {
+                  return (
+                    <div
+                      className={cn(
+                        s.docCallout,
+                        s[`docCallout--${block.calloutType}`],
+                      )}
+                    >
+                      {block.title && (
+                        <div className={s.docCalloutTitle}>
+                          <InfoCircleIcon /> <span>{block.title}</span>
+                        </div>
+                      )}
+                      <StructuredText data={block.text} />
+                    </div>
                   );
                 }
               }
