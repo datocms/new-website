@@ -1,3 +1,13 @@
+.wrapper {
+  max-width: var(--page-width-with-margin);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+  overflow-x: scroll;
+}
+
 .table {
   border-collapse: collapse;
   overflow: auto;
@@ -41,6 +51,11 @@
   .extra {
     color: var(--light-body-color);
     font-size: 0.8em;
+    display: none;
+
+    @media (width > 700px) {
+      display: block;
+    }
   }
 }
 
@@ -49,4 +64,9 @@
   font-weight: normal;
   color: var(--light-body-color);
   margin-top: 5px;
+  display: none;
+
+  @media (width > 700px) {
+    display: block;
+  }
 }

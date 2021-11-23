@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
-import Wrapper from 'components/Wrapper';
 import Head from 'components/Head';
 import s from './style.module.css';
 import { request } from 'lib/datocms';
@@ -65,7 +64,7 @@ export default function ComparePricing({ hints, plans, preview }) {
         <title>Full plan comparison</title>
       </Head>
       <Hero title={<>Full plan comparison</>} />
-      <Wrapper>
+      <div className={s.wrapper}>
         <table className={s.table}>
           <tbody>
             {Object.entries(
@@ -158,7 +157,7 @@ export default function ComparePricing({ hints, plans, preview }) {
             ))}
           </tbody>
         </table>
-      </Wrapper>
+      </div>
     </Layout>
   );
 }
