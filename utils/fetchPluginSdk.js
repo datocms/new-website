@@ -1,5 +1,5 @@
 // const baseUrl = 'http://localhost:5000';
-const baseUrl = 'https://unpkg.com/datocms-plugins-sdk@next';
+const baseUrl = 'https://unpkg.com/datocms-plugin-sdk';
 
 function findChildrenById(manifest, id) {
   return manifest.children.find((child) => child.id === id);
