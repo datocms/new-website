@@ -184,12 +184,13 @@ function StructuredText({ feature, preview, integrations, review }) {
           imageProps={{
             controls: false,
             autoPlay: true,
-            src: 'https://stream.mux.com/HWUevVMYGa01WRKd00nB5hHKe7GT1k10102n.m3u8',
+            src: 'https://stream.mux.com/uzYE02PAHSMwU91m01CoQtM00xMZuLr1Tm3.m3u8',
             title: keyword,
           }}
         >
           <p>
-            When you need to deliver content not only through the web, but on an&nbsp;
+            When you need to deliver content not only through the web, but on
+            an&nbsp;
             <strong>ever-growing number of different mediums</strong> ranging
             from native apps, voice assistants, e-books, IoT, etc... that&#39;s
             when being able to only create hyperlinks to fixed web addresses
