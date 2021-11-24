@@ -127,7 +127,10 @@ function buildCtx(manifest, definition) {
 
   if (definition.type.type === 'reflection') {
     const properties = definition.type.declaration.children.filter(
-      (child) => !['mode', 'getSettings'].includes(child.name),
+      (child) =>
+        !['mode', 'getSettings', 'setHeight', 'bodyPadding'].includes(
+          child.name,
+        ),
     );
 
     if (properties.length === 0) {
