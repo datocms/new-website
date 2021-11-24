@@ -26,7 +26,9 @@ function findExample(signature) {
     return null;
   }
 
-  const lines = example.split(/\n/).filter((l) => l.length !== 0);
+  const lines = example
+    .split(/\n/)
+    .filter((l, i, all) => l.length !== 0 || (i !== 0 && i !== all.length - 1));
 
   const spacesPerLine = lines.map((line) => {
     const spaces = line.match(/^\s*/);
