@@ -203,7 +203,6 @@ export default function Plugin({ plugin, preview }) {
                 ? `https://${projectDomain}/admin/plugins/install/${plugin.packageName}`
                 : `https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/plugins/install/${plugin.packageName}`
             }
-            target="_blank"
           >
             Install this plugin!
           </Button>
