@@ -16,7 +16,7 @@ import fieldTypes from 'utils/fieldTypes';
 import metaTypes from 'utils/metaTypes';
 import Heading from 'components/Heading';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, useQuerySubscription } from 'react-datocms';
 import { handleErrors } from 'lib/datocms';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
@@ -55,10 +55,13 @@ const Filters = ({ name, attrs }) => {
 export default function DocPage({
   docGroup,
   titleOverride,
-  page,
+  pageSubscription,
   fieldsMetaInfo,
   fieldTypesInfo,
 }) {
+  const { data } = useQuerySubscription(pageSubscription);
+  const page = data;
+
   return (
     <DocsLayout
       sidebar={

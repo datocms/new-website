@@ -15,7 +15,7 @@ import s from 'pages/docs/pageStyle.module.css';
 import { camelize, exampleForUpload } from 'utils/gqlExampleForField';
 import Heading from 'components/Heading';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, useQuerySubscription } from 'react-datocms';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const { props } = await docPageGetStaticProps({
@@ -50,7 +50,15 @@ const Filters = ({ name, attrs }) => {
   );
 };
 
-export default function DocPage({ docGroup, titleOverride, page, filters }) {
+export default function DocPage({
+  docGroup,
+  titleOverride,
+  pageSubscription,
+  filters,
+}) {
+  const { data } = useQuerySubscription(pageSubscription);
+  const page = data;
+
   return (
     <DocsLayout
       sidebar={

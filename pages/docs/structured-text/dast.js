@@ -9,7 +9,7 @@ import {
 import s from 'pages/docs/pageStyle.module.css';
 import Heading from 'components/Heading';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, useQuerySubscription } from 'react-datocms';
 import { buildStructuredTextDocumentSchema } from 'utils/fetchStructuredText';
 import ReactMarkdown from 'react-markdown';
 import { parse } from 'flatted';
@@ -62,9 +62,16 @@ const findAllChildrenDefinitions = (definition, foundDefs = []) => {
   );
 };
 
-export default function DocPage({ docGroup, titleOverride, page, schema }) {
+export default function DocPage({
+  docGroup,
+  titleOverride,
+  pageSubscription,
+  schema,
+}) {
   const result = useMemo(() => schema && parse(schema), [schema]);
   const definitions = findAllChildrenDefinitions(result.definitions.Root);
+  const { data } = useQuerySubscription(pageSubscription);
+  const page = data;
 
   // this is to prevent the build from breaking while the structured text doc group is not published
   if (!docGroup) {

@@ -6,7 +6,11 @@ import {
   handleErrors,
   gqlStaticPaths,
 } from 'lib/datocms';
-import { renderMetaTags, StructuredText } from 'react-datocms';
+import {
+  renderMetaTags,
+  StructuredText,
+  useQuerySubscription,
+} from 'react-datocms';
 import DocsLayout from 'components/DocsLayout';
 import PostContent from 'components/PostContent';
 import Link from 'next/link';
@@ -162,7 +166,7 @@ export const getStaticProps = handleErrors(async function ({
   const { titleOverride } = page;
   const pageId = page.page.id;
 
-  const { data } = await request({
+  const gqlPageRequest = {
     query: `
       query($pageId: ItemId!) {
         page: docPage(filter: { id: { eq: $pageId } }) {
@@ -303,7 +307,8 @@ export const getStaticProps = handleErrors(async function ({
     `,
     variables: { pageId },
     preview,
-  });
+  };
+  const { data } = await request(gqlPageRequest);
 
   if (!data.page) {
     return { notFound: true };
@@ -337,7 +342,14 @@ export const getStaticProps = handleErrors(async function ({
     props: {
       docGroup,
       titleOverride,
-      page: data.page,
+      pageSubscription: preview
+        ? {
+            ...gqlPageRequest,
+            token: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
+            enabled: true,
+            initialData: data.page,
+          }
+        : { enabled: false, initialData: data.page },
       additionalData,
       preview: preview ? true : false,
     },
@@ -443,10 +455,12 @@ export function Toc({ content, extraEntries: extra }) {
 export default function DocPage({
   docGroup,
   titleOverride,
-  page,
+  pageSubscription,
   preview,
   additionalData,
 }) {
+  const { data } = useQuerySubscription(pageSubscription);
+  const page = data;
   const pageTitle = titleOverride || (page && page.title);
   const defaultSeoTitle = `${
     docGroup ? `${docGroup.name} - ` : '-'
