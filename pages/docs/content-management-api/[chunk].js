@@ -10,7 +10,7 @@ import { parse } from 'flatted';
 
 import { useMemo } from 'react';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, useQuerySubscription } from 'react-datocms';
 import PostContent from 'components/PostContent';
 import { gqlStaticPaths } from 'lib/datocms';
 import { handleErrors } from 'lib/datocms';
@@ -53,11 +53,14 @@ export const getStaticProps = handleErrors(
 export default function DocPage({
   docGroup,
   titleOverride,
-  page,
+  pageSubscription,
   cma,
   preview,
 }) {
   const result = useMemo(() => parse(cma), [cma]);
+
+  const { data } = useQuerySubscription(pageSubscription);
+  const page = data;
 
   return (
     <DocsLayout
