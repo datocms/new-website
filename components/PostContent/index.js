@@ -244,12 +244,24 @@ export default function PostContent({
           renderBlock(s, record, defaultAltForImages) ||
           (customRenderBlock ? customRenderBlock(record) : undefined)
         }
-        renderLinkToRecord={({ record, transformedMeta }) => {
+        renderInlineRecord={({ record, transformedMeta }) => {
           switch (record.__typename) {
             case 'BlogPostRecord':
               return (
                 <a {...transformedMeta} href={`/blog/${record.slug}`}>
                   {record.title}
+                </a>
+              );
+            default:
+              return null;
+          }
+        }}
+        renderLinkToRecord={({ record, transformedMeta, children }) => {
+          switch (record.__typename) {
+            case 'BlogPostRecord':
+              return (
+                <a {...transformedMeta} href={`/blog/${record.slug}`}>
+                  {children}
                 </a>
               );
             default:
