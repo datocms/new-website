@@ -56,6 +56,14 @@
     }
   }
 
+  hr {
+    margin: rfs(60px) 0;
+    width: 90%;
+    height: 1px;
+    background: var(--border-color);
+    border: 0;
+  }
+
   figure {
     text-align: center;
     margin: rfs(80px) 0;
