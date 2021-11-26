@@ -526,3 +526,36 @@
     margin-left: 10px;
   }
 }
+
+.ReactUiExample {
+  margin-top: rfs(30px);
+  margin-bottom: rfs(30px);
+}
+
+.ReactUiExample__live {
+  padding: rfs(60px);
+  border-radius: 5px;
+  background: white;
+  box-shadow: var(--box-shadow);
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: rfs(60px);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-color);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: rfs(60px);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-color);
+  }
+}
