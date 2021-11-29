@@ -5,9 +5,8 @@ import PlusIcon from 'public/icons/regular/plus.svg';
 import ChevronDownIcon from 'public/icons/regular/chevron-down.svg';
 import Prism from 'components/Prism';
 import Tabs, { Tab } from 'components/Tabs';
-
-import 'datocms-react-ui/styles.css';
 import s from './style.module.css';
+import 'datocms-react-ui/styles.css';
 
 const StateManager = ({ initial, children }) => {
   const [value, setValue] = useState(initial);
