@@ -30,39 +30,32 @@ export default async function fetchReactUiExamples() {
             ),
         )
         .map(async (child) => {
-          const exampleNames = child.signatures[0].comment.tags
-            .find((t) => t.tag === 'examplenames')
-            .text.trim()
-            .split(/\s*,\s*/);
-
           return await Promise.all(
             child.signatures[0].comment.tags
               .filter((t) => t.tag === 'example')
               .map(async (t, i) => {
-                const content = removeCommonIndentation(t.text).replace(
-                  /;$/,
-                  '',
-                );
+                const content = removeCommonIndentation(t.text);
+
+                const code = content
+                  .match(/```[a-z]*\n([\s\S]*?)\n```/)[1]
+                  .trim()
+                  .replace(/;$/, '');
+
+                const textualContentLines = content
+                  .match(/([\s\S]*?)\n```/)[1]
+                  .trim()
+                  .split(/\n/);
+
+                const title = textualContentLines.shift();
+
+                const description = textualContentLines.join('\n');
 
                 return {
                   componentName: child.name,
-                  exampleName: exampleNames[i],
-                  content: content.trim(),
-                  serialized: await serialize(content, {
-                    scope: {
-                      ctx: {
-                        mode: 'renderPage',
-                        bodyPadding: [0, 0, 0, 0],
-                        theme: {
-                          primaryColor: 'rgb(226, 87, 87)',
-                          accentColor: 'rgb(75, 199, 216)',
-                          semiTransparentAccentColor: 'rgb(75, 199, 216, 0.1)',
-                          lightColor: 'rgb(229, 249, 252)',
-                          darkColor: 'rgb(80, 50, 83)',
-                        },
-                      },
-                    },
-                  }),
+                  code,
+                  title,
+                  description,
+                  serialized: await serialize(code),
                 };
               }),
           );

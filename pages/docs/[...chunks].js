@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import {
   request,
   seoMetaTagsFields,
@@ -12,27 +13,17 @@ import Link from 'next/link';
 import ActiveLink from 'components/ActiveLink';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
-import PlusIcon from 'public/icons/regular/plus.svg';
-import ChevronDownIcon from 'public/icons/regular/chevron-down.svg';
 import slugify from 'utils/slugify';
 import s from 'pages/docs/pageStyle.module.css';
 import Head from 'components/Head';
 import cn from 'classnames';
 import filter from 'utils/filterNodes';
 import { isHeading } from 'datocms-structured-text-utils';
-import * as components from 'datocms-react-ui';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { fetchPluginSdkHooks } from 'utils/fetchPluginSdk';
 import fetchReactUiExamples from 'utils/fetchReactUiExamples';
 import PluginSdkHook from 'components/PluginSdkHook';
-import { MDXRemote } from 'next-mdx-remote';
-import 'datocms-react-ui/styles.css';
-
-const reactUiComponents = {
-  ...components,
-  PlusIcon,
-  ChevronDownIcon,
-};
+import ReactUiExample from 'components/ReactUiExample';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -301,7 +292,6 @@ export const getStaticProps = handleErrors(async function ({
                 id
                 _modelApiKey
                 componentName
-                exampleName
               }
             }
           }
@@ -571,24 +561,20 @@ export default function DocPage({
                   );
                 }
                 case 'react_ui_live_example': {
-                  const example = additionalData.allReactUiExamples.find(
-                    (e) =>
-                      e.componentName === block.componentName &&
-                      e.exampleName === block.exampleName,
+                  const examples = additionalData.allReactUiExamples.filter(
+                    (e) => e.componentName === block.componentName,
                   );
 
                   return (
-                    <div className={s['ReactUiExample']}>
-                      <div className={s['ReactUiExample__live']}>
-                        <MDXRemote
-                          {...example.serialized}
-                          components={reactUiComponents}
-                        />
-                      </div>
-                      <pre className={s['ReactUiExample__code']}>
-                        {example.content}
-                      </pre>
-                    </div>
+                    <>
+                      {examples.map((example) => (
+                        <Fragment key={example.title}>
+                          <h2>{example.title}</h2>
+                          {example.description}
+                          <ReactUiExample example={example} />
+                        </Fragment>
+                      ))}
+                    </>
                   );
                 }
               }

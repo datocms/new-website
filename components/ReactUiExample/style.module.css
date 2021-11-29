@@ -1,0 +1,61 @@
+.ReactUiExample {
+  margin-top: rfs(30px);
+  margin-bottom: rfs(30px);
+
+  pre {
+    margin: initial;
+  }
+}
+
+.ReactUiExample__live {
+  padding: rfs(60px);
+  border-radius: 5px;
+  background: white;
+  box-shadow: var(--box-shadow);
+  position: relative;
+
+  code {
+    font-size: inherit;
+  }
+
+  table {
+    font-family: inherit;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: rfs(60px);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 1px dashed var(--border-color);
+    z-index: 1;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: rfs(60px);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 1px dashed var(--border-color);
+    z-index: 1;
+  }
+}
+
+.ReactUiExample__live__container {
+  position: relative;
+  z-index: 2;
+}
+
+.ReactUiExample__code {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  margin: rfs(40px) 0;
+  width: 100%;
+  tab-size: 2;
+  overflow: auto;
+  line-height: 1.3;
+}

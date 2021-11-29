@@ -37,7 +37,11 @@ function findExample(signature) {
 
   const commonIndentation = Math.min(...spacesPerLine);
 
-  return lines.map((line) => line.substring(commonIndentation)).join('\n');
+  const pruned = lines
+    .map((line) => line.substring(commonIndentation))
+    .join('\n');
+
+  return pruned.match(/```[a-z]*\n([\s\S]*?)\n```/)[1].trim();
 }
 
 function addFinalPeriod(text) {
