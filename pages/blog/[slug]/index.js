@@ -36,6 +36,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         slug
         title
         seoH1
+        canonicalUrl
         yoastAnalysis
         content {
           value
@@ -191,7 +192,7 @@ export default function Article({ preview, subscription }) {
 
   return (
     <Layout preview={preview}>
-      <Head>
+      <Head canonicalUrl={post.canonicalUrl}>
         {renderMetaTags(post._seoMetaTags)}
         {post._firstPublishedAt && (
           <meta
