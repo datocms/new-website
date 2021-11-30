@@ -33,6 +33,10 @@ module.exports = [
     destination: '/team/best-cms-for-developers',
   },
   {
+    source: '/docs/building-plugins/:rest*',
+    destination: '/docs/legacy-plugins/:rest*',
+  },
+  {
     source: '/docs/guides/custom-assets-domain/:rest*',
     destination: '/marketplace/enterprise/:rest*',
   },
