@@ -184,10 +184,14 @@ export default function Plugin({ plugin, preview }) {
                 Visit homepage
               </a>
             </Info>
-            <Info title="Plugin type">{plugin.pluginType.name}</Info>
-            <Info title="Compatible with fields">
-              {plugin.fieldTypes.map((f) => f.name).join(', ')}
-            </Info>
+            {plugin.pluginType && (
+              <Info title="Plugin type">{plugin.pluginType.name}</Info>
+            )}
+            {plugin.fieldTypes && (
+              <Info title="Compatible with fields">
+                {plugin.fieldTypes.map((f) => f.name).join(', ')}
+              </Info>
+            )}
             <Info title="Current version">{plugin.version}</Info>
             <Info title="Installs count">{info && info.installs}</Info>
             <Info title="Last update">
