@@ -8,7 +8,7 @@ export default function Numbers({ children, image }) {
       <BackgroundImage
         className={s.image}
         scale={0.5}
-        src={`${image}&fit=crop&fm=jpg&blur=10`}
+        src={`${image}&fit=crop&blur=10&auto=format`}
       />
       <div className={s.inner}>
         <Wrapper>
