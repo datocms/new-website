@@ -50,7 +50,7 @@ export default function UseCaseHead({ title, logo: logoUrl, image }) {
       <div className={cn(s.box, s.boxImage)}>
         <BackgroundImage
           className={s.image}
-          src={`${image}&fit=min&fm=png8&q=90&crop=center`}
+          src={`${image}&fit=min&q=90&crop=center&auto=format`}
         />
       </div>
     </div>
