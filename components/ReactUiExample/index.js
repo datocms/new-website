@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import * as components from 'datocms-react-ui';
 import PlusIcon from 'public/icons/regular/plus.svg';
+import TrashIcon from 'public/icons/regular/trash.svg';
 import ChevronDownIcon from 'public/icons/regular/chevron-down.svg';
 import Prism from 'components/Prism';
 import Tabs, { Tab } from 'components/Tabs';
@@ -17,6 +18,7 @@ const StateManager = ({ initial, children }) => {
 const reactUiComponents = {
   ...components,
   PlusIcon,
+  TrashIcon,
   ChevronDownIcon,
   StateManager,
 };

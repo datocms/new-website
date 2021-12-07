@@ -29,7 +29,7 @@
     "custom-prism-react-renderer": "1.0.6",
     "date-fns": "^2.22.1",
     "datebook": "^6.5.7",
-    "datocms-react-ui": "^0.3.18",
+    "datocms-react-ui": "^0.3.19",
     "datocms-search": "^0.1.8",
     "datocms-structured-text-to-html-string": "^1.1.4",
     "datocms-structured-text-to-plain-text": "^1.1.4",
