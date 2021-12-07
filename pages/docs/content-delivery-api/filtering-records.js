@@ -60,7 +60,7 @@ export default function DocPage({
   fieldTypesInfo,
 }) {
   const { data } = useQuerySubscription(pageSubscription);
-  const page = data;
+  const page = data.page;
 
   return (
     <DocsLayout

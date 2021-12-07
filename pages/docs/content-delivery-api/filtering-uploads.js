@@ -57,7 +57,7 @@ export default function DocPage({
   filters,
 }) {
   const { data } = useQuerySubscription(pageSubscription);
-  const page = data;
+  const page = data.page;
 
   return (
     <DocsLayout

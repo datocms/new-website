@@ -60,7 +60,7 @@ export default function DocPage({
   const result = useMemo(() => parse(cma), [cma]);
 
   const { data } = useQuerySubscription(pageSubscription);
-  const page = data;
+  const page = data.page;
 
   return (
     <DocsLayout

@@ -347,9 +347,9 @@ export const getStaticProps = handleErrors(async function ({
             ...gqlPageRequest,
             token: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
             enabled: true,
-            initialData: data.page,
+            initialData: data,
           }
-        : { enabled: false, initialData: data.page },
+        : { enabled: false, initialData: data },
       additionalData,
       preview: preview ? true : false,
     },
@@ -460,7 +460,7 @@ export default function DocPage({
   additionalData,
 }) {
   const { data } = useQuerySubscription(pageSubscription);
-  const page = data;
+  const page = data.page;
   const pageTitle = titleOverride || (page && page.title);
   const defaultSeoTitle = `${
     docGroup ? `${docGroup.name} - ` : '-'

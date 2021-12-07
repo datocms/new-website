@@ -71,7 +71,7 @@ export default function DocPage({
   const result = useMemo(() => schema && parse(schema), [schema]);
   const definitions = findAllChildrenDefinitions(result.definitions.Root);
   const { data } = useQuerySubscription(pageSubscription);
-  const page = data;
+  const page = data.page;
 
   // this is to prevent the build from breaking while the structured text doc group is not published
   if (!docGroup) {
