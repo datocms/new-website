@@ -4,7 +4,7 @@ import { request, imageFields } from 'lib/datocms';
 import { Image as DatoImage } from 'react-datocms';
 import Head from 'components/Head';
 import PluginBox from 'components/PluginBox';
-import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
+import s from 'pages/marketplace/plugins/browse/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';

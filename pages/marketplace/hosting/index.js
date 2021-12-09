@@ -3,7 +3,7 @@ import Wrapper from 'components/Wrapper';
 import { gqlStaticProps } from 'lib/datocms';
 import Head from 'components/Head';
 import PluginBox, { LogoImage } from 'components/PluginBox';
-import s from 'pages/marketplace/plugins/p/[page]/style.module.css';
+import s from 'pages/marketplace/plugins/browse/p/[page]/style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   `

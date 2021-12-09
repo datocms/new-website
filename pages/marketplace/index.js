@@ -209,6 +209,7 @@ export default function IntegrationsPage({
           <Box
             key={item.packageName}
             href={`/marketplace/plugins/i/${item.packageName}`}
+            title={item.title}
             description={truncate(item.description, 55)}
             image={
               <DatoImage

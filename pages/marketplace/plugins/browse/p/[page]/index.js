@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Layout from 'components/MarketplaceLayout';
 import Wrapper from 'components/Wrapper';
 import {
@@ -18,6 +18,7 @@ import s from './style.module.css';
 import truncate from 'truncate';
 import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
 import { useDebounce } from 'use-debounce';
+import { useGenerateUrl } from 'utils/plugins';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -84,19 +85,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState(plugins);
 
-  const generateUrl = useCallback(
-    (url, additionalParams = {}) => {
-      const params = new URLSearchParams(router.asPath.split('?')[1]);
-      Object.entries(additionalParams).forEach(([k, v]) => {
-        params.set(k, v);
-      });
-      if (params.toString()) {
-        return `${url}?${params.toString()}`;
-      }
-      return url;
-    },
-    [router.asPath],
-  );
+  const generateUrl = useGenerateUrl(router);
 
   useEffect(() => {
     if (
@@ -104,7 +93,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
       debouncedSearchTerm
     ) {
       router.push(
-        generateUrl(`/marketplace/plugins`, { s: debouncedSearchTerm }),
+        generateUrl(`/marketplace/plugins/browse`, { s: debouncedSearchTerm }),
         null,
         { shallow: true },
       );
@@ -230,8 +219,8 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
               totalEntries={meta.count}
               href={(index) =>
                 index === 0
-                  ? '/marketplace/plugins'
-                  : `/marketplace/plugins/p/${index}`
+                  ? '/marketplace/plugins/browse'
+                  : `/marketplace/plugins/browse/p/${index}`
               }
             />
           </>
