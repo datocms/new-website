@@ -77,13 +77,20 @@
 }
 
 .table {
-  column-count: 3;
   column-gap: 50px;
   max-width: var(--page-width-with-margin);
   padding-left: var(--page-margin);
   padding-right: var(--page-margin);
   margin-left: auto;
   margin-right: auto;
+
+  @media (min-width: 650px) {
+    column-count: 2;
+  }
+
+  @media (min-width: 850px) {
+    column-count: 3;
+  }
 }
 
 .tableCell {
