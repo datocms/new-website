@@ -77,6 +77,12 @@ function findReturnType(manifest, signature, extraInfo = {}) {
     });
   }
 
+  if (signature.type === 'array') {
+    return findReturnType(manifest, signature.elementType, {
+      isArray: true,
+    });
+  }
+
   if (signature.type.type === 'union') {
     if (
       signature.type.types.length === 2 &&
