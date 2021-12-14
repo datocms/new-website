@@ -50,6 +50,7 @@
     "jsdom": "^16.6.0",
     "json-schema-ref-parser": "^9.0.9",
     "keyword-highlighter": "^1.0.6",
+    "lodash-es": "^4.17.21",
     "min-md5": "^1.0.0",
     "next": "^12.0.0",
     "next-env": "^1.1.1",

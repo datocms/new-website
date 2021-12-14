@@ -1,0 +1,83 @@
+.posts {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 600px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1000px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.post {
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--box-shadow);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  transition: top 0.2s ease-in-out;
+
+  &:hover {
+    top: -10px;
+  }
+}
+
+.postLogo {
+  padding: 40px rfs(70px);
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+
+  img {
+    width: 100%;
+    height: 80px;
+  }
+}
+
+.postBody {
+  padding: 30px;
+}
+
+.postTitle {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.postDescription {
+  font-size: 16px;
+  color: var(--light-body-color);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pinkLogo {
+  background: linear-gradient(45deg, #f9ecfe, white);
+}
+
+.azureLogo {
+  background: linear-gradient(45deg, #e9fcff, white);
+}
+
+.grayLogo {
+  background: linear-gradient(45deg, #e9fcff, white);
+}
+
+.blueLogo {
+  background: linear-gradient(45deg, #e9e9ff, white);
+}
+
+.greenLogo {
+  background: linear-gradient(45deg, #e9ffed, white);
+}
+
+.yellowLogo {
+  background: linear-gradient(45deg, #feffe9, white);
+}
