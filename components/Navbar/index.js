@@ -445,14 +445,20 @@ export default function Navbar() {
                 </Pane>
               </div>
 
-              <Link href="/pricing">
+              <Link href="/partners">
                 <a className={s.entry}>
-                  <span>Pricing</span>
+                  <span>Partners</span>
                 </a>
               </Link>
             </div>
 
             <div className={s.actions}>
+              <Link href="/pricing">
+                <a className={s.entry}>
+                  <span>Pricing</span>
+                </a>
+              </Link>
+
               <Link href="/contact">
                 <a className={cn(s.entry, loggedIn && s.entryContact)}>
                   <span>Contact sales</span>

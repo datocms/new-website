@@ -1,4 +1,4 @@
-@media screen and (width <= 1050px) {
+@media screen and (width <= 1125px) {
   .root {
     visibility: hidden;
     height: 0;
@@ -10,7 +10,7 @@
   }
 }
 
-@media screen and (width > 1050px) {
+@media screen and (width > 1125px) {
   .notice {
     background: #fff0e8;
     padding: 10px 0;
@@ -61,7 +61,7 @@
 
   .entry,
   .groupTitle {
-    padding: 13px 14px;
+    padding: 13px 8px;
     font-size: 17px;
     display: block;
 
@@ -79,6 +79,10 @@
       height: 3px;
       background: var(--accent-color);
       transition: all 0.2s ease-in-out;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 13px 10px;
     }
   }
 

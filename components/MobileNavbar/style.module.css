@@ -206,7 +206,7 @@
   color: var(--light-body-color);
 }
 
-@media screen and (width > 1050px) {
+@media screen and (width > 1125px) {
   .overlay {
     display: none;
   }

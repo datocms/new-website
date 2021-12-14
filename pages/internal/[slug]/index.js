@@ -8,7 +8,7 @@ import {
   allStaticRoutes as staticRoutes,
   staticGeneratorsRoutes,
   customerRoutes,
-  // partnerRoutes,
+  partnerRoutes,
   blogRoutes,
   docsRoutes,
   marketplaceRoutes,
@@ -32,7 +32,7 @@ export async function getStaticProps({ params: { slug } }) {
         ...staticRoutes,
         ...(await staticGeneratorsRoutes()),
         ...(await customerRoutes()),
-        // ...(await partnerRoutes()),
+        ...(await partnerRoutes()),
       ];
       break;
     case 'sitemap-blog':

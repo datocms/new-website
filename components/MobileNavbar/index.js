@@ -286,6 +286,8 @@ export default function Navbar() {
 
                 <BigLink href="/pricing">Pricing</BigLink>
 
+                <BigLink href="/partners">Solution Partners</BigLink>
+
                 <div className={s.actions}>
                   <Link href="/contact">
                     <a className={s.sales}>Contact sales</a>
