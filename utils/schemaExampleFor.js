@@ -64,6 +64,8 @@ export default function schemaExampleFor(schema, pagination = true) {
     return true;
   } else if (type === 'integer') {
     return 20;
+  } else if (type === 'number') {
+    return 0.5;
   } else if (type === 'null') {
     return null;
   } else {
