@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import PlusIcon from 'public/icons/regular/plus.svg';
 import TimesIcon from 'public/icons/regular/times.svg';
 import GithubIcon from 'public/icons/brands/github.svg';
+import removeMarkdown from 'remove-markdown';
 import { useState } from 'react';
 import slugify from 'utils/slugify';
 import s from './style.module.css';
@@ -67,7 +68,63 @@ const ExpandablePane = ({ children, label }) => {
   );
 };
 
+const ExpandableAttribute = ({ item }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div key={item.name} className={s.hook}>
+      <div className={s.hookExpand} onClick={() => setOpen((open) => !open)}>
+        {open ? <TimesIcon /> : <PlusIcon />}
+      </div>
+      <div className={s.hookBody}>
+        <button className={s.hookName} onClick={() => setOpen((open) => !open)}>
+          <span className={s.hookNameName}>
+            ctx.{item.name}
+            {item.type === 'function' ? '()' : ''}
+          </span>
+          {!open && (
+            <span className={s.hookNameDesc}>
+              {removeMarkdown(item.description)}
+            </span>
+          )}
+        </button>
+        {open && (
+          <div className={s.hookDeets}>
+            <div className={s.hookDescription}>
+              <Markdown>{item.description}</Markdown>
+              <a
+                href={`${baseUrl}#L${item.lineNumber}`}
+                target="_blank"
+                rel="noreferrer"
+                className={s.hookGithub}
+              >
+                View on Github <GithubIcon />
+              </a>
+            </div>
+            {item.example && <Prism code={item.example} language="ts" />}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export default function Hook({ hook }) {
+  const ctxAttrs =
+    hook.ctx && hook.ctx.map((group) => group.properties || []).flat();
+
+  const ctxProperties =
+    ctxAttrs &&
+    ctxAttrs
+      .filter((i) => i.type !== 'function')
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+  const ctxMethods =
+    ctxAttrs &&
+    ctxAttrs
+      .filter((i) => i.type === 'function')
+      .sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <div key={hook.name}>
       <Heading anchor={hook.name} as="h3">
@@ -93,8 +150,8 @@ export default function Hook({ hook }) {
               {hook.returnType.properties
                 .sort((a, b) => a.lineNumber - b.lineNumber)
                 .map((item) => (
-                  <div key={item.name} className={s.hook}>
-                    <div className={s.hookName}>
+                  <div key={item.name} className={s.returnValue}>
+                    <div className={s.returnValueName}>
                       <a
                         href={`${baseUrl}#L${item.lineNumber}`}
                         target="_blank"
@@ -109,7 +166,7 @@ export default function Hook({ hook }) {
                         <span className={s.required}>Required</span>
                       )}
                     </div>
-                    <div className={s.hookDescription}>
+                    <div className={s.returnValueDescription}>
                       <Markdown>{item.description}</Markdown>
                     </div>
                   </div>
@@ -120,52 +177,36 @@ export default function Hook({ hook }) {
       )}
       {hook.ctx && (
         <>
-          <Heading
-            anchor={`${hook.name}-context`}
-            as="h5"
-            className={s.subchapter}
-          >
-            Properties/methods available in context
-          </Heading>
-          <p>The following information and methods are available:</p>
-          {hook.ctx.map((group) => {
-            const name = group.name
-              .replace('AdditionalMethods', 'Methods')
-              .replace('AdditionalProperties', 'Properties')
-              .replace('Methods', ' methods')
-              .replace('Properties', ' properties');
-
-            return (
-              <ExpandablePane label={`${name}`} key={name}>
-                <div className={s.groupDescription}>
-                  <Markdown>{group.description}</Markdown>
-                </div>
-                <div className={s.propertyGroup}>
-                  {(group.properties || []).map((item) => (
-                    <div key={item.name} className={s.hook}>
-                      <div className={s.hookName}>
-                        <a
-                          href={`${baseUrl}#L${item.lineNumber}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {item.name}
-                          {item.type === 'function' ? '()' : ''}
-                          <GithubIcon />
-                        </a>
-                      </div>
-                      <div className={s.hookDescription}>
-                        <Markdown>{item.description}</Markdown>
-                      </div>
-                      {item.example && (
-                        <Prism code={item.example} language="ts" />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </ExpandablePane>
-            );
-          })}
+          {ctxProperties && ctxProperties.length > 0 && (
+            <>
+              <Heading
+                anchor={`${hook.name}-context-properties`}
+                as="h5"
+                className={s.subchapter}
+              >
+                Properties available in context
+              </Heading>
+              <p>The following information and methods are available:</p>
+              {ctxProperties.map((item) => (
+                <ExpandableAttribute item={item} key={item.name} />
+              ))}
+            </>
+          )}
+          {ctxMethods && ctxMethods.length > 0 && (
+            <>
+              <Heading
+                anchor={`${hook.name}-context-methods`}
+                as="h5"
+                className={s.subchapter}
+              >
+                Methods available in context
+              </Heading>
+              <p>The following information and methods are available:</p>
+              {ctxMethods.map((item) => (
+                <ExpandableAttribute item={item} key={item.name} />
+              ))}
+            </>
+          )}
         </>
       )}
       {hook.example && <Prism code={hook.example} language="js" />}

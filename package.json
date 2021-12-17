@@ -77,6 +77,7 @@
     "rehype-raw": "^5.1.0",
     "rehype-sanitize": "^4.0.0",
     "remark-gfm": "^1.0.0",
+    "remove-markdown": "^0.3.0",
     "rollbar": "^2.22.0",
     "scroll-into-view-if-needed": "^2.2.28",
     "seedrandom": "^3.0.5",
