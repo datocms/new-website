@@ -125,6 +125,7 @@ puts ${variable}.inspect
 
   if (!allPages) {
     const code = `require "dato"
+
 client = Dato::Site::Client.new("YOUR-API-TOKEN")
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
       precode.length > 0 ? '\n' : ''

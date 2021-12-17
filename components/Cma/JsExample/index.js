@@ -89,6 +89,23 @@ function example(resource, link, allPages = false) {
     }
   }
 
+  const namespace = resource.links.find((l) => l.rel === 'instances')
+    ? humps.camelize(pluralize(resource.id))
+    : humps.camelize(resource.id);
+
+  const action = humps.camelize(methods[link.rel] || link.rel);
+
+  let call = `client.${namespace}.${action}`;
+  if (params.length > 0) {
+    if (allPages) {
+      call += `(\n${params.join(',\n').replace(/^/gm, '  ')}\n)`;
+    } else {
+      call += `(${params.join(', ')})`;
+    }
+  } else {
+    call += '()';
+  }
+
   let returnCode, output;
 
   if (link.targetSchema || link.jobSchema) {
@@ -104,55 +121,50 @@ function example(resource, link, allPages = false) {
 
       returnCode =
         example.data.length > 0 &&
-        `.then((${multipleVariable}) => {
-    ${multipleVariable}.forEach((${singleVariable}) => {
-      console.log(${singleVariable});
-    });
-  })`;
+        `const ${multipleVariable} = await ${call};
+
+${multipleVariable}.forEach((${singleVariable}) => {
+  console.log(${singleVariable});
+});`;
     } else {
       const variable = humps.camelize(resource.id);
       output = JSON.stringify(deserialize(example.data, true), null, 2);
 
-      returnCode = `.then((${variable}) => {
-  console.log(${variable});
-})`;
+      returnCode = `const ${variable} = await ${call};
+
+console.log(${variable});`;
     }
-  } else {
-    returnCode = `.then(() => {
-  console.log('Done!');
-})`;
   }
 
-  const namespace = resource.links.find((l) => l.rel === 'instances')
-    ? humps.camelize(pluralize(resource.id))
-    : humps.camelize(resource.id);
-
-  const action = humps.camelize(methods[link.rel] || link.rel);
-
   if (!allPages) {
-    const code = `const SiteClient = require('datocms-client').SiteClient;
-const client = new SiteClient('YOUR-API-TOKEN');
+    const body = `const client = new SiteClient('YOUR-API-TOKEN');
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
-      precode.length > 0 ? '\n' : ''
-    }
-client.${namespace}.${action}(${params.join(', ')})${
       returnCode ? `\n${returnCode}` : ''
     }
-.catch((error) => {
-  console.error(error);
-});
 ${
   link.targetSchema &&
   link.targetSchema.properties.meta &&
   link.targetSchema.properties.meta.properties.total_count
-    ? '\n\n// if you want to fetch all the pages with just one call:\n' +
+    ? '\n\n// or, if you want to fetch all the pages with just one call:\n' +
       example(resource, link, true).code
     : ''
 }`;
+
+    let code = `const { SiteClient } = require('datocms-client');
+
+async function run() {
+${body
+  .trim()
+  .split('\n')
+  .map((x) => `  ${x}`)
+  .join('\n')}
+}
+
+run();`;
+
     return { code, output };
   } else {
     const code = `
-client.${namespace}.${action}(${params.join(', ')})
 ${returnCode}`;
     return { code, output };
   }
