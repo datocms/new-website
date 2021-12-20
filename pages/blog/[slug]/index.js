@@ -47,6 +47,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               title
               __typename
             }
+            ... on ChangelogEntryRecord {
+              id
+              slug
+              title
+              __typename
+            }
           }
           blocks {
             ... on ImageRecord {

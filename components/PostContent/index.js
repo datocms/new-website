@@ -252,6 +252,15 @@ export default function PostContent({
                   {record.title}
                 </a>
               );
+            case 'ChangelogEntryRecord':
+              return (
+                <a
+                  {...transformedMeta}
+                  href={`/product-updates/${record.slug}`}
+                >
+                  {record.title}
+                </a>
+              );
             default:
               return null;
           }
@@ -261,6 +270,15 @@ export default function PostContent({
             case 'BlogPostRecord':
               return (
                 <a {...transformedMeta} href={`/blog/${record.slug}`}>
+                  {children}
+                </a>
+              );
+            case 'ChangelogEntryRecord':
+              return (
+                <a
+                  {...transformedMeta}
+                  href={`/product-updates/${record.slug}`}
+                >
                   {children}
                 </a>
               );
