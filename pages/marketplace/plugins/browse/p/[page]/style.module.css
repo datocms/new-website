@@ -62,3 +62,18 @@
   font-size: 30px;
   color: var(--light-body-color);
 }
+
+.techLogo {
+  height: 25px;
+  margin-top: 20px;
+}
+
+.demoDesc {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.demoDescBody {
+  flex: 1;
+}
