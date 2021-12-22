@@ -181,10 +181,12 @@ export default function IntegrationsPage({
               </div>
             }
             image={
-              <DatoImage
-                className={s.boxImageImage}
-                data={item.screenshot.responsiveImage}
-              />
+              item.screenshot && (
+                <DatoImage
+                  className={s.boxImageImage}
+                  data={item.screenshot.responsiveImage}
+                />
+              )
             }
           />
         ))}
@@ -212,10 +214,12 @@ export default function IntegrationsPage({
             title={item.title}
             description={truncate(item.description, 55)}
             image={
-              <DatoImage
-                className={s.boxImageImage}
-                data={item.coverImage.responsiveImage}
-              />
+              item.coverImage && (
+                <DatoImage
+                  className={s.boxImageImage}
+                  data={item.coverImage.responsiveImage}
+                />
+              )
             }
           />
         ))}
