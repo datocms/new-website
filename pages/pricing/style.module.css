@@ -14,13 +14,50 @@
   }
 }
 
+.agenciesCta {
+  color: inherit;
+  margin-bottom: 60px;
+  display: block;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #f2ffff, #fefbe4);
+
+  mark {
+    background-image: linear-gradient(120deg, #faf77d 0%, #faf77d 100%);
+    background-repeat: no-repeat;
+    font-weight: bold;
+  }
+
+  svg {
+    height: 2em;
+    margin-right: 10px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media screen and (width >= 930px) {
+    grid-area: 1 / 2 / 1 / 5;
+
+    mark {
+      padding: 2px 5px;
+    }
+  }
+}
+
 .plansStrip {
   position: relative;
 
   &:before {
     content: '';
-    background: linear-gradient(45deg, #e9fcff 30%, #fdf2ed 60%);
     clip-path: var(--clip-path);
+    background: linear-gradient(45deg, #e9fcff 30%, #fdf2ed 60%);
     text-align: center;
     position: absolute;
     left: 0;

@@ -30,6 +30,7 @@ import TitleStripWithContent from 'components/TitleStripWithContent';
 import SuccessIcon from 'public/icons/regular/check.svg';
 import Bullets from 'components/Bullets';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import AnnouncementIcon from 'public/images/illustrations/marketers.svg';
 import { Badge } from 'components/PluginToolkit';
 import Tier1 from 'public/images/tiers/tier-1.svg';
 import Tier2 from 'public/images/tiers/tier-2.svg';
@@ -203,6 +204,16 @@ export default function Pricing({
         <div className={s.plansStrip}>
           <Wrapper>
             <div className={s.plansContainer}>
+              <div />
+              <Link href="/pricing/agencies">
+                <a className={s.agenciesCta}>
+                  <AnnouncementIcon />
+                  <span>
+                    <mark>Building lots of sites?</mark> Very special prices are
+                    available for web agencies! &raquo;
+                  </span>
+                </a>
+              </Link>
               <div />
               {plans.map((plan, index) => (
                 <PlanBox
