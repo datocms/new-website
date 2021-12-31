@@ -209,8 +209,8 @@ export default function Pricing({
                 <a className={s.agenciesCta}>
                   <AnnouncementIcon />
                   <span>
-                    <mark>Building lots of sites?</mark> Very special prices are
-                    available for web agencies! &raquo;
+                    <mark>Building lots of sites?</mark> Find out about our
+                    Agency Parter program! &raquo;
                   </span>
                 </a>
               </Link>
