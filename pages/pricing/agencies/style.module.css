@@ -1,22 +1,25 @@
 .pre {
-  margin-top: rfs(70px);
   text-align: center;
   max-width: 850px;
-  margin: 0 auto;
+  margin: 40px auto;
 }
 
-.body {
-  margin-top: rfs(40px);
-  font-size: rfs(22px);
+.letter {
+  padding: 50px 30px;
+  font-size: 17px;
   font-family: var(--font-serif);
   line-height: 1.6;
   letter-spacing: -0.02em;
   max-width: 850px;
   margin: 0 auto;
   box-shadow: var(--box-shadow);
-  border-radius: 7px;
   background: white;
-  padding: 80px;
+
+  @media (width > 700px) {
+    border-radius: 7px;
+    font-size: rfs(21px);
+    padding: 80px;
+  }
 
   strong {
     margin: 0 -0.4em;
@@ -42,7 +45,7 @@
   }
 
   p {
-    margin: 0 0 rfs(40px);
+    margin: 0 0 rfs(20px);
   }
 
   ul {
@@ -51,5 +54,21 @@
 
   li {
     margin-bottom: 8px;
+  }
+
+  h3 {
+    font-family: var(--font-headline);
+    font-size: 1.5em;
+    margin: rfs(40px) 0 10px;
+  }
+}
+
+.signature {
+  margin-top: 40px;
+  line-height: 1;
+  font-size: 0.9em;
+
+  svg {
+    height: 4.5em;
   }
 }
