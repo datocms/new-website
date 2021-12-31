@@ -60,6 +60,7 @@
     font-family: var(--font-headline);
     font-size: 1.5em;
     margin: rfs(40px) 0 10px;
+    line-height: 1.2;
   }
 }
 

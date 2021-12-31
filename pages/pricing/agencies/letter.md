@@ -42,6 +42,6 @@ We're 100% positive that any pre-cooked plan/formula we can offer in this page y
 
 Tell us your needs, how you work, what you're looking for. Togheter, we'll come up with a super-convenient, custom-tailored price around your specific needs, capable of scaling with the number of projects, with no up-front investment for you.
 
-Challenge us. Ask us to put you in touch with some other Agency Partners, listen to their experience with us. Ask us to book some time with our core engineers, to clear your doubts and help you get the most out of DatoCMS.
+Challenge us. Ask us to put you in touch with some other [Agency Partners](/partners), listen to their experience with us. Ask us to book some time with our core engineers, to clear your doubts and help you get the most out of DatoCMS.
 
 We're here for the long run, and **we can't wait to meet you!**
