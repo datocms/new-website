@@ -199,42 +199,39 @@ export default function Agencies({ body }) {
         kicker="Agency partner program"
         title={
           <>
-            Agencies,&nbsp;we&apos;ve&nbsp;got a special&nbsp;deal{' '}
+            Agencies, we&apos;ve got a special&nbsp;deal{' '}
             <Highlight>for you</Highlight>.
           </>
         }
       />
 
-      <Wrapper>
-        <div className={s.letterContainer}>
-          <div className={s.elevator}>
-            <div className={s.pre}>
-              <p>
-                We couldn&apos;t find a better way to talk to you about this...
-                so here&apos;s a letter from us.{' '}
-              </p>
-              <p>Thanks for taking the time to read these lines! 🙏</p>
+      <div className={s.letterContainer}>
+        <div className={s.elevator}>
+          <div className={s.pre}>
+            <p>Here&apos;s a letter from us, to you! </p>
+            <p>
+              Sorry for the length, but we think it might be worth it to know
+              each other better. 🙏
+            </p>
 
-              <Arrow />
-            </div>
-          </div>
-
-          <div className={s.letter}>
-            <ReactMarkdown>{body}</ReactMarkdown>
-            <div className={s.signature}>
-              <Signature />
-              <div>Stefano, and all the DatoCMS team</div>
-            </div>
+            <Arrow />
           </div>
         </div>
-      </Wrapper>
+
+        <div className={s.letter}>
+          <ReactMarkdown>{body}</ReactMarkdown>
+          <div className={s.signature}>
+            <Signature />
+            <div>Stefano, and all the DatoCMS team</div>
+          </div>
+        </div>
+      </div>
 
       <Space top={3}>
         <TitleStripWithContent
           title={
             <>
-              Introducing our{' '}
-              <Highlight>Agency&nbsp;Partner&nbsp;Program</Highlight>
+              Introducing our <Highlight>Agency&nbsp;Partner program</Highlight>
             </>
           }
           subtitle={
@@ -303,8 +300,7 @@ export default function Agencies({ body }) {
             <Space top={1}>
               Fill in this form, and we&apos;ll setup a quick 15 minutes call to
               know each other and enroll you in the program. You are one step
-              away from unlocking all the benefits of the DatoCMS Partner
-              Program!
+              away from unlocking all the benefits!
             </Space>
           }
         >

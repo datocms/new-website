@@ -9,6 +9,8 @@ import {
 } from 'react-hook-form';
 import cn from 'classnames';
 import { useToasts } from 'react-toast-notifications';
+import { useRef } from 'react';
+import useComponentSize from '@rehooks/component-size';
 
 export const Field = ({
   name,
@@ -29,6 +31,8 @@ export const Field = ({
   } = useFormContext();
   const value = watch(name);
   const field = register(name, validations);
+  const labelRef = useRef();
+  const { height: labelHeight } = useComponentSize(labelRef);
 
   let input = (
     <input
@@ -84,9 +88,13 @@ export const Field = ({
       className={cn(s.field, {
         [s.fieldError]: errors[name] && errors[name].message,
       })}
+      style={{
+        '--paddingTop': `${35 + labelHeight}px`,
+      }}
     >
-      <label htmlFor={name}>
-        {label} {validations && <span className={s.required}> *</span>}
+      <label htmlFor={name} ref={labelRef}>
+        {label}
+        {validations && <span className={s.required}>&nbsp;*</span>}
       </label>
 
       {errors[name] && <div className={s.error}>← {errors[name].message}</div>}

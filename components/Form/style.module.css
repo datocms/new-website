@@ -2,10 +2,11 @@
   position: relative;
   border-bottom: 1px solid var(--border-color);
   background: white;
+  --paddingTop: 50px;
 
   .selectPlaceholder {
     position: absolute;
-    top: 45px;
+    top: var(--paddingTop);
     left: 32px;
     right: 30px;
     font-size: rfs(17px);
@@ -20,7 +21,7 @@
     border: 0;
     margin: 0;
     background-color: white;
-    padding: 45px 29px 20px;
+    padding: var(--paddingTop) 29px 20px;
     font-family: inherit;
     font-size: 17px;
     display: block;
@@ -56,8 +57,8 @@
   label {
     color: var(--light-body-color);
     font-weight: bold;
-    width: 70%;
     font-size: 15px;
+    padding-right: 80px;
     pointer-events: none;
   }
 
@@ -65,9 +66,16 @@
     font-size: 12px;
     right: 29px;
     left: auto;
-    width: 30%;
     text-align: right;
-    color: var(--accent-color);
+    background: var(--accent-color);
+    padding: 3px 5px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+  }
+
+  &:hover .error {
+    opacity: 0.3;
   }
 }
 
