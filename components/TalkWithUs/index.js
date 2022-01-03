@@ -1,5 +1,5 @@
 import s from './style.module.css';
-import Textarea from 'react-autosize-textarea';
+import Textarea from 'react-textarea-autosize';
 import { getData } from 'country-list';
 import { Form, Field } from 'components/Form';
 import { getCookie } from 'utils/cookies';

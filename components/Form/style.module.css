@@ -50,14 +50,13 @@
     position: absolute;
     top: 25px;
     left: 33px;
-    width: 40%;
     line-height: 1;
   }
 
   label {
     color: var(--light-body-color);
     font-weight: bold;
-    width: 60%;
+    width: 70%;
     font-size: 15px;
     pointer-events: none;
   }
@@ -66,6 +65,7 @@
     font-size: 12px;
     right: 29px;
     left: auto;
+    width: 30%;
     text-align: right;
     color: var(--accent-color);
   }

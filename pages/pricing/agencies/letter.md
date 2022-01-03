@@ -2,9 +2,13 @@ Hey,
 
 we don't know each other personally — _yet!_ — but having run web agencies for +10 years before starting DatoCMS... we feel like we kinda know you, at least a bit.
 
-For example, we know (painfully well) how time constrained you are. How hard it is to find time for anything else than keeping your clients happy. So thanks for taking the time to read these lines. Also, keep fighting! ✊
+We know (painfully well) how time constrained you are.
 
-We also know how many projects you're simultaneously working on right now (that's simple, _far too many_), and how much they're different in size and scope, no matter how much you might try to standardize things...
+How hard it is to find time for anything else than keeping your clients happy.
+
+How many projects you're simultaneously working on right now (that's simple, _far too many_).
+
+How much every work is different in size and scope, no matter how much you might try to standardize things...
 
 ### What you need from a CMS
 

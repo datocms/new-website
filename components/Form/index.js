@@ -70,7 +70,6 @@ export const Field = ({
         name={name}
         id={name}
         control={control}
-        placeholder={placeholder}
         rules={validations}
       />
     );
