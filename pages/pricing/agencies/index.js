@@ -270,7 +270,7 @@ export default function Agencies({ body }) {
                 </div>
                 <div className={s.perk}>
                   <div className={s.perkTitle}>
-                    Public listing on our website's Partners page
+                    Public listing on our website&apos;s Partners page
                   </div>
                   <div className={s.perkDescription}>
                     Get immediate visibility by showing up in our{' '}
@@ -301,13 +301,14 @@ export default function Agencies({ body }) {
           kicker="Enroll the Agency Partner Program"
           below={
             <Space top={1}>
-              Fill in this form, and we'll setup a quick 15 minutes call to know
-              each other and enroll you in the program. You are one step away
-              from unlocking all the benefits of the DatoCMS Partner Program!
+              Fill in this form, and we&apos;ll setup a quick 15 minutes call to
+              know each other and enroll you in the program. You are one step
+              away from unlocking all the benefits of the DatoCMS Partner
+              Program!
             </Space>
           }
         >
-          Interested? <Highlight>Then let's talk!</Highlight>
+          Interested? <Highlight>Then let&apos;s talk!</Highlight>
         </InterstitialTitle>
       </Space>
 
