@@ -208,7 +208,7 @@ export default function Agencies({ body }) {
             <p>Here&apos;s a letter from us, to you! </p>
             <p>
               Sorry for the length, but we think it might be worth it to know
-              each other better. 🙏
+              each other better 🙏
             </p>
 
             <Arrow />
