@@ -47,7 +47,7 @@ const AgencyForm = () => {
   //   const result = await res.json();
 
   //   if (!result.success) {
-  //     throw new Error('Ouch!');
+  //     throw new Error('Ouch');
   //   }
   // };
 
