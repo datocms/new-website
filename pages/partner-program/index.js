@@ -25,7 +25,7 @@ const AgencyForm = () => {
     country: '',
     email: getCookie('datoAccountEmail'),
 
-    introduction: '',
+    body: '',
     technologies: '',
     projectsPerQuarter: '',
     needsSalesMaterial: '',
@@ -103,7 +103,7 @@ const AgencyForm = () => {
         </div>
 
         <Field
-          name="introduction"
+          name="body"
           label="Please introduce yourself and your Agency!"
           validations={{ required: 'Required' }}
           render={({ field }) => (
