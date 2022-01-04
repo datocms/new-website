@@ -33,23 +33,23 @@ const AgencyForm = () => {
     additionalInfo: '',
   };
 
-  const submitSales = async (values) => {
-    const body = JSON.stringify(values);
+  // const submitSales = async (values) => {
+  //   const body = JSON.stringify(values);
 
-    const res = await fetch('/api/pipedrive/submit', {
-      body: body,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    });
+  //   const res = await fetch('/api/pipedrive/submit', {
+  //     body: body,
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     method: 'POST',
+  //   });
 
-    const result = await res.json();
+  //   const result = await res.json();
 
-    if (!result.success) {
-      throw new Error('Ouch!');
-    }
-  };
+  //   if (!result.success) {
+  //     throw new Error('Ouch!');
+  //   }
+  // };
 
   return (
     <div className={s.form}>
@@ -57,9 +57,9 @@ const AgencyForm = () => {
         defaultValues={defaultValues}
         submitLabel="Let's have a chat!"
         nativeSubmitForm
-        onSubmit={submitSales}
+        // onSubmit={submitSales}
         action={
-          'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/sWPCwvUmu--UpyGfM9hRVfjaIwWCyVh-3I0nJ4gNZKU6fQeDGRdrNfYSsrIyeoqTcGPguYxKX-ULe-OYj08sar17B0gWytpkKNcAZNZB_0HTwk9jBCh5wEQCmsmm'
+          'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/NPf8olN7ZLNBeDJ6J4Q5rMoiXscxF4_pBEjiyWan1qw34uL05cbu-cnZRELyObC5wuXRYNdhEJ_OV1XddP8wy0XqfXMXXfwmM2YDygkuEyF34tyIeO9DLPlMap-y'
         }
       >
         <div className={s.formCols}>
@@ -72,7 +72,7 @@ const AgencyForm = () => {
           <Field
             name="agencyUrl"
             label="Do you have a website?"
-            placeholder="http://www.acme.com"
+            placeholder="https://www.acme.com"
             validations={{ required: 'Required' }}
           />
         </div>
@@ -162,7 +162,6 @@ const AgencyForm = () => {
         <Field
           name="additionalInfo"
           label="If you have any additional question or concern, please ask!"
-          validations={{ required: 'Required' }}
           render={({ field }) => (
             <Textarea
               placeholder="Looking forward to chat with you!"
