@@ -41,8 +41,9 @@ module.exports = withNextEnv(
               value: 'nosniff',
             },
             {
-              key: 'x-frame-options',
-              value: 'DENY',
+              key: 'content-security-policy',
+              value:
+                'frame-ancestors https://datocms.admin.datocms.com http://localhost:3002',
             },
             {
               key: 'x-xss-protection',
