@@ -205,7 +205,7 @@ export default function Pricing({
           <Wrapper>
             <div className={s.plansContainer}>
               <div />
-              <Link href="/pricing/agencies">
+              <Link href="/partner-program">
                 <a className={s.agenciesCta}>
                   <AnnouncementIcon />
                   <span>

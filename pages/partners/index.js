@@ -11,6 +11,7 @@ import s from './style.module.css';
 import sortBy from 'lodash-es/sortBy';
 import Head from 'components/Head';
 import classNames from 'classnames';
+import { Announce } from 'components/PluginToolkit';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   `
@@ -118,6 +119,11 @@ export default function Partners({ subscription, preview }) {
             </Link>
           ))}
         </div>
+
+        <Announce href="/partner-program" center>
+          <strong>Want to become a DatoCMS Partner?</strong> Learn more about
+          our Partner Program and its benefits!
+        </Announce>
       </Wrapper>
     </Layout>
   );

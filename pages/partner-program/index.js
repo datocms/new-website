@@ -177,7 +177,7 @@ const AgencyForm = () => {
 const readFile = util.promisify(fs.readFile);
 
 export async function getStaticProps() {
-  const body = await readFile('pages/pricing/agencies/letter.md', 'utf8');
+  const body = await readFile('pages/partner-program/letter.md', 'utf8');
 
   return {
     props: {

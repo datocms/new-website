@@ -1,10 +1,8 @@
-import { useRouter } from 'next/router';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'components/Head';
 import Layout from 'components/MarketplaceLayout';
 import SmartMarkdown from 'components/SmartMarkdown';
 import Button from 'components/Button';
-import FormattedDate from 'components/FormattedDate';
 import UiChrome from 'components/UiChrome';
 import { Image as DatoImage } from 'react-datocms';
 import { LogoImage } from 'components/PluginBox';
