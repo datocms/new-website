@@ -2,6 +2,7 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
+import Space from 'components/Space';
 import { gqlStaticPropsWithSubscription } from 'lib/datocms';
 import Link from 'next/link';
 import React from 'react';
@@ -21,7 +22,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           ...partner
         }
       }
-      posts: allPartners {
+      posts: allPartners(filter: { hidden: { eq: false } }) {
         ...partner
       }
       projects: allShowcaseProjects {
@@ -94,6 +95,13 @@ export default function Partners({ subscription, preview }) {
           }
         />
 
+        <Space bottom={1}>
+          <Announce href="/partner-program" center>
+            <strong>Want to become a DatoCMS Partner?</strong> Learn more about
+            our Partner Program and its benefits!
+          </Announce>
+        </Space>
+
         <div className={s.posts}>
           {ordered.map((post, i) => (
             <Link href={`/partners/${post.slug}`} key={post.slug}>
@@ -119,11 +127,6 @@ export default function Partners({ subscription, preview }) {
             </Link>
           ))}
         </div>
-
-        <Announce href="/partner-program" center>
-          <strong>Want to become a DatoCMS Partner?</strong> Learn more about
-          our Partner Program and its benefits!
-        </Announce>
       </Wrapper>
     </Layout>
   );
