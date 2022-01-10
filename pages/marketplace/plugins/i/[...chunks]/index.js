@@ -1,9 +1,14 @@
 import Layout from 'components/MarketplaceLayout';
 import Button from 'components/Button';
-import { gqlStaticPaths, gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import {
+  gqlStaticPaths,
+  gqlStaticProps,
+  seoMetaTagsFields,
+  imageFields,
+} from 'lib/datocms';
 import SmartMarkdown from 'components/SmartMarkdown';
 import { useRouter } from 'next/router';
-import { renderMetaTags } from 'react-datocms';
+import { renderMetaTags, Image } from 'react-datocms';
 import Head from 'components/Head';
 import FormattedDate from 'components/FormattedDate';
 import s from './style.module.css';
@@ -61,12 +66,16 @@ export const getStaticProps = gqlStaticProps(
         }
         title
         coverImage {
-          url
+          responsiveImage(imgixParams: { w: 300 }) {
+            ...imageFields
+          }
         }
         previewImage {
+          format
           url
-          width
-          height
+          responsiveImage(imgixParams: { w: 850 }) {
+            ...imageFields
+          }
           video {
             duration
             streamingUrl
@@ -86,6 +95,7 @@ export const getStaticProps = gqlStaticProps(
       }
     }
     ${seoMetaTagsFields}
+    ${imageFields}
   `,
   {
     paramsToVars: ({ chunks }) => ({ name: chunks.join('/') }),
@@ -148,11 +158,26 @@ export default function Plugin({ plugin, preview }) {
               src={plugin.previewImage.video.streamingUrl}
               poster={plugin.previewImage.video.thumbnailUrl}
             />
-          ) : (
-            <img
-              alt="Preview"
+          ) : plugin.previewImage.format === 'gif' ? (
+            <video
+              poster={`${plugin.previewImage.url}?fm=jpg&fit=max&w=850`}
+              autoPlay
+              loop
               className={s.previewImage}
-              src={plugin.previewImage.url}
+            >
+              <source
+                src={`${plugin.previewImage.url}?fm=webm&w=850`}
+                type="video/webm"
+              />
+              <source
+                src={`${plugin.previewImage.url}?fm=mp4&w=850`}
+                type="video/mp4"
+              />
+            </video>
+          ) : (
+            <Image
+              data={plugin.previewImage.responsiveImage}
+              className={s.previewImage}
             />
           ))
         }
@@ -160,7 +185,7 @@ export default function Plugin({ plugin, preview }) {
         image={
           plugin.coverImage ? (
             <div className={s.cover}>
-              <img alt="Preview" src={plugin.coverImage.url} />
+              <Image data={plugin.coverImage.responsiveImage} />
             </div>
           ) : (
             <PluginImagePlacehoder hash={plugin.packageName} />
