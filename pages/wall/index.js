@@ -56,7 +56,7 @@ export default function Wall({ preview, subscription }) {
   ];
 
   return (
-    <Layout noCta preview={preview}>
+    <Layout preview={preview}>
       <Head>
         <title>Better, with DatoCMS</title>
       </Head>
