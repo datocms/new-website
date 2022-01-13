@@ -71,8 +71,8 @@ export default function Wall({ preview, subscription }) {
           }
           subtitle={
             <>
-              Hear from hundreds of customers about what changed for the better
-              since they switched to DatoCMS
+              Hear from our customers about what changed for the better since
+              they switched to DatoCMS
             </>
           }
         />
