@@ -197,7 +197,8 @@ export default function Page({ preview, pluginsPage, latest, popular, meta }) {
       </div>
       <form
         className={s.search}
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           router.push(
             generateUrl(`/marketplace/plugins/browse`, {
               s: document.getElementById('searchInput').value,

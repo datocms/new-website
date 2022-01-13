@@ -80,12 +80,12 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
   const [searchTerm, setSearchTerm] = useState(
     new URLSearchParams(router.asPath.split('?')[1]).get('s') || '',
   );
-  const cache = useRef({});
   const [debouncedSearchTerm] = useDebounce(searchTerm, 200);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState(plugins);
 
   const generateUrl = useGenerateUrl(router);
+  const cache = useRef({});
 
   useEffect(() => {
     if (
@@ -111,8 +111,25 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
       setSearchResults([]);
 
       cache.current[debouncedSearchTerm] = fetch(
-        `/api/plugins/search?term=${encodeURIComponent(debouncedSearchTerm)}`,
-      ).then((res) => res.json());
+        `https://RBIJYI5XXL-dsn.algolia.net/1/indexes/plugins/query`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'X-Algolia-Application-Id': 'RBIJYI5XXL',
+            'X-Algolia-API-Key': '4ad9999225eb7990bd4f641dd1f33357',
+          },
+          body: JSON.stringify({
+            params: new URLSearchParams({
+              query: debouncedSearchTerm,
+              hitsPerPage: 15,
+              getRankingInfo: 1,
+            }).toString(),
+          }),
+        },
+      )
+        .then((res) => res.json())
+        .then((res) => res.hits);
     }
 
     cache.current[debouncedSearchTerm].then((newSearchResults) => {
@@ -125,14 +142,8 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
     return () => {
       aborted = true;
     };
-  }, [
-    router,
-    debouncedSearchTerm,
-    plugins,
-    setIsLoading,
-    setSearchResults,
-    generateUrl,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchTerm, setIsLoading, setSearchResults, generateUrl]);
 
   return (
     <Layout preview={preview}>
