@@ -165,11 +165,43 @@ export default function Navbar() {
                         title="For content creators"
                       />
 
-                      <div className={s.sectionTitle}>Enterprise</div>
-                      <Link href="/enterprise-headless-cms">
-                        <a className={s.extraLink}>DatoCMS for Enterprise</a>
-                      </Link>
+                      <div className={s.sectionTitle}>
+                        Ready integrations with
+                      </div>
+                      <div className={s.integrations}>
+                        <Link href="/cms/nextjs-cms">
+                          <a className={s.integrationLink}>Next</a>
+                        </Link>
+                        <Link href="/cms/gatsbyjs-cms">
+                          <a className={s.integrationLink}>Gatsby</a>
+                        </Link>
+                        <Link href="/cms/nuxtjs-cms">
+                          <a className={s.integrationLink}>Nuxt</a>
+                        </Link>
+                        <Link href="/cms/react-cms">
+                          <a className={s.integrationLink}>React</a>
+                        </Link>
+                        <Link href="/cms/vue-js-cms">
+                          <a className={s.integrationLink}>Vue</a>
+                        </Link>
+                        <Link href="/cms/hugo-cms">
+                          <a className={s.integrationLink}>Hugo</a>
+                        </Link>
+                        <Link href="/cms/jekyll-cms">
+                          <a className={s.integrationLink}>Jekyll</a>
+                        </Link>
+                        <Link href="/cms/middleman-cms">
+                          <a className={s.integrationLink}>Middleman</a>
+                        </Link>
+                        <Link href="/marketplace/hosting/netlify">
+                          <a className={s.integrationLink}>Netlify</a>
+                        </Link>
+                        <Link href="/marketplace/hosting/vercel">
+                          <a className={s.integrationLink}>Vercel</a>
+                        </Link>
+                      </div>
                     </div>
+
                     <div className={s.section}>
                       <div className={s.sectionTitle}>Features</div>
 
@@ -272,30 +304,14 @@ export default function Navbar() {
                 <Pane>
                   <div className={s.cols}>
                     <div className={cn(s.section, s.sectionInverse)}>
-                      <div className={s.sectionTitle}>Technologies</div>
-                      <Link href="/cms/nextjs-cms">
-                        <a className={s.extraLink}>Next.js</a>
+                      <div className={s.sectionTitle}>Quotes</div>
+                      <Link href="/wall">
+                        <a className={s.extraLink}>Read our Testimonials</a>
                       </Link>
-                      <Link href="/cms/gatsbyjs-cms">
-                        <a className={s.extraLink}>Gatsby</a>
-                      </Link>
-                      <Link href="/cms/nuxtjs-cms">
-                        <a className={s.extraLink}>Nuxt.js</a>
-                      </Link>
-                      <Link href="/cms/hugo-cms">
-                        <a className={s.extraLink}>Hugo</a>
-                      </Link>
-                      <Link href="/cms/jekyll-cms">
-                        <a className={s.extraLink}>Jekyll</a>
-                      </Link>
-                      <Link href="/cms/react-cms">
-                        <a className={s.extraLink}>React</a>
-                      </Link>
-                      <Link href="/cms/vue-js-cms">
-                        <a className={s.extraLink}>Vue.js</a>
-                      </Link>
-                      <Link href="/cms/middleman-cms">
-                        <a className={s.extraLink}>Middleman</a>
+
+                      <div className={s.sectionTitle}>Enterprise</div>
+                      <Link href="/enterprise-headless-cms">
+                        <a className={s.extraLink}>DatoCMS for Enterprise</a>
                       </Link>
                     </div>
                     <div className={s.section}>

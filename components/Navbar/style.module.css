@@ -185,6 +185,7 @@
     font-size: 13px;
     margin-bottom: 20px;
     margin-top: 40px;
+    color: var(--light-body-color);
 
     &:first-child {
       margin-top: 0px;
@@ -242,6 +243,32 @@
 
   .flagTitle {
     font-weight: bold;
+  }
+
+  .integrations {
+    word-wrap: wrap;
+  }
+
+  .integrationLink {
+    text-decoration: none;
+    font-size: 15px;
+    padding: 7px 18px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, white 80%, transparent);
+    color: var(--light-body-color);
+    color: inherit;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      color: var(--accent-color);
+      background: white;
+    }
   }
 
   .extraLink {
@@ -328,15 +355,20 @@
   }
 
   .sectionInverse {
-    background: linear-gradient(45deg, #533451 40%, #422941);
-    color: white;
+    background: linear-gradient(60deg, white, #f8eefb);
     border-right: 0;
+    padding-right: 55px;
 
     .flagIcon {
-      background: #422941;
+      background: transparent;
+      margin-right: 5px;
+      height: auto;
+      padding-bottom: 5px;
 
       svg {
-        fill: rgba(255, 255, 255, 0.8);
+        fill: var(--light-body-color);
+        width: 25px;
+        height: 25px;
       }
     }
   }

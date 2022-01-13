@@ -17,6 +17,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     query {
       allReviews {
         ...reviewFields
+        _updatedAt
       }
       allPartners {
         name
@@ -32,6 +33,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               ...imageFields
             }
           }
+          _updatedAt
         }
       }
     }
@@ -53,7 +55,7 @@ export default function Wall({ preview, subscription }) {
       )
       .flat(),
     ...allReviews,
-  ];
+  ].sort((a, b) => b._updatedAt.localeCompare(a._updatedAt));
 
   return (
     <Layout preview={preview}>
