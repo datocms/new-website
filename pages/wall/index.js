@@ -15,11 +15,11 @@ import s from './style.module.css';
 export const getStaticProps = gqlStaticPropsWithSubscription(
   `
     query {
-      allReviews {
+      allReviews(first: 100) {
         ...reviewFields
         _updatedAt
       }
-      allPartners {
+      allPartners(first: 100) {
         name
         quotes {
           id
