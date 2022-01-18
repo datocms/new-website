@@ -267,7 +267,7 @@ export default function UseCase({ subscription, websites, preview }) {
             image={
               <LazyImage
                 className={s.logo}
-                alt={keyword + 'logo'}
+                alt={keyword + ' logo'}
                 src={
                   (landing.integration.squareLogo || landing.integration.logo)
                     .url

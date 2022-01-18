@@ -190,8 +190,8 @@ export default function Navbar() {
                         <Link href="/cms/jekyll-cms">
                           <a className={s.integrationLink}>Jekyll</a>
                         </Link>
-                        <Link href="/cms/middleman-cms">
-                          <a className={s.integrationLink}>Middleman</a>
+                        <Link href="/cms/remix-cms">
+                          <a className={s.integrationLink}>Remix</a>
                         </Link>
                         <Link href="/marketplace/hosting/netlify">
                           <a className={s.integrationLink}>Netlify</a>
