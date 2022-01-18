@@ -104,3 +104,11 @@ a.readMoreAbout {
     text-decoration: underline;
   }
 }
+
+.image {
+  width: 90%;
+  display: block;
+  border-radius: 3px;
+  box-shadow: var(--box-shadow);
+  margin: 0 auto;
+}
