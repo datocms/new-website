@@ -279,7 +279,7 @@ function DigitalMarketers({ integrations, preview, page, review1 }) {
         >
           <p>
             Your customers will experience sub-second page load times without
-            any additional optimization on your end. Even large photos are
+            any additional optimization on your end. Even large photos are{' '}
             <strong>
               automatically optimized and resized without losing quality
             </strong>
