@@ -35,11 +35,11 @@ export const getStaticProps = gqlStaticProps(
         count
       }
 
-      latest: allPlugins(first: 9, orderBy: _createdAt_DESC) {
+      latest: allPlugins(first: 12, orderBy: _createdAt_DESC) {
         ...pluginFields
       }
 
-      popular: allPlugins(first: 9, orderBy: installs_DESC) {
+      popular: allPlugins(first: 12, orderBy: installs_DESC) {
         ...pluginFields
       }
     }
