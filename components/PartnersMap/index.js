@@ -1,6 +1,4 @@
-import World from 'public/images/world.svg';
 import s from './style.module.css';
-import cn from 'classnames';
 import Wrapper from 'components/Wrapper';
 import {
   ComposableMap,
