@@ -50,7 +50,7 @@ export const getStaticPaths = async () => {
   const { data } = await request({
     query: `
       query {
-        projects: allShowcaseProjects(first: 100, orderBy: _firstPublishedAt_DESC, filter: { hidden: { eq: false } }) {
+        projects: allShowcaseProjects(first: 100, orderBy: _firstPublishedAt_DESC) {
           slug
           partner { slug }
         }
@@ -69,7 +69,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = gqlStaticPropsWithSubscription(
   `
     query ShowCaseQuery($projectSlug: String!) {
-      project: showcaseProject(filter: { slug: { eq: $projectSlug }, hidden: { eq: false } }) {
+      project: showcaseProject(filter: { slug: { eq: $projectSlug } }) {
         _seoMetaTags {
           ...seoMetaTagsFields
         }

@@ -34,7 +34,7 @@ import truncate from 'truncate';
 export const getStaticPaths = gqlStaticPaths(
   `
     query {
-      partners: allPartners(first: 100, orderBy: _firstPublishedAt_DESC, filter: { hidden: { eq: false } }) {
+      partners: allPartners(first: 100, orderBy: _firstPublishedAt_DESC) {
         slug
       }
     }
@@ -48,7 +48,7 @@ export const getStaticProps = handleErrors(
     const gqlRequest = {
       query: `
         query PartnerQuery($partnerSlug: String!) {
-          partner(filter: { slug: { eq: $partnerSlug }, hidden: { eq: false } }) {
+          partner(filter: { slug: { eq: $partnerSlug } }) {
             id
             slug
             _seoMetaTags {
@@ -91,7 +91,7 @@ export const getStaticProps = handleErrors(
         query ExtraProjectsQuery($partnerId: ItemId! ${
           authorId ? `, $authorId: ItemId!` : ''
         }) {
-          projects: allShowcaseProjects(filter: { partner: { eq: $partnerId }, hidden: { eq: false } }) {
+          projects: allShowcaseProjects(filter: { partner: { eq: $partnerId } }) {
             name
             slug
             headline { value }

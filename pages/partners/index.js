@@ -22,7 +22,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           ...partner
         }
       }
-      posts: allPartners(filter: { hidden: { eq: false } }) {
+      posts: allPartners {
         ...partner
       }
       projects: allShowcaseProjects {
