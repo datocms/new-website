@@ -38,10 +38,9 @@ export default function PartnersMap({ partners }) {
           <ComposableMap
             projection="geoEquirectangular"
             width={900}
-            height={500}
+            height={400}
+            projectionConfig={{ center: [0.5, 12] }}
           >
-            <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-
             <Geographies geography="/world-110m.json">
               {({ geographies }) =>
                 geographies.map((geo) => {
