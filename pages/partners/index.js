@@ -22,7 +22,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           ...partner
         }
       }
-      posts: allPartners {
+      posts: allPartners(first: 100) {
         ...partner
       }
       projects: allShowcaseProjects {
