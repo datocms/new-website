@@ -13,6 +13,7 @@ import sortBy from 'lodash-es/sortBy';
 import Head from 'components/Head';
 import classNames from 'classnames';
 import { Announce } from 'components/PluginToolkit';
+import PartnersMap from 'components/PartnersMap';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   `
@@ -41,6 +42,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       }
       locations {
         emoji
+        name
+        code
+        coordinates {
+          latitude
+          longitude
+        }
       }
     }
   `,
@@ -94,6 +101,8 @@ export default function Partners({ subscription, preview }) {
             </>
           }
         />
+
+        <PartnersMap partners={posts} />
 
         <Space bottom={1}>
           <Announce href="/partner-program" center>

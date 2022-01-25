@@ -69,6 +69,7 @@
     "react-masonry-css": "^1.0.16",
     "react-recaptcha-hook": "^1.2.2",
     "react-responsive-embed": "^2.1.0",
+    "react-simple-maps": "^2.3.0",
     "react-spring": "^9.0.0-beta.34",
     "react-textarea-autosize": "^8.3.3",
     "react-toast-notifications": "^2.4.4",
