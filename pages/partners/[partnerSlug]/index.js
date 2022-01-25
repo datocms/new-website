@@ -91,7 +91,7 @@ export const getStaticProps = handleErrors(
         query ExtraProjectsQuery($partnerId: ItemId! ${
           authorId ? `, $authorId: ItemId!` : ''
         }) {
-            projects: allShowcaseProjects(filter: { partner: { eq: $partnerId } }, first: 100) {
+            projects: allShowcaseProjects(filter: { partner: { eq: $partnerId } }, first: 100, orderBy: position_ASC) {
             name
             slug
             headline { value }
