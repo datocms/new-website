@@ -38,7 +38,7 @@ All our servers and services are protected by firewalls that let traffic through
 Read more about the security policies of the infrastructure providers that we use:
 
 - [Heroku](https://www.heroku.com/policy/security)
-- [Digital Ocean](https://www.digitalocean.com/legal/compliance/)
+- [Digital Ocean](https://www.digitalocean.com/legal/)
 - [AWS](https://aws.amazon.com/security/)
 - [Netlify](https://www.netlify.com/security/)
 - [Cloudflare](https://www.cloudflare.com/security/)
