@@ -16,12 +16,21 @@ function containsKeyword(element, keyword) {
 
 function allKeywords(seoAnalysis) {
   const { keyword, synonyms, relatedKeywords } = seoAnalysis;
+  let allKeywords = [];
 
-  return [
-    ...synonyms.split(', '),
-    ...relatedKeywords.map((k) => k.keyword),
-    keyword,
-  ];
+  if (keyword) {
+    allKeywords = [keyword];
+  }
+
+  if (synonyms) {
+    allKeywords = [...allKeywords, ...synonyms.split(', ')];
+  }
+
+  if (relatedKeywords) {
+    allKeywords = [...allKeywords, ...relatedKeywords.map((k) => k.keyword)];
+  }
+
+  return allKeywords;
 }
 
 export function containsKeywords(element, seoAnalysis) {
