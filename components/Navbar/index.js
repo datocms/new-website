@@ -172,7 +172,7 @@ export default function Navbar() {
                         <Link href="/cms/nextjs-cms">
                           <a className={s.integrationLink}>Next</a>
                         </Link>
-                        <Link href="/cms/gatsbyjs-cms">
+                        <Link href="/cms/gatsby-cms">
                           <a className={s.integrationLink}>Gatsby</a>
                         </Link>
                         <Link href="/cms/nuxtjs-cms">

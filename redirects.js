@@ -325,4 +325,8 @@ module.exports = [
     source: '/blog/offer-responsive-progressive-lqip-images-in-2020',
     destination: '/blog/best-way-for-handling-react-images',
   },
+  {
+    source: '/cms/gatsbyjs-cms',
+    destination: '/cms/gatsby-cms',
+  },
 ];

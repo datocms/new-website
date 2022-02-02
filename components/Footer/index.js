@@ -293,7 +293,7 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/gatsbyjs-cms">
+                      <Link href="/cms/gatsby-cms">
                         <a className={s.extraLink}>Gatsby</a>
                       </Link>
                     </div>
