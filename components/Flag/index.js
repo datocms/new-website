@@ -33,8 +33,6 @@ export default function Flag({
   let Subtitle;
   let Kicker;
 
-  const alt = kicker || title;
-
   if (seoAnalysis) {
     const kickerContainsKeywords = containsKeywords(kicker, seoAnalysis);
 
@@ -50,9 +48,17 @@ export default function Flag({
 
   const imageEl =
     typeof image === 'string' ? (
-      <LazyImage src={`/images/illustrations/${image}.svg`} alt={alt} />
+      <LazyImage
+        src={`/images/illustrations/${image}.svg`}
+        alt={kicker || `Dato headless CMS ${image}`}
+      />
     ) : image ? (
-      React.createElement(image, { ...imageProps, alt })
+      React.createElement(
+        image,
+        kicker && kickerContainsKeywords
+          ? { ...imageProps, alt: kicker }
+          : imageProps,
+      )
     ) : (
       <span />
     );

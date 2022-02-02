@@ -74,7 +74,7 @@ function GraphQlContentApi({ feature, preview, review }) {
           subtitle={
             <>
               <p>
-                Apps using GraphQL combined with an headless CMS are{' '}
+                Apps using GraphQL combined with a headless CMS are{' '}
                 <strong>fast and stable</strong> because it is not the server
                 which controls the data they get, <em>they</em> are.
               </p>

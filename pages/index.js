@@ -148,7 +148,8 @@ function Homepage({ successStories, preview, page }) {
           <p>
             How can you deliver a cohesive brand and message strategy if your
             company functions in silos and information is manually copy-pasted
-            across tens of different platforms?
+            across tens of different platforms? A headless CMS allows you to
+            manage your content in one place
           </p>
           <Bullets
             style="bad"
@@ -232,8 +233,16 @@ function Homepage({ successStories, preview, page }) {
                 </>
               }
             >
-              According to <strong>Gartner</strong> 89 percent of companies plan
-              to compete primarily on the basis of CX this year.
+              According to{' '}
+              <a
+                href="https://blogs.gartner.com/jake-sorofman/gartner-surveys-confirm-customer-experience-new-battlefield"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>Gartner</strong>
+              </a>
+              , 89 percent of companies plan to compete primarily on the basis
+              of CX this year.
             </Result>
             <Result
               number="86%"
@@ -243,9 +252,15 @@ function Homepage({ successStories, preview, page }) {
                 </>
               }
             >
-              <strong>Harris</strong> found 86% of consumers stop
-              interacting&#8203;/&#8203;buying from businesses if they have a
-              bad experience.
+              <a
+                href="https://www.oracle.com/us/products/applications/cust-exp-impact-report-epss-1560493.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>Harris</strong>
+              </a>{' '}
+              found 86% of consumers stop interacting&#8203;/&#8203;buying from
+              businesses if they have a bad experience.
             </Result>
             <Result
               number="25%"
@@ -255,15 +270,22 @@ function Homepage({ successStories, preview, page }) {
                 </>
               }
             >
-              <strong>Oracle</strong> reported that multichannel integration has
-              the ability to increase profitability by 25 percent.
+              <a
+                href="https://www.oracle.com/a/ocom/docs/applications/siebel/wp-powering-cross-channel-customer-experience.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>Oracle</strong>
+              </a>{' '}
+              reported that multichannel integration has the ability to increase
+              profitability by 25 percent.
             </Result>
           </div>
         </TitleStripWithContent>
 
         <Space top={4} bottom={2}>
           <InterstitialTitle style="two">
-            Here&apos;s how an Headless&nbsp;CMS can&nbsp;help&nbsp;your company
+            Here&apos;s how a headless&nbsp;CMS can&nbsp;help&nbsp;your company
           </InterstitialTitle>
         </Space>
 
@@ -302,7 +324,7 @@ function Homepage({ successStories, preview, page }) {
         </Flag>
 
         <Flag
-          kicker="Boost your workflow"
+          kicker="headless CMS boosts your workflow"
           seoAnalysis={page.yoastAnalysis}
           style="good"
           title={
@@ -330,7 +352,7 @@ function Homepage({ successStories, preview, page }) {
         </Flag>
 
         <Flag
-          kicker="Your website cannot be faster"
+          kicker="Your project cannot be faster"
           seoAnalysis={page.yoastAnalysis}
           style="good"
           title={
