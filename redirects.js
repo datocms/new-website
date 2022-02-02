@@ -326,6 +326,10 @@ module.exports = [
     destination: '/blog/best-way-for-handling-react-images',
   },
   {
+    source: '/blog/static-ecommerce-website-snipcart-gatsbyjs-datocms',
+    destination: '/blog/gatsby-ecommerce-tutorial',
+  },
+  {
     source: '/cms/gatsbyjs-cms',
     destination: '/cms/gatsby-cms',
   },
