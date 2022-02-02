@@ -10,16 +10,17 @@ export default function PersonasPicker() {
     <Wrapper>
       <div className={s.root}>
         <div className={s.intro}>
-          <div className={s.introSub}>
+          <h2 className={s.introSub}>
             A technology investment for your whole company
-          </div>
-          <h2 className={s.introTitle}>
-            Empower <Highlight>every&nbsp;member</Highlight> of&nbsp;your team
           </h2>
-          <div className={s.introBody}>
-            An end-to-end solution for businesses who create and distribute
-            content to websites and other digital experiences at scale.
-          </div>
+          <h3 className={s.introTitle}>
+            Empower <Highlight>every&nbsp;member</Highlight> of&nbsp;your team
+          </h3>
+          <p className={s.introBody}>
+            The headless CMS technology provides an end-to-end solution for
+            businesses who create and distribute content to websites and other
+            digital experiences at scale.
+          </p>
         </div>
         <div className={s.picker}>
           <Link href="/team/best-cms-for-developers">

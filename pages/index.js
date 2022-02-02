@@ -48,6 +48,7 @@ export const getStaticProps = gqlStaticProps(
         seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
+        yoastAnalysis
       }
       successStories: allSuccessStories(
         first: 4
@@ -79,6 +80,8 @@ function Homepage({ successStories, preview, page }) {
     <Layout preview={preview}>
       <Head>{page && renderMetaTags(page.seo)}</Head>
       <Hero
+        seoAnalysis={page.yoastAnalysis}
+        kicker={`${page.yoastAnalysis.keyword}, done right`}
         title={
           <>
             Simply put, the most complete, user-friendly and performant{' '}
@@ -87,9 +90,9 @@ function Homepage({ successStories, preview, page }) {
         }
         subtitle={
           <>
-            It&#39;s the CMS for the modern web. More than 25,000 businesses use
-            DatoCMS to create online content at scale from a central hub and
-            distribute it via API.
+            It&#39;s the headless CMS for the modern web. More than 25,000
+            businesses use DatoCMS to create online content at scale from a
+            central hub and distribute it via API.
           </>
         }
       >
@@ -132,6 +135,7 @@ function Homepage({ successStories, preview, page }) {
         </Space>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
           style="bad"
           title={
             <>
@@ -158,6 +162,7 @@ function Homepage({ successStories, preview, page }) {
         </Flag>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
           style="bad"
           title={
             <>
@@ -185,6 +190,7 @@ function Homepage({ successStories, preview, page }) {
         </Flag>
 
         <Flag
+          seoAnalysis={page.yoastAnalysis}
           style="bad"
           title={
             <>
@@ -215,6 +221,7 @@ function Homepage({ successStories, preview, page }) {
 
         <TitleStripWithContent
           title={<>How much is this already costing you?</>}
+          seoAnalysis={page.yoastAnalysis}
         >
           <div className={styles.grid}>
             <Result
@@ -267,6 +274,8 @@ function Homepage({ successStories, preview, page }) {
         </Space>
 
         <Flag
+          kicker="headless CMS as a content platform"
+          seoAnalysis={page.yoastAnalysis}
           style="good"
           image="box-things"
           title={
@@ -293,6 +302,8 @@ function Homepage({ successStories, preview, page }) {
         </Flag>
 
         <Flag
+          kicker="Boost your workflow"
+          seoAnalysis={page.yoastAnalysis}
           style="good"
           title={
             <>
@@ -319,6 +330,8 @@ function Homepage({ successStories, preview, page }) {
         </Flag>
 
         <Flag
+          kicker="Your website cannot be faster"
+          seoAnalysis={page.yoastAnalysis}
           style="good"
           title={
             <>

@@ -31,6 +31,7 @@
   color: var(--light-body-color);
   text-transform: uppercase;
   letter-spacing: -0.02em;
+  font-size: rfs(18px);
 }
 
 .introTitle {
