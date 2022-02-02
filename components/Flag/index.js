@@ -55,9 +55,7 @@ export default function Flag({
     ) : image ? (
       React.createElement(
         image,
-        kicker && kickerContainsKeywords
-          ? { ...imageProps, alt: kicker }
-          : imageProps,
+        kicker ? { ...imageProps, alt: kicker } : imageProps,
       )
     ) : (
       <span />
