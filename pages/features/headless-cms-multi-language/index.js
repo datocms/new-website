@@ -82,10 +82,12 @@ function MultiLanguage({ feature, preview }) {
         subtitle={
           <>
             Reach your <strong>global audience</strong> by choosing a{' '}
-            <strong>headless CMS focused on multi-language</strong>. Select from{' '}
-            <strong>+400 different locales</strong> and publish multiple
-            versions of your content in different languages to serve your
-            content to the world.
+            <strong>
+              <Link href="/">headless CMS</Link> focused on multi-language
+            </strong>
+            . Select from <strong>+400 different locales</strong> and publish
+            multiple versions of your content in different languages to serve
+            your content to the world.
           </>
         }
       />

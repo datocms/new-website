@@ -149,7 +149,7 @@ function Homepage({ successStories, preview, page }) {
             How can you deliver a cohesive brand and message strategy if your
             company functions in silos and information is manually copy-pasted
             across tens of different platforms? A headless CMS allows you to
-            manage your content in one place
+            manage your content in one place.
           </p>
           <Bullets
             style="bad"

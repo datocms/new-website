@@ -1,6 +1,6 @@
 import Layout from 'components/Layout';
+import Link from 'next/link';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
 import {
   imageFields,
   reviewFields,
@@ -280,7 +280,7 @@ function Developers({ integrations, preview, page, review }) {
               />
             ))}
         >
-          Being a API-first headless CMS,{' '}
+          Being a API-first <Link href="/">headless CMS</Link>,{' '}
           <strong>
             DatoCMS easily integrates with any third-party platform or service
           </strong>
