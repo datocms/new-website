@@ -14,7 +14,7 @@ const findSlugAndPermalink = async ({ item, itemTypeApiKey }) => {
 
   switch (itemTypeApiKey) {
     case 'home_page':
-      return ['', '/'];
+      return ['/', '/'];
     case 'blog_post':
       return [item.slug, `/blog/${item.slug}`];
     case 'landing_page':
