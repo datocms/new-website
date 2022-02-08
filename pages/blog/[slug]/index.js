@@ -222,37 +222,40 @@ export default function Article({ preview, subscription }) {
       >
         {post.title}
       </InterstitialTitle>
-      <Wrapper>
-        <div className={s.info}>
-          <DatoImage
-            className={s.avatar}
-            data={post.author.avatar.responsiveImage}
-          />
-          Posted on{' '}
-          <FormattedDate date={post._firstPublishedAt || post._createdAt} /> by{' '}
-          {post.author.name}
-        </div>
+      <div className={s.postWrapper}>
+        <Wrapper>
+          <div className={s.info}>
+            <DatoImage
+              className={s.avatar}
+              data={post.author.avatar.responsiveImage}
+            />
+            Posted on{' '}
+            <FormattedDate date={post._firstPublishedAt || post._createdAt} />{' '}
+            by {post.author.name}
+          </div>
 
-        <div id="main-content">
-          <PostContent content={post.content} />
-        </div>
-
+          <div id="main-content">
+            <PostContent content={post.content} />
+          </div>
+        </Wrapper>
         {headings.length > 4 && (
-          <div className={s.toc}>
-            <div className={s.tocTitle}>In this article:</div>
-            <ul>
-              {headings.map((heading) => {
-                const innerText = toPlainText(heading);
-                return (
-                  <li key={innerText}>
-                    <a href={`#${slugify(innerText)}`}>{innerText}</a>
-                  </li>
-                );
-              })}
-            </ul>
+          <div className={s.tocWrapper}>
+            <div className={s.toc}>
+              <div className={s.tocTitle}>In this article:</div>
+              <ul>
+                {headings.map((heading) => {
+                  const innerText = toPlainText(heading);
+                  return (
+                    <li key={innerText}>
+                      <a href={`#${slugify(innerText)}`}>{innerText}</a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         )}
-      </Wrapper>
+      </div>
     </Layout>
   );
 }
