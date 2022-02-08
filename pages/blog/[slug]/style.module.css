@@ -18,3 +18,47 @@
 .wrapper {
   --page-width-with-margin: 1100px;
 }
+
+.toc {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 40px 0 40px 40px;
+  max-width: 340px;
+  border-left: 10px solid #ff593d;
+  z-index: -1;
+
+  @media (min-width: 1900px) {
+    display: block;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.tocTitle {
+  color: var(--light-body-color);
+  margin-bottom: 15px;
+  font-size: 23px;
+  letter-spacing: -0.06em;
+  font-weight: bold;
+}

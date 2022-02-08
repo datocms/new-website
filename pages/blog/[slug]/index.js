@@ -13,6 +13,10 @@ import PostContent from 'components/PostContent';
 import Head from 'components/Head';
 import s from './style.module.css';
 import { useQuerySubscription } from 'react-datocms';
+import filter from 'utils/filterNodes';
+import { isHeading } from 'datocms-structured-text-utils';
+import slugify from 'utils/slugify';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -196,6 +200,8 @@ export default function Article({ preview, subscription }) {
     data: { post },
   } = useQuerySubscription(subscription);
 
+  const headings = filter(post.content.value.document, isHeading);
+
   return (
     <Layout preview={preview}>
       <Head canonicalUrl={post.canonicalUrl}>
@@ -230,6 +236,22 @@ export default function Article({ preview, subscription }) {
         <div id="main-content">
           <PostContent content={post.content} />
         </div>
+
+        {headings.length > 4 && (
+          <div className={s.toc}>
+            <div className={s.tocTitle}>In this article:</div>
+            <ul>
+              {headings.map((heading) => {
+                const innerText = toPlainText(heading);
+                return (
+                  <li key={innerText}>
+                    <a href={`#${slugify(innerText)}`}>{innerText}</a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </Wrapper>
     </Layout>
   );
