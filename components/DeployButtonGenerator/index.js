@@ -103,7 +103,9 @@ export default function CloneButtonGenerator() {
             />
           </div>
           <div className={styleForm.field}>
-            <label htmlFor="dbg-repo">Github repository to fork</label>
+            <label htmlFor="dbg-repo">
+              Github repository that will be copied
+            </label>
             <input
               type="text"
               name="repo"
@@ -135,7 +137,7 @@ export default function CloneButtonGenerator() {
               className={touched ? style.formField : undefined}
             >
               <option value="copyRepo">
-                Simply fork the template repository
+                Simply make a copy of the template repository
               </option>
               <option value="static">
                 It can be deployed to any static hosting (Vercel, Netlify)
