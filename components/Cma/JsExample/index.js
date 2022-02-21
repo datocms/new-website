@@ -111,28 +111,31 @@ function example(resource, link, allPages = false) {
   if (link.targetSchema || link.jobSchema) {
     const example = schemaExampleFor(link.jobSchema || link.targetSchema);
 
+    const singleVariable = humps.camelize(resource.id);
+
     if (Array.isArray(example.data)) {
-      const singleVariable = humps.camelize(resource.id);
       const multipleVariable = humps.camelize(pluralize(resource.id));
 
-      output =
-        example.data.length > 0 &&
-        JSON.stringify(deserialize(example.data[0], true), null, 2);
+      if (example.data.length > 0) {
+        output = JSON.stringify(deserialize(example.data[0], true), null, 2);
 
-      returnCode =
-        example.data.length > 0 &&
-        `const ${multipleVariable} = await ${call};
+        returnCode = `const ${multipleVariable} = await ${call};
+  
+  ${multipleVariable}.forEach((${singleVariable}) => {
+    console.log(${singleVariable});
+  });`;
+      } else {
+        output = '[]';
+        returnCode = `const result = await ${call};
 
-${multipleVariable}.forEach((${singleVariable}) => {
-  console.log(${singleVariable});
-});`;
+console.log(result);`;
+      }
     } else {
-      const variable = humps.camelize(resource.id);
       output = JSON.stringify(deserialize(example.data, true), null, 2);
 
-      returnCode = `const ${variable} = await ${call};
+      returnCode = `const ${singleVariable} = await ${call};
 
-console.log(${variable});`;
+console.log(${singleVariable});`;
     }
   }
 

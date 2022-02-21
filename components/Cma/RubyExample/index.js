@@ -104,14 +104,23 @@ function example(resource, link, allPages = false) {
     const example = schemaExampleFor(link.jobSchema || link.targetSchema);
     const variable = resource.id;
 
-    if (Array.isArray(example.data) && example.data.length > 0) {
-      output = JSON.stringify(deserialize(example.data[0], true), null, 2)
-        .replace(/": /g, '" => ')
-        .replace(/null/g, 'nil');
+    if (Array.isArray(example.data)) {
+      if (example.data.length > 0) {
+        output = JSON.stringify(deserialize(example.data[0], true), null, 2)
+          .replace(/": /g, '" => ')
+          .replace(/null/g, 'nil');
 
-      returnCode = `${call}.each do |${variable}|
+        returnCode = `${call}.each do |${variable}|
   puts ${variable}.inspect
 end`;
+      } else {
+        output = '[]';
+
+        returnCode = `result = ${call}
+
+puts result.inspect
+`;
+      }
     } else {
       output = JSON.stringify(deserialize(example.data, true), null, 2)
         .replace(/": /g, '" => ')

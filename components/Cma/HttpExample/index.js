@@ -23,9 +23,8 @@ function renderExample(example, resource) {
 
   const params = resource.hrefSchema ? toParam(resource.hrefSchema) : '';
 
-  const pathnameWithPlaceholders = (request
-    ? request.url
-    : resource.href
+  const pathnameWithPlaceholders = (
+    request ? request.url : resource.href
   ).replace(regexp, (_matched, chunk) => {
     console.log(chunk);
 
@@ -145,6 +144,7 @@ export default class HttpExample extends React.Component {
 
     if (link.jobSchema) {
       const response = schemaExampleFor(jobRetrieveLink.targetSchema);
+
       response.data.attributes.payload = schemaExampleFor(link.jobSchema);
 
       return (
