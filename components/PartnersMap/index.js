@@ -52,6 +52,12 @@ export default function PartnersMap({ partners }) {
                       key={geo.rsmKey}
                       geography={geo}
                       fill={results ? `var(--azure-color)` : '#F5F4F6'}
+                      tabIndex={-1}
+                      style={{
+                        default: { outline: 'none' },
+                        hover: { outline: 'none' },
+                        pressed: { outline: 'none' },
+                      }}
                     />
                   );
                 })
