@@ -26,6 +26,7 @@ import Vercel from 'public/images/logos/vercel.svg';
 import Dropbox from 'public/images/logos/dropbox.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Vmware from 'public/images/logos/vmware.svg';
+import Polestar from 'public/images/logos/polestar.svg';
 
 import Arduino from 'public/images/logos/arduino.svg';
 import CityOfSidney from 'public/images/logos/cityofsidney.svg';
@@ -110,6 +111,7 @@ function Homepage({ successStories, preview, page }) {
           Hashicorp,
           Verizon,
           Vmware,
+          Polestar,
           Arduino,
           CityOfSidney,
           DeutscheTelekom,
