@@ -1,6 +1,6 @@
 import Layout from 'components/Layout';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
+import Link from 'next/link';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Wrapper from 'components/Wrapper';
@@ -100,7 +100,11 @@ function DigitalMarketers({ integrations, preview, page, review1 }) {
               page and in stores. But companies finding the most success are the
               ones who ensure that{' '}
               <strong>every interaction is consistent</strong> online and
-              offline.
+              offline. Read more about our{' '}
+              <Link href="/blog/omnichannel-cms">
+                <a>omnichannel CMS</a>
+              </Link>
+              .
             </>
           }
         >
