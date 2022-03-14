@@ -32,7 +32,7 @@ export default function Enterprise({ items, preview }) {
         <div className={s.hero}>
           <div className={s.heroTitle}>Enterprise Apps</div>
           <div className={s.heroDesc}>
-            Keep your company data secure with centralized users management and
+            Keep company data secure with centralized users management and
             assets storage
           </div>
         </div>

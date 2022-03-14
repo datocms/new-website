@@ -106,11 +106,13 @@ function Enterprise({ page, review1, review2 }) {
         <EnterpriseStrip
           kicker={page.yoastAnalysis.keyword}
           title="Extend your team with support that works with you"
-          description=<p>
-            Our <strong>dedicated solution engineers</strong> will consult you
-            on the best way to integrate Dato headless CMS into enterprise
-            digital products and workflows. Full support 24h guaranteed.
-          </p>
+          description={
+            <p>
+              Our <strong>dedicated solution engineers</strong> will consult you
+              on the best way to integrate Dato headless CMS into enterprise
+              digital products and workflows. Full support 24h guaranteed.
+            </p>
+          }
         >
           <Point
             title="Shared Slack channel"
@@ -131,11 +133,14 @@ function Enterprise({ page, review1, review2 }) {
         <EnterpriseStrip
           kicker={page.yoastAnalysis.relatedKeywords[0].keyword}
           title="Full accountability and governance control"
-          description=<p>
-            <strong>Dato headless CMS empowers your business.</strong> Enable
-            your team to automate workflows, manage user permissions, stay
-            compliant with data security regulations, and scale your enterprise.
-          </p>
+          description={
+            <p>
+              <strong>Dato headless CMS empowers your business.</strong> Enable
+              your team to automate workflows, manage user permissions, stay
+              compliant with data security regulations, and scale your
+              enterprise.
+            </p>
+          }
         >
           <Point
             title="Granular roles and permissions"
@@ -156,12 +161,14 @@ function Enterprise({ page, review1, review2 }) {
         <EnterpriseStrip
           kicker="Safest CMS for enterprise"
           title="Robust data security, privacy and compliance"
-          description=<p>
-            <strong>Security</strong> is something we take very seriously.
-            DatoCMS customers rely on us to provide{' '}
-            <strong>top-notch security features</strong> and tools that ensure
-            their data is safe and remains secure.
-          </p>
+          description={
+            <p>
+              <strong>Security</strong> is something we take very seriously.
+              DatoCMS customers rely on us to provide{' '}
+              <strong>top-notch security features</strong> and tools that ensure
+              their data is safe and remains secure.
+            </p>
+          }
         >
           <Point
             title="Two Factor Authentication"
