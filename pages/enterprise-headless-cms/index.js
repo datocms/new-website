@@ -48,6 +48,9 @@ export const getStaticProps = gqlStaticProps(
       review2: review(filter: { name: { eq: "Jeff Escalante" } }) {
         ...reviewFields
       }
+      review3: review(filter: { name: { eq: "Filippo Conforti" } }) {
+        ...reviewFields
+      }
     }
     ${seoMetaTagsFields}
     ${imageFields}
@@ -55,7 +58,7 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-function Enterprise({ page, review1, review2 }) {
+function Enterprise({ page, review1, review2, review3 }) {
   return (
     <Layout>
       <Head seo={page.seo} slug={page.slug} />
@@ -64,17 +67,19 @@ function Enterprise({ page, review1, review2 }) {
         kicker={page.seoH1}
         title={
           <>
-            Enterprise&nbsp;grade <Highlight>content infrastructure</Highlight>
+            Enterprise&nbsp;grade content infrastructure,{' '}
+            <Highlight>security and scalability</Highlight>
           </>
         }
         subtitle={
           <>
-            Get{' '}
+            A complete headless CMS with the{' '}
             <strong>
-              dedicated onboarding service, premium technical support, private
-              cloud and custom SLAs
-            </strong>{' '}
-            to gain the assurance your enterprise needs.
+              governance, service and features to ensure you take your content
+              machine to scale
+            </strong>
+            . Dedicated onboarding service, premium technical support, private
+            cloud and custom SLAs
           </>
         }
       />
@@ -102,15 +107,66 @@ function Enterprise({ page, review1, review2 }) {
             Harrys,
           ]}
         />
+        <EnterpriseStrip
+          kicker="Safest CMS for enterprise"
+          title="Robust data security, privacy and compliance"
+          description={
+            <p>
+              <strong>Security</strong> and data integrity informs all our
+              decisions. DatoCMS enterprise customers can rely on us to ensure
+              their <strong>data is safe and remains secure</strong>
+            </p>
+          }
+        >
+          <Point
+            title="Single Sign-On"
+            description="Manage access to DatoCMS through your preferred identity provider."
+          />
+          <Point
+            title="Decoupled Data Storage"
+            description="Secure logging in to your account with two layers of auth."
+          />
+          <Point
+            title="ISO 27001 and GDPR Compliance"
+            description="We have a GDPR DPA and our data centers are ISO 27001, SOC 1 and SOC 2 compliant."
+          />
+        </EnterpriseStrip>
+
+        <Quote review={review2} />
 
         <EnterpriseStrip
-          kicker={page.yoastAnalysis.keyword}
+          kicker="PERFOMANCE AND SCABILITY GUARANTEED"
+          title="We are here to ensure your content has no limits"
+          description={
+            <p>
+              DatoCMS enterprise customers have performance and service SLAs to
+              ensure they can <strong>scale without lag</strong>.
+            </p>
+          }
+        >
+          <Point
+            title="Performance SLA"
+            description="Full support with dedicated priority 24/7 guaranteed."
+          />
+          <Point
+            title="Support SLA"
+            description="We tailor solutions to any specific use-case with real-time scaling."
+          />
+          <Point
+            title="Solution Architects"
+            description="We assist companies in their journey to scale, from bottom to top."
+          />
+        </EnterpriseStrip>
+
+        <Quote review={review1} />
+
+        <EnterpriseStrip
+          kicker={'SUPPORT WITH A SMILE'}
           title="Extend your team with support that works with you"
           description={
             <p>
-              Our <strong>dedicated solution engineers</strong> will consult you
-              on the best way to integrate Dato headless CMS into enterprise
-              digital products and workflows. Full support 24h guaranteed.
+              DatoCMS enterprise customers can rely on a{' '}
+              <strong>friendly team that helps all the way</strong>.
             </p>
           }
         >
@@ -119,68 +175,38 @@ function Enterprise({ page, review1, review2 }) {
             description="Involve the whole team with a dedicated Slack channel."
           />
           <Point
-            title="Onboarding Services"
+            title="Dedicated Technical & Editorial Onboarding"
             description="Add a DatoCMS integration expert to your project to help you jumpstart your architecture and get running faster."
           />
           <Point
-            title="Guaranteed SLA"
-            description="We can tailor a solution to your specific use case, with dedicated priority, 24/7 support, and real-time scaling"
+            title="Multiple sandbox environments for testing and backups"
+            description="DatoCMS has the best solution on the market for managing backups and progress."
           />
         </EnterpriseStrip>
 
-        <Quote review={review2} />
+        <Quote review={review3} />
 
         <EnterpriseStrip
           kicker={page.yoastAnalysis.relatedKeywords[0].keyword}
-          title="Full accountability and governance control"
+          title="Give your team full accountability and governance control"
           description={
             <p>
-              <strong>Dato headless CMS empowers your business.</strong> Enable
-              your team to automate workflows, manage user permissions, stay
-              compliant with data security regulations, and scale your
-              enterprise.
+              DatoCMS enterprise customers can enjoy features and structures
+              that <strong>empower their content business.</strong>
             </p>
           }
         >
           <Point
-            title="Granular roles and permissions"
-            description="Assign the appropriate roles and permissions to your team members, precisely determining what actions they can perform."
+            title="Bespoke Workflows"
+            description="Set up a precise state machine to bring a draft content up to the final publication through a series of intermediate, fully customizable approval steps."
           />
           <Point
-            title="Audit logs"
-            description="Capture every login and action in the system. Detailed, filterable, exportable, and accessible via API."
+            title="Enhanced per locale permissions & Granular roles"
+            description="Assign the appropriate roles and permissions, even per locale, to your team members, precisely determining what actions they can perform."
           />
           <Point
             title="Live sync backups"
             description="Store all the data, versioned, in your company Amazon AWS account."
-          />
-        </EnterpriseStrip>
-
-        <Quote review={review1} />
-
-        <EnterpriseStrip
-          kicker="Safest CMS for enterprise"
-          title="Robust data security, privacy and compliance"
-          description={
-            <p>
-              <strong>Security</strong> is something we take very seriously.
-              DatoCMS customers rely on us to provide{' '}
-              <strong>top-notch security features</strong> and tools that ensure
-              their data is safe and remains secure.
-            </p>
-          }
-        >
-          <Point
-            title="Two Factor Authentication"
-            description="Secure logging in to your account with two layers of auth."
-          />
-          <Point
-            title="Single Sign-On"
-            description="Manage access to DatoCMS through your preferred identity provider."
-          />
-          <Point
-            title="ISO 27001 and GDPR Compliance"
-            description="We have a GDPR DPA and our data centers are ISO 27001, SOC 1 and SOC 2 compliant."
           />
         </EnterpriseStrip>
 
