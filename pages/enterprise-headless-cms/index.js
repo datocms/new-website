@@ -124,7 +124,7 @@ function Enterprise({ page, review1, review2, review3 }) {
           />
           <Point
             title="Decoupled Data Storage"
-            description="Secure logging in to your account with two layers of auth."
+            description="Data is stored in multiple shards to guarantee performance, integrity and safety."
           />
           <Point
             title="ISO 27001 and GDPR Compliance"
