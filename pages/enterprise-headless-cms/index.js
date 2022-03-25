@@ -113,8 +113,8 @@ function Enterprise({ page, review1, review2, review3 }) {
           description={
             <p>
               <strong>Security</strong> and data integrity informs all our
-              decisions. DatoCMS enterprise customers can rely on us to ensure
-              their <strong>data is safe and remains secure</strong>
+              decisions. Enterprise headless CMS customers can rely on us to
+              ensure their <strong>data is safe and remains secure</strong>
             </p>
           }
         >
