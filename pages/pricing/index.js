@@ -199,6 +199,7 @@ export default function Pricing({
                 </div>
 
                 <div className={s.planPriceContainer}>
+                  <span className={s.planPricePerMonth}>Start at </span>
                   <span className={s.planPrice}>€{formatNumber(99)}</span>
                   <span className={s.planPricePerMonth}>/month</span>
 
@@ -249,6 +250,7 @@ export default function Pricing({
                 </div>
 
                 <div className={s.planPriceContainer}>
+                  <span className={s.planPricePerMonth}>Start at </span>
                   <span className={s.planPrice}>€{formatNumber(1499)}</span>
                   <span className={s.planPricePerMonth}>/month</span>
 
@@ -284,7 +286,7 @@ export default function Pricing({
                     Use your your own AWS/GCP bucket and custom domain for
                     assets
                   </Bullet>
-                  <Bullet>100% white-label</Bullet>
+                  <Bullet>100% White-label platform</Bullet>
                 </div>
               </div>
             </div>
