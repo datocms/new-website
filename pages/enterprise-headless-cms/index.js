@@ -3,6 +3,7 @@ import Hero from 'components/Hero';
 import Head from 'components/Head';
 import Highlight from 'components/Highlight';
 import Quote from 'components/Quote';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import EnterpriseStrip, { Point } from 'components/EnterpriseStrip';
 import LogosBar from 'components/LogosBar';
 import Wrapper from 'components/Wrapper';
@@ -59,12 +60,14 @@ export const getStaticProps = gqlStaticProps(
 );
 
 function Enterprise({ page, review1, review2, review3 }) {
+  const { yoastAnalysis, seo, slug, seoH1 } = page;
+
   return (
     <Layout>
-      <Head seo={page.seo} slug={page.slug} />
+      <Head seo={seo} slug={slug} />
       <Hero
-        seoAnalysis={page.yoastAnalysis}
-        kicker={page.seoH1}
+        seoAnalysis={yoastAnalysis}
+        kicker={seoH1}
         title={
           <>
             Enterprise&nbsp;grade content infrastructure,{' '}
@@ -188,7 +191,7 @@ function Enterprise({ page, review1, review2, review3 }) {
         <Quote review={review3} />
 
         <EnterpriseStrip
-          kicker={page.yoastAnalysis.relatedKeywords[0].keyword}
+          kicker={yoastAnalysis.relatedKeywords[0].keyword}
           title="Give your team full accountability and governance control"
           description={
             <p>
@@ -236,8 +239,8 @@ function Enterprise({ page, review1, review2, review3 }) {
         </div>
 
         <TitleStripWithContent
-          seoAnalysis={page.yoastAnalysis}
-          kicker="Enterprise headless CMS that empowers all team"
+          seoAnalysis={yoastAnalysis}
+          kicker="A CMS that empowers all team"
           title={
             <>
               A technology investment that doubles performaces and productivity
@@ -289,6 +292,26 @@ function Enterprise({ page, review1, review2, review3 }) {
             </Result>
           </div>
         </TitleStripWithContent>
+
+        <Flag
+          style="good"
+          seoAnalysis={yoastAnalysis}
+          kicker={`Enterprise headless CMS`}
+          title={
+            <>
+              A headless CMS that is ready to{' '}
+              <FlagHighlight>scale with you</FlagHighlight>
+            </>
+          }
+          image="key"
+        >
+          <p>
+            The best CMS for enterprise is the one that can{' '}
+            <strong>scale with your company with no effort</strong>. DatoCMS
+            offers services and support to make your company reach all kind
+            market segments.
+          </p>
+        </Flag>
       </div>
     </Layout>
   );

@@ -1,6 +1,5 @@
 import Layout from 'components/Layout';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
 import {
   imageFields,
   reviewFields,
@@ -43,7 +42,6 @@ export const getStaticProps = gqlStaticProps(
 
 function ImagesApi({ feature, preview, review }) {
   const seoAnalysis = feature.yoastAnalysis;
-  const { keyword } = seoAnalysis;
 
   return (
     <Layout preview={preview}>
