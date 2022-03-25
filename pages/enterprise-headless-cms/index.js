@@ -108,7 +108,7 @@ function Enterprise({ page, review1, review2, review3 }) {
           ]}
         />
         <EnterpriseStrip
-          kicker="Safest CMS for enterprise"
+          kicker="Safest enterprise headless CMS"
           title="Robust data security, privacy and compliance"
           description={
             <p>
@@ -139,8 +139,9 @@ function Enterprise({ page, review1, review2, review3 }) {
           title="We are here to ensure your content has no limits"
           description={
             <p>
-              DatoCMS enterprise customers have performance and service SLAs to
-              ensure they can <strong>scale without lag</strong>.
+              Customers of our enterprise headless CMS benefit of performance
+              and service SLAs to ensure they can{' '}
+              <strong>scale without lag</strong>.
             </p>
           }
         >
@@ -236,7 +237,7 @@ function Enterprise({ page, review1, review2, review3 }) {
 
         <TitleStripWithContent
           seoAnalysis={page.yoastAnalysis}
-          kicker="DatoCMS dev experience empowers all team"
+          kicker="Enterprise headless CMS that empowers all team"
           title={
             <>
               A technology investment that doubles performaces and productivity
@@ -265,8 +266,8 @@ function Enterprise({ page, review1, review2, review3 }) {
                 </>
               }
             >
-              <strong>HashiCorp</strong> needed a flexible and secure CMS to
-              manage its ever-expanding multi-site structure.
+              <strong>HashiCorp</strong> needed a flexible and secure enterprise
+              headless CMS to manage its ever-expanding multi-site structure.
             </Result>
             <Result
               number="35k"
