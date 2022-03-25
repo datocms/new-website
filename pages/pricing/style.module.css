@@ -2,8 +2,8 @@
 .plansContainer {
   @media screen and (width >= 930px) {
     display: grid;
-    grid-template-columns: 150px repeat(3, minmax(200px, 5fr));
-    align-items: center;
+    grid-template-columns: repeat(3, minmax(200px, 5fr));
+    align-items: stretch;
     column-gap: 30px;
   }
 
@@ -45,7 +45,7 @@
   }
 
   @media screen and (width >= 930px) {
-    grid-area: 1 / 2 / 1 / 5;
+    grid-area: 1 / 1 / 1 / 5;
 
     mark {
       padding: 2px;
@@ -77,7 +77,7 @@
 .plan {
   text-align: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 40px 20px 20px;
+  padding: 40px 20px;
   border-radius: 10px;
   background: white;
 }
@@ -98,9 +98,9 @@
 }
 
 .planDescription {
-  color: var(--light-body-color);
   font-size: 0.9em;
   margin-bottom: 30px;
+  height: 85px;
 }
 
 .planPriceContainer {
@@ -128,99 +128,27 @@
   font-size: 0.9em;
 }
 
-.planLimits {
-  margin-bottom: 30px;
-
-  @media screen and (width >= 930px) {
-    display: none;
-  }
+.planBullets {
+  margin-top: 40px;
+  text-align: left;
+  font-size: 0.9em;
 }
 
-.planLimit {
-  margin-bottom: 20px;
+.planBullet {
+  margin-bottom: 13px;
+  display: flex;
+  align-items: flex-start;
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 
-.planLimitName {
-  color: var(--light-body-color);
-  margin-bottom: 4px;
-}
+.planBulletIcon {
+  margin-right: 9px;
 
-.planLimitExtra {
-  color: var(--light-body-color);
-  font-size: 0.8em;
-}
-
-.limit {
-  padding: 20px 0;
-  text-align: center;
-  font-size: 0.9em;
-  border-radius: 10px;
-  display: none;
-
-  @media screen and (width >= 930px) {
-    display: grid;
-  }
-
-  &:last-child {
-    border-bottom: 0;
-  }
-
-  &:nth-child(2n) {
-    background: var(--highlight-bg-color);
-  }
-}
-
-.limitLegend {
-  text-align: left;
-  grid-row: 1 / span 2;
-  padding-left: 20px;
-  font-weight: bold;
-}
-
-.limitPlan {
-  grid-row: 1 / span 2;
-  position: relative;
-}
-
-.limitPlanWithExtra {
-  grid-row: 1 / span 1;
-}
-
-.limitExtra {
-  margin-top: 10px;
-  flex: 8;
-  color: var(--light-body-color);
-  font-size: 0.8em;
-  position: relative;
-  z-index: 1;
-}
-
-.limitExtraWide span {
-  position: relative;
-  padding: 0 15px;
-
-  &:before,
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 1px;
-    background: var(--border-color);
-    top: 50%;
-  }
-
-  &:before {
-    width: 30px;
-    right: 100%;
-  }
-
-  &:after {
-    left: 100%;
-    width: 30px;
+  svg {
+    fill: var(--azure-color);
   }
 }
 

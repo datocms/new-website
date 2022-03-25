@@ -37,8 +37,6 @@ import Tier2 from 'public/images/tiers/tier-2.svg';
 import Tier3 from 'public/images/tiers/tier-3.svg';
 import { handleErrors } from 'lib/datocms';
 
-const TierIcons = [Tier1, Tier2, Tier3];
-
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
     body: { data: datoPlans },
@@ -90,85 +88,20 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
       plans: datoPlans.sort(
         (a, b) => a.attributes.monthly_price - b.attributes.monthly_price,
       ),
-      hints: hints.filter((hint) => {
-        const limit = plan.attributes.limits.find((l) => l.id === hint.apiId);
-
-        if (
-          !limit ||
-          !(
-            limit.type === 'shared_quota_metered_site_resource' ||
-            limit.id === 'support_level' ||
-            limit.extra_packets_available_in_some_plan
-          )
-        ) {
-          return null;
-        }
-
-        return true;
-      }),
     },
   };
 });
 
-const PlanBox = ({ plan, hints, icon: Icon }) => {
-  const monthlyPrice = plan.attributes.monthly_price;
-  const yearlyPrice = plan.attributes.yearly_price / 12;
-
+function Bullet({ children }) {
   return (
-    <div key={plan.id} className={s.plan}>
-      <Icon className={s.planImage} />
-      <div className={s.planName} style={{ color: plan.attributes.color_hex }}>
-        {plan.attributes.name}
+    <div className={s.planBullet}>
+      <div className={s.planBulletIcon}>
+        <SuccessIcon />
       </div>
-      <div className={s.planDescription}>{plan.attributes.description}</div>
-
-      <div className={s.planPriceContainer}>
-        <span className={s.planPrice}>€{formatNumber(yearlyPrice)}</span>
-        <span className={s.planPricePerMonth}>/month</span>
-
-        {monthlyPrice > 0 ? (
-          <span className={s.planYearlyPrice}>
-            if paying annually, or{' '}
-            <strong>€{formatNumber(monthlyPrice)}/month</strong>
-          </span>
-        ) : (
-          <span className={s.planYearlyPrice}>No credit card required</span>
-        )}
-      </div>
-
-      <div className={s.planLimits}>
-        {hints.map((hint) => {
-          const limit = plan.attributes.limits.find((l) => l.id === hint.apiId);
-          return (
-            <div key={hint.apiId} className={s.planLimit}>
-              <div className={s.planLimitName}>{hint.name}</div>
-
-              <div className={cn(s.planLimitIncluded)}>
-                {formatLimit(limit)}
-              </div>
-              {limit.extra_packet_amount && (
-                <div className={s.planLimitExtra}>
-                  then {formatExtra(limit)}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      <div className={s.planAction}>
-        <Button
-          block
-          s="invert"
-          as="a"
-          href="https://dashboard.datocms.com/projects/browse/new"
-        >
-          Try for free
-        </Button>
-      </div>
+      {children}
     </div>
   );
-};
+}
 
 export default function Pricing({
   page,
@@ -204,7 +137,6 @@ export default function Pricing({
         <div className={s.plansStrip}>
           <Wrapper>
             <div className={s.plansContainer}>
-              <div />
               <Link href="/partner-program">
                 <a className={s.agenciesCta}>
                   <AnnouncementIcon />
@@ -214,93 +146,152 @@ export default function Pricing({
                   </span>
                 </a>
               </Link>
-              <div />
-              {plans.map((plan, index) => (
-                <PlanBox
-                  key={plan.id}
-                  plan={plan}
-                  hints={hints}
-                  icon={TierIcons[index]}
-                />
-              ))}
+
+              <div className={s.plan}>
+                <Tier1 className={s.planImage} />
+                <div className={s.planName} style={{ color: '#10b6ce' }}>
+                  Developer
+                </div>
+                <div className={s.planDescription}>
+                  Perfect to test the platform, and for individual developers
+                  working on personal sites.
+                </div>
+
+                <div className={s.planPriceContainer}>
+                  <span className={s.planPrice}>Free forever</span>
+
+                  <span className={s.planYearlyPrice}>
+                    No credit card required
+                  </span>
+                </div>
+
+                <div className={s.planAction}>
+                  <Button
+                    block
+                    s="invert"
+                    as="a"
+                    href="https://dashboard.datocms.com/projects/browse/new"
+                  >
+                    Try for free
+                  </Button>
+                </div>
+
+                <div className={s.planBullets}>
+                  <Bullet>
+                    Up to 3 projects with generous quota, but hard limits on
+                    resources (file storage, traffic, API calls)
+                  </Bullet>
+                  <Bullet>
+                    Two users per project (one admin + one editor)
+                  </Bullet>
+                  <Bullet>Community-based support</Bullet>
+                </div>
+              </div>
+
+              <div className={s.plan}>
+                <Tier2 className={s.planImage} />
+                <div className={s.planName} style={{ color: '#ef6424' }}>
+                  Professional
+                </div>
+                <div className={s.planDescription}>
+                  Everything you need if you&apos;re a small team building a
+                  digital project or two, and more.
+                </div>
+
+                <div className={s.planPriceContainer}>
+                  <span className={s.planPrice}>€{formatNumber(99)}</span>
+                  <span className={s.planPricePerMonth}>/month</span>
+
+                  <span className={s.planYearlyPrice}>
+                    if paying annually, or{' '}
+                    <strong>€{formatNumber(199)}/month</strong>
+                  </span>
+                </div>
+
+                <div className={s.planAction}>
+                  <Button
+                    block
+                    s="invert"
+                    as="a"
+                    href="https://dashboard.datocms.com/projects/browse/new"
+                  >
+                    Try for free
+                  </Button>
+                </div>
+
+                <div className={s.planBullets}>
+                  <Bullet>
+                    Extremely generous quota, with soft limits you can exceed
+                    and pay-as-you-go
+                  </Bullet>
+                  <Bullet>
+                    10 collaborators included on each project (you can purchase
+                    more if needed)
+                  </Bullet>
+                  <Bullet>
+                    Expanded authoring roles to support most publishing
+                    workflows
+                  </Bullet>
+                  <Bullet>
+                    Technical support via email (Mon/Fri, response in 24h)
+                  </Bullet>
+                </div>
+              </div>
+
+              <div className={s.plan}>
+                <Tier3 className={s.planImage} />
+                <div className={s.planName} style={{ color: '#8a3e7e' }}>
+                  Enterprise
+                </div>
+                <div className={s.planDescription}>
+                  A complete solution to power any digital experience. Scales up
+                  from one team or business unit to your whole organization.
+                </div>
+
+                <div className={s.planPriceContainer}>
+                  <span className={s.planPrice}>€{formatNumber(1499)}</span>
+                  <span className={s.planPricePerMonth}>/month</span>
+
+                  <span className={s.planYearlyPrice}>
+                    payable by credit card, or wire transfer
+                  </span>
+                </div>
+
+                <div className={s.planAction}>
+                  <Button block s="invert" as="a" href="/contact">
+                    Contact us
+                  </Button>
+                </div>
+
+                <div className={s.planBullets}>
+                  <Bullet>Guaranteed support and uptime SLAs</Bullet>
+                  <Bullet>
+                    Options for single-tenant to support your most critical
+                    business needs
+                  </Bullet>
+                  <Bullet>
+                    Fully customizable roles and tasks for granular workflows,
+                    tailored upon your specific needs
+                  </Bullet>
+                  <Bullet>
+                    SSO, Audit logs and Static webhook IPs for enhanced security
+                  </Bullet>
+                  <Bullet>
+                    Support via Shared Slack channel, editorial onboarding, plus
+                    access to our solution architects
+                  </Bullet>
+                  <Bullet>
+                    Use your your own AWS/GCP bucket and custom domain for
+                    assets
+                  </Bullet>
+                  <Bullet>100% white-label</Bullet>
+                </div>
+              </div>
             </div>
           </Wrapper>
         </div>
       </Space>
       <Wrapper>
-        {hints.map((hint) => {
-          const limitsWithExtras = plans
-            .map((plan) =>
-              plan.attributes.limits.find((l) => l.id === hint.apiId),
-            )
-            .filter((x) => x.extra_packet_price);
-
-          const extraPacketPrices = limitsWithExtras.map(
-            (l) => l.extra_packet_price,
-          );
-
-          const allSameExtras = extraPacketPrices.every(
-            (price) => price === extraPacketPrices[0],
-          );
-
-          const limitsWithExtrasToRender = allSameExtras
-            ? limitsWithExtras.slice(0, 1)
-            : limitsWithExtras;
-
-          return (
-            <div key={hint.apiId} className={s.limit}>
-              <div className={s.limitLegend}>{hint.name}</div>
-              {plans.map((plan) => {
-                const limit = plan.attributes.limits.find(
-                  (l) => l.id === hint.apiId,
-                );
-
-                const isScaleProjectsLimit =
-                  limit.id === 'sites' &&
-                  limit.free_of_charge_usage > 1 &&
-                  plan.attributes.monthly_price > 0;
-
-                return (
-                  <div
-                    key={plan.id}
-                    className={cn(s.limitPlan, {
-                      [s.limitPlanWithExtra]: !!limit.extra_packet_amount,
-                    })}
-                  >
-                    {isScaleProjectsLimit && <div className={s.circle} />}
-                    {formatLimit(limit)}
-                    {isScaleProjectsLimit && (
-                      <>
-                        {' '}
-                        <Badge>NEW!</Badge>
-                      </>
-                    )}
-                  </div>
-                );
-              })}
-              {limitsWithExtrasToRender.map((limit) => {
-                return (
-                  <div
-                    key={`${limit.id}-${limit.extra_packet_price}`}
-                    className={cn(s.limitExtra, {
-                      [s.limitExtraWide]: allSameExtras,
-                    })}
-                    style={
-                      allSameExtras
-                        ? {
-                            gridColumn: `3 / span ${limitsWithExtras.length}`,
-                          }
-                        : {}
-                    }
-                  >
-                    <span>then {formatExtra(limit)}</span>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
-
         <div className={s.fullComparison}>
           <Link href="/pricing/compare" passHref>
             <Button p="small" s="invert">
