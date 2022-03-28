@@ -103,6 +103,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 providerUid
               }
             }
+            ... on CtaButtonRecord {
+              id
+              _modelApiKey
+              text
+              url
+            }
             ... on MultipleDemosBlockRecord {
               id
               _modelApiKey

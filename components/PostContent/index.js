@@ -111,6 +111,13 @@ function renderBlock(s, block, defaultAltForImages) {
         </div>
       );
 
+    case 'cta_button':
+      return (
+        <Button href={block.url} p="small">
+          {block.text}
+        </Button>
+      );
+
     case 'multiple_demos_block':
       return (
         <div className={s.unwrap}>
