@@ -113,7 +113,7 @@ function renderBlock(s, block, defaultAltForImages) {
 
     case 'cta_button':
       return (
-        <Button href={block.url} p="small">
+        <Button as="a" href={block.url} p="small">
           {block.text}
         </Button>
       );
