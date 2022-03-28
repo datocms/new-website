@@ -153,8 +153,8 @@ export default function Pricing({
                   Developer
                 </div>
                 <div className={s.planDescription}>
-                  Perfect to test the platform, and for individual developers
-                  working on personal sites.
+                  Perfect to test the platform in detail, and for individual
+                  developers working on personal sites.
                 </div>
 
                 <div className={s.planPriceContainer}>
@@ -194,8 +194,8 @@ export default function Pricing({
                   Professional
                 </div>
                 <div className={s.planDescription}>
-                  Everything you need if you&apos;re a small team building a
-                  digital project or two, and more.
+                  Everything you need — and more – if you&apos;re a small team
+                  building a digital project or two.
                 </div>
 
                 <div className={s.planPriceContainer}>
@@ -245,17 +245,15 @@ export default function Pricing({
                   Enterprise
                 </div>
                 <div className={s.planDescription}>
-                  A complete solution to power any digital experience. Scales up
+                  A complete solution to power any digital experience. Scale up
                   from one team or business unit to your whole organization.
                 </div>
 
                 <div className={s.planPriceContainer}>
-                  <span className={s.planPricePerMonth}>Start at </span>
-                  <span className={s.planPrice}>€{formatNumber(1499)}</span>
-                  <span className={s.planPricePerMonth}>/month</span>
+                  <span className={s.planPrice}>Custom</span>
 
                   <span className={s.planYearlyPrice}>
-                    payable by credit card, or wire transfer
+                    payable by credit card or wire transfer
                   </span>
                 </div>
 
@@ -268,25 +266,25 @@ export default function Pricing({
                 <div className={s.planBullets}>
                   <Bullet>Guaranteed support and uptime SLAs</Bullet>
                   <Bullet>
-                    Options for single-tenant to support your most critical
-                    business needs
-                  </Bullet>
-                  <Bullet>
-                    Fully customizable roles and tasks for granular workflows,
-                    tailored upon your specific needs
-                  </Bullet>
-                  <Bullet>
                     SSO, Audit logs and Static webhook IPs for enhanced security
                   </Bullet>
                   <Bullet>
-                    Support via Shared Slack channel, editorial onboarding, plus
+                    Fully customizable roles and tasks for granular workflows,
+                    tailored to your specific needs
+                  </Bullet>
+                  <Bullet>100% White-label platform</Bullet>
+                  <Bullet>
+                    Support via shared Slack channel, editorial onboarding, plus
                     access to our solution architects
                   </Bullet>
                   <Bullet>
                     Use your your own AWS/GCP bucket and custom domain for
                     assets
                   </Bullet>
-                  <Bullet>100% White-label platform</Bullet>
+                  <Bullet>
+                    Options for single-tenant to support your most critical
+                    business needs
+                  </Bullet>
                 </div>
               </div>
             </div>
@@ -297,7 +295,7 @@ export default function Pricing({
         <div className={s.fullComparison}>
           <Link href="/pricing/compare" passHref>
             <Button p="small" s="invert">
-              See a full plan comparison <ArrowIcon />
+              Compare limits and features in detail <ArrowIcon />
             </Button>
           </Link>
         </div>
