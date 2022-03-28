@@ -4,6 +4,7 @@ import Hero from 'components/Hero';
 import Head from 'components/Head';
 import s from './style.module.css';
 import { request } from 'lib/datocms';
+import formatNumber from 'utils/formatNumber';
 import tiny from 'tiny-json-http';
 import {
   formatLimitRaw,
@@ -67,6 +68,35 @@ export default function ComparePricing({ hints, plans, preview }) {
       <div className={s.wrapper}>
         <table className={s.table}>
           <tbody>
+            <tr>
+              <th className={s.group} width="20%"></th>
+              {plans.map((plan) => (
+                <th key={plan.id} className={s.group} width="20%">
+                  {plan.attributes.name}
+                </th>
+              ))}
+              <th className={s.group} width="20%">
+                Enterprise
+              </th>
+            </tr>
+            <tr>
+              <th>Monthly subscription</th>
+              {plans.map((plan) => (
+                <td key={plan.id} width="20%">
+                  €{formatNumber(plan.attributes.monthly_price)}
+                </td>
+              ))}
+              <td width="20%">Custom</td>
+            </tr>
+            <tr>
+              <th>Yearly subscription</th>
+              {plans.map((plan) => (
+                <td key={plan.id} width="20%">
+                  €{formatNumber(plan.attributes.yearly_price)}
+                </td>
+              ))}
+              <td width="20%">Custom</td>
+            </tr>
             {Object.entries(
               groupBy(
                 plans[0].attributes.limits.sort((a, b) =>
