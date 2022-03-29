@@ -63,8 +63,6 @@ export default function ComparePricing({ hints, plans, preview }) {
     .filter((h) => !plans[0].attributes.limits.find((l) => l.id === h.apiId))
     .map((h) => ({ id: h.apiId, type: 'boolean_system_limit' }));
 
-  console.log(enterpriseOnlyLimits);
-
   return (
     <Layout preview={preview}>
       <Head>
