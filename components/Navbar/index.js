@@ -318,10 +318,16 @@ export default function Navbar() {
                       <div className={s.sectionTitle}>Success stories</div>
                       <div className={s.grid2}>
                         <TitleDesc
+                          href="/customers/polestar"
+                          title="Polestar"
+                          description="Localise everything to build a a global website"
+                          isNew
+                        />
+
+                        <TitleDesc
                           href="/customers/oberlo"
                           title="Shopify Orberlo"
                           description="Painless switch to static from Wordpress"
-                          isNew
                         />
 
                         <TitleDesc
@@ -340,12 +346,6 @@ export default function Navbar() {
                           href="/customers/matter-supply"
                           title="Matter Supply"
                           description="How to deliver an Emmy award-campaign in 4 weeks"
-                        />
-
-                        <TitleDesc
-                          href="/customers/wonderland"
-                          title="Wonderland"
-                          description="How to setup visually-stunning projects in minutes"
                         />
 
                         <TitleDesc
