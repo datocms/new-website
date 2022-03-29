@@ -139,7 +139,24 @@ export const formatLimit = (limit) => {
   );
 };
 
-const successIcon = <SuccessIcon style={{ fill: '#ff593d' }} />;
+const successIcon = (
+  <div
+    style={{
+      backgroundColor: '#20d770',
+      display: 'inline-block',
+      fill: 'white',
+      padding: '5px',
+      borderRadius: '100px',
+    }}
+  >
+    <SuccessIcon
+      style={{
+        fill: 'white',
+        display: 'block',
+      }}
+    />
+  </div>
+);
 const warningIcon = <WarningIcon style={{ fill: '#bebebecc' }} />;
 
 export const formatLimitRaw = (limit) => {

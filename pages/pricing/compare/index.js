@@ -59,6 +59,12 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
 });
 
 export default function ComparePricing({ hints, plans, preview }) {
+  const enterpriseOnlyLimits = hints
+    .filter((h) => !plans[0].attributes.limits.find((l) => l.id === h.apiId))
+    .map((h) => ({ id: h.apiId, type: 'boolean_system_limit' }));
+
+  console.log(enterpriseOnlyLimits);
+
   return (
     <Layout preview={preview}>
       <Head>
@@ -131,7 +137,25 @@ export default function ComparePricing({ hints, plans, preview }) {
                     Enterprise
                   </th>
                 </tr>
-                {limits
+                {(group === 'boolean_system_limit'
+                  ? [
+                      ...limits.sort(
+                        (l1, l2) =>
+                          plans.filter(
+                            (p) =>
+                              p.attributes.limits.find((l) => l2.id === l.id)
+                                .available,
+                          ).length -
+                          plans.filter(
+                            (p) =>
+                              p.attributes.limits.find((l) => l1.id === l.id)
+                                .available,
+                          ).length,
+                      ),
+                      ...enterpriseOnlyLimits,
+                    ]
+                  : limits
+                )
                   .filter((l) => l.id !== 'workflows_count')
                   .map((limit) => {
                     const hint = hints.find((h) => h.apiId === limit.id);
@@ -149,6 +173,18 @@ export default function ComparePricing({ hints, plans, preview }) {
                             const planLimit = plan.attributes.limits.find(
                               (l) => l.id === limit.id,
                             );
+
+                            if (!planLimit) {
+                              return (
+                                <td key={plan.id}>
+                                  {formatLimitRaw({
+                                    ...limit,
+                                    available: false,
+                                  })}
+                                </td>
+                              );
+                            }
+
                             return (
                               <td key={plan.id}>
                                 {formatLimitRaw(planLimit)}

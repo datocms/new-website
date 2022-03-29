@@ -1,5 +1,5 @@
 .wrapper {
-  max-width: var(--page-width-with-margin);
+  max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -29,6 +29,10 @@
       border-right: 1px solid var(--border-color);
     }
 
+    th:first-child {
+      padding-right: 40px;
+    }
+
     td {
       font-size: 0.9em;
       text-align: center;
@@ -45,6 +49,7 @@
 
     &:first-child {
       text-align: left;
+      min-width: 350px;
     }
   }
 
@@ -60,8 +65,9 @@
 }
 
 .hintDescription {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
+  line-height: 1.3;
   color: var(--light-body-color);
   margin-top: 5px;
   display: none;
