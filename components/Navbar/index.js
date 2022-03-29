@@ -320,7 +320,7 @@ export default function Navbar() {
                         <TitleDesc
                           href="/customers/polestar"
                           title="Polestar"
-                          description="Localise everything to build a a global website"
+                          description="Localise everything to build a global carmaker website"
                           isNew
                         />
 
