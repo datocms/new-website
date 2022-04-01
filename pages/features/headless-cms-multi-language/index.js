@@ -46,16 +46,18 @@ const icons = [
 ];
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
-      feature: feature(filter: { slug: { eq: "headless-cms-multi-language" } }) {
+      feature: feature(
+        filter: { slug: { eq: "headless-cms-multi-language" } }
+      ) {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
         slug
         seoH1
         yoastAnalysis
-
       }
     }
     ${seoMetaTagsFields}

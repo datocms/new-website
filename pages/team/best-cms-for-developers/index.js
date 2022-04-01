@@ -26,6 +26,7 @@ import MatterSupply from 'public/images/logos/matter-supply.svg';
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     query {
       page: teamPage(filter: { slug: { eq: "best-cms-for-developers" } }) {
@@ -36,9 +37,7 @@ export const getStaticProps = gqlStaticProps(
         seoH1
         yoastAnalysis
       }
-      integrations: allIntegrations(
-        first: 100
-      ) {
+      integrations: allIntegrations(first: 100) {
         id
         logo {
           url

@@ -19,6 +19,7 @@ import Button from 'components/Button';
 import Link from 'next/link';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       feature: feature(filter: { slug: { eq: "images-api" } }) {
@@ -28,7 +29,6 @@ export const getStaticProps = gqlStaticProps(
         slug
         seoH1
         yoastAnalysis
-
       }
       review: review(filter: { name: { eq: "Grace Guzman" } }) {
         ...reviewFields

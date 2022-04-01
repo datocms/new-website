@@ -33,8 +33,9 @@ export const getStaticPaths = gqlStaticPaths(
 );
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
-    query($first: IntType!, $skip: IntType!) {
+    query ($first: IntType!, $skip: IntType!) {
       pluginsPage {
         seo: _seoMetaTags {
           ...seoMetaTagsFields

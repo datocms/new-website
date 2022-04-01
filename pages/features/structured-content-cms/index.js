@@ -26,6 +26,7 @@ import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import Link from 'next/link';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       feature: feature(filter: { slug: { eq: "structured-content-cms" } }) {
@@ -39,9 +40,7 @@ export const getStaticProps = gqlStaticProps(
       review: review(filter: { name: { eq: "Dominic Blain" } }) {
         ...reviewFields
       }
-      integrations: allIntegrations(
-        first: 100
-      ) {
+      integrations: allIntegrations(first: 100) {
         id
         logo {
           url

@@ -20,6 +20,7 @@ import Quote from 'components/Quote';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       page: homePage {

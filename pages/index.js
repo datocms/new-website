@@ -43,6 +43,7 @@ import Harrys from 'public/images/logos/new/harrys.svg';
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     query {
       page: homePage {
@@ -64,7 +65,9 @@ export const getStaticProps = gqlStaticProps(
         duotoneColor2 {
           hex
         }
-        title { value }
+        title {
+          value
+        }
         slug
         logo {
           url

@@ -20,6 +20,7 @@ import Space from 'components/Space';
 import Link from 'next/link';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     query {
       feature: feature(filter: { slug: { eq: "worldwide-cdn" } }) {

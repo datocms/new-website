@@ -33,6 +33,7 @@ import Harrys from 'public/images/logos/new/harrys.svg';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       page: teamPage(filter: { slug: { eq: "enterprise-headless-cms" } }) {

@@ -19,6 +19,7 @@ import Head from 'components/Head';
 import { StructuredText } from 'react-datocms';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       topics: allSupportTopics(first: 60) {
@@ -35,7 +36,9 @@ export const getStaticProps = gqlStaticProps(
         disableContactForm
         contactFormType
         autoResponderType
-        description { value }
+        description {
+          value
+        }
         children {
           slug
         }

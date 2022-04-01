@@ -28,6 +28,7 @@ import Link from 'next/link';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       feature: feature(filter: { slug: { eq: "workflow-cms" } }) {

@@ -26,6 +26,7 @@ import SuccessIcon from 'public/icons/regular/check.svg';
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     query {
       page: teamPage(filter: { slug: { eq: "cms-digital-marketing" } }) {
@@ -36,14 +37,14 @@ export const getStaticProps = gqlStaticProps(
         seoH1
         yoastAnalysis
       }
-      integrations: allIntegrations(
-        first: 100
-      ) {
+      integrations: allIntegrations(first: 100) {
         id
         logo {
           url
         }
-        integrationType { slug }
+        integrationType {
+          slug
+        }
         squareLogo {
           url
         }

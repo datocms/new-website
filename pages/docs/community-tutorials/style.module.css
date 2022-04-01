@@ -1,0 +1,33 @@
+.tutorials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px;
+}
+
+.tutorial {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.tutorialTitle {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.tutorial:hover .tutorialTitle {
+  text-decoration: underline;
+}
+
+.tutorialCover {
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.2);
+  border: 3px solid white;
+
+  img {
+    display: block;
+  }
+}

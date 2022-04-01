@@ -42,6 +42,7 @@ export const getStaticPaths = gqlStaticPaths(
 );
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     query pluginQuery($name: String!) {
       plugin(

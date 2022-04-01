@@ -6,6 +6,7 @@ import PluginBox, { LogoImage } from 'components/PluginBox';
 import s from 'pages/marketplace/plugins/browse/p/[page]/style.module.css';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       items: allEnterpriseApps(first: 100) {

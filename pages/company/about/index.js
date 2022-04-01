@@ -33,6 +33,7 @@ import regression from 'regression';
 import cn from 'classnames';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       page: aboutPage {
@@ -44,9 +45,7 @@ export const getStaticProps = gqlStaticProps(
         name
         role
         avatar {
-          responsiveImage(
-            imgixParams: { w: 600, h: 400, fit: crop }
-          ) {
+          responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
             ...imageFields
           }
         }

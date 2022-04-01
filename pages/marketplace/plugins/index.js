@@ -14,6 +14,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       pluginsPage {

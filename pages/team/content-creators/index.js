@@ -25,6 +25,7 @@ import Space from 'components/Space';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     query {
       page: homePage {

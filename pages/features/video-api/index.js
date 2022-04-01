@@ -16,6 +16,7 @@ import s from './style.module.css';
 import { range } from 'range';
 
 export const getStaticProps = gqlStaticProps(
+  /* GraphQL */
   `
     {
       feature: feature(filter: { slug: { eq: "video-api" } }) {
