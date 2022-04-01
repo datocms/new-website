@@ -57,8 +57,6 @@ export const getStaticProps = gqlStaticProps(
 );
 
 export default function Tutorials({ tutorials, roots }) {
-  console.log(tutorials);
-
   return (
     <DocsLayout sidebar={<Sidebar roots={roots} />}>
       <Head>

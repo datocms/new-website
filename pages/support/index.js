@@ -160,18 +160,22 @@ export default function Support({ preview, topics }) {
                 toPlainText(leafTopic.description).length > 0)) && (
               <div className={s.description}>
                 <StructuredText data={leafTopic.description} />
-                <h3>Popular guides and tutorials</h3>
-                <p>
-                  Please take a look at these resources, as they might probably
-                  be the fastest way to solve your issue!
-                </p>
-                <ul>
-                  {leafTopic.commonQuestions.map((q) => (
-                    <li id={q.url} key={q.url}>
-                      <a href={q.url}>{q.title}</a>
-                    </li>
-                  ))}
-                </ul>
+                {leafTopic.commonQuestions.length > 0 && (
+                  <>
+                    <h3>Popular guides and tutorials</h3>
+                    <p>
+                      Please take a look at these resources, as they might
+                      probably be the fastest way to solve your issue!
+                    </p>
+                    <ul>
+                      {leafTopic.commonQuestions.map((q) => (
+                        <li id={q.url} key={q.url}>
+                          <a href={q.url}>{q.title}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
                 {leafTopic &&
                   leafTopic.children.length === 0 &&
                   !leafTopic.disableContactForm && (
