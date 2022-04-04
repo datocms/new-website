@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { Image as DatoImage } from 'react-datocms';
 import {
   request,
   seoMetaTagsFields,
@@ -19,6 +20,7 @@ import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
 import slugify from 'utils/slugify';
 import s from 'pages/docs/pageStyle.module.css';
+import sharedStyle from 'pages/docs/style.module.css';
 import Head from 'components/Head';
 import cn from 'classnames';
 import filter from 'utils/filterNodes';
@@ -297,6 +299,33 @@ export const getStaticProps = handleErrors(async function ({
                 _modelApiKey
                 componentName
               }
+              ... on TutorialVideoRecord {
+                id
+                _modelApiKey
+                tutorials {
+                  id
+                  title
+                  res: videoTutorialResource {
+                    ... on OtherVideoResourceRecord {
+                      _modelApiKey
+                      url
+                      coverImage {
+                        responsiveImage(imgixParams: { w: 300, ar: "4:3", fit: crop }) {
+                          ...imageFields
+                        }
+                      }
+                    }
+                    ... on YoutubeVideoResourceRecord {
+                      _modelApiKey
+                      video {
+                        url
+                        thumbnailUrl
+                        providerUid
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -572,6 +601,50 @@ export default function DocPage({
                       )}
                       <StructuredText data={block.text} />
                     </div>
+                  );
+                }
+                case 'tutorial_video': {
+                  return (
+                    <>
+                      <div className={sharedStyle.useCaseCards}>
+                        {block.tutorials.map((tutorial) =>
+                          tutorial.res[0]._modelApiKey ===
+                          'youtube_video_resource' ? (
+                            <a
+                              href={tutorial.res[0].video.url}
+                              key={tutorial.res[0].video.url}
+                              className={sharedStyle.videoCard}
+                            >
+                              <div className={sharedStyle.videoCardCover}>
+                                <img src={tutorial.res[0].video.thumbnailUrl} />
+                              </div>
+                              <div className={s.videoCardTitle}>
+                                {tutorial.title}
+                              </div>
+                            </a>
+                          ) : (
+                            <a
+                              href={tutorial.res[0].url}
+                              key={tutorial.res[0].url}
+                              className={sharedStyle.videoCard}
+                            >
+                              <div className={sharedStyle.videoCardCover}>
+                                {tutorial.res[0].coverImage && (
+                                  <DatoImage
+                                    data={
+                                      tutorial.res[0].coverImage.responsiveImage
+                                    }
+                                  />
+                                )}
+                              </div>
+                              <div className={s.videoCardTitle}>
+                                {tutorial.title}
+                              </div>
+                            </a>
+                          ),
+                        )}
+                      </div>
+                    </>
                   );
                 }
                 case 'react_ui_live_example': {

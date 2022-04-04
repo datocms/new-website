@@ -500,3 +500,12 @@
     margin-left: 10px;
   }
 }
+
+.videoCardTitle {
+  font-family: var(--font-sans);
+  border-top: 1px solid var(--border-color);
+  padding: 25px 15px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1.3;
+}
