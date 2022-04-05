@@ -141,6 +141,43 @@ function renderBlock(s, block, defaultAltForImages) {
         </div>
       );
 
+    case 'tutorial_video':
+      return (
+        <div className={s.unwrap}>
+          <div className={s.pluginBoxes}>
+            {block.tutorials.map((tutorial) => (
+              <div key={tutorial.title} className={s.pluginBoxContainer}>
+                {tutorial.res[0]._modelApiKey === 'youtube_video_resource' ? (
+                  <PluginBox
+                    title={tutorial.title}
+                    description="Play video »"
+                    image={
+                      <img
+                        className={s.pluginBoxImage}
+                        src={tutorial.res[0].video.thumbnailUrl}
+                      />
+                    }
+                    href={tutorial.res[0].video.url}
+                  />
+                ) : (
+                  <PluginBox
+                    title={tutorial.title}
+                    description="Play video »"
+                    image={
+                      <DatoImage
+                        className={s.pluginBoxImage}
+                        data={tutorial.res[0].coverImage.responsiveImage}
+                      />
+                    }
+                    href={tutorial.res[0].url}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
     case 'graphiql_editor':
       return (
         <div className={s.unwrap}>

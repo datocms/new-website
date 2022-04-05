@@ -603,50 +603,6 @@ export default function DocPage({
                     </div>
                   );
                 }
-                case 'tutorial_video': {
-                  return (
-                    <>
-                      <div className={sharedStyle.useCaseCards}>
-                        {block.tutorials.map((tutorial) =>
-                          tutorial.res[0]._modelApiKey ===
-                          'youtube_video_resource' ? (
-                            <a
-                              href={tutorial.res[0].video.url}
-                              key={tutorial.res[0].video.url}
-                              className={sharedStyle.videoCard}
-                            >
-                              <div className={sharedStyle.videoCardCover}>
-                                <img src={tutorial.res[0].video.thumbnailUrl} />
-                              </div>
-                              <div className={s.videoCardTitle}>
-                                {tutorial.title}
-                              </div>
-                            </a>
-                          ) : (
-                            <a
-                              href={tutorial.res[0].url}
-                              key={tutorial.res[0].url}
-                              className={sharedStyle.videoCard}
-                            >
-                              <div className={sharedStyle.videoCardCover}>
-                                {tutorial.res[0].coverImage && (
-                                  <DatoImage
-                                    data={
-                                      tutorial.res[0].coverImage.responsiveImage
-                                    }
-                                  />
-                                )}
-                              </div>
-                              <div className={s.videoCardTitle}>
-                                {tutorial.title}
-                              </div>
-                            </a>
-                          ),
-                        )}
-                      </div>
-                    </>
-                  );
-                }
                 case 'react_ui_live_example': {
                   const examples = additionalData.allReactUiExamples.filter(
                     (e) => e.componentName === block.componentName,
