@@ -38,7 +38,10 @@ export const getStaticProps = gqlStaticProps(
           }
         }
       }
-      tutorials: allVideoTutorials(first: 3) {
+      tutorials: allVideoTutorials(
+        first: 3
+        filter: { showInDocsHomepage: { eq: true } }
+      ) {
         id
         title
         res: videoTutorialResource {
