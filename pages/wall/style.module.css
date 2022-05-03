@@ -90,9 +90,16 @@
 }
 
 .authorRole {
+  text-decoration: none;
+  color: inherit;
+
   @media (width > 700px) {
     max-width: 250px;
   }
+}
+
+a.authorRole:hover .name {
+  text-decoration: underline;
 }
 
 .role {

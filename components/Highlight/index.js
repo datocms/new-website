@@ -16,9 +16,11 @@ export const highlightStructuredText = (
   return (
     <StructuredText
       data={data}
-      renderNode={(tagName, props, ...children) => {
-        const TagName = ['mark'].includes(tagName) ? Highlighter : tagName;
-        return <TagName {...props}>{children}</TagName>;
+      renderNode={(rawTagName, props, ...children) => {
+        const tagName = ['mark'].includes(rawTagName)
+          ? Highlighter
+          : rawTagName;
+        return React.createElement(tagName, props, ...children);
       }}
       customRules={
         noWrappers && [

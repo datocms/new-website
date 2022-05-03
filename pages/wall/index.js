@@ -2,6 +2,7 @@ import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import Highlight, { highlightStructuredText } from 'components/Highlight';
 import Hero from 'components/Hero';
+import Link from 'next/link';
 import Head from 'components/Head';
 import { useQuerySubscription, Image as DatoImage } from 'react-datocms';
 import Masonry from 'react-masonry-css';
@@ -21,6 +22,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       }
       allPartners(first: 100) {
         name
+        slug
         quotes {
           id
           quote {
@@ -51,7 +53,11 @@ export default function Wall({ preview, subscription }) {
   const quotes = [
     ...allPartners
       .map((p) =>
-        p.quotes.map((q) => ({ ...q, role: `${q.role} @ ${p.name}` })),
+        p.quotes.map((q) => ({
+          ...q,
+          role: `${q.role} @ ${p.name}`,
+          link: `/partners/${p.slug}`,
+        })),
       )
       .flat(),
     ...allReviews,
@@ -90,23 +96,34 @@ export default function Wall({ preview, subscription }) {
           className={s.grid}
           columnClassName={s.column}
         >
-          {quotes.map((quote) => (
-            <div key={quote.id} className={s.root}>
-              <div className={s.quote}>
-                {highlightStructuredText(quote.quote)}
-              </div>
-              <div className={s.content}>
-                <DatoImage
-                  className={s.image}
-                  data={quote.image.responsiveImage}
-                />
-                <div className={s.authorRole}>
-                  <div className={s.name}>{quote.name}</div>
-                  <div className={s.role}>{quote.role}</div>
+          {quotes.map((quote) => {
+            return (
+              <div key={quote.id} className={s.root}>
+                <div className={s.quote}>
+                  {highlightStructuredText(quote.quote)}
+                </div>
+                <div className={s.content}>
+                  <DatoImage
+                    className={s.image}
+                    data={quote.image.responsiveImage}
+                  />
+                  {quote.link ? (
+                    <Link href={quote.link}>
+                      <a className={s.authorRole}>
+                        <div className={s.name}>{quote.name}</div>
+                        <div className={s.role}>{quote.role}</div>
+                      </a>
+                    </Link>
+                  ) : (
+                    <div className={s.authorRole}>
+                      <div className={s.name}>{quote.name}</div>
+                      <div className={s.role}>{quote.role}</div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </Masonry>
       </div>
     </Layout>
