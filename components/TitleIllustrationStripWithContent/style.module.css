@@ -57,7 +57,13 @@
 }
 
 .subtitle {
+  font-size: 18px;
+  font-weight: normal;
   line-height: 1.4;
+
+  a {
+    color: inherit;
+  }
 }
 
 .kicker {
