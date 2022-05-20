@@ -11,7 +11,7 @@ import { parse } from 'flatted';
 import { useMemo } from 'react';
 import Head from 'components/Head';
 import { renderMetaTags, useQuerySubscription } from 'react-datocms';
-import PostContent from 'components/PostContent';
+import DocPageContent from 'components/DocPageContent';
 import { gqlStaticPaths } from 'lib/datocms';
 import { handleErrors } from 'lib/datocms';
 
@@ -99,7 +99,7 @@ export default function DocPage({
         <Toc content={page.content} />
         <div className={s.article}>
           <div className={s.title}>{titleOverride || page.title}</div>
-          <PostContent content={page.content} style={s} />
+          <DocPageContent content={page.content} style={s} />
         </div>
       </div>
     </DocsLayout>

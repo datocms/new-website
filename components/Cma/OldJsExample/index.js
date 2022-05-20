@@ -8,10 +8,15 @@ import schemaExampleFor from 'utils/schemaExampleFor';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 
+const methods = {
+  instances: 'all',
+  self: 'find',
+};
+
 const fix = (string) =>
   string.replace(/"([^[\-"]+)": /g, '$1: ').replace(/"/g, "'");
 
-function example(resource, link, clientInfo, allPages = false) {
+function example(resource, link, allPages = false) {
   let params = [];
   let precode = [];
 
@@ -23,7 +28,7 @@ function example(resource, link, clientInfo, allPages = false) {
     match = regexp.exec(link.href);
   }
 
-  const resourceId = resource.definitions.identity.example || '3209482753';
+  const resourceId = resource.definitions.identity.example || '43';
 
   placeholders.forEach((placeholder) => {
     if (placeholder === 'item_type') {
@@ -43,11 +48,15 @@ function example(resource, link, clientInfo, allPages = false) {
 
     const attrs = {
       ...id,
-      ...(data.attributes || {}),
+      ...(humps.camelizeKeys(data.attributes) || {}),
       ...(data.meta ? { meta: data.meta } : {}),
       ...Object.entries(data.relationships || {}).reduce(
         (acc, [name, value]) => {
-          acc[name] = value.data;
+          acc[humps.camelize(name)] = Array.isArray(value.data)
+            ? value.data.map((el) => el.id)
+            : value.data
+            ? value.data.id
+            : null;
           return acc;
         },
         {},
@@ -73,26 +82,29 @@ function example(resource, link, clientInfo, allPages = false) {
 
   if (link.hrefSchema) {
     const example = schemaExampleFor(link.hrefSchema, !allPages);
-    if (Object.keys(example).length > 0) {
-      params.push(fix(JSON.stringify(example, null, 2)));
+    params.push(fix(JSON.stringify(example, null, 2)));
+
+    if (allPages && link.targetSchema && link.targetSchema.properties.meta) {
+      params.push(fix(JSON.stringify({ allPages: true }, null, 2)));
     }
   }
 
-  const namespace = clientInfo.namespace;
-  const action = clientInfo.endpoint.name;
+  const namespace = resource.links.find((l) => l.rel === 'instances')
+    ? humps.camelize(pluralize(resource.id))
+    : humps.camelize(resource.id);
 
-  let paramsCode = '';
+  const action = humps.camelize(methods[link.rel] || link.rel);
+
+  let call = `client.${namespace}.${action}`;
   if (params.length > 0) {
     if (allPages) {
-      paramsCode += `(\n${params.join(',\n').replace(/^/gm, '  ')}\n)`;
+      call += `(\n${params.join(',\n').replace(/^/gm, '  ')}\n)`;
     } else {
-      paramsCode += `(${params.join(', ')})`;
+      call += `(${params.join(', ')})`;
     }
   } else {
-    paramsCode += '()';
+    call += '()';
   }
-
-  let call = `client.${namespace}.${action}${paramsCode}`;
 
   let returnCode, output;
 
@@ -105,21 +117,15 @@ function example(resource, link, clientInfo, allPages = false) {
       const multipleVariable = humps.camelize(pluralize(resource.id));
 
       if (example.data.length > 0) {
-        if (!allPages) {
-          output = fix(
-            JSON.stringify(deserialize(example.data[0], true), null, 2),
-          );
+        output = fix(
+          JSON.stringify(deserialize(example.data[0], true), null, 2),
+        );
 
-          returnCode = `const ${multipleVariable} = await ${call};
-
-${multipleVariable}.forEach((${singleVariable}) => {
-  console.log(${singleVariable});
-});`;
-        } else {
-          returnCode = `for await (const ${singleVariable} of client.${namespace}.${action}PagedIterator${paramsCode}) {
-  console.log(${singleVariable});
-}`;
-        }
+        returnCode = `const ${multipleVariable} = await ${call};
+  
+  ${multipleVariable}.forEach((${singleVariable}) => {
+    console.log(${singleVariable});
+  });`;
       } else {
         output = '[]';
         returnCode = `const result = await ${call};
@@ -133,33 +139,23 @@ console.log(result);`;
 
 console.log(${singleVariable});`;
     }
-  } else {
-    returnCode = `await ${call};`;
   }
 
   if (!allPages) {
-    const isPaginated = clientInfo.endpoint.paginatedResponse;
-
-    const body = `const client = buildClient({ apiToken: '<YOUR_API_TOKEN>' });
+    const body = `const client = new SiteClient('YOUR-API-TOKEN');
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
-      precode.length > 0 ? '\n' : ''
-    }${
-      returnCode
-        ? `${
-            isPaginated
-              ? '\n// this only returns the first page of results:'
-              : ''
-          }\n${returnCode}`
-        : ''
+      returnCode ? `\n${returnCode}` : ''
     }
 ${
-  isPaginated
-    ? '\n\n// this iterates over every page of results:' +
-      example(resource, link, clientInfo, true).code
+  link.targetSchema &&
+  link.targetSchema.properties.meta &&
+  link.targetSchema.properties.meta.properties.total_count
+    ? '\n\n// or, if you want to fetch all the pages with just one call:\n' +
+      example(resource, link, true).code
     : ''
 }`;
 
-    let code = `import { buildClient } from '@datocms/cma-client-node';
+    let code = `const { SiteClient } = require('datocms-client');
 
 async function run() {
 ${body
@@ -180,8 +176,6 @@ ${returnCode}`;
 }
 
 function renderExample(example, requestCode, responseCode) {
-  const response = example.request ? example.response : responseCode;
-
   return (
     <div>
       <RequestResponse
@@ -193,10 +187,10 @@ function renderExample(example, requestCode, responseCode) {
             language: 'javascript',
             code: example.request || requestCode,
           },
-          response && {
+          (example.response || responseCode) && {
             title: 'Returned output:',
             language: 'javascript',
-            code: response,
+            code: example.response || responseCode,
           },
         ].filter((x) => x)}
       />
@@ -204,21 +198,21 @@ function renderExample(example, requestCode, responseCode) {
   );
 }
 
-export default function JsExample({ resource, link, clientInfo }) {
-  const { code, output } = example(resource, link, clientInfo);
+export default function JsExample({ resource, link }) {
+  const { code, output } = example(resource, link);
 
-  if (link.examples && link.examples['new-js']) {
+  if (link.examples && link.examples['old-js']) {
     return (
       <>
         <p>The following examples are available:</p>
         <ul>
-          {link.examples['new-js'].map((example) => (
+          {link.examples['old-js'].map((example) => (
             <li key={example.title}>
               <a href={`#${slugify(example.title)}`}>{example.title}</a>
             </li>
           ))}
         </ul>
-        {link.examples['new-js'].map((example) =>
+        {link.examples['old-js'].map((example) =>
           renderExample(example, code, output),
         )}
       </>

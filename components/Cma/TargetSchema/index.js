@@ -31,16 +31,16 @@ export default function TargetSchema({ link }) {
     </Link>
   );
   const returnDescription = isArray ? (
-    <>an array of {resourceLink} objects</>
+    <>an array of {resourceLink} resource objects</>
   ) : (
-    <>a {resourceLink} object</>
+    <>a {resourceLink} resource object</>
   );
 
   return (
     <LanguageConsumer>
       {(language) => (
         <>
-          <h6>Returns</h6>
+          <h2>Returns</h2>
           {language === 'http' ? (
             <>
               Returns{' '}

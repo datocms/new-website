@@ -2,22 +2,20 @@ import DocsLayout from 'components/DocsLayout';
 import { Sidebar } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
+import fetchCmaClientResources from 'utils/fetchCmaClientResources';
 import { parse } from 'flatted';
 import { request } from 'lib/datocms';
 import { useMemo } from 'react';
 import Head from 'components/Head';
 import React from 'react';
 import HttpExample from 'components/Cma/HttpExample';
+import OldJsExample from 'components/Cma/OldJsExample';
 import JsExample from 'components/Cma/JsExample';
-import RubyExample from 'components/Cma/RubyExample';
-import ReactMarkdown from 'react-markdown';
+import DocDescription from 'components/DocDescription';
 import { HrefSchema, Schema } from 'components/Cma/Schema';
 import TargetSchema from 'components/Cma/TargetSchema';
 import { LanguageConsumer } from 'components/LanguagePicker';
 import { useRouter } from 'next/router';
-import Prism from 'components/Prism';
-import gfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
 import { handleErrors } from 'lib/datocms';
 
 export const getStaticPaths = async () => {
@@ -77,9 +75,12 @@ export const getStaticProps = handleErrors(async function ({
     return { notFound: true };
   }
 
-  const cma = await fetchCma(resource, endpoint);
+  const [cma, clientInfo] = await Promise.all([
+    fetchCma(resource, endpoint),
+    fetchCmaClientResources(resource, endpoint),
+  ]);
 
-  if (!cma) {
+  if (!cma || !clientInfo) {
     return { notFound: true };
   }
 
@@ -90,6 +91,7 @@ export const getStaticProps = handleErrors(async function ({
       cma,
       endpoint,
       resource,
+      clientInfo,
     },
   };
 });
@@ -100,6 +102,7 @@ export default function DocPage({
   preview,
   endpoint,
   resource,
+  clientInfo,
 }) {
   const router = useRouter();
   const result = useMemo(() => parse(cma), [cma]);
@@ -149,29 +152,7 @@ export default function DocPage({
           <div className={s.title}>{link.title}</div>
           <div className={s.body}>
             {link.description && (
-              <ReactMarkdown
-                remarkPlugins={[gfm]}
-                rehypePlugins={[rehypeRaw]}
-                components={{
-                  // eslint-disable-next-line react/display-name
-                  pre: ({ children }) => <>{children}</>,
-                  // eslint-disable-next-line react/display-name
-                  code: ({ inline, className, children }) => {
-                    const match = /language-(\w+)/.exec(className || '');
-                    return inline ? (
-                      <code>{children}</code>
-                    ) : (
-                      <Prism
-                        code={String(children).replace(/\n$/, '')}
-                        language={match ? match[1] : 'unknown'}
-                        showLineNumbers
-                      />
-                    );
-                  },
-                }}
-              >
-                {link.description}
-              </ReactMarkdown>
+              <DocDescription>{link.description}</DocDescription>
             )}
             {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
             {link.schema && (
@@ -183,7 +164,7 @@ export default function DocPage({
             )}
             {link && <TargetSchema link={link} />}
 
-            <h4>Examples</h4>
+            <h2>Examples</h2>
             <LanguageConsumer>
               {(language) => (
                 <>
@@ -196,11 +177,15 @@ export default function DocPage({
                   )}
 
                   {language === 'javascript' && (
-                    <JsExample resource={result.schema} link={link} />
+                    <JsExample
+                      resource={result.schema}
+                      link={link}
+                      clientInfo={clientInfo}
+                    />
                   )}
 
-                  {language === 'ruby' && (
-                    <RubyExample resource={result.schema} link={link} />
+                  {language === 'old-js' && (
+                    <OldJsExample resource={result.schema} link={link} />
                   )}
                 </>
               )}
