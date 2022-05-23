@@ -122,7 +122,7 @@ function example(resource, link, allPages = false) {
         );
 
         returnCode = `const ${multipleVariable} = await ${call};
-  
+
   ${multipleVariable}.forEach((${singleVariable}) => {
     console.log(${singleVariable});
   });`;
@@ -139,6 +139,8 @@ console.log(result);`;
 
 console.log(${singleVariable});`;
     }
+  } else {
+    returnCode = `await ${call};`;
   }
 
   if (!allPages) {
