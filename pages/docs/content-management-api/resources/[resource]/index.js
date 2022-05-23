@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import Head from 'components/Head';
 import Link from 'next/link';
 import { Definition } from 'components/Cma/Schema';
-import ReactMarkdown from 'react-markdown';
+import DocDescription from 'components/DocDescription';
 import { useRouter } from 'next/router';
 import { handleErrors } from 'lib/datocms';
 
@@ -123,7 +123,7 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
         <div className={s.article}>
           <div className={s.title}>{result.schema.title}</div>
           <div className={s.body}>
-            <ReactMarkdown>{result.schema.description}</ReactMarkdown>
+            <DocDescription>{result.schema.description}</DocDescription>
             <Definition title="Object payload" showId schema={result.schema} />
 
             {links && (

@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-import { Image as DatoImage } from 'react-datocms';
 import {
   request,
   seoMetaTagsFields,
@@ -13,14 +11,12 @@ import {
   useQuerySubscription,
 } from 'react-datocms';
 import DocsLayout from 'components/DocsLayout';
-import PostContent from 'components/PostContent';
+import DocPageContent from 'components/DocPageContent';
 import Link from 'next/link';
 import ActiveLink from 'components/ActiveLink';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
-import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
 import slugify from 'utils/slugify';
 import s from 'pages/docs/pageStyle.module.css';
-import sharedStyle from 'pages/docs/style.module.css';
 import Head from 'components/Head';
 import cn from 'classnames';
 import filter from 'utils/filterNodes';
@@ -28,8 +24,6 @@ import { isHeading } from 'datocms-structured-text-utils';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { fetchPluginSdkHooks } from 'utils/fetchPluginSdk';
 import fetchReactUiExamples from 'utils/fetchReactUiExamples';
-import PluginSdkHook from 'components/PluginSdkHook';
-import ReactUiExample from 'components/ReactUiExample';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -568,60 +562,10 @@ export default function DocPage({
             docGroup && `${docGroup.name} > `
           }${pageTitle}`}</h1>
           <div className={s.title}>{pageTitle}</div>
-          <PostContent
+          <DocPageContent
             content={page.content}
             style={s}
             defaultAltForImages={defaultSeoTitle}
-            renderBlock={(block) => {
-              switch (block._modelApiKey) {
-                case 'plugin_sdk_hook_group': {
-                  return (
-                    <>
-                      <hr />
-                      {additionalData.pluginSdkHooks
-                        .sort((a, b) => a.lineNumber - b.lineNumber)
-                        .map((hook) => (
-                          <PluginSdkHook key={hook.name} hook={hook} />
-                        ))}
-                    </>
-                  );
-                }
-                case 'doc_callout': {
-                  return (
-                    <div
-                      className={cn(
-                        s.docCallout,
-                        s[`docCallout--${block.calloutType}`],
-                      )}
-                    >
-                      {block.title && (
-                        <div className={s.docCalloutTitle}>
-                          <InfoCircleIcon /> <span>{block.title}</span>
-                        </div>
-                      )}
-                      <StructuredText data={block.text} />
-                    </div>
-                  );
-                }
-                case 'react_ui_live_example': {
-                  const examples = additionalData.allReactUiExamples.filter(
-                    (e) => e.componentName === block.componentName,
-                  );
-
-                  return (
-                    <>
-                      {examples.map((example) => (
-                        <Fragment key={example.title}>
-                          <h2>{example.title}</h2>
-                          {example.description}
-                          <ReactUiExample example={example} />
-                        </Fragment>
-                      ))}
-                    </>
-                  );
-                }
-              }
-            }}
           />
         </div>
       </div>

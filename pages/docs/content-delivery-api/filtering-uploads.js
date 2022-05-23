@@ -1,6 +1,6 @@
 import React from 'react';
 import DocsLayout from 'components/DocsLayout';
-import PostContent from 'components/PostContent';
+import DocPageContent from 'components/DocPageContent';
 import Space from 'components/Space';
 import Tabs, { Tab } from 'components/Tabs';
 import {
@@ -87,7 +87,7 @@ export default function DocPage({
         />
         <div className={s.article}>
           <div className={s.title}>{titleOverride || page.title}</div>
-          <PostContent content={page.content} style={s}>
+          <DocPageContent content={page.content} style={s}>
             <Heading anchor="meta-fields" as="h3">
               Available filters
             </Heading>
@@ -99,7 +99,7 @@ export default function DocPage({
                 <Filters name={name} attrs={filters[name]} />
               </React.Fragment>
             ))}
-          </PostContent>
+          </DocPageContent>
         </div>
       </div>
     </DocsLayout>

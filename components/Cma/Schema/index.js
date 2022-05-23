@@ -115,7 +115,7 @@ export function JsonSchemaObject({
           return (
             <JsonSchemaProperty
               key={name}
-              requird={requiredProperties.includes(name)}
+              required={requiredProperties.includes(name)}
               name={name}
               prefix={prefix}
               schema={property}
@@ -241,11 +241,12 @@ function Relationship({ name, schema, required }) {
               <span className={s.prefix}>relationships.</span>
             )}
             <span className={s.name}>
-              {language === 'javascript' ? humps.camelize(name) : name}
+              {language === 'old-js' ? humps.camelize(name) : name}
             </span>
             {language === 'http' && <span className={s.prefix}>.data</span>}
             &nbsp;&nbsp;
-            {language === 'http' || multipleRelationshipsPossible ? (
+            {['http', 'javascript'].includes(language) ||
+            multipleRelationshipsPossible ? (
               <span className={s.types}>
                 {isArray && (
                   <>
@@ -320,7 +321,7 @@ function Relationship({ name, schema, required }) {
 }
 
 function Relationships({ relationships, objectIsOptional }) {
-  const required = objectIsOptional ? relationships.required || [] : [];
+  const required = objectIsOptional ? [] : relationships.required || [];
 
   return (
     <>
@@ -359,7 +360,7 @@ export function JsonSchemaProperty({
             <div className={s.header}>
               {prefix && <span className={s.prefix}>{prefix}</span>}
               <span className={s.name}>
-                {language === 'javascript' ? humps.camelize(name) : name}
+                {language === 'old-js' ? humps.camelize(name) : name}
               </span>
               &nbsp;&nbsp;
               <Type schema={schema} />
@@ -451,7 +452,7 @@ export function HrefSchema({ schema }) {
 
   return (
     <>
-      <h6>Query parameters</h6>
+      <h2>Query parameters</h2>
       <div>
         <JsonSchemaObject depth={0} schema={schema} />
       </div>
@@ -474,7 +475,7 @@ export function Schema({ title, schema, showId }) {
     <LanguageConsumer>
       {(language) => (
         <>
-          <h6>{title}</h6>
+          <h2>{title}</h2>
           {(language === 'http' || showId) && schema.properties.id && (
             <div className={s.schema}>
               <div className={s.header}>
@@ -496,7 +497,8 @@ export function Schema({ title, schema, showId }) {
               </div>
             </div>
           )}
-          {language === 'http' && (
+          {(language === 'http' ||
+            (language === 'javascript' && isDefinition)) && (
             <div className={s.schema}>
               <div className={s.header}>
                 <span className={s.name}>type</span>&nbsp;&nbsp;

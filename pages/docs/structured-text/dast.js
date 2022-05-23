@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import DocsLayout from 'components/DocsLayout';
-import PostContent from 'components/PostContent';
+import DocPageContent from 'components/DocPageContent';
 import {
   Toc,
   Sidebar,
@@ -116,7 +116,7 @@ export default function DocPage({
         />
         <div className={s.article}>
           <div className={s.title}>{titleOverride || page.title}</div>
-          <PostContent content={page.content} style={s}>
+          <DocPageContent content={page.content} style={s}>
             <Heading anchor="nodes" as="h3">
               Nodes
             </Heading>
@@ -181,7 +181,7 @@ export default function DocPage({
                 </div>
               );
             })}
-          </PostContent>
+          </DocPageContent>
         </div>
       </div>
     </DocsLayout>

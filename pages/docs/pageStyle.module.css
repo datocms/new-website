@@ -137,11 +137,13 @@
   }
 
   summary {
-    font-family: var(--font-sans);
     line-height: 1.25;
-    font-size: 110%;
-    font-weight: bold;
     margin-bottom: 1em;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   p,

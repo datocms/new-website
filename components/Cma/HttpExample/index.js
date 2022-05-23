@@ -62,7 +62,7 @@ function renderExample(example, resource) {
             resource.schema &&
               resource.method !== 'GET' &&
               resource.method !== 'DELETE' && [
-                'Content-Type: application/json',
+                'Content-Type: application/vnd.api+json',
               ],
           )
           .filter((x) => x)
