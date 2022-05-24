@@ -12,7 +12,7 @@ const buildEndpointToc = (parentSlug, link) => {
 };
 
 const buildResourceToc = (resource, schema) => {
-  const slug = resource.replace(/\_/g, '-');
+  const slug = resource.replace(/_/g, '-');
   const endpoints = schema.links ? schema.links.filter((l) => !l.private) : [];
 
   return {

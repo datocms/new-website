@@ -4,7 +4,9 @@ export default async function fetchCmaClientResources(jsonApiType, rel) {
   );
   const resources = await response.json();
 
-  const foundResource = resources.find((r) => r.jsonApiType === jsonApiType);
+  const foundResource = resources.find(
+    (r) => r.jsonApiType === jsonApiType.replace(/\-/g, '_'),
+  );
 
   if (!foundResource) {
     return null;
