@@ -7,7 +7,7 @@ import s from 'pages/docs/pageStyle.module.css';
 import cn from 'classnames';
 import { StructuredText } from 'react-datocms';
 
-export default function DocPageContent(props) {
+export default function DocPageContent({ additionalData, ...props }) {
   return (
     <PostContent
       {...props}

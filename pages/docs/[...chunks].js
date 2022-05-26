@@ -563,6 +563,7 @@ export default function DocPage({
           }${pageTitle}`}</h1>
           <div className={s.title}>{pageTitle}</div>
           <DocPageContent
+            additionalData={additionalData}
             content={page.content}
             style={s}
             defaultAltForImages={defaultSeoTitle}
