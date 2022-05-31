@@ -40,6 +40,10 @@ export const getStaticProps = handleErrors(
       params: { chunks: ['content-management-api', chunk] },
     });
 
+    if (!props) {
+      return { notFound: true };
+    }
+
     const cma = await fetchCma();
 
     if (!cma) {

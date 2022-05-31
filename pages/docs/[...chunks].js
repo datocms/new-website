@@ -142,6 +142,10 @@ export const getStaticProps = handleErrors(async function ({
     preview,
   });
 
+  if (!docGroup) {
+    return { notFound: true };
+  }
+
   const allPages =
     docGroup &&
     docGroup.pages.reduce((acc, pageOrSection) => {

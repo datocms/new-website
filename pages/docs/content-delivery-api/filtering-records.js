@@ -25,6 +25,10 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
     preview,
   });
 
+  if (!props) {
+    return { notFound: true };
+  }
+
   const {
     body: { meta: fieldsMetaInfo, field_types: fieldTypesInfo },
   } = await tiny.get({

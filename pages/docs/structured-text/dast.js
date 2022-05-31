@@ -23,6 +23,10 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
     preview,
   });
 
+  if (!props) {
+    return { notFound: true };
+  }
+
   const schema = await buildStructuredTextDocumentSchema();
 
   return { props: { ...props, schema } };
