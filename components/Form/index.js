@@ -131,8 +131,6 @@ export const Form = ({
 
     const token = await execute('form');
 
-    console.log(token);
-
     recaptchaInput.current.value = token;
 
     if (onSubmit) {
