@@ -24,6 +24,7 @@ const errorLabels = {
 function Slack() {
   const { data: stats } = useSWR('/api/slack/info', fetcher);
   const execute = useRecaptcha({
+    // must be v3 Recaptcha!
     sitekey: '6LcU1dwUAAAAADe2gkTfPNlG3xoybrgx_ulxVbF3',
     hideDefaultBadge: true,
   });

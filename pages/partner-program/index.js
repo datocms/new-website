@@ -1,7 +1,6 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import Wrapper from 'components/Wrapper';
 import Head from 'components/Head';
 import fs from 'fs';
 import util from 'util';
@@ -17,8 +16,21 @@ import Space from 'components/Space';
 import InterstitialTitle from 'components/InterstitialTitle';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Link from 'next/link';
+import useScript from 'react-script-hook';
 
 const AgencyForm = () => {
+  useScript({
+    src: `https://www.google.com/recaptcha/api.js?render=explicit`,
+    onload: () =>
+      window.grecaptcha.ready(() => {
+        window.grecaptcha.render('recaptcha_container', {
+          // must be v2 Recaptcha!
+          sitekey: '6Lc7rEkgAAAAACOD_bMarSnDx3SVEYBKwWU4buVI',
+          size: 'invisible',
+        });
+      }),
+  });
+
   const defaultValues = {
     agencyName: '',
     agencyUrl: '',
@@ -33,31 +45,12 @@ const AgencyForm = () => {
     additionalInfo: '',
   };
 
-  // const submitSales = async (values) => {
-  //   const body = JSON.stringify(values);
-
-  //   const res = await fetch('/api/pipedrive/submit', {
-  //     body: body,
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     method: 'POST',
-  //   });
-
-  //   const result = await res.json();
-
-  //   if (!result.success) {
-  //     throw new Error('Ouch');
-  //   }
-  // };
-
   return (
     <div className={s.form}>
       <Form
         defaultValues={defaultValues}
         submitLabel="Let's have a chat!"
         nativeSubmitForm
-        // onSubmit={submitSales}
         action="https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/aiwRgx07C0Ix1B7x-Ex6B67cQpfHc9C_8taVomi6wfkt5nrcQIIoChC4AKU90ytYoSIyBXB9iUAzttmGijXse3tNA4LJdiOWwmF--Xbifq0RxMqHExLQKezhuYth"
       >
         <div className={s.formCols}>
@@ -167,6 +160,8 @@ const AgencyForm = () => {
             />
           )}
         />
+
+        <div id="recaptcha_container" />
       </Form>
     </div>
   );
