@@ -114,7 +114,7 @@ export const Form = ({
 }) => {
   const execute = useRecaptcha({
     // must be v3 Recaptcha!
-    sitekey: '6LcU1dwUAAAAADe2gkTfPNlG3xoybrgx_ulxVbF3',
+    sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY,
     hideDefaultBadge: true,
   });
 
