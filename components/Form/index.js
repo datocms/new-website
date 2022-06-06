@@ -11,6 +11,7 @@ import cn from 'classnames';
 import { useToasts } from 'react-toast-notifications';
 import { useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
+import { useRecaptcha } from 'react-recaptcha-hook';
 
 export const Field = ({
   name,
@@ -111,15 +112,28 @@ export const Form = ({
   onSubmit,
   nativeSubmitForm,
 }) => {
+  const execute = useRecaptcha({
+    // must be v3 Recaptcha!
+    sitekey: '6LcU1dwUAAAAADe2gkTfPNlG3xoybrgx_ulxVbF3',
+    hideDefaultBadge: true,
+  });
+
   const methods = useForm({
     defaultValues,
   });
   const { handleSubmit, formState } = methods;
 
   const toastHelpers = useToasts();
+  const recaptchaInput = useRef(null);
 
   const defaultOnSubmit = async (values, event) => {
     event.preventDefault();
+
+    const token = await execute('form');
+
+    console.log(token);
+
+    recaptchaInput.current.value = token;
 
     if (onSubmit) {
       try {
@@ -152,6 +166,9 @@ export const Form = ({
         acceptCharset="utf-8"
       >
         {children}
+
+        <input type="hidden" name="g-recaptcha-response" ref={recaptchaInput} />
+
         <div className={s.submit}>
           <div className={s.agree}>
             By submitting you agree to our{' '}

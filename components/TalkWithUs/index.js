@@ -3,25 +3,12 @@ import Textarea from 'react-textarea-autosize';
 import { getData } from 'country-list';
 import { Form, Field } from 'components/Form';
 import { getCookie } from 'utils/cookies';
-import useScript from 'react-script-hook';
 
 export default function TalkWithUs({
   initialValues = {},
   contactFormType,
   issueType,
 }) {
-  useScript({
-    src: `https://www.google.com/recaptcha/api.js?render=explicit`,
-    onload: () =>
-      window.grecaptcha.ready(() => {
-        window.grecaptcha.render('recaptcha_container', {
-          // must be v2 Recaptcha!
-          sitekey: '6Lc7rEkgAAAAACOD_bMarSnDx3SVEYBKwWU4buVI',
-          size: 'invisible',
-        });
-      }),
-  });
-
   const defaultValues = {
     name: '',
     project: '',
@@ -230,8 +217,6 @@ export default function TalkWithUs({
         )}
 
         <Field name="issueType" type="hidden" />
-
-        <div id="recaptcha_container" />
       </Form>
     </div>
   );

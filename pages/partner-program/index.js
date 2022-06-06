@@ -16,21 +16,8 @@ import Space from 'components/Space';
 import InterstitialTitle from 'components/InterstitialTitle';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Link from 'next/link';
-import useScript from 'react-script-hook';
 
 const AgencyForm = () => {
-  useScript({
-    src: `https://www.google.com/recaptcha/api.js?render=explicit`,
-    onload: () =>
-      window.grecaptcha.ready(() => {
-        window.grecaptcha.render('recaptcha_container', {
-          // must be v2 Recaptcha!
-          sitekey: '6Lc7rEkgAAAAACOD_bMarSnDx3SVEYBKwWU4buVI',
-          size: 'invisible',
-        });
-      }),
-  });
-
   const defaultValues = {
     agencyName: '',
     agencyUrl: '',
@@ -160,8 +147,6 @@ const AgencyForm = () => {
             />
           )}
         />
-
-        <div id="recaptcha_container" />
       </Form>
     </div>
   );
