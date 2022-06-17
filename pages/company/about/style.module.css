@@ -1,9 +1,10 @@
 .members {
   display: grid;
   grid-gap: 30px;
+  grid-align: center;
 
   @media (width > 900px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto auto;
     grid-auto-rows: auto;
   }
@@ -90,18 +91,32 @@
   font-size: 14px;
   margin-left: -20px;
 
-  .chartLabelAnchorAmount {
+  .chartLabelAnchorAmountDesktop,
+  .chartLabelAnchorAmountMobile {
     color: var(--base-body-color);
     font-weight: bold;
     font-size: 1.4em;
   }
 
+  .chartLabelAnchorAmountMobile {
+    font-size: 1em;
+    display: none;
+  }
+
   @media screen and (width < 900px) {
-    .chartLabelAnchorAmount {
+    .chartLabels {
       font-size: 1em;
     }
 
     .chartLabelAnchorDate {
+      font-size: 0.8em;
+    }
+
+    .chartLabelAnchorAmountMobile {
+      display: block;
+    }
+
+    .chartLabelAnchorAmountDesktop {
       display: none;
     }
   }

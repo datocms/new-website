@@ -31,6 +31,51 @@ import { range } from 'range';
 import InterstitialTitle from 'components/InterstitialTitle';
 import regression from 'regression';
 import cn from 'classnames';
+import { useEffect, useState } from 'react';
+
+const si = [
+  { value: 1, symbol: '' },
+  { value: 1e3, symbol: 'k' },
+  { value: 1e6, symbol: 'M' },
+  { value: 1e9, symbol: 'G' },
+];
+
+export function useMediaQuery(query) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => {
+      setMatches(media.matches);
+    };
+
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, [matches, query]);
+
+  return matches;
+}
+
+function prettyNumber(num) {
+  const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+  let i;
+
+  for (i = si.length - 1; i > 0; i -= 1) {
+    if (num >= si[i].value) {
+      break;
+    }
+  }
+
+  let number = num / si[i].value;
+
+  return (
+    number.toFixed(number < 10 ? 2 : number < 99 ? 1 : 0).replace(rx, '$1') +
+    si[i].symbol
+  );
+}
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -67,6 +112,9 @@ export const getStaticProps = gqlStaticProps(
 const fetcher = (url) => wretch(url).get().json();
 
 const Chart = ({ data: rawData, children }) => {
+  const isDesktop = useMediaQuery('(min-width: 550px)');
+  const lineEvery = isDesktop ? 3 : 5;
+
   if (!rawData) {
     return null;
   }
@@ -139,7 +187,7 @@ const Chart = ({ data: rawData, children }) => {
           />
 
           {data.map((point, i) => {
-            const up = ((i + (data.length % 3)) / 3) % 2 === 0;
+            const up = ((i - data.length + 1) / lineEvery) % 2 === 0;
 
             const [x1, y1] = project(i, point.value);
             const [x2, y2] = project(
@@ -148,7 +196,7 @@ const Chart = ({ data: rawData, children }) => {
             );
 
             return (
-              (i + (data.length % 3)) % 3 === 0 && (
+              (i - data.length + 1) % lineEvery === 0 && (
                 <line x1={x1} x2={x2} y1={y1} y2={y2} />
               )
             );
@@ -170,7 +218,7 @@ const Chart = ({ data: rawData, children }) => {
 
         <div className={s.chartLabels}>
           {data.map((point, i) => {
-            const up = ((i + (data.length % 3)) / 3) % 2 === 0;
+            const up = ((i - data.length + 1) / lineEvery) % 2 === 0;
 
             const [x, y] = projectLabel(
               i,
@@ -178,7 +226,7 @@ const Chart = ({ data: rawData, children }) => {
             );
 
             return (
-              (i + (data.length % 3)) % 3 === 0 && (
+              (i - data.length + 1) % lineEvery === 0 && (
                 <div
                   className={s.chartLabelAnchor}
                   style={{
@@ -192,10 +240,14 @@ const Chart = ({ data: rawData, children }) => {
                     })}
                   >
                     <span className={s.chartLabelAnchorDate}>
-                      {format(point.date, 'MMM yyyy')}:<br />
+                      {format(point.date, 'MMM yyyy')}
+                      <br />
                     </span>
-                    <span className={s.chartLabelAnchorAmount}>
+                    <span className={s.chartLabelAnchorAmountDesktop}>
                       €{parseInt(point.value).toLocaleString()}
+                    </span>
+                    <span className={s.chartLabelAnchorAmountMobile}>
+                      €{prettyNumber(point.value)}
                     </span>
                   </div>
                 </div>
