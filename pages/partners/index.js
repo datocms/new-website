@@ -5,7 +5,7 @@ import Wrapper from 'components/Wrapper';
 import Space from 'components/Space';
 import { gqlStaticPropsWithSubscription } from 'lib/datocms';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuerySubscription } from 'react-datocms';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import s from './style.module.css';
@@ -14,9 +14,10 @@ import Head from 'components/Head';
 import classNames from 'classnames';
 import { Announce } from 'components/PluginToolkit';
 import PartnersMap from 'components/PartnersMap';
+import ReactSelect from 'react-select';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
-  `
+  /* GraphQL */ `
     {
       partnersPage {
         highlightedPartners {
@@ -27,7 +28,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         ...partner
       }
       projects: allShowcaseProjects {
-        partner { slug }
+        partner {
+          slug
+        }
       }
     }
 
@@ -40,10 +43,19 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       shortDescription {
         value
       }
+      areasOfExpertise {
+        name
+      }
+      technologies {
+        name
+      }
       locations {
         emoji
         name
         code
+        continent {
+          name
+        }
         coordinates {
           latitude
           longitude
@@ -57,6 +69,18 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
 );
 
 const styles = [s.azureLogo, s.pinkLogo, s.blueLogo, s.greenLogo, s.yellowLogo];
+
+const toOption = (entry) => ({
+  value: entry[0],
+  label: entry[0],
+});
+const byCount = (entryA, entryB) => {
+  if (entryA[1] != entryB[1]) {
+    return entryB[1] - entryA[1];
+  }
+
+  return entryA[0].localeCompare(entryB[0]);
+};
 
 export default function Partners({ subscription, preview }) {
   const {
@@ -79,6 +103,65 @@ export default function Partners({ subscription, preview }) {
       [(x) => -(countBySlug[x.slug] || 0), 'name'],
     ),
   ];
+
+  const [technologyFilter, setTechnologyFilter] = useState(null);
+  const [areaOfExpertiseFilter, setAreaOfExpertiseFilter] = useState(null);
+  const [countryFilter, setCountryFilter] = useState(null);
+  const [continentFilter, setContinentFilter] = useState(null);
+
+  const filtered = ordered.filter((p) => {
+    if (
+      technologyFilter &&
+      !p.technologies.some((t) => t.name === technologyFilter)
+    ) {
+      return false;
+    }
+    if (
+      areaOfExpertiseFilter &&
+      !p.areasOfExpertise.some((t) => t.name === areaOfExpertiseFilter)
+    ) {
+      return false;
+    }
+    if (
+      countryFilter &&
+      !p.locations.some((t) => `${t.emoji} ${t.name}` === countryFilter)
+    ) {
+      return false;
+    }
+    if (
+      continentFilter &&
+      !p.locations.some((t) => t.continent.name === continentFilter)
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
+  const allTechnologies = {};
+  const allAreaOfExpertise = {};
+  const allCountries = {};
+  const allContinents = {};
+
+  filtered.forEach((p) => {
+    p.technologies.forEach(
+      (t) => (allTechnologies[t.name] = (allTechnologies[t.name] || 0) + 1),
+    );
+    p.areasOfExpertise.forEach(
+      (t) =>
+        (allAreaOfExpertise[t.name] = (allAreaOfExpertise[t.name] || 0) + 1),
+    );
+    p.locations.forEach(
+      (t) =>
+        (allCountries[`${t.emoji} ${t.name}`] =
+          (allCountries[`${t.emoji} ${t.name}`] || 0) + 1),
+    );
+    p.locations.forEach(
+      (t) =>
+        (allContinents[t.continent.name] =
+          (allContinents[t.continent.name] || 0) + 1),
+    );
+  });
 
   return (
     <Layout preview={preview}>
@@ -111,10 +194,67 @@ export default function Partners({ subscription, preview }) {
           </Announce>
         </Space>
 
+        <div className={s.filterGrid}>
+          <div className={s.filterLabel}>Filter by Continent</div>
+          <div className={s.filterLabel}>Filter by Country</div>
+          <div className={s.filterLabel}>Filter by Technology</div>
+          <div className={s.filterLabel}>Filter by Area of expertise</div>
+
+          <ReactSelect
+            isClearable
+            formatOptionLabel={(option) =>
+              `${option.value} (${allContinents[option.value]})`
+            }
+            options={Object.entries(allContinents).sort(byCount).map(toOption)}
+            onChange={(option) => {
+              setContinentFilter(option ? option.value : null);
+            }}
+          />
+          <ReactSelect
+            isClearable
+            formatOptionLabel={(option) =>
+              `${option.value} (${allCountries[option.value]})`
+            }
+            options={Object.entries(allCountries).sort(byCount).map(toOption)}
+            onChange={(option) => {
+              setCountryFilter(option ? option.value : null);
+            }}
+          />
+
+          <ReactSelect
+            isClearable
+            formatOptionLabel={(option) =>
+              `${option.value} (${allTechnologies[option.value]})`
+            }
+            options={Object.entries(allTechnologies)
+              .sort(byCount)
+              .map(toOption)}
+            onChange={(option) => {
+              setTechnologyFilter(option ? option.value : null);
+            }}
+          />
+          <ReactSelect
+            isClearable
+            formatOptionLabel={(option) =>
+              `${option.value} (${allAreaOfExpertise[option.value]})`
+            }
+            options={Object.entries(allAreaOfExpertise)
+              .sort(byCount)
+              .map(toOption)}
+            onChange={(option) => {
+              setAreaOfExpertiseFilter(option ? option.value : null);
+            }}
+          />
+        </div>
         <div className={s.posts}>
-          {ordered.map((post, i) => (
+          {filtered.map((post, i) => (
             <Link href={`/partners/${post.slug}`} key={post.slug}>
-              <a className={s.post}>
+              <a
+                className={classNames(
+                  s.post,
+                  countBySlug[post.slug] && s.postWithShowcasedProjects,
+                )}
+              >
                 <div
                   className={classNames(s.postLogo, styles[i % styles.length])}
                 >
@@ -130,8 +270,13 @@ export default function Partners({ subscription, preview }) {
                   <div className={s.postDescription}>
                     {toPlainText(post.shortDescription)}
                   </div>
-                  <div className={s.postDescription}></div>
                 </div>
+                {countBySlug[post.slug] && (
+                  <div className={s.showcasedProjects}>
+                    {countBySlug[post.slug]} showcased project
+                    {countBySlug[post.slug] > 1 && <>s</>}
+                  </div>
+                )}
               </a>
             </Link>
           ))}

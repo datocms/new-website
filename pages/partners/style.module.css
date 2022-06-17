@@ -29,6 +29,10 @@
   }
 }
 
+.postWithShowcasedProjects {
+  padding-bottom: 35px;
+}
+
 .postLogo {
   padding: 40px rfs(70px);
   text-align: center;
@@ -80,4 +84,29 @@
 
 .yellowLogo {
   background: linear-gradient(45deg, #feffe9, white);
+}
+
+.showcasedProjects {
+  background: var(--highlight-bg-color);
+  padding: 3px 5px;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  border-radius: 4px;
+}
+
+.filterGrid {
+  display: grid;
+  grid-gap: 10px 30px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 100px;
+  margin-top: 80px;
+  font-size: 16px;
+}
+
+.filterLabel {
+  color: var(--light-body-color);
 }

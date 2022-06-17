@@ -46,7 +46,7 @@ export const getStaticPaths = gqlStaticPaths(
 export const getStaticProps = handleErrors(
   async ({ params: { partnerSlug }, preview }) => {
     const gqlRequest = {
-      query: `
+      query: /* GraphQL */ `
         query PartnerQuery($partnerSlug: String!) {
           partner(filter: { slug: { eq: $partnerSlug } }) {
             id
@@ -55,18 +55,35 @@ export const getStaticProps = handleErrors(
               ...seoMetaTagsFields
             }
             name
-            shortDescription { value }
-            logo { url }
-            description { value }
+            shortDescription {
+              value
+            }
+            logo {
+              url
+            }
+            description {
+              value
+            }
             publicContactEmail
             websiteUrl
-            areasOfExpertise { name slug }
+            areasOfExpertise {
+              name
+              slug
+            }
             technologies {
               name
               slug
             }
-            locations { name emoji continent { name } }
-            npmUser { id }
+            locations {
+              name
+              emoji
+              continent {
+                name
+              }
+            }
+            npmUser {
+              id
+            }
           }
         }
 

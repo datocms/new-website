@@ -1,7 +1,6 @@
 .members {
   display: grid;
   grid-gap: 30px;
-  grid-align: center;
 
   @media (width > 900px) {
     grid-template-columns: repeat(3, 1fr);
