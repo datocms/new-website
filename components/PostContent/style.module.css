@@ -90,6 +90,7 @@
     font-family: var(--font-mono);
     border-radius: 0.25em;
     font-size: 0.9em;
+    word-wrap: break-word;
   }
 
   pre,

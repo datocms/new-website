@@ -195,56 +195,67 @@ export default function Partners({ subscription, preview }) {
         </Space>
 
         <div className={s.filterGrid}>
-          <div className={s.filterLabel}>Filter by Continent</div>
-          <div className={s.filterLabel}>Filter by Country</div>
-          <div className={s.filterLabel}>Filter by Technology</div>
-          <div className={s.filterLabel}>Filter by Area of expertise</div>
+          <div className={s.filter}>
+            <div className={s.filterLabel}>Filter by Continent</div>
+            <ReactSelect
+              isClearable
+              formatOptionLabel={(option) =>
+                `${option.value} (${allContinents[option.value]})`
+              }
+              options={Object.entries(allContinents)
+                .sort(byCount)
+                .map(toOption)}
+              onChange={(option) => {
+                setContinentFilter(option ? option.value : null);
+              }}
+            />
+          </div>
+          <div className={s.filter}>
+            <div className={s.filterLabel}>Filter by Country</div>
 
-          <ReactSelect
-            isClearable
-            formatOptionLabel={(option) =>
-              `${option.value} (${allContinents[option.value]})`
-            }
-            options={Object.entries(allContinents).sort(byCount).map(toOption)}
-            onChange={(option) => {
-              setContinentFilter(option ? option.value : null);
-            }}
-          />
-          <ReactSelect
-            isClearable
-            formatOptionLabel={(option) =>
-              `${option.value} (${allCountries[option.value]})`
-            }
-            options={Object.entries(allCountries).sort(byCount).map(toOption)}
-            onChange={(option) => {
-              setCountryFilter(option ? option.value : null);
-            }}
-          />
+            <ReactSelect
+              isClearable
+              formatOptionLabel={(option) =>
+                `${option.value} (${allCountries[option.value]})`
+              }
+              options={Object.entries(allCountries).sort(byCount).map(toOption)}
+              onChange={(option) => {
+                setCountryFilter(option ? option.value : null);
+              }}
+            />
+          </div>
+          <div className={s.filter}>
+            <div className={s.filterLabel}>Filter by Technology</div>
 
-          <ReactSelect
-            isClearable
-            formatOptionLabel={(option) =>
-              `${option.value} (${allTechnologies[option.value]})`
-            }
-            options={Object.entries(allTechnologies)
-              .sort(byCount)
-              .map(toOption)}
-            onChange={(option) => {
-              setTechnologyFilter(option ? option.value : null);
-            }}
-          />
-          <ReactSelect
-            isClearable
-            formatOptionLabel={(option) =>
-              `${option.value} (${allAreaOfExpertise[option.value]})`
-            }
-            options={Object.entries(allAreaOfExpertise)
-              .sort(byCount)
-              .map(toOption)}
-            onChange={(option) => {
-              setAreaOfExpertiseFilter(option ? option.value : null);
-            }}
-          />
+            <ReactSelect
+              isClearable
+              formatOptionLabel={(option) =>
+                `${option.value} (${allTechnologies[option.value]})`
+              }
+              options={Object.entries(allTechnologies)
+                .sort(byCount)
+                .map(toOption)}
+              onChange={(option) => {
+                setTechnologyFilter(option ? option.value : null);
+              }}
+            />
+          </div>
+          <div className={s.filter}>
+            <div className={s.filterLabel}>Filter by Area of expertise</div>
+
+            <ReactSelect
+              isClearable
+              formatOptionLabel={(option) =>
+                `${option.value} (${allAreaOfExpertise[option.value]})`
+              }
+              options={Object.entries(allAreaOfExpertise)
+                .sort(byCount)
+                .map(toOption)}
+              onChange={(option) => {
+                setAreaOfExpertiseFilter(option ? option.value : null);
+              }}
+            />
+          </div>
         </div>
         <div className={s.posts}>
           {filtered.map((post, i) => (
