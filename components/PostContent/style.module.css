@@ -8,6 +8,7 @@
 
   a {
     color: inherit;
+    word-wrap: break-word;
 
     &:hover {
       color: var(--accent-color);
@@ -41,6 +42,7 @@
   ul,
   ol {
     margin: 0 0 rfs(40px);
+    word-wrap: break-word;
   }
 
   ul,
