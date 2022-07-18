@@ -18,7 +18,7 @@ import s from './style.module.css';
 import truncate from 'truncate';
 import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
 import { useDebounce } from 'use-debounce';
-import { useGenerateUrl } from 'utils/plugins';
+import { generateUrl } from 'utils/plugins';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -85,7 +85,6 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState(plugins);
 
-  const generateUrl = useGenerateUrl(router);
   const cache = useRef({});
 
   useEffect(() => {
@@ -94,7 +93,9 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
       debouncedSearchTerm
     ) {
       router.push(
-        generateUrl(`/marketplace/plugins/browse`, { s: debouncedSearchTerm }),
+        generateUrl(router, `/marketplace/plugins/browse`, {
+          s: debouncedSearchTerm,
+        }),
         null,
         { shallow: true },
       );
@@ -144,7 +145,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
       aborted = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchTerm, setIsLoading, setSearchResults, generateUrl]);
+  }, [debouncedSearchTerm, setIsLoading, setSearchResults, router.asPath]);
 
   return (
     <Layout preview={preview}>
@@ -183,6 +184,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                     key={post.packageName}
                     title={post.title}
                     href={generateUrl(
+                      router,
                       `/marketplace/plugins/i/${post.packageName}`,
                     )}
                     image={
@@ -209,6 +211,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                   key={post.packageName}
                   title={post.title}
                   href={generateUrl(
+                    router,
                     `/marketplace/plugins/i/${post.packageName}`,
                   )}
                   image={

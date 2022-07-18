@@ -6,7 +6,7 @@ import { renderMetaTags } from 'react-datocms';
 import s from './style.module.css';
 import { Image as DatoImage } from 'react-datocms';
 import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
-import { useGenerateUrl } from 'utils/plugins';
+import { generateUrl } from 'utils/plugins';
 import { useRouter } from 'next/router';
 import truncate from 'truncate';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
@@ -65,7 +65,6 @@ export const getStaticProps = gqlStaticProps(
 
 const Big = ({ title, plugins, browse }) => {
   const router = useRouter();
-  const generateUrl = useGenerateUrl(router);
 
   return (
     <div className={s.category}>
@@ -80,7 +79,10 @@ const Big = ({ title, plugins, browse }) => {
           <PluginBox
             key={post.packageName}
             title={post.title}
-            href={generateUrl(`/marketplace/plugins/i/${post.packageName}`)}
+            href={generateUrl(
+              router,
+              `/marketplace/plugins/i/${post.packageName}`,
+            )}
             image={
               post.coverImage && post.coverImage.responsiveImage ? (
                 <DatoImage
@@ -101,7 +103,6 @@ const Big = ({ title, plugins, browse }) => {
 
 const Section = ({ title, plugins, browse }) => {
   const router = useRouter();
-  const generateUrl = useGenerateUrl(router);
 
   return (
     <div className={s.category}>
@@ -115,7 +116,10 @@ const Section = ({ title, plugins, browse }) => {
         {plugins.map((item) => (
           <div className={s.boxContainer} key={item.packageName}>
             <PluginBox
-              href={generateUrl(`/marketplace/plugins/i/${item.packageName}`)}
+              href={generateUrl(
+                router,
+                `/marketplace/plugins/i/${item.packageName}`,
+              )}
               title={item.title}
               description={truncate(item.description, 55)}
               image={
@@ -138,7 +142,6 @@ const Section = ({ title, plugins, browse }) => {
 
 const Table = ({ title, plugins, browse }) => {
   const router = useRouter();
-  const generateUrl = useGenerateUrl(router);
 
   return (
     <div className={s.category}>
@@ -153,7 +156,10 @@ const Table = ({ title, plugins, browse }) => {
           <a
             className={s.tableCell}
             key={item.packageName}
-            href={generateUrl(`/marketplace/plugins/i/${item.packageName}`)}
+            href={generateUrl(
+              router,
+              `/marketplace/plugins/i/${item.packageName}`,
+            )}
           >
             <div className={s.tableCellInner}>
               <div className={s.tableCellImage}>
@@ -184,7 +190,6 @@ const Table = ({ title, plugins, browse }) => {
 
 export default function Page({ preview, pluginsPage, latest, popular, meta }) {
   const router = useRouter();
-  const generateUrl = useGenerateUrl(router);
 
   return (
     <Layout preview={preview}>
@@ -201,7 +206,7 @@ export default function Page({ preview, pluginsPage, latest, popular, meta }) {
         onSubmit={(e) => {
           e.preventDefault();
           router.push(
-            generateUrl(`/marketplace/plugins/browse`, {
+            generateUrl(router, `/marketplace/plugins/browse`, {
               s: document.getElementById('searchInput').value,
             }),
           );
