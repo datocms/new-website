@@ -79,10 +79,7 @@ const Big = ({ title, plugins, browse }) => {
           <PluginBox
             key={post.packageName}
             title={post.title}
-            href={generateUrl(
-              router,
-              `/marketplace/plugins/i/${post.packageName}`,
-            )}
+            href={generateUrl(`/marketplace/plugins/i/${post.packageName}`)}
             image={
               post.coverImage && post.coverImage.responsiveImage ? (
                 <DatoImage
@@ -116,10 +113,7 @@ const Section = ({ title, plugins, browse }) => {
         {plugins.map((item) => (
           <div className={s.boxContainer} key={item.packageName}>
             <PluginBox
-              href={generateUrl(
-                router,
-                `/marketplace/plugins/i/${item.packageName}`,
-              )}
+              href={generateUrl(`/marketplace/plugins/i/${item.packageName}`)}
               title={item.title}
               description={truncate(item.description, 55)}
               image={
@@ -156,10 +150,7 @@ const Table = ({ title, plugins, browse }) => {
           <a
             className={s.tableCell}
             key={item.packageName}
-            href={generateUrl(
-              router,
-              `/marketplace/plugins/i/${item.packageName}`,
-            )}
+            href={generateUrl(`/marketplace/plugins/i/${item.packageName}`)}
           >
             <div className={s.tableCellInner}>
               <div className={s.tableCellImage}>
@@ -206,7 +197,7 @@ export default function Page({ preview, pluginsPage, latest, popular, meta }) {
         onSubmit={(e) => {
           e.preventDefault();
           router.push(
-            generateUrl(router, `/marketplace/plugins/browse`, {
+            generateUrl(`/marketplace/plugins/browse`, {
               s: document.getElementById('searchInput').value,
             }),
           );

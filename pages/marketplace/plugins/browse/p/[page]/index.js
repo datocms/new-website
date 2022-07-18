@@ -93,7 +93,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
       debouncedSearchTerm
     ) {
       router.push(
-        generateUrl(router, `/marketplace/plugins/browse`, {
+        generateUrl(`/marketplace/plugins/browse`, {
           s: debouncedSearchTerm,
         }),
         null,
@@ -184,7 +184,6 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                     key={post.packageName}
                     title={post.title}
                     href={generateUrl(
-                      router,
                       `/marketplace/plugins/i/${post.packageName}`,
                     )}
                     image={
@@ -211,7 +210,6 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                   key={post.packageName}
                   title={post.title}
                   href={generateUrl(
-                    router,
                     `/marketplace/plugins/i/${post.packageName}`,
                   )}
                   image={

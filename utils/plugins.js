@@ -1,5 +1,7 @@
-export function generateUrl(router, url, additionalParams = {}) {
-  const params = new URLSearchParams(router.asPath.split('?')[1]);
+export function generateUrl(url, additionalParams = {}) {
+  const params = new URLSearchParams(
+    typeof document === 'undefined' ? undefined : document.location.search,
+  );
   Object.entries(additionalParams).forEach(([k, v]) => {
     params.set(k, v);
   });
