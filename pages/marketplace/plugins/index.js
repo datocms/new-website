@@ -146,34 +146,37 @@ const Table = ({ title, plugins, browse }) => {
         {browse}
       </div>
       <div className={s.table}>
-        {plugins.map((item, i) => (
-          <a
-            className={s.tableCell}
-            key={item.packageName}
-            href={generateUrl(`/marketplace/plugins/i/${item.packageName}`)}
-          >
-            <div className={s.tableCellInner}>
-              <div className={s.tableCellImage}>
-                {item.coverImage && item.coverImage.responsiveImage ? (
-                  <DatoImage
-                    className={s.image}
-                    data={item.coverImage.responsiveImage}
-                  />
-                ) : (
-                  <PluginImagePlacehoder hash={item.packageName} />
-                )}
-              </div>
-              <div className={s.tableCellBody}>
-                <div className={s.tableCellTitle}>
-                  {i + 1}. {item.title}
+        {plugins.map((item, i) => {
+          return (
+            <Link
+              href={generateUrl(`/marketplace/plugins/i/${item.packageName}`)}
+              key={item.packageName}
+            >
+              <a className={s.tableCell}>
+                <div className={s.tableCellInner}>
+                  <div className={s.tableCellImage}>
+                    {item.coverImage && item.coverImage.responsiveImage ? (
+                      <DatoImage
+                        className={s.image}
+                        data={item.coverImage.responsiveImage}
+                      />
+                    ) : (
+                      <PluginImagePlacehoder hash={item.packageName} />
+                    )}
+                  </div>
+                  <div className={s.tableCellBody}>
+                    <div className={s.tableCellTitle}>
+                      {i + 1}. {item.title}
+                    </div>
+                    <div className={s.tableCellDesc}>
+                      {truncate(item.description, 60)}
+                    </div>
+                  </div>
                 </div>
-                <div className={s.tableCellDesc}>
-                  {truncate(item.description, 60)}
-                </div>
-              </div>
-            </div>
-          </a>
-        ))}
+              </a>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
@@ -215,7 +218,7 @@ export default function Page({ preview, pluginsPage, latest, popular, meta }) {
         title="Most popular"
         plugins={popular}
         browse={
-          <Link href="/marketplace/plugins/browse">
+          <Link href={generateUrl(`/marketplace/plugins/browse`)}>
             <a className={s.browseAll}>
               View all ({meta.count}) <ArrowIcon />
             </a>
