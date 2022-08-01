@@ -181,7 +181,7 @@ function Homepage({ successStories, preview, page }) {
           <p>
             Your customers demand blazing-fast digital products, web standards
             are evolving at the speed of light, yet you rely on 15-years-old
-            solutions like Wordpress that force you to deliver heavy,
+            solutions like WordPress that force you to deliver heavy,
             low-quality user experiences.
           </p>
           <Bullets
