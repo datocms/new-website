@@ -153,8 +153,8 @@ export default function Pricing({
                   Developer
                 </div>
                 <div className={s.planDescription}>
-                  Perfect to test the platform in detail, and for individual
-                  developers working on personal sites.
+                  To test the platform in detail, and for developers working on
+                  hobby sites
                 </div>
 
                 <div className={s.planPriceContainer}>
@@ -191,11 +191,11 @@ export default function Pricing({
               <div className={s.plan}>
                 <Tier2 className={s.planImage} />
                 <div className={s.planName} style={{ color: '#ef6424' }}>
-                  Professional
+                  Professional/Scale
                 </div>
                 <div className={s.planDescription}>
-                  Everything you need — and more – if you&apos;re a small team
-                  building a digital project or two.
+                  Everything you need — and more – to build professional digital
+                  projects
                 </div>
 
                 <div className={s.planPriceContainer}>
@@ -230,6 +230,9 @@ export default function Pricing({
                     more if needed)
                   </Bullet>
                   <Bullet>
+                    Additional projects can be added for as low as €29/month
+                  </Bullet>
+                  <Bullet>
                     Expanded authoring roles to support most publishing
                     workflows
                   </Bullet>
@@ -245,8 +248,7 @@ export default function Pricing({
                   Enterprise
                 </div>
                 <div className={s.planDescription}>
-                  A complete solution to power any digital experience. Scale up
-                  from one team or business unit to your whole organization.
+                  Premium features, high-touch support and advanced compliance
                 </div>
 
                 <div className={s.planPriceContainer}>

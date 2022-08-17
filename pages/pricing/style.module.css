@@ -77,7 +77,7 @@
 .plan {
   text-align: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 40px 20px;
+  padding: 30px;
   border-radius: 10px;
   background: white;
 }
@@ -93,14 +93,14 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  font-size: rfs(28px);
+  font-size: rfs(25px);
   margin-bottom: 10px;
 }
 
 .planDescription {
   font-size: 0.9em;
   margin-bottom: 30px;
-  height: 85px;
+  color: var(--light-body-color);
 }
 
 .planPriceContainer {
