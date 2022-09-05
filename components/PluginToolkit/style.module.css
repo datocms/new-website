@@ -187,6 +187,7 @@
   margin-top: rfs(60px);
   border-radius: 4px;
   color: #444;
+  word-break: break-word;
 
   @media (width > 900px) {
     box-shadow: var(--box-shadow);
