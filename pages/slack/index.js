@@ -59,7 +59,7 @@ function Slack() {
 
   return (
     <Layout>
-      <Head>
+      <Head noIndex>
         <title>Join DatoCMS Slack channel</title>
       </Head>
       <Hero

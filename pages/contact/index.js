@@ -15,7 +15,7 @@ import Head from 'next/head';
 export default function Support() {
   return (
     <Layout noCta>
-      <Head>
+      <Head noIndex>
         <title>Contact our Sales team</title>
       </Head>
       <div className={s.root}>

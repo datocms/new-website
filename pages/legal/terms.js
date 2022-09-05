@@ -21,7 +21,7 @@ export async function getStaticProps() {
 export default function Terms({ body }) {
   return (
     <Layout>
-      <Head>
+      <Head noIndex>
         <title>Terms of Service</title>
       </Head>
       <Hero

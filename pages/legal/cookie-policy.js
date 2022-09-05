@@ -22,7 +22,7 @@ export async function getStaticProps() {
 export default function Gdpr({ body }) {
   return (
     <Layout>
-      <Head>
+      <Head noIndex>
         <title>Cookie Policy</title>
       </Head>
       <Hero

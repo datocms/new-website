@@ -99,7 +99,7 @@ export default function Support({ preview, topics }) {
 
   return (
     <Layout noCta preview={preview}>
-      <Head>
+      <Head noIndex>
         <title>Support page</title>
       </Head>
 

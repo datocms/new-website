@@ -23,7 +23,7 @@ export async function getStaticProps() {
 export default function Gdpr({ body }) {
   return (
     <Layout>
-      <Head>
+      <Head noIndex>
         <title>DatoCMS Security</title>
       </Head>
       <Hero
