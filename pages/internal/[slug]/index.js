@@ -73,6 +73,12 @@ function slugToReadable(slug) {
 
 export default function Sitemap({ routes, slug }) {
   const title = slug.replace('sitemap-', '').replace(/-|\//g, ' ');
+  const chunkSize = routes.length / 3;
+  let chunks = [];
+
+  for (let i = 0; i < routes.length; i += chunkSize) {
+    chunks = [...chunks, routes.slice(i, i + chunkSize)];
+  }
 
   return (
     <Layout preview={false}>
@@ -92,14 +98,20 @@ export default function Sitemap({ routes, slug }) {
         }
       />
       <Wrapper>
-        <div className={s.body} style={{ maxHeight: routes.length * 15 }}>
-          {routes.map((route) => {
-            const pageTitle = slugToReadable(route);
-
+        <div className={s.chunks}>
+          {chunks.map((chunk, index) => {
             return (
-              <a className={s.sitemapLink} href={route} key={route}>
-                {pageTitle}
-              </a>
+              <div className={s.chunk} key={`chunk_${index}`}>
+                {chunk.map((route) => {
+                  const pageTitle = slugToReadable(route);
+
+                  return (
+                    <a className={s.sitemapLink} href={route} key={route}>
+                      {pageTitle}
+                    </a>
+                  );
+                })}
+              </div>
             );
           })}
         </div>

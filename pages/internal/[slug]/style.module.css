@@ -1,16 +1,23 @@
-.body {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  > a {
-    width: 32%;
-    margin: 0 1rem 0.5rem 0;
+.chunks {
+  @media (width > 800px) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.chunk {
+  overflow: scroll;
+  word-break: keep-all;
+
+  @media (width > 800px) {
+    max-width: 30%;
+    overflow: none;
   }
 }
 
 .sitemapLink {
   display: block;
-  margin-bottom: 7px;
+  margin-bottom: 20px;
   display: block;
   color: inherit;
   font-size: 0.9em;
