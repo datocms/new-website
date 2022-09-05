@@ -1,16 +1,12 @@
 User-agent: Googlebot
 Disallow:/legal/
 Disallow:/contact
-Disallow:/customers/
-Disallow:/partners/
 Disallow:/slack
 Disallow:/support
 
 User-agent: *
 Disallow:/legal/
 Disallow:/contact
-Disallow:/customers/
-Disallow:/partners/
 Disallow:/slack
 Disallow:/support
 
