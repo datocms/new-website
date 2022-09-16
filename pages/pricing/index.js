@@ -92,6 +92,17 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
   };
 });
 
+function ReadMore() {
+  return (
+    <div className={s.planBullet}>
+      <div className={s.readMoreBulletIcon} />
+      <Link href="/pricing/compare" passHref>
+        <a>Read all the details &raquo;</a>
+      </Link>
+    </div>
+  );
+}
+
 function Bullet({ children }) {
   return (
     <div className={s.planBullet}>
@@ -185,6 +196,7 @@ export default function Pricing({
                     Two users per project (one admin + one editor)
                   </Bullet>
                   <Bullet>Community-based support</Bullet>
+                  <ReadMore />
                 </div>
               </div>
 
@@ -239,6 +251,7 @@ export default function Pricing({
                   <Bullet>
                     Technical support via email (Mon/Fri, response in 24h)
                   </Bullet>
+                  <ReadMore />
                 </div>
               </div>
 
@@ -287,6 +300,7 @@ export default function Pricing({
                     Options for single-tenant to support your most critical
                     business needs
                   </Bullet>
+                  <ReadMore />
                 </div>
               </div>
             </div>

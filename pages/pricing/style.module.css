@@ -142,6 +142,11 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  a {
+    text-decoration: underline;
+    color: inherit;
+  }
 }
 
 .planBulletIcon {
@@ -150,6 +155,12 @@
   svg {
     fill: var(--azure-color);
   }
+}
+
+.readMoreBulletIcon {
+  margin-right: 9px;
+  width: 1em;
+  height: 1em;
 }
 
 /* --------------------------------------------------- */
