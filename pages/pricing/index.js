@@ -94,7 +94,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
 
 function ReadMore() {
   return (
-    <div className={s.planBullet}>
+    <div className={cn(s.planBullet, s.readMore)}>
       <div className={s.readMoreBulletIcon} />
       <Link href="/pricing/compare" passHref>
         <a>Read all the details &raquo;</a>

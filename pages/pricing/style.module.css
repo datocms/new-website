@@ -146,7 +146,15 @@
   a {
     text-decoration: underline;
     color: inherit;
+
+    &:hover {
+      color: var(--azure-color);
+    }
   }
+}
+
+.readMore {
+  margin-top: 25px;
 }
 
 .planBulletIcon {
