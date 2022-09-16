@@ -1,4 +1,5 @@
 .next
+.vercel
 .env
 node_modules
 public/blog.xml
