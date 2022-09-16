@@ -213,7 +213,7 @@ export default function Plugin({ plugin, preview }) {
             {plugin.pluginType && (
               <Info title="Plugin type">{plugin.pluginType.name}</Info>
             )}
-            {plugin.fieldTypes && (
+            {plugin.fieldTypes.length > 0 && (
               <Info title="Compatible with fields">
                 {plugin.fieldTypes.map((f) => f.name).join(', ')}
               </Info>
