@@ -153,7 +153,7 @@ export default function Pricing({
                   <AnnouncementIcon />
                   <span>
                     <strong>Building lots of sites?</strong> Discover our{' '}
-                    <mark>Agency Parter Program</mark> &raquo;
+                    <mark>Agency Partner Program</mark> &raquo;
                   </span>
                 </a>
               </Link>
