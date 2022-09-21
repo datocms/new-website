@@ -27,7 +27,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       posts: allPartners(first: 100) {
         ...partner
       }
-      projects: allShowcaseProjects {
+      projects: allShowcaseProjects(first: 100) {
         partner {
           slug
         }
@@ -94,13 +94,15 @@ export default function Partners({ subscription, preview }) {
       : 1,
   }));
 
+  console.log(countBySlug);
+
   const highlightedSlugs = partnersPage.highlightedPartners.map((p) => p.slug);
 
   const ordered = [
     ...partnersPage.highlightedPartners,
     ...sortBy(
       posts.filter((p) => !highlightedSlugs.includes(p.slug)),
-      [(x) => -(countBySlug[x.slug] || 0), 'name'],
+      [(x) => -(countBySlug[x.slug] || 0), 'slug'],
     ),
   ];
 
