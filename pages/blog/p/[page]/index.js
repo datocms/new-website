@@ -58,6 +58,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
         coverImage {
           url(imgixParams: { w: 550 })
+          author
+          customData
           responsiveImage(imgixParams: { w: 550 }) {
             ...imageFields
           }
@@ -177,10 +179,22 @@ export default function Blog({ preview, subscription }) {
             <Link key={post.slug} href={`/blog/${post.slug}`}>
               <a className={s.post}>
                 {post.coverImage && post.coverImage.responsiveImage && (
-                  <DatoImage
-                    className={s.image}
-                    data={post.coverImage.responsiveImage}
-                  />
+                  <div className={s.coverImage}>
+                    <DatoImage
+                      className={s.image}
+                      data={post.coverImage.responsiveImage}
+                    />
+                    {post.coverImage.author &&
+                      post.coverImage.customData.unsplash_author_username && (
+                        <a
+                          className={s.coverImageAttribution}
+                          href={`https://unsplash.com/@${post.coverImage.customData.unsplash_author_username}?utm_source=datocms&utm_medium=referral`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Photo by {post.coverImage.author}
+                        </a>
+                      )}
+                  </div>
                 )}
                 {post.coverImage && !post.coverImage.responsiveImage && (
                   <img className={s.image} src={post.coverImage.url} />
