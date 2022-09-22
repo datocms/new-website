@@ -32,7 +32,7 @@ export const getStaticProps = gqlStaticProps(
         }
       }
 
-      meta: _allPluginsMeta {
+      meta: _allPluginsMeta(filter: { manuallyDeprecated: { eq: "false" } }) {
         count
       }
 
