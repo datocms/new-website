@@ -144,6 +144,14 @@ export default function Plugin({ plugin, preview }) {
     'projectDomain',
   );
 
+  const projectEnvironment = new URLSearchParams(asPath.split('?')[1]).get(
+    'projectEnvironment',
+  );
+
+  const url = `${
+    projectEnvironment ? `/environments/${projectEnvironment}` : ''
+  }/admin/plugins/install/${plugin.packageName}`;
+
   return (
     <Layout preview={preview}>
       <Head>{renderMetaTags(plugin.seo)}</Head>
@@ -230,8 +238,8 @@ export default function Plugin({ plugin, preview }) {
             as="a"
             href={
               projectDomain
-                ? `https://${projectDomain}/admin/plugins/install/${plugin.packageName}`
-                : `https://dashboard.datocms.com/projects/redirect-to-project?path=/admin/plugins/install/${plugin.packageName}`
+                ? `https://${projectDomain}${url}`
+                : `https://dashboard.datocms.com/projects/redirect-to-project?path=${url}`
             }
           >
             Install this plugin!
