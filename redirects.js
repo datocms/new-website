@@ -333,4 +333,8 @@ module.exports = [
     source: '/cms/gatsbyjs-cms',
     destination: '/cms/gatsby-cms',
   },
+  {
+    source: '/landing/jamstackconf-2022',
+    destination: '/',
+  },
 ];
