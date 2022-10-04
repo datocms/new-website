@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import s from './style.module.css';
 import { useRouter } from 'next/router';
 import NProgress from 'components/NProgress';

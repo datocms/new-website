@@ -7,13 +7,26 @@ const DatoHead = ({ seo, children, canonicalUrl, noIndex }) => {
   const pageUrl = `https://www.datocms.com${router.asPath.split('?')[0]}`;
 
   return (
-    <Head>
-      {seo && renderMetaTags(seo)}
-      {children}
-      <link rel="alternate" hrefLang="en" href={pageUrl} />
-      <link rel="canonical" href={canonicalUrl || pageUrl} />
-      {noIndex && <meta name="robots" content="noindex" />}
-    </Head>
+    <>
+      <Head>
+        <meta
+          property="og:image"
+          content="https://www.datocms-assets.com/205/1614353889-social.png?fit=max&amp;fm=jpg&amp;w=1200"
+          key="meta-og:image"
+        />
+        <meta
+          name="twitter:image"
+          key="meta-twitter:image"
+          content="https://www.datocms-assets.com/205/1614353889-social.png?fit=max&amp;fm=jpg&amp;w=1200"
+        />
+        <meta key="meta-twitter:card" name="twitter:card" content="summary" />
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="canonical" href={canonicalUrl || pageUrl} />
+        {noIndex && <meta name="robots" content="noindex" />}
+      </Head>
+      {seo && <Head>{renderMetaTags(seo)}</Head>}
+      {children && <Head>{children}</Head>}
+    </>
   );
 };
 

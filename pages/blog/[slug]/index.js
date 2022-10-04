@@ -218,8 +218,12 @@ export default function Article({ preview, subscription }) {
             content={new Date(post._firstPublishedAt).toISOString()}
           />
         )}
+        <meta
+          key="meta-twitter:card"
+          name="twitter:card"
+          content="summary_large_image"
+        />
       </Head>
-
       <InterstitialTitle
         seoAnalysis={post.yoastAnalysis}
         kicker={post.seoH1 || 'The DatoCMS Blog'}

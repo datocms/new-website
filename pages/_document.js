@@ -35,31 +35,6 @@ class MyDocument extends Document {
             title="DatoCMS Product Changelog"
             href="/product-changelog.xml"
           />
-          <meta
-            property="og:image"
-            content="https://www.datocms-assets.com/205/1614353889-social.png?fit=max&amp;fm=jpg&amp;w=1000"
-            key="meta-og:image"
-          />
-          <meta
-            property="og:image:width"
-            content="1450"
-            key="meta-og:image:width"
-          />
-          <meta
-            property="og:image:height"
-            content="1452"
-            key="meta-og:image:height"
-          />
-          <meta
-            name="twitter:image"
-            key="meta-twitter:image"
-            content="https://www.datocms-assets.com/205/1614353889-social.png?fit=max&amp;fm=jpg&amp;w=1000"
-          />
-          <meta
-            key="meta-twitter:card"
-            name="twitter:card"
-            content="summary_large_image"
-          />
         </Head>
         <body>
           <Main />

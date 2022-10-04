@@ -9,7 +9,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Shout from 'public/images/illustrations/marketers.svg';
 
 export default function Support() {

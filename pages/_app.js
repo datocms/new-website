@@ -8,7 +8,7 @@ import { ToastProvider } from 'react-toast-notifications';
 import { Provider, ErrorBoundary } from '@rollbar/react';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Highlight from 'components/Highlight';
 
 const rollbarConfig = {

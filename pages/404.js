@@ -1,7 +1,7 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import Head from 'next/head';
+import Head from 'components/Head';
 
 function Error() {
   return (

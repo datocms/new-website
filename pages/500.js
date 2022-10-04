@@ -1,6 +1,6 @@
 import Layout from 'components/Layout';
 import Hero from 'components/Hero';
-import Head from 'next/head';
+import Head from 'components/Head';
 import Highlight from 'components/Highlight';
 import Wrapper from 'components/Wrapper';
 

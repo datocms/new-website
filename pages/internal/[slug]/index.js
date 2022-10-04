@@ -2,7 +2,7 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
-import Head from 'next/head';
+import Head from 'components/Head';
 import s from './style.module.css';
 import {
   allStaticRoutes as staticRoutes,
