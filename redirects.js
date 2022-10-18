@@ -337,4 +337,8 @@ module.exports = [
     source: '/landing/jamstackconf-2022',
     destination: '/',
   },
+  {
+    source: '/landing/nextjsconf-2022',
+    destination: '/',
+  },
 ];
