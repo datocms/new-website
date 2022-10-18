@@ -1,22 +1,20 @@
 // this "routing" function knows how to convert a DatoCMS record
 // into its slug and canonical URL within the website
 
-const findPermalink = ({ item, itemType, locale }) => {
-  const localePrefix = locale === 'en' ? '' : `/${locale}`;
-
+const findPermalink = ({ item, itemType }) => {
   switch (itemType.attributes.api_key) {
     case 'blog_post':
-      return `${localePrefix}/blog/${item.attributes.slug}`;
+      return `/blog/${item.attributes.slug}`;
     case 'landing_page':
-      return `${localePrefix}/cms/${item.attributes.slug}`;
+      return `/cms/${item.attributes.slug}`;
     case 'changelog_entry':
-      return `${localePrefix}/product-updates/${item.attributes.slug}`;
+      return `/product-updates/${item.attributes.slug}`;
     case 'feature':
-      return `${localePrefix}/features/${item.attributes.slug}`;
+      return `/features/${item.attributes.slug}`;
     case 'team_page':
-      return `${localePrefix}/team/${item.attributes.slug}`;
+      return `/team/${item.attributes.slug}`;
     case 'template_demo':
-      return `${localePrefix}/marketplace/starters/${item.attributes.code}`;
+      return `/marketplace/starters/${item.attributes.code}`;
     default:
       return null;
   }
@@ -34,7 +32,7 @@ const handler = (req, res) => {
     return res.status(200).send('ok');
   }
 
-  const { item, itemType, sandboxEnvironmentId, locale, name } = req.body;
+  const { item, itemType, locale } = req.body;
 
   const permalink = findPermalink({
     item,
@@ -43,21 +41,21 @@ const handler = (req, res) => {
   });
 
   if (!permalink) {
-    return res.status(200).json({ urls: [] });
+    return res.status(200).json({ previewLinks: [] });
   }
 
-  const urls = [
+  const previewLinks = [
     {
-      label: `${name} (${locale})`,
+      label: `Published record`,
       url: `https://www.datocms.com/${permalink}`,
     },
     {
-      label: `Draft ${name} (${locale})`,
+      label: `Draft record`,
       url: `https://www.datocms.com/api/preview/start?slug=${permalink}`,
     },
   ];
 
-  return res.status(200).json({ urls });
+  return res.status(200).json({ previewLinks });
 };
 
 export default handler;
