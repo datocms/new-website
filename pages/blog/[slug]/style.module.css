@@ -24,25 +24,25 @@
 }
 
 .tocWrapper {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   width: 340px;
+
+  @media (min-width: 1900px) {
+    display: block;
+  }
 }
 
 .toc {
-  display: none;
   position: sticky;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
   padding: 40px 0 40px 40px;
   border-left: 10px solid #ff593d;
-
-  @media (min-width: 1900px) {
-    display: block;
-  }
 
   ul {
     list-style-type: none;
