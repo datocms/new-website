@@ -203,7 +203,7 @@ export default function Pricing({
               <div className={s.plan}>
                 <Tier2 className={s.planImage} />
                 <div className={s.planName} style={{ color: '#ef6424' }}>
-                  Professional/Scale
+                  Professional
                 </div>
                 <div className={s.planDescription}>
                   Everything you need — and more – to build professional digital
@@ -212,7 +212,7 @@ export default function Pricing({
 
                 <div className={s.planPriceContainer}>
                   <span className={s.planPricePerMonth}>Start at </span>
-                  <span className={s.planPrice}>€{formatNumber(99)}</span>
+                  <span className={s.planPrice}>€{formatNumber(149)}</span>
                   <span className={s.planPricePerMonth}>/month</span>
 
                   <span className={s.planYearlyPrice}>
