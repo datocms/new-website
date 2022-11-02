@@ -73,37 +73,13 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       }
 
       latestChangelogEntry: changelogEntry(
-        orderBy: [_firstPublishedAt_DESC, _createdAt_DESC]
+        orderBy: [_firstPublishedAt_DESC, _createdAt_DESC],
+        filter: {showInBlog: {eq: true}}
       ) {
         title
         slug
         _firstPublishedAt
         _createdAt
-        content {
-          value
-          blocks {
-            ... on InternalVideoRecord {
-              id
-              _modelApiKey
-              autoplay
-              thumbTimeSeconds
-              video {
-                title
-                width
-                height
-                video {
-                  duration
-                  streamingUrl
-                  thumbnailUrl
-                }
-              }
-            }
-            ... on ImageRecord {
-              id
-              _modelApiKey
-            }
-          }
-        }
         categories {
           name
           color {
