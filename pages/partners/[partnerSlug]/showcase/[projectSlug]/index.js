@@ -95,7 +95,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
         mainImage {
           responsiveImage(
-            imgixParams: { w: 1200, maxH: 1200, fit: crop }
+            imgixParams: { w: 1200 }
           ) {
             ...imageFields
           }
@@ -115,7 +115,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           title
           width
           responsiveImage(
-            imgixParams: { w: 900, maxH: 900, fit: crop }
+            imgixParams: { w: 900 }
           ) {
             ...imageFields
           }
@@ -128,7 +128,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           title
           width
           responsiveImage(
-            imgixParams: { w: 900, maxH: 900, fit: crop }
+            imgixParams: { w: 900 }
           ) {
             ...imageFields
           }
