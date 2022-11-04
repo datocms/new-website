@@ -15,6 +15,7 @@ import classNames from 'classnames';
 import { Announce } from 'components/PluginToolkit';
 import PartnersMap from 'components/PartnersMap';
 import ReactSelect from 'react-select';
+import { uniq } from 'lodash-es';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   /* GraphQL */ `
@@ -82,6 +83,40 @@ const byCount = (entryA, entryB) => {
   return entryA[0].localeCompare(entryB[0]);
 };
 
+function calculateCounters(agencies, continent, country) {
+  const allTechnologies = {};
+  const allAreaOfExpertise = {};
+  const allCountries = {};
+  const allContinents = {};
+
+  agencies.forEach((p) => {
+    p.technologies.forEach(
+      (t) => (allTechnologies[t.name] = (allTechnologies[t.name] || 0) + 1),
+    );
+    p.areasOfExpertise.forEach(
+      (t) =>
+        (allAreaOfExpertise[t.name] = (allAreaOfExpertise[t.name] || 0) + 1),
+    );
+    p.locations.forEach((t) => {
+      if (!continent || t.continent.name === continent)
+        allCountries[`${t.emoji} ${t.name}`] =
+          (allCountries[`${t.emoji} ${t.name}`] || 0) + 1;
+    });
+    uniq(p.locations.map((t) => t.continent.name)).forEach(
+      (continentName) =>
+        (allContinents[continentName] =
+          (allContinents[continentName] || 0) + 1),
+    );
+  });
+
+  return {
+    technologies: allTechnologies,
+    areaOfExpertise: allAreaOfExpertise,
+    countries: allCountries,
+    continents: allContinents,
+  };
+}
+
 export default function Partners({ subscription, preview }) {
   const {
     data: { posts, partnersPage, projects },
@@ -140,30 +175,32 @@ export default function Partners({ subscription, preview }) {
     return true;
   });
 
-  const allTechnologies = {};
-  const allAreaOfExpertise = {};
-  const allCountries = {};
-  const allContinents = {};
+  const filteredCounters = calculateCounters(filtered, continentFilter);
+  const noFilterCounters = calculateCounters(ordered, continentFilter);
 
-  filtered.forEach((p) => {
-    p.technologies.forEach(
-      (t) => (allTechnologies[t.name] = (allTechnologies[t.name] || 0) + 1),
-    );
-    p.areasOfExpertise.forEach(
-      (t) =>
-        (allAreaOfExpertise[t.name] = (allAreaOfExpertise[t.name] || 0) + 1),
-    );
-    p.locations.forEach(
-      (t) =>
-        (allCountries[`${t.emoji} ${t.name}`] =
-          (allCountries[`${t.emoji} ${t.name}`] || 0) + 1),
-    );
-    p.locations.forEach(
-      (t) =>
-        (allContinents[t.continent.name] =
-          (allContinents[t.continent.name] || 0) + 1),
-    );
-  });
+  const someFilters =
+    continentFilter ||
+    countryFilter ||
+    technologyFilter ||
+    areaOfExpertiseFilter;
+
+  const continentOptions = Object.entries(filteredCounters.continents)
+    .sort(byCount)
+    .map(toOption);
+
+  const countryOptions = Object.entries(filteredCounters.countries)
+    .sort(byCount)
+    .map(toOption);
+
+  const technologyOptions = Object.entries(filteredCounters.technologies)
+    .sort(byCount)
+    .map(toOption);
+
+  const areaOfExpertiseOptions = Object.entries(
+    filteredCounters.areaOfExpertise,
+  )
+    .sort(byCount)
+    .map(toOption);
 
   return (
     <Layout preview={preview}>
@@ -202,14 +239,18 @@ export default function Partners({ subscription, preview }) {
             <ReactSelect
               isClearable
               formatOptionLabel={(option) =>
-                `${option.value} (${allContinents[option.value]})`
+                `${option.value} (${noFilterCounters.continents[option.value]})`
               }
-              options={Object.entries(allContinents)
-                .sort(byCount)
-                .map(toOption)}
+              options={continentOptions}
               onChange={(option) => {
                 setContinentFilter(option ? option.value : null);
+                setCountryFilter(null);
               }}
+              value={
+                continentFilter
+                  ? continentOptions.filter((o) => o.value === continentFilter)
+                  : null
+              }
             />
           </div>
           <div className={s.filter}>
@@ -218,12 +259,17 @@ export default function Partners({ subscription, preview }) {
             <ReactSelect
               isClearable
               formatOptionLabel={(option) =>
-                `${option.value} (${allCountries[option.value]})`
+                `${option.value} (${noFilterCounters.countries[option.value]})`
               }
-              options={Object.entries(allCountries).sort(byCount).map(toOption)}
+              options={countryOptions}
               onChange={(option) => {
                 setCountryFilter(option ? option.value : null);
               }}
+              value={
+                countryFilter
+                  ? countryOptions.find((o) => o.value === countryFilter)
+                  : null
+              }
             />
           </div>
           <div className={s.filter}>
@@ -231,15 +277,16 @@ export default function Partners({ subscription, preview }) {
 
             <ReactSelect
               isClearable
-              formatOptionLabel={(option) =>
-                `${option.value} (${allTechnologies[option.value]})`
-              }
-              options={Object.entries(allTechnologies)
-                .sort(byCount)
-                .map(toOption)}
+              formatOptionLabel={(option) => option.value}
+              options={technologyOptions}
               onChange={(option) => {
                 setTechnologyFilter(option ? option.value : null);
               }}
+              value={
+                technologyFilter
+                  ? technologyOptions.find((o) => o.value === technologyFilter)
+                  : null
+              }
             />
           </div>
           <div className={s.filter}>
@@ -247,15 +294,18 @@ export default function Partners({ subscription, preview }) {
 
             <ReactSelect
               isClearable
-              formatOptionLabel={(option) =>
-                `${option.value} (${allAreaOfExpertise[option.value]})`
-              }
-              options={Object.entries(allAreaOfExpertise)
-                .sort(byCount)
-                .map(toOption)}
+              formatOptionLabel={(option) => option.value}
+              options={areaOfExpertiseOptions}
               onChange={(option) => {
                 setAreaOfExpertiseFilter(option ? option.value : null);
               }}
+              value={
+                areaOfExpertiseFilter
+                  ? areaOfExpertiseOptions.find(
+                      (o) => o.value === areaOfExpertiseFilter,
+                    )
+                  : null
+              }
             />
           </div>
         </div>
@@ -276,9 +326,15 @@ export default function Partners({ subscription, preview }) {
                 <div className={s.postBody}>
                   <div className={s.postTitle}>
                     {post.name}{' '}
-                    {post.locations.map((l) => (
+                    {post.locations.slice(0, 5).map((l) => (
                       <span key={l.emoji}>{l.emoji}</span>
                     ))}
+                    {post.locations.length > 5 && (
+                      <span className={s.moreLocations}>
+                        {' + '}
+                        {post.locations.length - 5} more
+                      </span>
+                    )}
                   </div>
                   <div className={s.postDescription}>
                     {toPlainText(post.shortDescription)}

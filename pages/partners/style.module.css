@@ -53,6 +53,12 @@
   margin-bottom: 10px;
 }
 
+.moreLocations {
+  color: var(--light-body-color);
+  font-weight: normal;
+  font-size: 14px;
+}
+
 .postDescription {
   font-size: 16px;
   color: var(--light-body-color);
