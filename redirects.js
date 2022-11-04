@@ -335,7 +335,7 @@ module.exports = [
   },
   {
     source: '/landing/jamstackconf-2022',
-    destination: '/',
+    destination: '/?ref=jamstackconf-2022',
   },
   {
     source: '/landing/nextjsconf-2022',
