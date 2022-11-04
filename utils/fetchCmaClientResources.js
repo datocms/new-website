@@ -1,6 +1,6 @@
 export default async function fetchCmaClientResources(jsonApiType, rel) {
   const response = await fetch(
-    `https://unpkg.com/@datocms/cma-client@latest/resources.json`,
+    `https://cdn.jsdelivr.net/npm/@datocms/cma-client@latest/resources.json`,
   );
   const resources = await response.json();
 
