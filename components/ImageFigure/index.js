@@ -12,6 +12,7 @@ export default function ImageFigure({ data, imageClassName, alt, title }) {
                 poster={`${data.url}?fm=jpg&fit=max&w=1500`}
                 autoPlay
                 loop
+                muted
                 style={{ width: `${data.width}px`, display: 'block' }}
               >
                 <source src={`${data.url}?fm=webm&w=1500`} type="video/webm" />
@@ -25,6 +26,7 @@ export default function ImageFigure({ data, imageClassName, alt, title }) {
             style={{ width: `${data.width}px` }}
             autoPlay
             loop
+            muted
           >
             <source src={`${data.url}?fm=webm&w=900`} type="video/webm" />
             <source src={`${data.url}?fm=mp4&w=900`} type="video/mp4" />

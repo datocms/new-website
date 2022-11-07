@@ -172,6 +172,7 @@ export default function Plugin({ plugin, preview }) {
               poster={`${plugin.previewImage.url}?fm=jpg&fit=max&w=850`}
               autoPlay
               loop
+              muted
               className={s.previewImage}
             >
               <source
