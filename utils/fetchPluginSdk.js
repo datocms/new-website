@@ -6,21 +6,23 @@ function findChildrenById(manifest, id) {
 }
 
 function findFirstTag(signature, tagName) {
-  if (!signature.comment || !signature.comment.tags) {
+  if (!signature.comment || !signature.comment.blockTags) {
     return null;
   }
 
-  const tagNode = signature.comment.tags.find((tag) => tag.tag === tagName);
+  const tagNode = signature.comment.blockTags.find(
+    (tag) => tag.tag === tagName,
+  );
 
   if (!tagNode) {
     return null;
   }
 
-  return tagNode.text;
+  return tagNode.content.map((chunk) => chunk.text).join('');
 }
 
 function findExample(signature) {
-  const example = findFirstTag(signature, 'example');
+  const example = findFirstTag(signature, '@example');
 
   if (!example) {
     return null;
@@ -54,7 +56,11 @@ function addFinalPeriod(text) {
 
 function findShortText(signature) {
   return (
-    (signature.comment && addFinalPeriod(signature.comment.shortText)) || null
+    (signature.comment &&
+      addFinalPeriod(
+        signature.comment.summary.map((chunk) => chunk.text).join(''),
+      )) ||
+    null
   );
 }
 
@@ -186,6 +192,12 @@ function buildCtx(manifest, definition) {
     };
   }
 
+  if (definition.type.type === 'reference') {
+    const innerDefinition = findChildrenById(manifest, definition.type.id);
+
+    return buildCtx(manifest, innerDefinition);
+  }
+
   throw new Error('fuck');
 }
 
@@ -199,8 +211,11 @@ export async function fetchPluginSdkHooks() {
 
   const hooks = connectParameters.type.declaration.children;
 
-  return hooks.map((hook) => {
-    const signature = hook.signatures[0];
+  const result = hooks.map((hook) => {
+    const signature = hook.signatures
+      ? hook.signatures[0]
+      : hook.type.declaration.signatures[0];
+
     const ctxParameter = signature.parameters.find((p) => p.name === 'ctx');
     const ctx = ctxParameter
       ? buildCtx(
@@ -210,11 +225,11 @@ export async function fetchPluginSdkHooks() {
       : null;
 
     return {
-      name: signature.name,
+      name: hook.name,
       description: findShortText(signature),
       example: findExample(signature),
       groups:
-        findFirstTag(signature, 'group')
+        findFirstTag(signature, '@tag')
           ?.trim()
           ?.split(/\s*,\s*/) || [],
       ctx,
@@ -222,4 +237,6 @@ export async function fetchPluginSdkHooks() {
       lineNumber: hook.sources[0].line,
     };
   });
+
+  return result;
 }
