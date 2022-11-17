@@ -140,39 +140,55 @@ export default function Hook({ hook }) {
           >
             Return value
           </Heading>
-          <p>
-            The function must return{' '}
-            {hook.returnType.isArray ? 'an array of objects' : 'an object'} with
-            the following structure:
-          </p>
-          <ExpandablePane label="structure">
-            <div className={s.propertyGroup}>
-              {hook.returnType.properties
-                .sort((a, b) => a.lineNumber - b.lineNumber)
-                .map((item) => (
-                  <div key={item.name} className={s.returnValue}>
-                    <div className={s.returnValueName}>
-                      <a
-                        href={`${baseUrl}#L${item.lineNumber}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {item.name}
-                        <GithubIcon />
-                      </a>{' '}
-                      {item.isOptional ? (
-                        <span className={s.optional}>Optional</span>
-                      ) : (
-                        <span className={s.required}>Required</span>
-                      )}
-                    </div>
-                    <div className={s.returnValueDescription}>
-                      <Markdown>{item.description}</Markdown>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </ExpandablePane>
+          {hook.returnType.properties ? (
+            <>
+              <p>
+                The function must return{' '}
+                {hook.returnType.isArray ? 'an array of objects' : 'an object'}{' '}
+                with the following structure:
+              </p>
+              <ExpandablePane label="structure">
+                <div className={s.propertyGroup}>
+                  {hook.returnType.properties
+                    .sort((a, b) => a.lineNumber - b.lineNumber)
+                    .map((item) => (
+                      <div key={item.name} className={s.returnValue}>
+                        <div className={s.returnValueName}>
+                          <a
+                            href={`${baseUrl}#L${item.lineNumber}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {item.name}
+                            <GithubIcon />
+                          </a>{' '}
+                          {item.isOptional ? (
+                            <span className={s.optional}>Optional</span>
+                          ) : (
+                            <span className={s.required}>Required</span>
+                          )}
+                        </div>
+                        <div className={s.returnValueDescription}>
+                          <Markdown>{item.description}</Markdown>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </ExpandablePane>
+            </>
+          ) : (
+            <>
+              <p>
+                The{' '}
+                {hook.returnType.isMaybePromise ? '(optionally async) ' : ' '}
+                function must return{' '}
+                {hook.returnType.isArray
+                  ? `an array of ${hook.returnType.type}`
+                  : `a ${hook.returnType.type}`}
+                .
+              </p>
+            </>
+          )}
         </>
       )}
       {hook.ctx && (

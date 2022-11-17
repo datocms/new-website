@@ -77,6 +77,13 @@ function findReturnType(manifest, signature, extraInfo = {}) {
     return null;
   }
 
+  if (signature.type === 'intrinsic' && signature.name === 'boolean') {
+    return {
+      type: 'boolean',
+      ...extraInfo,
+    };
+  }
+
   if (signature.type.type === 'array') {
     return findReturnType(manifest, signature.type.elementType, {
       isArray: true,
@@ -121,6 +128,16 @@ function findReturnType(manifest, signature, extraInfo = {}) {
         };
       }),
     };
+  }
+
+  if (
+    signature.type.type === 'reference' &&
+    signature.type.name === 'MaybePromise'
+  ) {
+    return findReturnType(manifest, signature.type.typeArguments[0], {
+      ...extraInfo,
+      isMaybePromise: true,
+    });
   }
 
   throw new Error('fuck');
