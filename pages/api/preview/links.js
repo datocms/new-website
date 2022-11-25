@@ -1,7 +1,9 @@
 // this "routing" function knows how to convert a DatoCMS record
 // into its slug and canonical URL within the website
 
-const findPermalink = ({ item, itemType }) => {
+import { request } from '../../../lib/datocms';
+
+const findPermalink = async ({ item, itemType }) => {
   switch (itemType.attributes.api_key) {
     case 'blog_post':
       return `/blog/${item.attributes.slug}`;
@@ -15,6 +17,28 @@ const findPermalink = ({ item, itemType }) => {
       return `/team/${item.attributes.slug}`;
     case 'template_demo':
       return `/marketplace/starters/${item.attributes.code}`;
+    case 'partner':
+      return `/partners/${item.attributes.slug}`;
+    case 'showcase_project': {
+      const {
+        data: {
+          showcaseProject: { partner },
+        },
+      } = await request({
+        query: `
+        query PartnerSlug($id: ItemId!) {
+          showcaseProject(filter: {id: {eq: $id}}) {
+            partner {
+              slug
+            }
+          }
+        }`,
+        variables: { id: item.id },
+        preview: true,
+      });
+
+      return `/partners/${partner.slug}/showcase/${item.attributes.slug}`;
+    }
     default:
       return null;
   }
@@ -46,11 +70,11 @@ const handler = (req, res) => {
 
   const previewLinks = [
     {
-      label: `Published record`,
+      label: 'Published record',
       url: `https://www.datocms.com/${permalink}`,
     },
     {
-      label: `Draft record`,
+      label: 'Draft record',
       url: `https://www.datocms.com/api/preview/start?slug=${permalink}`,
     },
   ];
