@@ -44,7 +44,7 @@ const findPermalink = async ({ item, itemType }) => {
   }
 };
 
-const handler = (req, res) => {
+const handler = async (req, res) => {
   // setup CORS permissions
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST');
@@ -58,7 +58,7 @@ const handler = (req, res) => {
 
   const { item, itemType, locale } = req.body;
 
-  const permalink = findPermalink({
+  const permalink = await findPermalink({
     item,
     itemType,
     locale,
