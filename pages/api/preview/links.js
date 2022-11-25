@@ -71,7 +71,7 @@ const handler = async (req, res) => {
   const previewLinks = [
     {
       label: 'Published record',
-      url: `https://www.datocms.com/${permalink}`,
+      url: `https://www.datocms.com${permalink}`,
     },
     {
       label: 'Draft record',
