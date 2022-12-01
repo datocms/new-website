@@ -215,6 +215,7 @@ export default function CloneButtonGenerator() {
                             <option value="string">String</option>
                             <option value="datocmsProjectUrl">
                               DatoCMS Backend URL
+                              (https://PROJECT.admin.datocms.com/)
                             </option>
                             <option value="datocmsAccessToken">
                               DatoCMS API token
