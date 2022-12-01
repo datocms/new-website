@@ -96,6 +96,18 @@
       color: var(--extra-light-body-color);
     }
   }
+
+  select {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    appearance: none;
+    box-shadow: none;
+    font-size: inherit;
+    padding: 3px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+  }
 }
 
 .field {

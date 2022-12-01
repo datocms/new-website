@@ -17,7 +17,12 @@ export default function CloneButtonGenerator() {
       deploymentType: 'copyRepo',
       environmentVariables: [
         {
+          environmentVariableName: 'DATOCMS_BACKEND_URL',
+          type: 'datocmsProjectUrl',
+        },
+        {
           environmentVariableName: 'DATOCMS_READ_ONLY_API_TOKEN',
+          type: 'datocmsAccessToken',
           apiTokenName: 'Read-only API token',
         },
       ],
@@ -36,8 +41,6 @@ export default function CloneButtonGenerator() {
 
   const deploymentType = formValues['deploymentType'];
 
-  console.log(formValues['environmentVariables']);
-
   const datocmsJson = {
     name: formValues['name'] || mandatory,
     description: formValues['description'] || mandatory,
@@ -49,10 +52,21 @@ export default function CloneButtonGenerator() {
       deploymentType !== 'copyRepo'
         ? formValues['environmentVariables'].reduce(
             (acc, entry) =>
-              entry.environmentVariableName && entry.apiTokenName
+              entry.environmentVariableName
                 ? {
                     ...acc,
-                    [entry.environmentVariableName]: entry.apiTokenName,
+                    [entry.environmentVariableName]:
+                      entry.type === 'datocmsAccessToken'
+                        ? {
+                            type: 'datocmsAccessToken',
+                            tokenName: entry.tokenName || mandatory,
+                          }
+                        : entry.type === 'datocmsProjectUrl'
+                        ? { type: 'datocmsProjectUrl' }
+                        : {
+                            type: 'string',
+                            value: entry.value,
+                          },
                   }
                 : acc,
             {},
@@ -169,56 +183,93 @@ export default function CloneButtonGenerator() {
           {deploymentType !== 'copyRepo' && (
             <>
               <div className={styleForm.group}>
-                <label>
-                  API Tokens exposed as environment variables on hosting
-                </label>
+                <label>Environment variables to be added on hosting</label>
                 <div className={styleForm.fieldArray}>
-                  {environmentVariableFields.map((field, index) => (
-                    <div key={field.id} className={styleForm.fieldArrayItem}>
-                      <div
-                        className={styleForm.fieldArrayItemField}
-                        style={{ flex: 2 }}
-                      >
-                        <input
-                          required
-                          type="text"
-                          {...register(
-                            `environmentVariables.${index}.environmentVariableName`,
-                          )}
-                          placeholder="ENV_NAME"
-                        />
+                  {environmentVariableFields.map((field, index) => {
+                    const type =
+                      formValues['environmentVariables'][index]['type'];
+
+                    return (
+                      <div key={field.id} className={styleForm.fieldArrayItem}>
+                        <div
+                          className={styleForm.fieldArrayItemField}
+                          style={{ width: '35%' }}
+                        >
+                          <input
+                            required
+                            type="text"
+                            {...register(
+                              `environmentVariables.${index}.environmentVariableName`,
+                            )}
+                            placeholder="ENV_NAME"
+                          />
+                        </div>
+                        <div
+                          className={styleForm.fieldArrayItemField}
+                          style={{ flex: 1 }}
+                        >
+                          <select
+                            {...register(`environmentVariables.${index}.type`)}
+                            required
+                          >
+                            <option value="string">String</option>
+                            <option value="datocmsProjectUrl">
+                              DatoCMS Backend URL
+                            </option>
+                            <option value="datocmsAccessToken">
+                              DatoCMS API token
+                            </option>
+                          </select>
+                        </div>
+                        {type === 'datocmsAccessToken' && (
+                          <div
+                            className={styleForm.fieldArrayItemField}
+                            style={{ width: '25%' }}
+                          >
+                            <input
+                              required
+                              type="text"
+                              {...register(
+                                `environmentVariables.${index}.tokenName`,
+                              )}
+                              placeholder="Read-only API token"
+                            />
+                          </div>
+                        )}
+                        {type === 'string' && (
+                          <div
+                            className={styleForm.fieldArrayItemField}
+                            style={{ width: '25%' }}
+                          >
+                            <input
+                              required
+                              type="text"
+                              {...register(
+                                `environmentVariables.${index}.value`,
+                              )}
+                              placeholder="Foo bar"
+                            />
+                          </div>
+                        )}
+                        <button
+                          className={styleForm.fieldArrayButton}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            removeEnvironmentVariable(index);
+                          }}
+                        >
+                          Remove
+                        </button>
                       </div>
-                      <div
-                        className={styleForm.fieldArrayItemField}
-                        style={{ flex: 1 }}
-                      >
-                        <input
-                          required
-                          type="text"
-                          {...register(
-                            `environmentVariables.${index}.apiTokenName`,
-                          )}
-                          placeholder="Read-only API token"
-                        />
-                      </div>
-                      <button
-                        className={styleForm.fieldArrayButton}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          removeEnvironmentVariable(index);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
+                    );
+                  })}
                   <button
                     className={styleForm.fieldArrayButton}
                     onClick={(e) => {
                       e.preventDefault();
                       addEnvironmentVariable({
                         environmentVariableName: '',
-                        apiTokenName: '',
+                        type: 'string',
                       });
                     }}
                   >
