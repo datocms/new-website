@@ -1,69 +1,93 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './style.module.css';
 import styleForm from 'components/Form/style.module.css';
 import Prism from 'components/Prism';
 import Tabs, { Tab } from 'components/Tabs';
 import Space from 'components/Space';
+import { useForm, useFieldArray } from 'react-hook-form';
 
 export default function CloneButtonGenerator() {
-  const [touched, setTouched] = React.useState(false);
+  const {
+    handleSubmit: submitFn,
+    register,
+    control,
+    watch,
+  } = useForm({
+    defaultValues: {
+      deploymentType: 'copyRepo',
+      environmentVariables: [
+        {
+          environmentVariableName: 'DATOCMS_READ_ONLY_API_TOKEN',
+          apiTokenName: 'Read-only API token',
+        },
+      ],
+    },
+  });
 
-  const [deployUrl, setDeployUrl] = React.useState(
-    'https://dashboard.datocms.com/deploy?repo=datocms/structured-text-demo:main',
-  );
+  const {
+    fields: environmentVariableFields,
+    append: addEnvironmentVariable,
+    remove: removeEnvironmentVariable,
+  } = useFieldArray({ control, name: 'environmentVariables' });
 
-  const [datocmsJson, setDatocmsJson] = React.useState({});
-  const formRef = React.useRef();
+  const formValues = watch();
 
-  const onFormChange = React.useCallback((event) => {
-    const form = event.target.form;
-    const formData = new FormData(form);
-    const json = {};
-    for (let [key, val, ...rest] of formData.entries()) {
-      if (val !== '') {
-        json[key] = val;
-      } else if (form.elements[key] && form.elements[key].required) {
-        json[key] = 'THIS FIELD IS MANDATORY. PLEASE PROVIDE A VALUE.';
-      }
-    }
-    if (json.deploymentType === 'copyRepo') {
-      delete json.datocmsApiTokenEnvName;
-      delete json.buildCommand;
-    }
-    setDatocmsJson(json);
-    setTouched(true);
-    setDeployUrl(
-      `https://dashboard.datocms.com/deploy?${new URLSearchParams({
-        repo: formData.get('repo') || 'YOUR-GITHUB-REPO',
-      }).toString()}`,
-    );
-  }, []);
+  const mandatory = 'THIS FIELD IS MANDATORY. PLEASE PROVIDE A VALUE!';
 
-  React.useEffect(() => {
-    if (formRef.current) {
-      onFormChange({ target: { form: formRef.current } });
-    }
-  }, [onFormChange]);
+  const deploymentType = formValues['deploymentType'];
+
+  console.log(formValues['environmentVariables']);
+
+  const datocmsJson = {
+    name: formValues['name'] || mandatory,
+    description: formValues['description'] || mandatory,
+    previewImage: formValues['previewImage'] || mandatory,
+    livePreviewUrl: formValues['livePreviewUrl'] || undefined,
+    datocmsProjectId: formValues['datocmsProjectId'] || mandatory,
+    deploymentType: formValues['deploymentType'] || mandatory,
+    environmentVariables:
+      deploymentType !== 'copyRepo'
+        ? formValues['environmentVariables'].reduce(
+            (acc, entry) =>
+              entry.environmentVariableName && entry.apiTokenName
+                ? {
+                    ...acc,
+                    [entry.environmentVariableName]: entry.apiTokenName,
+                  }
+                : acc,
+            {},
+          )
+        : undefined,
+    buildCommand:
+      deploymentType !== 'copyRepo'
+        ? formValues['buildCommand'] || mandatory
+        : undefined,
+    postInstallUrl:
+      deploymentType !== 'copyRepo'
+        ? formValues['postInstallUrl'] || undefined
+        : undefined,
+  };
+
+  const deployUrl = `https://dashboard.datocms.com/deploy?${new URLSearchParams(
+    {
+      repo: formValues['repo'] || 'YOUR-GITHUB-REPO',
+    },
+  ).toString()}`;
+
+  function handleSubmit() {}
 
   return (
     <div>
       <Space top={1} bottom={1}>
-        <form
-          action="#"
-          method="GET"
-          onChange={onFormChange}
-          ref={formRef}
-          className={style.form}
-        >
+        <form onSubmit={submitFn(handleSubmit)} className={style.form}>
           <div className={styleForm.field}>
-            <label htmlFor="dbg-name">Starter name</label>
+            <label htmlFor="dbg-name">Project starter name</label>
             <input
               required
               type="text"
-              name="name"
+              {...register('name')}
               placeholder="Project Template Name"
               id="dbg-name"
-              className={touched ? style.formField : undefined}
             />
           </div>
           <div className={styleForm.field}>
@@ -71,10 +95,9 @@ export default function CloneButtonGenerator() {
             <input
               required
               type="text"
-              name="description"
+              {...register('description')}
               placeholder="Insert a short description for the project starter"
               id="dbg-description"
-              className={touched ? style.formField : undefined}
             />
           </div>
           <div className={styleForm.field}>
@@ -84,10 +107,9 @@ export default function CloneButtonGenerator() {
             <input
               required
               type="url"
-              name="previewImage"
+              {...register('previewImage')}
               placeholder="https://acme.com/preview.png"
               id="dbg-previewImage"
-              className={touched ? style.formField : undefined}
             />
           </div>
           <div className={styleForm.field}>
@@ -96,10 +118,9 @@ export default function CloneButtonGenerator() {
             </label>
             <input
               type="url"
-              name="livePreviewUrl"
+              {...register('livePreviewUrl')}
               placeholder="https://my-project-starter.netlify.app/"
               id="dbg-livePreviewUrl"
-              className={touched ? style.formField : undefined}
             />
           </div>
           <div className={styleForm.field}>
@@ -108,34 +129,30 @@ export default function CloneButtonGenerator() {
             </label>
             <input
               type="text"
-              name="repo"
+              {...register('repo')}
               placeholder="orgName/repoName:branchName"
               id="dbg-repo"
               pattern="[^/]+\/[^:]+:.*"
               required
-              className={style.formField}
             />
           </div>
           <div className={styleForm.field}>
-            <label htmlFor="dbg-datocmsProjectId">DatoCMS Project ID</label>
+            <label htmlFor="dbg-datocmsProjectId">
+              DatoCMS Project ID that will be duplicated
+            </label>
             <input
               required
               type="number"
-              name="datocmsProjectId"
+              {...register('datocmsProjectId')}
               placeholder="54321"
               id="dbg-datocmsProjectId"
-              className={touched ? style.formField : undefined}
             />
           </div>
           <div className={styleForm.field}>
             <label htmlFor="dbg-deploymentType">
               How the project can be built and deployed?
             </label>
-            <select
-              name="deploymentType"
-              required
-              className={touched ? style.formField : undefined}
-            >
+            <select {...register('deploymentType')} required>
               <option value="copyRepo">
                 Simply make a copy of the template repository
               </option>
@@ -149,30 +166,85 @@ export default function CloneButtonGenerator() {
               <option value="heroku">It can be deployed only to Heroku</option>
             </select>
           </div>
-          {datocmsJson.deploymentType !== 'copyRepo' && (
+          {deploymentType !== 'copyRepo' && (
             <>
-              <div className={styleForm.field}>
-                <label htmlFor="dbg-datocmsApiTokenEnvName">
-                  Name of the env variable for the read-only DatoCMS API token
+              <div className={styleForm.group}>
+                <label>
+                  API Tokens exposed as environment variables on hosting
                 </label>
-                <input
-                  required
-                  type="text"
-                  name="datocmsApiTokenEnvName"
-                  placeholder="DATOCMS_READ_ONLY_API_TOKEN"
-                  id="dbg-datocmsApiTokenEnvName"
-                  className={touched ? style.formField : undefined}
-                />
+                <div className={styleForm.fieldArray}>
+                  {environmentVariableFields.map((field, index) => (
+                    <div key={field.id} className={styleForm.fieldArrayItem}>
+                      <div
+                        className={styleForm.fieldArrayItemField}
+                        style={{ flex: 2 }}
+                      >
+                        <input
+                          required
+                          type="text"
+                          {...register(
+                            `environmentVariables.${index}.environmentVariableName`,
+                          )}
+                          placeholder="ENV_NAME"
+                        />
+                      </div>
+                      <div
+                        className={styleForm.fieldArrayItemField}
+                        style={{ flex: 1 }}
+                      >
+                        <input
+                          required
+                          type="text"
+                          {...register(
+                            `environmentVariables.${index}.apiTokenName`,
+                          )}
+                          placeholder="Read-only API token"
+                        />
+                      </div>
+                      <button
+                        className={styleForm.fieldArrayButton}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          removeEnvironmentVariable(index);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    className={styleForm.fieldArrayButton}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      addEnvironmentVariable({
+                        environmentVariableName: '',
+                        apiTokenName: '',
+                      });
+                    }}
+                  >
+                    Add environment variable
+                  </button>
+                </div>
               </div>
               <div className={styleForm.field}>
                 <label htmlFor="dbg-buildCommand">Build Command</label>
                 <input
                   required
                   type="text"
-                  name="buildCommand"
+                  {...register('buildCommand')}
                   placeholder="npm run build"
                   id="dbg-buildCommand"
-                  className={touched ? style.formField : undefined}
+                />
+              </div>
+              <div className={styleForm.field}>
+                <label htmlFor="dbg-postInstallUrl">
+                  Post-deploy install URL
+                </label>
+                <input
+                  type="text"
+                  {...register('postInstallUrl')}
+                  placeholder="/api/post-install"
+                  id="dbg-postInstallUrl"
                 />
               </div>
             </>

@@ -1,9 +1,110 @@
-.field {
+.field,
+.group {
   position: relative;
   border-bottom: 1px solid var(--border-color);
   background: white;
   --paddingTop: 50px;
 
+  label,
+  .error {
+    line-height: 1;
+    display: block;
+  }
+
+  label {
+    color: var(--light-body-color);
+    font-weight: bold;
+    font-size: 15px;
+    padding-right: 80px;
+    pointer-events: none;
+  }
+
+  .error {
+    font-size: 12px;
+    right: 29px;
+    left: auto;
+    text-align: right;
+    background: var(--accent-color);
+    padding: 3px 5px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+  }
+
+  &:hover .error {
+    opacity: 0.3;
+  }
+}
+
+.group {
+  padding: 25px;
+
+  label {
+    padding-bottom: 15px;
+  }
+}
+
+.fieldArray {
+  .fieldArrayItem {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .fieldArrayItemField {
+    margin-right: 20px;
+  }
+
+  .fieldArrayButton {
+    background: var(--light-bg-color);
+    color: inherit;
+    display: inline-block;
+    padding: 0.4em 0.5em;
+    font-weight: bold;
+    font-family: var(--font-sans);
+    border-radius: 3px;
+    border: 1px solid var(--light-bg-color);
+    font-size: 15px;
+    transition: opacity 150ms ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  input {
+    border: 0;
+    margin: 0;
+    padding: 5px 0;
+    background-color: white;
+    font-size: 17px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    appearance: none;
+    box-shadow: none;
+    border-bottom: 1px solid var(--border-color);
+
+    &:focus {
+      outline: none;
+      border-bottom-color: var(--azure-color);
+    }
+
+    &::placeholder {
+      color: var(--extra-light-body-color);
+    }
+  }
+}
+
+.field {
+  label,
+  .error {
+    position: absolute;
+    top: 25px;
+    left: 33px;
+  }
   .selectPlaceholder {
     position: absolute;
     top: var(--paddingTop);
@@ -44,38 +145,6 @@
   textarea {
     min-height: 150px;
     max-height: 300px;
-  }
-
-  label,
-  .error {
-    position: absolute;
-    top: 25px;
-    left: 33px;
-    line-height: 1;
-  }
-
-  label {
-    color: var(--light-body-color);
-    font-weight: bold;
-    font-size: 15px;
-    padding-right: 80px;
-    pointer-events: none;
-  }
-
-  .error {
-    font-size: 12px;
-    right: 29px;
-    left: auto;
-    text-align: right;
-    background: var(--accent-color);
-    padding: 3px 5px;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-  }
-
-  &:hover .error {
-    opacity: 0.3;
   }
 }
 
