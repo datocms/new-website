@@ -123,14 +123,14 @@ const Chart = ({ data: rawData, children }) => {
   const height = 350;
 
   const data = rawData.map((point) => ({
-    value: (point.value + 25000.0) * 12,
+    value: (point.value + 18000.0) * 12,
     date: parseISO(point.date),
   }));
 
   const coefficients = regression
     .polynomial(
       data.map((point, i) => [i, point.value]),
-      { order: 2, precision: 10 },
+      { order: 3, precision: 5 },
     )
     .equation.reverse();
 
