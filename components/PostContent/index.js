@@ -9,6 +9,7 @@ import { Image as DatoImage, StructuredText, renderRule } from 'react-datocms';
 import UiChrome from 'components/UiChrome';
 import PluginBox from 'components/PluginBox';
 import Button from 'components/Button';
+import truncate from 'truncate';
 import CloneButtonGenerator from 'components/CloneButtonGenerator';
 import DeployButtonGenerator from 'components/DeployButtonGenerator';
 import cn from 'classnames';
@@ -20,6 +21,7 @@ import queryString from 'qs';
 import Corona from 'public/images/illustrations/live-4.svg';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import CodeSandboxIcon from 'public/icons/brands/codesandbox.svg';
+import partnerStyles from '/pages/partners/[partnerSlug]/style.module.css';
 
 function renderBlock(s, block, defaultAltForImages) {
   switch (block._modelApiKey) {
@@ -77,6 +79,48 @@ function renderBlock(s, block, defaultAltForImages) {
         </div>
       );
 
+    case 'showcase_project_block':
+      return (
+        <div className={s.unwrap}>
+          <div
+            className={s.pluginBoxes}
+            style={{
+              justifyContent:
+                block.showcaseProjects.length === 1 ? 'center' : undefined,
+            }}
+          >
+            {block.showcaseProjects.map((project) => (
+              <div key={project.slug} className={s.pluginBoxContainer}>
+                <PluginBox
+                  title={project.name}
+                  key={project.slug}
+                  href={`/partners/${project.partner.slug}/showcase/${project.slug}`}
+                  description={
+                    <div className={partnerStyles.demoDesc}>
+                      <div className={partnerStyles.demoDescBody}>
+                        {truncate(toPlainText(project.headline), 120)}
+                      </div>
+                      <div className={partnerStyles.demoDescImage}>
+                        <LazyImage
+                          className={partnerStyles.techLogo}
+                          src={project.partner.logo.url}
+                        />
+                      </div>
+                    </div>
+                  }
+                  image={
+                    <DatoImage
+                      className={partnerStyles.boxImageImage}
+                      data={project.mainImage.responsiveImage}
+                    />
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
     case 'demo':
       return (
         <div className={s.unwrap}>
@@ -121,7 +165,12 @@ function renderBlock(s, block, defaultAltForImages) {
     case 'multiple_demos_block':
       return (
         <div className={s.unwrap}>
-          <div className={s.pluginBoxes}>
+          <div
+            className={s.pluginBoxes}
+            style={{
+              justifyContent: block.demos.length === 1 ? 'center' : undefined,
+            }}
+          >
             {block.demos.map((item) => (
               <div key={item.name} className={s.pluginBoxContainer}>
                 <PluginBox
@@ -144,7 +193,13 @@ function renderBlock(s, block, defaultAltForImages) {
     case 'tutorial_video':
       return (
         <div className={s.unwrap}>
-          <div className={s.pluginBoxes}>
+          <div
+            className={s.pluginBoxes}
+            style={{
+              justifyContent:
+                block.tutorials.length === 1 ? 'center' : undefined,
+            }}
+          >
             {block.tutorials.map((tutorial) => (
               <div key={tutorial.title} className={s.pluginBoxContainer}>
                 {tutorial.res[0]._modelApiKey === 'youtube_video_resource' ? (

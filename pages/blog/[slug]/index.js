@@ -59,6 +59,63 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             }
           }
           blocks {
+            ... on TutorialVideoRecord {
+              id
+              _modelApiKey
+              tutorials {
+                id
+                title
+                res: videoTutorialResource {
+                  ... on OtherVideoResourceRecord {
+                    _modelApiKey
+                    url
+                    coverImage {
+                      responsiveImage(imgixParams: { w: 300, ar: "4:3", fit: crop }) {
+                        ...imageFields
+                      }
+                    }
+                  }
+                  ... on YoutubeVideoResourceRecord {
+                    _modelApiKey
+                    video {
+                      url
+                      thumbnailUrl
+                      providerUid
+                    }
+                  }
+                }
+              }
+            }
+            ... on ShowcaseProjectBlockRecord {
+              id
+              _modelApiKey
+              showcaseProjects {
+                partner {
+                  name
+                  slug
+                  logo { url }
+                  shortDescription { value }
+                }
+                headline { value }
+                technologies {
+                  name
+                  logo {
+                    url
+                  }
+                }
+                name
+                slug
+                projectUrl
+                mainImage {
+                  responsiveImage(
+                    imgixParams: { w: 350 },
+                    sizes: "350px"
+                  ) {
+                    ...imageFields
+                  }
+                }
+              }
+            }
             ... on ImageRecord {
               id
               _modelApiKey

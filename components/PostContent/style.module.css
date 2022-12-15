@@ -275,22 +275,32 @@
 
 .pluginBoxes {
   display: flex;
-  padding: 40px 0 40px var(--page-margin);
+  padding-top: rfs(30px);
+  padding-bottom: rfs(80px);
+  padding-left: var(--page-margin);
+  padding-right: 0;
   max-width: var(--page-width-with-margin);
   margin-left: calc(var(--page-margin) * -1);
   margin-right: calc(var(--page-margin) * -1);
   align-items: stretch;
-  justify-content: center;
+  color: var(--base-body-color);
+  overflow-x: auto;
   font-family: var(--font-sans);
+  font-size: rfs(18px);
+  align-items: stretch;
+
+  img {
+    border-radius: 0;
+    display: block;
+    box-shadow: none;
+  }
 }
 
 .pluginBoxContainer {
   padding-right: 30px;
   display: flex;
   align-items: stretch;
-  flex-shrink: 0;
-  flex: 1;
-  max-width: 400px;
+  min-width: 350px;
 
   &:last-child {
     padding-right: var(--page-margin);
