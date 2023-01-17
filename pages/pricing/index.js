@@ -41,7 +41,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
     body: { data: datoPlans },
   } = await tiny.get({
-    url: `https://account-api.datocms.com/account-plans`,
+    url: `https://account-api.datocms.com/per-owner-pricing-plans`,
     headers: { accept: 'application/json' },
   });
 

@@ -129,8 +129,6 @@ export default function Partners({ subscription, preview }) {
       : 1,
   }));
 
-  console.log(countBySlug);
-
   const highlightedSlugs = partnersPage.highlightedPartners.map((p) => p.slug);
 
   const ordered = [

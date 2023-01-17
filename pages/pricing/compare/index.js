@@ -27,7 +27,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
     body: { data: datoPlans },
   } = await tiny.get({
-    url: `https://account-api.datocms.com/account-plans`,
+    url: `https://account-api.datocms.com/per-owner-pricing-plans`,
     headers: { accept: 'application/json' },
   });
 
@@ -77,8 +77,6 @@ export default function ComparePricing({ hints, plans, preview }) {
         ? 'per_site_quota_managed_site_resource'
         : limit.type,
   );
-
-  console.log(Object.keys(limitsByGroup));
 
   return (
     <Layout preview={preview}>
