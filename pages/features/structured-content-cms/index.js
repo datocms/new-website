@@ -85,8 +85,7 @@ function StructuredText({ feature, preview, integrations, review }) {
         kicker={feature.seoH1}
         title={
           <>
-            The smart way to store{' '}
-            <Highlight>rich&#8209;text content</Highlight>
+            The smart way to store <Highlight>rich–text content</Highlight>
           </>
         }
         subtitle={
