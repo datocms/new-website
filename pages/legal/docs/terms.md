@@ -142,7 +142,7 @@ Service plus the following specific terms:
    and maintenance set by the services of such third parties and cannot be held responsible for
    every sort of issues or consequences directly or indirectly attributable to such third parties.
    For a list of the third-party services in use, please consult the following
-   [link](https://www.datocms.com/legal/security).
+   [link](https://www.datocms.com/security).
 
 ### 4. Restrictions to the use of DatoCMS
 
@@ -228,7 +228,7 @@ credit card or bank transfer. Bank transfers are only accepted for yearly paymen
 6.2. All communications relating to payments are made on a specific line offered by a third party
 chosen by the Supplier and protected by an encryption system. The Supplier makes available the
 list of the third party services used for the payment and for the maintenance of the services at
-the following address: https://www.datocms.com/legal/security/
+the following address: https://www.datocms.com/security/
 The Supplier chooses third parties that guarantee the utmost compliance with the provisions of
 current legislation on the protection of personal data.
 
@@ -306,7 +306,7 @@ end users, if you have any. You acknowledge and agree that DATO SRL has no oblig
 to provide support or technical assistance directly to your end users and you shall not
 represent to any of your end users that DATO SRL is available to provide such support.
 DATO SRL will keep the system and server
-[active and available](https://www.datocms.com/legal/security)
+[active and available](https://www.datocms.com/security)
 without any right on your side to have personalized support, unless you have a separate
 agreement with us or you have purchased a billing plan that includes additional support.
 You can communicate with us anytime using our customer service address support@datocms.com.

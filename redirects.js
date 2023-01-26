@@ -115,7 +115,7 @@ module.exports = [
   },
   {
     source: '/docs/security',
-    destination: '/legal/security',
+    destination: '/security',
   },
   {
     source: '/docs/guides/private-videos',
@@ -242,10 +242,6 @@ module.exports = [
     destination: '/marketplace/hosting/vercel',
   },
   {
-    source: '/security',
-    destination: '/legal/security',
-  },
-  {
     source: '/cms/react',
     destination: '/cms/react-cms',
   },
@@ -340,5 +336,9 @@ module.exports = [
   {
     source: '/landing/nextjsconf-2022',
     destination: '/',
+  },
+  {
+    source: '/legal/security',
+    destination: '/security',
   },
 ];
