@@ -10,6 +10,8 @@ import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Head from 'components/Head';
 import Highlight from 'components/Highlight';
+import Script from 'next/script';
+import TagManager from 'react-gtm-module';
 
 const rollbarConfig = {
   accessToken: process.env.NEXT_PUBLIC_ROLLBAR_TOKEN,
@@ -22,6 +24,7 @@ const ErrorDisplay = ({ error, resetError }) => (
     <Head>
       <title>Website error</title>
     </Head>
+
     <Hero
       kicker="Website error"
       title={
@@ -40,6 +43,12 @@ const ErrorDisplay = ({ error, resetError }) => (
 
 function App({ Component, pageProps }) {
   const router = useRouter();
+
+  useEffect(() => {
+    TagManager.initialize({
+      gtmId: 'GTM-TJRM9NT',
+    });
+  }, []);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
