@@ -241,7 +241,7 @@
   th {
     font-weight: normal;
     border-bottom: 1px solid var(--border-color);
-    padding: 10px 20px;
+    padding: 10px 15px;
     text-align: left;
     font-size: 0.8em;
     color: var(--light-body-color);
@@ -250,7 +250,7 @@
   td {
     font-weight: normal;
     border-bottom: 1px solid var(--border-color);
-    padding: 10px 20px;
+    padding: 10px 15px;
     text-align: left;
   }
 

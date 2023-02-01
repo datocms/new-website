@@ -204,6 +204,11 @@ export const getStaticProps = handleErrors(async function ({
                   providerUid
                 }
               }
+              ... on TableRecord {
+                id
+                _modelApiKey
+                table
+              }
               ... on DemoRecord {
                 id
                 _modelApiKey

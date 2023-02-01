@@ -5,7 +5,23 @@ import ReactUiExample from 'components/ReactUiExample';
 import PostContent from 'components/PostContent';
 import s from 'pages/docs/pageStyle.module.css';
 import cn from 'classnames';
+import { replace } from '@wordpress/shortcode';
 import { StructuredText } from 'react-datocms';
+
+function parseShortCodes(text, codes) {
+  const meta = {};
+
+  const newText = codes.reduce(
+    (result, code) =>
+      replace(code, result, (match) => {
+        meta[code] = match.attrs.named || {};
+        return '';
+      }),
+    text,
+  );
+
+  return { ...meta, id: text, content: newText };
+}
 
 export default function DocPageContent({ additionalData, ...props }) {
   return (
@@ -23,6 +39,45 @@ export default function DocPageContent({ additionalData, ...props }) {
                     <PluginSdkHook key={hook.name} hook={hook} />
                   ))}
               </>
+            );
+          }
+          case 'table': {
+            const columns = block.table.columns.map((rawName) =>
+              parseShortCodes(rawName, ['style']),
+            );
+
+            function toCss(style) {
+              if (!style) {
+                return {};
+              }
+
+              return {
+                ...(style.align ? { textAlign: style.align } : {}),
+                ...(style.width ? { width: style.width } : {}),
+              };
+            }
+
+            return (
+              <table>
+                <thead>
+                  <tr>
+                    {columns.map((col) => (
+                      <th key={col.id} style={toCss(col.style)}>
+                        {col.content}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                {block.table.data.map((row) => (
+                  <tr key={JSON.stringify(row)}>
+                    {columns.map((col) => (
+                      <td key={col.id} style={toCss(col.style)}>
+                        {row[col.id]}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </table>
             );
           }
           case 'doc_callout': {
