@@ -93,6 +93,8 @@ From the CMS interface you can very **easily rotate the API tokens** used to acc
 
 **Each user can have a specific role** attached which allows a very granular configuration on what is visible and editable for each role. The roles can be customised and created by the project admins.
 
+**Avoid sharing account information internally** by using Organisations to share ownership of accounts, or to enter projects as account owners. We have done our part to prevent any benefit in sharing accounts between multiple people. Minimize any risk by having personal accounts with 2FA enabled.
+
 ### Reliability
 
 **Our entire infrastructure is highly reliable and easy to reproduce by design**. We rely on Heroku's platform-as-a-service which means that we are able to reprovision our entire application in a single deploy.
