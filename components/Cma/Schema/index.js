@@ -237,7 +237,8 @@ function Relationship({ name, schema, required }) {
       {(language) => (
         <div className={s.schema}>
           <div className={s.header}>
-            {(language === 'http' || multipleRelationshipsPossible) && (
+            {(language === 'http' ||
+              (language === 'old-js' && multipleRelationshipsPossible)) && (
               <span className={s.prefix}>relationships.</span>
             )}
             <span className={s.name}>
@@ -308,10 +309,21 @@ function Relationship({ name, schema, required }) {
                 )}
               </>
             )}
+            {schema.deprecated && (
+              <>
+                &nbsp;&nbsp;
+                <span className={s.required}>Deprecated</span>
+              </>
+            )}
           </div>
           {schema.description && (
             <div className={s.description}>
               <ReactMarkdown>{schema.description}</ReactMarkdown>
+            </div>
+          )}
+          {schema.deprecated && (
+            <div className={s.deprecatedDescription}>
+              <ReactMarkdown>{schema.deprecated}</ReactMarkdown>
             </div>
           )}
         </div>

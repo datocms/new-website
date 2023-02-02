@@ -40,6 +40,15 @@ export default function schemaExampleFor(schema, pagination = true) {
       if (!pagination && property.match(/^page/)) {
         return acc;
       }
+
+      if (
+        schema.properties[property].hasOwnProperty('deprecated') ||
+        schema.properties[property].hasOwnProperty('hideFromDocs') ||
+        schema.properties[property].hasOwnProperty('hideFromExample')
+      ) {
+        return acc;
+      }
+
       return Object.assign({}, acc, {
         [property]: schemaExampleFor(schema.properties[property]),
       });
