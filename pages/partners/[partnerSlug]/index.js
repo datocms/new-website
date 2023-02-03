@@ -151,6 +151,7 @@ export const getStaticProps = handleErrors(
         partnerId: data.partner.id,
         authorId,
       },
+      preview: preview || false,
     });
 
     return {
