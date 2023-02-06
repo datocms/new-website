@@ -219,6 +219,19 @@ export default function Plugin({ plugin, preview }) {
                 Visit homepage
               </a>
             </Info>
+
+            {plugin?.packageName && (
+              <Info title="Package">
+                <a
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={`https://www.npmjs.com/package/${plugin.packageName}`}
+                >
+                  Visit NPM
+                </a>
+              </Info>
+            )}
+
             {plugin.pluginType && (
               <Info title="Plugin type">{plugin.pluginType.name}</Info>
             )}
