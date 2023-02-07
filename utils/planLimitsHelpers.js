@@ -211,7 +211,7 @@ export const formatExtra = (limit) => {
 
 export const limitType = (type) => {
   switch (type) {
-    case 'account_managed_resource': {
+    case 'owner_managed_resource': {
       return 'Projects';
     }
     case 'activable_feature': {

@@ -117,7 +117,7 @@ export default function ComparePricing({ hints, plans, preview }) {
               <td width="20%">Custom</td>
             </tr>
             {[
-              'account_managed_resource',
+              'owner_managed_resource',
               'shared_quota_managed_site_resource',
               'per_environment_quota_managed_site_resource',
               'per_site_quota_managed_site_resource',
@@ -191,7 +191,7 @@ export default function ComparePricing({ hints, plans, preview }) {
                                 <td key={plan.id}>
                                   {formatLimitRaw(planLimit)}
                                   {[
-                                    'account_managed_resource',
+                                    'owner_managed_resource',
                                     'per_site_quota_managed_site_resource',
                                     'per_environment_quota_managed_site_resource',
                                     'shared_quota_managed_site_resource',
