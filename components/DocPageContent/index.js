@@ -58,26 +58,28 @@ export default function DocPageContent({ additionalData, ...props }) {
             }
 
             return (
-              <table>
-                <thead>
-                  <tr>
-                    {columns.map((col) => (
-                      <th key={col.id} style={toCss(col.style)}>
-                        {col.content}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                {block.table.data.map((row) => (
-                  <tr key={JSON.stringify(row)}>
-                    {columns.map((col) => (
-                      <td key={col.id} style={toCss(col.style)}>
-                        {row[col.id]}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </table>
+              <div className={s.tableWrapper}>
+                <table>
+                  <thead>
+                    <tr>
+                      {columns.map((col) => (
+                        <th key={col.id} style={toCss(col.style)}>
+                          {col.content}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  {block.table.data.map((row) => (
+                    <tr key={JSON.stringify(row)}>
+                      {columns.map((col) => (
+                        <td key={col.id} style={toCss(col.style)}>
+                          {row[col.id]}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </table>
+              </div>
             );
           }
           case 'doc_callout': {

@@ -225,11 +225,17 @@
     margin: 0;
   }
 
+  .tableWrapper {
+    overflow: auto;
+  }
+
   table {
     width: 100%;
     margin: 1em 0;
     font-size: 0.9em;
     font-family: var(--font-sans);
+    line-height: 1.1;
+
     &:first-child {
       margin-top: 0;
     }
@@ -495,7 +501,7 @@
   font-weight: 700;
   margin-bottom: 10px;
   display: flex;
-  align-items: center;
+  line-height: 1.1;
 
   span {
     flex: 1;
