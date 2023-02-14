@@ -165,3 +165,5 @@ Please contact us (at the address below) if you want to do any of the above.
 
 If you have any doubts, or wish to exercise your rights (as listed above),
 please send us an email here: [support@datocms.com](mailto:support@datocms.com)
+
+Latest update: May 17, 2021
