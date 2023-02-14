@@ -2,15 +2,17 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Legal from 'components/Legal';
-import tiny from 'tiny-json-http';
 import Head from 'components/Head';
 
+import fs from 'fs';
+import util from 'util';
+
+const readFile = util.promisify(fs.readFile);
+
 export async function getStaticProps() {
-  const {
-    body: { content: body },
-  } = await tiny.get({
-    url: 'https://www.iubenda.com/api/privacy-policy/64648824/only-legal',
-  });
+  const body = JSON.parse(
+    await readFile('pages/legal/docs/privacy.json', 'utf8'),
+  ).content;
 
   return {
     props: {
@@ -19,7 +21,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Gdpr({ body }) {
+export default function PrivacyPolicy({ body }) {
   return (
     <Layout>
       <Head noIndex>

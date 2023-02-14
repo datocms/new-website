@@ -29,7 +29,7 @@ Personal data is stored exclusively in the DatoCMS database.
 
 DatoCMS runs on Heroku, in its "Europe" region.
 
-Heroku's GDPR compliance is described [here][heroku-gdpr-compliance].
+Heroku's GDPR compliance is described [here][heroku-gdpr-compliance].  
 Heroku's DPA (Data Processing Addendum) is [here][heroku-dpa].
 
 [heroku-gdpr-compliance]: https://devcenter.heroku.com/articles/gdpr

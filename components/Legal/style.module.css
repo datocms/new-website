@@ -97,10 +97,6 @@
   }
 }
 
-.body :global(.iub_footer) {
-  display: none;
-}
-
 .body :global(.box_primary) {
   padding: rfs(30px);
   box-shadow: var(--box-shadow);
