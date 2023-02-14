@@ -5,7 +5,7 @@ in our [Terms of Service][datocms-terms-of-service]
 and our [Privacy Policy][datocms-privacy-policy].
 
 [datocms-terms-of-service]: https://www.datocms.com/legal/terms/
-[datocms-privacy-policy]: https://www.iubenda.com/privacy-policy/64648824/full-legal
+[datocms-privacy-policy]: https://www.datocms.com/legal/privacy-policy
 
 ## Personal data we collect
 
