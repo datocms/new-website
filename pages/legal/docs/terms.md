@@ -38,16 +38,25 @@ sandbox, for example) to commercial (such as for e-commerce platforms) and so on
 
 1.6. The term "Site" refers to the web page www.datocms.com.
 
-1.7 The term PROJECT means any new website or application a User will create using
-DatoCMS. In every PROJECT, the User will have the role of ADMIN, which is the lead
-user with the broadest powers on the project. The ADMIN, can also invite other people
-to collaborate to a certain project and they will take the role of USER for that
-specific project. USERS invited/authorized by ADMINS on a PROJECT will have to create
-their own account on DATO and will have limited powers on the project, according to
-their specific role. ADMINS are also the only ones who can invite other users to
-collaborate to a given PROJECT and the only one who can delete a PROJECT. For the
-description of their role and powers and possibilities, please consult the
-Documentation to use DatoCMS.
+1.7 The term PROJECT means any new website or application a USER will create with
+DatoCMS. In every PROJECT, the User will have the role of ADMIN, which hase the
+broadest permissions on any project created in the account. . The ADMIN, can also
+invite other people to collaborate to one or more projects in the account and they
+will take the role of COLLABORATORS for that specific project. COLLABORATORS
+invited/authorized by ADMINS on a PROJECT will have to create their own account on
+DATO and will have a set of permissions in the project, as assigned to their specific
+role. For the description of roles and permissions please consult the Documentation
+to use DatoCMS. A PROJECT can be owned by a PERSONAL account or a ORGANIZATION
+account.
+
+1.8 The terms ORGANIZATION account and PERSONAL account refer to a particular feature
+within the administration of an account. Any DatoCMS USER can have a PERSONAL account
+or an ORGANIZATION account or be invited to collaborate with a PERSONAL account or an
+ORGANIZATION account of a different USER. An ORGANIZATION differs from a PERSONAL
+account as it is intended for the management of a DatoCMS account as a legal person
+rather than a natural person. With regards to the totality of the Terms of Service
+of DatoCMS the term USER can refer to either a PERSONAL or an ORGANIZATION account,
+or both.
 
 ### 2. Use of DatoCMS
 
@@ -544,4 +553,4 @@ upon receipt, when delivered in person by nationally recognized overnight courie
 class, registered or certified mail, postage prepaid, to DATO SRL SRL, Via Botticini 3, 50100
 Firenze, Italy
 
-Version ID: 0.1.2, Firenze, 14/04/20
+Version ID: 0.1.3, February 24, 2023
