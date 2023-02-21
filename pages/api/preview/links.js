@@ -69,12 +69,16 @@ const handler = async (req, res) => {
   }
 
   const previewLinks = [
+    ...(item.status !== 'draft'
+      ? [
+          {
+            label: 'Visit published version',
+            url: `https://www.datocms.com${permalink}`,
+          },
+        ]
+      : []),
     {
-      label: 'Published record',
-      url: `https://www.datocms.com${permalink}`,
-    },
-    {
-      label: 'Draft record',
+      label: 'Preview draft version',
       url: `https://www.datocms.com/api/preview/start?slug=${permalink}`,
     },
   ];
