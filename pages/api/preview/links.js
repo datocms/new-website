@@ -69,7 +69,7 @@ const handler = async (req, res) => {
   }
 
   const previewLinks = [
-    ...(item.status !== 'draft'
+    ...(item.meta.status !== 'draft'
       ? [
           {
             label: 'Visit published version',
