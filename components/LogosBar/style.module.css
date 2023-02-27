@@ -12,7 +12,8 @@
     margin: 0 20px 40px 20px;
   }
 
-  svg {
+  svg,
+  img {
     height: 20px;
     fill: var(--light-body-color);
 
@@ -23,6 +24,10 @@
     @media screen and (width > 950px) {
       height: 30px;
     }
+  }
+
+  img {
+    filter: grayscale(100%);
   }
 }
 

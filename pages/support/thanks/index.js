@@ -43,7 +43,13 @@ export default function Support({ preview, topics }) {
         <div className={s.footer}>
           <LogosBar
             title="We power experiences for over half a billion users"
-            clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Linkedin]}
+            clients={[
+              <DeutscheTelekom key="DeutscheTelekom" />,
+              <Hashicorp key="Hashicorp" />,
+              <Verizon key="Verizon" />,
+              <Nike key="Nike" />,
+              <Linkedin key="Linkedin" />,
+            ]}
           />
         </div>
       </Wrapper>

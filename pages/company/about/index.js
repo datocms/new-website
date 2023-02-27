@@ -280,7 +280,13 @@ export default function About({ members, page, review1, review2 }) {
       <Space top={2} bottom={2}>
         <LogosBar
           title="We power experiences for over half a billion users"
-          clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
+          clients={[
+            <DeutscheTelekom key="DeutscheTelekom" />,
+            <Hashicorp key="Hashicorp" />,
+            <Verizon key="Verizon" />,
+            <Nike key="Nike" />,
+            <Vercel key="Vercel" />,
+          ]}
         />
       </Space>
 

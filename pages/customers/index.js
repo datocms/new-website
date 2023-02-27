@@ -81,12 +81,12 @@ export default function Customers({ subscription, preview }) {
         <Space top={1} bottom={2}>
           <LogosBar
             clients={[
-              Vercel,
-              DeutscheTelekom,
-              LittleCaesars,
-              Nhs,
-              Verizon,
-              Mit,
+              <Vercel key="Vercel" />,
+              <DeutscheTelekom key="DeutscheTelekom" />,
+              <LittleCaesars key="LittleCaesars" />,
+              <Nhs key="Nhs" />,
+              <Verizon key="Verizon" />,
+              <Mit key="Mit" />,
             ]}
           />
         </Space>

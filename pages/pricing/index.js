@@ -472,7 +472,13 @@ export default function Pricing({
       <Space top={2}>
         <LogosBar
           title="We power experiences for over half a billion users"
-          clients={[DeutscheTelekom, Hashicorp, Verizon, Nike, Vercel]}
+          clients={[
+            <DeutscheTelekom key="DeutscheTelekom" />,
+            <Hashicorp key="Hashicorp" />,
+            <Verizon key="Verizon" />,
+            <Nike key="Nike" />,
+            <Vercel key="Vercel" />,
+          ]}
         />
       </Space>
     </Layout>

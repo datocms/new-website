@@ -6,9 +6,9 @@ export default function LogosBar({ title, clients }) {
     <Wrapper>
       {title && <div className={s.title}>{title}</div>}
       <div className={s.root}>
-        {clients.map((Client, i) => (
+        {clients.map((client, i) => (
           <div className={s.logo} key={i}>
-            <Client />
+            {client}
           </div>
         ))}
       </div>

@@ -109,22 +109,22 @@ function Homepage({ successStories, preview, page }) {
 
       <LogosBar
         clients={[
-          Vercel,
-          Dropbox,
-          Hashicorp,
-          Verizon,
-          Vmware,
-          Polestar,
-          Arduino,
-          CityOfSidney,
-          DeutscheTelekom,
-          LinkedIn,
-          Oberlo,
-          Nhs,
-          LittleCaesars,
-          Mit,
-          Afsp,
-          Harrys,
+          <Vercel key="Vercel" />,
+          <Dropbox key="Dropbox" />,
+          <Hashicorp key="Hashicorp" />,
+          <Verizon key="Verizon" />,
+          <Vmware key="Vmware" />,
+          <Polestar key="Polestar" />,
+          <Arduino key="Arduino" />,
+          <CityOfSidney key="CityOfSidney" />,
+          <DeutscheTelekom key="DeutscheTelekom" />,
+          <LinkedIn key="LinkedIn" />,
+          <Oberlo key="Oberlo" />,
+          <Nhs key="Nhs" />,
+          <LittleCaesars key="LittleCaesars" />,
+          <Mit key="Mit" />,
+          <Afsp key="Afsp" />,
+          <Harrys key="Harrys" />,
         ]}
       />
       <div id="main-content">

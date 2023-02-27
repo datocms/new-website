@@ -97,18 +97,18 @@ function Enterprise({ page, review1, review2, review3 }) {
             </>
           }
           clients={[
-            DeutscheTelekom,
-            Hashicorp,
-            Verizon,
-            Nike,
-            Vercel,
-            Linkedin,
-            Oberlo,
-            Nhs,
-            LittleCaesars,
-            Mit,
-            Afsp,
-            Harrys,
+            <DeutscheTelekom key="DeutscheTelekom" />,
+            <Hashicorp key="Hashicorp" />,
+            <Verizon key="Verizon" />,
+            <Nike key="Nike" />,
+            <Vercel key="Vercel" />,
+            <Linkedin key="Linkedin" />,
+            <Oberlo key="Oberlo" />,
+            <Nhs key="Nhs" />,
+            <LittleCaesars key="LittleCaesars" />,
+            <Mit key="Mit" />,
+            <Afsp key="Afsp" />,
+            <Harrys key="Harrys" />,
           ]}
         />
         <EnterpriseStrip
