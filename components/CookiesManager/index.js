@@ -1,6 +1,6 @@
 import TagManager from 'react-gtm-module';
 import { getCookie, setCookie } from 'utils/cookies';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useContext } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import s from './style.module.css';
@@ -29,34 +29,35 @@ export default function CookiesManager({ children }) {
     }
   }, [showCookiesConsent]);
 
-  if (!showCookiesConsent) {
-    return <>{children}</>;
-  }
-
   return (
     <>
       {children}
-      <div className={s.cookies}>
-        <div className={s.cookiesText}>
-          We use cookies to enhance the user experience. Do you consent their
-          use in accordance with{' '}
-          <Link href="/legal/cookie-policy">
-            <a>our cookie policy</a>
-          </Link>
-          ?
+
+      {showCookiesConsent ? (
+        <div>
+          <div className={s.cookies}>
+            <div className={s.cookiesText}>
+              We use cookies to enhance the user experience. Do you consent
+              their use in accordance with{' '}
+              <Link href="/legal/cookie-policy">
+                <a>our cookie policy</a>
+              </Link>
+              ?
+            </div>
+
+            <button
+              className={cn(s.cookiesButton, s.cookiesPrimaryButton)}
+              onClick={accept}
+            >
+              I consent
+            </button>
+
+            <button className={s.cookiesButton} onClick={decline}>
+              I decline
+            </button>
+          </div>
         </div>
-
-        <button
-          className={cn(s.cookiesButton, s.cookiesPrimaryButton)}
-          onClick={accept}
-        >
-          I consent
-        </button>
-
-        <button className={s.cookiesButton} onClick={decline}>
-          I decline
-        </button>
-      </div>
+      ) : undefined}
     </>
   );
 }

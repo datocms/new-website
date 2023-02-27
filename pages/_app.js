@@ -10,7 +10,6 @@ import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Head from 'components/Head';
 import Highlight from 'components/Highlight';
-import CookiesManager from 'components/CookiesManager';
 
 const rollbarConfig = {
   accessToken: process.env.NEXT_PUBLIC_ROLLBAR_TOKEN,
@@ -80,13 +79,11 @@ function App({ Component, pageProps }) {
 
   return (
     <ToastProvider placement="bottom-right">
-      <CookiesManager>
-        <Provider config={rollbarConfig}>
-          <ErrorBoundary fallbackUI={ErrorDisplay}>
-            <Component {...pageProps} />
-          </ErrorBoundary>
-        </Provider>
-      </CookiesManager>
+      <Provider config={rollbarConfig}>
+        <ErrorBoundary fallbackUI={ErrorDisplay}>
+          <Component {...pageProps} />
+        </ErrorBoundary>
+      </Provider>
     </ToastProvider>
   );
 }

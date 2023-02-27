@@ -1,12 +1,13 @@
 import s from './style.module.css';
 import { useRouter } from 'next/router';
 import NProgress from 'components/NProgress';
+import CookiesManager from 'components/CookiesManager';
 
 export default function Layout({ preview, children }) {
   const router = useRouter();
 
   return (
-    <>
+    <CookiesManager>
       <NProgress />
       {preview && (
         <a
@@ -17,6 +18,6 @@ export default function Layout({ preview, children }) {
         </a>
       )}
       <div className={s.root}>{children}</div>
-    </>
+    </CookiesManager>
   );
 }
