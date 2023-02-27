@@ -10,7 +10,7 @@ import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Head from 'components/Head';
 import Highlight from 'components/Highlight';
-import TagManager from 'react-gtm-module';
+import CookiesManager from 'components/CookiesManager';
 
 const rollbarConfig = {
   accessToken: process.env.NEXT_PUBLIC_ROLLBAR_TOKEN,
@@ -42,12 +42,6 @@ const ErrorDisplay = ({ error, resetError }) => (
 
 function App({ Component, pageProps }) {
   const router = useRouter();
-
-  useEffect(() => {
-    TagManager.initialize({
-      gtmId: 'GTM-TJRM9NT',
-    });
-  }, []);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -86,11 +80,13 @@ function App({ Component, pageProps }) {
 
   return (
     <ToastProvider placement="bottom-right">
-      <Provider config={rollbarConfig}>
-        <ErrorBoundary fallbackUI={ErrorDisplay}>
-          <Component {...pageProps} />
-        </ErrorBoundary>
-      </Provider>
+      <CookiesManager>
+        <Provider config={rollbarConfig}>
+          <ErrorBoundary fallbackUI={ErrorDisplay}>
+            <Component {...pageProps} />
+          </ErrorBoundary>
+        </Provider>
+      </CookiesManager>
     </ToastProvider>
   );
 }
