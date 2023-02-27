@@ -1,6 +1,6 @@
 import TagManager from 'react-gtm-module';
 import { getCookie, setCookie } from 'utils/cookies';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import s from './style.module.css';
