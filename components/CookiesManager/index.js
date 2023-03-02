@@ -14,11 +14,11 @@ export default function CookiesManager({ children }) {
   const accept = useCallback(() => {
     setCookie('cookies-accepted', 'true', 500);
     setShowCookiesConsent(false);
-  });
+  }, []);
 
   const decline = useCallback(() => {
     setShowCookiesConsent(false);
-  });
+  }, []);
 
   useEffect(() => {
     if (getCookie('cookies-accepted') && !gtmInitialized.current) {
