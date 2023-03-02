@@ -52,7 +52,7 @@ function App({ Component, pageProps }) {
 
     Fathom.load('NVXWCARK', {
       includedDomains: ['www.datocms.com'],
-      url: 'https://panther.datocms.com/script.js',
+      url: '/api/fathom/load.js',
       honorDNT: true,
       spa: 'auto',
     });
