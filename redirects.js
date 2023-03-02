@@ -341,4 +341,8 @@ module.exports = [
     source: '/legal/security',
     destination: '/security',
   },
+  {
+    source: '/legal/privacy',
+    destination: '/legal/privacy-policy',
+  },
 ];
