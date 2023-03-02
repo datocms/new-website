@@ -1,27 +1,7 @@
-const httpProxy = require('http-proxy');
+export default async function handler(req, res) {
+  const response = await fetch('https://cdn.usefathom.com/script.js');
+  const text = await response.text();
 
-const proxy = httpProxy.createProxyServer({
-  secure: true,
-  hostRewrite: true,
-  autoRewrite: true,
-});
-
-proxy.on('error', function (err, req, res) {
-  console.error(err);
-  res.writeHead(500, {
-    'Content-Type': 'text/json',
-  });
-  res.end(err.toString());
-});
-
-export default function handler(req, res) {
-  req.url = 'https://cdn.usefathom.com/script.js';
-
-  proxy.web(req, res, {
-    target: {
-      protocol: 'https:',
-      host: 'cdn.usefathom.com',
-    },
-    changeOrigin: true,
-  });
+  res.setHeader('content-type', 'application/javascript');
+  res.status(200).send(text);
 }

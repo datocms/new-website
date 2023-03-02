@@ -58,10 +58,6 @@ function App({ Component, pageProps }) {
       const campaign = urlParams.get('utm_campaign');
 
       setCookie('datoUtm', JSON.stringify({ source, medium, campaign }), 365);
-
-      if (source === 'twitter') {
-        Fathom.trackGoal('5OHZ6BAS', 0);
-      }
     }
 
     function onRouteChangeComplete() {
