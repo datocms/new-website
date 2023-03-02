@@ -1,5 +1,5 @@
 import * as Fathom from 'fathom-client';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import { useEffect } from 'react';
 import '../components/BaseLayout/global.css';
 import '../components/NProgress/style.css';
@@ -39,18 +39,22 @@ const ErrorDisplay = ({ error, resetError }) => (
   </div>
 );
 
-function App({ Component, pageProps }) {
-  const router = useRouter();
+Router.events.on('routeChangeComplete', (as, routeProps) => {
+  if (!routeProps.shallow) {
+    Fathom.trackPageview();
+  }
+});
 
+function App({ Component, pageProps }) {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const source = urlParams.get('utm_source');
 
-    // Initialize Fathom when the app loads
     Fathom.load('NVXWCARK', {
       includedDomains: ['www.datocms.com'],
       url: 'https://panther.datocms.com/script.js',
       honorDNT: true,
+      spa: 'auto',
     });
 
     if (source && !getCookie('datoUtm')) {
@@ -59,19 +63,7 @@ function App({ Component, pageProps }) {
 
       setCookie('datoUtm', JSON.stringify({ source, medium, campaign }), 365);
     }
-
-    function onRouteChangeComplete() {
-      Fathom.trackPageview();
-    }
-
-    // Record a pageview when route changes
-    router.events.on('routeChangeComplete', onRouteChangeComplete);
-
-    // Unassign event listener
-    return () => {
-      router.events.off('routeChangeComplete', onRouteChangeComplete);
-    };
-  }, [router.events]);
+  }, []);
 
   return (
     <ToastProvider placement="bottom-right">
