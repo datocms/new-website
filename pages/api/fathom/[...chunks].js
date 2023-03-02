@@ -15,7 +15,7 @@ proxy.on('error', function (err, req, res) {
 });
 
 export default function handler(req, res) {
-  req.url = '/script.js';
+  req.url = 'https://cdn.usefathom.com/script.js';
 
   proxy.web(req, res, {
     target: {
