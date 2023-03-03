@@ -17,21 +17,38 @@ import LazyImage from '../../components/LazyImage';
 import { gqlStaticPropsWithSubscription, imageFields } from 'lib/datocms';
 import { useQuerySubscription, Image as DatoImage } from 'react-datocms';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import { sendFormValuesToHubspot } from 'utils/hubspot';
 
 const AgencyForm = () => {
   const defaultValues = {
+    firstName: '',
+    lastName: '',
     agencyName: '',
     agencyUrl: '',
     country: '',
     email: getCookie('datoAccountEmail'),
-
+    productFamiliarity: '',
     body: '',
-    technologies: '',
-    projectsPerQuarter: '',
-    needsSalesMaterial: '',
-    averagePricePerProject: '',
-    additionalInfo: '',
+    teamSize: '',
   };
+
+  async function handleSubmit(formValues) {
+    await sendFormValuesToHubspot({
+      formId: 'd0146ada-8c89-4f7a-971c-053a4c30f3ad',
+      formValues,
+      hubspotFieldsMapping: {
+        firstName: 'contact.firstname',
+        lastName: 'contact.lastname',
+        agencyName: 'company.name',
+        agencyUrl: 'company.website',
+        email: 'contact.email',
+        country: 'company.country',
+        body: 'contact.message',
+        teamSize: 'company.numberofemployees',
+        productFamiliarity: 'company.familiarity_with_datocms',
+      },
+    });
+  }
 
   return (
     <div className={s.form}>
@@ -39,12 +56,28 @@ const AgencyForm = () => {
         defaultValues={defaultValues}
         submitLabel="Let's have a chat!"
         nativeSubmitForm
+        onSubmit={handleSubmit}
         action="https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/aiwRgx07C0Ix1B7x-Ex6B67cQpfHc9C_8taVomi6wfkt5nrcQIIoChC4AKU90ytYoSIyBXB9iUAzttmGijXse3tNA4LJdiOWwmF--Xbifq0RxMqHExLQKezhuYth"
       >
         <div className={s.formCols}>
           <Field
+            name="firstName"
+            label="Your first name"
+            placeholder="Enter your first name"
+            validations={{ required: 'Required' }}
+          />
+          <Field
+            name="lastName"
+            label="Your last name"
+            placeholder="Enter your last name"
+            validations={{ required: 'Required' }}
+          />
+        </div>
+
+        <div className={s.formCols}>
+          <Field
             name="agencyName"
-            label="What's the name of your Agency?"
+            label="What's the name of your agency?"
             placeholder="Acme Inc."
             validations={{ required: 'Required' }}
           />
@@ -52,6 +85,33 @@ const AgencyForm = () => {
             name="agencyUrl"
             label="Do you have a website?"
             placeholder="https://www.acme.com"
+            validations={{ required: 'Required' }}
+          />
+        </div>
+
+        <div className={s.formCols}>
+          <Field
+            name="teamSize"
+            label="Company size"
+            placeholder="Select number of employees"
+            options={[
+              "1 — it's just me",
+              '2-10',
+              '10-50',
+              '50-200',
+              '200-1000',
+              '1000+',
+            ]}
+            validations={{ required: 'Required' }}
+          />
+          <Field
+            name="productFamiliarity"
+            label="How familiar are you with DatoCMS?"
+            options={[
+              'Exploring the product',
+              'Already published a few projects',
+              'Already published +10 projects',
+            ]}
             validations={{ required: 'Required' }}
           />
         </div>
@@ -85,65 +145,11 @@ const AgencyForm = () => {
 
         <Field
           name="body"
-          label="Please introduce yourself and your Agency!"
+          label="Please introduce yourself and your agency. If you have any additional question or concern, please ask!"
           validations={{ required: 'Required' }}
           render={({ field }) => (
             <Textarea
-              placeholder="The partner program is meant for web agencies only. If you think we should make an exception for you, let us know why!"
-              {...field}
-            />
-          )}
-        />
-
-        <Field
-          name="needsSalesMaterial"
-          label="Would you benefit from some marketing/sales material from us?"
-          placeholder="To understand if it's useful to have more documentation in this regard"
-          validations={{ required: 'Required' }}
-          options={[
-            "Yes, that'd be REALLY useful",
-            'Probably',
-            'Meh, not really',
-          ]}
-        />
-
-        <Field
-          name="technologies"
-          label="What technologies are you going to use, together with DatoCMS?"
-          validations={{ required: 'Required' }}
-          render={({ field }) => (
-            <Textarea
-              placeholder="Have you already used the Jamstack before? Which hosting platform, frameworks, etc. do you master?"
-              {...field}
-            />
-          )}
-        />
-
-        <Field
-          name="projectsPerQuarter"
-          label="How many projects a quarter are you planning to do with DatoCMS?"
-          placeholder="3-4 new projects every quarter"
-          validations={{ required: 'Required' }}
-        />
-
-        <Field
-          name="averagePricePerProject"
-          label="On average, how much are you willing to spend per project for the CMS a month?"
-          validations={{ required: 'Required' }}
-          render={({ field }) => (
-            <Textarea
-              placeholder="If you've different kind of packages you're selling, with different price points and resources needed, we want to know them all!"
-              {...field}
-            />
-          )}
-        />
-
-        <Field
-          name="additionalInfo"
-          label="If you have any additional question or concern, please ask!"
-          render={({ field }) => (
-            <Textarea
-              placeholder="Looking forward to chat with you!"
+              placeholder="Looking forward to chat with you! ;-)"
               {...field}
             />
           )}
@@ -257,9 +263,7 @@ export default function Agencies({ subscription }) {
           title="+80 Agency Partners distributed in 45 countries"
           clients={partnersPage.highlightedPartners.map((partner) => (
             <Link href={`/partners/${partner.slug}`} key={partner.slug}>
-              <a>
-                <LazyImage src={partner.logo.url} />
-              </a>
+              <LazyImage src={partner.logo.url} />
             </Link>
           ))}
         />
@@ -323,7 +327,7 @@ export default function Agencies({ subscription }) {
             Partners can enable special plans — or a 15% discount on the public
             Professional plan — on their customers&apos; accounts.{' '}
             <Link href="/docs/agency-partner-program/partners-dashboard#enabling-special-plans-to-clients">
-              <a>Directly from their dashboard</a>
+              Directly from their dashboard
             </Link>
             , autonomously, without having to ask us for anything.
           </Benefit>
@@ -331,11 +335,11 @@ export default function Agencies({ subscription }) {
           <Benefit title={<>Full-access to all your clients&apos; projects</>}>
             Assign your team members a special{' '}
             <Link href="/docs/agency-partner-program/partners-dashboard#developer-and-projects-manager-roles">
-              <a>Developer role</a>
+              Developer role
             </Link>{' '}
             to give them{' '}
             <Link href="/docs/agency-partner-program/partners-dashboard#automatic-access-to-your-clients-projects">
-              <a>access to all projects</a>
+              access to all projects
             </Link>
             . Even when they reside on a separate account, managed by the end
             customer. And without having to purchase additional collaborator
@@ -345,11 +349,9 @@ export default function Agencies({ subscription }) {
           <Benefit title={<>DatoCMS partner listing</>}>
             We&apos;ll get you in front of new potential clients by featuring
             your agency (and projects) as part of our{' '}
-            <Link href="/partners">
-              <a>Partners page</a>
-            </Link>
-            . Teams in need of development resources go there to find the right
-            level of support for their projects.
+            <Link href="/partners">Partners page</Link>. Teams in need of
+            development resources go there to find the right level of support
+            for their projects.
           </Benefit>
 
           <Benefit title={<>Dedicated partner account manager</>}>
@@ -362,11 +364,8 @@ export default function Agencies({ subscription }) {
           <Benefit title={<>Co-marketing opportunities</>}>
             Our marketing relies on real success stories — and we know that our
             Partners will provide some great ones. We&apos;ll promote your
-            projects,{' '}
-            <Link href="/customers">
-              <a>create case studies</a>
-            </Link>{' '}
-            and articles, and feature your logo on our website.
+            projects, <Link href="/customers">create case studies</Link> and
+            articles, and feature your logo on our website.
           </Benefit>
         </div>
       </TitleStripWithContent>

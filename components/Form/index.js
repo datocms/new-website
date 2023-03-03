@@ -50,7 +50,9 @@ export const Field = ({
     input = (
       <>
         {!value && (
-          <div className={s.selectPlaceholder}>Please select one...</div>
+          <div className={s.selectPlaceholder}>
+            {placeholder || 'Please select one...'}
+          </div>
         )}
         <select id={name} {...field}>
           <option value="" />

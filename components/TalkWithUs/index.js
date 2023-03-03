@@ -3,29 +3,7 @@ import Textarea from 'react-textarea-autosize';
 import { getData } from 'country-list';
 import { Form, Field } from 'components/Form';
 import { getCookie } from 'utils/cookies';
-
-const hubspotObjectTypeIdMapping = {
-  contact: '0-1',
-  company: '0-2',
-  deal: '0-3',
-  ticket: '0-5',
-};
-
-const hubspotFieldsMapping = {
-  firstName: 'contact.firstname',
-  lastName: 'contact.lastname',
-  project: null,
-  email: 'contact.email',
-  companyName: 'company.name',
-  country: 'company.country',
-  industry: 'company.industry',
-  jobFunction: 'contact.jobtitle',
-  useCase: 'contact.use_case',
-  referral: 'contact.referral',
-  body: 'contact.message',
-  errorId: null,
-  issueType: null,
-};
+import { sendFormValuesToHubspot } from 'utils/hubspot';
 
 const frontFormIds = {
   sales:
@@ -54,40 +32,6 @@ async function sendToPipedrive(payload) {
   }
 }
 
-async function sendToHubspot(formId, formValues) {
-  const res = await fetch(`/api/hubspot/${formId}/submit`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      fields: Object.entries(formValues)
-        .map(([fieldName, fieldValue]) => {
-          if (!(fieldValue && hubspotFieldsMapping[fieldName])) {
-            return null;
-          }
-
-          const [hubspotContext, hubspotFieldName] =
-            hubspotFieldsMapping[fieldName].split('.');
-
-          return {
-            objectTypeId: hubspotObjectTypeIdMapping[hubspotContext],
-            name: hubspotFieldName,
-            value: fieldValue,
-          };
-        })
-        .filter(Boolean),
-      context: {
-        hutk: getCookie('hubspotutk'),
-        pageUri: document.location.href,
-        pageName: document.title,
-      },
-    }),
-  });
-
-  if (!res.ok) {
-    throw new Error('Ouch!');
-  }
-}
-
 export default function TalkWithUs({
   initialValues = {},
   fieldset,
@@ -111,7 +55,25 @@ export default function TalkWithUs({
 
   async function handleSubmit(formValues) {
     if (hubspotFormId) {
-      await sendToHubspot(hubspotFormId, formValues);
+      await sendFormValuesToHubspot({
+        formId: hubspotFormId,
+        formValues,
+        hubspotFieldsMapping: {
+          firstName: 'contact.firstname',
+          lastName: 'contact.lastname',
+          project: null,
+          email: 'contact.email',
+          companyName: 'company.name',
+          country: 'company.country',
+          industry: 'company.industry',
+          jobFunction: 'contact.jobtitle',
+          useCase: 'contact.use_case',
+          referral: 'contact.referral',
+          body: 'contact.message',
+          errorId: null,
+          issueType: null,
+        },
+      });
     }
 
     if (fieldset === 'sales') {
