@@ -53,7 +53,7 @@ export const Field = ({
           <div className={s.selectPlaceholder}>Please select one...</div>
         )}
         <select id={name} {...field}>
-          <option value=""></option>
+          <option value="" />
           {options.map((option) => {
             const value = typeof option === 'string' ? option : option.value;
             const label = typeof option === 'string' ? option : option.label;
@@ -119,14 +119,14 @@ export const Form = ({
   });
 
   const methods = useForm({
-    defaultValues,
+    defaultValues: { ...defaultValues, FORM_ERROR: '' },
   });
-  const { handleSubmit, formState } = methods;
+  const { clearErrors, setError, handleSubmit, formState } = methods;
 
   const toastHelpers = useToasts();
   const recaptchaInput = useRef(null);
 
-  const defaultOnSubmit = async (values, event) => {
+  async function defaultSubmit(values, event) {
     event.preventDefault();
 
     const token = await execute('form');
@@ -141,13 +141,16 @@ export const Form = ({
           appearance: 'error',
           autoDismiss: true,
         });
+        setError('FORM_ERROR');
+        setTimeout(() => clearErrors('FORM_ERROR'), 100);
+        return;
       }
     }
 
     if (nativeSubmitForm) {
       event.target.submit();
     }
-  };
+  }
 
   const waiting =
     formState.isSubmitting ||
@@ -157,7 +160,7 @@ export const Form = ({
     <FormProvider {...methods}>
       <form
         className={s.form}
-        onSubmit={handleSubmit(defaultOnSubmit)}
+        onSubmit={handleSubmit(defaultSubmit)}
         method="POST"
         action={action}
         encType="multipart/form-data"
@@ -169,14 +172,9 @@ export const Form = ({
 
         <div className={s.submit}>
           <div className={s.agree}>
-            By submitting you agree to our{' '}
-            <Link href="/legal/terms">
-              <a>TOS</a>
-            </Link>{' '}
+            By submitting you agree to our <Link href="/legal/terms">TOS</Link>{' '}
             and acknowledge our{' '}
-            <Link href="/legal/privacy-policy">
-              <a>Privacy Policy</a>
-            </Link>
+            <Link href="/legal/privacy-policy">Privacy Policy</Link>
           </div>
 
           <Button as="button" type="submit" disabled={waiting}>

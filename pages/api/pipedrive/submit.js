@@ -48,7 +48,8 @@ async function findOrCreateOrgByName(name, industry) {
 
 async function findOrCreatePerson(
   email,
-  name,
+  firstName,
+  lastName,
   country,
   jobFunction,
   referral,
@@ -79,7 +80,7 @@ async function findOrCreatePerson(
     }
 
     const data = {
-      name: name,
+      name: `${firstName} ${lastName}`,
       email: email,
       postal_address: country,
       [jobFunctionCustomField]: jobFunction,
@@ -180,7 +181,8 @@ const handler = async (req, res) => {
     }
 
     const {
-      name,
+      firstName,
+      lastName,
       companyName,
       email,
       country,
@@ -195,7 +197,8 @@ const handler = async (req, res) => {
 
     const person = await findOrCreatePerson(
       email,
-      name,
+      firstName,
+      lastName,
       country,
       jobFunction,
       referral,

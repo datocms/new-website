@@ -54,15 +54,16 @@ export default function Support() {
 
                 <p className={s.support}>
                   Need support? Please visit our{' '}
-                  <Link href="/support">
-                    <a>Support page</a>
-                  </Link>
-                  .
+                  <Link href="/support">Support page</Link>.
                 </p>
               </div>
             </div>
             <div className={s.picker}>
-              <TalkWithUs contactFormType="sales" issueType="sales" />
+              <TalkWithUs
+                fieldset="sales"
+                initialValues={{ issueType: 'sales' }}
+                hubspotFormId="11eae68a-59d8-4c94-b503-a373cb490a61"
+              />
             </div>
           </div>
         </Wrapper>

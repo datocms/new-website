@@ -227,9 +227,16 @@ export default function Support({ preview, topics }) {
                         email,
                         errorId,
                         project: projectUrl,
+                        issueType: leafTopic.autoResponderType,
                       }}
-                      contactFormType={leafTopic.contactFormType}
-                      issueType={leafTopic.autoResponderType}
+                      fieldset={leafTopic.contactFormType}
+                      hubspotFormId={
+                        leafTopic.contactFormType === 'sales'
+                          ? '11eae68a-59d8-4c94-b503-a373cb490a61'
+                          : leafTopic.contactFormType === 'support'
+                          ? 'e29ac953-aed2-4318-b2a4-8eb02bab22ba'
+                          : undefined
+                      }
                     />
                   </div>
                 </div>

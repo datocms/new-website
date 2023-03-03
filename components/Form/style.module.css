@@ -7,11 +7,14 @@
 
   label,
   .error {
+    position: absolute;
     line-height: 1;
     display: block;
   }
 
   label {
+    top: 25px;
+    left: 33px;
     color: var(--light-body-color);
     font-weight: bold;
     font-size: 15px;
@@ -23,6 +26,7 @@
     font-size: 12px;
     right: 29px;
     left: auto;
+    top: 22px;
     text-align: right;
     background: var(--accent-color);
     padding: 3px 5px;
@@ -111,12 +115,6 @@
 }
 
 .field {
-  label,
-  .error {
-    position: absolute;
-    top: 25px;
-    left: 33px;
-  }
   .selectPlaceholder {
     position: absolute;
     top: var(--paddingTop);

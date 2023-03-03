@@ -4,46 +4,120 @@ import { getData } from 'country-list';
 import { Form, Field } from 'components/Form';
 import { getCookie } from 'utils/cookies';
 
+const hubspotObjectTypeIdMapping = {
+  contact: '0-1',
+  company: '0-2',
+  deal: '0-3',
+  ticket: '0-5',
+};
+
+const hubspotFieldsMapping = {
+  firstName: 'contact.firstname',
+  lastName: 'contact.lastname',
+  project: null,
+  email: 'contact.email',
+  companyName: 'company.name',
+  country: 'company.country',
+  industry: 'company.industry',
+  jobFunction: 'contact.jobtitle',
+  useCase: 'contact.use_case',
+  referral: 'contact.referral',
+  body: 'contact.message',
+  errorId: null,
+  issueType: null,
+};
+
+const frontFormIds = {
+  sales:
+    'sWPCwvUmu--UpyGfM9hRVfjaIwWCyVh-3I0nJ4gNZKU6fQeDGRdrNfYSsrIyeoqTcGPguYxKX-ULe-OYj08sar17B0gWytpkKNcAZNZB_0HTwk9jBCh5wEQCmsmm',
+  support:
+    'dTIFLRUzwsUhDSuSqTsVTadDNiaxdRGAXWcMPc785T1sSFl2FaLg_dh3D3syMHw06ZRO4UDsIYWvxwLolfWYe1kvkhpAxbfb4BK_Bmb_Kxro1oHtw-dCVYEZ-15Q',
+};
+
+async function sendToPipedrive(payload) {
+  const res = await fetch('/api/pipedrive/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error('Ouch!');
+  }
+
+  const result = await res.json();
+
+  if (!result.success) {
+    throw new Error('Ouch!');
+  }
+}
+
+async function sendToHubspot(formId, formValues) {
+  const res = await fetch(`/api/hubspot/${formId}/submit`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      fields: Object.entries(formValues)
+        .map(([fieldName, fieldValue]) => {
+          if (!(fieldValue && hubspotFieldsMapping[fieldName])) {
+            return null;
+          }
+
+          const [hubspotContext, hubspotFieldName] =
+            hubspotFieldsMapping[fieldName].split('.');
+
+          return {
+            objectTypeId: hubspotObjectTypeIdMapping[hubspotContext],
+            name: hubspotFieldName,
+            value: fieldValue,
+          };
+        })
+        .filter(Boolean),
+      context: {
+        hutk: getCookie('hubspotutk'),
+        pageUri: document.location.href,
+        pageName: document.title,
+      },
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error('Ouch!');
+  }
+}
+
 export default function TalkWithUs({
   initialValues = {},
-  contactFormType,
-  issueType,
+  fieldset,
+  hubspotFormId,
 }) {
   const defaultValues = {
-    name: '',
+    firstName: '',
+    lastName: '',
     project: '',
     email: getCookie('datoAccountEmail'),
-    phoneNumber: '',
     companyName: '',
     country: '',
     industry: '',
     jobFunction: '',
     useCase: '',
     referral: '',
-    companyRevenue: '',
     body: '',
     errorId: '',
-    issueType: issueType,
     ...initialValues,
   };
 
-  const submitSales = async (values) => {
-    const body = JSON.stringify(values);
-
-    const res = await fetch('/api/pipedrive/submit', {
-      body: body,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    });
-
-    const result = await res.json();
-
-    if (!result.success) {
-      throw new Error('Ouch!');
+  async function handleSubmit(formValues) {
+    if (hubspotFormId) {
+      await sendToHubspot(hubspotFormId, formValues);
     }
-  };
+
+    if (fieldset === 'sales') {
+      await sendToPipedrive(formValues);
+    }
+  }
 
   return (
     <div className={s.root}>
@@ -51,70 +125,42 @@ export default function TalkWithUs({
         defaultValues={defaultValues}
         submitLabel="Get in touch"
         nativeSubmitForm
-        onSubmit={contactFormType === 'sales' ? submitSales : undefined}
-        action={
-          contactFormType === 'sales'
-            ? 'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/sWPCwvUmu--UpyGfM9hRVfjaIwWCyVh-3I0nJ4gNZKU6fQeDGRdrNfYSsrIyeoqTcGPguYxKX-ULe-OYj08sar17B0gWytpkKNcAZNZB_0HTwk9jBCh5wEQCmsmm'
-            : 'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/dTIFLRUzwsUhDSuSqTsVTadDNiaxdRGAXWcMPc785T1sSFl2FaLg_dh3D3syMHw06ZRO4UDsIYWvxwLolfWYe1kvkhpAxbfb4BK_Bmb_Kxro1oHtw-dCVYEZ-15Q'
-        }
+        onSubmit={handleSubmit}
+        action={`https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/${frontFormIds[fieldset]}`}
       >
-        {contactFormType === 'support' && (
+        {fieldset === 'support' && (
           <>
-            <div className={s.formCols}>
-              <Field
-                name="email"
-                label="Account email"
-                placeholder="Your account email"
-                validations={{
-                  required: 'Required',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
-                    message: 'Invalid email',
-                  },
-                }}
-              />
-              <Field
-                name="project"
-                label="Project URL"
-                placeholder="Your CMS URL"
-                validations={{ required: 'Required' }}
-              />
-            </div>
+            <Field
+              name="email"
+              label="DatoCMS account email"
+              placeholder="Your account email"
+              validations={{
+                required: 'Required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
+                  message: 'Invalid email',
+                },
+              }}
+            />
+            <Field
+              name="project"
+              label="DatoCMS project URL"
+              placeholder="https://<YOUR_PROJECT>.admin.datocms.com"
+              validations={{ required: 'Required' }}
+            />
           </>
         )}
 
-        {contactFormType === 'sales' && (
+        {fieldset === 'sales' && (
           <>
-            <div className={s.formCols}>
-              <Field
-                name="name"
-                label="Full name"
-                placeholder="Your full name"
-                validations={{ required: 'Required' }}
-              />
-
-              <Field
-                name="companyName"
-                label="Company name"
-                placeholder="Your company name"
-                validations={{ required: 'Required' }}
-              />
-            </div>
+            <Field
+              name="companyName"
+              label="Company name"
+              placeholder="Your company name"
+              validations={{ required: 'Required' }}
+            />
 
             <div className={s.formCols}>
-              <Field
-                name="email"
-                label="Work email"
-                placeholder="Your work email"
-                validations={{
-                  required: 'Required',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
-                    message: 'Invalid email',
-                  },
-                }}
-              />
-
               <Field
                 name="country"
                 label="Country"
@@ -126,22 +172,6 @@ export default function TalkWithUs({
                   }))
                   .sort((a, b) => a.label.localeCompare(b.label))}
               />
-            </div>
-
-            <div className={s.formCols}>
-              <Field
-                name="jobFunction"
-                label="Job function"
-                validations={{ required: 'Required' }}
-                options={[
-                  'Editorial & Content',
-                  'Developer/Engineering',
-                  'Product & Project',
-                  'Sales & Marketing',
-                  'Other',
-                ]}
-              />
-
               <Field
                 name="industry"
                 label="Industry"
@@ -164,34 +194,61 @@ export default function TalkWithUs({
 
             <div className={s.formCols}>
               <Field
-                name="useCase"
-                label="Use case"
-                options={[
-                  'Ecommerce',
-                  'Moving to headless',
-                  'Migrating from other headless CMS',
-                  'Agency',
-                  'Other',
-                ]}
+                name="firstName"
+                label="First name"
+                placeholder="Your first name"
                 validations={{ required: 'Required' }}
               />
 
-              {contactFormType === 'sales' && (
-                <Field
-                  name="referral"
-                  label="How did you hear about us?"
-                  options={[
-                    'A colleague/recommendation/forum',
-                    'Software review platform (G2, Capterra...)',
-                    'Our partners (Gatsby, Next.js...)',
-                    'Social Media (Twitter, LinkedIn...)',
-                    'Search',
-                    'Other',
-                  ]}
-                  validations={{ required: 'Required' }}
-                />
-              )}
+              <Field
+                name="lastName"
+                label="Last name"
+                placeholder="Your last name"
+                validations={{ required: 'Required' }}
+              />
             </div>
+
+            <div className={s.formCols}>
+              <Field
+                name="email"
+                label="Work email"
+                placeholder="Your work email"
+                validations={{
+                  required: 'Required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,20}$/i,
+                    message: 'Invalid email',
+                  },
+                }}
+              />
+
+              <Field
+                name="jobFunction"
+                label="Job function"
+                validations={{ required: 'Required' }}
+                options={[
+                  'Editorial & Content',
+                  'Developer/Engineering',
+                  'Product & Project',
+                  'Sales & Marketing',
+                  'Administrative',
+                  'Other',
+                ]}
+              />
+            </div>
+
+            <Field
+              name="useCase"
+              label="Use case"
+              options={[
+                'Ecommerce',
+                'Moving to headless',
+                'Migrating from other headless CMS',
+                'Agency',
+                'Other',
+              ]}
+              validations={{ required: 'Required' }}
+            />
           </>
         )}
 
@@ -203,14 +260,30 @@ export default function TalkWithUs({
           render={({ field }) => <Textarea {...field} />}
         />
 
+        {fieldset === 'sales' && (
+          <Field
+            name="referral"
+            label="How did you hear about us?"
+            options={[
+              'A colleague/recommendation/forum',
+              'Software review platform (G2, Capterra...)',
+              'Our partners (Gatsby, Next.js...)',
+              'Social Media (Twitter, LinkedIn...)',
+              'Search',
+              'Other',
+            ]}
+            validations={{ required: 'Required' }}
+          />
+        )}
+
         {initialValues.errorId && (
           <Field name="errorId" label="Error ID" readOnly />
         )}
 
-        {contactFormType === 'support' && (
+        {fieldset === 'support' && (
           <Field
             name="uploads"
-            label="Add any additional attachments"
+            label="Add any additional attachments, if necessary"
             type="file"
             multiple
           />

@@ -234,7 +234,11 @@ function Enterprise({ page, review1, review2, review3 }) {
                   </p>
                 </div>
               </div>
-              <TalkWithUs contactFormType="sales" issueType="enterprise" />
+              <TalkWithUs
+                fieldset="sales"
+                initialValues={{ issueType: 'enterprise' }}
+                hubspotFormId="52d242a6-a292-4c05-9056-da87d4a08448"
+              />
             </div>
           </Wrapper>
         </div>
