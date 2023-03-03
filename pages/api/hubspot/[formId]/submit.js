@@ -12,7 +12,10 @@ const handler = async (req, res) => {
       'Access-Control-Allow-Headers',
       'Content-Type, Authorization',
     );
-    res.setHeader('Content-Type', 'application/json');
+
+    if (req.method === 'OPTIONS') {
+      return res.status(200).json({ success: true });
+    }
 
     if (req.method !== 'POST') {
       return res.status(404).send('Invalid endpoint!');
