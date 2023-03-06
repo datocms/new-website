@@ -1,5 +1,5 @@
 import * as Fathom from 'fathom-client';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import '../components/BaseLayout/global.css';
 import '../components/NProgress/style.css';
@@ -39,13 +39,9 @@ const ErrorDisplay = ({ error, resetError }) => (
   </div>
 );
 
-Router.events.on('routeChangeComplete', (as, routeProps) => {
-  if (!routeProps.shallow) {
-    Fathom.trackPageview();
-  }
-});
-
 function App({ Component, pageProps }) {
+  const router = useRouter();
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const source = urlParams.get('utm_source');
@@ -63,7 +59,19 @@ function App({ Component, pageProps }) {
 
       setCookie('datoUtm', JSON.stringify({ source, medium, campaign }), 365);
     }
-  }, []);
+
+    function onRouteChangeComplete() {
+      Fathom.trackPageview();
+    }
+
+    // Record a pageview when route changes
+    router.events.on('routeChangeComplete', onRouteChangeComplete);
+
+    // Unassign event listener
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete);
+    };
+  }, [router.events]);
 
   return (
     <ToastProvider placement="bottom-right">
