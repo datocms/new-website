@@ -317,13 +317,13 @@ export default function Agencies({ subscription }) {
         }
       >
         <div className={s.benefits}>
-          <Benefit title={<>Special plans and discounts</>}>
+          <Benefit title={<>💰 Special plans and discounts</>}>
             You get access to customised plans, specifically designed to get you
             started with DatoCMS without any big price jumps/committments. Or,
             if you prefer, a 30% discount on the Professional public plan.
           </Benefit>
 
-          <Benefit title={<>30% off for your clients</>}>
+          <Benefit title={<>🎁 30% off for your clients</>}>
             Partners can enable special plans — or a 30% discount on the public
             Professional plan — on their customers&apos; accounts.{' '}
             <Link href="/docs/agency-partner-program/partners-dashboard#enabling-special-plans-to-clients">
@@ -332,7 +332,9 @@ export default function Agencies({ subscription }) {
             , autonomously, without having to ask us for anything.
           </Benefit>
 
-          <Benefit title={<>Full-access to all your clients&apos; projects</>}>
+          <Benefit
+            title={<>🔑 Full-access to all your clients&apos; projects</>}
+          >
             Assign your team members a special{' '}
             <Link href="/docs/agency-partner-program/partners-dashboard#developer-and-projects-manager-roles">
               Developer role
@@ -346,7 +348,7 @@ export default function Agencies({ subscription }) {
             seats.
           </Benefit>
 
-          <Benefit title={<>Partner listing for winning new clients</>}>
+          <Benefit title={<>🏆 Partner listing for winning new clients</>}>
             We&apos;ll get you in front of new potential clients by featuring
             your agency (and projects) as part of our{' '}
             <Link href="/partners">Partners page</Link>. Teams in need of
@@ -354,14 +356,14 @@ export default function Agencies({ subscription }) {
             for their projects.
           </Benefit>
 
-          <Benefit title={<>Dedicated partner account manager</>}>
+          <Benefit title={<>👩‍💼 Dedicated partner account manager</>}>
             Get the most out of DatoCMS: gain access to the constant support of
             our Partner Team to address any questions you (or your customers)
             may have. Participate in webinars specifically dedicated to our
             partners.{' '}
           </Benefit>
 
-          <Benefit title={<>Co-marketing opportunities</>}>
+          <Benefit title={<>📈 Co-marketing opportunities</>}>
             Our marketing relies on real success stories — and we know that our
             Partners will provide some great ones. We&apos;ll promote your
             projects, <Link href="/customers">create case studies</Link> and
