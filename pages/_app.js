@@ -1,6 +1,6 @@
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import '../components/BaseLayout/global.css';
 import '../components/NProgress/style.css';
 import { getCookie, setCookie } from 'utils/cookies';
@@ -41,6 +41,7 @@ const ErrorDisplay = ({ error, resetError }) => (
 
 function App({ Component, pageProps }) {
   const router = useRouter();
+  const firstPageViewTracked = useRef(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -50,7 +51,6 @@ function App({ Component, pageProps }) {
       includedDomains: ['www.datocms.com'],
       url: '/api/fathom/load.js',
       honorDNT: true,
-      spa: 'auto',
     });
 
     if (source && !getCookie('datoUtm')) {
@@ -66,6 +66,11 @@ function App({ Component, pageProps }) {
 
     // Record a pageview when route changes
     router.events.on('routeChangeComplete', onRouteChangeComplete);
+
+    if (!firstPageViewTracked.current) {
+      firstPageViewTracked.current = true;
+      Fathom.trackPageview();
+    }
 
     // Unassign event listener
     return () => {
