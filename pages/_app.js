@@ -49,7 +49,7 @@ function App({ Component, pageProps }) {
 
     Fathom.load('NVXWCARK', {
       includedDomains: ['www.datocms.com'],
-      url: '/api/fathom/load.js',
+      url: 'https://cdn.usefathom.com/script.js',
       honorDNT: true,
     });
 
