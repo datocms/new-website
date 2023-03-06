@@ -323,7 +323,7 @@ export default function Agencies({ subscription }) {
             if you prefer, a 30% discount on the Professional public plan.
           </Benefit>
 
-          <Benefit title={<>Activate custom plans to your clients</>}>
+          <Benefit title={<>30% off for your clients</>}>
             Partners can enable special plans — or a 30% discount on the public
             Professional plan — on their customers&apos; accounts.{' '}
             <Link href="/docs/agency-partner-program/partners-dashboard#enabling-special-plans-to-clients">
@@ -346,7 +346,7 @@ export default function Agencies({ subscription }) {
             seats.
           </Benefit>
 
-          <Benefit title={<>DatoCMS partner listing</>}>
+          <Benefit title={<>Partner listing for winning new clients</>}>
             We&apos;ll get you in front of new potential clients by featuring
             your agency (and projects) as part of our{' '}
             <Link href="/partners">Partners page</Link>. Teams in need of
