@@ -320,11 +320,11 @@ export default function Agencies({ subscription }) {
           <Benefit title={<>Special plans and discounts</>}>
             You get access to customised plans, specifically designed to get you
             started with DatoCMS without any big price jumps/committments. Or,
-            if you prefer, a 15% discount on the Professional public plan.
+            if you prefer, a 30% discount on the Professional public plan.
           </Benefit>
 
           <Benefit title={<>Activate custom plans to your clients</>}>
-            Partners can enable special plans — or a 15% discount on the public
+            Partners can enable special plans — or a 30% discount on the public
             Professional plan — on their customers&apos; accounts.{' '}
             <Link href="/docs/agency-partner-program/partners-dashboard#enabling-special-plans-to-clients">
               Directly from their dashboard
