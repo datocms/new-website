@@ -173,7 +173,34 @@
 }
 
 .newsletter {
-  padding-bottom: rfs(80px);
+  position: relative;
+
+  &:before {
+    content: '';
+    background: #13151b;
+    clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+}
+
+.newsletterInner {
+  padding: rfs(40px);
+  background: white;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  color: var(--base-body-color);
+
+  ::-moz-selection {
+    background: #f4cf58;
+  }
+  ::selection {
+    background: #f4cf58;
+  }
 
   @media (width > 900px) {
     display: flex;
@@ -184,7 +211,8 @@
 .newsletterTitle {
   font-weight: bold;
   margin-bottom: 10px;
-  font-size: rfs(30px);
+  font-size: rfs(25px);
+  letter-spacing: -0.03em;
 }
 
 .newsletterBody {
