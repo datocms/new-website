@@ -10,7 +10,7 @@ import Verizon from 'public/images/logos/verizon.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
-import useSWR from 'swr';
+// import useSWR from 'swr';
 import {
   gqlStaticProps,
   imageFields,
@@ -261,7 +261,7 @@ const Chart = ({ data: rawData, children }) => {
 };
 
 export default function About({ members, page, review1, review2 }) {
-  const { data } = useSWR('/api/company/metrics', fetcher);
+  // const { data } = useSWR('/api/company/metrics', fetcher);
 
   return (
     <Layout>
@@ -354,7 +354,7 @@ export default function About({ members, page, review1, review2 }) {
         <a id="arr" />
       </Flag>
 
-      {data && (
+      {/* {data && (
         <Space bottom={3}>
           <Wrapper>
             <InterstitialTitle style="two">An Open Company</InterstitialTitle>
@@ -366,7 +366,7 @@ export default function About({ members, page, review1, review2 }) {
             <Chart data={data.data.recurring_revenue} />
           </Wrapper>
         </Space>
-      )}
+      )} */}
 
       <Wrapper>
         <div className={s.members}>
