@@ -1,4 +1,8 @@
-const html = `
+// Usage:
+// <script type="text/javascript" src="https://www.datocms.com/landing-pages/cookieConsent.js"></script>
+
+(() => {
+  const html = `
   <div class="consent--cookies">
     <div class="consent--cookiesText">We use cookies to enhance the user experience. Do you consent their use in accordance with <a href="https://www.datocms.com/legal/cookie-policy">our cookie policy</a>?</div>
     <button class="consent--cookiesButton consent--cookiesPrimaryButton" data-consent="true">I consent</button>
@@ -6,7 +10,7 @@ const html = `
   </div>
 `;
 
-const css = `
+  const css = `
  .consent--cookies {
   position:fixed;
   bottom:0;
@@ -56,7 +60,7 @@ const css = `
  }
 `;
 
-const gtmScript = `
+  const gtmScript = `
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -64,26 +68,29 @@ const gtmScript = `
   })(window,document,'script','dataLayer','GTM-TJRM9NT');
 `;
 
-const cookieName = 'cookies-accepted';
+  const cookieName = 'cookies-accepted';
 
-const getCookie = (name) => {
-  const match = document.cookie.match(new RegExp(`${name}=([^;]+)`));
-  if (match) return match[1];
-};
+  const getCookie = (name) => {
+    const match = document.cookie.match(new RegExp(`${name}=([^;]+)`));
+    if (match) return match[1];
+  };
 
-const setCookie = (name, value, days) => {
-  let expires = '';
+  const setCookie = (name, value, days) => {
+    let expires = '';
 
-  if (days) {
-    const date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    expires = `; expires=${date.toGMTString()}`;
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = `; expires=${date.toGMTString()}`;
+    }
+
+    document.cookie = `${name}=${value}${expires}; path=/; domain=.datocms.com; samesite=none; secure`;
+  };
+
+  if (getCookie(cookieName)) {
+    return;
   }
 
-  document.cookie = `${name}=${value}${expires}; path=/; domain=.datocms.com; samesite=none; secure`;
-};
-
-if (!getCookie(cookieName)) {
   const container = document.createElement('div');
   container.innerHTML = html;
   document.body.appendChild(container);
@@ -109,4 +116,4 @@ if (!getCookie(cookieName)) {
     .addEventListener('click', () => {
       container.parentNode.removeChild(container);
     });
-}
+})();
