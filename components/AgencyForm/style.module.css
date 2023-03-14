@@ -1,0 +1,19 @@
+.form {
+  textarea {
+    resize: none;
+  }
+}
+
+.formCols {
+  @media (width > 900px) {
+    display: flex;
+
+    > * {
+      flex: 1;
+
+      &:first-child {
+        border-right: 1px solid var(--border-color);
+      }
+    }
+  }
+}

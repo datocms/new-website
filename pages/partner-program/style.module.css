@@ -129,37 +129,6 @@
   line-height: 1.1;
 }
 
-.form {
-  max-width: 900px;
-  margin: rfs(30px) auto;
-  box-shadow: var(--box-shadow);
-  background: white;
-
-  @media (width > 700px) {
-    border-radius: 7px;
-    overflow: hidden;
-    font-size: rfs(21px);
-  }
-
-  textarea {
-    resize: none;
-  }
-}
-
-.formCols {
-  @media (width > 900px) {
-    display: flex;
-
-    > * {
-      flex: 1;
-
-      &:first-child {
-        border-right: 1px solid var(--border-color);
-      }
-    }
-  }
-}
-
 .root {
   display: block;
   color: inherit;
@@ -265,5 +234,18 @@ a.authorRole:hover .name {
   }
   to {
     left: -4500px;
+  }
+}
+
+.form {
+  max-width: 900px;
+  margin: rfs(30px) auto;
+  box-shadow: var(--box-shadow);
+  background: white;
+
+  @media (width > 700px) {
+    border-radius: 7px;
+    overflow: hidden;
+    font-size: rfs(21px);
   }
 }

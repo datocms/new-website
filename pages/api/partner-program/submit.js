@@ -9,12 +9,10 @@ const proxy = httpProxy.createProxyServer({
 export default function handler(req, res) {
   proxy.web(req, res, {
     ignorePath: true,
-    target: `https://api.unsplash.com${req.url.replace(
-      /.*unsplash\-proxy/,
-      '',
-    )}`,
+    target:
+      'https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/aiwRgx07C0Ix1B7x-Ex6B67cQpfHc9C_8taVomi6wfkt5nrcQIIoChC4AKU90ytYoSIyBXB9iUAzttmGijXse3tNA4LJdiOWwmF--Xbifq0RxMqHExLQKezhuYth',
     headers: {
-      Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_TOKEN}`,
+      Referer: 'https://www.datocms.com/partner-program',
     },
     changeOrigin: true,
   });

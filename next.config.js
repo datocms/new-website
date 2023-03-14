@@ -43,7 +43,7 @@ module.exports = withNextEnv(
             {
               key: 'content-security-policy',
               value:
-                'frame-ancestors https://datocms.admin.datocms.com http://localhost:3002',
+                'frame-ancestors https://datocms.admin.datocms.com http://localhost:3002 https://get.datocms.com',
             },
             {
               key: 'x-xss-protection',
