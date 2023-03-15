@@ -2,10 +2,14 @@
 
 // Place the following code where you want the form to appear:
 //
-// <iframe src="https://www.datocms.com/partner-program/form" id="agencyPartnerForm" frameBorder="0" style="width: 100%;"></iframe>
+// <div id="agencyPartnerForm"></div>
 // <script type="text/javascript" src="https://www.datocms.com/landing-pages/agencyPartnerForm.js"></script>
 
 (() => {
+  document.getElementById(
+    'agencyPartnerForm',
+  ).innerHTML = `<iframe src="https://www.datocms.com/partner-program/form" id="agencyPartnerForm" frameBorder="0" style="width: 100%;"></iframe>`;
+
   const script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
   script.setAttribute(
