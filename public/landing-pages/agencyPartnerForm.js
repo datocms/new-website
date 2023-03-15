@@ -8,7 +8,7 @@
 (() => {
   document.getElementById(
     'agencyPartnerForm',
-  ).innerHTML = `<iframe src="https://www.datocms.com/partner-program/form" id="agencyPartnerForm" frameBorder="0" style="width: 100%;"></iframe>`;
+  ).innerHTML = `<iframe src="https://www.datocms.com/partner-program/form" id="agencyPartnerFormIframe" frameBorder="0" style="width: 100%;"></iframe>`;
 
   const script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
@@ -17,7 +17,7 @@
     'https://unpkg.com/iframe-resizer@4.3.6/js/iframeResizer.min.js',
   );
   script.addEventListener('load', () => {
-    iFrameResize({ log: false }, '#agencyPartnerForm');
+    iFrameResize({ log: false }, '#agencyPartnerFormIframe');
   });
   document.getElementsByTagName('head')[0].appendChild(script);
 })();
