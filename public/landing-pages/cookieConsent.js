@@ -87,33 +87,43 @@
     document.cookie = `${name}=${value}${expires}; path=/; domain=.datocms.com; samesite=none; secure`;
   };
 
-  if (getCookie(cookieName)) {
-    return;
+  function onReady(cb) {
+    if (document.readyState === 'complete') {
+      cb();
+    } else {
+      window.addEventListener('load', cb);
+    }
   }
 
-  const container = document.createElement('div');
-  container.innerHTML = html;
-  document.body.appendChild(container);
+  onReady(() => {
+    if (getCookie(cookieName)) {
+      return;
+    }
 
-  const style = document.createElement('style');
-  style.setAttribute('type', 'text/css');
-  style.appendChild(document.createTextNode(css));
-  document.getElementsByTagName('head')[0].appendChild(style);
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    document.body.appendChild(container);
 
-  document
-    .querySelector('.consent--cookies [data-consent]')
-    .addEventListener('click', () => {
-      container.parentNode.removeChild(container);
-      setCookie(cookieName, 'true');
+    const style = document.createElement('style');
+    style.setAttribute('type', 'text/css');
+    style.appendChild(document.createTextNode(css));
+    document.getElementsByTagName('head')[0].appendChild(style);
 
-      const script = document.createElement('script');
-      script.appendChild(document.createTextNode(gtmScript));
-      document.getElementsByTagName('head')[0].appendChild(script);
-    });
+    document
+      .querySelector('.consent--cookies [data-consent]')
+      .addEventListener('click', () => {
+        container.parentNode.removeChild(container);
+        setCookie(cookieName, 'true');
 
-  document
-    .querySelector('.consent--cookies [data-decline]')
-    .addEventListener('click', () => {
-      container.parentNode.removeChild(container);
-    });
+        const script = document.createElement('script');
+        script.appendChild(document.createTextNode(gtmScript));
+        document.getElementsByTagName('head')[0].appendChild(script);
+      });
+
+    document
+      .querySelector('.consent--cookies [data-decline]')
+      .addEventListener('click', () => {
+        container.parentNode.removeChild(container);
+      });
+  });
 })();
