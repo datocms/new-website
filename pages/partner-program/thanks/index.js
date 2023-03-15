@@ -5,9 +5,9 @@ import Highlight from 'components/Highlight';
 import s from './style.module.css';
 import Head from 'components/Head';
 
-export default function Support({ preview, topics }) {
+export default function Support() {
   return (
-    <Layout noCta preview={preview}>
+    <Layout noCta>
       <Head>
         <title>Agency Partner Program</title>
       </Head>
@@ -31,7 +31,6 @@ export default function Support({ preview, topics }) {
           <p>We really can&apos;t wait to know more about you!</p>
         </div>
       </Wrapper>
-      <div className={s.footer}></div>
     </Layout>
   );
 }
