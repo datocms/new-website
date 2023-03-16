@@ -1,0 +1,7 @@
+.container {
+  @media (width > 700px) {
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    font-size: rfs(21px);
+  }
+}
