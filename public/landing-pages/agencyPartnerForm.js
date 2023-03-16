@@ -17,7 +17,7 @@
     'https://unpkg.com/iframe-resizer@4.3.6/js/iframeResizer.min.js',
   );
   script.addEventListener('load', () => {
-    iFrameResize({ log: false }, '#agencyPartnerFormIframe');
+    iFrameResize({ log: true }, '#agencyPartnerFormIframe');
   });
   document.getElementsByTagName('head')[0].appendChild(script);
 })();
