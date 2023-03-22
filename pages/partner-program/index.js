@@ -118,7 +118,11 @@ export default function Agencies({ subscription }) {
         <LogosBar
           title="+80 Agency Partners distributed in 45 countries"
           clients={partnersPage.highlightedPartners.map((partner) => (
-            <Link href={`/partners/${partner.slug}`} key={partner.slug}>
+            <Link
+              href={`/partners/${partner.slug}`}
+              key={partner.slug}
+              passHref
+            >
               <LazyImage src={partner.logo.url} />
             </Link>
           ))}
