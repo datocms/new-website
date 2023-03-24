@@ -2,13 +2,15 @@ const Rollbar = require('rollbar');
 import {
   createNote,
   createLead,
-  findOrCreatePerson,
   findOrCreateOrgByName,
+  findOrCreatePerson,
 } from '../../../lib/pipedrive-helpers';
 
 const rollbar = process.env.ROLLBAR_TOKEN
   ? new Rollbar(process.env.ROLLBAR_TOKEN)
   : { error: () => {} };
+
+const partnershipLabel = '87a60c60-6a8e-11ed-92ec-410445a67487';
 
 const handler = async (req, res) => {
   try {
@@ -24,31 +26,37 @@ const handler = async (req, res) => {
     const {
       firstName,
       lastName,
-      companyName,
+      agencyName,
+      agencyUrl,
       email,
       country,
-      jobFunction,
-      industry,
-      useCase,
-      referral,
       body,
+      teamSize,
+      productFamiliarity,
     } = req.body;
 
-    const organization = await findOrCreateOrgByName(companyName, industry);
+    const organization = await findOrCreateOrgByName(
+      agencyName,
+      'Agency / Freelancer',
+      agencyUrl,
+    );
 
     const person = await findOrCreatePerson(
       email,
       firstName,
       lastName,
       country,
-      jobFunction,
-      referral,
+      '',
+      '',
       organization,
     );
 
-    const lead = await createLead(person, organization, useCase);
+    const lead = await createLead(person, organization, '', [partnershipLabel]);
 
-    await createNote(lead, body);
+    const noteText = `Team size: ${teamSize}
+    Product familiarity: ${productFamiliarity}
+    Message: ${body}`;
+    await createNote(lead, noteText);
 
     res.status(200).json({ success: true });
   } catch (e) {

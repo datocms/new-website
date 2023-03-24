@@ -36,6 +36,21 @@ export default function AgencyForm({
         productFamiliarity: 'company.familiarity_with_datocms',
       },
     });
+
+    const body = JSON.stringify(formValues);
+    const res = await fetch('/api/pipedrive/submit-partner', {
+      body: body,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    });
+
+    const result = await res.json();
+
+    if (!result.success) {
+      throw new Error('Ouch!');
+    }
   }
 
   return (
