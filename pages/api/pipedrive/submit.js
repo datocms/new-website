@@ -4,7 +4,7 @@ import {
   createLead,
   findOrCreatePerson,
   findOrCreateOrgByName,
-} from '../../../lib/pipedrive-helpers';
+} from '../../../lib/pipedriveHelpers';
 
 const rollbar = process.env.ROLLBAR_TOKEN
   ? new Rollbar(process.env.ROLLBAR_TOKEN)

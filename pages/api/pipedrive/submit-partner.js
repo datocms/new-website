@@ -4,7 +4,7 @@ import {
   createLead,
   findOrCreateOrgByName,
   findOrCreatePerson,
-} from '../../../lib/pipedrive-helpers';
+} from '../../../lib/pipedriveHelpers';
 
 const rollbar = process.env.ROLLBAR_TOKEN
   ? new Rollbar(process.env.ROLLBAR_TOKEN)
@@ -53,9 +53,17 @@ const handler = async (req, res) => {
 
     const lead = await createLead(person, organization, '', [partnershipLabel]);
 
-    const noteText = `Team size: ${teamSize}
-    Product familiarity: ${productFamiliarity}
-    Message: ${body}`;
+    const noteText =
+      '<p>Team size: ' +
+      teamSize +
+      '</p>' +
+      '<p>Product familiarity: ' +
+      productFamiliarity +
+      '</p>' +
+      '<p>Message: ' +
+      body +
+      '</p>';
+
     await createNote(lead, noteText);
 
     res.status(200).json({ success: true });
