@@ -96,6 +96,23 @@ function findReturnType(manifest, signature, extraInfo = {}) {
     });
   }
 
+  if (signature.type === 'union') {
+    if (
+      signature.types.length === 2 &&
+      signature.types.some((t) => t.type === 'intrinsic' && t.name === 'void')
+    ) {
+      return findReturnType(
+        manifest,
+        signature.types.find(
+          (t) => t.type !== 'intrinsic' || t.name !== 'void',
+        ),
+        { ...extraInfo, isNullable: true },
+      );
+    }
+
+    return null;
+  }
+
   if (signature.type.type === 'union') {
     if (
       signature.type.types.length === 2 &&
@@ -140,7 +157,7 @@ function findReturnType(manifest, signature, extraInfo = {}) {
     });
   }
 
-  throw new Error('fuck');
+  throw new Error(`unknown signature ${JSON.stringify(signature)}`);
 }
 
 function buildCtx(manifest, definition) {
@@ -176,11 +193,7 @@ function buildCtx(manifest, definition) {
       name: definition.name,
       description: findShortText(definition),
       properties: properties.map((child) => {
-        if (
-          child.type &&
-          child.type.declaration &&
-          child.type.declaration.signatures
-        ) {
+        if (child.type?.declaration?.signatures) {
           child.signatures = child.type.declaration.signatures;
         }
 
