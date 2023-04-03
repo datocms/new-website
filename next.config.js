@@ -25,7 +25,14 @@ const svgTemplate = (
 module.exports = withNextEnv(
   withBundleAnalyzer({
     async redirects() {
-      return redirects.map((r) => ({ ...r, statusCode: 301 }));
+      return [
+        {
+          source: '/landing-pages/cookieConsent.js',
+          destination: '/api/cookieConsent',
+          statusCode: 301,
+        },
+        ...redirects.map((r) => ({ ...r, statusCode: 301 })),
+      ];
     },
     async headers() {
       return [

@@ -10,6 +10,7 @@ import Hero from 'components/Hero';
 import Wrapper from 'components/Wrapper';
 import Head from 'components/Head';
 import Highlight from 'components/Highlight';
+import Script from 'next/script';
 
 const rollbarConfig = {
   accessToken: process.env.NEXT_PUBLIC_ROLLBAR_TOKEN,
@@ -41,7 +42,6 @@ const ErrorDisplay = ({ error, resetError }) => (
 
 function App({ Component, pageProps }) {
   const router = useRouter();
-  const firstPageViewTracked = useRef(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -50,7 +50,6 @@ function App({ Component, pageProps }) {
     Fathom.load('NVXWCARK', {
       includedDomains: ['www.datocms.com'],
       url: 'https://cdn.usefathom.com/script.js',
-      honorDNT: true,
     });
 
     if (source && !getCookie('datoUtm')) {
@@ -67,11 +66,6 @@ function App({ Component, pageProps }) {
     // Record a pageview when route changes
     router.events.on('routeChangeComplete', onRouteChangeComplete);
 
-    if (!firstPageViewTracked.current) {
-      firstPageViewTracked.current = true;
-      Fathom.trackPageview();
-    }
-
     // Unassign event listener
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
@@ -82,6 +76,11 @@ function App({ Component, pageProps }) {
     <ToastProvider placement="bottom-right">
       <Provider config={rollbarConfig}>
         <ErrorBoundary fallbackUI={ErrorDisplay}>
+          <Script
+            id="cookie-consent"
+            strategy="afterInteractive"
+            src="/landing-pages/cookieConsent.js"
+          />
           <Component {...pageProps} />
         </ErrorBoundary>
       </Provider>
