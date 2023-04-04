@@ -8,6 +8,7 @@ import Button from 'components/Button';
 import s from './style.module.css';
 import { useForm } from 'react-hook-form';
 import wretch from 'wretch';
+import * as Fathom from 'fathom-client';
 
 wretch().errorType('json');
 
@@ -34,6 +35,7 @@ export default function Footer({ noCta }) {
 
   const onSubmit = async ({ email }) => {
     try {
+      Fathom.trackGoal('NZPPFI8Z', 0);
       await wretch('/api/mailchimp/subscribe').post({ email }).json();
 
       reset();
