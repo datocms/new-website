@@ -95,7 +95,7 @@ const cookieConsentScript = `
     animation-duration: 0.2s;
     animation-name: cookies-appear;
     animation-timing-function: ease-in;
-    font-family: Colfax;
+    font-family: Colfax, colfax-web;
   }
 
   @keyframes cookies-appear {
