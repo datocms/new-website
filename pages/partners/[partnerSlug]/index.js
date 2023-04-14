@@ -84,10 +84,37 @@ export const getStaticProps = handleErrors(
             npmUser {
               id
             }
+            projects: _allReferencingShowcaseProjects(
+              first: 100
+              orderBy: position_ASC
+            ) {
+              name
+              slug
+              headline {
+                value
+              }
+              technologies {
+                name
+                integrationType {
+                  slug
+                }
+                logo {
+                  url
+                }
+              }
+              mainImage {
+                responsiveImage(
+                  imgixParams: { w: 750, h: 500, fit: crop, crop: top }
+                ) {
+                  ...imageFields
+                }
+              }
+            }
           }
         }
 
         ${seoMetaTagsFields}
+        ${imageFields}
       `,
       variables: { partnerSlug },
       preview: preview || false,
@@ -100,59 +127,39 @@ export const getStaticProps = handleErrors(
     }
 
     const authorId = data.partner.npmUser?.id;
+    let plugins = [];
 
-    const {
-      data: { projects, plugins },
-    } = await request({
-      query: `
-        query ExtraProjectsQuery($partnerId: ItemId! ${
-          authorId ? `, $authorId: ItemId!` : ''
-        }) {
-            projects: allShowcaseProjects(filter: { partner: { eq: $partnerId } }, first: 100, orderBy: position_ASC) {
-            name
-            slug
-            headline { value }
-            technologies {
-              name
-              logo {
-                url
+    if (authorId) {
+      const { data } = await request({
+        query: /* GraphQL */ `
+          query ExtraProjectsQuery($authorId: ItemId!) {
+            plugins: allPlugins(
+              filter: {
+                author: { eq: $authorId }
+                manuallyDeprecated: { eq: false }
               }
-            }
-            mainImage {
-              responsiveImage(
-                imgixParams: { w: 750, h: 500, fit: crop, crop: top }
-              ) {
-                ...imageFields
-              }
-            }
-          }
-          ${
-            authorId
-              ? `
-                plugins: allPlugins(filter: { author: { eq: $authorId }, manuallyDeprecated: { eq: false } }, orderBy: installs_DESC) {
-                  title
-                  description
-                  releasedAt
-                  packageName
-                  coverImage {
-                    responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
-                      ...imageFields
-                    }
-                  }
+              orderBy: installs_DESC
+            ) {
+              title
+              description
+              releasedAt
+              packageName
+              coverImage {
+                responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
+                  ...imageFields
                 }
-              `
-              : ''
+              }
+            }
           }
-        }
 
-        ${imageFields}
-    `,
-      variables: {
-        partnerId: data.partner.id,
-        authorId,
-      },
-      preview: preview || false,
-    });
+          ${imageFields}
+        `,
+        variables: { authorId },
+        preview: preview || false,
+      });
+
+      plugins = data.plugins;
+    }
 
     return {
       revalidate: 60 * 10,
@@ -166,19 +173,13 @@ export const getStaticProps = handleErrors(
               initialData: data,
             }
           : { enabled: false, initialData: data },
-        projects,
         plugins: plugins || [],
       },
     };
   },
 );
 
-export default function PartnerPage({
-  preview,
-  subscription,
-  projects,
-  plugins,
-}) {
+export default function PartnerPage({ preview, subscription, plugins }) {
   const {
     data: { partner },
   } = useQuerySubscription(subscription);
@@ -273,7 +274,7 @@ export default function PartnerPage({
           </StickySidebar>
         </Space>
 
-        {projects.length > 0 && (
+        {partner.projects.length > 0 && (
           <Space top={1}>
             <SidebarPane
               icon={<DescriptionIcon />}
@@ -281,7 +282,7 @@ export default function PartnerPage({
               separateMoreFromContent
             >
               <div className={s.projectsGrid}>
-                {projects.map((project) => (
+                {partner.projects.map((project) => (
                   <PluginBox
                     title={project.name}
                     key={project.slug}
@@ -295,8 +296,14 @@ export default function PartnerPage({
                           <LazyImage
                             className={s.techLogo}
                             src={
-                              project.technologies.find((t) => t?.logo?.url)
-                                .logo.url
+                              (
+                                project.technologies.find(
+                                  (t) =>
+                                    t.integrationType.slug === 'framework' &&
+                                    t.logo?.url,
+                                ) ||
+                                project.technologies.find((t) => t.logo?.url)
+                              ).logo.url
                             }
                           />
                         </div>
@@ -323,25 +330,24 @@ export default function PartnerPage({
               separateMoreFromContent
             >
               <div className={s.pluginsGrid}>
-                {plugins &&
-                  plugins.map((post) => (
-                    <PluginBox
-                      key={post.packageName}
-                      title={post.title}
-                      href={`/marketplace/plugins/i/${post.packageName}`}
-                      image={
-                        post.coverImage && post.coverImage.responsiveImage ? (
-                          <Image
-                            className={s.image}
-                            data={post.coverImage.responsiveImage}
-                          />
-                        ) : (
-                          <PluginImagePlacehoder hash={post.packageName} />
-                        )
-                      }
-                      description={truncate(post.description, 120)}
-                    />
-                  ))}
+                {plugins?.map((post) => (
+                  <PluginBox
+                    key={post.packageName}
+                    title={post.title}
+                    href={`/marketplace/plugins/i/${post.packageName}`}
+                    image={
+                      post.coverImage && post.coverImage.responsiveImage ? (
+                        <Image
+                          className={s.image}
+                          data={post.coverImage.responsiveImage}
+                        />
+                      ) : (
+                        <PluginImagePlacehoder hash={post.packageName} />
+                      )
+                    }
+                    description={truncate(post.description, 120)}
+                  />
+                ))}
               </div>
             </SidebarPane>
           </Space>
