@@ -170,15 +170,8 @@ const cookieConsentScript = `
   };
 
   const setCookie = (name, value) => {
-    let expires = '';
-
-    if (days) {
-      const date = new Date();
-      date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000);
-      expires = '; expires=' + date.toUTCString();
-    }
-
-    document.cookie = name + '=' + value + expires + '; path=/; domain=.datocms.com; samesite=none; secure';
+    const expiration = new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = name + '=' + value + '; expires=' + expiration + '; path=/; domain=.datocms.com; samesite=none; secure';
   };
 
   onReady(() => {
