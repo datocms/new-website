@@ -169,13 +169,13 @@ const cookieConsentScript = `
     if (match) return match[1];
   };
 
-  const setCookie = (name, value, days) => {
+  const setCookie = (name, value) => {
     let expires = '';
 
     if (days) {
       const date = new Date();
-      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-      expires = '; expires=' + date.toGMTString();
+      date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000);
+      expires = '; expires=' + date.toUTCString();
     }
 
     document.cookie = name + '=' + value + expires + '; path=/; domain=.datocms.com; samesite=none; secure';
