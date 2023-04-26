@@ -188,7 +188,7 @@ export default function PartnerPage({ preview, subscription }) {
       </InterstitialTitle>
       <Wrapper>
         <Space bottom={2}>
-          {project.video ? (
+          {project.video?.video ? (
             <div className={s.mainImage}>
               <VideoPlayer
                 controls
