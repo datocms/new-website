@@ -485,15 +485,31 @@
 }
 
 .docCallout--gray {
-  background: var(--light-bg-color);
+  background: #f4f5ff;
+
+  .docCalloutTitle {
+    color: #1e64f0;
+
+    svg {
+      fill: #1e64f0;
+    }
+  }
 }
 
 .docCallout--green {
-  background: #e8f9e9;
+  background: #c0fee5;
+
+  .docCalloutTitle {
+    color: #00a67c;
+
+    svg {
+      fill: #00a67c;
+    }
+  }
 }
 
 .docCallout--yellow {
-  background: #fffadb;
+  background: #fffbd1;
 }
 
 .docCalloutTitle {
