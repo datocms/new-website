@@ -5,23 +5,8 @@ import ReactUiExample from 'components/ReactUiExample';
 import PostContent from 'components/PostContent';
 import s from 'pages/docs/pageStyle.module.css';
 import cn from 'classnames';
-import { replace } from '@wordpress/shortcode';
 import { StructuredText } from 'react-datocms';
-
-function parseShortCodes(text, codes) {
-  const meta = {};
-
-  const newText = codes.reduce(
-    (result, code) =>
-      replace(code, result, (match) => {
-        meta[code] = match.attrs.named || {};
-        return '';
-      }),
-    text,
-  );
-
-  return { ...meta, id: text, content: newText };
-}
+import { parseShortCodes } from '../../utils/table';
 
 export default function DocPageContent({ additionalData, ...props }) {
   return (

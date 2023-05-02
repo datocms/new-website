@@ -233,6 +233,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               question { value }
               answer { value }
             }
+            ... on TableRecord {
+              id
+              _modelApiKey
+              table
+            }
           }
         }
         _firstPublishedAt

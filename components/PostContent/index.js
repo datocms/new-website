@@ -22,6 +22,7 @@ import Corona from 'public/images/illustrations/live-4.svg';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import CodeSandboxIcon from 'public/icons/brands/codesandbox.svg';
 import partnerStyles from '/pages/partners/[partnerSlug]/style.module.css';
+import { parseShortCodes, toCss } from '../../utils/table';
 
 function renderBlock(s, block, defaultAltForImages) {
   switch (block._modelApiKey) {
@@ -208,6 +209,7 @@ function renderBlock(s, block, defaultAltForImages) {
                     description="Play video »"
                     image={
                       <img
+                        alt={tutorial.res[0].video.alt}
                         className={s.pluginBoxImage}
                         src={tutorial.res[0].video.thumbnailUrl}
                       />
@@ -259,12 +261,8 @@ function renderBlock(s, block, defaultAltForImages) {
           <ImageFigure
             imageClassName={s.responsiveImage}
             data={block.image}
-            alt={
-              (responsiveImage && responsiveImage.alt) ||
-              alt ||
-              defaultAltForImages
-            }
-            title={(responsiveImage && responsiveImage.title) || title}
+            alt={responsiveImage?.alt || alt || defaultAltForImages}
+            title={responsiveImage?.title || title}
           />
         </div>
       );
@@ -308,19 +306,52 @@ function renderBlock(s, block, defaultAltForImages) {
       return (
         <div className={s.unwrap}>
           <Link href={`https://codesandbox.io/s/${block.slug}`} target="_blank">
-            <a className={s.link} target="_blank" rel="noreferrer">
+            <a className={s.link} target="_blank" rel="noreferrer" href="">
               <DatoImage
                 className={s.responsiveImage}
                 data={block.preview.responsiveImage}
               />
               <div className={s.lightbox}>
-                <button className={s.lightboxButton}>
+                <button className={s.lightboxButton} type="button">
                   <CodeSandboxIcon />
                   Try it on CodeSandbox!
                 </button>
               </div>
             </a>
           </Link>
+        </div>
+      );
+
+    case 'table':
+      return (
+        <div className={s.tableWrapper}>
+          <table>
+            <thead>
+              <tr>
+                {block.table.columns
+                  .map((rawName) => parseShortCodes(rawName, ['style']))
+                  .map((col) => (
+                    <th
+                      key={col.id}
+                      style={toCss(col.style || { align: 'left' })}
+                    >
+                      {col.content}
+                    </th>
+                  ))}
+              </tr>
+            </thead>
+            {block.table.data.map((row) => (
+              <tr key={JSON.stringify(row)}>
+                {block.table.columns.map((col) => {
+                  return (
+                    <td key={col} style={toCss(col.style)}>
+                      {row[col]}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </table>
         </div>
       );
   }
