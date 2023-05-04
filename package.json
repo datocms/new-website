@@ -6,7 +6,7 @@
   "scripts": {
     "prettier": "prettier --write \"{pages,lib,utils,components}/**/*.{js,css}\"",
     "dev": "next",
-    "build": "node -r esm lib/writeFeedsAndSitemap.js && next build",
+    "build": "next build && node -r esm lib/writeFeedsAndSitemap.js",
     "start": "next start",
     "prepare": "husky install"
   },
