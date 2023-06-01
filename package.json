@@ -25,6 +25,7 @@
     "@use-it/interval": "^1.0.0",
     "@vercel/edge": "^0.3.1",
     "@vercel/postgres": "^0.5.0",
+    "@vercel/stega": "^0.0.5",
     "@wordpress/shortcode": "^3.26.0",
     "babel-plugin-react-css-modules": "^5.2.6",
     "clamp": "^1.0.1",

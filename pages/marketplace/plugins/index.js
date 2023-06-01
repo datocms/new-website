@@ -10,6 +10,7 @@ import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import truncate from 'truncate';
 import { generateUrl } from 'utils/plugins';
 import s from './style.module.css';
+import { clean } from 'utils/stega';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -87,7 +88,9 @@ const Big = ({ title, plugins, browse }) => {
           <PluginBox
             key={post.packageName}
             title={post.title}
-            href={generateUrl(`/marketplace/plugins/i/${post.packageName}`)}
+            href={generateUrl(
+              `/marketplace/plugins/i/${clean(post.packageName)}`,
+            )}
             image={
               post.coverImage && post.coverImage.responsiveImage ? (
                 <DatoImage
@@ -121,7 +124,9 @@ const Section = ({ title, plugins, browse }) => {
         {plugins.map((item) => (
           <div className={s.boxContainer} key={item.packageName}>
             <PluginBox
-              href={generateUrl(`/marketplace/plugins/i/${item.packageName}`)}
+              href={generateUrl(
+                `/marketplace/plugins/i/${clean(item.packageName)}`,
+              )}
               title={item.title}
               description={truncate(item.description, 55)}
               image={
@@ -157,7 +162,9 @@ const Table = ({ title, plugins, browse }) => {
         {plugins.map((item, i) => {
           return (
             <Link
-              href={generateUrl(`/marketplace/plugins/i/${item.packageName}`)}
+              href={generateUrl(
+                `/marketplace/plugins/i/${clean(item.packageName)}`,
+              )}
               key={item.packageName}
             >
               <a className={s.tableCell}>

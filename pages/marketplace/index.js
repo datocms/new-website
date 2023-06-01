@@ -11,6 +11,7 @@ import tiny from 'tiny-json-http';
 import truncate from 'truncate';
 import { githubRepoToManifest } from 'utils/githubRepo';
 import s from './style.module.css';
+import { clean } from 'utils/stega';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
@@ -94,7 +95,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
   page.demos = await Promise.all(
     page.demos.map(async (starter) => {
       const { body } = await tiny.get({
-        url: githubRepoToManifest(starter.githubRepo),
+        url: githubRepoToManifest(clean(starter.githubRepo)),
       });
       return { ...JSON.parse(body), ...starter };
     }),
@@ -166,7 +167,7 @@ export default function IntegrationsPage({
           <Box
             key={item.code}
             title={item.name}
-            href={`/marketplace/starters/${item.code}`}
+            href={`/marketplace/starters/${clean(item.code)}`}
             tag={item.recommended && 'Best choice to start!'}
             description={
               <div className={s.demoDesc}>
@@ -204,7 +205,7 @@ export default function IntegrationsPage({
         {page.plugins.map((item) => (
           <Box
             key={item.packageName}
-            href={`/marketplace/plugins/i/${item.packageName}`}
+            href={`/marketplace/plugins/i/${clean(item.packageName)}`}
             title={item.title}
             description={truncate(item.description, 55)}
             image={
