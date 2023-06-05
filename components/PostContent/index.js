@@ -376,7 +376,7 @@ export default function PostContent({
   const s = style || defaultStyles;
 
   return (
-    <div className={s.body}>
+    <div className={s.body} data-vercel-edit-target>
       <StructuredText
         data={content}
         renderBlock={({ record }) =>
