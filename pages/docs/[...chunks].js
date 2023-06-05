@@ -497,7 +497,7 @@ export default function DocPage({
 }) {
   const { data } = useQuerySubscription(pageSubscription);
   const page = data.page;
-  const pageTitle = clean(titleOverride) || (page && page.title);
+  const pageTitle = clean(titleOverride) ? titleOverride : page?.title;
   const defaultSeoTitle = `${
     docGroup ? `${docGroup.name} - ` : '-'
   }${pageTitle} - DatoCMS Docs`;
@@ -535,8 +535,9 @@ export default function DocPage({
                           ? ''
                           : `/${page.slugOverride || page.page.slug}`
                       }`,
-                      label:
-                        clean(page.titleOverride) || clean(page.page.title),
+                      label: clean(page.titleOverride)
+                        ? page.titleOverride
+                        : page.page.title,
                     });
 
                     if (pageOrSection.__typename === 'DocGroupPageRecord') {
