@@ -12,6 +12,12 @@ import {
   request,
   seoMetaTagsFields,
 } from 'lib/datocms';
+import { clean } from 'utils/stega';
+import {
+  renderMetaTags,
+  StructuredText,
+  useQuerySubscription,
+} from 'react-datocms';
 import Link from 'next/link';
 import s from 'pages/docs/pageStyle.module.css';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
@@ -491,7 +497,7 @@ export default function DocPage({
 }) {
   const { data } = useQuerySubscription(pageSubscription);
   const page = data.page;
-  const pageTitle = titleOverride || (page && page.title);
+  const pageTitle = clean(titleOverride) || (page && page.title);
   const defaultSeoTitle = `${
     docGroup ? `${docGroup.name} - ` : '-'
   }${pageTitle} - DatoCMS Docs`;
@@ -529,7 +535,8 @@ export default function DocPage({
                           ? ''
                           : `/${page.slugOverride || page.page.slug}`
                       }`,
-                      label: page.titleOverride || page.page.title,
+                      label:
+                        clean(page.titleOverride) || clean(page.page.title),
                     });
 
                     if (pageOrSection.__typename === 'DocGroupPageRecord') {
