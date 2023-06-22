@@ -79,13 +79,13 @@ export default function ComparePricing({ hints, plans, preview }) {
       limit.type.includes('shared')
         ? 'shared_quota_managed_site_resource'
         : ['activable_feature', 'boolean_system_limit'].includes(limit.type)
-          ? 'boolean_system_limit'
-          : [
+        ? 'boolean_system_limit'
+        : [
             'countable_system_limit',
             'possibly_incompatible_countable_system_limit',
           ].includes(limit.type)
-            ? 'per_site_quota_managed_site_resource'
-            : limit.type,
+        ? 'per_site_quota_managed_site_resource'
+        : limit.type,
   );
 
   limitsByGroup['boolean_system_limit'] = [

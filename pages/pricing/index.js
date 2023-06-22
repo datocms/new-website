@@ -181,7 +181,7 @@ export default function Pricing({
                     block
                     s="invert"
                     as="a"
-                    href="https://dashboard.datocms.com/projects/browse/new"
+                    href="https://dashboard.datocms.com/signup"
                   >
                     Try for free
                   </Button>
@@ -226,7 +226,7 @@ export default function Pricing({
                     block
                     s="invert"
                     as="a"
-                    href="https://dashboard.datocms.com/projects/browse/new"
+                    href="https://dashboard.datocms.com/signup"
                   >
                     Try for free
                   </Button>

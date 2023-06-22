@@ -10,7 +10,7 @@ import s from './style.module.css';
 
 const client = new DatoCmsSearch('d46fe8134ea916b42af4eaa0d06109');
 
-const fetchCommunity = async query => {
+const fetchCommunity = async (query) => {
   const endpoint = 'https://community.datocms.com/search/query.json';
 
   const { topics, posts } = await wretch(
@@ -23,8 +23,8 @@ const fetchCommunity = async query => {
     return [];
   }
 
-  return posts.map(post => {
-    const topic = topics.find(t => t.id === post.topic_id);
+  return posts.map((post) => {
+    const topic = topics.find((t) => t.id === post.topic_id);
     return {
       title: highlighter(query || '', topic.title),
       body: highlighter(query || '', post.blurb),
@@ -34,7 +34,7 @@ const fetchCommunity = async query => {
   });
 };
 
-const search = async query => {
+const search = async (query) => {
   const [{ results: docs }, community] = await Promise.all([
     client.search(query),
     fetchCommunity(query),
@@ -53,7 +53,7 @@ export default function DocSearch() {
     if (debouncedSearchTerm) {
       setIsSearching(true);
 
-      search(debouncedSearchTerm).then(results => {
+      search(debouncedSearchTerm).then((results) => {
         setIsSearching(false);
         setResults(results);
       });
@@ -76,7 +76,7 @@ export default function DocSearch() {
           </div>
         )}
         <ul className={s.results}>
-          {results.map(result => (
+          {results.map((result) => (
             <li key={result.url} className={s.result}>
               <a href={result.url}>
                 <div className={s.resultTitle}>
@@ -108,7 +108,7 @@ export default function DocSearch() {
           type="search"
           placeholder="Search in the docs and community..."
           value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
     </>
