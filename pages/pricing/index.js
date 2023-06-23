@@ -226,9 +226,9 @@ export default function Pricing({
                     block
                     s="invert"
                     as="a"
-                    href="https://dashboard.datocms.com/signup"
+                    href="https://dashboard.datocms.com/personal-account/plan-billing/change?plan_id=294&utm_source=datocms&utm_medium=website&utm_campaign=pricing"
                   >
-                    Try for free
+                    Purchase
                   </Button>
                 </div>
 
