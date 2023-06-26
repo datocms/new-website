@@ -345,4 +345,13 @@ module.exports = [
     source: '/legal/privacy',
     destination: '/legal/privacy-policy',
   },
+  {
+    source: '/docs/pro-tips/manage-draft-published-state-by-locale',
+    destination: '/docs/general-concepts/localization#locale-based-publishing',
+  },
+  {
+    source:
+      '/marketplace/starters/next-js-multilingual-blog-per-local-publishing',
+    destination: '/docs/general-concepts/localization#locale-based-publishing',
+  },
 ];
