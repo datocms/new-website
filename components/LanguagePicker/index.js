@@ -39,7 +39,7 @@ export default function LanguagePicker({ children }) {
           })}
           onClick={() => setLanguage('old-js')}
         >
-          Legacy JS client
+          Legacy JS client (deprecated)
         </button>
       </div>
       <LanguageContext.Provider value={language}>
