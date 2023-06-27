@@ -8,7 +8,7 @@ import ActiveLink from 'components/ActiveLink';
 import { Image as DatoImage } from 'react-datocms';
 import Next from 'public/images/logos/next.svg';
 import Gatsby from 'public/images/logos/gatsbyjs.svg';
-import Hugo from 'public/images/logos/hugosquare.svg';
+import Nuxt from 'public/images/logos/nuxt.svg';
 import Schema from 'public/images/illustrations/dynamic-layouts.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import GettingStarted from 'public/images/illustrations/marketers.svg';
@@ -168,11 +168,11 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
               <p>Learn how to integrate your Gatsby website with DatoCMS</p>
             </a>
           </Link>
-          <Link href="/docs/hugo">
+          <Link href="/docs/nuxt">
             <a className={s.useCaseCard}>
-              <Hugo />
-              <div className={s.useCaseCardTitle}>Hugo</div>
-              <p>Learn how to integrate your Hugo website with DatoCMS</p>
+              <Nuxt />
+              <div className={s.useCaseCardTitle}>Nuxt</div>
+              <p>Learn how to integrate your Nuxt website with DatoCMS</p>
             </a>
           </Link>
         </div>
