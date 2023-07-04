@@ -184,12 +184,6 @@ export default function Navbar() {
                         <Link href="/cms/vue-js-cms">
                           <a className={s.integrationLink}>Vue</a>
                         </Link>
-                        <Link href="/cms/hugo-cms">
-                          <a className={s.integrationLink}>Hugo</a>
-                        </Link>
-                        <Link href="/cms/jekyll-cms">
-                          <a className={s.integrationLink}>Jekyll</a>
-                        </Link>
                         <Link href="/cms/remix-cms">
                           <a className={s.integrationLink}>Remix</a>
                         </Link>
