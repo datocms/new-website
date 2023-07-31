@@ -93,3 +93,24 @@
   margin: 0 auto;
   font-weight: bold;
 }
+
+.three {
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    background-color: #eee;
+    width: 50vw;
+    max-width: 600px;
+    height: 10vw;
+    min-height: 90px;
+    max-height: 200px;
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) skew(0deg, -10deg);
+    background: linear-gradient(45deg, #f9ecfe, #fefae4);
+  }
+}

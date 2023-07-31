@@ -1,53 +1,59 @@
-import Layout from 'components/Layout';
+import { default as classNames, default as cn } from 'classnames';
+import Button from 'components/Button';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import Wrapper from 'components/Wrapper';
-import Button from 'components/Button';
+import InterstitialTitle from 'components/InterstitialTitle';
+import Layout from 'components/Layout';
+import RcSwitch from 'rc-switch';
+import LogosBar from 'components/LogosBar';
 import Quote from 'components/Quote';
-import Head from 'components/Head';
-import { renderMetaTags, StructuredText } from 'react-datocms';
-import s from './style.module.css';
+import Space from 'components/Space';
+import { matchSorter } from 'match-sorter';
+import Wrapper from 'components/Wrapper';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import {
+  formatLimitRaw,
+  formatExtra,
+  formatUpperBoundLimitRaw,
+} from 'utils/planLimitsHelpers';
+import {
+  handleErrors,
   imageFields,
-  reviewFields,
   request,
+  reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import tiny from 'tiny-json-http';
-import formatNumber from 'utils/formatNumber';
-import InterstitialTitle from 'components/InterstitialTitle';
-import Space from 'components/Space';
-import cn from 'classnames';
 import Link from 'next/link';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
+import SuccessIcon from 'public/icons/regular/check.svg';
+import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
+import MinusCircleIcon from 'public/icons/regular/minus-circle.svg';
+import ExclamationIcon from 'public/icons/regular/exclamation-triangle.svg';
+import PlusCircleIcon from 'public/icons/regular/plus-circle.svg';
+import SearchIcon from 'public/icons/regular/search.svg';
+import NopeIcon from 'public/icons/regular/times.svg';
+import CloseIcon from 'public/icons/regular/times-circle.svg';
+import AnnouncementIcon from 'public/images/illustrations/marketers.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
-import LogosBar from 'components/LogosBar';
-import { formatLimit, formatExtra } from 'utils/planLimitsHelpers';
-import TitleStripWithContent from 'components/TitleStripWithContent';
-import SuccessIcon from 'public/icons/regular/check.svg';
-import Bullets from 'components/Bullets';
-import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
-import AnnouncementIcon from 'public/images/illustrations/marketers.svg';
-import { Badge } from 'components/PluginToolkit';
-import Tier1 from 'public/images/tiers/tier-1.svg';
-import Tier2 from 'public/images/tiers/tier-2.svg';
-import Tier3 from 'public/images/tiers/tier-3.svg';
-import { handleErrors } from 'lib/datocms';
+import Verizon from 'public/images/logos/verizon.svg';
+import { useEffect, useState } from 'react';
+import { renderMetaTags, StructuredText } from 'react-datocms';
+import tiny from 'tiny-json-http';
+import formatNumber from 'utils/formatNumber';
+import s from './style.module.css';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
     body: { data: datoPlans },
   } = await tiny.get({
-    url: `https://account-api.datocms.com/per-owner-pricing-plans`,
+    url: 'https://account-api.datocms.com/per-owner-pricing-plans',
     headers: { accept: 'application/json' },
   });
 
-  const {
-    data: { hints, ...others },
-  } = await request({
+  const { data } = await request({
     query: `
       {
         page: pricingPage {
@@ -60,15 +66,26 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
           question
           answer { value }
         }
-        hints: allPricingHints {
+        planFeatureGroups: allPlanFeatureGroups(orderBy:position_ASC, first: 100) {
+          id
+          name
+          features {
+            id
+            name
+            description {
+              value
+            }
+            tags
+            availableOnProfessionalPlan
+          }
+        }
+        hints: allPricingHints(first: 100) {
           apiId
           name
           description
+          position
         }
         review1: review(filter: { name: { eq: "Tore Heimann" } }) {
-          ...reviewFields
-        }
-        review2: review(filter: { name: { eq: "Jeff Escalante" } }) {
           ...reviewFields
         }
       }
@@ -79,11 +96,9 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
     preview,
   });
 
-  const plan = datoPlans[0];
-
   return {
     props: {
-      ...others,
+      ...data,
       preview: preview || false,
       plans: datoPlans.sort(
         (a, b) => a.attributes.monthly_price - b.attributes.monthly_price,
@@ -92,11 +107,23 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
   };
 });
 
+const Check = () => (
+  <div className={s.check}>
+    <SuccessIcon />
+  </div>
+);
+
+const Nope = () => (
+  <div className={s.nope}>
+    <NopeIcon />
+  </div>
+);
+
 function ReadMore() {
   return (
     <div className={cn(s.planBullet, s.readMore)}>
       <div className={s.readMoreBulletIcon} />
-      <Link href="/pricing/compare" passHref>
+      <Link href="#details" passHref>
         <a>Read all the details &raquo;</a>
       </Link>
     </div>
@@ -114,15 +141,265 @@ function Bullet({ children }) {
   );
 }
 
+function FreeLimitsTable({ hints, freePlan, proPlan }) {
+  return (
+    <table className={s.fTable}>
+      <thead className={s.fReducedHead}>
+        <th className={s.fReducedHeadTitle}>Limit</th>
+        <th className={s.fReducedHeadPlan}>Free plan</th>
+        <th className={s.fReducedHeadPlan}>Professional plan</th>
+      </thead>
+      <tbody>
+        {[
+          'users',
+          'items',
+          'uploadable_bytes',
+          'indexable_pages',
+          'history_retention_days',
+          'traffic_bytes',
+          'api_calls',
+          'mux_encoding_seconds',
+          'mux_streaming_seconds',
+        ].map((limitId, i) => {
+          const hint = hints.find((h) => h.apiId === limitId);
+
+          const freePlanLimit = freePlan.attributes.limits.find(
+            (l) => l.id === limitId,
+          );
+
+          const proPlanLimit = proPlan.attributes.limits.find(
+            (l) => l.id === limitId,
+          );
+
+          return (
+            <tr
+              key={limitId.id}
+              className={classNames(
+                s.fTableFeature,
+                i % 2 === 0 && s.fTableFeatureOdd,
+              )}
+            >
+              <th className={s.fTableFeatureName}>
+                <div className={s.fTableFeatureNameSplit}>
+                  <div className={s.fTableFeatureNameName}>{hint.name} </div>
+                  {hint.description && (
+                    <div className={s.fTableFeatureNameInfo}>
+                      <InfoCircleIcon />
+                      <div className={s.fTableFeatureNameInfoHint}>
+                        {hint.description}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </th>
+              <td className={s.fTableFeaturePlan}>
+                {formatLimitRaw(freePlanLimit)}
+              </td>
+
+              <td className={s.fTableFeaturePlan}>
+                {formatLimitRaw(proPlanLimit)}
+                {proPlanLimit.extra_packet_amount && (
+                  <div className={s.extra}>{formatExtra(proPlanLimit)}</div>
+                )}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
+function LimitsGroup({ proPlan, hints, forceOpen }) {
+  const [isOpen, setOpen] = useState(true);
+
+  const limits = [
+    'users',
+    'sites',
+    'sandbox_environments',
+    'locales',
+    'item_types',
+    'items',
+    'uploadable_bytes',
+    'maximum_single_upload_bytes',
+    'indexable_pages',
+    'history_retention_days',
+    'traffic_bytes',
+    'api_calls',
+    'mux_encoding_seconds',
+    'mux_streaming_seconds',
+  ];
+
+  return (
+    <>
+      <tr className={s.fTableGroup}>
+        <td colSpan={3} onClick={() => setOpen((old) => !old)}>
+          {isOpen || forceOpen ? (
+            <MinusCircleIcon className={s.fTableGroupIcon} />
+          ) : (
+            <PlusCircleIcon className={s.fTableGroupIcon} />
+          )}
+          Limits{' '}
+          {!isOpen && !forceOpen && (
+            <span className={s.fTableGroupCount}>({limits.length})</span>
+          )}
+        </td>
+      </tr>
+      {(isOpen || forceOpen) &&
+        limits.map((limitId, i) => {
+          const hint = hints.find((h) => h.apiId === limitId);
+
+          const proPlanLimit = proPlan.attributes.limits.find(
+            (l) => l.id === limitId,
+          );
+
+          return (
+            <tr
+              key={limitId.id}
+              className={classNames(
+                s.fTableFeature,
+                i % 2 === 0 && s.fTableFeatureOdd,
+              )}
+            >
+              <th className={s.fTableFeatureName}>
+                <div className={s.fTableFeatureNameSplit}>
+                  <div className={s.fTableFeatureNameName}>{hint.name} </div>
+                  {hint.description && (
+                    <div className={s.fTableFeatureNameInfo}>
+                      <InfoCircleIcon />
+                      <div className={s.fTableFeatureNameInfoHint}>
+                        {hint.description}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </th>
+              <td className={s.fTableFeaturePlan}>
+                {formatLimitRaw(proPlanLimit)} included{' '}
+                {proPlanLimit.max_extra_packets && (
+                  <>(up to {formatUpperBoundLimitRaw(proPlanLimit)})</>
+                )}
+                {proPlanLimit.extra_packet_amount && (
+                  <div className={s.extra}>{formatExtra(proPlanLimit)}</div>
+                )}
+              </td>
+
+              <td className={s.fTableFeaturePlan}>Custom</td>
+            </tr>
+          );
+        })}
+    </>
+  );
+}
+
+function FeatureGroup({ group, searchTerm, startOpen, onlyShowDifferences }) {
+  const normalizedSearchTerm = searchTerm.trim();
+
+  const [isOpen, setOpen] = useState(startOpen);
+
+  const augmentedFeatures = group.features.map((f) => ({
+    ...f,
+    group: group.name,
+    plainDescription: toPlainText(f.description),
+  }));
+
+  const filteredFeaturesByTerm = normalizedSearchTerm
+    ? matchSorter(augmentedFeatures, normalizedSearchTerm, {
+        keys: ['name', 'group', 'plainDescription', 'tags'],
+        threshold: matchSorter.rankings.CONTAINS,
+      })
+    : augmentedFeatures;
+
+  const filteredFeatures = onlyShowDifferences
+    ? filteredFeaturesByTerm.filter((f) => !f.availableOnProfessionalPlan)
+    : filteredFeaturesByTerm;
+
+  if (
+    (normalizedSearchTerm || onlyShowDifferences) &&
+    filteredFeatures.length === 0
+  ) {
+    return null;
+  }
+
+  const isForcedOpen = isOpen || !!normalizedSearchTerm || onlyShowDifferences;
+
+  return (
+    <>
+      <tr className={s.fTableGroup}>
+        <td colSpan={3} onClick={() => setOpen((old) => !old)}>
+          {isForcedOpen ? (
+            <MinusCircleIcon className={s.fTableGroupIcon} />
+          ) : (
+            <PlusCircleIcon className={s.fTableGroupIcon} />
+          )}
+          {group.name}{' '}
+          {isForcedOpen ? undefined : (
+            <span className={s.fTableGroupCount}>
+              ({filteredFeatures.length})
+            </span>
+          )}
+        </td>
+      </tr>
+      {(isOpen || normalizedSearchTerm || onlyShowDifferences) &&
+        filteredFeatures.map((feature, i) => (
+          <tr
+            key={feature.id}
+            className={classNames(
+              s.fTableFeature,
+              i % 2 === 0 && s.fTableFeatureOdd,
+            )}
+          >
+            <th className={s.fTableFeatureName}>
+              <div className={s.fTableFeatureNameSplit}>
+                <div className={s.fTableFeatureNameName}>{feature.name} </div>
+                {feature.description && (
+                  <div className={s.fTableFeatureNameInfo}>
+                    <InfoCircleIcon />
+                    <div className={s.fTableFeatureNameInfoHint}>
+                      <StructuredText data={feature.description} />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </th>
+            <td className={s.fTableFeaturePlan}>
+              {feature.availableOnProfessionalPlan ? <Check /> : <Nope />}
+            </td>
+            <td className={s.fTableFeaturePlan}>
+              <Check />
+            </td>
+          </tr>
+        ))}
+    </>
+  );
+}
+
 export default function Pricing({
   page,
-  hints,
-  plans,
   faqs,
   preview,
   review1,
-  review2,
+  plans,
+  planFeatureGroups,
+  hints,
 }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [onlyShowDifferences, setOnlyShowDifferences] = useState(false);
+  const [freePlan, proPlan] = plans;
+  const [visibleFreePlan, setVisibleFreePlan] = useState(false);
+
+  useEffect(() => {
+    if (onlyShowDifferences) {
+      setSearchTerm('');
+    }
+  }, [onlyShowDifferences]);
+
+  useEffect(() => {
+    if (searchTerm) {
+      setOnlyShowDifferences(false);
+    }
+  }, [searchTerm]);
+
   return (
     <Layout preview={preview}>
       <Head>{renderMetaTags(page.seo)}</Head>
@@ -137,9 +414,9 @@ export default function Pricing({
         }
         subtitle={
           <>
-            Zero maintenance, zero operations: save tens of thousands of dollars
-            annually by using DatoCMS headless technology and
-            content&nbsp;infrastructure
+            Effortless maintenance, seamless operations: unlock substantial
+            savings every year by leveraging DatoCMS headless technology and
+            content infrastructure
           </>
         }
       />
@@ -148,310 +425,271 @@ export default function Pricing({
         <div className={s.plansStrip}>
           <Wrapper>
             <div className={s.plansContainer}>
-              <Link href="/partner-program">
-                <a className={s.agenciesCta}>
-                  <AnnouncementIcon />
-                  <span>
-                    <strong>Building lots of sites?</strong> Discover our{' '}
-                    <mark>Agency Partner Program</mark> &raquo;
-                  </span>
-                </a>
-              </Link>
-
               <div className={s.plan}>
-                <Tier1 className={s.planImage} />
-                <div className={s.planName} style={{ color: '#10b6ce' }}>
-                  Developer
-                </div>
-                <div className={s.planDescription}>
-                  To test the platform in detail, and for developers working on
-                  hobby sites
-                </div>
+                <div className={s.planInner}>
+                  <div className={s.planName}>Professional</div>
+                  <div className={s.planDescription}>
+                    Everything you need — and more – to build professional
+                    digital projects
+                  </div>
 
-                <div className={s.planPriceContainer}>
-                  <span className={s.planPrice}>Free forever</span>
+                  <div className={s.planPriceContainer}>
+                    <span className={s.planPricePerMonth}>Start at </span>
+                    <span className={s.planPrice}>€{formatNumber(149)}</span>
+                    <span className={s.planPricePerMonth}>/month</span>
 
-                  <span className={s.planYearlyPrice}>
-                    No credit card required
-                  </span>
-                </div>
+                    <span className={s.planYearlyPrice}>
+                      if paying annually, or{' '}
+                      <strong>€{formatNumber(199)}/month</strong>
+                    </span>
+                  </div>
 
-                <div className={s.planAction}>
-                  <Button
-                    block
-                    s="invert"
-                    as="a"
-                    href="https://dashboard.datocms.com/signup"
-                  >
-                    Try for free
-                  </Button>
-                </div>
+                  <div className={s.planAction}>
+                    <Button
+                      block
+                      s="invert"
+                      as="a"
+                      href="https://dashboard.datocms.com/personal-account/plan-billing/change?plan_id=294&utm_source=datocms&utm_medium=website&utm_campaign=pricing"
+                    >
+                      Purchase now
+                    </Button>
+                  </div>
 
-                <div className={s.planBullets}>
-                  <Bullet>
-                    Up to 3 projects with generous quota, but hard limits on
-                    resources (file storage, traffic, API calls)
-                  </Bullet>
-                  <Bullet>
-                    Two users per project (one admin + one editor)
-                  </Bullet>
-                  <Bullet>Community-based support</Bullet>
-                  <ReadMore />
+                  <div className={s.planBullets}>
+                    <Bullet>
+                      Generous quota included, with soft limits you can exceed
+                      and pay-as-you-go
+                    </Bullet>
+                    <Bullet>
+                      10 collaborators included on each project (you can
+                      purchase more if needed)
+                    </Bullet>
+                    <Bullet>
+                      Additional projects can be added for as low as €29/month
+                    </Bullet>
+                    <Bullet>
+                      Expanded authoring roles to support most publishing
+                      workflows
+                    </Bullet>
+                    <ReadMore />
+                  </div>
                 </div>
               </div>
 
               <div className={s.plan}>
-                <Tier2 className={s.planImage} />
-                <div className={s.planName} style={{ color: '#ef6424' }}>
-                  Professional
-                </div>
-                <div className={s.planDescription}>
-                  Everything you need — and more – to build professional digital
-                  projects
-                </div>
+                <div className={s.planInner}>
+                  <div className={s.planName}>Enterprise</div>
+                  <div className={s.planDescription}>
+                    Premium features, high-touch support and advanced compliance
+                    for scaled experiences
+                  </div>
 
-                <div className={s.planPriceContainer}>
-                  <span className={s.planPricePerMonth}>Start at </span>
-                  <span className={s.planPrice}>€{formatNumber(149)}</span>
-                  <span className={s.planPricePerMonth}>/month</span>
+                  <div className={s.planPriceContainer}>
+                    <span className={s.planPrice}>Custom</span>
 
-                  <span className={s.planYearlyPrice}>
-                    if paying annually, or{' '}
-                    <strong>€{formatNumber(199)}/month</strong>
-                  </span>
-                </div>
+                    <span className={s.planYearlyPrice}>
+                      payable by credit card or wire transfer
+                    </span>
+                  </div>
 
-                <div className={s.planAction}>
-                  <Button
-                    block
-                    s="invert"
-                    as="a"
-                    href="https://dashboard.datocms.com/personal-account/plan-billing/change?plan_id=294&utm_source=datocms&utm_medium=website&utm_campaign=pricing"
-                  >
-                    Purchase
-                  </Button>
-                </div>
+                  <div className={s.planAction}>
+                    <Button block s="invert" as="a" href="/contact">
+                      Contact us
+                    </Button>
+                  </div>
 
-                <div className={s.planBullets}>
-                  <Bullet>
-                    Extremely generous quota, with soft limits you can exceed
-                    and pay-as-you-go
-                  </Bullet>
-                  <Bullet>
-                    10 collaborators included on each project (you can purchase
-                    more if needed)
-                  </Bullet>
-                  <Bullet>
-                    Additional projects can be added for as low as €29/month
-                  </Bullet>
-                  <Bullet>
-                    Expanded authoring roles to support most publishing
-                    workflows
-                  </Bullet>
-                  <Bullet>
-                    Technical support via email (Mon/Fri, response in 24h)
-                  </Bullet>
-                  <ReadMore />
-                </div>
-              </div>
-
-              <div className={s.plan}>
-                <Tier3 className={s.planImage} />
-                <div className={s.planName} style={{ color: '#8a3e7e' }}>
-                  Enterprise
-                </div>
-                <div className={s.planDescription}>
-                  Premium features, high-touch support and advanced compliance
-                </div>
-
-                <div className={s.planPriceContainer}>
-                  <span className={s.planPrice}>Custom</span>
-
-                  <span className={s.planYearlyPrice}>
-                    payable by credit card or wire transfer
-                  </span>
-                </div>
-
-                <div className={s.planAction}>
-                  <Button block s="invert" as="a" href="/contact">
-                    Contact us
-                  </Button>
-                </div>
-
-                <div className={s.planBullets}>
-                  <Bullet>Guaranteed support and uptime SLAs</Bullet>
-                  <Bullet>
-                    SSO, Audit logs and Static webhook IPs for enhanced security
-                  </Bullet>
-                  <Bullet>
-                    Fully customizable roles and tasks for granular workflows,
-                    tailored to your specific needs
-                  </Bullet>
-                  <Bullet>100% White-label platform</Bullet>
-                  <Bullet>
-                    Support via shared Slack channel, editorial onboarding, plus
-                    access to our solution architects
-                  </Bullet>
-                  <Bullet>
-                    Use your your own AWS/GCP bucket and custom domain for
-                    assets
-                  </Bullet>
-                  <Bullet>
-                    Options for single-tenant to support your most critical
-                    business needs
-                  </Bullet>
-                  <ReadMore />
+                  <div className={s.planBullets}>
+                    <Bullet>Guaranteed support and uptime SLAs</Bullet>
+                    <Bullet>
+                      SSO, Audit logs and Static webhook IPs for enhanced
+                      security
+                    </Bullet>
+                    <Bullet>
+                      Fully customizable roles and tasks for granular workflows,
+                      tailored to your specific needs
+                    </Bullet>
+                    <Bullet>
+                      Support via shared Slack channel, editorial onboarding,
+                      plus access to our solution architects
+                    </Bullet>
+                    <ReadMore />
+                  </div>
                 </div>
               </div>
             </div>
+            <Link href="/partner-program">
+              <a className={s.agenciesCta}>
+                <AnnouncementIcon />
+                <span>
+                  <strong>Building lots of sites?</strong> Discover our{' '}
+                  <mark>Agency Partner Program</mark> &raquo;
+                </span>
+              </a>
+            </Link>
           </Wrapper>
         </div>
       </Space>
+
       <Wrapper>
-        <div className={s.fullComparison}>
-          <Link href="/pricing/compare" passHref>
-            <Button p="small" s="invert">
-              Compare limits and features in detail <ArrowIcon />
+        <div className={s.freePlan}>
+          <div className={s.freePlanContent}>
+            <div className={s.freePlanTitle}>
+              Just getting started? Try DatoCMS out for free, forever (yes
+              really)
+            </div>
+            <div className={s.freePlanDescription}>
+              Free plan comes with 2 editors and 300 records, with 10GB of
+              traffic and 100k API calls each month. No overages allowed.{' '}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setVisibleFreePlan(true);
+                }}
+              >
+                See all limits in detail <InfoCircleIcon />
+              </a>
+            </div>
+          </div>
+          <div className={s.freePlanCta}>
+            <Button
+              block
+              s="invert"
+              as="a"
+              href="https://dashboard.datocms.com/signup"
+            >
+              Sign up for free
             </Button>
-          </Link>
+            <div className={s.freePlanCtaReassurance}>
+              Easy setup, no credit card required
+            </div>
+          </div>
         </div>
       </Wrapper>
 
+      {visibleFreePlan && (
+        <div
+          className={s.modalOverlay}
+          onClick={() => setVisibleFreePlan(false)}
+        >
+          <div className={s.modal} onClick={(e) => e.stopPropagation()}>
+            <a
+              href="#"
+              className={s.modalClose}
+              onClick={(e) => {
+                e.preventDefault();
+                setVisibleFreePlan(false);
+              }}
+            >
+              <CloseIcon />
+            </a>
+            <div className={s.modalTitle}>Free vs Professional</div>
+            <div className={s.modalWarning}>
+              ⚠️{' '}
+              <strong>
+                In the Free plan, you can&apos;t go over the allowed monthly
+                limits.
+              </strong>{' '}
+              If you reach these limits, the service will stop responding as
+              expected.
+            </div>
+            <div className={s.fTableScroll}>
+              <FreeLimitsTable
+                hints={hints}
+                freePlan={freePlan}
+                proPlan={proPlan}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <a id="details" />
       <Space top={2}>
         <Wrapper>
-          <div className={s.std}>
-            <div className={s.stdTitle}>And included in every plan...</div>
-            <div className={s.stdBullets}>
-              <div className={s.stdBullet}>
-                <div className={s.stdBulletTitle}>GraphQL API</div>
-                <div className={s.stdBulletDesc}>
-                  An understandable description of your API, the power to ask
-                  exactly the data you need and powerful developer tools
-                </div>
-              </div>
-              <div className={s.stdBullet}>
-                <div className={s.stdBulletTitle}>Worldwide CDN</div>
-                <div className={s.stdBulletDesc}>
-                  Delight your customers with lightning fast responses thanks to
-                  our CDN: performant, secure, and close to every customer
-                </div>
-              </div>
-              <div className={s.stdBullet}>
-                <div className={s.stdBulletTitle}>
-                  Granular roles and permissions
-                </div>
-                <div className={s.stdBulletDesc}>
-                  Assign the appropriate roles and permissions to your members,
-                  precisely determining what actions they can perform
-                </div>
-              </div>
-              <div className={s.stdBullet}>
-                <div className={s.stdBulletTitle}>Plugins</div>
-                <div className={s.stdBulletDesc}>
-                  Easily expand the capabilities of DatoCMS with plugins to
-                  handle custom editing needs and 3rd-party integrations
-                </div>
-              </div>
-              <div className={s.stdBullet}>
-                <div className={s.stdBulletTitle}>
-                  Unlimited image transformations
-                </div>
-                <div className={s.stdBulletDesc}>
-                  Optimize, resize, crop, rotate and watermark images on-the-fly
-                  simply adding custom parameters to the URL of your images
-                </div>
-              </div>
-              <div className={s.stdBullet}>
-                <div className={s.stdBulletTitle}>
-                  AI-based smart image tagging
-                </div>
-                <div className={s.stdBulletDesc}>
-                  Locate media files quickly using AI-powered tagging and
-                  advanced search capabilities, saved filters and asset folders
-                </div>
-              </div>
+          <InterstitialTitle style="three">
+            Compare plans
+            <div className={s.searchFeatures}>
+              <SearchIcon />
+              <input
+                type="text"
+                placeholder="Search features"
+                onChange={(e) => setSearchTerm(e.target.value)}
+                value={searchTerm}
+              />
+              {searchTerm && (
+                <button type="button" onClick={() => setSearchTerm('')}>
+                  <CloseIcon />
+                </button>
+              )}
             </div>
+          </InterstitialTitle>
+          <div className={s.fTableScroll}>
+            <a className={s.fTableAnchor} id="detailsTable" />
+            <table className={s.fTable}>
+              <thead>
+                <th className={s.fTableHead}>
+                  <div className={s.fTableHeadTitle}>Features by plan</div>
+                  <div className={s.fTableHeadSub}>
+                    Explore our features and choose the best plan for you
+                  </div>
+                  <label className={s.fTableHeadDiff}>
+                    <RcSwitch
+                      id="showDiff"
+                      checked={onlyShowDifferences}
+                      onChange={(value) => {
+                        setOnlyShowDifferences(value);
+                        document
+                          .getElementById('detailsTable')
+                          .scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    />{' '}
+                    <span>Only show differences</span>
+                  </label>
+                </th>
+                <th className={s.fTablePlan}>
+                  <div className={s.fTablePlanName}>Professional</div>
+                  <div className={s.fTablePlanPrice}>
+                    From €{formatNumber(149)}/month (billed annually)
+                  </div>
+                  <Button
+                    block
+                    s="invert"
+                    as="a"
+                    p="tiny"
+                    href="https://dashboard.datocms.com/personal-account/plan-billing/change?plan_id=294&utm_source=datocms&utm_medium=website&utm_campaign=pricing"
+                  >
+                    Purchase now
+                  </Button>
+                </th>
+                <th className={s.fTablePlan}>
+                  <div className={s.fTablePlanName}>Enterprise</div>
+                  <div className={s.fTablePlanPrice}>
+                    Tailored on your needs
+                  </div>
+                  <Button block p="tiny" s="invert" as="a" href="/contact">
+                    Contact us
+                  </Button>
+                </th>
+              </thead>
+              {planFeatureGroups.map((group, i) => (
+                <FeatureGroup
+                  startOpen={i === 0}
+                  key={group.id}
+                  group={group}
+                  searchTerm={searchTerm}
+                  onlyShowDifferences={onlyShowDifferences}
+                />
+              ))}
+              <LimitsGroup
+                forceOpen={onlyShowDifferences}
+                proPlan={proPlan}
+                hints={hints}
+              />
+            </table>
           </div>
         </Wrapper>
       </Space>
-
-      <Space top={2}>
-        <TitleStripWithContent
-          title={<>Enterprises</>}
-          subtitle={
-            <>
-              <p>
-                Get dedicated onboarding service, premium technical support,
-                private cloud and custom SLAs to gain the assurance your
-                enterprise needs. Grows with your needs, from one team or
-                business unit to your whole organization.
-              </p>
-              <div className={s.buttonGroup}>
-                <Link href="/enterprise-headless-cms" passHref>
-                  <Button p="small" s="invert">
-                    Learn more
-                  </Button>
-                </Link>
-                <Link href="/enterprise-headless-cms#form" passHref>
-                  <Button p="small">Contact sales</Button>
-                </Link>
-              </div>
-            </>
-          }
-        >
-          <div className={s.enterprise}>
-            <div className={s.enterpriseGroup}>
-              <div className={s.enterpriseGroupTitle}>Services</div>
-              <Bullets
-                style="good"
-                icon={SuccessIcon}
-                bullets={[
-                  'Guaranteed support SLAs',
-                  'High priority support',
-                  'Shared Slack channel',
-                  'Customer success',
-                  'Onboarding services',
-                  'Solution Architects',
-                ]}
-              />
-            </div>
-
-            <div className={s.enterpriseGroup}>
-              <div className={s.enterpriseGroupTitle}>Governance</div>
-              <Bullets
-                style="good"
-                icon={SuccessIcon}
-                bullets={[
-                  'Single Sign-On',
-                  'SCIM v2 user provisioning',
-                  'Security reporting',
-                  'Platform white-labelling',
-                  'User Management API',
-                  'Static webhook IPs',
-                ]}
-              />
-            </div>
-
-            <div className={s.enterpriseGroup}>
-              <div className={s.enterpriseGroupTitle}>Infrastructure </div>
-              <Bullets
-                style="good"
-                icon={SuccessIcon}
-                bullets={[
-                  'Guaranteed uptime SLAs',
-                  'Single-tenant infrastructure',
-                  'Multi-region infrastructure',
-                  'Audit logs API',
-                  'Daily backups',
-                  '24/7 monitoring',
-                ]}
-              />
-            </div>
-          </div>
-        </TitleStripWithContent>
-      </Space>
-
-      <Quote review={review1} />
 
       <Space top={3}>
         <Wrapper>
@@ -481,6 +719,8 @@ export default function Pricing({
           ]}
         />
       </Space>
+
+      <Quote review={review1} />
     </Layout>
   );
 }

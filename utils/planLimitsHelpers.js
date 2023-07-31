@@ -190,6 +190,20 @@ export const formatLimitRaw = (limit) => {
   return perMonth(limit.id, formatValue(limit.id, limit.free_of_charge_usage));
 };
 
+export const formatUpperBoundLimitRaw = (limit) => {
+  const includedUsage =
+    limit.type === 'per_site_quota_managed_site_resource'
+      ? limit.free_of_charge_per_site_usage
+      : limit.type === 'per_environment_quota_managed_site_resource'
+      ? limit.free_of_charge_per_environment_usage
+      : limit.free_of_charge_usage;
+
+  return formatValue(
+    limit.id,
+    includedUsage + limit.max_extra_packets * limit.extra_packet_amount,
+  );
+};
+
 export const formatExtra = (limit) => {
   if (!limit.extra_packet_amount) {
     return null;

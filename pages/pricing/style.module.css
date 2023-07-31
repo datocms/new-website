@@ -1,13 +1,13 @@
 .limit,
 .plansContainer {
-  @media screen and (width >= 930px) {
+  @media screen and (width >= 700px) {
     display: grid;
-    grid-template-columns: repeat(3, minmax(200px, 5fr));
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
     align-items: stretch;
-    column-gap: 30px;
+    column-gap: 50px;
   }
 
-  @media screen and (width <= 929px) {
+  @media screen and (width < 700px) {
     > * {
       margin-bottom: 40px;
     }
@@ -43,14 +43,6 @@
   &:hover {
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.04);
   }
-
-  @media screen and (width >= 930px) {
-    grid-area: 1 / 1 / 1 / 5;
-
-    mark {
-      padding: 2px;
-    }
-  }
 }
 
 .plansStrip {
@@ -77,16 +69,15 @@
 .plan {
   text-align: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  padding: 50px;
   border-radius: 10px;
   background: white;
+  display: flex;
+  justify-content: center;
 }
 
-.planImage {
-  width: 80px;
-  height: 50px;
-  margin: 0 auto 20px;
-  fill: #333;
+.planInner {
+  max-width: 400px;
 }
 
 .planName {
@@ -115,7 +106,7 @@
 .planPrice {
   font-weight: bold;
   letter-spacing: -0.02em;
-  font-size: rfs(35px);
+  font-size: rfs(25px);
 }
 
 .planPricePerMonth {
@@ -251,36 +242,6 @@
   }
 }
 
-.enterprise {
-  box-shadow: var(--box-shadow);
-  padding: rfs(40px);
-  background: white;
-
-  @media screen and (width > 930px) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 40px;
-  }
-}
-
-.enterpriseGroup {
-  margin-bottom: 30px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  @media screen and (width > 930px) {
-    margin-bottom: 0;
-  }
-}
-
-.enterpriseGroupTitle {
-  font-weight: bold;
-  font-size: rfs(25px);
-  margin-bottom: rfs(20px);
-}
-
 .buttonGroup {
   margin-top: 20px;
   display: inline-grid;
@@ -291,30 +252,455 @@
   text-align: center;
 }
 
-.fullComparison {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: rfs(30px);
+.fTable {
+  width: 100%;
+  border-spacing: 0;
+}
 
-  svg {
-    height: 0.7em;
-    margin-left: 10px;
-    fill: var(--accent-color);
-    position: relative;
-  }
+.fTable th,
+.fTable td {
+  vertical-align: middle;
+}
 
-  &:hover svg {
-    left: 3px;
+.fTableHead {
+  text-align: left;
+  font-weight: normal;
+  min-width: 300px;
+}
+
+.fTablePlan {
+  font-weight: normal;
+  width: 30%;
+  min-width: 250px;
+  border: 1px solid var(--border-color);
+  border-right: 0;
+
+  &:last-child {
+    border-right: 1px solid var(--border-color);
   }
 }
 
-.circle {
+.fTableHead,
+.fTablePlan {
+  border-bottom: 1px solid var(--border-color);
+  padding: 15px 30px;
+  background: white;
+
+  @media screen and (height >= 750px) and (width >= 850px) {
+    position: sticky;
+    z-index: 101;
+    top: 0;
+  }
+
+  @media screen and (height >= 750px) and (width >= 1125px) {
+    top: 90px;
+  }
+}
+
+.fTableScroll {
+  overflow: scroll;
+
+  @media screen and (height >= 750px) and (width >= 850px) {
+    overflow: unset;
+  }
+}
+
+.fTableAnchor {
+  position: relative;
+  top: 0;
+
+  @media screen and (width >= 1125px) {
+    top: -90px;
+  }
+}
+
+.fTableHeadTitle {
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.1;
+}
+
+.fTableHeadSub {
+  font-size: 13px;
+  color: var(--light-body-color);
+}
+
+.fTableHeadDiff {
+  display: flex;
+  margin-top: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  align-items: center;
+
+  span {
+    padding-left: 0.4em;
+  }
+}
+
+.fTablePlanName {
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.fTablePlanPrice {
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.fTableFeature td,
+.fTableFeature th {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.fTableFeatureOdd {
+  background: var(--highlight-bg-color);
+}
+
+.fTableFeature:hover {
+  background: #fffff0;
+}
+
+.fTableFeatureOdd:hover {
+  background: var(--darker-lighlight-bg-color);
+}
+
+.fTableFeatureName {
+  font-weight: normal;
+  text-align: left;
+  padding-left: 30px;
+  min-width: 300px;
+  font-size: 15px;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.fTableFeaturePlan {
+  text-align: center;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-right: 1px solid var(--border-color);
+}
+
+.fTableGroup td {
+  font-weight: bold;
+  padding: 20px 30px;
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.fTableGroupIcon {
+  vertical-align: middle;
+  fill: var(--azure-color);
+  transition: all 0.2s ease-in-out;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.fTableGroupCount {
+  font-weight: normal;
+  color: var(--light-body-color);
+}
+
+.fTableGroup td:hover .fTableGroupIcon {
+  opacity: 0.5;
+}
+
+.fTableGroupIcon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.fTableFeatureNameSplit {
+  display: flex;
+  align-items: center;
+}
+
+.fTableFeatureNameName {
+  flex: 1;
+  text-wrap: balance;
+  padding: 12px 0;
+}
+
+.fTableFeatureNameInfo {
+  margin-left: 10px;
+  position: relative;
+  padding: 14px;
+  padding-right: 30px;
+  svg {
+    width: 15px;
+    height: 15px;
+    fill: var(--light-body-color);
+  }
+}
+
+.fTableFeatureNameInfoHint {
+  display: none;
   position: absolute;
-  top: -34px;
-  left: -20px;
-  right: -20px;
-  bottom: -59px;
-  background: url('/images/circle.svg') no-repeat center center;
-  background-size: contain;
+  bottom: 100%;
+  right: 0;
+  max-width: 400px;
+  min-width: 300px;
+  background: var(--dark-bg-color);
+  color: white;
+  z-index: 110;
+  padding: rfs(30px);
+  border-radius: 4px;
+  font-size: 14px;
+  text-wrap: balance;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 29px;
+    margin-left: -9px;
+    border-width: 9px;
+    border-style: solid;
+    border-color: var(--dark-bg-color) transparent transparent transparent;
+  }
+
+  p {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.fTableFeatureNameInfoHint .fTableFeatureNameInfoHint p:last-child {
+  margin-bottom: 0;
+}
+
+.fTableFeatureNameInfo:hover .fTableFeatureNameInfoHint {
+  display: block;
+}
+
+.check {
+  border: 2px solid var(--azure-color);
+  background-color: var(--azure-color);
+  display: inline-block;
+  fill: white;
+  padding: 3px;
+  border-radius: 100px;
+
+  svg {
+    fill: white;
+    display: block;
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.nope {
+  border: 2px solid #aaa;
+  display: inline-block;
+  fill: white;
+  padding: 3px;
+  border-radius: 100px;
+
+  svg {
+    fill: #aaa;
+    display: block;
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.freePlan {
+  text-align: center;
+}
+
+.freePlanContent {
+  margin-bottom: 30px;
+}
+
+@media screen and (width >= 930px) {
+  .freePlan {
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+
+  .freePlanContent {
+    flex: 1;
+    margin-right: 100px;
+    margin-bottom: 0;
+  }
+}
+
+.freePlanTitle {
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.freePlanDescription {
+  color: var(--light-body-color);
+
+  a {
+    color: inherit;
+  }
+
+  svg {
+    fill: var(--light-body-color);
+    width: 0.9em;
+    height: 0.9em;
+    vertical-align: middle;
+  }
+}
+
+.freePlanCta {
+  text-align: center;
+}
+
+.freePlanCtaReassurance {
+  font-size: 13px;
+  margin-top: 10px;
+  color: var(--light-body-color);
+}
+
+.searchFeatures {
+  position: relative;
+  font-size: 17px;
+  max-width: 400px;
+  margin: rfs(30px) auto 0px;
+
+  input {
+    display: block;
+    margin: 20px auto;
+    width: 100%;
+    padding: 10px;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: white;
+    padding-left: 40px;
+
+    &:focus {
+      outline: none;
+      box-shadow: var(--box-shadow);
+    }
+  }
+
+  > svg {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: var(--light-body-color);
+  }
+
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+
+    svg {
+      display: block;
+      fill: var(--light-body-color);
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.extra {
+  color: var(--light-body-color);
+  font-size: 13px;
+  line-height: 1.1;
+  display: none;
+
+  @media (width > 700px) {
+    display: block;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.2);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 1000;
+  cursor: pointer;
+  overflow: scroll;
+}
+
+.modal {
+  background: white;
+  padding: rfs(40px);
+  border-radius: 10px;
+  max-width: calc(100% - 40px);
+  position: relative;
+  cursor: default;
+  margin: 20px auto;
+
+  @media screen and (width >= 930px) {
+    max-width: 1000px;
+  }
+}
+
+.modalTitle {
+  font-size: rfs(35px);
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.fReducedHead {
+  font-size: 16px;
+}
+
+.fReducedHeadTitle {
+  text-align: left;
+  padding: 15px 30px;
+  border: 1px solid var(--border-color);
+}
+
+.fReducedHeadPlan {
+  border: 1px solid var(--border-color);
+  border-left: 0;
+  padding: 15px 30px;
+  min-width: 200px;
+}
+
+.modalWarning {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.modalWarningIcon {
+  padding-right: 30px;
+  svg {
+    vertical-align: middle;
+  }
+}
+
+.modalClose {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+
+  svg {
+    width: 1.5em;
+    height: 1.5em;
+    fill: var(--light-body-color);
+  }
 }

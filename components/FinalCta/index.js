@@ -7,7 +7,7 @@ import s from './style.module.css';
 export default function FinalCta() {
   return (
     <Wrapper>
-      <a href="https://dashboard.datocms.com/signup" className={s.root}>
+      <a href="/pricing" className={s.root}>
         <div className={s.rootInner}>
           <div className={s.body}>
             <div className={s.title}>Start using DatoCMS today</div>

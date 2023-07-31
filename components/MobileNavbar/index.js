@@ -313,7 +313,7 @@ export default function Navbar() {
                           p="small"
                           href="https://dashboard.datocms.com/signup"
                         >
-                          Try for free!
+                          Get started
                         </Button>
                       </div>
                     </>

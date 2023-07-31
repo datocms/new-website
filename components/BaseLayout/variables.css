@@ -12,7 +12,8 @@
   --light-body-color: #71788a;
   --dark-bg-color: #2e343f;
   --light-bg-color: #f4f4f4;
-  --highlight-bg-color: rgb(246, 251, 253);
+  --highlight-bg-color: #f8fdff;
+  --darker-lighlight-bg-color: #ebf9ff;
   --border-color: #eee;
   --accent-color: #ff593d;
   --darker-accent-color: #c93f28;

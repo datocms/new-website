@@ -493,12 +493,8 @@ export default function Navbar() {
                   >
                     <span>Log in</span>
                   </a>
-                  <Button
-                    as="a"
-                    p="small"
-                    href="https://dashboard.datocms.com/signup"
-                  >
-                    Try for free!
+                  <Button as="a" p="small" href="/pricing">
+                    Get started
                   </Button>
                 </>
               )}
