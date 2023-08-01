@@ -104,8 +104,8 @@
     width: 50vw;
     max-width: 600px;
     height: 10vw;
-    min-height: 90px;
-    max-height: 200px;
+    min-height: 80px;
+    max-height: 160px;
     z-index: -1;
     position: absolute;
     top: 50%;

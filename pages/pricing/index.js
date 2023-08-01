@@ -275,9 +275,10 @@ function LimitsGroup({ proPlan, hints, forceOpen }) {
                 </div>
               </th>
               <td className={s.fTableFeaturePlan}>
-                {formatLimitRaw(proPlanLimit)} included{' '}
+                {formatLimitRaw(proPlanLimit)}
+                {proPlanLimit.extra_packet_amount && <> included</>}
                 {proPlanLimit.max_extra_packets && (
-                  <>(up to {formatUpperBoundLimitRaw(proPlanLimit)})</>
+                  <> (up to {formatUpperBoundLimitRaw(proPlanLimit)})</>
                 )}
                 {proPlanLimit.extra_packet_amount && (
                   <div className={s.extra}>{formatExtra(proPlanLimit)}</div>
