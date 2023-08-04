@@ -10,8 +10,8 @@ import {
   Image as DatoImage,
   renderMetaTags,
   StructuredText,
-  useQuerySubscription,
 } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import Head from 'components/Head';
 import Layout from 'components/Layout';
 import Button from 'components/Button';

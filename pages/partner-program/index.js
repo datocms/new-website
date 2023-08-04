@@ -12,7 +12,8 @@ import Link from 'next/link';
 import LogosBar from 'components/LogosBar';
 import LazyImage from '../../components/LazyImage';
 import { gqlStaticPropsWithSubscription, imageFields } from 'lib/datocms';
-import { useQuerySubscription, Image as DatoImage } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 
 function Benefit({ title, children }) {

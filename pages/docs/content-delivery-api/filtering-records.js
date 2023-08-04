@@ -16,7 +16,8 @@ import fieldTypes from 'utils/fieldTypes';
 import metaTypes from 'utils/metaTypes';
 import Heading from 'components/Heading';
 import Head from 'components/Head';
-import { renderMetaTags, useQuerySubscription } from 'react-datocms';
+import { renderMetaTags } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import { handleErrors } from 'lib/datocms';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {

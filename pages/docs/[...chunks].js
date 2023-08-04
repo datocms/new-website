@@ -5,11 +5,8 @@ import {
   handleErrors,
   gqlStaticPaths,
 } from 'lib/datocms';
-import {
-  renderMetaTags,
-  StructuredText,
-  useQuerySubscription,
-} from 'react-datocms';
+import { renderMetaTags, StructuredText } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import DocsLayout from 'components/DocsLayout';
 import DocPageContent from 'components/DocPageContent';
 import Link from 'next/link';

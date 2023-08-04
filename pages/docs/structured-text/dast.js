@@ -9,7 +9,8 @@ import {
 import s from 'pages/docs/pageStyle.module.css';
 import Heading from 'components/Heading';
 import Head from 'components/Head';
-import { renderMetaTags, useQuerySubscription } from 'react-datocms';
+import { renderMetaTags } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import { buildStructuredTextDocumentSchema } from 'utils/fetchStructuredText';
 import ReactMarkdown from 'react-markdown';
 import { parse } from 'flatted';

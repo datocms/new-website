@@ -8,7 +8,8 @@ import {
   reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { StructuredText, useQuerySubscription } from 'react-datocms';
+import { StructuredText } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';

@@ -1,8 +1,5 @@
-import {
-  renderMetaTags,
-  StructuredText,
-  useQuerySubscription,
-} from 'react-datocms';
+import { renderMetaTags, StructuredText } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import Head from 'components/Head';
 import Link from 'next/link';
 import Layout from 'components/Layout';

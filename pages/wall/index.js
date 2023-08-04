@@ -4,7 +4,8 @@ import Highlight, { highlightStructuredText } from 'components/Highlight';
 import Hero from 'components/Hero';
 import Link from 'next/link';
 import Head from 'components/Head';
-import { useQuerySubscription, Image as DatoImage } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import Masonry from 'react-masonry-css';
 import {
   gqlStaticPropsWithSubscription,

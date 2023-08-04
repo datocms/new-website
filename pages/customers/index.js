@@ -13,7 +13,8 @@ import Nhs from 'public/images/logos/new/nhs.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import React from 'react';
-import { Image as DatoImage, useQuerySubscription } from 'react-datocms';
+import { Image as DatoImage } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 import Head from 'components/Head';
 

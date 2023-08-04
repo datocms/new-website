@@ -15,7 +15,8 @@ import s from 'pages/docs/pageStyle.module.css';
 import { camelize, exampleForUpload } from 'utils/gqlExampleForField';
 import Heading from 'components/Heading';
 import Head from 'components/Head';
-import { renderMetaTags, useQuerySubscription } from 'react-datocms';
+import { renderMetaTags } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const { props } = await docPageGetStaticProps({

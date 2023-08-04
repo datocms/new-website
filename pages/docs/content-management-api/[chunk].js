@@ -10,7 +10,8 @@ import { parse } from 'flatted';
 
 import { useMemo } from 'react';
 import Head from 'components/Head';
-import { renderMetaTags, useQuerySubscription } from 'react-datocms';
+import { renderMetaTags } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import DocPageContent from 'components/DocPageContent';
 import { gqlStaticPaths } from 'lib/datocms';
 import { handleErrors } from 'lib/datocms';
