@@ -10,6 +10,7 @@
 .right {
   flex: 40;
   min-width: 300px;
+  background-color: #e4e4e4;
   background-size: cover;
   background-position: 50% 50%;
 
