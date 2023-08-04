@@ -68,12 +68,17 @@ const handler = async (req, res) => {
     return res.status(200).json({ previewLinks: [] });
   }
 
+  const domain =
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? 'www.datocms.com'
+      : process.env.VERCEL_BRANCH_URL;
+
   const previewLinks = [
     ...(item.meta.status !== 'draft'
       ? [
           {
             label: 'Published version',
-            url: `https://www.datocms.com${permalink}`,
+            url: `https://${domain}${permalink}`,
           },
         ]
       : []),
@@ -81,7 +86,7 @@ const handler = async (req, res) => {
       ? [
           {
             label: 'Preview draft version',
-            url: `https://www.datocms.com/api/preview/start?slug=${permalink}`,
+            url: `https://${domain}/api/preview/start?slug=${permalink}`,
           },
         ]
       : []),
