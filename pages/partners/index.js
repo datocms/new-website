@@ -6,7 +6,7 @@ import Space from 'components/Space';
 import { gqlStaticPropsWithSubscription } from 'lib/datocms';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useQuerySubscription } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import s from './style.module.css';
 import sortBy from 'lodash-es/sortBy';

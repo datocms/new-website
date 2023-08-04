@@ -12,7 +12,7 @@ import Link from 'next/link';
 import FormattedDate from 'components/FormattedDate';
 import { renderMetaTags } from 'react-datocms';
 import Head from 'components/Head';
-import { useQuerySubscription } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import PostContent from 'components/PostContent';
 
 import s from 'pages/product-updates/p/[page]/style.module.css';

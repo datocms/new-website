@@ -15,7 +15,7 @@ import Paginator from 'components/Paginator';
 import { useRouter } from 'next/router';
 import Head from 'components/Head';
 import { renderMetaTags } from 'react-datocms';
-import { useQuerySubscription } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import PostContent from 'components/PostContent';
 import pageStyle from 'pages/docs/pageStyle.module.css';
 

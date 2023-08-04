@@ -19,7 +19,7 @@ import Paginator from 'components/Paginator';
 import { range } from 'range';
 import { useRouter } from 'next/router';
 import s from './style.module.css';
-import { useQuerySubscription } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticPaths = gqlStaticPaths(
   `

@@ -12,7 +12,7 @@ import InterstitialTitle from 'components/InterstitialTitle';
 import PostContent from 'components/PostContent';
 import Head from 'components/Head';
 import s from './style.module.css';
-import { useQuerySubscription } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import filter from 'utils/filterNodes';
 import { isHeading } from 'datocms-structured-text-utils';
 import slugify from 'utils/slugify';
