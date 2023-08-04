@@ -17,6 +17,7 @@ import LazyImage from 'components/LazyImage';
 import Button from 'components/Button';
 import Checks from 'components/Checks';
 import CdnMap from 'components/CdnMap';
+import ShopifyProduct from 'components/ShopifyProduct';
 import GitHubButton from 'components/GitHubButton';
 import InterstitialTitle from 'components/InterstitialTitle';
 import s from './style.module.css';
@@ -166,6 +167,11 @@ export const getStaticProps = handleErrors(
                   ...imageFields
                 }
               }
+            }
+            ... on ShopifyProductRecord {
+              id
+              _modelApiKey
+              shopifyProductId
             }
           }
           seoH1
@@ -570,6 +576,13 @@ export default function UseCase({ subscription, websites, preview }) {
                           <Vercel key="Vercel" />,
                         ]}
                       />
+                    </Space>
+                  </>
+                )}
+                {block._modelApiKey === 'shopify_product' && (
+                  <>
+                    <Space top={2} bottom={2}>
+                      <ShopifyProduct block={block} />
                     </Space>
                   </>
                 )}
