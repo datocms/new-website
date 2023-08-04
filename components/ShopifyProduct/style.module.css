@@ -5,20 +5,16 @@
   border-radius: 5px;
   overflow: hidden;
   background: white;
+  align-items: stretch;
 }
 
 .right {
   flex: 40;
   min-width: 300px;
   background-color: #e4e4e4;
-  background-size: cover;
-  background-position: 50% 50%;
-
-  &:before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .left {
@@ -55,10 +51,24 @@
   font-size: 16px;
 }
 
-.variants {
+.actions {
   margin: 20px 0;
+
+  @media (width > 1000px) {
+    display: flex;
+    align-items: stretch;
+  }
+}
+
+.variants {
   display: flex;
   align-items: stretch;
+  flex: 1;
+  margin-bottom: 30px;
+
+  @media (width > 1000px) {
+    margin-bottom: 0;
+  }
 
   div {
     margin-right: 20px;

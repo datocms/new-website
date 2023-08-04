@@ -256,27 +256,26 @@ export default function ShopifyProduct({ block }) {
           </div>
           <div className={s.description}>{shopifyProduct.description}</div>
 
-          <div className={s.variants}>
-            <div>Select a variant:</div>
-            <select onChange={(e) => setVariantId(e.target.value)}>
-              {shopifyProduct.variants.edges.map(({ node: variant }) => (
-                <option key={variant.id} value={variant.id}>
-                  {variant.title}
-                </option>
-              ))}
-            </select>
+          <div className={s.actions}>
+            <div className={s.variants}>
+              <div>Select a variant:</div>
+              <select onChange={(e) => setVariantId(e.target.value)}>
+                {shopifyProduct.variants.edges.map(({ node: variant }) => (
+                  <option key={variant.id} value={variant.id}>
+                    {variant.title}
+                  </option>
+                ))}
+              </select>
+            </div>
             <Button as="div">
               <CartIcon />
               Add to cart
             </Button>
           </div>
         </div>
-        <div
-          className={s.right}
-          style={{
-            backgroundImage: `url(${currentVariant.image.src})`,
-          }}
-        />
+        <div className={s.right}>
+          <img src={currentVariant.image.src} alt={currentVariant.title} />
+        </div>
       </div>
     </Wrapper>
   );
