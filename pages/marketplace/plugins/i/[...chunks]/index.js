@@ -106,7 +106,11 @@ export const getStaticProps = gqlStaticProps(
 
 const fetcher = (packageName) =>
   wretch(
-    `https://graphql.datocms.com/environments/${process.env.NEXT_PUBLIC_DATOCMS_ENVIRONMENT_ID}`,
+    `https://graphql.datocms.com${
+      process.env.NEXT_PUBLIC_DATOCMS_ENVIRONMENT_ID
+        ? `/environments/${process.env.NEXT_PUBLIC_DATOCMS_ENVIRONMENT_ID}`
+        : '/'
+    }`,
     {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN}`,
