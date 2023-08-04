@@ -88,12 +88,14 @@ const handler = async (req, res) => {
   // final step is to get the HTML of the webpage associated with the record
   // and return it to the client
 
-  const { body } = await got(
-    new URL(permalink, process.env.BASE_URL).toString(),
-    {
-      headers: { cookie },
-    },
-  );
+  const baseUrl =
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
+      ? `https://${process.env.VERCEL_BRANCH_URL}`
+      : process.env.BASE_URL;
+
+  const { body } = await got(new URL(permalink, baseUrl).toString(), {
+    headers: { cookie },
+  });
 
   const { document } = new JSDOM(body).window;
 
