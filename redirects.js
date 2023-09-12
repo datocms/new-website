@@ -354,4 +354,8 @@ module.exports = [
       '/marketplace/starters/next-js-multilingual-blog-per-local-publishing',
     destination: '/docs/general-concepts/localization#locale-based-publishing',
   },
+  {
+    source: '/pricing/compare',
+    destination: '/pricing',
+  },
 ];
