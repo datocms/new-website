@@ -28,11 +28,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       posts: allPartners(first: 100) {
         ...partner
       }
-      projects: allShowcaseProjects(first: 100) {
-        partner {
-          slug
-        }
-      }
     }
 
     fragment partner on PartnerRecord {
@@ -61,6 +56,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           latitude
           longitude
         }
+      }
+      _allReferencingShowcaseProjectsMeta {
+        count
       }
     }
   `,
@@ -122,12 +120,10 @@ export default function Partners({ subscription, preview }) {
     data: { posts, partnersPage, projects },
   } = useQuerySubscription(subscription);
 
-  const countBySlug = projects.reduce((acc, project) => ({
-    ...acc,
-    [project.partner.slug]: acc[project.partner.slug]
-      ? acc[project.partner.slug] + 1
-      : 1,
-  }));
+  const countBySlug = posts.reduce((acc, post) => {
+    acc[post.slug] = post._allReferencingShowcaseProjectsMeta.count;
+    return acc;
+  }, {});
 
   const highlightedSlugs = partnersPage.highlightedPartners.map((p) => p.slug);
 
@@ -338,7 +334,7 @@ export default function Partners({ subscription, preview }) {
                     {toPlainText(post.shortDescription)}
                   </div>
                 </div>
-                {countBySlug[post.slug] && (
+                {countBySlug[post.slug] !== 0 && (
                   <div className={s.showcasedProjects}>
                     {countBySlug[post.slug]} showcased project
                     {countBySlug[post.slug] > 1 && <>s</>}
