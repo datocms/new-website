@@ -19,7 +19,10 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
       {
         starters: allTemplateDemos(first: 100) {
           id
+          name
+          cmsDescription
           code
+          recommended
           githubRepo
           technology {
             name
@@ -29,7 +32,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
           }
           screenshot {
             responsiveImage(
-              imgixParams: { w: 400, h: 300, fit: crop, crop: top }
+              imgixParams: { w: 400, h: 300, fit: crop }
             ) {
               ...imageFields
             }
@@ -80,31 +83,31 @@ export default function Plugins({ starters, preview }) {
           do that in our documentation!
         </Announce>
         <div className={s.grid}>
-          {starters &&
-            starters.map((item) => (
-              <PluginBox
-                title={item.name}
-                key={item.code}
-                href={`/marketplace/starters/${item.code}`}
-                description={
-                  <div className={s.demoDesc}>
-                    <div className={s.demoDescBody}>{item.description}</div>
-                    <div className={s.demoDescImage}>
-                      <LazyImage
-                        className={s.techLogo}
-                        src={item.technology.logo.url}
-                      />
-                    </div>
+          {starters?.map((item) => (
+            <PluginBox
+              title={item.name}
+              key={item.code}
+              href={`/marketplace/starters/${item.code}`}
+              tag={item.recommended && 'Best choice to try out DatoCMS!'}
+              description={
+                <div className={s.demoDesc}>
+                  <div className={s.demoDescBody}>{item.cmsDescription}</div>
+                  <div className={s.demoDescImage}>
+                    <LazyImage
+                      className={s.techLogo}
+                      src={item.technology.logo.url}
+                    />
                   </div>
-                }
-                image={
-                  <DatoImage
-                    className={s.boxImageImage}
-                    data={item.screenshot.responsiveImage}
-                  />
-                }
-              />
-            ))}
+                </div>
+              }
+              image={
+                <DatoImage
+                  className={s.boxImageImage}
+                  data={item.screenshot.responsiveImage}
+                />
+              }
+            />
+          ))}
         </div>
       </Wrapper>
     </Layout>

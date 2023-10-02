@@ -46,6 +46,7 @@ export const getStaticProps = handleErrors(
           seo: _seoMetaTags {
             ...seoMetaTagsFields
           }
+          name
           cmsDescription
           seoH1
           yoastAnalysis

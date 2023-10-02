@@ -50,9 +50,11 @@ export default function PluginBox({
   actions,
   details,
   href,
+  tag,
 }) {
   return (
     <MaybeLink href={href} className={s.box}>
+      {tag && <div className={s.boxTag}>{tag}</div>}
       {image}
       <div className={s.boxBody}>
         <div className={s.boxTitle}>{title}</div>

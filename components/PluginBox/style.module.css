@@ -7,12 +7,29 @@
   display: block;
   color: inherit;
   text-decoration: none;
-  overflow: hidden;
   transition: all 200ms ease-in-out;
   width: 100%;
   display: flex;
   flex-direction: column;
   background: white;
+  position: relative;
+}
+
+.boxTag {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+  z-index: 10;
+  background: #f4cf58;
+  padding: 5px 12px;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 0 0.6px 3.6px rgba(0, 0, 0, 0.024),
+    0 1.6px 10px rgba(0, 0, 0, 0.035), 0 3.9px 24.1px rgba(0, 0, 0, 0.046),
+    0 13px 80px rgba(0, 0, 0, 0.07);
 }
 
 a.box {
