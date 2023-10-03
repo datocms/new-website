@@ -145,7 +145,7 @@ function Homepage({ successStories, preview, page }) {
           title={
             <>
               Is content spread across{' '}
-              <FlagHighlight style="bad">endless different CMSs</FlagHighlight>?
+              <FlagHighlight style="bad">endless different CMSs?</FlagHighlight>
             </>
           }
           image="random-things"
