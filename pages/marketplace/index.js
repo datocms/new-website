@@ -37,6 +37,9 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
           demos {
             id
             code
+            name
+            recommended
+            cmsDescription
             githubRepo
             technology {
               name
@@ -46,7 +49,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
             }
             screenshot {
               responsiveImage(
-                imgixParams: { w: 300, h: 200, fit: crop, crop: top }
+                imgixParams: { w: 300, h: 200, fit: crop }
               ) {
                 ...imageFields
               }
@@ -124,11 +127,12 @@ const Category = ({ title, description, children, browse }) => (
   </div>
 );
 
-const Box = ({ title, description, image, href }) => (
+const Box = ({ title, description, image, href, tag }) => (
   <div className={s.boxContainer}>
     <PluginBox
       href={href}
       title={title}
+      tag={tag}
       description={description}
       image={image}
     />
@@ -150,12 +154,7 @@ export default function IntegrationsPage({
       </Head>
       <Category
         title="Starter projects"
-        description={
-          <>
-            Start with a fully configured DatoCMS project, a best-practice
-            frontend and free hosting
-          </>
-        }
+        description="Start with a fully configured DatoCMS project, a best-practice frontend and free hosting"
         browse={
           <Link href="/marketplace/starters">
             <a className={s.browseAll}>
@@ -169,9 +168,10 @@ export default function IntegrationsPage({
             key={item.code}
             title={item.name}
             href={`/marketplace/starters/${item.code}`}
+            tag={item.recommended && 'Best choice to start!'}
             description={
               <div className={s.demoDesc}>
-                <div className={s.demoDescBody}>{item.description}</div>
+                <div className={s.demoDescBody}>{item.cmsDescription}</div>
                 <div className={s.demoDescImage}>
                   <LazyImage
                     className={s.techLogo}
@@ -200,12 +200,7 @@ export default function IntegrationsPage({
             </a>
           </Link>
         }
-        description={
-          <>
-            Easily expand and customize the capabilities of DatoCMS with
-            community plugins
-          </>
-        }
+        description="Easily expand and customize the capabilities of DatoCMS with community plugins"
       >
         {page.plugins.map((item) => (
           <Box
