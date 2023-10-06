@@ -14,6 +14,7 @@ import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import {
   formatLimitRaw,
+  formatLimit,
   formatExtra,
   formatUpperBoundLimitRaw,
 } from 'utils/planLimitsHelpers';
@@ -275,13 +276,16 @@ function LimitsGroup({ proPlan, hints, forceOpen }) {
                 </div>
               </th>
               <td className={s.fTableFeaturePlan}>
-                {formatLimitRaw(proPlanLimit)}
-                {proPlanLimit.extra_packet_amount && <> included</>}
-                {proPlanLimit.max_extra_packets && (
-                  <> (up to {formatUpperBoundLimitRaw(proPlanLimit)})</>
-                )}
+                {formatLimit(proPlanLimit)}
+                {/* {proPlanLimit.extra_packet_amount && <> included</>} */}
+
                 {proPlanLimit.extra_packet_amount && (
-                  <div className={s.extra}>{formatExtra(proPlanLimit)}</div>
+                  <div className={s.extra}>
+                    {formatExtra(proPlanLimit)}
+                    {proPlanLimit.max_extra_packets && (
+                      <>, up to {formatUpperBoundLimitRaw(proPlanLimit)}</>
+                    )}
+                  </div>
                 )}
               </td>
 

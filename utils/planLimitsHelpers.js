@@ -103,12 +103,10 @@ export const perMonth = (name, value) => {
 };
 
 export const formatLimit = (limit) => {
-  if (['activable_feature', 'boolean_system_limit'].includes(limit.type)) {
-    return formatLimitRaw(limit);
-  }
-
   if (
     [
+      'activable_feature',
+      'boolean_system_limit',
       'countable_system_limit',
       'possibly_incompatible_countable_system_limit',
     ].includes(limit.type)
@@ -116,26 +114,17 @@ export const formatLimit = (limit) => {
     return formatLimitRaw(limit);
   }
 
-  if (limit.type === 'per_site_quota_managed_site_resource') {
-    return limit.extra_packet_amount ? (
-      <>{formatLimitRaw(limit)} per project</>
-    ) : (
-      <>Up to {formatLimitRaw(limit)} per project</>
-    );
-  }
-
-  if (limit.type === 'per_environment_quota_managed_site_resource') {
-    return limit.extra_packet_amount ? (
-      <>{formatLimitRaw(limit)} included per project</>
-    ) : (
-      <>Up to {formatLimitRaw(limit)} per project</>
-    );
+  if (
+    limit.type === 'per_site_quota_managed_site_resource' ||
+    limit.type === 'per_environment_quota_managed_site_resource'
+  ) {
+    return <>{formatLimitRaw(limit)} included per project</>;
   }
 
   return limit.extra_packet_amount ? (
     <>{formatLimitRaw(limit)} included</>
   ) : (
-    <>Up to {formatLimitRaw(limit)}</>
+    <>{formatLimitRaw(limit)}</>
   );
 };
 
@@ -221,36 +210,4 @@ export const formatExtra = (limit) => {
       extra {limitLabel(limit.id).replace(/_/g, ' ')}
     </>
   );
-};
-
-export const limitType = (type) => {
-  switch (type) {
-    case 'owner_managed_resource': {
-      return 'Projects';
-    }
-    case 'activable_feature': {
-      return 'Activable features';
-    }
-    case 'boolean_system_limit': {
-      return 'Available features';
-    }
-    case 'countable_system_limit': {
-      return 'Plan limits';
-    }
-    case 'possibly_incompatible_countable_system_limit': {
-      return 'Plan limits';
-    }
-    case 'per_environment_quota_managed_site_resource': {
-      return 'Per-environment limits';
-    }
-    case 'per_site_quota_managed_site_resource': {
-      return 'Per-project limits';
-    }
-    case 'shared_quota_managed_site_resource': {
-      return 'Shared resources';
-    }
-    case 'shared_quota_metered_site_resource': {
-      return 'Shared resources';
-    }
-  }
 };
