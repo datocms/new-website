@@ -25,7 +25,7 @@ const subscribe = async ({ method, body }, res) => {
     res.status(200).json({ success: true });
   } catch (e) {
     if (e.status === 400 && e.response.body.title === 'Member Exists') {
-      res.status(e.status).json({ success: true });
+      res.status(200).json({ success: true });
     } else {
       res
         .status(e.status)
