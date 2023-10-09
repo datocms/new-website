@@ -23,6 +23,10 @@
   .notice {
     display: none;
   }
+
+  .footerCol {
+    margin-bottom: 30px;
+  }
 }
 
 @media (width >= 1000px) {
@@ -149,6 +153,13 @@
     border-top: 1px solid var(--border-color);
     padding: 50px var(--page-margin);
     margin-top: 50px;
+    display: grid;
+    column-gap: 50px;
+    grid-template-columns: 350px auto;
+  }
+
+  .footerCol {
+    flex: 1;
   }
 }
 
@@ -196,4 +207,74 @@
   font-weight: bold;
   margin: 0 0 10px;
   font-size: 18px;
+}
+
+.thumbsButton {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background: white;
+  padding: 8px 15px 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+  }
+
+  &:hover {
+    border-color: var(--accent-color);
+  }
+}
+
+.activeThumbsButton {
+  border-color: var(--accent-color);
+  outline: 1px solid var(--accent-color);
+}
+
+.form {
+  font-size: 14px;
+  margin-top: 20px;
+
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 10px;
+    outline: none;
+    appearance: none;
+
+    &:focus {
+      border-color: var(--accent-color);
+    }
+  }
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.fieldError {
+  color: red;
+  margin-top: 5px;
+}
+
+.label {
+  display: flex;
+  line-height: 1.1;
+  margin-bottom: 5px;
+}
+
+.labelName {
+  font-weight: bold;
+  flex: 1;
+  margin-right: 15px;
+}
+
+.labelInfo {
+  color: var(--light-body-color);
 }
