@@ -165,20 +165,31 @@
 
 @media (width >= 1300px) {
   .root {
-    grid-template-columns: minmax(270px, calc((100% - 1262px) / 2 + 270px)) 1010px 1fr;
+    --content-width: 1010px;
+    --sidebar-width: 270px;
+    grid-template-columns:
+      minmax(
+        var(--sidebar-width),
+        calc(
+          (100% - var(--content-width) - var(--sidebar-width)) / 2 +
+            var(--sidebar-width)
+        )
+      )
+      var(--content-width) 1fr;
   }
 
-  .sidebar {
+  .sidebar,
+  .emptySidebar {
     min-width: 292px;
     width: 100%;
   }
 
   .logo {
-    width: 270px;
+    width: var(--sidebar-width);
   }
 
   .innerSidebar {
-    width: 270px;
+    width: var(--sidebar-width);
   }
 
   .container {
@@ -186,11 +197,25 @@
   }
 
   .mainHeader {
-    width: 1010px;
+    width: var(--content-width);
   }
 
   .footer {
     padding: 50px 0;
+  }
+}
+
+@media (width >= 1500px) {
+  .root {
+    --content-width: 1110px;
+    --sidebar-width: 300px;
+  }
+}
+
+@media (width >= 1600px) {
+  .root {
+    --content-width: 1210px;
+    --sidebar-width: 300px;
   }
 }
 

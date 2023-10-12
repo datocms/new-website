@@ -294,9 +294,8 @@
 
   .sidebar {
     padding-top: 58px;
-    padding-left: 48px;
-    min-width: 209px;
-    max-width: 280px;
+    padding-left: 64px;
+    width: 330px;
   }
 
   .toc {
@@ -313,12 +312,19 @@
   }
 }
 
+@media (width > 1600px) {
+  .emptySidebar {
+    padding-top: 58px;
+    padding-left: 64px;
+    width: 330px;
+  }
+}
+
 @media (width < 1300px) {
   .article {
     padding-left: var(--page-margin);
     padding-right: var(--page-margin);
     border-bottom: 1px solid var(--border-color);
-    max-width: 800px;
   }
 
   .toc {

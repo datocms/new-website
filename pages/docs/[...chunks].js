@@ -478,7 +478,9 @@ export function Toc({ content, extraEntries: extra }) {
         </div>
       </div>
     </div>
-  ) : null;
+  ) : (
+    <div className={s.emptySidebar} />
+  );
 }
 
 export default function DocPage({
