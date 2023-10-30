@@ -92,7 +92,7 @@ function StructuredText({ feature, preview, integrations, review }) {
           <>
             Meet our all-encompassing solution designed with{' '}
             <strong>omnichannel</strong> in mind.{' '}
-            <strong>Dato CMS structured content</strong>
+            <strong>DatoCMS structured content</strong>{' '}
             combines a powerful and flexible{' '}
             <strong>rich-text editor with a portable JSON format</strong> to
             store your content.
@@ -107,7 +107,7 @@ function StructuredText({ feature, preview, integrations, review }) {
           title={<>A delightfully focused writing&nbsp;experience</>}
           subtitle={
             <>
-              Dato CMS Structured Content offers a beautiful,{' '}
+              DatoCMS Structured Content offers a beautiful,{' '}
               <strong>Notion-like editor</strong> designed for focus, with{' '}
               <strong>
                 slash commands, markdown/keyboard shortcuts, and drag &amp; drop
@@ -157,7 +157,7 @@ function StructuredText({ feature, preview, integrations, review }) {
           <p>
             Galleries, call-to-actions, polls, third-party embeds and widgets
             for YouTube, Twitter... these things have always been a problem to
-            handle. Not with Dato CMS structured content: blocks are completely
+            handle. Not with DatoCMS structured content: blocks are completely
             custom, can be{' '}
             <strong>
               moved around, edited and composed in any way you want
