@@ -2,7 +2,7 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Legal from 'components/Legal';
-import ReactMarkdown from 'react-markdown';
+import DocDescription from 'components/DocDescription';
 import fs from 'fs';
 import util from 'util';
 import Head from 'components/Head';
@@ -33,7 +33,7 @@ export default function Terms({ body }) {
         }
       />
       <Legal>
-        <ReactMarkdown>{body}</ReactMarkdown>
+        <DocDescription>{body}</DocDescription>
       </Legal>
     </Layout>
   );

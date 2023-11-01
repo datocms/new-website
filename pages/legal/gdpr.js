@@ -2,7 +2,7 @@ import Layout from 'components/Layout';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Legal from 'components/Legal';
-import ReactMarkdown from 'react-markdown';
+import DocDescription from 'components/DocDescription';
 import Head from 'components/Head';
 
 import fs from 'fs';
@@ -35,7 +35,7 @@ export default function Gdpr({ body }) {
         }
       />
       <Legal>
-        <ReactMarkdown>{body}</ReactMarkdown>
+        <DocDescription>{body}</DocDescription>
       </Legal>
     </Layout>
   );
