@@ -157,7 +157,7 @@ export default function Plugin({ plugin, preview }) {
 
   const url = `${
     projectEnvironment ? `/environments/${projectEnvironment}` : ''
-  }/admin/plugins/install/${plugin.packageName}`;
+  }/configuration/plugins/install/${plugin.packageName}`;
 
   return (
     <Layout preview={preview}>
