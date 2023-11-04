@@ -387,8 +387,7 @@ export default function Footer({ noCta }) {
                 </form>
                 <div className={s.formMessage}>
                   {formState.errors.email && formState.errors.email.message}
-                  {success &&
-                    'You successfully subscribed to our newsletter. Welcome on board! 🎉'}
+                  {success && 'Successfully subscribed. Welcome on board! 🎉'}
                 </div>
               </div>
             </div>
