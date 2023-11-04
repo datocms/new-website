@@ -36,7 +36,11 @@ export default function Footer({ noCta }) {
   const onSubmit = async ({ email }) => {
     try {
       Fathom.trackGoal('NZPPFI8Z', 0);
-      await wretch('/api/mailchimp/subscribe').post({ email }).json();
+
+      await Promise.all([
+        wretch('/api/mailchimp/subscribe').post({ email }).json(),
+        wretch('/api/mailerlite/subscribe').post({ email }).json(),
+      ]);
 
       reset();
       setSuccess(true);
@@ -360,10 +364,7 @@ export default function Footer({ noCta }) {
                   directly in your inbox.
                 </div>
               </div>
-              <div
-                className={s.formContainer}
-                onSubmit={handleSubmit(onSubmit)}
-              >
+              <div className={s.formContainer}>
                 <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
                   <input
                     placeholder="Enter your email"
