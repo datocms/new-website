@@ -322,38 +322,47 @@ function renderBlock(s, block, defaultAltForImages) {
         </div>
       );
 
-    case 'table':
+    case 'table': {
+      const columns = block.table.columns.map((rawName) =>
+        parseShortCodes(rawName, ['style']),
+      );
+
+      function toCss(style) {
+        if (!style) {
+          return {};
+        }
+
+        return {
+          ...(style.align ? { textAlign: style.align } : {}),
+          ...(style.width ? { width: style.width } : {}),
+        };
+      }
+
       return (
         <div className={s.tableWrapper}>
           <table>
             <thead>
               <tr>
-                {block.table.columns
-                  .map((rawName) => parseShortCodes(rawName, ['style']))
-                  .map((col) => (
-                    <th
-                      key={col.id}
-                      style={toCss(col.style || { align: 'left' })}
-                    >
-                      {col.content}
-                    </th>
-                  ))}
+                {columns.map((col) => (
+                  <th key={col.id} style={toCss(col.style)}>
+                    {col.content}
+                  </th>
+                ))}
               </tr>
             </thead>
             {block.table.data.map((row) => (
               <tr key={JSON.stringify(row)}>
-                {block.table.columns.map((col) => {
-                  return (
-                    <td key={col} style={toCss(col.style)}>
-                      {row[col]}
-                    </td>
-                  );
-                })}
+                {columns.map((col) => (
+                  <td key={col.id} style={toCss(col.style)}>
+                    {row[col.id]}
+                  </td>
+                ))}
               </tr>
             ))}
           </table>
         </div>
       );
+    }
   }
 }
 

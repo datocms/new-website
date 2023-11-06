@@ -6,7 +6,6 @@ import PostContent from 'components/PostContent';
 import s from 'pages/docs/pageStyle.module.css';
 import cn from 'classnames';
 import { StructuredText } from 'react-datocms';
-import { parseShortCodes } from '../../utils/table';
 
 export default function DocPageContent({ additionalData, ...props }) {
   return (
@@ -26,47 +25,7 @@ export default function DocPageContent({ additionalData, ...props }) {
               </>
             );
           }
-          case 'table': {
-            const columns = block.table.columns.map((rawName) =>
-              parseShortCodes(rawName, ['style']),
-            );
 
-            function toCss(style) {
-              if (!style) {
-                return {};
-              }
-
-              return {
-                ...(style.align ? { textAlign: style.align } : {}),
-                ...(style.width ? { width: style.width } : {}),
-              };
-            }
-
-            return (
-              <div className={s.tableWrapper}>
-                <table>
-                  <thead>
-                    <tr>
-                      {columns.map((col) => (
-                        <th key={col.id} style={toCss(col.style)}>
-                          {col.content}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  {block.table.data.map((row) => (
-                    <tr key={JSON.stringify(row)}>
-                      {columns.map((col) => (
-                        <td key={col.id} style={toCss(col.style)}>
-                          {row[col.id]}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </table>
-              </div>
-            );
-          }
           case 'doc_callout': {
             return (
               <div
