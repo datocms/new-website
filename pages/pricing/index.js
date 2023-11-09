@@ -164,6 +164,8 @@ function FreeLimitsTable({ hints, freePlan, proPlan }) {
         ].map((limitId, i) => {
           const hint = hints.find((h) => h.apiId === limitId);
 
+          if (!hint) return;
+
           const freePlanLimit = freePlan.attributes.limits.find(
             (l) => l.id === limitId,
           );
@@ -249,6 +251,8 @@ function LimitsGroup({ proPlan, hints, forceOpen }) {
       {(isOpen || forceOpen) &&
         limits.map((limitId, i) => {
           const hint = hints.find((h) => h.apiId === limitId);
+
+          if (!hint) return;
 
           const proPlanLimit = proPlan.attributes.limits.find(
             (l) => l.id === limitId,
