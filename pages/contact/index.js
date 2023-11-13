@@ -63,7 +63,6 @@ export default function Support() {
                 fieldset="sales"
                 initialValues={{ issueType: 'sales' }}
                 hubspotFormId="11eae68a-59d8-4c94-b503-a373cb490a61"
-                fathomGoal="XCOUN3RN"
               />
             </div>
           </div>

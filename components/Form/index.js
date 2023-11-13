@@ -12,7 +12,6 @@ import { useToasts } from 'react-toast-notifications';
 import { useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
 import { useRecaptcha } from 'react-recaptcha-hook';
-import * as Fathom from 'fathom-client';
 
 export const Field = ({
   name,
@@ -114,7 +113,6 @@ export const Form = ({
   submitLabel,
   onSubmit,
   nativeSubmitForm,
-  fathomGoal,
 }) => {
   const execute = useRecaptcha({
     // must be v3 Recaptcha!
@@ -136,10 +134,6 @@ export const Form = ({
     const token = await execute('form');
 
     recaptchaInput.current.value = token;
-
-    if (fathomGoal) {
-      Fathom.trackGoal(fathomGoal, 0);
-    }
 
     if (onSubmit) {
       try {

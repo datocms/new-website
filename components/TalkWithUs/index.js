@@ -36,7 +36,6 @@ export default function TalkWithUs({
   initialValues = {},
   fieldset,
   hubspotFormId,
-  fathomGoal,
 }) {
   const defaultValues = {
     firstName: '',
@@ -90,7 +89,6 @@ export default function TalkWithUs({
         nativeSubmitForm
         onSubmit={handleSubmit}
         action={`https://webhook.frontapp.com/forms/f51dbf7c0379d350b50e/${frontFormIds[fieldset]}`}
-        fathomGoal={fathomGoal}
       >
         {fieldset === 'support' && (
           <>

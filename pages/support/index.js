@@ -230,7 +230,6 @@ export default function Support({ preview, topics }) {
                         issueType: leafTopic.autoResponderType,
                       }}
                       fieldset={leafTopic.contactFormType}
-                      fathomGoal="YP2LQSQ5"
                       hubspotFormId={
                         leafTopic.contactFormType === 'sales'
                           ? '11eae68a-59d8-4c94-b503-a373cb490a61'
