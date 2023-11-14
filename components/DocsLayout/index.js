@@ -99,8 +99,8 @@ function Feedback() {
               <div className={s.field}>
                 <div className={s.label}>
                   <div className={s.labelName}>
-                    If we can contact you with more questions, please enter your
-                    email address
+                    To receive further updates or address your feedback, kindly
+                    share your email address with us.
                   </div>
                   <div className={s.labelInfo}>Optional</div>
                 </div>
