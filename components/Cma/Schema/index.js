@@ -245,7 +245,17 @@ function Relationship({ name, schema, required }) {
               {language === 'old-js' ? humps.camelize(name) : name}
             </span>
             {language === 'http' && <span className={s.prefix}>.data</span>}
-            &nbsp;&nbsp;
+            {!isDefinition && (
+              <>
+                &nbsp;&nbsp;
+                {required ? (
+                  <span className={s.required}>Required</span>
+                ) : (
+                  <span className={s.optional}>Optional</span>
+                )}
+                &nbsp;&nbsp;
+              </>
+            )}
             {['http', 'javascript'].includes(language) ||
             multipleRelationshipsPossible ? (
               <span className={s.types}>
@@ -298,16 +308,6 @@ function Relationship({ name, schema, required }) {
                   );
                 })}
               </span>
-            )}
-            {!isDefinition && (
-              <>
-                &nbsp;&nbsp;
-                {required ? (
-                  <span className={s.required}>Required</span>
-                ) : (
-                  <span className={s.optional}>Optional</span>
-                )}
-              </>
             )}
             {schema.deprecated && (
               <>
@@ -374,8 +374,6 @@ export function JsonSchemaProperty({
               <span className={s.name}>
                 {language === 'old-js' ? humps.camelize(name) : name}
               </span>
-              &nbsp;&nbsp;
-              <Type schema={schema} />
               {schema.deprecated && (
                 <>
                   &nbsp;&nbsp;
@@ -392,6 +390,30 @@ export function JsonSchemaProperty({
                   )}
                 </>
               )}
+              &nbsp;&nbsp;
+              <Type schema={schema} />
+              {
+                // The plural "examples" will array.join these: [true,false] -> "true,false"
+                schema.examples && schema.examples.length ? (
+                  <>
+                    &nbsp;&nbsp;<span className={s.example}>Examples: </span>
+                    {schema.examples.map((ex, i) => [
+                      i > 0 && ', ',
+                      <span className={s.type} key={i}>
+                        {JSON.stringify(ex)}
+                      </span>,
+                    ])}
+                  </>
+                ) : // The singular example will just JSON stringify: [true, false] -> [true, false]
+                schema.example ? (
+                  <>
+                    &nbsp;&nbsp;<span className={s.example}>Example: </span>
+                    <span className={s.type}>
+                      {JSON.stringify(schema.example)}
+                    </span>
+                  </>
+                ) : null
+              }
             </div>
           )}
           {schema.description && (
