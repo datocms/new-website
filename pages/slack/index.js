@@ -11,6 +11,7 @@ import wretch from 'wretch';
 import { useRecaptcha } from 'react-recaptcha-hook';
 import { useToasts } from 'react-toast-notifications';
 import Head from 'components/Head';
+import Link from 'next/link';
 
 wretch().errorType('json');
 
@@ -60,20 +61,30 @@ function Slack() {
   return (
     <Layout>
       <Head noIndex>
-        <title>Join DatoCMS Slack channel</title>
+        <title>Join the DatoCMS Slack Channel</title>
       </Head>
       <Hero
-        kicker="DatoCMS Slack channel"
+        kicker="DatoCMS Community Slack Shannel"
         title={
           <>
-            Join our <Highlight>Community</Highlight>!
+            Join us on <Highlight>Slack</Highlight>!
           </>
         }
         subtitle={
           <>
-            Become a part of DatoCMS community, try out new product updates
-            before they&apos;re widely released, help us test and improve the
-            product.
+            <p>
+              Try out new product updates before they&apos;re widely released,
+              help us test and improve the product, and connect with other
+              users!
+            </p>
+            <p>
+              Our Slack is great for informal chats and quick questions, but for
+              official technical support, we recommend the{' '}
+              <Link href={'https://community.datocms.com/'}>
+                community forum
+              </Link>{' '}
+              or <Link href={'/support'}>support form</Link> instead.
+            </p>
           </>
         }
       />
@@ -93,7 +104,7 @@ function Slack() {
             <span className={s.error}>{formState.errors.email.message}</span>
           )}
           <Button as="button" block disabled={formState.isSubmitting}>
-            {formState.isSubmitting ? 'Submitting...' : 'Get my invite!'}
+            {formState.isSubmitting ? 'Submitting...' : 'Get my Slack invite!'}
           </Button>
           {stats && (
             <div className={s.stats}>
