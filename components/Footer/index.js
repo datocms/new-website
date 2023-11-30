@@ -266,16 +266,6 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/cms/hugo-cms">
-                        <a className={s.extraLink}>Hugo</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <Link href="/cms/jekyll-cms">
-                        <a className={s.extraLink}>Jekyll</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
                       <Link href="/cms/react-cms">
                         <a className={s.extraLink}>React</a>
                       </Link>
@@ -283,11 +273,6 @@ export default function Footer({ noCta }) {
                     <div className={s.groupLink}>
                       <Link href="/cms/vue-js-cms">
                         <a className={s.extraLink}>Vue.js</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <Link href="/cms/middleman-cms">
-                        <a className={s.extraLink}>Middleman</a>
                       </Link>
                     </div>
                   </div>
