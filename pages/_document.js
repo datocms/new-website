@@ -10,10 +10,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta
-            name="google-site-verification"
-            content="wfOsq57h3qCQUTbHcX-4qEEY07vgi4KgH9rdT1ywwwc"
-          />
           {[16, 32, 96, 192].map((size) => (
             <link
               rel="icon"
