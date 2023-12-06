@@ -1,6 +1,6 @@
-import tiny from 'tiny-json-http';
-import parser from 'json-schema-ref-parser';
 import { stringify } from 'flatted';
+import parser from 'json-schema-ref-parser';
+import tiny from 'tiny-json-http';
 
 const buildEndpointToc = (parentSlug, link) => {
   return {
@@ -53,8 +53,8 @@ function trimSchema(schema, exceptResourceId) {
 }
 
 export default async function buildCmaResources(resourceSlug, linkRel) {
-  // const url = 'http://localhost:3001/docs/site-api-hyperschema.json';
-  const url = 'https://site-api.datocms.com/docs/site-api-hyperschema.json';
+  const url = 'http://localhost:3001/docs/site-api-hyperschema.json';
+  // const url = 'https://site-api.datocms.com/docs/site-api-hyperschema.json';
 
   const { body: unreferencedSchema } = await tiny.get({ url });
 

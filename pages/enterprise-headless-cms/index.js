@@ -1,34 +1,33 @@
-import Layout from 'components/Layout';
-import Hero from 'components/Hero';
-import Head from 'components/Head';
-import Highlight from 'components/Highlight';
-import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import EnterpriseStrip, { Point } from 'components/EnterpriseStrip';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Head from 'components/Head';
+import Hero from 'components/Hero';
+import Highlight from 'components/Highlight';
+import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
-import Wrapper from 'components/Wrapper';
+import Quote from 'components/Quote';
+import Result from 'components/Result';
 import TalkWithUs from 'components/TalkWithUs';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import Wrapper from 'components/Wrapper';
 import {
   gqlStaticProps,
-  seoMetaTagsFields,
-  reviewFields,
   imageFields,
+  reviewFields,
+  seoMetaTagsFields,
 } from 'lib/datocms';
-import { renderMetaTags } from 'react-datocms';
-import TitleStripWithContent from 'components/TitleStripWithContent';
-import Result from 'components/Result';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
-import Nike from 'public/images/logos/nike.svg';
-import Vercel from 'public/images/logos/vercel.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
 import Linkedin from 'public/images/logos/linkedin.svg';
-import Oberlo from 'public/images/logos/new/oberlo.svg';
-import Nhs from 'public/images/logos/new/nhs.svg';
-import LittleCaesars from 'public/images/logos/new/little-caesars.svg';
-import Mit from 'public/images/logos/new/mit.svg';
 import Afsp from 'public/images/logos/new/afsp.svg';
 import Harrys from 'public/images/logos/new/harrys.svg';
+import LittleCaesars from 'public/images/logos/new/little-caesars.svg';
+import Mit from 'public/images/logos/new/mit.svg';
+import Nhs from 'public/images/logos/new/nhs.svg';
+import Oberlo from 'public/images/logos/new/oberlo.svg';
+import Nike from 'public/images/logos/nike.svg';
+import Vercel from 'public/images/logos/vercel.svg';
+import Verizon from 'public/images/logos/verizon.svg';
 
 import s from './style.module.css';
 
@@ -237,7 +236,6 @@ function Enterprise({ page, review1, review2, review3 }) {
               <TalkWithUs
                 fieldset="sales"
                 initialValues={{ issueType: 'enterprise' }}
-                hubspotFormId="52d242a6-a292-4c05-9056-da87d4a08448"
               />
             </div>
           </Wrapper>

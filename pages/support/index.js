@@ -1,22 +1,22 @@
-import Layout from 'components/Layout';
-import Wrapper from 'components/Wrapper';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import { gqlStaticProps } from 'lib/datocms';
-import { useState, useEffect } from 'react';
-import s from './style.module.css';
-import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import Layout from 'components/Layout';
+import LogosBar from 'components/LogosBar';
 import TalkWithUs from 'components/TalkWithUs';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Wrapper from 'components/Wrapper';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import { gqlStaticProps } from 'lib/datocms';
+import { useRouter } from 'next/router';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
-import LogosBar from 'components/LogosBar';
-import { useRouter } from 'next/router';
-import scrollIntoView from 'scroll-into-view-if-needed';
-import Head from 'components/Head';
+import Verizon from 'public/images/logos/verizon.svg';
+import { useEffect, useState } from 'react';
 import { StructuredText } from 'react-datocms';
+import scrollIntoView from 'scroll-into-view-if-needed';
+import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -230,13 +230,6 @@ export default function Support({ preview, topics }) {
                         issueType: leafTopic.autoResponderType,
                       }}
                       fieldset={leafTopic.contactFormType}
-                      hubspotFormId={
-                        leafTopic.contactFormType === 'sales'
-                          ? '11eae68a-59d8-4c94-b503-a373cb490a61'
-                          : leafTopic.contactFormType === 'support'
-                          ? 'e29ac953-aed2-4318-b2a4-8eb02bab22ba'
-                          : undefined
-                      }
                     />
                   </div>
                 </div>

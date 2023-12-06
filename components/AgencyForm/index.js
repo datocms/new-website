@@ -1,7 +1,6 @@
-import { sendFormValuesToHubspot } from 'utils/hubspot';
-import Textarea from 'react-textarea-autosize';
+import { Field, Form } from 'components/Form';
 import { getData } from 'country-list';
-import { Form, Field } from 'components/Form';
+import Textarea from 'react-textarea-autosize';
 import { getCookie } from 'utils/cookies';
 import s from './style.module.css';
 
@@ -21,22 +20,6 @@ export default function AgencyForm({
   };
 
   async function handleSubmit(formValues) {
-    await sendFormValuesToHubspot({
-      formId: 'd0146ada-8c89-4f7a-971c-053a4c30f3ad',
-      formValues,
-      hubspotFieldsMapping: {
-        firstName: 'contact.firstname',
-        lastName: 'contact.lastname',
-        agencyName: 'company.name',
-        agencyUrl: 'company.website',
-        email: 'contact.email',
-        country: 'company.country',
-        body: 'contact.message',
-        teamSize: 'company.numberofemployees',
-        productFamiliarity: 'company.familiarity_with_datocms',
-      },
-    });
-
     const body = JSON.stringify(formValues);
     const res = await fetch('/api/pipedrive/submit-partner', {
       body: body,

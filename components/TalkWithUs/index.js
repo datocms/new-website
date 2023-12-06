@@ -1,9 +1,8 @@
-import s from './style.module.css';
-import Textarea from 'react-textarea-autosize';
+import { Field, Form } from 'components/Form';
 import { getData } from 'country-list';
-import { Form, Field } from 'components/Form';
+import Textarea from 'react-textarea-autosize';
 import { getCookie } from 'utils/cookies';
-import { sendFormValuesToHubspot } from 'utils/hubspot';
+import s from './style.module.css';
 
 const frontFormIds = {
   sales:
@@ -32,11 +31,7 @@ async function sendToPipedrive(payload) {
   }
 }
 
-export default function TalkWithUs({
-  initialValues = {},
-  fieldset,
-  hubspotFormId,
-}) {
+export default function TalkWithUs({ initialValues = {}, fieldset }) {
   const defaultValues = {
     firstName: '',
     lastName: '',
@@ -54,28 +49,6 @@ export default function TalkWithUs({
   };
 
   async function handleSubmit(formValues) {
-    if (hubspotFormId) {
-      await sendFormValuesToHubspot({
-        formId: hubspotFormId,
-        formValues,
-        hubspotFieldsMapping: {
-          firstName: 'contact.firstname',
-          lastName: 'contact.lastname',
-          project: null,
-          email: 'contact.email',
-          companyName: 'company.name',
-          country: 'company.country',
-          industry: 'company.industry',
-          jobFunction: 'contact.jobtitle',
-          useCase: 'contact.use_case',
-          referral: 'contact.referral',
-          body: 'contact.message',
-          errorId: null,
-          issueType: null,
-        },
-      });
-    }
-
     if (fieldset === 'sales') {
       await sendToPipedrive(formValues);
     }
