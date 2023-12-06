@@ -53,8 +53,8 @@ function trimSchema(schema, exceptResourceId) {
 }
 
 export default async function buildCmaResources(resourceSlug, linkRel) {
-  const url = 'http://localhost:3001/docs/site-api-hyperschema.json';
-  // const url = 'https://site-api.datocms.com/docs/site-api-hyperschema.json';
+  // const url = 'http://localhost:3001/docs/site-api-hyperschema.json';
+  const url = 'https://site-api.datocms.com/docs/site-api-hyperschema.json';
 
   const { body: unreferencedSchema } = await tiny.get({ url });
 
