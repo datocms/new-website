@@ -34,10 +34,11 @@ export default function Pagination({
     next_page: nextPage,
   } = paginator.build(totalEntries, currentPage + 1);
 
+  const router = useRouter();
+
   if (pageCount === 1) {
     return null;
   }
-  const router = useRouter();
 
   return (
     <div className={s.root}>
