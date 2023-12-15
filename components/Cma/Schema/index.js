@@ -551,6 +551,9 @@ export function Schema({ title, schema, showId }) {
               <div className={s.description}>
                 Must be exactly{' '}
                 <code>&quot;{schema.properties.type.example}&quot;</code>
+                {schema.properties.type.description && (
+                  <p>{schema.properties.type.description}</p>
+                )}
               </div>
             </div>
           )}
