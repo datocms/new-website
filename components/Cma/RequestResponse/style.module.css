@@ -22,13 +22,18 @@
     max-height: 400px;
     overflow: auto;
   }
+
+  .description {
+    margin-bottom: 0.5em;
+    font-size: 15px;
+    font-family: var(--font-sans);
+  }
 }
 
 .chunkTitle {
   font-family: var(--font-sans);
   margin-bottom: 15px;
-  color: var(--light-body-color);
-  font-size: 0.9em;
+  font-weight: bold;
 }
 
 .description {

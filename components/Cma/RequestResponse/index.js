@@ -45,6 +45,9 @@ const RequestResponse = ({ title, description, chunks }) => (
     {chunks.map((chunk) => (
       <div className={s.chunk} key={chunk.title}>
         <div className={s.chunkTitle}>{chunk.title}</div>
+        {chunk.description && (
+          <div className={s.description}>{chunk.description}</div>
+        )}
         <Prism code={chunk.code} language={chunk.language} />
       </div>
     ))}

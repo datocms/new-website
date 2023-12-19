@@ -123,11 +123,17 @@ function renderExample(example, resource) {
       title={title}
       description={description}
       chunks={[
-        { title: 'HTTP Request:', code: requestCode, language: 'http' },
+        {
+          title: 'HTTP Request',
+          code: requestCode,
+          language: 'http',
+          description: request?.description ?? '',
+        },
         responseCode && {
-          title: 'HTTP Response:',
+          title: 'HTTP Response',
           code: responseCode,
           language: 'http',
+          description: response?.description ?? '',
         },
       ].filter((x) => !!x)}
     />
