@@ -3,6 +3,7 @@ import Heading from 'components/Heading';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
+import MaybeLink from 'components/MaybeLink';
 import Wrapper from 'components/Wrapper';
 import { gqlStaticPropsWithSubscription } from 'lib/datocms';
 import { groupBy } from 'lodash-es';
@@ -89,7 +90,13 @@ export default function Glossary({ subscription, preview }) {
                         className={s.entryTitle}
                         anchor={slugify(entry.title)}
                       >
-                        {entry.title}
+                        {entry.url ? (
+                          <MaybeLink className={s.goto} href={entry.url}>
+                            {entry.title}
+                          </MaybeLink>
+                        ) : (
+                          entry.title
+                        )}
                       </Heading>
                       <dd className={s.entryDescription}>
                         <StructuredText data={entry.description} />

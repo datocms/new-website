@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import Wrapper from 'components/Wrapper';
+import cn from 'classnames';
+import Button from 'components/Button';
 import FinalCta from 'components/FinalCta';
 import StatusBadge from 'components/StatusBadge';
-import cn from 'classnames';
+import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
-import Button from 'components/Button';
-import s from './style.module.css';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import wretch from 'wretch';
+import s from './style.module.css';
 
 wretch().errorType('json');
 
@@ -203,6 +203,11 @@ export default function Footer({ noCta }) {
                     <div className={s.groupLink}>
                       <Link href="/support">
                         <a>Support</a>
+                      </Link>
+                    </div>{' '}
+                    <div className={s.groupLink}>
+                      <Link href="/glossary">
+                        <a>Glossary</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>

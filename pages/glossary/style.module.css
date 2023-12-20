@@ -121,7 +121,28 @@
   font-size: 22px;
   margin: 0;
   padding: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  position: relative;
+
+  [data-permalink] {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    margin-right: 6px;
+    transform: translate(0, -50%);
+  }
+
+  a.goto {
+    color: inherit;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 2px solid var(--light-body-color);
+
+    &:hover {
+      border-bottom-color: var(--accent-color);
+    }
+  }
 }
 
 .entryDescription {
