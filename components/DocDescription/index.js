@@ -85,7 +85,6 @@ export default function DocDescription({ children, renderExample }) {
             return null;
           }
 
-          console.log(node.properties);
           return renderExample(
             node.properties.id,
             node.properties.singleExample === 'yes',
