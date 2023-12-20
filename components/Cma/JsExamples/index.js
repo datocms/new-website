@@ -1,8 +1,7 @@
-import React from 'react';
 import humps from 'humps';
 import pluralize from 'pluralize';
+import React from 'react';
 import RequestResponse from '../RequestResponse';
-import slugify from 'utils/slugify';
 
 import schemaExampleFor from 'utils/schemaExampleFor';
 
@@ -11,7 +10,7 @@ const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 const fix = (string) =>
   string.replace(/"([^[\-"]+)": /g, '$1: ').replace(/"/g, "'");
 
-function example(resource, link, clientInfo, allPages = false) {
+function buildExample(resource, link, clientInfo, allPages = false) {
   let params = [];
   let precode = [];
 
@@ -155,7 +154,7 @@ ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
 ${
   isPaginated
     ? '\n\n// this iterates over every page of results:' +
-      example(resource, link, clientInfo, true).code
+      buildExample(resource, link, clientInfo, true).code
     : ''
 }`;
 
@@ -179,51 +178,81 @@ ${returnCode}`;
   }
 }
 
-function renderExample(example, requestCode, responseCode) {
-  const response = example.request ? example.response : responseCode;
+export function JSExample({
+  example,
+  link,
+  schema,
+  clientInfo,
+  startExpanded,
+}) {
+  const { code: requestCode, output: responseCode } = buildExample(
+    schema,
+    link,
+    clientInfo,
+  );
+  const response = example.response ? example.response : { code: responseCode };
 
   return (
-    <div>
-      <RequestResponse
-        title={example.title}
-        description={example.description}
-        chunks={[
-          {
-            title: 'Example code:',
-            language: 'javascript',
-            code: example.request || requestCode,
-          },
-          response && {
-            title: 'Returned output:',
-            language: 'javascript',
-            code: response,
-          },
-        ].filter((x) => x)}
-      />
-    </div>
+    <RequestResponse
+      title={example.title}
+      description={example.description}
+      startExpanded={startExpanded}
+      chunks={[
+        {
+          title: 'Code',
+          language: 'javascript',
+          description: example.request?.description,
+          code: example.request?.code || requestCode,
+        },
+        response.code && {
+          title: 'Returned output',
+          language: 'javascript',
+          code: response.code,
+          description: response.description,
+        },
+      ].filter((x) => x)}
+    />
   );
 }
 
-export default function JsExample({ resource, link, clientInfo }) {
-  const { code, output } = example(resource, link, clientInfo);
+export default function JsExamples({
+  schema,
+  link,
+  clientInfo,
+  omitExampleIds = [],
+}) {
+  if (link?.documentation?.['new-js']?.examples) {
+    const examples = link.documentation['new-js'].examples.filter(
+      (example) => !omitExampleIds.includes(example.id),
+    );
 
-  if (link.examples && link.examples['new-js']) {
+    if (examples.length === 0) {
+      return null;
+    }
+
     return (
       <>
-        <p>The following examples are available:</p>
-        <ul>
-          {link.examples['new-js'].map((example) => (
-            <li key={example.title}>
-              <a href={`#${slugify(example.title)}`}>{example.title}</a>
-            </li>
-          ))}
-        </ul>
-        {link.examples['new-js'].map((example) =>
-          renderExample(example, code, output),
-        )}
+        {examples.map((example) => (
+          <JSExample
+            key={example.id}
+            example={example}
+            link={link}
+            schema={schema}
+            clientInfo={clientInfo}
+            startExpanded={true}
+          />
+        ))}
       </>
     );
   }
 
-  return renderExample({}, code, output);
+  return (
+    <JSExample
+      example={{ title: 'Basic example' }}
+      link={link}
+      schema={schema}
+      clientInfo={clientInfo}
+      startExpanded={true}
+    />
+  );
 }

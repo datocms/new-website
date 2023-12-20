@@ -1,6 +1,6 @@
+import cn from 'classnames';
 import { createContext } from 'react';
 import useLocalStorage from 'utils/useLocalStorage';
-import cn from 'classnames';
 import s from './style.module.css';
 
 const LanguageContext = createContext('javascript');

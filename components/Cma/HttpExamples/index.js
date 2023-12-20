@@ -1,6 +1,6 @@
+import queryString from 'qs';
 import React from 'react';
 import schemaExampleFor from 'utils/schemaExampleFor';
-import queryString from 'qs';
 import RequestResponse from '../RequestResponse';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
@@ -18,7 +18,7 @@ const toParam = (schema) => {
     : '';
 };
 
-function renderExample(example, resource) {
+export function HttpExample({ example, link: resource, startExpanded }) {
   const { request, response, title, description } = example;
 
   const params = resource.hrefSchema ? toParam(resource.hrefSchema) : '';
@@ -122,6 +122,7 @@ function renderExample(example, resource) {
     <RequestResponse
       title={title}
       description={description}
+      startExpanded={startExpanded}
       chunks={[
         {
           title: 'HTTP Request',
@@ -140,12 +141,31 @@ function renderExample(example, resource) {
   );
 }
 
-export default class HttpExample extends React.Component {
+export default class HttpExamples extends React.Component {
   render() {
-    const { link, jobRetrieveLink } = this.props;
+    const { link, jobRetrieveLink, omitExampleIds } = this.props;
 
-    if (link.examples && link.examples.http) {
-      return link.examples.http.map((example) => renderExample(example, link));
+    if (link?.documentation?.http?.examples) {
+      const examples = link.documentation.http.examples.filter(
+        (example) => !omitExampleIds.includes(example.id),
+      );
+
+      if (examples.length === 0) {
+        return null;
+      }
+
+      return (
+        <>
+          {examples.map((example) => (
+            <HttpExample
+              key={example.id}
+              example={example}
+              link={link}
+              startExpanded={true}
+            />
+          ))}
+        </>
+      );
     }
 
     if (link.jobSchema) {
@@ -155,18 +175,29 @@ export default class HttpExample extends React.Component {
 
       return (
         <>
-          {renderExample({ title: 'Step 1: Perform the request' }, link)}
-          {renderExample(
-            {
+          <HttpExample
+            example={{ title: 'Step 1: Perform the request' }}
+            link={link}
+            startExpanded={true}
+          />
+          <HttpExample
+            example={{
               title: 'Step 2: Poll for the job result',
               response: { body: JSON.stringify(response, null, 2) },
-            },
-            jobRetrieveLink,
-          )}
+            }}
+            link={jobRetrieveLink}
+            startExpanded={true}
+          />
         </>
       );
     }
 
-    return renderExample({}, link);
+    return (
+      <HttpExample
+        example={{ title: 'Basic example' }}
+        link={link}
+        startExpanded={true}
+      />
+    );
   }
 }
