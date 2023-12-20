@@ -1,8 +1,10 @@
-import Prism from 'components/Prism';
-import gfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import ReactMarkdown from 'react-markdown';
 import Heading from 'components/Heading';
+import Prism from 'components/Prism';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import remarkDirective from 'remark-directive';
+import gfm from 'remark-gfm';
+import visit from 'unist-util-visit';
 import slugify from 'utils/slugify';
 
 function findText(node) {
@@ -24,10 +26,36 @@ function headingWithAnchor(tagName) {
   };
 }
 
-export default function DocDescription({ children }) {
+function isExample(node) {
+  return !!node && node.type === 'leafDirective' && node.name === 'example';
+}
+
+function findExamples() {
+  return (tree) => {
+    visit(tree, (node, index, parent) => {
+      if (isExample(node)) {
+        const previousNode = index === 0 ? null : parent.children[index - 1];
+        const nextNode =
+          index === parent.children.length - 1
+            ? null
+            : parent.children[index + 1];
+
+        node.data = {};
+        node.data.hName = 'example';
+        node.data.hProperties = {
+          id: node.children[0].value,
+          singleExample:
+            !isExample(previousNode) && !isExample(nextNode) ? 'yes' : 'no',
+        };
+      }
+    });
+  };
+}
+
+export default function DocDescription({ children, renderExample }) {
   return (
     <ReactMarkdown
-      remarkPlugins={[gfm]}
+      remarkPlugins={[remarkDirective, findExamples, gfm]}
       rehypePlugins={[rehypeRaw]}
       components={{
         h1: headingWithAnchor('h1'),
@@ -49,6 +77,18 @@ export default function DocDescription({ children }) {
               language={match ? match[1] : 'unknown'}
               showLineNumbers
             />
+          );
+        },
+        // eslint-disable-next-line react/display-name
+        example: ({ node }) => {
+          if (!renderExample) {
+            return null;
+          }
+
+          console.log(node.properties);
+          return renderExample(
+            node.properties.id,
+            node.properties.singleExample === 'yes',
           );
         },
       }}

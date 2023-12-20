@@ -1,22 +1,24 @@
-import DocsLayout from 'components/DocsLayout';
-import { Sidebar } from 'pages/docs/[...chunks]';
-import s from 'pages/docs/pageStyle.module.css';
-import fetchCma from 'utils/fetchCma';
-import fetchCmaClientResources from 'utils/fetchCmaClientResources';
-import { parse } from 'flatted';
-import { request } from 'lib/datocms';
-import { useMemo } from 'react';
-import Head from 'components/Head';
-import React from 'react';
-import HttpExample from 'components/Cma/HttpExample';
-import OldJsExample from 'components/Cma/OldJsExample';
-import JsExample from 'components/Cma/JsExample';
-import DocDescription from 'components/DocDescription';
+import HttpExamples, { HttpExample } from 'components/Cma/HttpExamples';
+import JSExamples, { JSExample } from 'components/Cma/JsExamples';
+import OldJsExamples, { OldJsExample } from 'components/Cma/OldJsExamples';
 import { HrefSchema, Schema } from 'components/Cma/Schema';
 import TargetSchema from 'components/Cma/TargetSchema';
+import DocDescription from 'components/DocDescription';
+import DocsLayout from 'components/DocsLayout';
+import Head from 'components/Head';
 import { LanguageConsumer } from 'components/LanguagePicker';
+import { parse } from 'flatted';
+import { handleErrors, request } from 'lib/datocms';
 import { useRouter } from 'next/router';
-import { handleErrors } from 'lib/datocms';
+import { Sidebar } from 'pages/docs/[...chunks]';
+import s from 'pages/docs/pageStyle.module.css';
+import React, { useMemo } from 'react';
+import remarkDirective from 'remark-directive';
+import remarkParse from 'remark-parse';
+import unified from 'unified';
+import visit from 'unist-util-visit';
+import fetchCma from 'utils/fetchCma';
+import fetchCmaClientResources from 'utils/fetchCmaClientResources';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -147,52 +149,140 @@ export default function DocPage({
           {link.title} - {result.schema.title} - Content Management API
         </title>
       </Head>
-      <div className={s.articleContainer}>
-        <div className={s.article}>
-          <div className={s.title}>{link.title}</div>
-          <div className={s.body}>
-            {link.description && (
-              <DocDescription>{link.description}</DocDescription>
-            )}
-            {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
-            {link.schema && (
-              <Schema
-                title="Parameters"
-                schema={link.schema.properties.data}
-                showId={link.method !== 'PUT'}
-              />
-            )}
-            {link && <TargetSchema link={link} />}
+      <LanguageConsumer>
+        {(language) => {
+          const docLanguage =
+            language === 'javascript'
+              ? 'new-js'
+              : language === 'old-js'
+              ? 'old-js'
+              : 'http';
 
-            <h2>Examples</h2>
-            <LanguageConsumer>
-              {(language) => (
-                <>
-                  {language === 'http' && (
-                    <HttpExample
-                      resource={result.schema}
-                      link={link}
-                      jobRetrieveLink={result.jobRetrieveLink}
+          const description =
+            link.documentation?.[docLanguage]?.description || link.description;
+
+          const examples = link?.documentation?.[docLanguage]?.examples || [];
+          const allExampleIds = examples.map((e) => e.id);
+
+          const referencedExampleIds = [];
+
+          visit(
+            unified().use(remarkParse).use(remarkDirective).parse(description),
+            (node) => {
+              if (node.type === 'leafDirective') {
+                if (node.name === 'example') {
+                  referencedExampleIds.push(node.children[0].value);
+                }
+              }
+            },
+          );
+
+          return (
+            <div className={s.articleContainer}>
+              <div className={s.article}>
+                <div className={s.title}>{link.title}</div>
+                <div className={s.body}>
+                  {description && (
+                    <DocDescription
+                      renderExample={(exampleId, singleExample) => {
+                        const example = examples.find(
+                          (e) => e.id === exampleId,
+                        );
+
+                        if (!example) {
+                          return null;
+                        }
+
+                        if (language === 'http') {
+                          return (
+                            <HttpExample
+                              example={example}
+                              link={link}
+                              startExpanded={singleExample}
+                            />
+                          );
+                        }
+
+                        if (language === 'javascript') {
+                          return (
+                            <JSExample
+                              example={example}
+                              schema={result.schema}
+                              link={link}
+                              clientInfo={clientInfo}
+                              startExpanded={singleExample}
+                            />
+                          );
+                        }
+
+                        return (
+                          <OldJsExample
+                            example={example}
+                            schema={result.schema}
+                            link={link}
+                            startExpanded={singleExample}
+                          />
+                        );
+                      }}
+                    >
+                      {description}
+                    </DocDescription>
+                  )}
+                  {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
+                  {link.schema && (
+                    <Schema
+                      title="Parameters"
+                      schema={link.schema.properties.data}
+                      showId={link.method !== 'PUT'}
                     />
                   )}
 
-                  {language === 'javascript' && (
-                    <JsExample
-                      resource={result.schema}
-                      link={link}
-                      clientInfo={clientInfo}
-                    />
-                  )}
+                  {link && <TargetSchema link={link} />}
 
-                  {language === 'old-js' && (
-                    <OldJsExample resource={result.schema} link={link} />
+                  {(allExampleIds.length === 0 ||
+                    allExampleIds.length > referencedExampleIds.length) && (
+                    <>
+                      <h2>
+                        {referencedExampleIds.length > 0 &&
+                        allExampleIds.length > referencedExampleIds.length ? (
+                          <>Other examples</>
+                        ) : (
+                          <>Examples</>
+                        )}
+                      </h2>
+
+                      {language === 'http' && (
+                        <HttpExamples
+                          link={link}
+                          jobRetrieveLink={result.jobRetrieveLink}
+                          omitExampleIds={referencedExampleIds}
+                        />
+                      )}
+
+                      {language === 'javascript' && (
+                        <JSExamples
+                          schema={result.schema}
+                          link={link}
+                          clientInfo={clientInfo}
+                          omitExampleIds={referencedExampleIds}
+                        />
+                      )}
+
+                      {language === 'old-js' && (
+                        <OldJsExamples
+                          schema={result.schema}
+                          link={link}
+                          omitExampleIds={referencedExampleIds}
+                        />
+                      )}
+                    </>
                   )}
-                </>
-              )}
-            </LanguageConsumer>
-          </div>
-        </div>
-      </div>
+                </div>
+              </div>
+            </div>
+          );
+        }}
+      </LanguageConsumer>
     </DocsLayout>
   );
 }

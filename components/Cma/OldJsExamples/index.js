@@ -1,8 +1,7 @@
-import React from 'react';
 import humps from 'humps';
 import pluralize from 'pluralize';
+import React from 'react';
 import RequestResponse from '../RequestResponse';
-import slugify from 'utils/slugify';
 
 import schemaExampleFor from 'utils/schemaExampleFor';
 
@@ -16,7 +15,7 @@ const methods = {
 const fix = (string) =>
   string.replace(/"([^[\-"]+)": /g, '$1: ').replace(/"/g, "'");
 
-function example(resource, link, allPages = false) {
+function buildExample(resource, link, allPages = false) {
   let params = [];
   let precode = [];
 
@@ -153,7 +152,7 @@ ${
   link.targetSchema.properties.meta &&
   link.targetSchema.properties.meta.properties.total_count
     ? '\n\n// or, if you want to fetch all the pages with just one call:\n' +
-      example(resource, link, true).code
+      buildExample(resource, link, true).code
     : ''
 }`;
 
@@ -177,49 +176,67 @@ ${returnCode}`;
   }
 }
 
-function renderExample(example, requestCode, responseCode) {
+export function OldJsExample({ example, schema, link, startExpanded }) {
+  const { code: requestCode, output: responseCode } = buildExample(
+    schema,
+    link,
+  );
+  const response = example.response ? example.response : { code: responseCode };
+
   return (
-    <div>
-      <RequestResponse
-        title={example.title}
-        description={example.description}
-        chunks={[
-          {
-            title: 'Example code:',
-            language: 'javascript',
-            code: example.request || requestCode,
-          },
-          (example.response || responseCode) && {
-            title: 'Returned output:',
-            language: 'javascript',
-            code: example.response || responseCode,
-          },
-        ].filter((x) => x)}
-      />
-    </div>
+    <RequestResponse
+      title={example.title}
+      description={example.description}
+      startExpanded={startExpanded}
+      chunks={[
+        {
+          title: 'Code',
+          language: 'javascript',
+          description: example.request?.description,
+          code: example.request?.code || requestCode,
+        },
+        (example.response || responseCode) && {
+          title: 'Returned output',
+          language: 'javascript',
+          code: response.code,
+          description: response.description,
+        },
+      ].filter((x) => x)}
+    />
   );
 }
 
-export default function JsExample({ resource, link }) {
-  const { code, output } = example(resource, link);
+export default function JsExamples({ schema, link, omitExampleIds = [] }) {
+  if (link?.documentation?.['old-js']?.examples) {
+    const examples = link.documentation['old-js'].examples.filter(
+      (example) => !omitExampleIds.includes(example.id),
+    );
 
-  if (link.examples && link.examples['old-js']) {
+    if (examples.length === 0) {
+      return null;
+    }
+
     return (
       <>
-        <p>The following examples are available:</p>
-        <ul>
-          {link.examples['old-js'].map((example) => (
-            <li key={example.title}>
-              <a href={`#${slugify(example.title)}`}>{example.title}</a>
-            </li>
-          ))}
-        </ul>
-        {link.examples['old-js'].map((example) =>
-          renderExample(example, code, output),
-        )}
+        {examples.map((example) => (
+          <OldJsExample
+            key={example.id}
+            example={example}
+            link={link}
+            schema={schema}
+            startExpanded={true}
+          />
+        ))}
       </>
     );
   }
 
-  return renderExample({}, code, output);
+  return (
+    <OldJsExample
+      example={{ title: 'Basic example' }}
+      link={link}
+      schema={schema}
+      startExpanded={true}
+    />
+  );
 }
