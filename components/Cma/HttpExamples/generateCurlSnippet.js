@@ -50,7 +50,7 @@ export function generateCompress(isEncode) {
 export function generateCurlSnippet([url, options = {}]) {
   let lines = [];
 
-  lines.push(`curl ${url}`);
+  lines.push(`curl '${url}'`);
   lines.push(generateMethod(options));
   lines = [...lines, ...generateHeaders(options)];
   lines.push(generateBody(options));
