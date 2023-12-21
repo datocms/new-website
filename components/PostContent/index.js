@@ -1,28 +1,28 @@
-import ResponsiveEmbed from 'react-responsive-embed';
-import VideoPlayer from 'components/VideoPlayer';
-import Link from 'next/link';
-import ImageFigure from 'components/ImageFigure';
-import Prism from 'components/Prism';
-import defaultStyles from './style.module.css';
-import LazyImage from 'components/LazyImage';
-import { Image as DatoImage, StructuredText, renderRule } from 'react-datocms';
-import UiChrome from 'components/UiChrome';
-import PluginBox from 'components/PluginBox';
+import cn from 'classnames';
 import Button from 'components/Button';
-import truncate from 'truncate';
 import CloneButtonGenerator from 'components/CloneButtonGenerator';
 import DeployButtonGenerator from 'components/DeployButtonGenerator';
-import cn from 'classnames';
-import { isBlockquote, isCode, isHeading } from 'datocms-structured-text-utils';
-import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import slugify from 'utils/slugify';
 import Heading from 'components/Heading';
-import queryString from 'qs';
-import Corona from 'public/images/illustrations/live-4.svg';
-import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import ImageFigure from 'components/ImageFigure';
+import LazyImage from 'components/LazyImage';
+import PluginBox from 'components/PluginBox';
+import Prism from 'components/Prism';
+import UiChrome from 'components/UiChrome';
+import VideoPlayer from 'components/VideoPlayer';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import { isBlockquote, isCode, isHeading } from 'datocms-structured-text-utils';
+import Link from 'next/link';
 import CodeSandboxIcon from 'public/icons/brands/codesandbox.svg';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import Corona from 'public/images/illustrations/live-4.svg';
+import queryString from 'qs';
+import { Image as DatoImage, StructuredText, renderRule } from 'react-datocms';
+import ResponsiveEmbed from 'react-responsive-embed';
+import truncate from 'truncate';
+import slugify from 'utils/slugify';
+import { parseShortCodes } from '../../utils/table';
+import defaultStyles from './style.module.css';
 import partnerStyles from '/pages/partners/[partnerSlug]/style.module.css';
-import { parseShortCodes, toCss } from '../../utils/table';
 
 function renderBlock(s, block, defaultAltForImages) {
   switch (block._modelApiKey) {
@@ -158,7 +158,7 @@ function renderBlock(s, block, defaultAltForImages) {
 
     case 'cta_button':
       return (
-        <Button as="a" href={block.url} p="small">
+        <Button as="a" href={block.url} p="tiny" fs="small" s="invert">
           {block.text}
         </Button>
       );
