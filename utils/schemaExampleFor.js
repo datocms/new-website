@@ -36,7 +36,9 @@ export default function schemaExampleFor(schema, pagination = true) {
       return {};
     }
 
-    return Object.keys(schema.properties).reduce((acc, property) => {
+    const propertiesToGenerate = schema.required ? schema.required : [];
+
+    return propertiesToGenerate.reduce((acc, property) => {
       if (!pagination && property.match(/^page/)) {
         return acc;
       }

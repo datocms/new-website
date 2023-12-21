@@ -12,11 +12,10 @@ function addSearchParamsToRequestUrl(url, link) {
     return;
   }
 
-  const schema = link.hrefSchema;
-
-  for (const param of schema.required ||
-    Object.keys(schema.properties).slice(0, 2)) {
-    url.searchParams.set(param, schema.properties[param].example);
+  for (const [param, value] of Object.entries(
+    schemaExampleFor(link.hrefSchema),
+  )) {
+    url.searchParams.set(param, value);
   }
 }
 

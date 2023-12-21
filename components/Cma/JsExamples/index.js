@@ -212,7 +212,7 @@ export function JSExample({
           code: response.code,
           description: response.description,
         },
-      ].filter((x) => x)}
+      ].filter(Boolean)}
     />
   );
 }
