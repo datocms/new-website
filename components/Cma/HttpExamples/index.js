@@ -1,142 +1,226 @@
-import queryString from 'qs';
+import status from 'http-status';
 import React from 'react';
 import schemaExampleFor from 'utils/schemaExampleFor';
+import { jsonToJs } from '../JsExamples';
 import RequestResponse from '../RequestResponse';
+import { generateCurlSnippet } from './generateCurlSnippet';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 
-const toParam = (schema) => {
-  const params = (
-    schema.required || Object.keys(schema.properties).slice(0, 2)
-  ).reduce((acc, k) => {
-    acc[k] = schema.properties[k]['example'];
-    return acc;
-  }, {});
-
-  return Object.entries(params).length > 0
-    ? `?${queryString.stringify(params)}`
-    : '';
-};
-
-export function HttpExample({ example, link: resource, startExpanded }) {
-  const { request, response, title, description } = example;
-
-  const params = resource.hrefSchema ? toParam(resource.hrefSchema) : '';
-
-  const pathnameWithPlaceholders = (
-    request ? request.url : resource.href
-  ).replace(regexp, (_matched, chunk) => {
-    console.log(chunk);
-
-    if (chunk === 'item_type') {
-      return `:model_id_or_api_key`;
-    }
-
-    if (chunk === 'field') {
-      return `:field_id_or_api_key`;
-    }
-
-    return `:${chunk}_id`;
-  });
-
-  let requestCode =
-    request && request.method
-      ? `${request.method} ${pathnameWithPlaceholders + params} HTTP/1.1`
-      : `${resource.method} ${
-          'https://site-api.datocms.com' + pathnameWithPlaceholders + params
-        } HTTP/1.1`;
-
-  requestCode += '\n\n';
-
-  requestCode +=
-    request && request.headers
-      ? Object.entries(request.headers)
-          .map(([name, value]) => `${name}: ${value}`)
-          .join('\n')
-      : [
-          'X-Api-Version: 3',
-          'Authorization: Bearer YOUR-API-TOKEN',
-          'Accept: application/json',
-        ]
-          .concat(
-            resource.schema &&
-              resource.method !== 'GET' &&
-              resource.method !== 'DELETE' && [
-                'Content-Type: application/vnd.api+json',
-              ],
-          )
-          .filter((x) => x)
-          .join('\n');
-
-  if (
-    resource.schema &&
-    resource.method !== 'GET' &&
-    resource.method !== 'DELETE'
-  ) {
-    requestCode += '\n\n';
-
-    requestCode +=
-      request && request.body !== undefined
-        ? request.body.trim()
-        : JSON.stringify(schemaExampleFor(resource.schema), null, 2).trim();
+function addSearchParamsToRequestUrl(url, link) {
+  if (!link?.hrefSchema) {
+    return;
   }
 
-  let responseCode = '';
+  const schema = link.hrefSchema;
 
-  if (resource.targetSchema) {
-    let statusCode = (response && response.statusCode) || '200';
-    statusCode = resource.jobSchema ? '202' : statusCode;
-    responseCode = `HTTP/1.1 ${statusCode} ${
-      (response && response.statusText) || 'OK'
-    }`;
+  for (const param of schema.required ||
+    Object.keys(schema.properties).slice(0, 2)) {
+    url.searchParams.set(param, schema.properties[param].example);
+  }
+}
 
-    responseCode += '\n\n';
+function defaultRequestHeaders(link) {
+  const result = {
+    'X-Api-Version': '3',
+    Authorization: 'Bearer YOUR-API-TOKEN',
+    Accept: 'application/json',
+  };
 
-    responseCode +=
-      response && response.headers
-        ? Object.entries(response.headers)
-            .map(([name, value]) => `${name}: ${value}`)
-            .join('\n')
-        : [
-            'Content-Type: application/json',
-            'Cache-Control: cache-control: max-age=0, private, must-revalidate',
-            'X-RateLimit-Limit: 30',
-            'X-RateLimit-Remaining: 28',
-          ].join('\n');
+  if (link.schema && link.method !== 'GET' && link.method !== 'DELETE') {
+    result['Content-Type'] = 'application/vnd.api+json';
+  }
 
-    if ((response && response.body) || resource.targetSchema) {
-      responseCode += '\n\n';
+  return result;
+}
 
-      responseCode +=
-        response && response.body !== undefined
-          ? response.body.trim()
-          : JSON.stringify(
-              schemaExampleFor(resource.targetSchema),
-              null,
-              2,
-            ).trim();
-    }
+function parseJsonBody(body) {
+  if (typeof body !== 'string') {
+    return body;
+  }
+
+  try {
+    return JSON.parse(body);
+  } catch (e) {
+    return body;
+  }
+}
+
+function buildFetchRequest({ request }, link) {
+  const rawRequestUrl = (request?.url || link.href).replace(
+    regexp,
+    (_matched, chunk) => {
+      if (chunk === 'item_type') {
+        return ':model_id_or_api_key';
+      }
+
+      if (chunk === 'field') {
+        return ':field_id_or_api_key';
+      }
+
+      return `:${chunk}_id`;
+    },
+  );
+
+  const rawRequestAsURL = new URL(
+    rawRequestUrl,
+    'https://site-api.datocms.com',
+  );
+
+  addSearchParamsToRequestUrl(rawRequestAsURL, link);
+
+  const method = request?.method || link.method;
+
+  return [
+    rawRequestAsURL.toString(),
+    {
+      method,
+      headers: request?.headers || defaultRequestHeaders(link),
+      body:
+        link.schema && method !== 'GET' && method !== 'DELETE'
+          ? request?.body !== undefined
+            ? parseJsonBody(request.body)
+            : schemaExampleFor(link.schema)
+          : undefined,
+    },
+  ];
+}
+
+function buildResponse({ response }, link) {
+  if (!link.targetSchema) {
+    return null;
+  }
+
+  const statusCode = link.jobSchema ? '202' : response?.statusCode || '200';
+
+  return {
+    statusCode,
+    statusText: status[statusCode],
+    headers: response?.headers || {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'cache-control: max-age=0, private, must-revalidate',
+      'X-RateLimit-Limit': '30',
+      'X-RateLimit-Remaining': '28',
+    },
+    body: response?.body
+      ? response.body.trim()
+      : link.targetSchema
+      ? JSON.stringify(schemaExampleFor(link.targetSchema), null, 2).trim()
+      : null,
+  };
+}
+
+function buildHttpRequest([url, requestInit = {}]) {
+  let result = `${requestInit.method || 'GET'} ${url} HTTP/1.1`;
+
+  if (requestInit.headers) {
+    result += '\n\n';
+
+    result += Object.entries(requestInit.headers)
+      .map(([name, value]) => `${name}: ${value}`)
+      .join('\n');
+  }
+
+  if (requestInit.body) {
+    const body =
+      typeof requestInit.body === 'string'
+        ? requestInit.body
+        : JSON.stringify(requestInit.body, null, 2);
+
+    result += `\n\n${body}`;
+  }
+
+  return result;
+}
+
+function buildFetchCommand([url, requestInit = {}]) {
+  return `await fetch(
+  '${url}',
+  ${Object.entries(requestInit)
+    .map(([option, value]) => {
+      if (option !== 'body') {
+        return `${option}: ${jsonToJs(
+          JSON.stringify(value, null, 2).split('\n').join('\n  '),
+        )},`;
+      }
+
+      if (!value) {
+        return null;
+      }
+
+      if (typeof value === 'string') {
+        return `body: ${JSON.stringify(value)},`;
+      }
+
+      return `body: JSON.stringify(${jsonToJs(
+        JSON.stringify(value, null, 2).split('\n').join('\n  '),
+      )}),`;
+    })
+    .filter(Boolean)
+    .join('\n  ')}
+);`;
+}
+
+function buildHttpResponse(response) {
+  if (!response) {
+    return null;
+  }
+
+  let result = `HTTP/1.1 ${response.statusCode} ${response.statusText}`;
+
+  result += '\n\n';
+
+  result += Object.entries(response.headers)
+    .map(([name, value]) => `${name}: ${value}`)
+    .join('\n');
+
+  if (response.body) {
+    result += `\n\n${response.body}`;
+  }
+
+  return result;
+}
+
+export function HttpExample({ example, link, startExpanded }) {
+  const request = buildFetchRequest(example, link);
+  const response = buildResponse(example, link);
+
+  const chunks = [
+    {
+      title: 'HTTP Request',
+      code: buildHttpRequest(request),
+      language: 'http',
+      description: example.request?.description ?? '',
+    },
+    {
+      title: 'CURL Request',
+      code: generateCurlSnippet(request),
+      language: 'bash',
+      description: example.response?.description ?? '',
+    },
+    {
+      title: 'fetch() Request',
+      code: buildFetchCommand(request),
+      language: 'js',
+      description: example.response?.description ?? '',
+    },
+  ];
+
+  if (response) {
+    chunks.push({
+      title: 'HTTP Response',
+      code: buildHttpResponse(response),
+      language: 'http',
+      description: example.response?.description ?? '',
+    });
   }
 
   return (
     <RequestResponse
-      title={title}
-      description={description}
+      title={example.title}
+      description={example.description}
       startExpanded={startExpanded}
-      chunks={[
-        {
-          title: 'HTTP Request',
-          code: requestCode,
-          language: 'http',
-          description: request?.description ?? '',
-        },
-        responseCode && {
-          title: 'HTTP Response',
-          code: responseCode,
-          language: 'http',
-          description: response?.description ?? '',
-        },
-      ].filter((x) => !!x)}
+      chunks={chunks}
     />
   );
 }

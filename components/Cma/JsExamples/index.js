@@ -7,7 +7,7 @@ import schemaExampleFor from 'utils/schemaExampleFor';
 
 const regexp = /{\(%2Fschemata%2F([^%]+)[^}]*}/g;
 
-const fix = (string) =>
+export const jsonToJs = (string) =>
   string.replace(/"([^[\-"]+)": /g, '$1: ').replace(/"/g, "'");
 
 function buildExample(resource, link, clientInfo, allPages = false) {
@@ -59,7 +59,7 @@ function buildExample(resource, link, clientInfo, allPages = false) {
     const example = schemaExampleFor(link.schema, !allPages);
     if (example.data) {
       params.push(
-        fix(
+        jsonToJs(
           JSON.stringify(
             deserialize(example.data, link.method === 'POST'),
             null,
@@ -73,7 +73,7 @@ function buildExample(resource, link, clientInfo, allPages = false) {
   if (link.hrefSchema) {
     const example = schemaExampleFor(link.hrefSchema, !allPages);
     if (Object.keys(example).length > 0) {
-      params.push(fix(JSON.stringify(example, null, 2)));
+      params.push(jsonToJs(JSON.stringify(example, null, 2)));
     }
   }
 
@@ -105,7 +105,7 @@ function buildExample(resource, link, clientInfo, allPages = false) {
 
       if (example.data.length > 0) {
         if (!allPages) {
-          output = fix(
+          output = jsonToJs(
             JSON.stringify(deserialize(example.data[0], true), null, 2),
           );
 
@@ -126,7 +126,9 @@ ${multipleVariable}.forEach((${singleVariable}) => {
 console.log(result);`;
       }
     } else {
-      output = fix(JSON.stringify(deserialize(example.data, true), null, 2));
+      output = jsonToJs(
+        JSON.stringify(deserialize(example.data, true), null, 2),
+      );
 
       returnCode = `const ${singleVariable} = await ${call};
 

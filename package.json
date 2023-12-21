@@ -48,6 +48,7 @@
     "hls.js": "^1.0.7",
     "html-react-parser": "^1.2.6",
     "http-proxy": "^1.18.1",
+    "http-status": "^1.7.3",
     "humps": "^2.0.1",
     "iframe-resizer": "4.3.6",
     "jsdom": "^16.6.0",
