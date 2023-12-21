@@ -1,15 +1,15 @@
-import Layout from 'components/Layout';
+import cn from 'classnames';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Quote from 'components/Quote';
-import Numbers, { Block as NumbersBlock } from 'components/Numbers';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
-import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
-import Nike from 'public/images/logos/nike.svg';
-import Vercel from 'public/images/logos/vercel.svg';
+import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
+import Quote from 'components/Quote';
+import Space from 'components/Space';
+import Wrapper from 'components/Wrapper';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
 // import useSWR from 'swr';
 import {
   gqlStaticProps,
@@ -17,21 +17,17 @@ import {
   reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { Image as DatoImage } from 'react-datocms';
-import s from './style.module.css';
-import Wrapper from 'components/Wrapper';
-import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import Space from 'components/Space';
-import wretch from 'wretch';
-import format from 'date-fns/format';
-import parseISO from 'date-fns/parseISO';
-import { addMonths } from 'date-fns';
+import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Nike from 'public/images/logos/nike.svg';
+import Vercel from 'public/images/logos/vercel.svg';
+import Verizon from 'public/images/logos/verizon.svg';
 import { range } from 'range';
-import InterstitialTitle from 'components/InterstitialTitle';
-import regression from 'regression';
-import cn from 'classnames';
 import { useEffect, useState } from 'react';
+import { Image as DatoImage, renderMetaTags } from 'react-datocms';
+import regression from 'regression';
+import wretch from 'wretch';
+import s from './style.module.css';
 
 const si = [
   { value: 1, symbol: '' },
@@ -90,7 +86,7 @@ export const getStaticProps = gqlStaticProps(
         name
         role
         avatar {
-          responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
+          responsiveImage(imgixParams: { w: 400, h: 300, fit: crop }) {
             ...imageFields
           }
         }

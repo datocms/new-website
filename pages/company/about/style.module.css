@@ -2,8 +2,20 @@
   display: grid;
   grid-gap: 30px;
 
-  @media (width > 900px) {
+  @media (width > 500px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    grid-auto-rows: auto;
+  }
+
+  @media (width > 800px) {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    grid-auto-rows: auto;
+  }
+
+  @media (width > 1200px) {
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto auto;
     grid-auto-rows: auto;
   }
