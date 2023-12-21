@@ -1,5 +1,11 @@
+import FormattedDate from 'components/FormattedDate';
+import Head from 'components/Head';
+import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
+import PostContent from 'components/PostContent';
 import Wrapper from 'components/Wrapper';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import { isHeading } from 'datocms-structured-text-utils';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
@@ -7,16 +13,10 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
-import FormattedDate from 'components/FormattedDate';
-import InterstitialTitle from 'components/InterstitialTitle';
-import PostContent from 'components/PostContent';
-import Head from 'components/Head';
-import s from './style.module.css';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
 import filter from 'utils/filterNodes';
-import { isHeading } from 'datocms-structured-text-utils';
 import slugify from 'utils/slugify';
-import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
+import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -108,8 +108,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 projectUrl
                 mainImage {
                   responsiveImage(
-                    imgixParams: { w: 350 },
-                    sizes: "350px"
+                    imgixParams: { w: 850 },
+                    sizes: "850px"
                   ) {
                     ...imageFields
                   }
