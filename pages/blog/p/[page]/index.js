@@ -1,25 +1,28 @@
-import Layout from 'components/Layout';
+import FormattedDate from 'components/FormattedDate';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
-import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
+import Layout from 'components/Layout';
+import Paginator from 'components/Paginator';
+import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Link from 'next/link';
-import { Image as DatoImage, StructuredText } from 'react-datocms';
-import Masonry from 'react-masonry-css';
-import FormattedDate from 'components/FormattedDate';
 import { BLOG_POSTS_PER_PAGE } from 'lib/pages';
-import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import Paginator from 'components/Paginator';
-import { range } from 'range';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import s from './style.module.css';
+import { range } from 'range';
+import {
+  Image as DatoImage,
+  StructuredText,
+  renderMetaTags,
+} from 'react-datocms';
+import Masonry from 'react-masonry-css';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
+import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -57,10 +60,10 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           value
         }
         coverImage {
-          url(imgixParams: { w: 550 })
+          url(imgixParams: { auto: format, w: 550 })
           author
           customData
-          responsiveImage(imgixParams: { w: 550 }) {
+          responsiveImage(imgixParams: { auto: format, w: 550 }) {
             ...imageFields
           }
         }

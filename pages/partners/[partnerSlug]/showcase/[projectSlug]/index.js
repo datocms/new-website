@@ -1,32 +1,31 @@
-import { renderMetaTags, StructuredText } from 'react-datocms';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
+import Button from 'components/Button';
 import Head from 'components/Head';
-import Link from 'next/link';
+import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
+import LazyImage from 'components/LazyImage';
+import SidebarPane from 'components/SidebarPane';
+import Space from 'components/Space';
+import StickySidebar from 'components/StickySidebar';
+import VideoPlayer from 'components/VideoPlayer';
+import Wrapper from 'components/Wrapper';
+import Zoomable from 'components/Zoomable';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import { Image } from 'react-datocms';
 import {
+  gqlStaticPropsWithSubscription,
   imageFields,
   request,
   seoMetaTagsFields,
-  gqlStaticPropsWithSubscription,
 } from 'lib/datocms';
-import Space from 'components/Space';
-import LazyImage from 'components/LazyImage';
-import Wrapper from 'components/Wrapper';
-import Button from 'components/Button';
+import Link from 'next/link';
+import CameraIcon from 'public/icons/regular/camera.svg';
+import DescriptionIcon from 'public/icons/regular/info.svg';
 import LaptopIcon from 'public/icons/regular/laptop-code.svg';
 import BrowserIcon from 'public/icons/regular/link.svg';
 import TagIcon from 'public/icons/regular/tag.svg';
 import UsersIcon from 'public/icons/regular/users.svg';
-import CameraIcon from 'public/icons/regular/camera.svg';
-import DescriptionIcon from 'public/icons/regular/info.svg';
+import { Image, StructuredText, renderMetaTags } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
-import Zoomable from 'components/Zoomable';
-import VideoPlayer from 'components/VideoPlayer';
-import SidebarPane from 'components/SidebarPane';
-import InterstitialTitle from 'components/InterstitialTitle';
-import StickySidebar from 'components/StickySidebar';
 
 const Gallery = ({ screens }) =>
   screens.map((screen) => (
@@ -92,7 +91,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
         mainImage {
           responsiveImage(
-            imgixParams: { w: 1200 }
+            imgixParams: { auto: format, w: 1200 }
           ) {
             ...imageFields
           }
@@ -112,11 +111,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           title
           width
           responsiveImage(
-            imgixParams: { w: 900 }
+            imgixParams: { auto: format, w: 900 }
           ) {
             ...imageFields
           }
-          zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
+          zoomableResponsiveImage: responsiveImage(imgixParams: { auto: format, w: 1500, fit: max }) {
             ...imageFields
           }
         }
@@ -125,11 +124,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           title
           width
           responsiveImage(
-            imgixParams: { w: 900 }
+            imgixParams: { auto: format, w: 900 }
           ) {
             ...imageFields
           }
-          zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
+          zoomableResponsiveImage: responsiveImage(imgixParams: { auto: format, w: 1500, fit: max }) {
             ...imageFields
           }
         }

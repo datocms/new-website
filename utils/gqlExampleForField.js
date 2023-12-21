@@ -98,7 +98,7 @@ export function exampleForUpload(fieldName, queryFieldName, field) {
     }
   ) {
     blurUpThumb
-    url(imgixParams: { w: 100, h: 100, fit: crop })
+    url(imgixParams: { auto: format, w: 100, h: 100, fit: crop })
   }
 }`;
   }
@@ -106,7 +106,7 @@ export function exampleForUpload(fieldName, queryFieldName, field) {
   return `query {
   allUploads(filter: { ${camelize(fieldName)}: { ${filter} } }) {
     blurUpThumb
-    url(imgixParams: { w: 100, h: 100, fit: crop })
+    url(imgixParams: { auto: format, w: 100, h: 100, fit: crop })
   }
 }`;
 }

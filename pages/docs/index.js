@@ -1,17 +1,16 @@
-import { gqlStaticProps, seoMetaTagsFields, imageFields } from 'lib/datocms';
-import DocsLayout from 'components/DocsLayout';
-import Link from 'next/link';
-import Head from 'components/Head';
-import s from './style.module.css';
-import { renderMetaTags } from 'react-datocms';
 import ActiveLink from 'components/ActiveLink';
-import { Image as DatoImage } from 'react-datocms';
-import Next from 'public/images/logos/next.svg';
-import Gatsby from 'public/images/logos/gatsbyjs.svg';
-import Nuxt from 'public/images/logos/nuxt.svg';
+import DocsLayout from 'components/DocsLayout';
+import Head from 'components/Head';
+import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
+import Link from 'next/link';
 import Schema from 'public/images/illustrations/dynamic-layouts.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import GettingStarted from 'public/images/illustrations/marketers.svg';
+import Gatsby from 'public/images/logos/gatsbyjs.svg';
+import Next from 'public/images/logos/next.svg';
+import Nuxt from 'public/images/logos/nuxt.svg';
+import { Image as DatoImage, renderMetaTags } from 'react-datocms';
+import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -49,7 +48,9 @@ export const getStaticProps = gqlStaticProps(
             _modelApiKey
             url
             coverImage {
-              responsiveImage(imgixParams: { w: 300, ar: "4:3", fit: crop }) {
+              responsiveImage(
+                imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }
+              ) {
                 ...imageFields
               }
             }

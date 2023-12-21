@@ -1,32 +1,31 @@
-import { renderMetaTags, StructuredText } from 'react-datocms';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
+import Button from 'components/Button';
 import Head from 'components/Head';
+import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
+import LazyImage from 'components/LazyImage';
+import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
+import SidebarPane from 'components/SidebarPane';
+import Space from 'components/Space';
+import StickySidebar from 'components/StickySidebar';
+import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import { Image } from 'react-datocms';
 import {
   gqlStaticPaths,
-  seoMetaTagsFields,
-  imageFields,
   handleErrors,
+  imageFields,
   request,
+  seoMetaTagsFields,
 } from 'lib/datocms';
-import Space from 'components/Space';
-import LazyImage from 'components/LazyImage';
-import Wrapper from 'components/Wrapper';
-import Button from 'components/Button';
-import MapPinIcon from 'public/icons/regular/map-marker.svg';
-import BrowserIcon from 'public/icons/regular/link.svg';
-import LaptopIcon from 'public/icons/regular/laptop-code.svg';
 import EnvelopeIcon from 'public/icons/regular/envelope.svg';
-import MarkerIcon from 'public/icons/regular/marker.svg';
 import DescriptionIcon from 'public/icons/regular/info.svg';
-import s from './style.module.css';
-import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
-import InterstitialTitle from 'components/InterstitialTitle';
-import SidebarPane from 'components/SidebarPane';
-import StickySidebar from 'components/StickySidebar';
+import LaptopIcon from 'public/icons/regular/laptop-code.svg';
+import BrowserIcon from 'public/icons/regular/link.svg';
+import MapPinIcon from 'public/icons/regular/map-marker.svg';
+import MarkerIcon from 'public/icons/regular/marker.svg';
+import { Image, StructuredText, renderMetaTags } from 'react-datocms';
 import truncate from 'truncate';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
+import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -101,7 +100,13 @@ export const getStaticProps = handleErrors(
               }
               mainImage {
                 responsiveImage(
-                  imgixParams: { w: 750, h: 500, fit: crop, crop: top }
+                  imgixParams: {
+                    auto: format
+                    w: 750
+                    h: 500
+                    fit: crop
+                    crop: top
+                  }
                 ) {
                   ...imageFields
                 }
@@ -142,7 +147,9 @@ export const getStaticProps = handleErrors(
               releasedAt
               packageName
               coverImage {
-                responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
+                responsiveImage(
+                  imgixParams: { auto: format, w: 600, h: 400, fit: crop }
+                ) {
                   ...imageFields
                 }
               }

@@ -1,38 +1,38 @@
-import { useState, useCallback, useRef, useEffect, useMemo } from 'react';
-import {
-  YahooCalendar,
-  ICalendar,
-  GoogleCalendar,
-  OutlookCalendar,
-} from 'datebook';
-import Space from 'components/Space';
-import {
-  Image as DatoImage,
-  renderMetaTags,
-  StructuredText,
-} from 'react-datocms';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
+import Button from 'components/Button';
+import FormattedDate from 'components/FormattedDate';
 import Head from 'components/Head';
 import Layout from 'components/Layout';
-import Button from 'components/Button';
+import SidebarPane from 'components/SidebarPane';
+import Space from 'components/Space';
+import StickySidebar from 'components/StickySidebar';
+import Wrapper from 'components/Wrapper';
 import addMinutes from 'date-fns/addMinutes';
+import {
+  GoogleCalendar,
+  ICalendar,
+  OutlookCalendar,
+  YahooCalendar,
+} from 'datebook';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import FormattedDate from 'components/FormattedDate';
 import {
   gqlStaticPaths,
-  seoMetaTagsFields,
   gqlStaticPropsWithSubscription,
   imageFields,
+  seoMetaTagsFields,
 } from 'lib/datocms';
-import Wrapper from 'components/Wrapper';
-import CalendarIcon from 'public/icons/regular/calendar-day.svg';
-import SpeakersIcon from 'public/icons/regular/user.svg';
 import CompanyIcon from 'public/icons/regular/building.svg';
-import VideoIcon from 'public/icons/regular/video.svg';
-import DescriptionIcon from 'public/icons/regular/info.svg';
+import CalendarIcon from 'public/icons/regular/calendar-day.svg';
 import DurationIcon from 'public/icons/regular/clock.svg';
-import SidebarPane from 'components/SidebarPane';
-import StickySidebar from 'components/StickySidebar';
+import DescriptionIcon from 'public/icons/regular/info.svg';
+import SpeakersIcon from 'public/icons/regular/user.svg';
+import VideoIcon from 'public/icons/regular/video.svg';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  Image as DatoImage,
+  StructuredText,
+  renderMetaTags,
+} from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 import s from './style.module.css';
 
@@ -162,7 +162,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         url
         coverImage {
           responsiveImage(
-            imgixParams: { w: 780 }
+            imgixParams: { auto: format, w: 780 }
           ) {
             ...imageFields
           }
@@ -183,7 +183,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           }
           avatar {
             responsiveImage(
-              imgixParams: { w: 50, h: 50, fit: crop, crop: faces }
+              imgixParams: { auto: format, w: 50, h: 50, fit: crop, crop: faces }
             ) {
               ...imageFields
             }

@@ -70,7 +70,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                     _modelApiKey
                     url
                     coverImage {
-                      responsiveImage(imgixParams: { w: 300, ar: "4:3", fit: crop }) {
+                      responsiveImage(imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }) {
                         ...imageFields
                       }
                     }
@@ -108,7 +108,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 projectUrl
                 mainImage {
                   responsiveImage(
-                    imgixParams: { w: 850 },
+                    imgixParams: { auto: format, w: 850 },
                     sizes: "850px"
                   ) {
                     ...imageFields
@@ -125,10 +125,10 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 height
                 title
                 alt
-                responsiveImage(imgixParams: { w: 950 }, sizes: "(max-width: 810px) 100vw, (max-width: 1000px) 750px, (min-width: 1001px) 950px") {
+                responsiveImage(imgixParams: { auto: format, w: 950 }, sizes: "(max-width: 810px) 100vw, (max-width: 1000px) 750px, (min-width: 1001px) 950px") {
                   ...imageFields
                 }
-                zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max}) {
+                zoomableResponsiveImage: responsiveImage(imgixParams: { auto: format, w: 1500, fit: max}) {
                   ...imageFields
                 }
                 url
@@ -143,7 +143,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               _modelApiKey
               slug
               preview {
-                responsiveImage(imgixParams: { h: 500 }) {
+                responsiveImage(imgixParams: { auto: format, h: 500 }) {
                   ...imageFields
                 }
               }
@@ -181,7 +181,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 }
                 screenshot {
                   responsiveImage(
-                    imgixParams: { w: 400, h: 300, fit: crop, crop: top }
+                    imgixParams: { auto: format, w: 400, h: 300, fit: crop, crop: top }
                   ) {
                     ...imageFields
                   }
@@ -204,7 +204,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 }
                 screenshot {
                   responsiveImage(
-                    imgixParams: { w: 450, h: 350, fit: crop, crop: top }
+                    imgixParams: { auto: format, w: 450, h: 350, fit: crop, crop: top }
                   ) {
                     ...imageFields
                   }
@@ -246,7 +246,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           name
           avatar {
             responsiveImage(
-              imgixParams: { w: 50, h: 50, fit: crop, crop: faces }
+              imgixParams: { auto: format, w: 50, h: 50, fit: crop, crop: faces }
             ) {
               ...imageFields
             }

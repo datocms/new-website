@@ -1,21 +1,21 @@
-import Layout from 'components/Layout';
-import UseCaseRecap from 'components/UseCaseRecap';
+import Head from 'components/Head';
 import { highlightStructuredText } from 'components/Highlight';
+import Layout from 'components/Layout';
+import PostContent from 'components/PostContent';
 import UseCaseHead from 'components/UseCaseHead';
-import Wrapper from 'components/Wrapper';
 import Numbers, { Block as NumbersBlock } from 'components/UseCaseNumbers';
+import UseCaseRecap from 'components/UseCaseRecap';
 import Results, { Block as ResultsBlock } from 'components/UseCaseResults';
-import s from './style.module.css';
+import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { renderMetaTags, StructuredText } from 'react-datocms';
-import PostContent from 'components/PostContent';
-import Head from 'components/Head';
+import { StructuredText, renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
+import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -82,7 +82,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               image {
                 format
                 width
-                responsiveImage(imgixParams: { w: 810 }) {
+                responsiveImage(imgixParams: { auto: format, w: 810 }) {
                   ...imageFields
                 }
                 url

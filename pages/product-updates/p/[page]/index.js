@@ -1,23 +1,23 @@
-import Layout from 'components/Layout';
+import FormattedDate from 'components/FormattedDate';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
-import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
+import Layout from 'components/Layout';
+import Paginator from 'components/Paginator';
+import PostContent from 'components/PostContent';
+import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
-  seoMetaTagsFields,
   imageFields,
+  seoMetaTagsFields,
 } from 'lib/datocms';
-import Link from 'next/link';
-import FormattedDate from 'components/FormattedDate';
 import { CHANGELOG_POSTS_PER_PAGE } from 'lib/pages';
-import Paginator from 'components/Paginator';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Head from 'components/Head';
+import pageStyle from 'pages/docs/pageStyle.module.css';
 import { renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
-import PostContent from 'components/PostContent';
-import pageStyle from 'pages/docs/pageStyle.module.css';
 
 import { range } from 'range';
 
@@ -81,10 +81,10 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 width
                 title
                 alt
-                responsiveImage(imgixParams: { w: 950, fit: max }) {
+                responsiveImage(imgixParams: { auto: format, w: 950, fit: max }) {
                   ...imageFields
                 }
-                zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
+                zoomableResponsiveImage: responsiveImage(imgixParams: { auto: format, w: 1500, fit: max }) {
                   ...imageFields
                 }
                 url

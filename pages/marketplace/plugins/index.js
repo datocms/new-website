@@ -1,17 +1,15 @@
-import Layout from 'components/MarketplaceLayout';
-import Wrapper from 'components/Wrapper';
-import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import s from './style.module.css';
-import { Image as DatoImage } from 'react-datocms';
+import Layout from 'components/MarketplaceLayout';
 import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
-import { generateUrl } from 'utils/plugins';
+import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import truncate from 'truncate';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import React from 'react';
-import Link from 'next/link';
+import { Image as DatoImage, renderMetaTags } from 'react-datocms';
+import truncate from 'truncate';
+import { generateUrl } from 'utils/plugins';
+import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -60,7 +58,9 @@ export const getStaticProps = gqlStaticProps(
       releasedAt
       packageName
       coverImage {
-        responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
+        responsiveImage(
+          imgixParams: { auto: format, w: 600, h: 400, fit: crop }
+        ) {
           ...imageFields
         }
       }

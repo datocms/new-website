@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import Head from 'components/Head';
 import Layout from 'components/MarketplaceLayout';
+import Paginator from 'components/Paginator';
+import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
 import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
@@ -7,18 +9,15 @@ import {
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { Image as DatoImage } from 'react-datocms';
 import { PLUGINS_PER_PAGE } from 'lib/pages';
-import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import Paginator from 'components/Paginator';
-import { range } from 'range';
 import { useRouter } from 'next/router';
-import s from './style.module.css';
+import { range } from 'range';
+import { useEffect, useRef, useState } from 'react';
+import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import truncate from 'truncate';
-import PluginBox, { PluginImagePlacehoder } from 'components/PluginBox';
 import { useDebounce } from 'use-debounce';
 import { generateUrl } from 'utils/plugins';
+import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -53,7 +52,9 @@ export const getStaticProps = gqlStaticProps(
         releasedAt
         packageName
         coverImage {
-          responsiveImage(imgixParams: { w: 600, h: 400, fit: crop }) {
+          responsiveImage(
+            imgixParams: { auto: format, w: 600, h: 400, fit: crop }
+          ) {
             ...imageFields
           }
         }

@@ -1,22 +1,22 @@
-import Layout from 'components/Layout';
+import FormattedDate from 'components/FormattedDate';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
-import Wrapper from 'components/Wrapper';
 import Highlight from 'components/Highlight';
+import Layout from 'components/Layout';
+import PostContent from 'components/PostContent';
+import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
-  seoMetaTagsFields,
   imageFields,
+  seoMetaTagsFields,
 } from 'lib/datocms';
 import Link from 'next/link';
-import FormattedDate from 'components/FormattedDate';
 import { renderMetaTags } from 'react-datocms';
-import Head from 'components/Head';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
-import PostContent from 'components/PostContent';
 
-import s from 'pages/product-updates/p/[page]/style.module.css';
 import pageStyle from 'pages/docs/pageStyle.module.css';
+import s from 'pages/product-updates/p/[page]/style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -50,10 +50,10 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 width
                 title
                 alt
-                responsiveImage(imgixParams: { w: 950 }) {
+                responsiveImage(imgixParams: { auto: format, w: 950 }) {
                   ...imageFields
                 }
-                zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
+                zoomableResponsiveImage: responsiveImage(imgixParams: { auto: format, w: 1500, fit: max }) {
                   ...imageFields
                 }
                 url

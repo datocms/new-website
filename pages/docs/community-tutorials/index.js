@@ -1,7 +1,7 @@
-import { gqlStaticProps, imageFields } from 'lib/datocms';
 import DocsLayout from 'components/DocsLayout';
-import { Sidebar } from 'pages/docs';
 import Head from 'components/Head';
+import { gqlStaticProps, imageFields } from 'lib/datocms';
+import { Sidebar } from 'pages/docs';
 import s from 'pages/docs/pageStyle.module.css';
 import { Image as DatoImage } from 'react-datocms';
 import t from './style.module.css';
@@ -34,7 +34,9 @@ export const getStaticProps = gqlStaticProps(
             _modelApiKey
             url
             coverImage {
-              responsiveImage(imgixParams: { w: 300, ar: "4:3", fit: crop }) {
+              responsiveImage(
+                imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }
+              ) {
                 ...imageFields
               }
             }

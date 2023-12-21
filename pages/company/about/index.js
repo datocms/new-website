@@ -86,7 +86,9 @@ export const getStaticProps = gqlStaticProps(
         name
         role
         avatar {
-          responsiveImage(imgixParams: { w: 400, h: 300, fit: crop }) {
+          responsiveImage(
+            imgixParams: { auto: format, w: 400, h: 300, fit: crop }
+          ) {
             ...imageFields
           }
         }

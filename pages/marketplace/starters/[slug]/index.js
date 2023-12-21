@@ -1,27 +1,26 @@
-import { renderMetaTags } from 'react-datocms';
+import Button from 'components/Button';
 import Head from 'components/Head';
 import Layout from 'components/MarketplaceLayout';
-import SmartMarkdown from 'components/SmartMarkdown';
-import Button from 'components/Button';
-import UiChrome from 'components/UiChrome';
-import { Image as DatoImage } from 'react-datocms';
 import { LogoImage } from 'components/PluginBox';
 import {
-  PluginInfo,
+  Announce,
   Info,
   NameWithGravatar,
   PluginDetails,
+  PluginInfo,
 } from 'components/PluginToolkit';
+import SmartMarkdown from 'components/SmartMarkdown';
+import UiChrome from 'components/UiChrome';
 import {
   gqlStaticPaths,
+  handleErrors,
+  imageFields,
   request,
   seoMetaTagsFields,
-  imageFields,
 } from 'lib/datocms';
+import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest, githubRepoToUrl } from 'utils/githubRepo';
-import { handleErrors } from 'lib/datocms';
-import { Announce } from 'components/PluginToolkit';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -63,15 +62,15 @@ export const getStaticProps = handleErrors(
             }
           }
           screenshot {
-            url(imgixParams: { w: 600, h: 500, fit: crop, crop: top })
+            url(imgixParams: { auto: format, w: 600, h: 500, fit: crop, crop: top })
             responsiveImage(
-              imgixParams: { w: 600, h: 500, fit: crop, crop: top }
+              imgixParams: { auto: format, w: 600, h: 500, fit: crop, crop: top }
             ) {
               ...imageFields
             }
           }
           backendScreenshot {
-            responsiveImage(imgixParams: { h: 500, fit: crop, crop: top }) {
+            responsiveImage(imgixParams: { auto: format, h: 500, fit: crop, crop: top }) {
               ...imageFields
             }
           }

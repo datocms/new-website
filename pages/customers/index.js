@@ -1,3 +1,4 @@
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight, { highlightStructuredText } from 'components/Highlight';
 import Layout from 'components/Layout';
@@ -16,7 +17,6 @@ import React from 'react';
 import { Image as DatoImage } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
-import Head from 'components/Head';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   `
@@ -36,7 +36,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         coverImage {
           url
           focalPoint { x y }
-          responsiveImage(imgixParams: { ar: "16:9", w: 960, fit: crop, monochrome: "45000000", nr: 20, nrs: 20 }) {
+          responsiveImage(imgixParams: { auto: format, ar: "16:9", w: 960, fit: crop, monochrome: "45000000", nr: 20, nrs: 20 }) {
             ...imageFields
           }
         }

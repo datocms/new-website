@@ -1,51 +1,48 @@
-import React from 'react';
-import Layout from 'components/Layout';
-import {
-  gqlStaticPaths,
-  request,
-  handleErrors,
-  imageFields,
-  reviewFields,
-  seoMetaTagsFields,
-} from 'lib/datocms';
-import { StructuredText } from 'react-datocms';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
+import Button from 'components/Button';
+import CdnMap from 'components/CdnMap';
+import Checks from 'components/Checks';
+import CodeExcerpt from 'components/CodeExcerpt';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import GitHubButton from 'components/GitHubButton';
+import GraphQlDemo from 'components/GraphQlDemo';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';
-import Wrapper from 'components/Wrapper';
-import LazyImage from 'components/LazyImage';
-import Button from 'components/Button';
-import Checks from 'components/Checks';
-import CdnMap from 'components/CdnMap';
-import ShopifyProduct from 'components/ShopifyProduct';
-import GitHubButton from 'components/GitHubButton';
-import InterstitialTitle from 'components/InterstitialTitle';
-import s from './style.module.css';
-import TitleStripWithContent from 'components/TitleStripWithContent';
-import GraphQlDemo from 'components/GraphQlDemo';
-import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
-import Arrow3 from 'public/images/illustrations/arrow-sketch-1.svg';
-import { Highlight as FlagHighlight } from 'components/Flag';
-import Flag from 'components/Flag';
-import UseModularBlocks from 'components/UseModularBlocks';
-import CodeExcerpt from 'components/CodeExcerpt';
 import ImgixTransformations from 'components/ImgixTransformations';
+import InterstitialTitle from 'components/InterstitialTitle';
+import Layout from 'components/Layout';
+import LazyImage from 'components/LazyImage';
+import LogosBar from 'components/LogosBar';
+import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
 import Quote from 'components/Quote';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
+import ShopifyProduct from 'components/ShopifyProduct';
+import Space from 'components/Space';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import TryDemoCta from 'components/TryDemoCta';
+import UiChrome from 'components/UiChrome';
+import UseModularBlocks from 'components/UseModularBlocks';
+import VideoPlayer from 'components/VideoPlayer';
+import Wrapper from 'components/Wrapper';
+import {
+  gqlStaticPaths,
+  handleErrors,
+  imageFields,
+  request,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
+import Link from 'next/link';
+import Arrow3 from 'public/images/illustrations/arrow-sketch-1.svg';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
-import LogosBar from 'components/LogosBar';
-import TryDemoCta from 'components/TryDemoCta';
-import Space from 'components/Space';
-import VideoPlayer from 'components/VideoPlayer';
-import UiChrome from 'components/UiChrome';
-import { Image as DatoImage } from 'react-datocms';
-import Link from 'next/link';
-import { useEffect } from 'react';
-import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import React, { useEffect } from 'react';
+import { Image as DatoImage, StructuredText } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
+import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -89,7 +86,7 @@ export const getStaticProps = handleErrors(
             githubRepo
             screenshot {
               responsiveImage(
-                imgixParams: { w: 600, h: 400, fit: crop, crop: top }
+                imgixParams: { auto: format, w: 600, h: 400, fit: crop, crop: top }
               ) {
                 ...imageFields
               }
@@ -164,7 +161,7 @@ export const getStaticProps = handleErrors(
               id
               _modelApiKey
               image { 
-                responsiveImage(imgixParams: { h: 500 }) {
+                responsiveImage(imgixParams: { auto: format, h: 500 }) {
                   ...imageFields
                 }
               }
@@ -207,7 +204,7 @@ export const getStaticProps = handleErrors(
           url
           image {
             responsiveImage(
-              imgixParams: { w: 400, h: 300, fit: crop, crop: top }
+              imgixParams: { auto: format, w: 400, h: 300, fit: crop, crop: top }
             ) {
               ...imageFields
             }

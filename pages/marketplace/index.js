@@ -1,17 +1,16 @@
-import Layout from 'components/MarketplaceLayout';
-import LazyImage from 'components/LazyImage';
-import Head from 'components/Head';
-import { request, imageFields } from 'lib/datocms';
-import s from './style.module.css';
-import { Image as DatoImage } from 'react-datocms';
-import truncate from 'truncate';
-import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
-import Link from 'next/link';
 import cn from 'classnames';
+import Head from 'components/Head';
+import LazyImage from 'components/LazyImage';
+import Layout from 'components/MarketplaceLayout';
 import PluginBox, { LogoImage } from 'components/PluginBox';
+import { handleErrors, imageFields, request } from 'lib/datocms';
+import Link from 'next/link';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import { Image as DatoImage } from 'react-datocms';
 import tiny from 'tiny-json-http';
+import truncate from 'truncate';
 import { githubRepoToManifest } from 'utils/githubRepo';
-import { handleErrors } from 'lib/datocms';
+import s from './style.module.css';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
@@ -49,7 +48,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
             }
             screenshot {
               responsiveImage(
-                imgixParams: { w: 300, h: 200, fit: crop }
+                imgixParams: { auto: format, w: 300, h: 200, fit: crop }
               ) {
                 ...imageFields
               }
@@ -58,7 +57,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
           plugins {
             packageName
             coverImage {
-              responsiveImage(imgixParams: { w: 300, h: 200, fit: crop }) {
+              responsiveImage(imgixParams: { auto: format, w: 300, h: 200, fit: crop }) {
                 ...imageFields
               }
             }

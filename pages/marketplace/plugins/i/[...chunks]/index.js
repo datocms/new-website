@@ -1,29 +1,29 @@
-import Layout from 'components/MarketplaceLayout';
 import Button from 'components/Button';
-import {
-  gqlStaticPaths,
-  gqlStaticProps,
-  seoMetaTagsFields,
-  imageFields,
-} from 'lib/datocms';
-import SmartMarkdown from 'components/SmartMarkdown';
-import { useRouter } from 'next/router';
-import { renderMetaTags, Image } from 'react-datocms';
-import Head from 'components/Head';
 import FormattedDate from 'components/FormattedDate';
-import s from './style.module.css';
-import useSWR from 'swr';
-import wretch from 'wretch';
+import Head from 'components/Head';
+import Layout from 'components/MarketplaceLayout';
 import { PluginImagePlacehoder } from 'components/PluginBox';
-import truncate from 'truncate';
-import VideoPlayer from 'components/VideoPlayer';
 import {
-  PluginInfo,
+  Announce,
   Info,
   NameWithGravatar,
   PluginDetails,
-  Announce,
+  PluginInfo,
 } from 'components/PluginToolkit';
+import SmartMarkdown from 'components/SmartMarkdown';
+import VideoPlayer from 'components/VideoPlayer';
+import {
+  gqlStaticPaths,
+  gqlStaticProps,
+  imageFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
+import { useRouter } from 'next/router';
+import { Image, renderMetaTags } from 'react-datocms';
+import useSWR from 'swr';
+import truncate from 'truncate';
+import wretch from 'wretch';
+import s from './style.module.css';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -67,14 +67,14 @@ export const getStaticProps = gqlStaticProps(
         }
         title
         coverImage {
-          responsiveImage(imgixParams: { w: 300 }) {
+          responsiveImage(imgixParams: { auto: format, w: 300 }) {
             ...imageFields
           }
         }
         previewImage {
           format
           url
-          responsiveImage(imgixParams: { w: 850 }) {
+          responsiveImage(imgixParams: { auto: format, w: 850 }) {
             ...imageFields
           }
           video {

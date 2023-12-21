@@ -1,26 +1,26 @@
+import cn from 'classnames';
+import ActiveLink from 'components/ActiveLink';
+import DocPageContent from 'components/DocPageContent';
+import DocsLayout from 'components/DocsLayout';
+import Head from 'components/Head';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import { isHeading } from 'datocms-structured-text-utils';
 import {
+  gqlStaticPaths,
+  handleErrors,
+  imageFields,
   request,
   seoMetaTagsFields,
-  imageFields,
-  handleErrors,
-  gqlStaticPaths,
 } from 'lib/datocms';
-import { renderMetaTags, StructuredText } from 'react-datocms';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
-import DocsLayout from 'components/DocsLayout';
-import DocPageContent from 'components/DocPageContent';
 import Link from 'next/link';
-import ActiveLink from 'components/ActiveLink';
-import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
-import slugify from 'utils/slugify';
 import s from 'pages/docs/pageStyle.module.css';
-import Head from 'components/Head';
-import cn from 'classnames';
-import filter from 'utils/filterNodes';
-import { isHeading } from 'datocms-structured-text-utils';
-import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
+import { StructuredText, renderMetaTags } from 'react-datocms';
 import { fetchPluginSdkHooks } from 'utils/fetchPluginSdk';
 import fetchReactUiExamples from 'utils/fetchReactUiExamples';
+import filter from 'utils/filterNodes';
+import slugify from 'utils/slugify';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -180,10 +180,10 @@ export const getStaticProps = handleErrors(async function ({
                 image {
                   format
                   width
-                  responsiveImage(imgixParams: { w: 1000 }) {
+                  responsiveImage(imgixParams: { auto: format, w: 1000 }) {
                     ...imageFields
                   }
-                  zoomableResponsiveImage: responsiveImage(imgixParams: { w: 1500, fit: max }) {
+                  zoomableResponsiveImage: responsiveImage(imgixParams: { auto: format, w: 1500, fit: max }) {
                     ...imageFields
                   }
                   url
@@ -222,7 +222,7 @@ export const getStaticProps = handleErrors(async function ({
                   }
                   screenshot {
                     responsiveImage(
-                      imgixParams: { w: 450, h: 350, fit: crop, crop: top }
+                      imgixParams: { auto: format, w: 450, h: 350, fit: crop, crop: top }
                     ) {
                       ...imageFields
                     }
@@ -244,7 +244,7 @@ export const getStaticProps = handleErrors(async function ({
                   }
                   screenshot {
                     responsiveImage(
-                      imgixParams: { w: 300, h: 200, fit: crop, crop: top }
+                      imgixParams: { auto: format, w: 300, h: 200, fit: crop, crop: top }
                     ) {
                       ...imageFields
                     }
@@ -310,7 +310,7 @@ export const getStaticProps = handleErrors(async function ({
                       _modelApiKey
                       url
                       coverImage {
-                        responsiveImage(imgixParams: { w: 300, ar: "4:3", fit: crop }) {
+                        responsiveImage(imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }) {
                           ...imageFields
                         }
                       }

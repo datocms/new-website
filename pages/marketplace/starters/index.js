@@ -1,15 +1,14 @@
-import Layout from 'components/MarketplaceLayout';
-import Wrapper from 'components/Wrapper';
-import { request, imageFields } from 'lib/datocms';
-import { Image as DatoImage } from 'react-datocms';
 import Head from 'components/Head';
-import PluginBox from 'components/PluginBox';
-import s from 'pages/marketplace/plugins/browse/p/[page]/style.module.css';
 import LazyImage from 'components/LazyImage';
+import Layout from 'components/MarketplaceLayout';
+import PluginBox from 'components/PluginBox';
+import { Announce } from 'components/PluginToolkit';
+import Wrapper from 'components/Wrapper';
+import { handleErrors, imageFields, request } from 'lib/datocms';
+import s from 'pages/marketplace/plugins/browse/p/[page]/style.module.css';
+import { Image as DatoImage } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';
-import { handleErrors } from 'lib/datocms';
-import { Announce } from 'components/PluginToolkit';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
@@ -32,7 +31,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
           }
           screenshot {
             responsiveImage(
-              imgixParams: { w: 400, h: 300, fit: crop }
+              imgixParams: { auto: format, w: 400, h: 300, fit: crop }
             ) {
               ...imageFields
             }
