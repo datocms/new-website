@@ -22,9 +22,9 @@ function addSearchParamsToRequestUrl(url, link) {
 
 function defaultRequestHeaders(link) {
   const result = {
-    'X-Api-Version': '3',
     Authorization: 'Bearer YOUR-API-TOKEN',
     Accept: 'application/json',
+    'X-Api-Version': '3',
   };
 
   if (link.schema && link.method !== 'GET' && link.method !== 'DELETE') {
