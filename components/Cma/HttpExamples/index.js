@@ -136,28 +136,34 @@ function buildHttpRequest([url, requestInit = {}]) {
 function buildFetchCommand([url, requestInit = {}]) {
   return `await fetch(
   '${url}',
-  ${Object.entries(requestInit)
-    .map(([option, value]) => {
-      if (option !== 'body') {
-        return `${option}: ${jsonToJs(
-          JSON.stringify(value, null, 2).split('\n').join('\n  '),
-        )},`;
-      }
+  {
+    ${Object.entries(requestInit)
+      .map(([option, value]) => {
+        if (option === 'method' && value === 'GET') {
+          return null;
+        }
 
-      if (!value) {
-        return null;
-      }
+        if (option !== 'body') {
+          return `${option}: ${jsonToJs(
+            JSON.stringify(value, null, 2).split('\n').join('\n    '),
+          )},`;
+        }
 
-      if (typeof value === 'string') {
-        return `body: ${JSON.stringify(value)},`;
-      }
+        if (!value) {
+          return null;
+        }
 
-      return `body: JSON.stringify(${jsonToJs(
-        JSON.stringify(value, null, 2).split('\n').join('\n  '),
-      )}),`;
-    })
-    .filter(Boolean)
-    .join('\n  ')}
+        if (typeof value === 'string') {
+          return `body: ${JSON.stringify(value)},`;
+        }
+
+        return `body: JSON.stringify(${jsonToJs(
+          JSON.stringify(value, null, 2).split('\n').join('\n    '),
+        )}),`;
+      })
+      .filter(Boolean)
+      .join('\n    ')}
+  }
 );`;
 }
 
