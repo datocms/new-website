@@ -9,6 +9,7 @@ import Space from 'components/Space';
 import StickySidebar from 'components/StickySidebar';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import { isBlockquote } from 'datocms-structured-text-utils';
 import {
   gqlStaticPaths,
   handleErrors,
@@ -22,7 +23,12 @@ import LaptopIcon from 'public/icons/regular/laptop-code.svg';
 import BrowserIcon from 'public/icons/regular/link.svg';
 import MapPinIcon from 'public/icons/regular/map-marker.svg';
 import MarkerIcon from 'public/icons/regular/marker.svg';
-import { Image, StructuredText, renderMetaTags } from 'react-datocms';
+import {
+  Image,
+  StructuredText,
+  renderMetaTags,
+  renderRule,
+} from 'react-datocms';
 import truncate from 'truncate';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
@@ -253,7 +259,23 @@ export default function PartnerPage({ preview, subscription, plugins }) {
               title={`About ${partner.name}`}
             >
               <div className={s.description}>
-                <StructuredText data={partner.description} />
+                <StructuredText
+                  data={partner.description}
+                  customRules={[
+                    renderRule(isBlockquote, ({ node, children, key }) => {
+                      return (
+                        <div key={key} className={s.quote}>
+                          <div className={s.quoteQuote}>{children}</div>
+                          {node.attribution && (
+                            <div className={s.quoteAuthor}>
+                              {node.attribution}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }),
+                  ]}
+                />
               </div>
               <div className={s.action}>
                 <div className={s.actionButton}>

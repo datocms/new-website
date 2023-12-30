@@ -67,3 +67,53 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.quote {
+  text-align: left;
+  padding-top: rfs(30px);
+  position: relative;
+
+  &:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    font-family: var(--font-serif);
+    content: '\201C';
+    color: var(--accent-color);
+    font-size: rfs(100px);
+    line-height: 0.3;
+  }
+}
+
+.quoteQuote {
+  line-height: 1.2;
+  margin-left: rfs(50px);
+  font-family: var(--font-serif);
+  color: #333;
+
+  p,
+  ul,
+  ol {
+    margin: 0 0 rfs(20px);
+  }
+
+  strong {
+    background-image: linear-gradient(120deg, #f4cf58 0%, #f4cf58 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.5em;
+    background-position: 0 88%;
+    font-weight: 600;
+  }
+}
+
+.quoteAuthor {
+  margin-left: rfs(50px);
+  font-style: italic;
+  color: var(--light-body-color);
+
+  &:before {
+    content: '—';
+    padding-right: 10px;
+  }
+}
