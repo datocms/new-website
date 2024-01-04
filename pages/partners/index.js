@@ -1,21 +1,21 @@
+import classNames from 'classnames';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
-import Wrapper from 'components/Wrapper';
+import PartnersMap from 'components/PartnersMap';
+import { Announce } from 'components/PluginToolkit';
 import Space from 'components/Space';
+import Wrapper from 'components/Wrapper';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { gqlStaticPropsWithSubscription } from 'lib/datocms';
+import { uniq } from 'lodash-es';
+import sortBy from 'lodash-es/sortBy';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
-import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import s from './style.module.css';
-import sortBy from 'lodash-es/sortBy';
-import Head from 'components/Head';
-import classNames from 'classnames';
-import { Announce } from 'components/PluginToolkit';
-import PartnersMap from 'components/PartnersMap';
 import ReactSelect from 'react-select';
-import { uniq } from 'lodash-es';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
+import s from './style.module.css';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   /* GraphQL */ `
@@ -25,7 +25,13 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           ...partner
         }
       }
-      posts: allPartners(first: 100) {
+      posts1: allPartners(first: 100) {
+        ...partner
+      }
+      posts2: allPartners(skip: 100, first: 100) {
+        ...partner
+      }
+      posts3: allPartners(skip: 200, first: 100) {
         ...partner
       }
     }
@@ -52,10 +58,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         continent {
           name
         }
-        coordinates {
-          latitude
-          longitude
-        }
       }
       _allReferencingShowcaseProjectsMeta {
         count
@@ -63,7 +65,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     }
   `,
   {
-    requiredKeys: ['posts'],
+    requiredKeys: ['posts1'],
   },
 );
 
@@ -74,7 +76,7 @@ const toOption = (entry) => ({
   label: entry[0],
 });
 const byCount = (entryA, entryB) => {
-  if (entryA[1] != entryB[1]) {
+  if (entryA[1] !== entryB[1]) {
     return entryB[1] - entryA[1];
   }
 
@@ -117,8 +119,10 @@ function calculateCounters(agencies, continent, country) {
 
 export default function Partners({ subscription, preview }) {
   const {
-    data: { posts, partnersPage, projects },
+    data: { posts1, posts2, posts3, partnersPage },
   } = useQuerySubscription(subscription);
+
+  const posts = [...posts1, ...posts2, ...posts3];
 
   const countBySlug = posts.reduce((acc, post) => {
     acc[post.slug] = post._allReferencingShowcaseProjectsMeta.count;
