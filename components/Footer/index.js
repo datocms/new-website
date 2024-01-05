@@ -35,7 +35,6 @@ export default function Footer({ noCta }) {
   const onSubmit = async ({ email }) => {
     try {
       await Promise.all([
-        wretch('/api/mailchimp/subscribe').post({ email }).json(),
         wretch('/api/mailerlite/subscribe').post({ email }).json(),
       ]);
 

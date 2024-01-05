@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mailchimp/mailchimp_marketing": "^3.0.47",
     "@mailerlite/mailerlite-nodejs": "^1.2.0",
     "@mozilla/readability": "^0.4.1",
     "@next/bundle-analyzer": "^11.1.2",
