@@ -259,8 +259,6 @@ const Chart = ({ data: rawData, children }) => {
 };
 
 export default function About({ members, page, review1, review2 }) {
-  // const { data } = useSWR('/api/company/metrics', fetcher);
-
   return (
     <Layout>
       <Head>{renderMetaTags(page.seo)}</Head>
@@ -349,7 +347,6 @@ export default function About({ members, page, review1, review2 }) {
           ourselves. We&#39;ve put down our roots and we want them to grow.
           Slowly but steadily.
         </p>
-        <a id="arr" />
       </Flag>
 
       {/* {data && (
