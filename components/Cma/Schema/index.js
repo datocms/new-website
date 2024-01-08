@@ -1,11 +1,10 @@
-import React, { createContext, useContext, useState } from 'react';
-import s from './style.module.css';
 import { LanguageConsumer } from 'components/LanguagePicker';
-import humps from 'humps';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
 import PlusIcon from 'public/icons/regular/plus.svg';
 import TimesIcon from 'public/icons/regular/times.svg';
+import React, { createContext, useContext, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import s from './style.module.css';
 
 const DefinitionContext = createContext(false);
 
@@ -237,13 +236,10 @@ function Relationship({ name, schema, required }) {
       {(language) => (
         <div className={s.schema}>
           <div className={s.header}>
-            {(language === 'http' ||
-              (language === 'old-js' && multipleRelationshipsPossible)) && (
+            {language === 'http' && (
               <span className={s.prefix}>relationships.</span>
             )}
-            <span className={s.name}>
-              {language === 'old-js' ? humps.camelize(name) : name}
-            </span>
+            <span className={s.name}>{name}</span>
             {language === 'http' && <span className={s.prefix}>.data</span>}
             {!isDefinition && (
               <>
@@ -371,9 +367,7 @@ export function JsonSchemaProperty({
           {name && (
             <div className={s.header}>
               {prefix && <span className={s.prefix}>{prefix}</span>}
-              <span className={s.name}>
-                {language === 'old-js' ? humps.camelize(name) : name}
-              </span>
+              <span className={s.name}>{name}</span>
               {schema.deprecated && (
                 <>
                   &nbsp;&nbsp;

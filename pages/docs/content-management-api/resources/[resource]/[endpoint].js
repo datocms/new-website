@@ -1,6 +1,5 @@
 import HttpExamples, { HttpExample } from 'components/Cma/HttpExamples';
 import JSExamples, { JSExample } from 'components/Cma/JsExamples';
-import OldJsExamples, { OldJsExample } from 'components/Cma/OldJsExamples';
 import { HrefSchema, Schema } from 'components/Cma/Schema';
 import TargetSchema from 'components/Cma/TargetSchema';
 import DocDescription from 'components/DocDescription';
@@ -151,12 +150,7 @@ export default function DocPage({
       </Head>
       <LanguageConsumer>
         {(language) => {
-          const docLanguage =
-            language === 'javascript'
-              ? 'new-js'
-              : language === 'old-js'
-              ? 'old-js'
-              : 'http';
+          const docLanguage = language === 'javascript' ? 'new-js' : 'http';
 
           const description =
             link.documentation?.[docLanguage]?.description || link.description;
@@ -203,23 +197,12 @@ export default function DocPage({
                           );
                         }
 
-                        if (language === 'javascript') {
-                          return (
-                            <JSExample
-                              example={example}
-                              schema={result.schema}
-                              link={link}
-                              clientInfo={clientInfo}
-                              startExpanded={singleExample}
-                            />
-                          );
-                        }
-
                         return (
-                          <OldJsExample
+                          <JSExample
                             example={example}
                             schema={result.schema}
                             link={link}
+                            clientInfo={clientInfo}
                             startExpanded={singleExample}
                           />
                         );
@@ -264,14 +247,6 @@ export default function DocPage({
                           schema={result.schema}
                           link={link}
                           clientInfo={clientInfo}
-                          omitExampleIds={referencedExampleIds}
-                        />
-                      )}
-
-                      {language === 'old-js' && (
-                        <OldJsExamples
-                          schema={result.schema}
-                          link={link}
                           omitExampleIds={referencedExampleIds}
                         />
                       )}

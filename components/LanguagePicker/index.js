@@ -33,14 +33,6 @@ export default function LanguagePicker({ children }) {
         >
           HTTP
         </button>
-        <button
-          className={cn(s.pickerButton, {
-            [s.pickerButtonActive]: language === 'old-js',
-          })}
-          onClick={() => setLanguage('old-js')}
-        >
-          Legacy JS client (deprecated)
-        </button>
       </div>
       <LanguageContext.Provider value={language}>
         {children}
