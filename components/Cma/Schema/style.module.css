@@ -90,3 +90,20 @@
     color: var(--base-body-color);
   }
 }
+
+.optionalSchema {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  background: #f4f5ff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+
+  svg {
+    fill: #1e64f0;
+    margin-right: 8px;
+  }
+}

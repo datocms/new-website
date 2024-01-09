@@ -214,8 +214,12 @@ export default function DocPage({
                   {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
                   {link.schema && (
                     <Schema
-                      title="Parameters"
+                      title="Body Parameters"
                       schema={link.schema.properties.data}
+                      optional={
+                        Array.isArray(link.schema.type) &&
+                        link.schema.type.includes('null')
+                      }
                       showId={link.method !== 'PUT'}
                     />
                   )}

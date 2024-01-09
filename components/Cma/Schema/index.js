@@ -1,5 +1,6 @@
 import { LanguageConsumer } from 'components/LanguagePicker';
 import Link from 'next/link';
+import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
 import PlusIcon from 'public/icons/regular/plus.svg';
 import TimesIcon from 'public/icons/regular/times.svg';
 import React, { createContext, useContext, useState } from 'react';
@@ -496,7 +497,7 @@ export function Definition(props) {
   );
 }
 
-export function Schema({ title, schema, showId }) {
+export function Schema({ title, optional, schema, showId }) {
   const isDefinition = useContext(DefinitionContext);
 
   return (
@@ -504,6 +505,12 @@ export function Schema({ title, schema, showId }) {
       {(language) => (
         <>
           <h2>{title}</h2>
+          {optional && (
+            <div className={s.optionalSchema}>
+              <InfoCircleIcon /> For this endpoint, the body is not required and
+              can be entirely omitted
+            </div>
+          )}
           {(language === 'http' || showId) && schema.properties.id && (
             <div className={s.schema}>
               <div className={s.header}>
