@@ -150,12 +150,10 @@ export default function DocPage({
       </Head>
       <LanguageConsumer>
         {(language) => {
-          const docLanguage = language === 'javascript' ? 'new-js' : 'http';
-
           const description =
-            link.documentation?.[docLanguage]?.description || link.description;
+            link.documentation?.[language]?.description || link.description;
 
-          const examples = link?.documentation?.[docLanguage]?.examples || [];
+          const examples = link?.documentation?.[language]?.examples || [];
           const allExampleIds = examples.map((e) => e.id);
 
           const referencedExampleIds = [];

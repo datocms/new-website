@@ -223,8 +223,8 @@ export default function JsExamples({
   clientInfo,
   omitExampleIds = [],
 }) {
-  if (link?.documentation?.['new-js']?.examples) {
-    const examples = link.documentation['new-js'].examples.filter(
+  if (link?.documentation?.javascript?.examples) {
+    const examples = link.documentation.javascript.examples.filter(
       (example) => !omitExampleIds.includes(example.id),
     );
 
