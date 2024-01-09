@@ -14,42 +14,54 @@ import {
 } from 'lib/datocms';
 import s from './style.module.css';
 
-export const getStaticProps = gqlStaticPropsWithSubscription(
-  `
-    query {
-      allReviews(first: 100) {
-        ...reviewFields
-        _updatedAt
+export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
+  query {
+    allReviews(first: 100) {
+      ...reviewFields
+      _updatedAt
+    }
+    partner1: allPartners(first: 100) {
+      ...partnerQuote
+    }
+    partner2: allPartners(skip: 100, first: 100) {
+      ...partnerQuote
+    }
+    partner3: allPartners(skip: 200, first: 100) {
+      ...partnerQuote
+    }
+  }
+
+  ${reviewFields}
+  ${imageFields}
+
+  fragment partnerQuote on PartnerRecord {
+    name
+    slug
+    quotes {
+      id
+      quote {
+        value
       }
-      allPartners(first: 100) {
-        name
-        slug
-        quotes {
-          id
-          quote {
-            value
-          }
-          role
-          name
-          image {
-            responsiveImage(imgixParams: { w: 300, h:300, fit: crop, crop: faces, auto: format }){
-              ...imageFields
-            }
-          }
-          _updatedAt
+      role
+      name
+      image {
+        responsiveImage(
+          imgixParams: { w: 300, h: 300, fit: crop, crop: faces, auto: format }
+        ) {
+          ...imageFields
         }
       }
+      _updatedAt
     }
-
-    ${reviewFields}
-    ${imageFields}
-  `,
-);
+  }
+`);
 
 export default function Wall({ preview, subscription }) {
   const {
-    data: { allPartners, allReviews },
+    data: { partner1, partner2, partner3, allReviews },
   } = useQuerySubscription(subscription);
+
+  const allPartners = [...partner1, ...partner2, ...partner3];
 
   const quotes = [
     ...allPartners
