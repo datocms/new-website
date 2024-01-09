@@ -201,13 +201,13 @@ export function HttpExample({ example, link, startExpanded }) {
       title: 'CURL Request',
       code: generateCurlSnippet(request),
       language: 'bash',
-      description: example.response?.description ?? '',
+      description: example.request?.description ?? '',
     },
     {
       title: 'fetch() Request',
       code: buildFetchCommand(request),
       language: 'js',
-      description: example.response?.description ?? '',
+      description: example.request?.description ?? '',
     },
   ];
 
