@@ -92,8 +92,8 @@ function StructuredText({ feature, preview, integrations, review }) {
           <>
             Meet our all-encompassing solution designed with{' '}
             <strong>omnichannel</strong> in mind.{' '}
-            <strong>DatoCMS structured content</strong>{' '}
-            combines a powerful and flexible{' '}
+            <strong>DatoCMS structured content</strong> combines a powerful and
+            flexible{' '}
             <strong>rich-text editor with a portable JSON format</strong> to
             store your content.
           </>
