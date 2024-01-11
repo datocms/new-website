@@ -1,21 +1,21 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import GraphQlDemo from 'components/GraphQlDemo';
 import Head from 'components/Head';
-import {
-  imageFields,
-  reviewFields,
-  gqlStaticProps,
-  seoMetaTagsFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import GraphQlDemo from 'components/GraphQlDemo';
+import Layout from 'components/Layout';
+import Quote from 'components/Quote';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import VideoPlayer from 'components/VideoPlayer';
-import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
 
 import s from './style.module.css';
 
@@ -182,12 +182,9 @@ function GraphQlContentApi({ feature, preview, review }) {
         >
           <div className={s.video}>
             <VideoPlayer
-              controls
-              autoPlay
-              muted
-              loop
+              autoPlayAndLoop
               title={keyword}
-              src="https://stream.mux.com/41n005I01cshC02vPeSunBhVOYGomfIUOd02.m3u8"
+              playbackId="41n005I01cshC02vPeSunBhVOYGomfIUOd02"
             />
           </div>
         </TitleStripWithContent>

@@ -138,8 +138,10 @@ export const getStaticProps = handleErrors(
               title { value }
               content { value }
               video {
+                width
+                height
                 video {
-                  streamingUrl
+                  playbackId: muxPlaybackId
                 }
               }
               id
@@ -156,15 +158,6 @@ export const getStaticProps = handleErrors(
               _modelApiKey
               title { value }
               content { value }
-            }
-            ... on ImageRecord {
-              id
-              _modelApiKey
-              image { 
-                responsiveImage(imgixParams: { auto: format, h: 500 }) {
-                  ...imageFields
-                }
-              }
             }
             ... on ShopifyProductRecord {
               id
@@ -453,16 +446,6 @@ export default function UseCase({ subscription, websites, preview }) {
                     </GraphQlDemo>
                   </TitleStripWithContent>
                 )}
-                {block._modelApiKey === 'image' && (
-                  <Space top={3}>
-                    <TitleStripWithContent seoAnalysis={seoAnalysis}>
-                      <DatoImage
-                        data={block.image.responsiveImage}
-                        className={s.image}
-                      />
-                    </TitleStripWithContent>
-                  </Space>
-                )}
                 {block._modelApiKey === 'landing_progressive_images_block' && (
                   <Space top={3}>
                     <TitleStripWithContent
@@ -593,10 +576,10 @@ export default function UseCase({ subscription, websites, preview }) {
                     >
                       <div className={s.video}>
                         <VideoPlayer
-                          controls
-                          autoPlay
-                          muted
-                          src={block.video.video.streamingUrl}
+                          autoPlayAndLoop
+                          playbackId={block.video.video.playbackId}
+                          width={block.video.width}
+                          height={block.video.height}
                         />
                       </div>
                     </TitleStripWithContent>

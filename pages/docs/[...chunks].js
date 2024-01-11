@@ -177,6 +177,7 @@ export const getStaticProps = handleErrors(async function ({
               ... on ImageRecord {
                 id
                 _modelApiKey
+                frameless
                 image {
                   format
                   width
@@ -260,10 +261,9 @@ export const getStaticProps = handleErrors(async function ({
                   title
                   width
                   height
+                  blurUpThumb
                   video {
-                    duration
-                    streamingUrl
-                    thumbnailUrl
+                    playbackId: muxPlaybackId
                   }
                 }
               }

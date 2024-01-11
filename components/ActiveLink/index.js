@@ -1,6 +1,6 @@
-import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 export default function ActiveLink({ children, ...props }) {
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function ActiveLink({ children, ...props }) {
   return <Link {...props}>{React.cloneElement(child, { className })}</Link>;
 }
 
-function isActive(props, router) {
+export function isActive(props, router) {
   const componentUrl = props.as ? props.as : props.href;
   const routerUrl = props.as ? router.asPath : router.pathname;
   const urlTokens = routerUrl.split('/');

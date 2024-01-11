@@ -100,10 +100,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           title
           width
           height
+          blurUpThumb
           video {
-            duration
-            streamingUrl
-            thumbnailUrl
+            playbackId: muxPlaybackId
           }
         }
         projectScreenshots {
@@ -187,9 +186,11 @@ export default function PartnerPage({ preview, subscription }) {
           {project.video?.video ? (
             <div className={s.mainImage}>
               <VideoPlayer
-                controls
-                src={project.video.video.streamingUrl}
-                poster={`${project.video.video.thumbnailUrl}?width=1200&time=2`}
+                title={project.video.title}
+                playbackId={project.video.video.playbackId}
+                blurUpThumb={project.video.blurUpThumb}
+                width={project.video.width}
+                height={project.video.height}
               />
             </div>
           ) : (

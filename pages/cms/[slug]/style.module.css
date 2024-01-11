@@ -28,7 +28,8 @@
   overflow: hidden;
   background: var(--base-body-color);
 
-  video {
+  video,
+  mux-player {
     width: 100%;
     display: block;
   }

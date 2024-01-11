@@ -1,4 +1,4 @@
-import { default as classnames, default as cn } from 'classnames';
+import cn from 'classnames';
 import Button from 'components/Button';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
@@ -8,11 +8,11 @@ import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import Image from 'public/images/illustrations/image-api.svg';
-import Languages from 'public/images/illustrations/multilanguage-2.svg';
-import Video from 'public/images/illustrations/video-encoding.svg';
 import RealTime from 'public/images/illustrations/live-31.svg';
-import StructuredText from 'public/images/illustrations/scontent.svg';
 import DataIntegrity from 'public/images/illustrations/lock2.svg';
+import Languages from 'public/images/illustrations/multilanguage-2.svg';
+import StructuredText from 'public/images/illustrations/scontent.svg';
+import Video from 'public/images/illustrations/video-encoding.svg';
 import Workflows from 'public/images/illustrations/workflows.svg';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -47,21 +47,21 @@ const BigLink = ({ children, href }) => {
   );
 };
 
-const LearnResource = ({ href, title, target, description }) => {
+const Resource = ({ href, title, target, description }) => {
   const content = (
     <>
-      <div className={s.learnResourceTitle}>{title}</div>
-      <div className={s.learnResourceDesc}>{description}</div>
+      <div className={s.resourceTitle}>{title}</div>
+      <div className={s.resourceDesc}>{description}</div>
     </>
   );
 
   return target ? (
-    <a className={s.learnResource} href={href} target={target}>
+    <a className={s.resource} href={href} target={target}>
       {content}
     </a>
   ) : (
     <Link href={href}>
-      <a className={s.learnResource}>{content}</a>
+      <a className={s.resource}>{content}</a>
     </Link>
   );
 };
@@ -97,7 +97,7 @@ export default function Navbar() {
       {visible && (
         <div className={s.overlay} onClick={() => setVisible(false)} />
       )}
-      <div className={classnames(s.root)} data-datocms-noindex>
+      <div className={cn(s.root)} data-datocms-noindex>
         <Wrapper>
           <div className={s.innerRoot}>
             <Link href="/">
@@ -221,36 +221,42 @@ export default function Navbar() {
 
                 <Group title="Learn">
                   <div className={s.twocols}>
-                    <LearnResource
+                    <Resource
                       title="Documentation"
                       description="Guides, tutorials and API reference"
                       href="/docs"
                     />
 
-                    <LearnResource
+                    <Resource
                       title="Blog"
                       description="Culture, learnings, and announcements"
                       href="/blog"
                     />
 
-                    <LearnResource
+                    <Resource
                       title="Product updates"
                       description="Changelog for features and improvements"
                       href="/product-updates"
                     />
 
-                    <LearnResource
+                    {/* <Resource
+                      title="Academy"
+                      description="Deep dive into the concepts around headless"
+                      href="/academy"
+                    /> */}
+
+                    <Resource
                       title="Community forum"
                       description="Ask questions/discuss with your peers"
                       href="https://community.datocms.com"
                       target="_blank"
                     />
-                    <LearnResource
+                    <Resource
                       title="Slack channel"
                       description="Chat live with other devs"
                       href="/slack"
                     />
-                    <LearnResource
+                    <Resource
                       title="Support"
                       description="Got questions? Get in touch!"
                       href="/support"
@@ -260,23 +266,23 @@ export default function Navbar() {
 
                 <Group title="Marketplace">
                   <div className={s.twocols}>
-                    <LearnResource
+                    <Resource
                       href="/marketplace/starters"
                       title="Starter projects"
                       description="Start with a fully configured DatoCMS project"
                     />
-                    <LearnResource
+                    <Resource
                       href="/marketplace/plugins"
                       title="Plugins"
                       description="Easily expand the capabilities of DatoCMS"
                     />
-                    <LearnResource
+                    <Resource
                       href="/marketplace/hosting"
                       title="Hosting &amp; Builds"
                       description="No matter the stack you're using, we've got you covered"
                     />
 
-                    <LearnResource
+                    <Resource
                       href="/marketplace/enterprise"
                       title="Enterprise apps"
                       description="Keep your company data secure"

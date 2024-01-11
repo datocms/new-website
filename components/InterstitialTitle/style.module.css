@@ -68,6 +68,15 @@
   font-weight: bold;
   color: var(--extra-light-body-color);
   text-transform: uppercase;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .title {

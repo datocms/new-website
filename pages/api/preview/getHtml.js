@@ -1,35 +1,33 @@
 import { SiteClient } from 'datocms-client';
 import got from 'got';
 import { JSDOM } from 'jsdom';
+import { findPermalink } from './links';
 
 const client = new SiteClient(process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN);
 
 // this "routing" function knows how to convert a DatoCMS record
 // into its slug and canonical URL within the website
 
+const findSlug = async ({ item, itemTypeApiKey }) => {
+  switch (itemTypeApiKey) {
+    case 'template_demo':
+      return item.attributes.code;
+    case 'home_page':
+      return '/';
+    default:
+      return item.attributes.slug || null;
+  }
+};
+
 const findSlugAndPermalink = async ({ item, itemTypeApiKey }) => {
-  if (item.slug === 'enterprise-headless-cms') {
-    return [item.slug, `/${item.slug}`];
+  const permalink = await findPermalink({ item, itemTypeApiKey });
+  const slug = await findSlug({ item, itemTypeApiKey });
+
+  if (!permalink || !permalink) {
+    return [null, null];
   }
 
-  switch (itemTypeApiKey) {
-    case 'home_page':
-      return ['/', '/'];
-    case 'blog_post':
-      return [item.slug, `/blog/${item.slug}`];
-    case 'landing_page':
-      return [item.slug, `/cms/${item.slug}`];
-    case 'changelog_entry':
-      return [item.slug, `/product-updates/${item.slug}`];
-    case 'feature':
-      return [item.slug, `/features/${item.slug}`];
-    case 'team_page':
-      return [item.slug, `/team/${item.slug}`];
-    case 'template_demo':
-      return [item.code, `/marketplace/starters/${item.code}`];
-    default:
-      return [null, null];
-  }
+  return [slug, permalink];
 };
 
 const handler = async (req, res) => {
@@ -56,7 +54,7 @@ const handler = async (req, res) => {
   const { itemId, itemTypeId, itemTypeApiKey } = req.query;
 
   // given the itemId, we can now get the record (and it's model) from the Datocms API
-  const item = await client.items.find(itemId);
+  const { data: item } = await client.items.rawFind(itemId);
 
   // we can now get the URL for the record using a routing function
   // that knows which record is linked to which URL in the website

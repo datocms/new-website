@@ -1,71 +1,28 @@
-import { useRef, useEffect } from 'react';
+import MuxPlayer from '@mux/mux-player-react/lazy';
 
-export default function VideoPlayer({ src, autoPlay, ...other }) {
-  const ref = useRef();
-
-  useEffect(() => {
-    const videoEl = ref.current;
-
-    if (!videoEl) {
-      return;
-    }
-
-    if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
-      console.log('HLS supported natively!');
-      // This will run in safari, where HLS is supported natively
-      videoEl.src = src;
-      return;
-    }
-
-    let destroy;
-
-    const attachHls = async () => {
-      const { default: Hls } = await import('hls.js');
-
-      if (!Hls.isSupported()) {
-        console.log('HLS not supported and HLS is not supported natively!');
-        return;
-      }
-
-      const hls = new Hls();
-
-      hls.attachMedia(ref.current);
-
-      hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-        hls.loadSource(src);
-        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-          if (autoPlay) {
-            ref.current.play();
-          }
-        });
-      });
-
-      destroy = () => hls.destroy();
-    };
-
-    attachHls();
-
-    return () => {
-      if (destroy) {
-        destroy();
-      }
-    };
-  }, [autoPlay, src]);
-
-  const poster =
-    other.poster ||
-    src
-      .replace('stream.mux.com', 'image.mux.com')
-      .replace('.m3u8', '/thumbnail.jpg?height=600');
-
+export default function VideoPlayer({
+  playbackId,
+  thumbnailTime,
+  autoPlayAndLoop,
+  title,
+  width,
+  height,
+  blurUpThumb,
+}) {
   return (
-    <video
-      playsInline
-      muted={autoPlay}
-      {...other}
-      ref={ref}
-      poster={poster}
-      style={{ display: 'block' }}
+    <MuxPlayer
+      loading="page"
+      streamType="on-demand"
+      playbackId={playbackId}
+      autoPlay={autoPlayAndLoop ? 'muted' : false}
+      loop={autoPlayAndLoop}
+      accentColor="#ff593d"
+      title={title}
+      placeholder={blurUpThumb}
+      style={{
+        aspectRatio: width && height ? `${width} / ${height}` : undefined,
+      }}
+      thumbnailTime={thumbnailTime || 0}
     />
   );
 }

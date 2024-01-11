@@ -6,6 +6,10 @@
   max-width: 750px;
   margin: 0 auto;
 
+  > *:first-child {
+    margin-top: 0;
+  }
+
   a {
     color: inherit;
     word-wrap: break-word;
@@ -61,7 +65,7 @@
   table {
     width: 100%;
     margin: 1em 0;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-family: var(--font-sans);
     line-height: 1.1;
 
@@ -144,8 +148,13 @@
   img {
     border-radius: 5px;
     overflow: hidden;
-    display: inline-block;
+    display: block;
     box-shadow: var(--box-shadow);
+  }
+
+  .framelessResponsiveImage {
+    overflow: hidden;
+    display: inline-block;
   }
 
   iframe {
@@ -155,7 +164,9 @@
 
   .videoWrapper {
     overflow: hidden;
-    video {
+
+    video,
+    mux-player {
       display: block;
     }
   }

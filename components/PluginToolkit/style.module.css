@@ -90,18 +90,19 @@
   border-radius: 5px;
   box-shadow: var(--box-shadow);
   overflow: hidden;
+  width: 600px;
 
   &:first-child:last-child {
     margin-right: 0px;
   }
 
-  > * {
-    display: block !important;
-  }
-
   svg {
     height: 40vh !important;
     width: auto !important;
+  }
+
+  mux-player {
+    display: block;
   }
 }
 

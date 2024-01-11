@@ -1,18 +1,17 @@
-import { generatePaths, generateProps } from 'lib/appQueries';
-import { renderMetaTags } from 'react-datocms';
-import Head from 'components/Head';
-import PostContent from 'components/PostContent';
-import docPageStyles from 'pages/docs/pageStyle.module.css';
-import Layout from 'components/MarketplaceLayout';
 import Button from 'components/Button';
-import { Image as DatoImage } from 'react-datocms';
+import Head from 'components/Head';
+import Layout from 'components/MarketplaceLayout';
 import { LogoImage } from 'components/PluginBox';
 import {
-  PluginInfo,
   Info,
   NameWithGravatar,
   PluginDetails,
+  PluginInfo,
 } from 'components/PluginToolkit';
+import PostContent from 'components/PostContent';
+import { generatePaths, generateProps } from 'lib/appQueries';
+import docPageStyles from 'pages/docs/pageStyle.module.css';
+import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 
 export const getStaticPaths = generatePaths('allHostingApps');
 export const getStaticProps = generateProps('hostingApp');
@@ -26,11 +25,7 @@ export default function EnterpriseApp({ page, preview }) {
         title={page.title}
         description={page.description}
         gallery={page.gallery.map((image) => (
-          <DatoImage
-            key={image.id}
-            explicitWidth
-            data={image.responsiveImage}
-          />
+          <DatoImage key={image.id} data={image.responsiveImage} />
         ))}
         content={
           <PostContent content={page && page.content} style={docPageStyles} />

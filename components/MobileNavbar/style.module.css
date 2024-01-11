@@ -190,18 +190,18 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.learnResource {
+.resource {
   text-decoration: none;
   font-size: 17px;
   display: block;
   color: black;
 }
 
-.learnResourceTitle {
+.resourceTitle {
   margin-bottom: 5px;
 }
 
-.learnResourceDesc {
+.resourceDesc {
   font-size: 14px;
   color: var(--light-body-color);
 }

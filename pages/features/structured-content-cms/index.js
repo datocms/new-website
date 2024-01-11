@@ -1,29 +1,27 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Button from 'components/Button';
+import CodeExcerpt from 'components/CodeExcerpt';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import {
-  imageFields,
-  reviewFields,
-  gqlStaticProps,
-  seoMetaTagsFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import RealtimeUpdatesDemo from 'components/RealtimeUpdatesDemo';
-import TitleStripWithContent from 'components/TitleStripWithContent';
-import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import VideoPlayer from 'components/VideoPlayer';
-import Button from 'components/Button';
-import s from './style.module.css';
-import CodeExcerpt from 'components/CodeExcerpt';
-import Space from 'components/Space';
-import InterstitialTitle from 'components/InterstitialTitle';
 import IntegrationsBanner from 'components/IntegrationsBanner';
+import InterstitialTitle from 'components/InterstitialTitle';
+import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Quote from 'components/Quote';
+import Space from 'components/Space';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import VideoPlayer from 'components/VideoPlayer';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -118,9 +116,8 @@ function StructuredText({ feature, preview, integrations, review }) {
         >
           <div className={s.video}>
             <VideoPlayer
-              controls
-              muted
-              src="https://stream.mux.com/FcwaLceO4tvoUKflRIt0176Lli5llFLwW.m3u8"
+              autoPlayAndLoop
+              playbackId="FcwaLceO4tvoUKflRIt0176Lli5llFLwW"
               title="Notion headless CMS"
             />
           </div>
