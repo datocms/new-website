@@ -1,5 +1,5 @@
-import { Image as DatoImage } from 'react-datocms';
 import Zoomable from 'components/Zoomable';
+import { Image as DatoImage } from 'react-datocms';
 
 export default function ImageFigure({ data, imageClassName, alt, title }) {
   return (
@@ -37,7 +37,7 @@ export default function ImageFigure({ data, imageClassName, alt, title }) {
         <Zoomable
           content={
             data.zoomableResponsiveImage &&
-            data.width > 900 && (
+            data.width > 1100 && (
               <DatoImage
                 className={imageClassName}
                 data={data.zoomableResponsiveImage}
