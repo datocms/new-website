@@ -1,4 +1,4 @@
-import { buildClient } from '@datocms/cma-client-node';
+import { buildClient } from '@datocms/cma-client';
 import got from 'got';
 import { JSDOM } from 'jsdom';
 import { findPermalink } from './links';
