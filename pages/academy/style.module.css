@@ -4,6 +4,12 @@
   grid-template-columns: 1fr 1fr;
   margin: rfs(80px);
   align-items: center;
+
+  --dotBaseUnit: 40px;
+
+  @media screen and (width > 800px) {
+    --dotBaseUnit: 70px;
+  }
 }
 
 .course:nth-child(odd) {
@@ -14,13 +20,24 @@
 
 .courseImage {
   flex: 1;
+  position: relative;
+}
 
-  &:before {
-    content: '';
-    display: block;
-    background: var(--light-bg-color);
-    height: 400px;
-    border-radius: 30px;
+.dot {
+  position: absolute;
+  border-radius: 1000px;
+  animation: move 2s infinite alternate ease-in-out;
+  z-index: -1;
+  background: linear-gradient(#c3f4fa, #9be0e8);
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(15px);
   }
 }
 

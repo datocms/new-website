@@ -250,7 +250,7 @@ export default function Academy({ subscription, preview }) {
             </div>
           </div>
         </div>
-        <div className={s.body}>
+        <div className={s.body} id="main-content">
           <PostContent content={chapter.content} />
 
           <PrevNext

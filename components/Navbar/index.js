@@ -383,11 +383,11 @@ export default function Navbar() {
                           href="/product-updates"
                         />
 
-                        {/* <TitleDesc
+                        <TitleDesc
                           title="Academy"
                           description="Deep dive into the concepts around headless"
                           href="/academy"
-                        /> */}
+                        />
                       </div>
                     </div>
                     <div className={s.section}>

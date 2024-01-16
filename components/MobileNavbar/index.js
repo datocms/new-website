@@ -239,11 +239,11 @@ export default function Navbar() {
                       href="/product-updates"
                     />
 
-                    {/* <Resource
+                    <Resource
                       title="Academy"
                       description="Deep dive into the concepts around headless"
                       href="/academy"
-                    /> */}
+                    />
 
                     <Resource
                       title="Community forum"

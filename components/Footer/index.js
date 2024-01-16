@@ -203,7 +203,12 @@ export default function Footer({ noCta }) {
                       <Link href="/support">
                         <a>Support</a>
                       </Link>
-                    </div>{' '}
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/academy">
+                        <a>Academy</a>
+                      </Link>
+                    </div>
                     <div className={s.groupLink}>
                       <Link href="/glossary">
                         <a>Glossary</a>
