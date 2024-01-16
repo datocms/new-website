@@ -75,7 +75,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             ... on InternalVideoRecord {
               id
               _modelApiKey
-              autoplay
               thumbTimeSeconds
               video {
                 title

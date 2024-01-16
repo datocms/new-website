@@ -255,7 +255,6 @@ export const getStaticProps = handleErrors(async function ({
               ... on InternalVideoRecord {
                 id
                 _modelApiKey
-                autoplay
                 thumbTimeSeconds
                 video {
                   title

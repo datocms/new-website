@@ -54,7 +54,6 @@ function renderBlock(s, block, defaultAltForImages) {
             <div className={s.videoWrapper}>
               <VideoPlayer
                 title={block.video.title}
-                autoPlayAndLoop={block.autoplay}
                 playbackId={block.video.video.playbackId}
                 blurUpThumb={block.video.blurUpThumb}
                 width={block.video.width}
