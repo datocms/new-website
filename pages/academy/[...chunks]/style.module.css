@@ -1,0 +1,181 @@
+@media (max-width: 1200px) {
+  .tocWrapper {
+    margin: 0 auto 50px;
+    background: linear-gradient(45deg, #fefae4, white);
+    padding: 30px var(--page-margin);
+    font-size: 15px;
+  }
+
+  .toc {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1201px) {
+  .contentWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tocWrapper {
+    margin-right: 100px;
+    max-width: 350px;
+    font-size: 15px;
+  }
+
+  .toc {
+    position: sticky;
+    left: 0;
+    top: 100px;
+    padding: 20px 0 20px 20px;
+    border-left: 10px solid #ff593d;
+  }
+}
+
+@media (min-width: 1800px) {
+  .contentWrapper {
+    display: block;
+  }
+
+  .tocWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    max-width: 420px;
+  }
+
+  .toc {
+    padding-left: 50px;
+  }
+}
+
+.tocChapters {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.2;
+
+  > li {
+    width: 100%;
+    margin-bottom: 10px;
+
+    > a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.activeTocChapter {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.tocTitle {
+  color: var(--light-body-color);
+  margin-bottom: 15px;
+  font-size: 23px;
+  letter-spacing: -0.06em;
+  font-weight: bold;
+}
+
+.tocFooter {
+  border-top: 1px solid var(--border-color);
+  margin-top: 20px;
+  padding-top: 20px;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--base-body-color);
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.tocChapterSections {
+  margin: 15px 0;
+  padding: 0;
+  list-style-type: none;
+
+  @media (min-width: 1800px) {
+    margin: 15px 0 15px 20px;
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.tocChapterSection {
+  margin-bottom: 4px;
+  font-size: 15px;
+  > a {
+    color: var(--light-body-color);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.body {
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+
+  @media (min-width: 1800px) {
+    max-width: 950px;
+    margin: 0 auto;
+  }
+}
+
+.prevNext {
+  color: var(--light-body-color);
+
+  @media (min-width: 750px) {
+    display: flex;
+  }
+}
+
+.prev,
+.next {
+  flex: 1;
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: inherit;
+    color: var(--base-body-color);
+  }
+}
+
+.next {
+  text-align: right;
+  margin-top: 20px;
+
+  @media (min-width: 750px) {
+    margin-top: 0;
+  }
+}

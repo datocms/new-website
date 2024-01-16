@@ -16,6 +16,7 @@
   "dependencies": {
     "@mailerlite/mailerlite-nodejs": "^1.2.0",
     "@mozilla/readability": "^0.4.1",
+    "@mux/mux-player-react": "^2.3.1",
     "@next/bundle-analyzer": "^11.1.2",
     "@rehooks/component-size": "^1.0.3",
     "@rollbar/react": "^0.8.0",
@@ -44,7 +45,6 @@
     "got": "^10.7.0",
     "graphql": "^15.5.0",
     "gray-matter": "^4.0.3",
-    "hls.js": "^1.0.7",
     "html-react-parser": "^1.2.6",
     "http-proxy": "^1.18.1",
     "http-status": "^1.7.3",
@@ -54,6 +54,7 @@
     "json-schema-ref-parser": "^9.0.9",
     "keyword-highlighter": "^1.0.6",
     "lodash-es": "^4.17.21",
+    "lodash.get": "*",
     "match-sorter": "^6.3.1",
     "min-md5": "^1.0.0",
     "next": "^12.0.0",

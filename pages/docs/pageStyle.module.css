@@ -201,7 +201,8 @@
 
   .videoWrapper {
     overflow: hidden;
-    video {
+    video,
+    mux-player {
       display: block;
     }
   }

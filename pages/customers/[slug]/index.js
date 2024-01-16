@@ -79,6 +79,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             ... on ImageRecord {
               id
               _modelApiKey
+              frameless
               image {
                 format
                 width
@@ -121,10 +122,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 title
                 width
                 height
+                blurUpThumb
                 video {
-                  duration
-                  streamingUrl
-                  thumbnailUrl
+                  playbackId: muxPlaybackId
                 }
               }
             }

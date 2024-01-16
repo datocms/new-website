@@ -1,10 +1,10 @@
-import { Fragment } from 'react';
-import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
-import PluginSdkHook from 'components/PluginSdkHook';
-import ReactUiExample from 'components/ReactUiExample';
-import PostContent from 'components/PostContent';
-import s from 'pages/docs/pageStyle.module.css';
 import cn from 'classnames';
+import PluginSdkHook from 'components/PluginSdkHook';
+import PostContent from 'components/PostContent';
+import ReactUiExample from 'components/ReactUiExample';
+import s from 'pages/docs/pageStyle.module.css';
+import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
+import { Fragment } from 'react';
 import { StructuredText } from 'react-datocms';
 
 export default function DocPageContent({ additionalData, ...props }) {

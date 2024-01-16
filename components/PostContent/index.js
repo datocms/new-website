@@ -53,14 +53,13 @@ function renderBlock(s, block, defaultAltForImages) {
           <figure>
             <div className={s.videoWrapper}>
               <VideoPlayer
-                controls
-                autoPlay={block.autoplay}
-                src={block.video.video.streamingUrl}
-                poster={`${block.video.video.thumbnailUrl}?time=${
-                  block.thumbTimeSeconds !== null
-                    ? block.thumbTimeSeconds
-                    : block.video.video.duration / 2
-                }`}
+                title={block.video.title}
+                autoPlayAndLoop={block.autoplay}
+                playbackId={block.video.video.playbackId}
+                blurUpThumb={block.video.blurUpThumb}
+                width={block.video.width}
+                height={block.video.height}
+                thumbnailTime={block.video.video.thumbnailUrl}
               />
             </div>
             {block.video.title && <figcaption>{block.video.title}</figcaption>}
@@ -259,7 +258,9 @@ function renderBlock(s, block, defaultAltForImages) {
           }
         >
           <ImageFigure
-            imageClassName={s.responsiveImage}
+            imageClassName={
+              block.frameless ? s.framelessResponsiveImage : s.responsiveImage
+            }
             data={block.image}
             alt={responsiveImage?.alt || alt || defaultAltForImages}
             title={responsiveImage?.title || title}

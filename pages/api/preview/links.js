@@ -3,8 +3,14 @@
 
 import { request } from '../../../lib/datocms';
 
-const findPermalink = async ({ item, itemType }) => {
-  switch (itemType.attributes.api_key) {
+export const findPermalink = async ({ item, itemTypeApiKey }) => {
+  switch (itemTypeApiKey) {
+    case 'home_page':
+      return '/';
+    case 'team_page':
+      return item.slug === 'enterprise-headless-cms'
+        ? '/enterprise-headless-cms'
+        : `/team/${item.attributes.slug}`;
     case 'blog_post':
       return `/blog/${item.attributes.slug}`;
     case 'landing_page':
@@ -13,8 +19,6 @@ const findPermalink = async ({ item, itemType }) => {
       return `/product-updates/${item.attributes.slug}`;
     case 'feature':
       return `/features/${item.attributes.slug}`;
-    case 'team_page':
-      return `/team/${item.attributes.slug}`;
     case 'template_demo':
       return `/marketplace/starters/${item.attributes.code}`;
     case 'partner':
@@ -39,6 +43,42 @@ const findPermalink = async ({ item, itemType }) => {
 
       return `/partners/${partner.slug}/showcase/${item.attributes.slug}`;
     }
+    case 'academy_course': {
+      const {
+        data: {
+          academyCourse: { chapters },
+        },
+      } = await request({
+        query: `
+          query AcademyCourse($id: ItemId!) {
+            academyCourse(filter: {id: {eq: $id}}) {
+              chapters { slug }
+            }
+          }`,
+        variables: { id: item.id },
+        preview: true,
+      });
+
+      return `/academy/${item.attributes.slug}/${chapters[0].slug}`;
+    }
+    case 'academy_chapter': {
+      const {
+        data: { chapter },
+      } = await request({
+        query: `
+          query AcademyChapter($id: ItemId!) {
+            chapter: academyChapter(filter: {id: {eq: $id}}) {
+              courses: _allReferencingAcademyCourses {
+                slug
+              }
+            }
+          }`,
+        variables: { id: item.id },
+        preview: true,
+      });
+
+      return `/academy/${chapter.courses[0].slug}/${item.attributes.slug}`;
+    }
     default:
       return null;
   }
@@ -60,7 +100,7 @@ const handler = async (req, res) => {
 
   const permalink = await findPermalink({
     item,
-    itemType,
+    itemTypeApiKey: itemType.attributes.api_key,
     locale,
   });
 

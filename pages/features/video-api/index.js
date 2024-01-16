@@ -1,19 +1,17 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import VideoPlayer from 'components/VideoPlayer';
+import Layout from 'components/Layout';
 import TitleStripWithContent from 'components/TitleStripWithContent';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Ill4 from 'public/images/illustrations/dato-svg-2a-01.svg';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import VideoPlayer from 'components/VideoPlayer';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
 
-import s from './style.module.css';
 import { range } from 'range';
+import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -74,13 +72,9 @@ function VideoStreamingEncoding({ feature, preview }) {
         >
           <div className={s.video}>
             <VideoPlayer
-              controls
-              autoPlay
-              src="https://stream.mux.com/goGuGfWk00LaymzN28ox44TAz00xOxea8i.m3u8"
+              autoPlayAndLoop
+              playbackId="goGuGfWk00LaymzN28ox44TAz00xOxea8i"
               title={keyword}
-              description="DatoCMS video API allows you to make your videos immediately streamable"
-              tag={keyword}
-              translate="no"
             />
           </div>
         </TitleStripWithContent>

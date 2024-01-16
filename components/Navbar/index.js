@@ -1,25 +1,24 @@
-import Wrapper from 'components/Wrapper';
-import FullLogo from 'public/images/full_logo.svg';
-import Link from 'next/link';
-import s from './style.module.css';
-import classnames from 'classnames';
+import { default as classnames, default as cn } from 'classnames';
 import Button from 'components/Button';
-import { useState, useEffect } from 'react';
-import { getCookie } from 'utils/cookies';
-import cn from 'classnames';
+import Wrapper from 'components/Wrapper';
+import Link from 'next/link';
+import FullLogo from 'public/images/full_logo.svg';
+import ContentCreators from 'public/images/illustrations/content-editors2.svg';
+import Developers from 'public/images/illustrations/developers-2.svg';
+import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
 import Cdn from 'public/images/illustrations/global-cdn-2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import Image from 'public/images/illustrations/image-api.svg';
-import Video from 'public/images/illustrations/video-encoding.svg';
-import Languages from 'public/images/illustrations/multilanguage-2.svg';
-import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
-import Developers from 'public/images/illustrations/developers-2.svg';
-import Marketers from 'public/images/illustrations/marketers.svg';
-import Workflows from 'public/images/illustrations/workflows.svg';
-import ContentCreators from 'public/images/illustrations/content-editors2.svg';
 import RealTime from 'public/images/illustrations/live-31.svg';
 import DataIntegrity from 'public/images/illustrations/lock2.svg';
+import Marketers from 'public/images/illustrations/marketers.svg';
+import Languages from 'public/images/illustrations/multilanguage-2.svg';
 import StructuredText from 'public/images/illustrations/scontent.svg';
+import Video from 'public/images/illustrations/video-encoding.svg';
+import Workflows from 'public/images/illustrations/workflows.svg';
+import { useEffect, useState } from 'react';
+import { getCookie } from 'utils/cookies';
+import s from './style.module.css';
 
 import External from 'public/icons/regular/external-link.svg';
 
@@ -383,6 +382,12 @@ export default function Navbar() {
                           description="Changelog for new features and improvements"
                           href="/product-updates"
                         />
+
+                        {/* <TitleDesc
+                          title="Academy"
+                          description="Deep dive into the concepts around headless"
+                          href="/academy"
+                        /> */}
                       </div>
                     </div>
                     <div className={s.section}>

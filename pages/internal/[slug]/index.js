@@ -1,20 +1,21 @@
-import Layout from 'components/Layout';
-import Hero from 'components/Hero';
-import Wrapper from 'components/Wrapper';
-import Highlight from 'components/Highlight';
 import Head from 'components/Head';
-import s from './style.module.css';
+import Hero from 'components/Hero';
+import Highlight from 'components/Highlight';
+import Layout from 'components/Layout';
+import Wrapper from 'components/Wrapper';
 import {
-  allStaticRoutes as staticRoutes,
-  staticGeneratorsRoutes,
-  customerRoutes,
-  partnerRoutes,
+  academyRoutes,
   blogRoutes,
+  customerRoutes,
   docsRoutes,
   marketplaceRoutes,
+  partnerRoutes,
   productUpdatesRoutes,
   sitemapSlugs,
+  staticGeneratorsRoutes,
+  allStaticRoutes as staticRoutes,
 } from 'lib/routes';
+import s from './style.module.css';
 
 export const getStaticPaths = async () => {
   return {
@@ -46,6 +47,9 @@ export async function getStaticProps({ params: { slug } }) {
       break;
     case 'sitemap-product-updates':
       routes = await productUpdatesRoutes();
+      break;
+    case 'sitemap-academy':
+      routes = await academyRoutes();
       break;
     default:
       return { notFound: true };

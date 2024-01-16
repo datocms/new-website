@@ -20,8 +20,14 @@ body {
 }
 
 img,
-video {
+video,
+mux-player {
   max-width: 100%;
+}
+
+mux-player {
+  width: 100%;
+  display: block;
 }
 
 ::-moz-selection {

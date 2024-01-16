@@ -74,13 +74,14 @@ export const getStaticProps = gqlStaticProps(
         previewImage {
           format
           url
+          width
+          height
+          blurUpThumb
           responsiveImage(imgixParams: { auto: format, w: 850 }) {
             ...imageFields
           }
           video {
-            duration
-            streamingUrl
-            thumbnailUrl
+            playbackId: muxPlaybackId
           }
         }
         fieldTypes {
@@ -170,16 +171,14 @@ export default function Plugin({ plugin, preview }) {
           plugin.previewImage &&
           (plugin.previewImage.video ? (
             <VideoPlayer
-              controls
-              src={plugin.previewImage.video.streamingUrl}
-              poster={plugin.previewImage.video.thumbnailUrl}
+              playbackId={plugin.previewImage.video.playbackId}
+              blurUpThumb={plugin.previewImage.blurUpThumb}
+              width={plugin.previewImage.width}
+              height={plugin.previewImage.height}
             />
           ) : plugin.previewImage.format === 'gif' ? (
             <video
               poster={`${plugin.previewImage.url}?fm=jpg&fit=max&w=850`}
-              autoPlay
-              loop
-              muted
               className={s.previewImage}
             >
               <source
