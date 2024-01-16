@@ -1,9 +1,11 @@
-import { SiteClient } from 'datocms-client';
+import { buildClient } from '@datocms/cma-client-node';
 import got from 'got';
 import { JSDOM } from 'jsdom';
 import { findPermalink } from './links';
 
-const client = new SiteClient(process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN);
+const client = buildClient({
+  apiToken: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
+});
 
 // this "routing" function knows how to convert a DatoCMS record
 // into its slug and canonical URL within the website

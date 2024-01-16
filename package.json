@@ -103,7 +103,7 @@
   },
   "devDependencies": {
     "critters": "^0.0.14",
-    "datocms-client": "^3.4.11",
+    "@datocms/cma-client": "^3.1.1",
     "datocms-html-to-structured-text": "^1.1.3",
     "eslint": "^7.28.0",
     "eslint-config-next": "^11.0.0",
