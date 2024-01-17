@@ -3,6 +3,7 @@ import Head from 'components/Head';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
 import PostContent from 'components/PostContent';
+import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { isHeading } from 'datocms-structured-text-utils';
@@ -199,67 +200,69 @@ export default function Academy({ subscription, preview }) {
           {chapter.title}
         </InterstitialTitle>
       </Wrapper>
-      <div className={s.contentWrapper}>
-        <div className={s.tocWrapper}>
-          <div className={s.toc}>
-            <div className={s.tocTitle}>Course chapters</div>
-            <ul className={s.tocChapters}>
-              {allChapters.map((nthChapter) => {
-                const isActive = nthChapter.slug === chapter.slug;
+      <Space top={1}>
+        <div className={s.contentWrapper}>
+          <div className={s.tocWrapper}>
+            <div className={s.toc}>
+              <div className={s.tocTitle}>Course chapters</div>
+              <ul className={s.tocChapters}>
+                {allChapters.map((nthChapter) => {
+                  const isActive = nthChapter.slug === chapter.slug;
 
-                return (
-                  <li key={nthChapter.slug} className={s.tocChapter}>
-                    <ActiveLink
-                      href={`/academy/${course.slug}/${nthChapter.slug}`}
-                      activeClassName={s.activeTocChapter}
-                    >
-                      <a>{nthChapter.title}</a>
-                    </ActiveLink>
+                  return (
+                    <li key={nthChapter.slug} className={s.tocChapter}>
+                      <ActiveLink
+                        href={`/academy/${course.slug}/${nthChapter.slug}`}
+                        activeClassName={s.activeTocChapter}
+                      >
+                        <a>{nthChapter.title}</a>
+                      </ActiveLink>
 
-                    {isActive && sections.length > 0 && (
-                      <ul className={s.tocChapterSections}>
-                        {sections.map((section) => {
-                          console.log;
-                          return (
-                            <li
-                              key={section.url}
-                              className={s.tocChapterSection}
-                            >
-                              <Link href={section.url}>
-                                <a title={toPlainText(section.node)}>
-                                  {toPlainText(section.node)}
-                                </a>
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-            <div className={s.tocFooter}>
-              <p>
-                This <strong>{course.name}</strong> course is part of{' '}
-                <Link href="/academy">
-                  <a>DatoCMS Academy</a>
-                </Link>
-                , a deep dive into the concepts around headless.
-              </p>
+                      {isActive && sections.length > 0 && (
+                        <ul className={s.tocChapterSections}>
+                          {sections.map((section) => {
+                            console.log;
+                            return (
+                              <li
+                                key={section.url}
+                                className={s.tocChapterSection}
+                              >
+                                <Link href={section.url}>
+                                  <a title={toPlainText(section.node)}>
+                                    {toPlainText(section.node)}
+                                  </a>
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className={s.tocFooter}>
+                <p>
+                  This <strong>{course.name}</strong> course is part of{' '}
+                  <Link href="/academy">
+                    <a>DatoCMS Academy</a>
+                  </Link>
+                  , a deep dive into the concepts around headless.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={s.body} id="main-content">
-          <PostContent content={chapter.content} />
+          <div className={s.body} id="main-content">
+            <PostContent content={chapter.content} />
 
-          <PrevNext
-            course={course}
-            prevChapter={prevChapter}
-            nextChapter={nextChapter}
-          />
+            <PrevNext
+              course={course}
+              prevChapter={prevChapter}
+              nextChapter={nextChapter}
+            />
+          </div>
         </div>
-      </div>
+      </Space>
     </Layout>
   );
 }

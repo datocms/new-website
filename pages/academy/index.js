@@ -4,6 +4,7 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
+import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
 import { gqlStaticPropsWithSubscription } from 'lib/datocms';
 import Link from 'next/link';
@@ -128,11 +129,13 @@ export default function Academy({ subscription, preview }) {
           }
           subtitle="Browse the DatoCMS Academy for a deep dive into the concepts around Headless CMS. Content APIs, and frontend frameworks, to get up to speed with headless content management"
         />
-        {courses
-          .filter((course) => course.chapters.length > 0)
-          .map((course) => (
-            <Course course={course} key={course.slug} />
-          ))}
+        <Space top={2} bottom={2}>
+          {courses
+            .filter((course) => course.chapters.length > 0)
+            .map((course) => (
+              <Course course={course} key={course.slug} />
+            ))}
+        </Space>
       </Wrapper>
     </Layout>
   );

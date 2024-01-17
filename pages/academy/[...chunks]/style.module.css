@@ -153,6 +153,7 @@
 
 .prevNext {
   color: var(--light-body-color);
+  margin-top: rfs(80px);
 
   @media (min-width: 750px) {
     display: flex;
@@ -168,6 +169,10 @@
     font-weight: bold;
     color: inherit;
     color: var(--base-body-color);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

@@ -1,13 +1,16 @@
 .course {
-  display: grid;
-  grid-gap: rfs(80px);
-  grid-template-columns: 1fr 1fr;
-  margin: rfs(80px);
-  align-items: center;
+  @media (max-width: 900px) {
+    text-align: center;
+    --dotBaseUnit: 20px;
+    margin-bottom: rfs(50px);
+  }
 
-  --dotBaseUnit: 40px;
-
-  @media screen and (width > 800px) {
+  @media (min-width: 901px) {
+    display: grid;
+    grid-gap: rfs(80px);
+    grid-template-columns: 1fr 1fr;
+    margin: rfs(80px);
+    align-items: center;
     --dotBaseUnit: 70px;
   }
 }
@@ -21,6 +24,11 @@
 .courseImage {
   flex: 1;
   position: relative;
+
+  @media (max-width: 900px) {
+    max-width: 200px;
+    margin: 0 auto 30px;
+  }
 }
 
 .dot {
@@ -46,10 +54,10 @@
 }
 
 .courseTitle {
-  font-size: 30px;
+  font-size: rfs(40px);
   font-weight: bold;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 
   a {
     color: inherit;
@@ -64,6 +72,7 @@
 .courseChapters {
   margin-top: 30px;
   color: var(--light-body-color);
+  font-size: 0.9em;
 
   a {
     color: inherit;
