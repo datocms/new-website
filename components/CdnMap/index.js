@@ -1,10 +1,10 @@
-import World from 'public/images/world.svg';
-import s from './style.module.css';
-import useSWR from 'swr';
-import wretch from 'wretch';
 import cn from 'classnames';
 import Wrapper from 'components/Wrapper';
-import { useCallback, useState, useEffect } from 'react';
+import World from 'public/images/world.svg';
+import { useCallback, useEffect, useState } from 'react';
+import useSWR from 'swr';
+import wretch from 'wretch';
+import s from './style.module.css';
 
 const fetcher = (url) => wretch(url).get().json();
 
@@ -157,7 +157,7 @@ export default function CdnMap() {
                 >
                   <div className={s.code}>{dc.code}</div>
                   <div className={s.city}>
-                    {dc.name.split(/ \- /)[0]}, {dc.group}
+                    {dc.name.split(/ \- /)[0]}, {dc.billing_region}
                   </div>
                   <div className={s.infos}>
                     <div className={s.info}>
