@@ -1,17 +1,17 @@
+import Head from 'components/Head';
+import Hero from 'components/Hero';
+import Highlight, { highlightStructuredText } from 'components/Highlight';
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
-import Highlight, { highlightStructuredText } from 'components/Highlight';
-import Hero from 'components/Hero';
-import Link from 'next/link';
-import Head from 'components/Head';
-import { Image as DatoImage } from 'react-datocms';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
-import Masonry from 'react-masonry-css';
 import {
   gqlStaticPropsWithSubscription,
   imageFields,
   reviewFields,
 } from 'lib/datocms';
+import Link from 'next/link';
+import { Image as DatoImage } from 'react-datocms';
+import Masonry from 'react-masonry-css';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
@@ -20,24 +20,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
       ...reviewFields
       _updatedAt
     }
-    partner1: allPartners(first: 100) {
-      ...partnerQuote
-    }
-    partner2: allPartners(skip: 100, first: 100) {
-      ...partnerQuote
-    }
-    partner3: allPartners(skip: 200, first: 100) {
-      ...partnerQuote
-    }
-  }
-
-  ${reviewFields}
-  ${imageFields}
-
-  fragment partnerQuote on PartnerRecord {
-    name
-    slug
-    quotes {
+    allPartnerTestimonials(first: 100) {
       id
       quote {
         value
@@ -51,30 +34,26 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
           ...imageFields
         }
       }
+      partner {
+        name
+        slug
+      }
       _updatedAt
     }
   }
+
+  ${reviewFields}
+  ${imageFields}
 `);
 
 export default function Wall({ preview, subscription }) {
   const {
-    data: { partner1, partner2, partner3, allReviews },
+    data: { allPartnerTestimonials, allReviews },
   } = useQuerySubscription(subscription);
 
-  const allPartners = [...partner1, ...partner2, ...partner3];
-
-  const quotes = [
-    ...allPartners
-      .map((p) =>
-        p.quotes.map((q) => ({
-          ...q,
-          role: `${q.role} @ ${p.name}`,
-          link: `/partners/${p.slug}`,
-        })),
-      )
-      .flat(),
-    ...allReviews,
-  ].sort((a, b) => b._updatedAt.localeCompare(a._updatedAt));
+  const quotes = [...allPartnerTestimonials, ...allReviews].sort((a, b) =>
+    b._updatedAt.localeCompare(a._updatedAt),
+  );
 
   return (
     <Layout preview={preview}>
@@ -120,11 +99,13 @@ export default function Wall({ preview, subscription }) {
                     className={s.image}
                     data={quote.image.responsiveImage}
                   />
-                  {quote.link ? (
-                    <Link href={quote.link}>
+                  {quote.partner ? (
+                    <Link href={`/partners/${quote.partner.slug}`}>
                       <a className={s.authorRole}>
                         <div className={s.name}>{quote.name}</div>
-                        <div className={s.role}>{quote.role}</div>
+                        <div className={s.role}>
+                          {quote.role} @ {quote.partner.name}
+                        </div>
                       </a>
                     </Link>
                   ) : (
