@@ -19,6 +19,7 @@ export default function VideoPlayer({
       accentColor="#ff593d"
       title={title}
       placeholder={blurUpThumb}
+      disableCookies={true}
       style={{
         aspectRatio: width && height ? `${width} / ${height}` : undefined,
       }}
