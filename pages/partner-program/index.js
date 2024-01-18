@@ -1,20 +1,20 @@
-import Layout from 'components/Layout';
+import AgencyForm from 'components/AgencyForm';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight, { highlightStructuredText } from 'components/Highlight';
-import Head from 'components/Head';
-import Space from 'components/Space';
-import Wrapper from 'components/Wrapper';
-import s from './style.module.css';
 import InterstitialTitle from 'components/InterstitialTitle';
-import AgencyForm from 'components/AgencyForm';
-import TitleStripWithContent from 'components/TitleStripWithContent';
-import Link from 'next/link';
+import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
-import LazyImage from '../../components/LazyImage';
+import Space from 'components/Space';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import Wrapper from 'components/Wrapper';
+import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { gqlStaticPropsWithSubscription, imageFields } from 'lib/datocms';
+import Link from 'next/link';
 import { Image as DatoImage } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
-import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
+import LazyImage from '../../components/LazyImage';
+import s from './style.module.css';
 
 function Benefit({ title, children }) {
   return (
@@ -43,31 +43,25 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         ...partner
       }
     }
-    allPartners(first: 100) {
-      name
-      slug
-      quotes {
-        id
-        quote {
-          value
-        }
-        role
-        name
-        image {
-          responsiveImage(
-            imgixParams: {
-              w: 300
-              h: 300
-              fit: crop
-              crop: faces
-              auto: format
-            }
-          ) {
-            ...imageFields
-          }
-        }
-        _updatedAt
+    allPartnerTestimonials(first: 100) {
+      id
+      quote {
+        value
       }
+      role
+      name
+      image {
+        responsiveImage(
+          imgixParams: { w: 300, h: 300, fit: crop, crop: faces, auto: format }
+        ) {
+          ...imageFields
+        }
+      }
+      partner {
+        slug
+        name
+      }
+      _updatedAt
     }
   }
 
@@ -83,13 +77,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
 `);
 export default function Agencies({ subscription }) {
   const {
-    data: { partnersPage, allPartners },
+    data: { partnersPage, allPartnerTestimonials },
   } = useQuerySubscription(subscription);
 
-  const quotes = allPartners.flatMap((partner) =>
-    partner.quotes
-      .filter((quote) => toPlainText(quote.quote).length < 230)
-      .map((quote) => ({ ...quote, partner })),
+  const quotes = allPartnerTestimonials.filter(
+    (quote) => toPlainText(quote.quote).length < 230,
   );
 
   return (
@@ -143,20 +135,11 @@ export default function Agencies({ subscription }) {
                         className={s.image}
                         data={quote.image.responsiveImage}
                       />
-                      {quote.link ? (
-                        <Link href={quote.link}>
-                          <a className={s.authorRole}>
-                            <div className={s.name}>{quote.name}</div>
-                            <div className={s.role}>{quote.role}</div>
-                          </a>
-                        </Link>
-                      ) : (
-                        <div className={s.authorRole}>
-                          <div className={s.name}>{quote.name}</div>
-                          <div className={s.role}>{quote.role}</div>
-                          <div className={s.role}>{quote.partner.name}</div>
-                        </div>
-                      )}
+                      <div className={s.authorRole}>
+                        <div className={s.name}>{quote.name}</div>
+                        <div className={s.role}>{quote.role}</div>
+                        <div className={s.role}>{quote.partner.name}</div>
+                      </div>
                     </div>
                   </a>
                 </Link>
