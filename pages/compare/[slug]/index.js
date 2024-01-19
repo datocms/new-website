@@ -1,5 +1,5 @@
+import Button from 'components/Button';
 import Head from 'components/Head';
-import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
@@ -9,6 +9,7 @@ import Space from 'components/Space';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Wrapper from 'components/Wrapper';
 
+import Checks from 'components/Checks';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
@@ -23,6 +24,7 @@ import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import React from 'react';
+
 import { StructuredText } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
@@ -105,15 +107,27 @@ export default function ProductComparison({ subscription, preview }) {
   return (
     <Layout preview={preview}>
       <Head seo={page.seo} slug={page.slug} />
-      <Hero
-        kicker="Product Comparison"
-        title={
-          <>
-            Why choose DatoCMS vs <Highlight>{page.product}?</Highlight>
-          </>
-        }
-        subtitle="Our customers choose DatoCMS for its convenient scalability, unparalled developer experience, and Wordpress-like editing interface"
-      />
+
+      <Wrapper>
+        <div className={s.hero}>
+          <div className={s.heroBody}>
+            <h1 className={s.heroTitle}>
+              When to choose DatoCMS vs <Highlight>{page.product}?</Highlight>
+            </h1>
+            <div className={s.heroSubtitle}>
+              Our customers choose DatoCMS for its convenient scalability,
+              unparalled developer experience, and Wordpress-like editing
+              interface
+            </div>
+            <Checks checks={['No credit card', 'Easy setup']}>
+              <Button as="a" href="https://dashboard.datocms.com/signup">
+                Try it now for free!
+              </Button>
+            </Checks>
+          </div>
+          <img src="/images/product.png" alt="DatoCMS editing interface" />
+        </div>
+      </Wrapper>
 
       <LogosBar
         title="We power experiences for over half a billion users"

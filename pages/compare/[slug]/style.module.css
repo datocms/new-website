@@ -1,3 +1,46 @@
+.hero {
+  padding: rfs(80px) 0;
+}
+
+.heroTitle {
+  font-family: var(--font-headline);
+  font-size: rfs(70px);
+  margin: 0;
+  font-weight: bold;
+  margin-bottom: rfs(40px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+@media screen and (width <= 1000px) {
+  .hero {
+    text-align: center;
+
+    > img {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .heroBody {
+      margin-bottom: rfs(80px);
+    }
+  }
+}
+
+@media screen and (width > 1000px) {
+  .hero {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 50px;
+    grid-auto-columns: 1fr;
+    align-items: center;
+  }
+}
+
+.heroSubtitle {
+  margin-bottom: rfs(20px);
+}
+
 .whyDifferent {
   display: flex;
   flex-direction: column;
