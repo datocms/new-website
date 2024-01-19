@@ -51,7 +51,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         }
       }
     }
-    allPartnerTestimonials(first: 100) {
+    allPartnerTestimonials(first: 10) {
       ...partnerTestimonialFields
       _updatedAt
     }

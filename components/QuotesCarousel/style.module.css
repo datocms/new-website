@@ -2,6 +2,7 @@
   overflow: hidden;
   position: relative;
   display: flex;
+  justify-content: center;
 }
 
 .root {
@@ -23,6 +24,30 @@
     font-size: rfs(150px);
     line-height: 0.3;
     transform: translateX(-50%);
+  }
+}
+
+.quotes:not(.quotesAnimated) {
+  .root:nth-child(n + 2) {
+    display: none;
+  }
+
+  @media screen and (width > 900px) {
+    .root:nth-child(2) {
+      display: block;
+    }
+  }
+
+  @media screen and (width > 1350px) {
+    .root:nth-child(3) {
+      display: block;
+    }
+  }
+
+  @media screen and (width > 1800px) {
+    .root:nth-child(4) {
+      display: block;
+    }
   }
 }
 
@@ -92,15 +117,19 @@ a.authorRole:hover .name {
   position: relative;
 }
 
-.quotesInnerAnimated {
-  animation: cambio calc(10s * var(--items-count)) infinite linear;
+.quotesAnimated {
+  justify-content: start;
 
-  @media screen and (width > 900px) {
-    animation-duration: calc(6s * var(--items-count));
-  }
+  .quotesInner {
+    animation: cambio calc(10s * var(--items-count)) infinite linear;
 
-  &:hover {
-    animation-play-state: paused;
+    @media screen and (width > 900px) {
+      animation-duration: calc(6s * var(--items-count));
+    }
+
+    &:hover {
+      animation-play-state: paused;
+    }
   }
 }
 

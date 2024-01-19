@@ -7,11 +7,12 @@ import s from './style.module.css';
 
 export default function QuotesCarousel({ quotes, animated }) {
   return (
-    <div className={s.quotes} style={{ '--items-count': quotes.length }}>
-      <div
-        className={classNames(s.quotesInner, animated && s.quotesInnerAnimated)}
-      >
-        {times(quotes.length / 4 > 1 ? 2 : 3).map((repeat) =>
+    <div
+      className={classNames(s.quotes, animated && s.quotesAnimated)}
+      style={{ '--items-count': quotes.length }}
+    >
+      <div className={s.quotesInner}>
+        {times(animated ? (quotes.length / 4 > 1 ? 2 : 3) : 1).map((repeat) =>
           quotes.map((quote) => {
             return (
               <MaybeLink
