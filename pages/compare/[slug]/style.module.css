@@ -18,6 +18,18 @@
   text-align: center;
 }
 
+.topicTake {
+  font-size: rfs(17px);
+
+  a {
+    color: inherit;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
 @media screen and (width <= 700px) {
   .topicsHeading {
     display: none;
@@ -28,6 +40,14 @@
   }
 
   .topicTake {
+    margin-bottom: rfs(25px);
+    padding: rfs(30px);
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    color: var(--base-body-color);
+    text-align: center;
+
     &:first-child {
       margin-right: 10vw;
     }
@@ -59,7 +79,7 @@
       rgba(255, 255, 255, 1) 60%,
       rgba(255, 255, 255, 0)
     );
-    padding-bottom: rfs(80px);
+    padding-bottom: rfs(50px);
 
     @media screen and (width > 1125px) {
       top: 90px;
@@ -83,14 +103,40 @@
     span {
       padding: rfs(20px) rfs(30px);
       font-weight: bold;
-      font-size: rfs(30px);
+      font-size: rfs(25px);
       letter-spacing: -0.03em;
       background: linear-gradient(45deg, #f9ecfe, #fefae4);
       border-radius: 10px;
     }
   }
 
-  .topicDifference,
+  .topicDifferences {
+    padding: rfs(30px);
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    color: var(--base-body-color);
+  }
+
+  .topicDifference {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-gap: 50px;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px 0;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
   .topicLines {
     display: grid;
     grid-auto-flow: column;
@@ -130,7 +176,7 @@
 
 .topicName {
   font-size: rfs(20px);
-  margin-bottom: rfs(30px);
+  margin-bottom: rfs(25px);
   padding-top: rfs(60px);
   font-weight: bold;
   text-transform: uppercase;
@@ -139,28 +185,6 @@
 
   @media screen and (width > 700px) {
     color: var(--extra-light-body-color);
-  }
-}
-
-.topicTake {
-  margin-bottom: rfs(25px);
-  padding: rfs(30px);
-  background: white;
-  border-radius: 10px;
-  box-shadow: var(--box-shadow);
-  color: var(--base-body-color);
-  text-align: center;
-
-  a {
-    color: inherit;
-  }
-
-  > *:first-child {
-    margin-top: 0;
-  }
-
-  > *:last-child {
-    margin-bottom: 0;
   }
 }
 
