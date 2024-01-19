@@ -58,7 +58,7 @@ function renderBlock(s, block, defaultAltForImages) {
                 blurUpThumb={block.video.blurUpThumb}
                 width={block.video.width}
                 height={block.video.height}
-                thumbnailTime={block.video.video.thumbnailUrl}
+                thumbnailTime={block.thumbTimeSeconds}
               />
             </div>
             {block.video.title && <figcaption>{block.video.title}</figcaption>}
