@@ -1,3 +1,10 @@
+.quotes {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
 .root {
   display: block;
   color: inherit;
@@ -64,13 +71,6 @@ a.authorRole:hover .name {
 
 .role {
   color: var(--light-body-color);
-}
-
-.quotes {
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  justify-content: center;
 }
 
 .quotesInner {

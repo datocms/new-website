@@ -105,34 +105,32 @@ export default function ProductComparison({ subscription, preview }) {
   return (
     <Layout preview={preview}>
       <Head seo={page.seo} slug={page.slug} />
-      <Wrapper>
-        <Hero
-          kicker="Product Comparison"
-          title={
-            <>
-              Why choose DatoCMS vs <Highlight>{page.product}?</Highlight>
-            </>
-          }
-          subtitle="Our customers choose DatoCMS for its convenient scalability, unparalled developer experience, and Wordpress-like editing interface"
-        />
-        <LogosBar
-          title="We power experiences for over half a billion users"
-          clients={[
-            <DeutscheTelekom key="DeutscheTelekom" />,
-            <Hashicorp key="Hashicorp" />,
-            <Verizon key="Verizon" />,
-            <Nike key="Nike" />,
-            <Vercel key="Vercel" />,
-          ]}
-        />
-      </Wrapper>
+      <Hero
+        kicker="Product Comparison"
+        title={
+          <>
+            Why choose DatoCMS vs <Highlight>{page.product}?</Highlight>
+          </>
+        }
+        subtitle="Our customers choose DatoCMS for its convenient scalability, unparalled developer experience, and Wordpress-like editing interface"
+      />
 
+      <LogosBar
+        title="We power experiences for over half a billion users"
+        clients={[
+          <DeutscheTelekom key="DeutscheTelekom" />,
+          <Hashicorp key="Hashicorp" />,
+          <Verizon key="Verizon" />,
+          <Nike key="Nike" />,
+          <Vercel key="Vercel" />,
+        ]}
+      />
       <div id="main-content">
         <Space top={1} bottom={2}>
           <TitleStripWithContent
             title={
               <>
-                DatoCMS&nbsp;vs.&nbsp;{page.product}:<br />
+                DatoCMS vs. {page.product}:<br />
                 <Highlight>How we&apos;re different</Highlight>
               </>
             }
@@ -163,8 +161,12 @@ export default function ProductComparison({ subscription, preview }) {
             <div className={s.topicsHeading}>
               <Wrapper>
                 <div className={s.topicsHeadingInner}>
-                  <div className={s.topicsHeadingTitle}>DatoCMS</div>
-                  <div className={s.topicsHeadingTitle}>Contentful</div>
+                  <div className={s.topicsHeadingTitle}>
+                    <span>DatoCMS</span>
+                  </div>
+                  <div className={s.topicsHeadingTitle}>
+                    <span>{page.product}</span>
+                  </div>
                 </div>
               </Wrapper>
             </div>
@@ -181,9 +183,13 @@ export default function ProductComparison({ subscription, preview }) {
                       {topic.differences.map((difference) => (
                         <div key={difference.id} className={s.topicDifference}>
                           <div className={s.topicTake}>
+                            <div className={s.topicTakeProduct}>DatoCMS...</div>
                             <StructuredText data={difference.datocmsTake} />
                           </div>
                           <div className={s.topicTake}>
+                            <div className={s.topicTakeProduct}>
+                              ...vs {page.product}
+                            </div>
                             <StructuredText data={difference.competitorTake} />
                           </div>
                         </div>
