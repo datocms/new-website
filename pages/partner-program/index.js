@@ -1,17 +1,21 @@
 import AgencyForm from 'components/AgencyForm';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
-import Highlight, { highlightStructuredText } from 'components/Highlight';
+import Highlight from 'components/Highlight';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
+import QuotesCarousel from 'components/QuotesCarousel';
 import Space from 'components/Space';
 import TitleStripWithContent from 'components/TitleStripWithContent';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import { gqlStaticPropsWithSubscription, imageFields } from 'lib/datocms';
+import {
+  gqlStaticPropsWithSubscription,
+  imageFields,
+  partnerTestimonialFields,
+} from 'lib/datocms';
 import Link from 'next/link';
-import { Image as DatoImage } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import LazyImage from '../../components/LazyImage';
 import s from './style.module.css';
@@ -40,40 +44,21 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   {
     partnersPage {
       highlightedPartners {
-        ...partner
+        name
+        slug
+        logo {
+          url
+        }
       }
     }
     allPartnerTestimonials(first: 100) {
-      id
-      quote {
-        value
-      }
-      role
-      name
-      image {
-        responsiveImage(
-          imgixParams: { w: 300, h: 300, fit: crop, crop: faces, auto: format }
-        ) {
-          ...imageFields
-        }
-      }
-      partner {
-        slug
-        name
-      }
+      ...partnerTestimonialFields
       _updatedAt
     }
   }
 
   ${imageFields}
-
-  fragment partner on PartnerRecord {
-    name
-    slug
-    logo {
-      url
-    }
-  }
+  ${partnerTestimonialFields}
 `);
 export default function Agencies({ subscription }) {
   const {
@@ -110,43 +95,22 @@ export default function Agencies({ subscription }) {
       <Space top={1} bottom={1}>
         <LogosBar
           title="+80 Agency Partners distributed in 45 countries"
-          clients={partnersPage.highlightedPartners.map((partner) => (
-            <Link
-              href={`/partners/${partner.slug}`}
-              key={partner.slug}
-              passHref
-            >
-              <LazyImage src={partner.logo.url} />
-            </Link>
-          ))}
+          clients={partnersPage.highlightedPartners
+            .slice(0, 7)
+            .map((partner) => (
+              <Link
+                href={`/partners/${partner.slug}`}
+                key={partner.slug}
+                passHref
+              >
+                <LazyImage src={partner.logo.url} />
+              </Link>
+            ))}
         />
 
-        <div className={s.quotes}>
-          <div className={s.quotesInner}>
-            {quotes.map((quote) => {
-              return (
-                <Link href={`/partners/${quote.partner.slug}`} key={quote.id}>
-                  <a className={s.root}>
-                    <div className={s.quote}>
-                      {highlightStructuredText(quote.quote)}
-                    </div>
-                    <div className={s.content}>
-                      <DatoImage
-                        className={s.image}
-                        data={quote.image.responsiveImage}
-                      />
-                      <div className={s.authorRole}>
-                        <div className={s.name}>{quote.name}</div>
-                        <div className={s.role}>{quote.role}</div>
-                        <div className={s.role}>{quote.partner.name}</div>
-                      </div>
-                    </div>
-                  </a>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+        <Space top={1} bottom={1}>
+          <QuotesCarousel quotes={quotes} animated={true} />
+        </Space>
       </Space>
 
       <TitleStripWithContent

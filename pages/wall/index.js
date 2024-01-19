@@ -6,6 +6,7 @@ import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPropsWithSubscription,
   imageFields,
+  partnerTestimonialFields,
   reviewFields,
 } from 'lib/datocms';
 import Link from 'next/link';
@@ -21,28 +22,13 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
       _updatedAt
     }
     allPartnerTestimonials(first: 100) {
-      id
-      quote {
-        value
-      }
-      role
-      name
-      image {
-        responsiveImage(
-          imgixParams: { w: 300, h: 300, fit: crop, crop: faces, auto: format }
-        ) {
-          ...imageFields
-        }
-      }
-      partner {
-        name
-        slug
-      }
+      ...partnerTestimonialFields
       _updatedAt
     }
   }
 
   ${reviewFields}
+  ${partnerTestimonialFields}
   ${imageFields}
 `);
 
