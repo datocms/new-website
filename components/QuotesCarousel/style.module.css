@@ -63,6 +63,7 @@
 .authorRole {
   text-decoration: none;
   color: inherit;
+  max-width: 240px;
 }
 
 a.authorRole:hover .name {
@@ -73,34 +74,43 @@ a.authorRole:hover .name {
   color: var(--light-body-color);
 }
 
+.company {
+  color: var(--light-body-color);
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.quote {
+  width: min(450px, 90vw);
+  padding: 0 30px;
+}
+
 .quotesInner {
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 10vh;
-  grid-auto-columns: minmax(350px, 420px);
+  display: flex;
   align-items: center;
   justify-items: center;
-  padding: 0 50px;
   position: relative;
 }
 
 .quotesInnerAnimated {
-  animation: cambio 55s infinite linear;
-  &:hover {
-    animation-play-state: paused;
+  animation: cambio calc(10s * var(--items-count)) infinite linear;
+
+  @media screen and (width > 900px) {
+    animation-duration: calc(6s * var(--items-count));
   }
 
-  @media (width < 700px) {
-    animation: cambio 35s infinite linear;
+  &:hover {
+    animation-play-state: paused;
   }
 }
 
 @keyframes cambio {
   from {
-    left: 0;
+    transform: translateX(0);
   }
   to {
-    left: -4500px;
+    transform: translateX(calc(min(450px, 90vw) * -1 * var(--items-count)));
   }
 }
 

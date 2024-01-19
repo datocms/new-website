@@ -150,7 +150,7 @@ export default function ProductComparison({ subscription, preview }) {
           <InterstitialTitle style="two">
             What our customers say
           </InterstitialTitle>
-          <QuotesCarousel quotes={page.testimonials} />
+          <QuotesCarousel quotes={page.testimonials} animated={true} />
         </Space>
 
         <Space top={1} bottom={2}>
