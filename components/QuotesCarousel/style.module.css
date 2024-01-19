@@ -2,7 +2,6 @@
   overflow: hidden;
   position: relative;
   display: flex;
-  justify-content: center;
 }
 
 .root {
