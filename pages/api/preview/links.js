@@ -120,7 +120,7 @@ const handler = async (req, res) => {
       ? [
           {
             label: 'Published version',
-            url: `https://${domain}${permalink}`,
+            url: `https://${domain}/api/preview/stop?slug=${permalink}`,
           },
         ]
       : []),
