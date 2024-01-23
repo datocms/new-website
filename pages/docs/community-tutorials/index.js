@@ -70,27 +70,27 @@ export default function Tutorials({ tutorials, roots }) {
 
           <div className={t.tutorials}>
             {tutorials.map((tutorial) =>
-              tutorial.res[0]._modelApiKey === 'youtube_video_resource' ? (
+              tutorial.res._modelApiKey === 'youtube_video_resource' ? (
                 <a
-                  href={tutorial.res[0].video.url}
-                  key={tutorial.res[0].video.url}
+                  href={tutorial.res.video.url}
+                  key={tutorial.res.video.url}
                   className={t.tutorial}
                 >
                   <div className={t.tutorialCover}>
-                    <img src={tutorial.res[0].video.thumbnailUrl} />
+                    <img src={tutorial.res.video.thumbnailUrl} />
                   </div>
                   <div className={t.tutorialTitle}>{tutorial.title}</div>
                 </a>
               ) : (
                 <a
-                  href={tutorial.res[0].url}
-                  key={tutorial.res[0].url}
+                  href={tutorial.res.url}
+                  key={tutorial.res.url}
                   className={t.tutorial}
                 >
                   <div className={t.tutorialCover}>
-                    {tutorial.res[0].coverImage && (
+                    {tutorial.res.coverImage && (
                       <DatoImage
-                        data={tutorial.res[0].coverImage.responsiveImage}
+                        data={tutorial.res.coverImage.responsiveImage}
                       />
                     )}
                   </div>

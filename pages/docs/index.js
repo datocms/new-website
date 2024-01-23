@@ -185,28 +185,26 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
         </h6>
         <div className={s.useCaseCards}>
           {tutorials.map((tutorial) =>
-            tutorial.res[0]._modelApiKey === 'youtube_video_resource' ? (
+            tutorial.res._modelApiKey === 'youtube_video_resource' ? (
               <a
-                href={tutorial.res[0].video.url}
-                key={tutorial.res[0].video.url}
+                href={tutorial.res.video.url}
+                key={tutorial.res.video.url}
                 className={s.videoCard}
               >
                 <div className={s.tutorialCover}>
-                  <img src={tutorial.res[0].video.thumbnailUrl} />
+                  <img src={tutorial.res.video.thumbnailUrl} />
                 </div>
                 <div className={s.videoCardTitle}>{tutorial.title}</div>
               </a>
             ) : (
               <a
-                href={tutorial.res[0].url}
-                key={tutorial.res[0].url}
+                href={tutorial.res.url}
+                key={tutorial.res.url}
                 className={s.videoCard}
               >
                 <div className={s.videoCardCover}>
-                  {tutorial.res[0].coverImage && (
-                    <DatoImage
-                      data={tutorial.res[0].coverImage.responsiveImage}
-                    />
+                  {tutorial.res.coverImage && (
+                    <DatoImage data={tutorial.res.coverImage.responsiveImage} />
                   )}
                 </div>
                 <div className={s.videoCardTitle}>{tutorial.title}</div>

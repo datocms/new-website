@@ -201,18 +201,18 @@ function renderBlock(s, block, defaultAltForImages) {
           >
             {block.tutorials.map((tutorial) => (
               <div key={tutorial.title} className={s.pluginBoxContainer}>
-                {tutorial.res[0]._modelApiKey === 'youtube_video_resource' ? (
+                {tutorial.res._modelApiKey === 'youtube_video_resource' ? (
                   <PluginBox
                     title={tutorial.title}
                     description="Play video »"
                     image={
                       <img
-                        alt={tutorial.res[0].video.alt}
+                        alt={tutorial.res.video.alt}
                         className={s.pluginBoxImage}
-                        src={tutorial.res[0].video.thumbnailUrl}
+                        src={tutorial.res.video.thumbnailUrl}
                       />
                     }
-                    href={tutorial.res[0].video.url}
+                    href={tutorial.res.video.url}
                   />
                 ) : (
                   <PluginBox
@@ -221,10 +221,10 @@ function renderBlock(s, block, defaultAltForImages) {
                     image={
                       <DatoImage
                         className={s.pluginBoxImage}
-                        data={tutorial.res[0].coverImage.responsiveImage}
+                        data={tutorial.res.coverImage.responsiveImage}
                       />
                     }
-                    href={tutorial.res[0].url}
+                    href={tutorial.res.url}
                   />
                 )}
               </div>
