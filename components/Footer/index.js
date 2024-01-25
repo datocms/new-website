@@ -286,6 +286,31 @@ export default function Footer({ noCta }) {
                     </div>
                   </div>
                 </div>
+                <div className={s.group}>
+                  <div className={s.groupTitle}>Compare DatoCMS</div>
+                  <div className={s.groupLinks}>
+                    <div className={s.groupLink}>
+                      <Link href="/compare/datocms-vs-contentful">
+                        <a className={s.extraLink}>vs Contentful</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/compare/datocms-vs-sanity">
+                        <a className={s.extraLink}>vs Sanity</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/compare/datocms-vs-storyblok">
+                        <a className={s.extraLink}>vs Storyblok</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/compare/datocms-vs-wordpress">
+                        <a className={s.extraLink}>vs Wordpress</a>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className={s.col}>
                 <div className={s.group}>

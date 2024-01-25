@@ -6,6 +6,7 @@ import Wrapper from 'components/Wrapper';
 import {
   academyRoutes,
   blogRoutes,
+  compareRoutes,
   customerRoutes,
   docsRoutes,
   marketplaceRoutes,
@@ -51,6 +52,9 @@ export async function getStaticProps({ params: { slug } }) {
     case 'sitemap-academy':
       routes = await academyRoutes();
       break;
+    case 'sitemap-compare':
+      routes = await compareRoutes();
+      break;
     default:
       return { notFound: true };
   }
@@ -77,12 +81,6 @@ function slugToReadable(slug) {
 
 export default function Sitemap({ routes, slug }) {
   const title = slug.replace('sitemap-', '').replace(/-|\//g, ' ');
-  const chunkSize = routes.length / 3;
-  let chunks = [];
-
-  for (let i = 0; i < routes.length; i += chunkSize) {
-    chunks = [...chunks, routes.slice(i, i + chunkSize)];
-  }
 
   return (
     <Layout preview={false}>
@@ -102,20 +100,14 @@ export default function Sitemap({ routes, slug }) {
         }
       />
       <Wrapper>
-        <div className={s.chunks}>
-          {chunks.map((chunk, index) => {
-            return (
-              <div className={s.chunk} key={`chunk_${index}`}>
-                {chunk.map((route) => {
-                  const pageTitle = slugToReadable(route);
+        <div className={s.routes}>
+          {routes.map((route) => {
+            const pageTitle = slugToReadable(route);
 
-                  return (
-                    <a className={s.sitemapLink} href={route} key={route}>
-                      {pageTitle}
-                    </a>
-                  );
-                })}
-              </div>
+            return (
+              <a className={s.sitemapLink} href={route} key={route}>
+                {pageTitle}
+              </a>
             );
           })}
         </div>

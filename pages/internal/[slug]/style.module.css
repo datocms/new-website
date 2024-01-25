@@ -5,13 +5,11 @@
   }
 }
 
-.chunk {
-  overflow: scroll;
+.routes {
   word-break: keep-all;
 
   @media (width > 800px) {
-    max-width: 30%;
-    overflow: none;
+    columns: 3;
   }
 }
 
