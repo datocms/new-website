@@ -116,8 +116,7 @@ export default function ProductComparison({ subscription, preview }) {
             </h1>
             <div className={s.heroSubtitle}>
               Our customers choose DatoCMS for its convenient scalability,
-              unparalled developer experience, and Wordpress-like editing
-              interface.
+              unparalled developer experience, and clean editing interface.
             </div>
             <Checks checks={['No credit card', 'Easy setup']}>
               <Button as="a" href="https://dashboard.datocms.com/signup">
