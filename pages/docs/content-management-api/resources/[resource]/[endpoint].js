@@ -209,7 +209,9 @@ export default function DocPage({
                       {description}
                     </DocDescription>
                   )}
-                  {link.hrefSchema && <HrefSchema schema={link.hrefSchema} />}
+                  {link.hrefSchema && (
+                    <HrefSchema schema={link.hrefSchema} language={language} />
+                  )}
                   {link.schema && (
                     <Schema
                       title="Body Parameters"

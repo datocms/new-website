@@ -6,6 +6,7 @@ import TimesIcon from 'public/icons/regular/times.svg';
 import React, { createContext, useContext, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from './style.module.css';
+import { stripQuotes } from '/utils/stripQuotes';
 
 const DefinitionContext = createContext(false);
 
@@ -54,6 +55,7 @@ export function JsonSchemaObject({
   depth,
   objectIsOptional,
   showProperties = 'all',
+  removeQuotes = false,
 }) {
   const isDefinition = useContext(DefinitionContext);
 
@@ -120,6 +122,7 @@ export function JsonSchemaObject({
               prefix={prefix}
               schema={property}
               depth={depth + 1}
+              removeQuotes={removeQuotes}
             />
           );
         })}
@@ -142,6 +145,7 @@ export function JsonSchemaObject({
                       prefix={prefix}
                       schema={property}
                       depth={depth + 1}
+                      removeQuotes={removeQuotes}
                     />
                   );
                 })}
@@ -357,6 +361,7 @@ export function JsonSchemaProperty({
   prefix,
   required,
   schema,
+  removeQuotes = false,
 }) {
   const [open, setOpen] = useState(false);
   const isDefinition = useContext(DefinitionContext);
@@ -395,7 +400,9 @@ export function JsonSchemaProperty({
                     {schema.examples.map((ex, i) => [
                       i > 0 && ', ',
                       <span className={s.type} key={i}>
-                        {JSON.stringify(ex)}
+                        {removeQuotes
+                          ? stripQuotes(JSON.stringify(ex))
+                          : JSON.stringify(ex)}
                       </span>,
                     ])}
                   </>
@@ -404,7 +411,9 @@ export function JsonSchemaProperty({
                   <>
                     &nbsp;&nbsp;<span className={s.example}>Example: </span>
                     <span className={s.type}>
-                      {JSON.stringify(schema.example)}
+                      {removeQuotes
+                        ? stripQuotes(JSON.stringify(schema.example))
+                        : JSON.stringify(schema.example)}
                     </span>
                   </>
                 ) : null
@@ -427,7 +436,11 @@ export function JsonSchemaProperty({
               label="object format"
               onToggle={setOpen}
             >
-              <JsonSchemaObject schema={schema} depth={depth} />
+              <JsonSchemaObject
+                schema={schema}
+                depth={depth}
+                removeQuotes={language && language === 'http'}
+              />
             </ExpandablePane>
           )}
           {toArray(schema.type).includes('object') && schema.patternProperties && (
@@ -439,6 +452,7 @@ export function JsonSchemaProperty({
               <JsonSchemaObjectWithPatternProperties
                 schema={schema}
                 depth={depth}
+                removeQuotes={language && language === 'http'}
               />
             </ExpandablePane>
           )}
@@ -465,7 +479,11 @@ export function JsonSchemaProperty({
                 onToggle={setOpen}
                 label="objects format inside array"
               >
-                <JsonSchemaObject schema={schema.items} depth={depth} />
+                <JsonSchemaObject
+                  schema={schema.items}
+                  depth={depth}
+                  removeQuotes={language && language === 'http'}
+                />
               </ExpandablePane>
             )}
         </div>
@@ -474,7 +492,7 @@ export function JsonSchemaProperty({
   );
 }
 
-export function HrefSchema({ schema }) {
+export function HrefSchema({ schema, language }) {
   if (!schema.properties) {
     return null;
   }
@@ -483,7 +501,12 @@ export function HrefSchema({ schema }) {
     <>
       <h2>Query parameters</h2>
       <div>
-        <JsonSchemaObject depth={0} schema={schema} />
+        {/* We don't want quote marks around HTTP query parameters, because that would break our params */}
+        <JsonSchemaObject
+          depth={0}
+          schema={schema}
+          removeQuotes={language && language === 'http'}
+        />
       </div>
     </>
   );
