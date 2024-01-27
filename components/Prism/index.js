@@ -6,19 +6,26 @@ import s from './style.module.css';
 import { range } from 'range';
 import { useMemo } from 'react';
 
+const modifiedStyles = [
+  {
+    types: ['comment'],
+    style: {
+      color: '#98c6e7',
+      fontStyle: 'italic',
+    },
+  },
+  {
+    types: ['header-name'],
+    languages: ['http'],
+    style: {
+      color: 'rgb(130, 170, 255)',
+    },
+  },
+];
+
 const modifiedTheme = {
   ...theme,
-  styles: theme.styles.map((style) =>
-    style.types.includes('comment')
-      ? {
-          types: ['comment'],
-          style: {
-            color: '#98c6e7',
-            fontStyle: 'italic',
-          },
-        }
-      : style,
-  ),
+  styles: [...theme.styles, ...modifiedStyles],
 };
 
 const Prism = ({ code, language, showLineNumbers, highlightLines = [] }) => {
