@@ -5,8 +5,12 @@ Disallow:/slack
 Disallow:/support
 
 User-agent: DatoCmsSearchBot
+Disallow:/legal/
+Disallow:/contact
+Disallow:/slack
+Disallow:/support
 Disallow:/pricing/compare
-Disallow:/marketplace/plugins/
+Disallow:/marketplace/plugins
 
 User-agent: *
 Disallow:/legal/
