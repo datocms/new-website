@@ -12,5 +12,6 @@ Disallow:/support
 
 User-Agent: DatoCmsSearchBot
 Disallow: /pricing/compare
+Disallow: /marketplace/plugins/
 
 Sitemap: https://www.datocms.com/sitemap.xml
