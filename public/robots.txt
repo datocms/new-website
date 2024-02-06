@@ -4,14 +4,14 @@ Disallow:/contact
 Disallow:/slack
 Disallow:/support
 
+User-agent: DatoCmsSearchBot
+Disallow:/pricing/compare
+Disallow:/marketplace/plugins/
+
 User-agent: *
 Disallow:/legal/
 Disallow:/contact
 Disallow:/slack
 Disallow:/support
-
-User-Agent: DatoCmsSearchBot
-Disallow: /pricing/compare
-Disallow: /marketplace/plugins/
 
 Sitemap: https://www.datocms.com/sitemap.xml
