@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Schema from 'public/images/illustrations/dynamic-layouts.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import GettingStarted from 'public/images/illustrations/marketers.svg';
-import Gatsby from 'public/images/logos/gatsbyjs.svg';
 import Next from 'public/images/logos/next.svg';
 import Nuxt from 'public/images/logos/nuxt.svg';
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
