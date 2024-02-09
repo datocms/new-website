@@ -153,20 +153,13 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
           </Link>
         </div>
 
-        <h6 className={s.introTitle}>Popular integrations (9)</h6>
+        <h6 className={s.introTitle}>Popular integrations</h6>
         <div className={s.useCaseCards}>
           <Link href="/docs/next-js">
             <a className={s.useCaseCard}>
               <Next />
               <div className={s.useCaseCardTitle}>Next.js</div>
               <p>Learn how to integrate your Next.js website with DatoCMS</p>
-            </a>
-          </Link>
-          <Link href="/docs/gatsby">
-            <a className={s.useCaseCard}>
-              <Gatsby />
-              <div className={s.useCaseCardTitle}>Gatsby</div>
-              <p>Learn how to integrate your Gatsby website with DatoCMS</p>
             </a>
           </Link>
           <Link href="/docs/nuxt">
