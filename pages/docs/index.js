@@ -8,6 +8,7 @@ import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import GettingStarted from 'public/images/illustrations/marketers.svg';
 import Next from 'public/images/logos/next.svg';
 import Nuxt from 'public/images/logos/nuxt.svg';
+import Svelte from 'public/images/logos/svelte.svg';
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import s from './style.module.css';
 
@@ -166,6 +167,13 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
               <Nuxt />
               <div className={s.useCaseCardTitle}>Nuxt</div>
               <p>Learn how to integrate your Nuxt website with DatoCMS</p>
+            </a>
+          </Link>
+          <Link href="/docs/svelte">
+            <a className={s.useCaseCard}>
+              <Svelte />
+              <div className={s.useCaseCardTitle}>Svelte</div>
+              <p>Learn how to integrate your Svelte website with DatoCMS</p>
             </a>
           </Link>
         </div>
