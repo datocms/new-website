@@ -6,9 +6,9 @@ import Link from 'next/link';
 import Schema from 'public/images/illustrations/dynamic-layouts.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import GettingStarted from 'public/images/illustrations/marketers.svg';
-import Gatsby from 'public/images/logos/gatsbyjs.svg';
 import Next from 'public/images/logos/next.svg';
 import Nuxt from 'public/images/logos/nuxt.svg';
+import Svelte from 'public/images/logos/svelte.svg';
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import s from './style.module.css';
 
@@ -153,7 +153,7 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
           </Link>
         </div>
 
-        <h6 className={s.introTitle}>Popular integrations (9)</h6>
+        <h6 className={s.introTitle}>Popular integrations</h6>
         <div className={s.useCaseCards}>
           <Link href="/docs/next-js">
             <a className={s.useCaseCard}>
@@ -162,18 +162,18 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
               <p>Learn how to integrate your Next.js website with DatoCMS</p>
             </a>
           </Link>
-          <Link href="/docs/gatsby">
-            <a className={s.useCaseCard}>
-              <Gatsby />
-              <div className={s.useCaseCardTitle}>Gatsby</div>
-              <p>Learn how to integrate your Gatsby website with DatoCMS</p>
-            </a>
-          </Link>
           <Link href="/docs/nuxt">
             <a className={s.useCaseCard}>
               <Nuxt />
               <div className={s.useCaseCardTitle}>Nuxt</div>
               <p>Learn how to integrate your Nuxt website with DatoCMS</p>
+            </a>
+          </Link>
+          <Link href="/docs/svelte">
+            <a className={s.useCaseCard}>
+              <Svelte />
+              <div className={s.useCaseCardTitle}>Svelte</div>
+              <p>Learn how to integrate your Svelte website with DatoCMS</p>
             </a>
           </Link>
         </div>
