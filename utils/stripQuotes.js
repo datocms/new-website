@@ -8,7 +8,7 @@ export const stripQuotes = (inputString) => {
     inputString.startsWith('"') &&
     inputString.endsWith('"')
   ) {
-    return inputString.substring(1, inputString.length - 1);
+    return inputString.slice(1, -1);
   }
   return inputString;
 };
