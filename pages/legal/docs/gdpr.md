@@ -80,22 +80,6 @@ The information is:
 
 [Pipedrive GDPR Compliance](https://www.pipedrive.com/en/privacy)
 
-### Hubspot
-
-When you submit a contact form or when you become a paying customer we create a record on our marketing platform, Hubspot.
-
-We only collect the information that you provide or that is publicly available online.
-
-The information is:
-
-- email,
-- first name,
-- last name,
-- company,
-- any additional information that you provide on the contact form.
-
-[Hubspot GDPR Compliance](https://www.hubspot.com/data-privacy/gdpr)
-
 ### Fatture in Cloud
 
 Our company needs to send certified digital invoices to our Italian customers and to
@@ -130,16 +114,16 @@ Underlying Front, we use Google workspace to send and receive email and to book 
 
 [Google GDPR Compliance](https://cloud.google.com/privacy/gdpr)
 
-### Mailchimp
+### MailerLite
 
-If you opt to sign up for our newsletter, we register you on our Mailchimp
+If you opt to sign up for our newsletter, we register you on our MailerLite
 account, supplying them with:
 
 - email,
 - first name,
 - last name.
 
-[Mailchimp GDPR Compliance announcement](https://mailchimp.com/help/about-the-general-data-protection-regulation/)
+[MailerLite GDPR Compliance announcement](https://www.mailerlite.com/gdpr-compliance)
 
 ### Rollbar
 
@@ -153,11 +137,21 @@ We use AppSignal to compute performance metrics on API calls in order to find an
 
 [AppSignal GDPR compliance](https://docs.appsignal.com/appsignal/gdpr.html)
 
-### Logtail by Better Stack
+### PostHog
 
-We need to keep logs to understand how our services are used, debug errors and improve performance. To manage and analyse server logs we use Logtail.
+To better understand the product usage, we send to PostHog certain user actions performed in the CMS and website.
 
-[Better Stack DPA](https://betterstack.com/dpa)
+The information that we send are:
+
+- email,
+- first name,
+- last name,
+- company,
+- action performed,
+- device information,
+- IP address.
+
+[PostHog GDPR Compliance](https://posthog.com/handbook/company/security#gdpr)
 
 ## Legal basis
 
@@ -204,4 +198,4 @@ Please contact us (at the address below) if you want to do any of the above.
 If you have any doubts, or wish to exercise your rights (as listed above),
 please send us an email here: [support@datocms.com](mailto:support@datocms.com)
 
-Latest update: February 24, 2023
+Latest update: February 1, 2024
