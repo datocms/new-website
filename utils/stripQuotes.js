@@ -4,7 +4,7 @@
 export const stripQuotes = (inputString) => {
   if (
     inputString &&
-    typeof inputString === 'string' &&
+    typeof inputString === 'string' && // in case an obj, etc. is passed (because we're not using TypeScript)
     inputString.startsWith('"') &&
     inputString.endsWith('"')
   ) {

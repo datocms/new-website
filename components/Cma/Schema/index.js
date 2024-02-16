@@ -452,7 +452,6 @@ export function JsonSchemaProperty({
               <JsonSchemaObjectWithPatternProperties
                 schema={schema}
                 depth={depth}
-                removeQuotes={language && language === 'http'}
               />
             </ExpandablePane>
           )}
