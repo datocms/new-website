@@ -86,7 +86,9 @@ const RequestResponse = ({ title, description, chunks, startExpanded }) => {
 
           <div className={s.chunk}>
             {activeChunk.description && (
-              <div className={s.description}>{activeChunk.description}</div>
+              <ReactMarkdown className={s.description} remarkPlugins={[gfm]}>
+                {activeChunk.description}
+              </ReactMarkdown>
             )}
             {activeChunk.code && (
               <Prism code={activeChunk.code} language={activeChunk.language} />
