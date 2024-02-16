@@ -174,7 +174,7 @@ export default function Academy({ subscription, preview }) {
 
   const sections = filter(
     chapter.content.value.document,
-    (node) => isHeading(node) && node.level < 5,
+    (node) => isHeading(node) && node.level < 4,
   ).map((heading) => {
     const slug = slugify(toPlainText(heading));
     return {
