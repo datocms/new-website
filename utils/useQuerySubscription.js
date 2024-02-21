@@ -8,12 +8,8 @@ export function useQuerySubscription(config) {
       fetch(baseUrl, {
         headers: {
           ...headers,
-          ...(process.env.VERCEL_ENV === 'preview'
-            ? {
-                'X-Visual-Editing': 'vercel-v1',
-                'X-Base-Editing-Url': 'https://cms.datocms.com',
-              }
-            : {}),
+          'X-Visual-Editing': 'vercel-v1',
+          'X-Base-Editing-Url': 'https://cms.datocms.com',
         },
         method,
         body,
