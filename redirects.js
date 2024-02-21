@@ -358,4 +358,12 @@ module.exports = [
     source: '/pricing/compare',
     destination: '/pricing',
   },
+  {
+    source: '/docs/content-management-api/rate-limits',
+    destination: '/docs/content-management-api/technical-limits',
+  },
+  {
+    source: '/docs/content-delivery-api/rate-limiting',
+    destination: '/docs/content-delivery-api/technical-limits',
+  },
 ];
