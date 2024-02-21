@@ -21,12 +21,10 @@ import {
 import Link from 'next/link';
 import s from 'pages/docs/pageStyle.module.css';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
-import { StructuredText, renderMetaTags } from 'react-datocms';
 import { fetchPluginSdkHooks } from 'utils/fetchPluginSdk';
 import fetchReactUiExamples from 'utils/fetchReactUiExamples';
 import filter from 'utils/filterNodes';
 import slugify from 'utils/slugify';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticPaths = gqlStaticPaths(
   `
