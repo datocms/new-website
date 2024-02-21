@@ -4,7 +4,7 @@ const fetcher = (baseUrl, { headers, method, body }) => {
   return fetch(baseUrl, {
     headers: {
       ...headers,
-      ...(process.env.VERCEL_ENV === 'preview'
+      ...(process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
         ? {
             'X-Visual-Editing': 'vercel-v1',
             'X-Base-Editing-Url': 'https://cms.datocms.com',
