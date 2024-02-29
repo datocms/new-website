@@ -19,7 +19,7 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
-import Nike from 'public/images/logos/nike.svg';
+import LittleCaesars from 'public/images/logos/new/little-caesars.svg';
 import Polestar from 'public/images/logos/polestar.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
@@ -134,7 +134,7 @@ export default function ProductComparison({ subscription, preview }) {
           <Polestar key="Polestar" />,
           <Hashicorp key="Hashicorp" />,
           <Verizon key="Verizon" />,
-          <Nike key="Nike" />,
+          <LittleCaesars key="LittleCaesars" />,
           <Vercel key="Vercel" />,
         ]}
       />

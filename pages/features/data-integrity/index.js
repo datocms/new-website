@@ -19,7 +19,7 @@ import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Verizon from 'public/images/logos/verizon.svg';
-import Nike from 'public/images/logos/nike.svg';
+import Polestar from 'public/images/logos/polestar.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import LogosBar from 'components/LogosBar';
 import SandboxEnvironmentsDemo from 'components/SandboxEnvironmentsDemo';
@@ -269,7 +269,7 @@ function Validations({ page, preview, review }) {
               <DeutscheTelekom key="DeutscheTelekom" />,
               <Hashicorp key="Hashicorp" />,
               <Verizon key="Verizon" />,
-              <Nike key="Nike" />,
+              <Polestar key="Polestar" />,
               <Vercel key="Vercel" />,
             ]}
           />

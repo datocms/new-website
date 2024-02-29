@@ -37,7 +37,6 @@ import CloseIcon from 'public/icons/regular/times-circle.svg';
 import AnnouncementIcon from 'public/images/illustrations/marketers.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
-import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import { useEffect, useState } from 'react';
@@ -45,6 +44,7 @@ import { renderMetaTags, StructuredText } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import formatNumber from 'utils/formatNumber';
 import s from './style.module.css';
+import Polestar from 'public/images/logos/polestar.svg';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
@@ -719,7 +719,7 @@ export default function Pricing({
             <DeutscheTelekom key="DeutscheTelekom" />,
             <Hashicorp key="Hashicorp" />,
             <Verizon key="Verizon" />,
-            <Nike key="Nike" />,
+            <Polestar key="Polestar" />,
             <Vercel key="Vercel" />,
           ]}
         />

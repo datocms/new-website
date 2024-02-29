@@ -25,7 +25,6 @@ import LittleCaesars from 'public/images/logos/new/little-caesars.svg';
 import Mit from 'public/images/logos/new/mit.svg';
 import Nhs from 'public/images/logos/new/nhs.svg';
 import Oberlo from 'public/images/logos/new/oberlo.svg';
-import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 
@@ -99,7 +98,6 @@ function Enterprise({ page, review1, review2, review3 }) {
             <DeutscheTelekom key="DeutscheTelekom" />,
             <Hashicorp key="Hashicorp" />,
             <Verizon key="Verizon" />,
-            <Nike key="Nike" />,
             <Vercel key="Vercel" />,
             <Linkedin key="Linkedin" />,
             <Oberlo key="Oberlo" />,

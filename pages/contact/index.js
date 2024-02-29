@@ -7,7 +7,7 @@ import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
-import Nike from 'public/images/logos/nike.svg';
+import Polestar from 'public/images/logos/polestar.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import s from './style.module.css';
@@ -73,7 +73,7 @@ export default function Support() {
           <DeutscheTelekom key="DeutscheTelekom" />,
           <Hashicorp key="Hashicorp" />,
           <Verizon key="Verizon" />,
-          <Nike key="Nike" />,
+          <Polestar key="Polestar" />,
           <Vercel key="Vercel" />,
         ]}
       />
