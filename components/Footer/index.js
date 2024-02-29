@@ -305,13 +305,13 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/compare/datocms-vs-wordpress">
-                        <a className={s.extraLink}>vs Wordpress</a>
+                      <Link href="/compare/datocms-vs-strapi">
+                        <a className={s.extraLink}>vs Strapi</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/compare/datocms-vs-strapi">
-                        <a className={s.extraLink}>vs Strapi</a>
+                      <Link href="/compare/datocms-vs-wordpress">
+                        <a className={s.extraLink}>vs Wordpress</a>
                       </Link>
                     </div>
                   </div>
