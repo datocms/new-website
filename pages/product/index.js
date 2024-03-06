@@ -50,6 +50,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         value
       }
       pillars {
+        id
         theme
         pillarCallout
         title {
@@ -105,12 +106,13 @@ export default function Wall({ preview, subscription }) {
       {productOverview.pillars.map((pillar, index) => {
         return (
           <Flag
+            key={pillar.id}
             kicker={pillar.theme}
             title={
               <>
                 {/* <LayerIcon /> */}
                 {highlightStructuredText(pillar.title, {
-                  highlightWith: ({ children }) => {
+                  highlightWith: function BadHighlight({ children }) {
                     return (
                       <FlagHighlight style="bad">{children}</FlagHighlight>
                     );
@@ -134,9 +136,9 @@ export default function Wall({ preview, subscription }) {
               icon={SuccessIcon}
               largeBullet
               bullets={[
-                <StructuredText data={pillar.capability1} />,
-                <StructuredText data={pillar.capability2} />,
-                <StructuredText data={pillar.capability3} />,
+                <StructuredText key={pillar.id} data={pillar.capability1} />,
+                <StructuredText key={pillar.id} data={pillar.capability2} />,
+                <StructuredText key={pillar.id} data={pillar.capability3} />,
               ]}
             />
           </Flag>
