@@ -3,6 +3,24 @@
   list-style-type: none;
 }
 
+.largeBullet {
+  align-items: center;
+  font-size: 17px;
+  list-style: none;
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (width > 650px) {
+    display: flex;
+    align-items: flex-start;
+
+    span {
+      flex: 1;
+    }
+  }
+}
+
 .bullet {
   margin-bottom: 12px;
   align-items: center;
