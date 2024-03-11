@@ -13,6 +13,8 @@ export const findPermalink = async ({ item, itemTypeApiKey }) => {
         : `/team/${item.attributes.slug}`;
     case 'product_comparison':
       return `/compare/${item.attributes.slug}`;
+    case 'success_story':
+      return `/customers/${item.attributes.slug}`;
     case 'blog_post':
       return `/blog/${item.attributes.slug}`;
     case 'landing_page':
