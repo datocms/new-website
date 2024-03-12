@@ -157,7 +157,6 @@ export default function Footer({ noCta }) {
                     <Feature
                       title="Workflows"
                       keyword="Workflow CMS"
-                      isNew
                       href="/features/workflow-cms"
                       description="Supercharge your content approval process"
                     />
@@ -165,7 +164,6 @@ export default function Footer({ noCta }) {
                     <Feature
                       title="Real-time updates"
                       keyword="Real-time API"
-                      isNew
                       href="/features/real-time-api"
                       description="Live changes to content on production website"
                     />
@@ -173,7 +171,6 @@ export default function Footer({ noCta }) {
                     <Feature
                       title="Structured text"
                       keyword="Structured content CMS"
-                      isNew
                       href="/features/structured-content-cms"
                       description="Freedom for editors, control for developers"
                     />
