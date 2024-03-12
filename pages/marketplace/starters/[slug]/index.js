@@ -21,6 +21,7 @@ import {
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest, githubRepoToUrl } from 'utils/githubRepo';
+import { clean } from 'utils/stega';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -88,7 +89,7 @@ export const getStaticProps = handleErrors(
     }
 
     const { body } = await tiny.get({
-      url: githubRepoToManifest(page.githubRepo),
+      url: githubRepoToManifest(clean(page.githubRepo)),
     });
 
     return {

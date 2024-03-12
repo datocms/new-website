@@ -315,6 +315,7 @@ export default function Partners({ subscription, preview }) {
                   s.post,
                   countBySlug[post.slug] && s.postWithShowcasedProjects,
                 )}
+                data-vercel-edit-target
               >
                 <div
                   className={classNames(s.postLogo, styles[i % styles.length])}

@@ -53,7 +53,7 @@ export default function PluginBox({
   tag,
 }) {
   return (
-    <MaybeLink href={href} className={s.box}>
+    <MaybeLink href={href} className={s.box} data-vercel-edit-target>
       {tag && <div className={s.boxTag}>{tag}</div>}
       {image}
       <div className={s.boxBody}>
