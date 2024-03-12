@@ -1,19 +1,17 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import FieldSettings from 'components/FieldSettings';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import IntegrationsBanner from 'components/IntegrationsBanner';
+import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
 import ProjectSettings from 'components/ProjectSettings';
-import FieldSettings from 'components/FieldSettings';
 import TranslatedUI from 'components/TranslatedUI';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
-import Button from 'components/Button';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
 
 const icons = [
   '/images/flags/argentina.svg',
@@ -111,8 +109,8 @@ function MultiLanguage({ feature, preview }) {
               Add all the languages you&#39;d like to support in your app
             </strong>{' '}
             and start translating your content, with our user-friendly
-            multi-language interface. Dato headless CMS will deliver your
-            content to your net of projects, using the same{' '}
+            multi-language interface. DatoCMS will deliver your content to your
+            net of projects, using the same{' '}
             <strong>fast and scalable platform</strong>.
           </p>
         </Flag>
@@ -140,12 +138,11 @@ function MultiLanguage({ feature, preview }) {
           image={FieldSettings}
         >
           <p>
-            Dato headless CMS gives you a{' '}
-            <strong>great deal of customization</strong> for your multi-language
-            project. Specify which types of content need to be translated or
-            not, and in which languages, on a per-field level. Feel free to set
-            a field as localized, or change settings at any time, with{' '}
-            <strong>no complex data migrations</strong>.
+            DatoCMS gives you a <strong>great deal of customization</strong> for
+            your multi-language project. Specify which types of content need to
+            be translated or not, and in which languages, on a per-field level.
+            Feel free to set a field as localized, or change settings at any
+            time, with <strong>no complex data migrations</strong>.
           </p>
         </Flag>
 

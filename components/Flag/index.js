@@ -1,13 +1,12 @@
-import React from 'react';
-import Wrapper from 'components/Wrapper';
-import s from './style.module.css';
-import { useMemo, useState } from 'react';
-import LazyImage from 'components/LazyImage';
 import cn from 'classnames';
+import Heading from 'components/Heading';
+import LazyImage from 'components/LazyImage';
+import Wrapper from 'components/Wrapper';
+import React, { useMemo, useState } from 'react';
 import seedrandom from 'seedrandom';
 import { containsKeywords } from 'utils/containsKeyword';
 import slugify from 'utils/slugify';
-import Heading from 'components/Heading';
+import s from './style.module.css';
 
 export default function Flag({
   style = 'neutral',
@@ -50,7 +49,7 @@ export default function Flag({
     typeof image === 'string' ? (
       <LazyImage
         src={`/images/illustrations/${image}.svg`}
-        alt={kicker || `Dato headless CMS ${image}`}
+        alt={kicker || `Headless DatoCMS ${image}`}
       />
     ) : image ? (
       React.createElement(

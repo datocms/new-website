@@ -12,7 +12,7 @@ account on DatoCMS platform, you represent and warrant that: (i) you are 18 year
 of age or older; (ii) you have full legal authority to be bound as a Customer to
 this Agreement; (iii) you have read and understood this Agreement. If you do not
 fulfill the age requirements and/or if you do not have the legal authority to bind
-the Customer on whose behalf you are signing this agreement, you cannot use dato and
+the Customer on whose behalf you are signing this agreement, you cannot use DatoCMS and
 therefore, please, do not click “accept”.
 
 ### 1. Definitions and services

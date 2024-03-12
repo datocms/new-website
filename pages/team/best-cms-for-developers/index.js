@@ -1,28 +1,28 @@
-import Layout from 'components/Layout';
-import Link from 'next/link';
+import DatoIllustration from 'components/DatoIllustration';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import {
-  imageFields,
-  reviewFields,
-  gqlStaticProps,
-  seoMetaTagsFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import OtherPersonasPicker from 'components/OtherPersonasPicker';
-import DatoIllustration from 'components/DatoIllustration';
-import InterstitialTitle from 'components/InterstitialTitle';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import IntegrationsBanner from 'components/IntegrationsBanner';
-import Quote from 'components/Quote';
-import TitleStripWithContent from 'components/TitleStripWithContent';
-import Result from 'components/Result';
+import InterstitialTitle from 'components/InterstitialTitle';
+import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
-import Space from 'components/Space';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
-import Wonderland from 'public/images/logos/wonderland.svg';
+import OtherPersonasPicker from 'components/OtherPersonasPicker';
+import Quote from 'components/Quote';
+import Result from 'components/Result';
+import Space from 'components/Space';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
+import Link from 'next/link';
 import Chillys from 'public/images/logos/chillys.svg';
 import MatterSupply from 'public/images/logos/matter-supply.svg';
+import Wonderland from 'public/images/logos/wonderland.svg';
 import styles from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
@@ -203,7 +203,7 @@ function Developers({ integrations, preview, page, review }) {
 
         <TitleStripWithContent
           seoAnalysis={page.yoastAnalysis}
-          kicker="Dato CMS makes developers happy"
+          kicker="DatoCMS makes developers happy"
           title={<>Stop the madness, try&nbsp;headless</>}
         >
           <DatoIllustration />

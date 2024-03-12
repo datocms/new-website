@@ -1,29 +1,28 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Button from 'components/Button';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import {
-  imageFields,
-  reviewFields,
-  gqlStaticProps,
-  seoMetaTagsFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import Workflow from 'components/Workflow';
+import Layout from 'components/Layout';
+import LogosBar from 'components/LogosBar';
+import Space from 'components/Space';
 import TitleStripWithContent from 'components/TitleStripWithContent';
+import Workflow from 'components/Workflow';
 import WorkflowPermissions from 'components/WorkflowPermissions';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
+import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
 import Polestar from 'public/images/logos/polestar.svg';
 import Vercel from 'public/images/logos/vercel.svg';
-import LogosBar from 'components/LogosBar';
-import Button from 'components/Button';
-import Space from 'components/Space';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
-import Link from 'next/link';
+import Verizon from 'public/images/logos/verizon.svg';
 
 import s from './style.module.css';
 
@@ -61,7 +60,7 @@ function Workflows({ feature, preview, review }) {
           kicker={feature.seoH1}
           title={
             <>
-              <Highlight>Dato CMS supercharges</Highlight> your content approval
+              <Highlight>DatoCMS supercharges</Highlight> your content approval
               workflow
             </>
           }
@@ -69,8 +68,8 @@ function Workflows({ feature, preview, review }) {
             <>
               Stop spreading your <strong>editorial life-cycle</strong> around
               tens of different products.{' '}
-              <strong>Dato CMS Workflow feature</strong> concentrates all eyes
-              in one place.
+              <strong>DatoCMS Workflow feature</strong> concentrates all eyes in
+              one place.
             </>
           }
         />
@@ -103,7 +102,7 @@ function Workflows({ feature, preview, review }) {
 
           <Flag
             seoAnalysis={seoAnalysis}
-            kicker={`Manage workflow CMS`}
+            kicker="Manage workflows on CMS"
             style="good"
             title={
               <>
@@ -118,14 +117,14 @@ function Workflows({ feature, preview, review }) {
               content, and inefficient workflows. Organizations invest more in
               content,{' '}
               <strong>but their ROI remains lower due to friction</strong>, and
-              their content engines stall. Dato CMS{' '}
-              <strong>Workflow feature fixes all this</strong>.
+              their content engines stall. DatoCMS{' '}
+              <strong>Workflows fixes all this</strong>.
             </p>
           </Flag>
 
           <Flag
             seoAnalysis={seoAnalysis}
-            kicker={`CMS approval workflow`}
+            kicker="CMS approval workflow"
             style="good"
             title={
               <>
@@ -191,7 +190,7 @@ function Workflows({ feature, preview, review }) {
           <Flag
             style="good"
             seoAnalysis={seoAnalysis}
-            kicker={`The most user-friendly CMS`}
+            kicker="The most user-friendly CMS"
             title={
               <>
                 A complete set of{' '}

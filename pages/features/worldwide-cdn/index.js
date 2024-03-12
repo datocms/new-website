@@ -1,23 +1,22 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import CdnMap from 'components/CdnMap';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import {
-  imageFields,
-  reviewFields,
-  gqlStaticProps,
-  seoMetaTagsFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import CdnMap from 'components/CdnMap';
 import InterstitialTitle from 'components/InterstitialTitle';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Quote from 'components/Quote';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import Layout from 'components/Layout';
 import Numbers, { Block as NumbersBlock } from 'components/Numbers';
+import Quote from 'components/Quote';
 import Space from 'components/Space';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -91,10 +90,10 @@ function WorldwideCdn({ preview, review1, feature }) {
           image="space"
         >
           <p>
-            We built Dato <Link href="/">headless CMS</Link> content
-            infrastructure so you don’t have to. Focus on writing great content
-            and creating new, innovative digital experiences. We work every day
-            to offer the fastest performance and a{' '}
+            We built DatoCMS content infrastructure so you don’t have to. Focus
+            on writing great content and creating new, innovative digital
+            experiences. We work every day to offer the fastest performance and
+            a{' '}
             <strong>reliable solution capable of following your growth</strong>,
             globally, while letting you adapt along the journey, with{' '}
             <strong>no upfront costs</strong>.
@@ -170,7 +169,7 @@ function WorldwideCdn({ preview, review1, feature }) {
         <Flag
           style="good"
           seoAnalysis={seoAnalysis}
-          kicker="Is Dato the fastest headless CMS?"
+          kicker="Is DatoCMS the fastest headless CMS?"
           title={
             <>
               Obsessed by <FlagHighlight>Performance and speed</FlagHighlight>

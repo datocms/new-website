@@ -1,22 +1,21 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import {
-  imageFields,
-  reviewFields,
-  gqlStaticProps,
-  seoMetaTagsFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import ImgixTransformations from 'components/ImgixTransformations';
+import Layout from 'components/Layout';
 import ProgressiveImagesDemo from 'components/ProgressiveImagesDemo';
-import TitleStripWithContent from 'components/TitleStripWithContent';
 import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
-import Button from 'components/Button';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -122,7 +121,7 @@ function ImagesApi({ feature, preview, review }) {
             </>
           }
         >
-          <ProgressiveImagesDemo name={`with Dato API`} />
+          <ProgressiveImagesDemo name={`with DatoCMS API`} />
         </TitleStripWithContent>
 
         <Flag

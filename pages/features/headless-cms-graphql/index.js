@@ -306,7 +306,7 @@ function GraphQlContentApi({ feature, preview, review }) {
           style="good"
           seoAnalysis={seoAnalysis}
           kicker={`#1 ${keyword}`}
-          title={<>GraphQL + Dato headless CMS = 🚀 </>}
+          title="GraphQL + DatoCMS = 🚀"
           image="rocket"
         >
           <p>

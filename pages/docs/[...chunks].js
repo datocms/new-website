@@ -500,7 +500,7 @@ export default function DocPage({
 
   if (
     page._seoMetaTags.find(
-      // This is the Dato default title which is not descriptive enough for SEO
+      // This is the DatoCMS default title which is not descriptive enough for SEO
       (t) => t.tag === 'title' && t.content === `${pageTitle} - DatoCMS`,
     )
   ) {
