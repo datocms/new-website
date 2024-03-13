@@ -146,26 +146,26 @@ function VideoStreamingEncoding({ feature, preview }) {
           }
         >
           <p>
-            Rather than require you to use a proprietary player, we made it{' '}
-            <strong>
-              easy to integrate with all major web and mobile video players
-            </strong>
-            , open-source or professional, web or native. Check out what else we
-            can do thanks to{' '}
-            <a
-              href="https://mux.com/features/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Mux
+            We make it&nbsp;
+            <strong>easy to integrate with all major video players</strong>,
+            open-source or professional, web or native. Or, you can simply get
+            the&nbsp;<strong>DatoCMS Video Component</strong>&nbsp;for{' '}
+            <a href="https://www.datocms.com/docs/react/displaying-videos">
+              React
             </a>
+            ,<a href="https://www.datocms.com/docs/vue/display-videos">Vue</a>,
+            or{' '}
+            <a href="https://www.datocms.com/docs/svelte/displaying-videos">
+              Svelte
+            </a>
+            , all powered by the Mux Player.
           </p>
         </Flag>
 
         <Flag
           style="good"
           seoAnalysis={seoAnalysis}
-          kicker={`The best digital experience`}
+          kicker="The best digital experience"
           title={
             <>
               A complete set of{' '}
