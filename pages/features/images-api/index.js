@@ -64,9 +64,9 @@ function ImagesApi({ feature, preview, review }) {
       />
       <div id="main-content">
         <TitleStripWithContent
-          kicker={`Best API for images processing`}
+          kicker="Best API for images processing"
           seoAnalysis={seoAnalysis}
-          title={<>Endless image transformations at your service</>}
+          title="Endless image transformations at your service"
           subtitle={
             <>
               DatoCMS offers best-in-class API for{' '}
@@ -87,29 +87,28 @@ function ImagesApi({ feature, preview, review }) {
         <Flag
           style="good"
           seoAnalysis={seoAnalysis}
-          kicker={`Optimized images`}
+          kicker="Optimized images"
           title={
             <>
               Automatically serve{' '}
-              <FlagHighlight>
-                the&nbsp;best&nbsp;output&nbsp;format
-              </FlagHighlight>
+              <FlagHighlight>the&nbsp;best&nbsp;output</FlagHighlight>
             </>
           }
           image="key"
         >
           <p>
-            Thanks to <strong>DatoCMS automatic Content Negotiation</strong>,
-            you are able to serve WebP and other modern images formats to
-            browsers that support them without any additional work,{' '}
-            <strong>reducing the average file size by 50%</strong>.
+            Our&nbsp;<strong>Automatic Image Optimization</strong>
+            &nbsp;simplifies getting your images ready for the web. It&nbsp;
+            <strong>reduces the average file size by 50%</strong>&nbsp;and
+            preserves high quality, all with zero development effort on your
+            side.
           </p>
         </Flag>
 
         <TitleStripWithContent
-          kicker={`Images preview`}
+          kicker="Images preview"
           seoAnalysis={seoAnalysis}
-          title={<>State of the art for responsive and progressive images</>}
+          title="State of the art for responsive and progressive images"
           subtitle={
             <>
               Serving optimized images is incredibly hard, but using our GraphQL
@@ -121,13 +120,13 @@ function ImagesApi({ feature, preview, review }) {
             </>
           }
         >
-          <ProgressiveImagesDemo name={`with DatoCMS API`} />
+          <ProgressiveImagesDemo name="with DatoCMS API" />
         </TitleStripWithContent>
 
         <Flag
           style="good"
           seoAnalysis={seoAnalysis}
-          kicker={`Images Metadata`}
+          kicker="Images Metadata"
           title={
             <>
               All the <FlagHighlight>metadata</FlagHighlight> you need
@@ -147,7 +146,7 @@ function ImagesApi({ feature, preview, review }) {
         <Flag
           style="good"
           seoAnalysis={seoAnalysis}
-          kicker={`All the tools you need`}
+          kicker="All the tools you need"
           title={
             <>
               A complete set of{' '}
