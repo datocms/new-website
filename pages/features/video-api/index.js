@@ -153,7 +153,7 @@ function VideoStreamingEncoding({ feature, preview }) {
             <a href="https://www.datocms.com/docs/react/displaying-videos">
               React
             </a>
-            ,<a href="https://www.datocms.com/docs/vue/display-videos">Vue</a>,
+            , <a href="https://www.datocms.com/docs/vue/display-videos">Vue</a>,
             or{' '}
             <a href="https://www.datocms.com/docs/svelte/displaying-videos">
               Svelte
