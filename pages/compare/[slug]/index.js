@@ -86,6 +86,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             value
           }
         }
+        importer {
+          learnMoreSlug
+          header
+          description
+        }
       }
     }
 
@@ -234,6 +239,25 @@ export default function ProductComparison({ subscription, preview }) {
             </Wrapper>
           </div>
         </Space>
+        {page.importer && (
+          <Wrapper>
+            <div className={s.importer}>
+              <div className={s.importerTitle}>{page.importer.header}</div>
+
+              <div className={s.importerSubtitle}>
+                <p>{page.importer.description}</p>
+                <Button
+                  as="a"
+                  fs="small"
+                  p="small"
+                  href={`/docs/import-and-export/${page.importer.learnMoreSlug}`}
+                >
+                  Learn More
+                </Button>
+              </div>
+            </div>
+          </Wrapper>
+        )}
       </div>
     </Layout>
   );
