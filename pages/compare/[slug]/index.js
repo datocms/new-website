@@ -220,25 +220,6 @@ export default function ProductComparison({ subscription, preview }) {
           </div>
         </Space>
 
-        <Space top={3} bottom={2}>
-          <div className={s.reasons}>
-            <Wrapper>
-              <div className={s.reasonsTitle}>
-                Three reasons to consider DatoCMS
-              </div>
-              <ol className={s.reasonsList}>
-                {page.reasons.map((reason) => (
-                  <li className={s.reason} key={reason.id}>
-                    <div className={s.reasonTitle}>{reason.title}</div>
-                    <div className={s.reasonContent}>
-                      <StructuredText data={reason.content} />
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </Wrapper>
-          </div>
-        </Space>
         {page.importer && (
           <Wrapper>
             <div className={s.importer}>
@@ -258,6 +239,26 @@ export default function ProductComparison({ subscription, preview }) {
             </div>
           </Wrapper>
         )}
+
+        <Space top={3} bottom={2}>
+          <div className={s.reasons}>
+            <Wrapper>
+              <div className={s.reasonsTitle}>
+                Three reasons to consider DatoCMS
+              </div>
+              <ol className={s.reasonsList}>
+                {page.reasons.map((reason) => (
+                  <li className={s.reason} key={reason.id}>
+                    <div className={s.reasonTitle}>{reason.title}</div>
+                    <div className={s.reasonContent}>
+                      <StructuredText data={reason.content} />
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </Wrapper>
+          </div>
+        </Space>
       </div>
     </Layout>
   );

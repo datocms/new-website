@@ -322,7 +322,7 @@
 
 .importer {
   position: relative;
-  margin: 150px 0px 200px 0px;
+  margin: 250px 0px 200px 0px;
 
   &:before {
     content: '';
