@@ -7,7 +7,6 @@ import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Layout from 'components/Layout';
 import Bullets from 'components/Bullets';
 import SuccessIcon from 'public/icons/regular/check.svg';
-import LayerIcon from 'public/icons/regular/layer-group-solid.svg';
 import Button from 'components/Button';
 import {
   gqlStaticPropsWithSubscription,
@@ -19,6 +18,7 @@ import Link from 'next/link';
 import { Image as DatoImage, StructuredText } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
+import Quote from 'components/Quote';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   query {
@@ -52,6 +52,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
       pillars {
         id
         theme
+        icon {
+          url
+        }
         pillarCallout
         title {
           value
@@ -69,6 +72,60 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
           responsiveImage {
             ...imageFields
           }
+        }
+      }
+      testimonials {
+        ... on ReviewRecord {
+          id
+          name
+          quote {
+            value
+          }
+          image {
+            responsiveImage(
+              imgixParams: {
+                w: 300
+                h: 300
+                fit: crop
+                crop: faces
+                auto: format
+              }
+            ) {
+              ...imageFields
+            }
+          }
+          role
+        }
+        ... on PartnerTestimonialRecord {
+          id
+          name
+          quote {
+            value
+          }
+          image {
+            responsiveImage(
+              imgixParams: {
+                w: 300
+                h: 300
+                fit: crop
+                crop: faces
+                auto: format
+              }
+            ) {
+              ...imageFields
+            }
+          }
+          role
+        }
+      }
+      features {
+        id
+        title
+        icon {
+          url
+        }
+        description {
+          value
         }
       }
     }
@@ -105,43 +162,47 @@ export default function Wall({ preview, subscription }) {
 
       {productOverview.pillars.map((pillar, index) => {
         return (
-          <Flag
-            key={pillar.id}
-            kicker={pillar.theme}
-            title={
-              <>
-                {/* <LayerIcon /> */}
-                {highlightStructuredText(pillar.title, {
-                  highlightWith: function BadHighlight({ children }) {
-                    return (
-                      <FlagHighlight style="bad">{children}</FlagHighlight>
-                    );
-                  },
-                })}
-              </>
-            }
-            image={DatoImage}
-            imageProps={{
-              data: pillar.image.responsiveImage,
-              objectFit: 'cover',
-              objectPosition: '50% 50%',
-            }}
-            rightImage={!(index % 2)}
-            hideDot
-          >
-            <p> {pillar.pillarCallout}</p>
+          <div key={pillar.id} className={s.flagContainer}>
+            <Flag
+              kicker={pillar.theme}
+              title={
+                <>
+                  <LazyImage
+                    className={s.pillarIcon}
+                    src={pillar.icon.url}
+                    height={30}
+                    width={30}
+                  />
+                  {highlightStructuredText(pillar.title, {
+                    highlightWith: function BadHighlight({ children }) {
+                      return (
+                        <FlagHighlight style="bad">{children}</FlagHighlight>
+                      );
+                    },
+                  })}
+                </>
+              }
+              image={DatoImage}
+              imageProps={{
+                data: pillar.image.responsiveImage,
+              }}
+              rightImage={!(index % 2)}
+              hideDot
+            >
+              <p> {pillar.pillarCallout}</p>
 
-            <Bullets
-              style="bad"
-              icon={SuccessIcon}
-              largeBullet
-              bullets={[
-                <StructuredText key={pillar.id} data={pillar.capability1} />,
-                <StructuredText key={pillar.id} data={pillar.capability2} />,
-                <StructuredText key={pillar.id} data={pillar.capability3} />,
-              ]}
-            />
-          </Flag>
+              <Bullets
+                style="bad"
+                icon={SuccessIcon}
+                largeBullet
+                bullets={[
+                  <StructuredText key={pillar.id} data={pillar.capability1} />,
+                  <StructuredText key={pillar.id} data={pillar.capability2} />,
+                  <StructuredText key={pillar.id} data={pillar.capability3} />,
+                ]}
+              />
+            </Flag>
+          </div>
         );
       })}
 
@@ -176,6 +237,36 @@ export default function Wall({ preview, subscription }) {
           official Github page
         </a>
       </IntegrationsBanner>
+
+      <div className={s.testimonials}>
+        <h2 className={s.title}>What our customers say...</h2>
+        <div className={s.testimonialsContainer}>
+          {productOverview.testimonials.map((testimonial) => {
+            return <Quote key={testimonial.id} review={testimonial} />;
+          })}
+        </div>
+      </div>
+
+      <div>
+        <h2 className={s.title}>...and features they love!</h2>
+        <div className={s.featuresContainers}>
+          {productOverview.features.map((feature) => {
+            return (
+              <div key={feature.id} className={s.feature}>
+                <div className={s.featureIcon}>
+                  <LazyImage src={feature.icon.url} height={30} width={30} />
+                </div>
+                <div className={s.featureText}>
+                  <h4 className={s.featureTitle}>{feature.title}</h4>
+                  <p>
+                    <StructuredText data={feature.description} />
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </Layout>
   );
 }
