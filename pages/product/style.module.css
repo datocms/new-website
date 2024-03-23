@@ -111,7 +111,7 @@
 
 .quote {
   font-family: var(--font-serif);
-  font-size: rfs(25px);
+  font-size: rfs(30px);
   margin-bottom: 40px;
   letter-spacing: -0.03em;
   line-height: 1.2;
