@@ -242,7 +242,34 @@ export default function Wall({ preview, subscription }) {
         <h2 className={s.title}>What our customers say...</h2>
         <div className={s.testimonialsContainer}>
           {productOverview.testimonials.map((testimonial) => {
-            return <Quote key={testimonial.id} review={testimonial} />;
+            return (
+              <div key={testimonial.id} className={s.root}>
+                <div className={s.quote}>
+                  {highlightStructuredText(testimonial.quote)}
+                </div>
+                <div className={s.content}>
+                  <DatoImage
+                    className={s.image}
+                    data={testimonial.image.responsiveImage}
+                  />
+                  {testimonial.partner ? (
+                    <Link href={`/partners/${quote.partner.slug}`}>
+                      <a className={s.authorRole}>
+                        <div className={s.name}>{quote.name}</div>
+                        <div className={s.role}>
+                          {testimonial.role} @ {testimonial.partner.name}
+                        </div>
+                      </a>
+                    </Link>
+                  ) : (
+                    <div className={s.authorRole}>
+                      <div className={s.name}>{testimonial.name}</div>
+                      <div className={s.role}>{testimonial.role}</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
           })}
         </div>
       </div>

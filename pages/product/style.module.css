@@ -15,6 +15,7 @@
   display: flex;
   overflow: scroll;
   margin-top: rfs(-80px);
+  gap: 50px;
 
   ::-webkit-scrollbar {
     display: none;
@@ -87,4 +88,87 @@
 .featureTitle {
   margin-block-start: 0;
   margin-block-end: 0;
+}
+
+.root {
+  text-align: left;
+  padding-top: rfs(40px);
+  position: relative;
+  margin: rfs(200px) auto;
+
+  &:before {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    font-family: var(--font-serif);
+    content: '\201C';
+    color: var(--accent-color);
+    font-size: rfs(150px);
+    line-height: 0.3;
+    transform: translateX(-50%);
+  }
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-size: rfs(25px);
+  margin-bottom: 40px;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  text-align: center;
+  width: rfs(500px);
+
+  &:before {
+    content: '\201C';
+  }
+
+  &:after {
+    content: '\201D';
+  }
+}
+
+.image {
+  border-radius: 400px;
+  margin: 0 auto 20px;
+  width: 80px;
+
+  @media (width > 700px) {
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: 40px;
+  }
+}
+
+.name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.content {
+  text-align: center;
+
+  @media (width > 700px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+  }
+}
+
+.authorRole {
+  text-decoration: none;
+  color: inherit;
+
+  @media (width > 700px) {
+    max-width: 250px;
+  }
+}
+
+a.authorRole:hover .name {
+  text-decoration: underline;
+}
+
+.role {
+  color: var(--light-body-color);
 }
