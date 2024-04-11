@@ -13,25 +13,30 @@ const client = new DatoCmsSearch('d46fe8134ea916b42af4eaa0d06109');
 const fetchCommunity = async (query) => {
   const endpoint = 'https://community.datocms.com/search/query.json';
 
-  const { topics, posts } = await wretch(
-    `${endpoint}?include_blurbs=true&term=${encodeURIComponent(query)}`,
-  )
-    .get()
-    .json();
+  try {
+    const { topics, posts } = await wretch(
+      `${endpoint}?include_blurbs=true&term=${encodeURIComponent(query)}`,
+    )
+      .get()
+      .json();
 
-  if (!posts) {
+    if (!posts) {
+      return [];
+    }
+
+    return posts.map((post) => {
+      const topic = topics.find((t) => t.id === post.topic_id);
+      return {
+        title: highlighter(query || '', topic.title),
+        body: highlighter(query || '', post.blurb),
+        url: `https://community.datocms.com/t/${topic.slug}/${topic.id}`,
+        community: true,
+      };
+    });
+  } catch (error) {
+    console.error(`Error seaching the DatoCMS forum: ${error}`);
     return [];
   }
-
-  return posts.map((post) => {
-    const topic = topics.find((t) => t.id === post.topic_id);
-    return {
-      title: highlighter(query || '', topic.title),
-      body: highlighter(query || '', post.blurb),
-      url: `https://community.datocms.com/t/${topic.slug}/${topic.id}`,
-      community: true,
-    };
-  });
 };
 
 const search = async (query) => {
