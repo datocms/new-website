@@ -11,6 +11,7 @@ Disallow:/slack
 Disallow:/support
 Disallow:/pricing/compare
 Disallow:/marketplace/plugins
+Disallow:/internal
 
 User-agent: *
 Disallow:/legal/
