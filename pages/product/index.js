@@ -6,6 +6,7 @@ import LazyImage from 'components/LazyImage';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Layout from 'components/Layout';
 import Bullets from 'components/Bullets';
+import Checks from 'components/Checks';
 import SuccessIcon from 'public/icons/regular/check.svg';
 import Button from 'components/Button';
 import {
@@ -18,6 +19,7 @@ import Link from 'next/link';
 import { Image as DatoImage, StructuredText } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
+import Wrapper from 'components/Wrapper';
 import Quote from 'components/Quote';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
@@ -136,13 +138,13 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   ${imageFields}
 `);
 
-export default function Wall({ preview, subscription }) {
+export default function Product({ preview, subscription }) {
   const {
     data: { productOverview, integrations },
   } = useQuerySubscription(subscription);
 
   return (
-    <Layout preview={preview}>
+    <Layout preview={preview} noCta>
       <Head>
         <title>Better, with DatoCMS</title>
       </Head>
@@ -160,27 +162,26 @@ export default function Wall({ preview, subscription }) {
         </div>
       </div>
 
+      {/* alternating pillars */}
+
       {productOverview.pillars.map((pillar, index) => {
         return (
           <div key={pillar.id} className={s.flagContainer}>
             <Flag
               kicker={pillar.theme}
               title={
-                <>
-                  <LazyImage
-                    className={s.pillarIcon}
-                    src={pillar.icon.url}
-                    height={30}
-                    width={30}
-                  />
-                  {highlightStructuredText(pillar.title, {
-                    highlightWith: function BadHighlight({ children }) {
-                      return (
-                        <FlagHighlight style="bad">{children}</FlagHighlight>
-                      );
-                    },
-                  })}
-                </>
+                <div className={s.flagTitle}>
+                  <LazyImage src={pillar.icon.url} height={35} width={35} />
+                  <div>
+                    {highlightStructuredText(pillar.title, {
+                      highlightWith: function BadHighlight({ children }) {
+                        return (
+                          <FlagHighlight style="bad">{children}</FlagHighlight>
+                        );
+                      },
+                    })}
+                  </div>
+                </div>
               }
               image={DatoImage}
               imageProps={{
@@ -207,7 +208,7 @@ export default function Wall({ preview, subscription }) {
       })}
 
       <IntegrationsBanner
-        title={<>Extensible and integrable by&nbsp;design</>}
+        title={<div>Extensible and integrable by&nbsp;design</div>}
         bubbles={integrations
           .filter((i) =>
             ['ci', 'static-generator', 'language', 'cdn', 'framework'].includes(
@@ -238,6 +239,8 @@ export default function Wall({ preview, subscription }) {
         </a>
       </IntegrationsBanner>
 
+      {/* testiominals */}
+
       <div className={s.testimonials}>
         <h2 className={s.title}>What our customers say...</h2>
         <div className={s.testimonialsContainer}>
@@ -254,12 +257,12 @@ export default function Wall({ preview, subscription }) {
                   />
                   {testimonial.partner ? (
                     <Link href={`/partners/${quote.partner.slug}`}>
-                      <a className={s.authorRole}>
+                      <div className={s.authorRole}>
                         <div className={s.name}>{quote.name}</div>
                         <div className={s.role}>
                           {testimonial.role} @ {testimonial.partner.name}
                         </div>
-                      </a>
+                      </div>
                     </Link>
                   ) : (
                     <div className={s.authorRole}>
@@ -274,8 +277,12 @@ export default function Wall({ preview, subscription }) {
         </div>
       </div>
 
+      {/* feature grid */}
+
       <div>
-        <h2 className={s.title}>...and features they love!</h2>
+        <h2 className={s.featureSectionTitle}>
+          ...and the features they love!
+        </h2>
         <div className={s.featuresContainers}>
           {productOverview.features.map((feature) => {
             return (
@@ -293,6 +300,27 @@ export default function Wall({ preview, subscription }) {
             );
           })}
         </div>
+      </div>
+
+      {/* footer */}
+
+      <div className={s.customFooter}>
+        <Wrapper>
+          <div className={s.customFooterInner}>
+            <h1 className={s.footerTitle}>
+              Seen enough? Get started with DatoCMS
+            </h1>
+            <Checks checks={['No credit card', 'Easy setup']}>
+              <Button
+                fs="big"
+                as="a"
+                href="https://dashboard.datocms.com/signup"
+              >
+                Try it now for free!
+              </Button>
+            </Checks>
+          </div>
+        </Wrapper>
       </div>
     </Layout>
   );

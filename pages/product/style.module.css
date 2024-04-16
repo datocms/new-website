@@ -6,7 +6,7 @@
 
 .flagContainer {
   margin-bottom: rfs(-100px);
-  @media (width < 700px) {
+  @media (width < 800px) {
     margin-bottom: rfs(100px);
   }
 }
@@ -22,7 +22,7 @@
   }
 
   /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
@@ -35,7 +35,7 @@
   flex: 0 0 auto;
   justify-content: center;
   align-items: center;
-  animation: scroll 30s linear infinite alternate-reverse; /* Adjust the duration to control the speed */
+  animation: scroll 30s linear infinite alternate-reverse;
 }
 
 @keyframes scroll {
@@ -51,13 +51,33 @@
   font-family: var(--font-headline);
   font-size: rfs(60px);
   text-align: center;
-  margin: rfs(40px) auto;
+  margin: rfs(60px) auto;
   line-height: 1;
   letter-spacing: -0.02em;
   font-weight: bold;
 
   @media (width > 800px) {
     max-width: 70%;
+  }
+  @media (width < 800px) {
+    font-size: rfs(50px);
+  }
+}
+
+.featureSectionTitle {
+  font-family: var(--font-headline);
+  font-size: rfs(60px);
+  text-align: center;
+  margin: rfs(100px) auto;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: bold;
+
+  @media (width > 800px) {
+    max-width: 70%;
+  }
+  @media (width < 800px) {
+    font-size: rfs(50px);
   }
 }
 
@@ -68,14 +88,15 @@
 .featuresContainers {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  @media (width < 700px) {
+  @media (width < 800px) {
     grid-template-columns: repeat(1, 1fr);
-    max-width: rfs(600px);
+    margin: rfs(80px);
+    text-align: center;
   }
   gap: 50px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: rfs(80px);
+  margin-top: rfs(120px);
   max-width: var(--page-width-with-margin);
 }
 
@@ -118,6 +139,10 @@
   text-align: center;
   width: rfs(500px);
 
+  @media (width < 800px) {
+    font-size: rfs(25px);
+  }
+
   &:before {
     content: '\201C';
   }
@@ -143,6 +168,9 @@
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 5px;
+  @media (width < 800px) {
+    font-size: rfs(1em);
+  }
 }
 
 .content {
@@ -171,4 +199,40 @@ a.authorRole:hover .name {
 
 .role {
   color: var(--light-body-color);
+  @media (width < 800px) {
+    font-size: 0.8em;
+  }
+}
+
+.flagTitle {
+  font-size: rfs(35px);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  @media (width < 800px) {
+    justify-content: center;
+  }
+}
+
+.customFooter {
+  padding: rfs(100px) 0;
+  background: linear-gradient(45deg, #fefbe4, #fdf0eb);
+  clip-path: var(--clip-path);
+  margin-top: rfs(120px);
+}
+
+.customFooterInner {
+  margin: rfs(40px) auto;
+  text-align: center;
+  @media (width > 800px) {
+    max-width: 70%;
+  }
+}
+
+.footerTitle {
+  font-family: var(--font-headline);
+  font-size: rfs(40px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: bold;
 }
