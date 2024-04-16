@@ -18,6 +18,7 @@ import truncate from 'truncate';
 import { useDebounce } from 'use-debounce';
 import { generateUrl } from 'utils/plugins';
 import s from './style.module.css';
+import { clean } from 'utils/stega';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -185,7 +186,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                     key={post.packageName}
                     title={post.title}
                     href={generateUrl(
-                      `/marketplace/plugins/i/${post.packageName}`,
+                      `/marketplace/plugins/i/${clean(post.packageName)}`,
                     )}
                     image={
                       post.coverImage && post.coverImage.responsiveImage ? (
@@ -211,7 +212,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                   key={post.packageName}
                   title={post.title}
                   href={generateUrl(
-                    `/marketplace/plugins/i/${post.packageName}`,
+                    `/marketplace/plugins/i/${clean(post.packageName)}`,
                   )}
                   image={
                     post.coverImage && post.coverImage.responsiveImage ? (

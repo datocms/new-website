@@ -9,6 +9,7 @@ import s from 'pages/marketplace/plugins/browse/p/[page]/style.module.css';
 import { Image as DatoImage } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';
+import { clean } from 'utils/stega';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
@@ -46,7 +47,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
   const startersData = await Promise.all(
     starters.map(async (starter) => {
       const { body } = await tiny.get({
-        url: githubRepoToManifest(starter.githubRepo),
+        url: githubRepoToManifest(clean(starter.githubRepo)),
       });
       return { ...JSON.parse(body), ...starter };
     }),
