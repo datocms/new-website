@@ -62,11 +62,11 @@ export default function CloneButtonGenerator() {
                             tokenName: entry.tokenName || mandatory,
                           }
                         : entry.type === 'datocmsProjectUrl'
-                        ? { type: 'datocmsProjectUrl' }
-                        : {
-                            type: 'string',
-                            value: entry.value,
-                          },
+                          ? { type: 'datocmsProjectUrl' }
+                          : {
+                              type: 'string',
+                              value: entry.value,
+                            },
                   }
                 : acc,
             {},

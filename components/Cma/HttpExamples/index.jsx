@@ -104,8 +104,8 @@ function buildResponse({ response }, link) {
     body: response?.body
       ? response.body.trim()
       : link.targetSchema
-      ? JSON.stringify(schemaExampleFor(link.targetSchema), null, 2).trim()
-      : null,
+        ? JSON.stringify(schemaExampleFor(link.targetSchema), null, 2).trim()
+        : null,
   };
 }
 

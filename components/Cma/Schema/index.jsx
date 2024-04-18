@@ -443,18 +443,19 @@ export function JsonSchemaProperty({
               />
             </ExpandablePane>
           )}
-          {toArray(schema.type).includes('object') && schema.patternProperties && (
-            <ExpandablePane
-              open={open}
-              label="object format"
-              onToggle={setOpen}
-            >
-              <JsonSchemaObjectWithPatternProperties
-                schema={schema}
-                depth={depth}
-              />
-            </ExpandablePane>
-          )}
+          {toArray(schema.type).includes('object') &&
+            schema.patternProperties && (
+              <ExpandablePane
+                open={open}
+                label="object format"
+                onToggle={setOpen}
+              >
+                <JsonSchemaObjectWithPatternProperties
+                  schema={schema}
+                  depth={depth}
+                />
+              </ExpandablePane>
+            )}
           {schema.enum && (
             <>
               <ExpandablePane

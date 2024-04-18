@@ -163,8 +163,8 @@ export default function ProgressiveImagesDemo() {
                 i < 0
                   ? i + images.length
                   : i >= images.length
-                  ? i - images.length
-                  : i;
+                    ? i - images.length
+                    : i;
 
               const image = images[indexInRange];
 
