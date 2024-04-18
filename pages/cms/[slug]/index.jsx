@@ -208,11 +208,14 @@ export const getStaticProps = handleErrors(
     `,
     });
 
-    const sortedWebsites = websites.flatMap((website, i) => {
+    const sortedWebsites = [];
+
+    websites.forEach((website, i) => {
       if (i % 2 === 0) {
-        return website;
+        sortedWebsites.push(website);
+      } else {
+        sortedWebsites.unshift(website);
       }
-      return [website, ...acc];
     });
 
     return {

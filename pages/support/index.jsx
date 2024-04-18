@@ -65,7 +65,7 @@ export default function Support({ preview, topics }) {
   const rootTopics = topics.filter((t) => !t.parent);
   const rootTopic =
     rootTopicSlug && topics.find((t) => t.slug === rootTopicSlug);
-  const subTopics = rootTopic?.children.map((x) =>
+  const subTopics = rootTopic?.children?.map((x) =>
     topics.find((t) => t.slug === x.slug),
   );
   const leafTopic =

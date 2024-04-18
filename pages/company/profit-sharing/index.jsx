@@ -11,7 +11,10 @@ import util from 'node:util';
 const readFile = util.promisify(fs.readFile);
 
 export async function getStaticProps() {
-  const body = await readFile('pages/legal/docs/gdpr.md', 'utf8');
+  const body = await readFile(
+    'pages/company/profit-sharing/content.md',
+    'utf8',
+  );
 
   return {
     props: {
@@ -24,13 +27,13 @@ export default function Gdpr({ body }) {
   return (
     <Layout>
       <Head noIndex>
-        <title>GDPR Compliance</title>
+        <title>Profit Sharing Program</title>
       </Head>
       <Hero
-        kicker="Legal"
+        kicker="DatoCMS the company"
         title={
           <>
-            <Highlight>GDPR Compliance</Highlight>
+            <Highlight>Profit Sharing Program</Highlight>
           </>
         }
       />

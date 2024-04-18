@@ -99,16 +99,14 @@ export function JsonSchemaObject({
   const [isOpen, setOpen] = useState(false);
 
   for (const name of allProperties) {
-    if (requiredProperties.includes(name)) {
-      return;
-    }
+    if (!requiredProperties.includes(name)) {
+      const property = schema.properties[name];
 
-    const property = schema.properties[name];
-
-    if (property.deprecated) {
-      deprecatedProperties.push(name);
-    } else {
-      optionalProperties.push(name);
+      if (property.deprecated) {
+        deprecatedProperties.push(name);
+      } else {
+        optionalProperties.push(name);
+      }
     }
   }
 
