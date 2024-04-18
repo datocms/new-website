@@ -1,6 +1,6 @@
 import AgencyForm from 'components/AgencyForm';
-import s from './style.module.css';
 import 'iframe-resizer/js/iframeResizer.contentWindow';
+import s from './style.module.css';
 
 export default function Form() {
   return (

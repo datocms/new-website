@@ -89,25 +89,24 @@ function calculateCounters(agencies, continent, country) {
   const allCountries = {};
   const allContinents = {};
 
-  agencies.forEach((p) => {
-    p.technologies.forEach(
-      (t) => (allTechnologies[t.name] = (allTechnologies[t.name] || 0) + 1),
-    );
-    p.areasOfExpertise.forEach(
-      (t) =>
-        (allAreaOfExpertise[t.name] = (allAreaOfExpertise[t.name] || 0) + 1),
-    );
-    p.locations.forEach((t) => {
+  for (const p of agencies) {
+    for (const t of p.technologies) {
+      allTechnologies[t.name] = (allTechnologies[t.name] || 0) + 1;
+    }
+    for (const t of p.areasOfExpertise) {
+      allAreaOfExpertise[t.name] = (allAreaOfExpertise[t.name] || 0) + 1;
+    }
+    for (const t of p.locations) {
       if (!continent || t.continent.name === continent)
         allCountries[`${t.emoji} ${t.name}`] =
           (allCountries[`${t.emoji} ${t.name}`] || 0) + 1;
-    });
-    uniq(p.locations.map((t) => t.continent.name)).forEach(
-      (continentName) =>
-        (allContinents[continentName] =
-          (allContinents[continentName] || 0) + 1),
-    );
-  });
+    }
+    for (const continentName of uniq(
+      p.locations.map((t) => t.continent.name),
+    )) {
+      allContinents[continentName] = (allContinents[continentName] || 0) + 1;
+    }
+  }
 
   return {
     technologies: allTechnologies,
@@ -341,7 +340,7 @@ export default function Partners({ subscription, preview }) {
                 {countBySlug[post.slug] !== 0 && (
                   <div className={s.showcasedProjects}>
                     {countBySlug[post.slug]} showcased project
-                    {countBySlug[post.slug] > 1 && <>s</>}
+                    {countBySlug[post.slug] > 1 && 's'}
                   </div>
                 )}
               </a>

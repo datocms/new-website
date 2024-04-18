@@ -1,7 +1,7 @@
-import UIChrome from 'components/UiChrome';
 import cn from 'classnames';
-import s from './style.module.css';
+import UIChrome from 'components/UiChrome';
 import { useEffect, useState } from 'react';
+import s from './style.module.css';
 
 export default function FieldValidations() {
   const [count, setCount] = useState(0);

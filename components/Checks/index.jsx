@@ -1,6 +1,6 @@
 import cn from 'classnames';
-import style from './style.module.css';
 import CheckIcon from 'public/icons/regular/check.svg';
+import style from './style.module.css';
 
 const fsClassNames = {
   big: style.fsBig,

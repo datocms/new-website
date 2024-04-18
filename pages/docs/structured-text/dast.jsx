@@ -1,22 +1,22 @@
-import { useMemo } from 'react';
-import DocsLayout from 'components/DocsLayout';
+import { JsonSchemaObject } from 'components/Cma/Schema';
 import DocPageContent from 'components/DocPageContent';
+import DocsLayout from 'components/DocsLayout';
+import Head from 'components/Head';
+import Heading from 'components/Heading';
+import Prism from 'components/Prism';
+import { parse } from 'flatted';
+import { handleErrors } from 'lib/datocms';
 import {
-  Toc,
   Sidebar,
+  Toc,
   getStaticProps as docPageGetStaticProps,
 } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
-import Heading from 'components/Heading';
-import Head from 'components/Head';
+import { useMemo } from 'react';
 import { renderMetaTags } from 'react-datocms';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
-import { buildStructuredTextDocumentSchema } from 'utils/fetchStructuredText';
 import ReactMarkdown from 'react-markdown';
-import { parse } from 'flatted';
-import { JsonSchemaObject } from 'components/Cma/Schema';
-import Prism from 'components/Prism';
-import { handleErrors } from 'lib/datocms';
+import { buildStructuredTextDocumentSchema } from 'utils/fetchStructuredText';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const { props } = await docPageGetStaticProps({
@@ -127,7 +127,7 @@ export default function DocPage({
             </Heading>
             {definitions.map((definition) => {
               const name = definition.properties.type.const;
-              let match = definition.description.match(
+              const match = definition.description.match(
                 /```([a-z]+)\n((.*\n)+)```/,
               );
               const exampleCode = match && {

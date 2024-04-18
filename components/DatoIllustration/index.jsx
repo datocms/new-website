@@ -1,15 +1,15 @@
-import s from './style.module.css';
 import cn from 'classnames';
 import LazyImage from 'components/LazyImage';
+import s from './style.module.css';
 
-import Website from 'public/images/illustrations/website.svg';
 import Chatbot from 'public/images/illustrations/chatbot.svg';
 import Mobile from 'public/images/illustrations/mobile.svg';
+import Website from 'public/images/illustrations/website.svg';
 
+import Backend from 'public/images/illustrations/content-editors2.svg';
 import GraphQl from 'public/images/illustrations/graphql-api.svg';
 import Image from 'public/images/illustrations/image-api.svg';
 import Video from 'public/images/illustrations/video-encoding.svg';
-import Backend from 'public/images/illustrations/content-editors2.svg';
 
 const apps = [
   { id: 'Website', Icon: Website },
@@ -48,12 +48,12 @@ export default function OmnichannelIllustration() {
               <path
                 d="M89,113 C89,52.3093004 11,81.2309828 11,15"
                 transform="translate(50.000000, 64.000000) rotate(-90.000000) translate(-50.000000, -64.000000) "
-              ></path>
+              />
               <path
                 d="M89,252 C89,191.3093 11,220.230983 11,154"
                 transform="translate(50.000000, 203.000000) scale(1, -1) rotate(-90.000000) translate(-50.000000, -203.000000) "
-              ></path>
-              <line x1="99.6357046" y1="134" x2="1" y2="133.5"></line>
+              />
+              <line x1="99.6357046" y1="134" x2="1" y2="133.5" />
             </g>
           </svg>
         </div>
@@ -83,16 +83,16 @@ export default function OmnichannelIllustration() {
                 x2="178.5"
                 y2="0.5"
                 transform="translate(178.500000, 43.000000) scale(1, -1) translate(-178.500000, -43.000000) "
-              ></line>
+              />
               <path
                 d="M2.5,1 C87.5,1 2.9006892,85 87.5,85"
                 transform="translate(45.000000, 43.000000) scale(-1, -1) rotate(-90.000000) translate(-45.000000, -43.000000) "
-              ></path>
+              />
 
               <path
                 d="M354.5,85 C269.900689,85 354.5,1 269.5,1"
                 transform="translate(312.000000, 43.000000) scale(-1, 1) rotate(-90.000000) translate(-312.000000, -43.000000) "
-              ></path>
+              />
             </g>
           </svg>
         </div>
@@ -106,15 +106,15 @@ export default function OmnichannelIllustration() {
                 x2="178.5"
                 y2="85.5"
                 transform="translate(178.500000, 43.000000) scale(1, -1) translate(-178.500000, -43.000000) "
-              ></line>
+              />
               <path
                 d="M87.5,85 C2.9006892,85 87.5,1 2.5,1"
                 transform="translate(45.000000, 43.000000) scale(-1, -1) rotate(-90.000000) translate(-45.000000, -43.000000) "
-              ></path>
+              />
               <path
                 d="M269.5,1 C354.5,1 269.900689,85 354.5,85"
                 transform="translate(312.000000, 43.000000) scale(-1, 1) rotate(-90.000000) translate(-312.000000, -43.000000) "
-              ></path>
+              />
             </g>
           </svg>
         </div>

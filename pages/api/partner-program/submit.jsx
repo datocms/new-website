@@ -14,13 +14,13 @@ const proxy = httpProxy.createProxyServer({
   changeOrigin: true,
 });
 
-proxy.on('proxyRes', function (proxyRes, req, res) {
+proxy.on('proxyRes', (proxyRes, req, res) => {
   const chunks = [];
-  proxyRes.on('data', function (chunk) {
+  proxyRes.on('data', (chunk) => {
     chunks.push(chunk);
   });
-  proxyRes.on('end', function () {
-    const url = new URL(proxyRes.headers['location']);
+  proxyRes.on('end', () => {
+    const url = new URL(proxyRes.headers.location);
     url.searchParams.set('proxied', 'true');
     res.redirect(proxyRes.statusCode, url.toString());
   });

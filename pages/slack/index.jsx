@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import Layout from 'components/Layout';
-import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
-import useSWR from 'swr';
-import s from './style.module.css';
-import { useForm } from 'react-hook-form';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import wretch from 'wretch';
+import Layout from 'components/Layout';
+import Wrapper from 'components/Wrapper';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useRecaptcha } from 'react-recaptcha-hook';
 import { useToasts } from 'react-toast-notifications';
-import Head from 'components/Head';
-import Link from 'next/link';
+import useSWR from 'swr';
+import wretch from 'wretch';
+import s from './style.module.css';
 
 wretch().errorType('json');
 
@@ -46,7 +46,7 @@ function Slack() {
         '🎉 Awesome, welcome on board! Check your email for the invitation!',
       );
     } catch (e) {
-      if (e.json && e.json.error) {
+      if (e.json?.error) {
         setError('email', {
           message: errorLabels[e.json.error] || `Slack error: ${e.json.error}`,
         });

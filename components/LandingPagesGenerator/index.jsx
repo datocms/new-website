@@ -1,7 +1,7 @@
 import UIChrome from 'components/UiChrome';
-import s from './style.module.css';
 import { useEffect, useState } from 'react';
-import { useTransition, animated } from 'react-spring';
+import { animated, useTransition } from 'react-spring';
+import s from './style.module.css';
 
 const shuffle = (array) => {
   const currentId = array.map((i) => i.name).join('-');
@@ -12,6 +12,7 @@ const shuffle = (array) => {
     if (shuffledId !== currentId) {
       return shuffled;
     }
+    // biome-ignore lint/correctness/noConstantCondition: <explanation>
   } while (true);
 };
 
@@ -44,7 +45,10 @@ export default function LandingPagesGenerator() {
   let height = 0;
 
   const transitions = useTransition(
-    rows.map((data) => ({ ...data, y: (height += data.height) - data.height })),
+    rows.map((data) => {
+      height += data.height;
+      return { ...data, y: height - data.height };
+    }),
     (d) => d.name,
     {
       from: { height: 0, opacity: 0 },

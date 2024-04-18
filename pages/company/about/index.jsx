@@ -65,7 +65,7 @@ function prettyNumber(num) {
     }
   }
 
-  let number = num / si[i].value;
+  const number = num / si[i].value;
 
   return (
     number.toFixed(number < 10 ? 2 : number < 99 ? 1 : 0).replace(rx, '$1') +
@@ -167,21 +167,15 @@ const Chart = ({ data: rawData, children }) => {
         >
           <path
             className={s.trendLine}
-            d={
-              `M 0 ${height} ` +
-              trend
-                .map((value, i) => `L ${project(i, value).join(' ')}`)
-                .join(' ')
-            }
+            d={`M 0 ${height} ${trend
+              .map((value, i) => `L ${project(i, value).join(' ')}`)
+              .join(' ')}`}
           />
 
           <path
-            d={
-              `M 0 ${height} ` +
-              data
-                .map((point, i) => `L ${project(i, point.value).join(' ')}`)
-                .join(' ')
-            }
+            d={`M 0 ${height} ${data
+              .map((point, i) => `L ${project(i, point.value).join(' ')}`)
+              .join(' ')}`}
           />
 
           {data.map((point, i) => {
@@ -208,7 +202,7 @@ const Chart = ({ data: rawData, children }) => {
                 cx={x}
                 cy={y}
                 r="2"
-                data-value={parseInt(point.value)}
+                data-value={Number.parseInt(point.value)}
               />
             );
           })}
@@ -242,7 +236,7 @@ const Chart = ({ data: rawData, children }) => {
                       <br />
                     </span>
                     <span className={s.chartLabelAnchorAmountDesktop}>
-                      €{parseInt(point.value).toLocaleString()}
+                      €{Number.parseInt(point.value).toLocaleString()}
                     </span>
                     <span className={s.chartLabelAnchorAmountMobile}>
                       €{prettyNumber(point.value)}

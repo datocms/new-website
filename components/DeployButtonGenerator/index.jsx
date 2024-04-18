@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import style from './style.module.css';
 import styleForm from 'components/Form/style.module.css';
 import Prism from 'components/Prism';
-import Tabs, { Tab } from 'components/Tabs';
 import Space from 'components/Space';
-import { useForm, useFieldArray } from 'react-hook-form';
+import Tabs, { Tab } from 'components/Tabs';
+import React, { useState } from 'react';
+import { useFieldArray, useForm } from 'react-hook-form';
+import style from './style.module.css';
 
 export default function CloneButtonGenerator() {
   const {
@@ -39,23 +39,23 @@ export default function CloneButtonGenerator() {
 
   const mandatory = 'THIS FIELD IS MANDATORY. PLEASE PROVIDE A VALUE!';
 
-  const deploymentType = formValues['deploymentType'];
+  const deploymentType = formValues.deploymentType;
 
   const datocmsJson = {
-    name: formValues['name'] || mandatory,
-    description: formValues['description'] || mandatory,
-    previewImage: formValues['previewImage'] || mandatory,
-    livePreviewUrl: formValues['livePreviewUrl'] || undefined,
-    datocmsProjectId: formValues['datocmsProjectId'] || mandatory,
-    deploymentType: formValues['deploymentType'] || mandatory,
+    name: formValues.name || mandatory,
+    description: formValues.description || mandatory,
+    previewImage: formValues.previewImage || mandatory,
+    livePreviewUrl: formValues.livePreviewUrl || undefined,
+    datocmsProjectId: formValues.datocmsProjectId || mandatory,
+    deploymentType: formValues.deploymentType || mandatory,
     environmentVariables:
       deploymentType !== 'copyRepo'
-        ? formValues['environmentVariables'].reduce(
-            (acc, entry) =>
-              entry.environmentVariableName
-                ? {
-                    ...acc,
-                    [entry.environmentVariableName]:
+        ? Object.fromEntries(
+            formValues.environmentVariables
+              .map((entry) =>
+                entry.environmentVariableName
+                  ? [
+                      entry.environmentVariableName,
                       entry.type === 'datocmsAccessToken'
                         ? {
                             type: 'datocmsAccessToken',
@@ -67,24 +67,25 @@ export default function CloneButtonGenerator() {
                               type: 'string',
                               value: entry.value,
                             },
-                  }
-                : acc,
-            {},
+                    ]
+                  : null,
+              )
+              .filter(Boolean),
           )
         : undefined,
     buildCommand:
       deploymentType !== 'copyRepo'
-        ? formValues['buildCommand'] || mandatory
+        ? formValues.buildCommand || mandatory
         : undefined,
     postInstallUrl:
       deploymentType !== 'copyRepo'
-        ? formValues['postInstallUrl'] || undefined
+        ? formValues.postInstallUrl || undefined
         : undefined,
   };
 
   const deployUrl = `https://dashboard.datocms.com/deploy?${new URLSearchParams(
     {
-      repo: formValues['repo'] || 'YOUR-GITHUB-REPO',
+      repo: formValues.repo || 'YOUR-GITHUB-REPO',
     },
   ).toString()}`;
 
@@ -186,8 +187,7 @@ export default function CloneButtonGenerator() {
                 <label>Environment variables to be added on hosting</label>
                 <div className={styleForm.fieldArray}>
                   {environmentVariableFields.map((field, index) => {
-                    const type =
-                      formValues['environmentVariables'][index]['type'];
+                    const type = formValues.environmentVariables[index].type;
 
                     return (
                       <div key={field.id} className={styleForm.fieldArrayItem}>
@@ -253,6 +253,7 @@ export default function CloneButtonGenerator() {
                           </div>
                         )}
                         <button
+                          type="button"
                           className={styleForm.fieldArrayButton}
                           onClick={(e) => {
                             e.preventDefault();
@@ -265,6 +266,7 @@ export default function CloneButtonGenerator() {
                     );
                   })}
                   <button
+                    type="button"
                     className={styleForm.fieldArrayButton}
                     onClick={(e) => {
                       e.preventDefault();

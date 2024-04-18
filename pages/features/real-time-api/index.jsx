@@ -167,7 +167,7 @@ function RealTime({ feature, preview, review }) {
         <Flag
           style="good"
           seoAnalysis={seoAnalysis}
-          kicker={`APIs + Worldwide CDN`}
+          kicker={'APIs + Worldwide CDN'}
           title={
             <>
               A complete set of{' '}

@@ -20,9 +20,9 @@ import { Image as DatoImage, StructuredText, renderRule } from 'react-datocms';
 import ResponsiveEmbed from 'react-responsive-embed';
 import truncate from 'truncate';
 import slugify from 'utils/slugify';
+import partnerStyles from '/pages/partners/[partnerSlug]/style.module.css';
 import { parseShortCodes } from '../../utils/table';
 import defaultStyles from './style.module.css';
-import partnerStyles from '/pages/partners/[partnerSlug]/style.module.css';
 
 function renderBlock(s, block, defaultAltForImages) {
   switch (block._modelApiKey) {
@@ -247,7 +247,7 @@ function renderBlock(s, block, defaultAltForImages) {
         </div>
       );
 
-    case 'image':
+    case 'image': {
       const { width, height, responsiveImage, alt, title } = block.image;
 
       return (
@@ -266,6 +266,7 @@ function renderBlock(s, block, defaultAltForImages) {
           />
         </div>
       );
+    }
 
     case 'video':
       return (

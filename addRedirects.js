@@ -6,9 +6,9 @@ async function start() {
 
   const urls = (
     await sitemapper.fetch('https://datocms.netlify.com/sitemap.xml')
-  ).sites.map(x => x.replace('https://www.datocms.com', ''));
+  ).sites.map((x) => x.replace('https://www.datocms.com', ''));
 
-  const redirects = urls.map(url => {
+  const redirects = urls.map((url) => {
     const urlWithSlash = url.endsWith('/') ? url : `${url}/`;
 
     return {

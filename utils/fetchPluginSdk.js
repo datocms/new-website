@@ -164,7 +164,7 @@ function buildCtx(manifest, definition) {
   if (definition.type.type === 'intersection') {
     let result = [];
 
-    definition.type.types.forEach((elementInIntersection) => {
+    for (const elementInIntersection of definition.type.types) {
       if (elementInIntersection.type === 'reference') {
         const innerDefinition = findChildrenById(
           manifest,
@@ -172,7 +172,7 @@ function buildCtx(manifest, definition) {
         );
         result = [...result, buildCtx(manifest, innerDefinition)];
       }
-    });
+    }
 
     return result.flat().filter((x) => x);
   }

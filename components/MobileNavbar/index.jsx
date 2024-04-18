@@ -25,6 +25,7 @@ const Group = ({ title, children }) => {
   return (
     <div className={s.group}>
       <button
+        type="button"
         className={cn(s.groupTitle, s.groupTitleHandle, {
           [s.handleOpen]: open,
         })}
@@ -106,7 +107,11 @@ export default function Navbar() {
               </a>
             </Link>
             <div className={s.space} />
-            <button className={s.hamburger} onClick={toggleVisibility}>
+            <button
+              type="button"
+              className={s.hamburger}
+              onClick={toggleVisibility}
+            >
               <Hamburger />
             </button>
           </div>

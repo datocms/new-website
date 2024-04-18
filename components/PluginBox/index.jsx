@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
 import cn from 'classnames';
 import LazyImage from 'components/LazyImage';
-import s from './style.module.css';
-import PluginIcon from 'public/icons/regular/puzzle-piece.svg';
 import MaybeLink from 'components/MaybeLink';
+import PluginIcon from 'public/icons/regular/puzzle-piece.svg';
+import { useMemo } from 'react';
+import s from './style.module.css';
 
 export const LogoImage = ({ logo, style = 'pink' }) => (
   <div

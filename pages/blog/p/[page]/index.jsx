@@ -36,7 +36,10 @@ export const getStaticPaths = gqlStaticPaths(
   ({ meta }) =>
     range(
       1,
-      Math.min(5, Math.ceil(meta.count / parseFloat(BLOG_POSTS_PER_PAGE))),
+      Math.min(
+        5,
+        Math.ceil(meta.count / Number.parseFloat(BLOG_POSTS_PER_PAGE)),
+      ),
     ),
 );
 
@@ -99,7 +102,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     requiredKeys: ['blog', 'posts'],
     paramsToVars: ({ page }) => ({
       first: BLOG_POSTS_PER_PAGE,
-      skip: BLOG_POSTS_PER_PAGE * parseInt(page),
+      skip: BLOG_POSTS_PER_PAGE * Number.parseInt(page),
     }),
   },
 );
@@ -128,7 +131,7 @@ export default function Blog({ preview, subscription }) {
             <div className={s.changelogIntro}>
               Latest from our Product Updates changelog →
             </div>
-            <Link href={`/product-updates`}>
+            <Link href={'/product-updates'}>
               <a className={s.changelogEntry}>
                 <div className={s.changelogEntryTitle}>
                   {latestChangelogEntry.title}
@@ -157,7 +160,7 @@ export default function Blog({ preview, subscription }) {
           {posts.map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
               <a className={s.post}>
-                {post.coverImage && post.coverImage.responsiveImage && (
+                {post.coverImage?.responsiveImage && (
                   <div className={s.coverImage}>
                     <DatoImage
                       className={s.image}
@@ -199,7 +202,7 @@ export default function Blog({ preview, subscription }) {
 
         <Paginator
           perPage={BLOG_POSTS_PER_PAGE}
-          currentPage={router.query ? parseInt(router.query.page) : 0}
+          currentPage={router.query ? Number.parseInt(router.query.page) : 0}
           totalEntries={meta.count}
           href={(index) => (index === 0 ? '/blog' : `/blog/p/${index}`)}
         />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import times from 'utils/times';
 import s from './style.module.css';
 

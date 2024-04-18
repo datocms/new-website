@@ -1,11 +1,11 @@
-import Layout from 'components/Layout';
 import BaseLayout from 'components/BaseLayout';
-import Wrapper from 'components/Wrapper';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import s from './style.module.css';
-import Head from 'components/Head';
+import Layout from 'components/Layout';
+import Wrapper from 'components/Wrapper';
 import { useRouter } from 'next/router';
+import s from './style.module.css';
 
 export default function Support() {
   const router = useRouter();

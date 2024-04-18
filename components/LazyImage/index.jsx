@@ -1,6 +1,6 @@
+import cn from 'classnames';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
-import cn from 'classnames';
 import s from './style.module.css';
 
 export default function LazyImage(props) {

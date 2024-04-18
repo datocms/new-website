@@ -1,11 +1,11 @@
-import Layout from 'components/Layout';
+import cn from 'classnames';
+import Button from 'components/Button';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import Button from 'components/Button';
+import Layout from 'components/Layout';
 import Legal from 'components/Legal';
 import s from './style.module.css';
-import cn from 'classnames';
-import Head from 'components/Head';
 
 export default function BrandAssets() {
   return (

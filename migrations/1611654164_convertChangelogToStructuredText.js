@@ -1,11 +1,9 @@
-'use strict';
-
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
 const markdownToStructuredText = require('./utils/markdownToStructuredText');
 const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
 const getAllRecords = require('./utils/getAllRecords');
 const { buildModularBlock } = require('datocms-client');
-const path = require('path');
+const path = require('node:path');
 const {
   paragraph,
 } = require('datocms-html-to-structured-text/dist/lib/handlers');
@@ -13,7 +11,7 @@ const swapFields = require('./utils/swapFields');
 
 module.exports = async (client) => {
   const itemTypesByApiKey = await getItemTypesByApiKey(client);
-  const imageBlockId = itemTypesByApiKey['image'].id;
+  const imageBlockId = itemTypesByApiKey.image.id;
 
   await createStructuredTextFieldFrom(client, 'changelog_entry', 'content', [
     imageBlockId,

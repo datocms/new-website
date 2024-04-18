@@ -1,9 +1,9 @@
-import { range } from 'range';
-import Paginator from 'paginator';
-import s from './style.module.css';
 import cn from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Paginator from 'paginator';
+import { range } from 'range';
+import s from './style.module.css';
 
 const GoTo = ({ href, index, className, disabled, children, query }) =>
   disabled ? (

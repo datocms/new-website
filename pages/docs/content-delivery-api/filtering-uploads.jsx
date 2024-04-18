@@ -1,21 +1,21 @@
-import React from 'react';
-import DocsLayout from 'components/DocsLayout';
 import DocPageContent from 'components/DocPageContent';
+import DocsLayout from 'components/DocsLayout';
+import Head from 'components/Head';
+import Heading from 'components/Heading';
+import Prism from 'components/Prism';
 import Space from 'components/Space';
 import Tabs, { Tab } from 'components/Tabs';
+import { handleErrors } from 'lib/datocms';
 import {
-  Toc,
   Sidebar,
+  Toc,
   getStaticProps as docPageGetStaticProps,
 } from 'pages/docs/[...chunks]';
-import { handleErrors } from 'lib/datocms';
-import tiny from 'tiny-json-http';
-import Prism from 'components/Prism';
 import s from 'pages/docs/pageStyle.module.css';
-import { camelize, exampleForUpload } from 'utils/gqlExampleForField';
-import Heading from 'components/Heading';
-import Head from 'components/Head';
+import React from 'react';
 import { renderMetaTags } from 'react-datocms';
+import tiny from 'tiny-json-http';
+import { camelize, exampleForUpload } from 'utils/gqlExampleForField';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {

@@ -1,5 +1,5 @@
-import tiny from 'tiny-json-http';
 import { WebClient } from '@slack/web-api';
+import tiny from 'tiny-json-http';
 
 const web = new WebClient(process.env.SLACK_TOKEN);
 
@@ -16,7 +16,7 @@ const handler = async ({ method, body }, res) => {
 
   try {
     const { body: recaptcha } = await tiny.post({
-      url: `https://www.google.com/recaptcha/api/siteverify`,
+      url: 'https://www.google.com/recaptcha/api/siteverify',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },

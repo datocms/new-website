@@ -1,7 +1,7 @@
-import UIChrome from 'components/UiChrome';
-import s from './style.module.css';
 import cn from 'classnames';
+import UIChrome from 'components/UiChrome';
 import { useEffect, useRef, useState } from 'react';
+import s from './style.module.css';
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const labels = {
@@ -122,7 +122,7 @@ export default function UseModularBlocks() {
                   <div
                     className={cn(s.mcAddButton, {
                       [s.mcAddButtonActive]:
-                        blocksSequence[blockCount] == block,
+                        blocksSequence[blockCount] === block,
                     })}
                     key={block}
                   >

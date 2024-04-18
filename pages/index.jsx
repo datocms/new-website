@@ -1,44 +1,44 @@
-import Layout from 'components/Layout';
-import Hero from 'components/Hero';
-import Highlight from 'components/Highlight';
+import Bullets from 'components/Bullets';
 import Button from 'components/Button';
 import Checks from 'components/Checks';
-import UseCaseExcerpts from 'components/UseCaseExcerpts';
-import OmnichannelIllustration from 'components/OmnichannelIllustration';
-import Wrapper from 'components/Wrapper';
-import PersonasPicker from 'components/PersonasPicker';
-import InterstitialTitle from 'components/InterstitialTitle';
-import TitleStripWithContent from 'components/TitleStripWithContent';
-import Result from 'components/Result';
 import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Bullets from 'components/Bullets';
-import LogosBar from 'components/LogosBar';
-import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
+import Hero from 'components/Hero';
+import Highlight from 'components/Highlight';
+import InterstitialTitle from 'components/InterstitialTitle';
+import Layout from 'components/Layout';
+import LogosBar from 'components/LogosBar';
+import OmnichannelIllustration from 'components/OmnichannelIllustration';
+import PersonasPicker from 'components/PersonasPicker';
+import Result from 'components/Result';
 import Space from 'components/Space';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import UseCaseExcerpts from 'components/UseCaseExcerpts';
+import Wrapper from 'components/Wrapper';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
+import { renderMetaTags } from 'react-datocms';
 
-import WarningIcon from 'public/icons/regular/times.svg';
 import SuccessIcon from 'public/icons/regular/check.svg';
+import WarningIcon from 'public/icons/regular/times.svg';
 
-import Hashicorp from 'public/images/logos/hashicorp.svg';
-import Vercel from 'public/images/logos/vercel.svg';
 import Dropbox from 'public/images/logos/dropbox.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Polestar from 'public/images/logos/polestar.svg';
+import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import Vmware from 'public/images/logos/vmware.svg';
-import Polestar from 'public/images/logos/polestar.svg';
 
 import Arduino from 'public/images/logos/arduino.svg';
 import CityOfSidney from 'public/images/logos/cityofsidney.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import LinkedIn from 'public/images/logos/linkedin.svg';
 
-import Oberlo from 'public/images/logos/new/oberlo.svg';
-import Nhs from 'public/images/logos/new/nhs.svg';
-import LittleCaesars from 'public/images/logos/new/little-caesars.svg';
-import Mit from 'public/images/logos/new/mit.svg';
 import Afsp from 'public/images/logos/new/afsp.svg';
 import Harrys from 'public/images/logos/new/harrys.svg';
+import LittleCaesars from 'public/images/logos/new/little-caesars.svg';
+import Mit from 'public/images/logos/new/mit.svg';
+import Nhs from 'public/images/logos/new/nhs.svg';
+import Oberlo from 'public/images/logos/new/oberlo.svg';
 
 import styles from './style.module.css';
 

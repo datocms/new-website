@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDebounce } from 'use-debounce';
-import DatoCmsSearch from 'datocms-search/dist/datocms-search.base';
-import highlighter from 'keyword-highlighter';
 import cn from 'classnames';
+import DatoCmsSearch from 'datocms-search/dist/datocms-search.base';
 import parse from 'html-react-parser';
+import highlighter from 'keyword-highlighter';
+import { useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 import wretch from 'wretch';
 
 import s from './style.module.css';

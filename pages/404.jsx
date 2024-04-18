@@ -1,9 +1,9 @@
-import Layout from 'components/Layout';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import Head from 'components/Head';
+import Layout from 'components/Layout';
 
-function Error() {
+function ErrorPage() {
   return (
     <Layout noCta>
       <Head>
@@ -21,4 +21,4 @@ function Error() {
   );
 }
 
-export default Error;
+export default ErrorPage;

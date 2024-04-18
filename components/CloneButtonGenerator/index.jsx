@@ -1,8 +1,8 @@
+import styleForm from 'components/Form/style.module.css';
+import Space from 'components/Space';
+import Tabs, { Tab } from 'components/Tabs';
 import React from 'react';
 import style from './style.module.css';
-import styleForm from 'components/Form/style.module.css';
-import Tabs, { Tab } from 'components/Tabs';
-import Space from 'components/Space';
 
 export default function CloneButtonGenerator() {
   const [cloneUrl, setCloneUrl] = React.useState(

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import cn from 'classnames';
+import React, { useState } from 'react';
 import s from './style.module.css';
 
 export default function Tabs({ children }) {
@@ -10,6 +10,7 @@ export default function Tabs({ children }) {
       <div className={s.handles}>
         {React.Children.map(children, (child, index) => (
           <button
+            type="button"
             key={index}
             onClick={() => setActiveTab(index)}
             className={cn(s.handle, {

@@ -1,16 +1,16 @@
-import Layout from 'components/Layout';
-import Wrapper from 'components/Wrapper';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import s from '../style.module.css';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
-import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
-import Nike from 'public/images/logos/nike.svg';
-import Linkedin from 'public/images/logos/linkedin.svg';
+import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
-import Head from 'components/Head';
+import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
+import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Linkedin from 'public/images/logos/linkedin.svg';
+import Nike from 'public/images/logos/nike.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import s from '../style.module.css';
 
 export default function Support({ preview, topics }) {
   return (

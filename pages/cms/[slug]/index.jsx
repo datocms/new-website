@@ -208,13 +208,12 @@ export const getStaticProps = handleErrors(
     `,
     });
 
-    const sortedWebsites = websites.reduce((acc, website, i) => {
+    const sortedWebsites = websites.flatMap((website, i) => {
       if (i % 2 === 0) {
-        return [...acc, website];
-      } else {
-        return [website, ...acc];
+        return website;
       }
-    }, []);
+      return [website, ...acc];
+    });
 
     return {
       props: {
@@ -239,7 +238,7 @@ export default function UseCase({ subscription, websites, preview }) {
   } = useQuerySubscription(subscription);
 
   useEffect(() => {
-    const el = document.getElementById(`centerwebsite`);
+    const el = document.getElementById('centerwebsite');
 
     if (el) {
       const rect = el.getBoundingClientRect();
@@ -250,7 +249,7 @@ export default function UseCase({ subscription, websites, preview }) {
       });
     }
   }, []);
-  const seoAnalysis = landing && landing.yoastAnalysis;
+  const seoAnalysis = landing?.yoastAnalysis;
   const keyword = seoAnalysis.keyword;
 
   return (
@@ -264,7 +263,7 @@ export default function UseCase({ subscription, websites, preview }) {
             image={
               <LazyImage
                 className={s.logo}
-                alt={keyword + ' logo'}
+                alt={`${keyword} logo`}
                 src={
                   (landing.integration.squareLogo || landing.integration.logo)
                     .url
@@ -302,7 +301,7 @@ export default function UseCase({ subscription, websites, preview }) {
                       key={website.id}
                       className={s.website}
                       id={
-                        parseInt(websites.length / 2) === i
+                        Number.parseInt(websites.length / 2) === i
                           ? 'centerwebsite'
                           : null
                       }
@@ -328,7 +327,7 @@ export default function UseCase({ subscription, websites, preview }) {
                 {block._modelApiKey === 'landing_cdn_map_block' && (
                   <>
                     <Space top={4} bottom={1}>
-                      <InterstitialTitle style="two" kicker={`Worldwide CDN`}>
+                      <InterstitialTitle style="two" kicker={'Worldwide CDN'}>
                         {highlightStructuredText(block.title)}
                       </InterstitialTitle>
                     </Space>
@@ -351,7 +350,7 @@ export default function UseCase({ subscription, websites, preview }) {
                 )}
                 {block._modelApiKey === 'graphql_demo_block' && (
                   <TitleStripWithContent
-                    kicker={`GraphQL Content API`}
+                    kicker={'GraphQL Content API'}
                     title={<>Ask for what you need, get exactly that</>}
                     seoAnalysis={seoAnalysis}
                     subtitle={
@@ -449,7 +448,7 @@ export default function UseCase({ subscription, websites, preview }) {
                 {block._modelApiKey === 'landing_progressive_images_block' && (
                   <Space top={3}>
                     <TitleStripWithContent
-                      kicker={landing.name + ' images'}
+                      kicker={`${landing.name} images`}
                       title={highlightStructuredText(block.title)}
                       seoAnalysis={seoAnalysis}
                       subtitle={

@@ -297,7 +297,7 @@ function Enterprise({ page, review1, review2, review3 }) {
         <Flag
           style="good"
           seoAnalysis={yoastAnalysis}
-          kicker={`Enterprise headless CMS`}
+          kicker={'Enterprise headless CMS'}
           title={
             <>
               A headless CMS that is ready to{' '}

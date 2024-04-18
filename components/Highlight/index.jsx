@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './style.module.css';
-import { StructuredText, renderRule } from 'react-datocms';
 import { isParagraph } from 'datocms-structured-text-utils';
+import React from 'react';
+import { StructuredText, renderRule } from 'react-datocms';
+import styles from './style.module.css';
 
 export default function Highlight({ style = 'neutral', children }) {
   return <strong className={styles[style]}>{children}</strong>;

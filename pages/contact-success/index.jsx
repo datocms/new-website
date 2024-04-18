@@ -1,16 +1,16 @@
+import Head from 'components/Head';
+import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
+import LogosBar from 'components/LogosBar';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
-import s from './style.module.css';
-import Highlight from 'components/Highlight';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Shout from 'public/images/illustrations/marketers.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
 import Nike from 'public/images/logos/nike.svg';
 import Vercel from 'public/images/logos/vercel.svg';
-import LogosBar from 'components/LogosBar';
-import Head from 'components/Head';
-import Shout from 'public/images/illustrations/marketers.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import s from './style.module.css';
 
 export default function Support() {
   return (

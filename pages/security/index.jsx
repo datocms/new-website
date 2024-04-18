@@ -1,12 +1,12 @@
-import Layout from 'components/Layout';
-import Hero from 'components/Hero';
-import Highlight from 'components/Highlight';
-import Legal from 'components/Legal';
 import DocDescription from 'components/DocDescription';
 import Head from 'components/Head';
+import Hero from 'components/Hero';
+import Highlight from 'components/Highlight';
+import Layout from 'components/Layout';
+import Legal from 'components/Legal';
 
-import fs from 'fs';
-import util from 'util';
+import fs from 'node:fs';
+import util from 'node:util';
 
 const readFile = util.promisify(fs.readFile);
 

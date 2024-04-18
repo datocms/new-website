@@ -1,11 +1,11 @@
-import Layout from 'components/Layout';
-import Wrapper from 'components/Wrapper';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
+import Layout from 'components/Layout';
 import Showcase from 'components/Showcase';
-import s from '../style.module.css';
-import Head from 'components/Head';
+import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
+import s from '../style.module.css';
 
 export default function Support({ preview, topics }) {
   return (
@@ -32,7 +32,7 @@ export default function Support({ preview, topics }) {
           <Showcase />
         </div>
       </Wrapper>
-      <div className={s.footer}></div>
+      <div className={s.footer} />
     </Layout>
   );
 }

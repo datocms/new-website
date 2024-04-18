@@ -1,32 +1,32 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Button from 'components/Button';
+import FieldValidations from 'components/FieldValidations';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import {
-  imageFields,
-  reviewFields,
-  gqlStaticProps,
-  seoMetaTagsFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import TitleStripWithContent from 'components/TitleStripWithContent';
-import WorkflowPermissions from 'components/WorkflowPermissions';
-import FieldValidations from 'components/FieldValidations';
 import InterstitialTitle from 'components/InterstitialTitle';
-import Workflow from 'components/Workflow';
-import Button from 'components/Button';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
-import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
-import Verizon from 'public/images/logos/verizon.svg';
-import Polestar from 'public/images/logos/polestar.svg';
-import Vercel from 'public/images/logos/vercel.svg';
+import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
 import SandboxEnvironmentsDemo from 'components/SandboxEnvironmentsDemo';
 import Space from 'components/Space';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import TitleStripWithContent from 'components/TitleStripWithContent';
+import Workflow from 'components/Workflow';
+import WorkflowPermissions from 'components/WorkflowPermissions';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Polestar from 'public/images/logos/polestar.svg';
+import Vercel from 'public/images/logos/vercel.svg';
+import Verizon from 'public/images/logos/verizon.svg';
+import { renderMetaTags } from 'react-datocms';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticProps(
@@ -210,7 +210,7 @@ function Validations({ page, preview, review }) {
           </TitleStripWithContent>
           <Flag
             style="good"
-            kicker={`The most user-friendly CMS`}
+            kicker={'The most user-friendly CMS'}
             title={
               <>
                 A complete set of{' '}

@@ -1,9 +1,9 @@
-import Wrapper from 'components/Wrapper';
 import Button from 'components/Button';
 import UiChrome from 'components/UiChrome';
+import Wrapper from 'components/Wrapper';
+import Link from 'next/link';
 import { Image as DatoImage } from 'react-datocms';
 import s from './style.module.css';
-import Link from 'next/link';
 
 export default function TryDemoCta({
   image,

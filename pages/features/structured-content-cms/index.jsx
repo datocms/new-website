@@ -309,7 +309,7 @@ function StructuredText({ feature, preview, integrations, review }) {
         <Flag
           style="good"
           seoAnalysis={seoAnalysis}
-          kicker={`The most user-friendly CMS`}
+          kicker={'The most user-friendly CMS'}
           title={
             <>
               A complete set of{' '}

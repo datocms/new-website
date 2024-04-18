@@ -1,7 +1,7 @@
 const Rollbar = require('rollbar');
 import {
-  createNote,
   createLead,
+  createNote,
   findOrCreateOrgByName,
   findOrCreatePerson,
 } from '../../../lib/pipedriveHelpers';
@@ -53,16 +53,7 @@ const handler = async (req, res) => {
 
     const lead = await createLead(person, organization, '', [partnershipLabel]);
 
-    const noteText =
-      '<p>Team size: ' +
-      teamSize +
-      '</p>' +
-      '<p>Product familiarity: ' +
-      productFamiliarity +
-      '</p>' +
-      '<p>Message: ' +
-      body +
-      '</p>';
+    const noteText = `<p>Team size: ${teamSize}</p><p>Product familiarity: ${productFamiliarity}</p><p>Message: ${body}</p>`;
 
     await createNote(lead, noteText);
 

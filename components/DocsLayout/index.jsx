@@ -1,19 +1,19 @@
 import BaseLayout from 'components/BaseLayout';
-import DocSearch from 'components/DocSearch';
 import Button from 'components/Button';
-import FullLogo from 'public/images/full_logo.svg';
+import DocSearch from 'components/DocSearch';
 import Link from 'next/link';
-import s from './style.module.css';
 import SupportIcon from 'public/icons/regular/headset.svg';
 import StatusIcon from 'public/icons/regular/tachometer.svg';
-import ThumbsUpIcon from 'public/icons/regular/thumbs-up.svg';
 import ThumbsDownIcon from 'public/icons/regular/thumbs-down.svg';
+import ThumbsUpIcon from 'public/icons/regular/thumbs-up.svg';
+import FullLogo from 'public/images/full_logo.svg';
 import wretch from 'wretch';
+import s from './style.module.css';
 
-import LanguagePicker from 'components/LanguagePicker';
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import classNames from 'classnames';
+import LanguagePicker from 'components/LanguagePicker';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 wretch().errorType('json');
 

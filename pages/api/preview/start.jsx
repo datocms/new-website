@@ -1,4 +1,4 @@
-import url from 'url';
+import url from 'node:url';
 
 const handler = (req, res) => {
   const uri = url.parse(req.query.page || req.query.slug || '/', true);

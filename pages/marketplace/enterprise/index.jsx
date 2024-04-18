@@ -1,8 +1,8 @@
+import Head from 'components/Head';
 import Layout from 'components/MarketplaceLayout';
+import PluginBox, { LogoImage } from 'components/PluginBox';
 import Wrapper from 'components/Wrapper';
 import { gqlStaticProps } from 'lib/datocms';
-import Head from 'components/Head';
-import PluginBox, { LogoImage } from 'components/PluginBox';
 import s from 'pages/marketplace/plugins/browse/p/[page]/style.module.css';
 
 export const getStaticProps = gqlStaticProps(
@@ -38,16 +38,15 @@ export default function Enterprise({ items, preview }) {
           </div>
         </div>
         <div className={s.grid}>
-          {items &&
-            items.map((item) => (
-              <PluginBox
-                key={item.slug}
-                href={`/marketplace/enterprise/${item.slug}`}
-                title={item.title}
-                description={item.description}
-                image={<LogoImage style="azure" logo={item.logo} />}
-              />
-            ))}
+          {items?.map((item) => (
+            <PluginBox
+              key={item.slug}
+              href={`/marketplace/enterprise/${item.slug}`}
+              title={item.title}
+              description={item.description}
+              image={<LogoImage style="azure" logo={item.logo} />}
+            />
+          ))}
         </div>
       </Wrapper>
     </Layout>

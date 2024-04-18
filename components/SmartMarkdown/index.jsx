@@ -1,10 +1,10 @@
-import parse, { domToReact } from 'html-react-parser';
-import Prism from 'components/Prism';
-import ImageFigure from 'components/ImageFigure';
 import Heading from 'components/Heading';
+import ImageFigure from 'components/ImageFigure';
+import Prism from 'components/Prism';
+import parse, { domToReact } from 'html-react-parser';
 import { useMemo } from 'react';
-import slugify from 'utils/slugify';
 import getInnerText from 'utils/getInnerText';
+import slugify from 'utils/slugify';
 
 export default function SmartMarkdown({ children, imageClassName }) {
   const parseOptions = useMemo(

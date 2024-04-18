@@ -1,15 +1,15 @@
+import { ErrorBoundary, Provider } from '@rollbar/react';
+import Head from 'components/Head';
+import Hero from 'components/Hero';
+import Highlight from 'components/Highlight';
+import Wrapper from 'components/Wrapper';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { useEffect, useRef } from 'react';
+import { ToastProvider } from 'react-toast-notifications';
+import { getCookie, setCookie } from 'utils/cookies';
 import '../components/BaseLayout/global.css';
 import '../components/NProgress/style.css';
-import { getCookie, setCookie } from 'utils/cookies';
-import { ToastProvider } from 'react-toast-notifications';
-import { Provider, ErrorBoundary } from '@rollbar/react';
-import Hero from 'components/Hero';
-import Wrapper from 'components/Wrapper';
-import Head from 'components/Head';
-import Highlight from 'components/Highlight';
-import Script from 'next/script';
 
 const rollbarConfig = {
   accessToken: process.env.NEXT_PUBLIC_ROLLBAR_TOKEN,
@@ -42,6 +42,7 @@ const ErrorDisplay = ({ error, resetError }) => (
 function App({ Component, pageProps }) {
   const router = useRouter();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const source = urlParams.get('utm_source');

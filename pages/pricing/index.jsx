@@ -5,19 +5,11 @@ import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
-import RcSwitch from 'rc-switch';
 import LogosBar from 'components/LogosBar';
 import Quote from 'components/Quote';
 import Space from 'components/Space';
-import { matchSorter } from 'match-sorter';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import {
-  formatLimitRaw,
-  formatLimit,
-  formatExtra,
-  formatUpperBoundLimitRaw,
-} from 'utils/planLimitsHelpers';
 import {
   handleErrors,
   imageFields,
@@ -25,26 +17,34 @@ import {
   reviewFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
+import { matchSorter } from 'match-sorter';
 import Link from 'next/link';
 import SuccessIcon from 'public/icons/regular/check.svg';
+import ExclamationIcon from 'public/icons/regular/exclamation-triangle.svg';
 import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
 import MinusCircleIcon from 'public/icons/regular/minus-circle.svg';
-import ExclamationIcon from 'public/icons/regular/exclamation-triangle.svg';
 import PlusCircleIcon from 'public/icons/regular/plus-circle.svg';
 import SearchIcon from 'public/icons/regular/search.svg';
-import NopeIcon from 'public/icons/regular/times.svg';
 import CloseIcon from 'public/icons/regular/times-circle.svg';
+import NopeIcon from 'public/icons/regular/times.svg';
 import AnnouncementIcon from 'public/images/illustrations/marketers.svg';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
+import Polestar from 'public/images/logos/polestar.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
+import RcSwitch from 'rc-switch';
 import { useEffect, useState } from 'react';
-import { renderMetaTags, StructuredText } from 'react-datocms';
+import { StructuredText, renderMetaTags } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import formatNumber from 'utils/formatNumber';
+import {
+  formatExtra,
+  formatLimit,
+  formatLimitRaw,
+  formatUpperBoundLimitRaw,
+} from 'utils/planLimitsHelpers';
 import s from './style.module.css';
-import Polestar from 'public/images/logos/polestar.svg';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {

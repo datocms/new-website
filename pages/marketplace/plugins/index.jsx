@@ -89,7 +89,7 @@ const Big = ({ title, plugins, browse }) => {
             title={post.title}
             href={generateUrl(`/marketplace/plugins/i/${post.packageName}`)}
             image={
-              post.coverImage && post.coverImage.responsiveImage ? (
+              post.coverImage?.responsiveImage ? (
                 <DatoImage
                   className={s.image}
                   data={post.coverImage.responsiveImage}
@@ -125,7 +125,7 @@ const Section = ({ title, plugins, browse }) => {
               title={item.title}
               description={truncate(item.description, 55)}
               image={
-                item.coverImage && item.coverImage.responsiveImage ? (
+                item.coverImage?.responsiveImage ? (
                   <DatoImage
                     className={s.image}
                     data={item.coverImage.responsiveImage}
@@ -163,7 +163,7 @@ const Table = ({ title, plugins, browse }) => {
               <a className={s.tableCell}>
                 <div className={s.tableCellInner}>
                   <div className={s.tableCellImage}>
-                    {item.coverImage && item.coverImage.responsiveImage ? (
+                    {item.coverImage?.responsiveImage ? (
                       <DatoImage
                         className={s.image}
                         data={item.coverImage.responsiveImage}
@@ -208,7 +208,7 @@ export default function Page({ preview, pluginsPage, latest, popular, meta }) {
         onSubmit={(e) => {
           e.preventDefault();
           router.push(
-            generateUrl(`/marketplace/plugins/browse`, {
+            generateUrl('/marketplace/plugins/browse', {
               s: document.getElementById('searchInput').value,
             }),
           );
@@ -226,7 +226,7 @@ export default function Page({ preview, pluginsPage, latest, popular, meta }) {
         title="Most popular"
         plugins={popular}
         browse={
-          <Link href={generateUrl(`/marketplace/plugins/browse`)}>
+          <Link href={generateUrl('/marketplace/plugins/browse')}>
             <a className={s.browseAll}>
               View all ({meta.count}) <ArrowIcon />
             </a>

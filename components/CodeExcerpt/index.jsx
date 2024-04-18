@@ -1,8 +1,8 @@
+import cn from 'classnames';
+import Highlight, { defaultProps } from 'custom-prism-react-renderer';
+import theme from 'custom-prism-react-renderer/themes/palenight';
 /* eslint-disable react/jsx-key */
 import s from './style.module.css';
-import cn from 'classnames';
-import theme from 'custom-prism-react-renderer/themes/palenight';
-import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 
 export default function CodeExcerpt({ code, language }) {
   return (

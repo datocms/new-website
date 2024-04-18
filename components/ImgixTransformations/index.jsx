@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
-import Wrapper from 'components/Wrapper';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
+import Wrapper from 'components/Wrapper';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import s from './style.module.css';
 
 // task fux: :environment do
@@ -333,7 +333,7 @@ export default function ImgixTransformations() {
                 src={image}
                 className={s.image}
                 style={{
-                  width: `calc(var(--max-width))`,
+                  width: 'calc(var(--max-width))',
                   height: `calc(var(--max-width) / ${ar})`,
                   transform: result.transform,
                 }}

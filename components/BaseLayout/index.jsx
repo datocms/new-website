@@ -1,6 +1,6 @@
-import s from './style.module.css';
-import { useRouter } from 'next/router';
 import NProgress from 'components/NProgress';
+import { useRouter } from 'next/router';
+import s from './style.module.css';
 
 export default function Layout({ preview, children }) {
   const router = useRouter();

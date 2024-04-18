@@ -1,6 +1,6 @@
+import { useCallback, useEffect, useState } from 'react';
 import { Portal } from 'utils/usePortal';
 import s from './style.module.css';
-import { useCallback, useState, useEffect } from 'react';
 
 function Zoom({ children, onClose }) {
   const escFunction = useCallback(

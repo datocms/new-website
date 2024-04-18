@@ -11,10 +11,10 @@ export const jsonToJs = (string) =>
   string.replace(/"([^[\-"]+)": /g, '$1: ').replace(/"/g, "'");
 
 function buildExample(resource, link, clientInfo, allPages = false) {
-  let params = [];
-  let precode = [];
+  const params = [];
+  const precode = [];
 
-  let placeholders = [];
+  const placeholders = [];
   let match = regexp.exec(link.href);
 
   while (match != null) {
@@ -24,7 +24,7 @@ function buildExample(resource, link, clientInfo, allPages = false) {
 
   const resourceId = resource.definitions.identity.example || '3209482753';
 
-  placeholders.forEach((placeholder) => {
+  for (const placeholder of placeholders) {
     if (placeholder === 'item_type') {
       precode.push(`const modelIdOrApiKey = 'blog_post';`);
       params.push('modelIdOrApiKey');
@@ -35,7 +35,7 @@ function buildExample(resource, link, clientInfo, allPages = false) {
       precode.push(`const ${humps.camelize(placeholder)}Id = '${resourceId}';`);
       params.push(`${humps.camelize(placeholder)}Id`);
     }
-  });
+  }
 
   const deserialize = (data, withId = false) => {
     const id = withId ? { id: data.id } : {};
@@ -91,9 +91,10 @@ function buildExample(resource, link, clientInfo, allPages = false) {
     paramsCode += '()';
   }
 
-  let call = `client.${namespace}.${action}${paramsCode}`;
+  const call = `client.${namespace}.${action}${paramsCode}`;
 
-  let returnCode, output;
+  let returnCode;
+  let output;
 
   if (link.targetSchema || link.jobSchema) {
     const example = schemaExampleFor(link.jobSchema || link.targetSchema);
@@ -143,24 +144,23 @@ console.log(${singleVariable});`;
 
     const body = `const client = buildClient({ apiToken: '<YOUR_API_TOKEN>' });
 ${precode.length > 0 ? '\n' : ''}${precode.join('\n')}${
-      precode.length > 0 ? '\n' : ''
-    }${
-      returnCode
-        ? `${
-            isPaginated
-              ? '\n// this only returns the first page of results:'
-              : ''
-          }\n${returnCode}`
-        : ''
-    }
+  precode.length > 0 ? '\n' : ''
+}${
+  returnCode
+    ? `${
+        isPaginated ? '\n// this only returns the first page of results:' : ''
+      }\n${returnCode}`
+    : ''
+}
 ${
   isPaginated
-    ? '\n\n// this iterates over every page of results:' +
-      buildExample(resource, link, clientInfo, true).code
+    ? `\n\n// this iterates over every page of results:${
+        buildExample(resource, link, clientInfo, true).code
+      }`
     : ''
 }`;
 
-    let code = `import { buildClient } from '@datocms/cma-client-node';
+    const code = `import { buildClient } from '@datocms/cma-client-node';
 
 async function run() {
 ${body
@@ -173,11 +173,10 @@ ${body
 run();`;
 
     return { code, output };
-  } else {
-    const code = `
-${returnCode}`;
-    return { code, output };
   }
+  const code = `
+${returnCode}`;
+  return { code, output };
 }
 
 export function JSExample({

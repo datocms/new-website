@@ -28,7 +28,8 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'page',
-  ({ meta }) => range(1, Math.ceil(meta.count / parseFloat(PLUGINS_PER_PAGE))),
+  ({ meta }) =>
+    range(1, Math.ceil(meta.count / Number.parseFloat(PLUGINS_PER_PAGE))),
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -71,7 +72,7 @@ export const getStaticProps = gqlStaticProps(
   {
     paramsToVars: ({ page }) => ({
       first: PLUGINS_PER_PAGE,
-      skip: PLUGINS_PER_PAGE * parseInt(page),
+      skip: PLUGINS_PER_PAGE * Number.parseInt(page),
     }),
     requiredKeys: ['pluginsPage', 'plugins'],
   },
@@ -94,7 +95,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
       debouncedSearchTerm
     ) {
       router.push(
-        generateUrl(`/marketplace/plugins/browse`, {
+        generateUrl('/marketplace/plugins/browse', {
           s: debouncedSearchTerm,
         }),
         null,
@@ -114,7 +115,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
       setSearchResults([]);
 
       cache.current[debouncedSearchTerm] = fetch(
-        `https://RBIJYI5XXL-dsn.algolia.net/1/indexes/plugins/query`,
+        'https://RBIJYI5XXL-dsn.algolia.net/1/indexes/plugins/query',
         {
           method: 'POST',
           headers: {
@@ -188,7 +189,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                       `/marketplace/plugins/i/${post.packageName}`,
                     )}
                     image={
-                      post.coverImage && post.coverImage.responsiveImage ? (
+                      post.coverImage?.responsiveImage ? (
                         <DatoImage
                           className={s.image}
                           data={post.coverImage.responsiveImage}
@@ -214,7 +215,7 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
                     `/marketplace/plugins/i/${post.packageName}`,
                   )}
                   image={
-                    post.coverImage && post.coverImage.responsiveImage ? (
+                    post.coverImage?.responsiveImage ? (
                       <DatoImage
                         className={s.image}
                         data={post.coverImage.responsiveImage}
@@ -229,7 +230,9 @@ export default function Plugins({ plugins, preview, meta, pluginsPage }) {
             </div>
             <Paginator
               perPage={PLUGINS_PER_PAGE}
-              currentPage={router.query ? parseInt(router.query.page) : 0}
+              currentPage={
+                router.query ? Number.parseInt(router.query.page) : 0
+              }
               totalEntries={meta.count}
               href={(index) =>
                 index === 0

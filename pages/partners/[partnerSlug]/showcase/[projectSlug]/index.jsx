@@ -218,7 +218,7 @@ export default function PartnerPage({ preview, subscription }) {
                         <a>
                           <LazyImage
                             className={s.madeByLogo}
-                            alt={project.partner.name + ' logo'}
+                            alt={`${project.partner.name} logo`}
                             src={project.partner.logo.url}
                           />
                         </a>

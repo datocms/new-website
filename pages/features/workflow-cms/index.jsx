@@ -76,7 +76,7 @@ function Workflows({ feature, preview, review }) {
         <div id="main-content">
           <TitleStripWithContent
             seoAnalysis={seoAnalysis}
-            kicker={`Publishing workflow in your CMS`}
+            kicker={'Publishing workflow in your CMS'}
             title={<>Build your perfectly oiled content machine</>}
             subtitle={
               <>

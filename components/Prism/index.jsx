@@ -1,10 +1,10 @@
+import cn from 'classnames';
+import Highlight, { defaultProps } from 'custom-prism-react-renderer';
 /* eslint-disable react/jsx-key */
 import theme from 'custom-prism-react-renderer/themes/palenight';
-import Highlight, { defaultProps } from 'custom-prism-react-renderer';
-import cn from 'classnames';
-import s from './style.module.css';
 import { range } from 'range';
 import { useMemo } from 'react';
+import s from './style.module.css';
 
 const modifiedStyles = [
   {

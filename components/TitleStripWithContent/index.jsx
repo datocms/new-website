@@ -1,8 +1,8 @@
+import Heading from 'components/Heading';
 import Wrapper from 'components/Wrapper';
-import s from './style.module.css';
 import { containsKeywords } from 'utils/containsKeyword';
 import slugify from 'utils/slugify';
-import Heading from 'components/Heading';
+import s from './style.module.css';
 
 export default function TitleStripWithContent({
   kicker,

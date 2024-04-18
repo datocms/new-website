@@ -1,10 +1,10 @@
-import Wrapper from 'components/Wrapper';
-import s from './style.module.css';
-import Dato from 'public/images/logos/datocms.svg';
 import cn from 'classnames';
-import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import BackgroundImage from 'components/BackgroundImage';
+import Wrapper from 'components/Wrapper';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import Dato from 'public/images/logos/datocms.svg';
 import { StructuredText } from 'react-datocms';
+import s from './style.module.css';
 
 export default function UseCaseHead({ title, logo: logoUrl, image }) {
   return (

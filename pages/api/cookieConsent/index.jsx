@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import { geolocation } from '@vercel/edge';
+import { NextResponse } from 'next/server';
 
 export const config = {
   runtime: 'experimental-edge',

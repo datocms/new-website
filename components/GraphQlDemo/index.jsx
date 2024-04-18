@@ -1,8 +1,8 @@
-/* eslint-disable react/jsx-key */
-import { useState, useEffect, useRef, useCallback } from 'react';
-import s from './style.module.css';
 import cn from 'classnames';
 import Highlight, { defaultProps } from 'custom-prism-react-renderer';
+/* eslint-disable react/jsx-key */
+import { useCallback, useEffect, useRef, useState } from 'react';
+import s from './style.module.css';
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -148,7 +148,7 @@ export default function GraphQlDemo({ height, children }) {
 
   const difference =
     text.slice(0, cursor).length -
-    text.slice(0, cursor).replace(/  /g, '\t').length;
+    text.slice(0, cursor).replace(/ {2}/g, '\t').length;
 
   return (
     <div className={s.root}>
@@ -157,7 +157,7 @@ export default function GraphQlDemo({ height, children }) {
         style={{ height: `calc(${1.3 * height}em + var(--padding) * 2)` }}
       >
         {text
-          .replace(/  /g, '\t')
+          .replace(/ {2}/g, '\t')
           .slice(0, cursor - difference)
           .split('')
           .map((c, i) => (
@@ -165,7 +165,7 @@ export default function GraphQlDemo({ height, children }) {
           ))}
         <div className={s.cursor} />
         {text
-          .replace(/  /g, '\t')
+          .replace(/ {2}/g, '\t')
           .slice(cursor - difference)
           .split('')
           .map((c, i) => (
@@ -175,7 +175,7 @@ export default function GraphQlDemo({ height, children }) {
 
       <Highlight
         {...defaultProps}
-        code={result.replace(/  /g, '\t')}
+        code={result.replace(/ {2}/g, '\t')}
         language="json"
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (

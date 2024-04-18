@@ -18,6 +18,7 @@ export default function LanguagePicker({ children }) {
       <div className={s.picker}>
         <div className={s.pickerLabel}>Show examples in:</div>
         <button
+          type="button"
           className={cn(s.pickerButton, {
             [s.pickerButtonActive]: language === 'javascript',
           })}
@@ -26,6 +27,7 @@ export default function LanguagePicker({ children }) {
           Javascript
         </button>
         <button
+          type="button"
           className={cn(s.pickerButton, {
             [s.pickerButtonActive]: language === 'http',
           })}

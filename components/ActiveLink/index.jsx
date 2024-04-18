@@ -32,7 +32,7 @@ export function isActive(props, router) {
     const componentUrlTokens = componentUrl.split('/');
 
     return (
-      urlTokens[parentPageIdx] == componentUrlTokens[parentPageIdx] &&
+      urlTokens[parentPageIdx] === componentUrlTokens[parentPageIdx] &&
       props.activeClassName
     );
   }

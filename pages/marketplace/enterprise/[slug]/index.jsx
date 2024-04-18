@@ -33,9 +33,7 @@ export default function EnterpriseApp({ page, preview }) {
         gallery={page.gallery.map((image) => (
           <DatoImage key={image.id} data={image.responsiveImage} />
         ))}
-        content={
-          <PostContent content={page && page.content} style={docPageStyles} />
-        }
+        content={<PostContent content={page?.content} style={docPageStyles} />}
         image={<LogoImage style="azure" logo={page.logo} />}
         shortDescription={page.shortDescription}
         actions={

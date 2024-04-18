@@ -1,6 +1,6 @@
 const nextEnv = require('next-env');
 const dotenvLoad = require('dotenv-load');
-const path = require('path');
+const path = require('node:path');
 const redirects = require('./redirects');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

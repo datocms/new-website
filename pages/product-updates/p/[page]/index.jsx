@@ -35,7 +35,10 @@ export const getStaticPaths = gqlStaticPaths(
   ({ meta }) =>
     range(
       1,
-      Math.min(5, Math.ceil(meta.count / parseFloat(CHANGELOG_POSTS_PER_PAGE))),
+      Math.min(
+        5,
+        Math.ceil(meta.count / Number.parseFloat(CHANGELOG_POSTS_PER_PAGE)),
+      ),
     ),
 );
 
@@ -112,7 +115,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     requiredKeys: ['changelog', 'posts'],
     paramsToVars: ({ page }) => ({
       first: CHANGELOG_POSTS_PER_PAGE,
-      skip: CHANGELOG_POSTS_PER_PAGE * parseInt(page),
+      skip: CHANGELOG_POSTS_PER_PAGE * Number.parseInt(page),
     }),
   },
 );
@@ -140,44 +143,40 @@ export default function Changelog({ preview, subscription }) {
       />
       <Wrapper>
         <div>
-          {posts &&
-            posts.map((post) => (
-              <div key={post.slug} className={s.post}>
-                <div className={s.categories}>
-                  {post.categories.map((cat) => (
-                    <span
-                      key={cat.name}
-                      className={s.category}
-                      style={{ backgroundColor: cat.color.hex }}
-                    >
-                      {cat.name}
-                    </span>
-                  ))}
-                </div>
-
-                <h6 className={s.title}>
-                  <Link key={post.slug} href={`/product-updates/${post.slug}`}>
-                    <a>{post.title}</a>
-                  </Link>
-                </h6>
-
-                <div className={s.info}>
-                  <FormattedDate date={post._firstPublishedAt} />
-                </div>
-
-                <div className={s.body}>
-                  <PostContent
-                    content={post && post.content}
-                    style={pageStyle}
-                  />
-                </div>
+          {posts?.map((post) => (
+            <div key={post.slug} className={s.post}>
+              <div className={s.categories}>
+                {post.categories.map((cat) => (
+                  <span
+                    key={cat.name}
+                    className={s.category}
+                    style={{ backgroundColor: cat.color.hex }}
+                  >
+                    {cat.name}
+                  </span>
+                ))}
               </div>
-            ))}
+
+              <h6 className={s.title}>
+                <Link key={post.slug} href={`/product-updates/${post.slug}`}>
+                  <a>{post.title}</a>
+                </Link>
+              </h6>
+
+              <div className={s.info}>
+                <FormattedDate date={post._firstPublishedAt} />
+              </div>
+
+              <div className={s.body}>
+                <PostContent content={post?.content} style={pageStyle} />
+              </div>
+            </div>
+          ))}
         </div>
 
         <Paginator
           perPage={CHANGELOG_POSTS_PER_PAGE}
-          currentPage={router.query ? parseInt(router.query.page) : 0}
+          currentPage={router.query ? Number.parseInt(router.query.page) : 0}
           totalEntries={meta.count}
           href={(index) =>
             index === 0 ? '/product-updates' : `/product-updates/p/${index}`

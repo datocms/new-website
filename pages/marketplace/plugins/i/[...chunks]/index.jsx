@@ -146,7 +146,7 @@ export default function Plugin({ plugin, preview }) {
   } = useRouter();
 
   const { data } = useSWR(chunks.join('/'), fetcher);
-  const info = data && data.data.plugin;
+  const info = data?.data.plugin;
 
   const projectDomain = new URLSearchParams(asPath.split('?')[1]).get(
     'projectDomain',
@@ -220,7 +220,7 @@ export default function Plugin({ plugin, preview }) {
               <a
                 rel="noopener noreferrer"
                 target="_blank"
-                href={plugin && plugin.homepage}
+                href={plugin?.homepage}
               >
                 Visit homepage
               </a>
@@ -247,7 +247,7 @@ export default function Plugin({ plugin, preview }) {
               </Info>
             )}
             <Info title="Current version">{plugin.version}</Info>
-            <Info title="Installs count">{info && info.installs}</Info>
+            <Info title="Installs count">{info?.installs}</Info>
             <Info title="Last update">
               {info && <FormattedDate date={info.lastUpdate} />}
             </Info>

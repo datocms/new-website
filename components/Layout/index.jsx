@@ -1,7 +1,7 @@
-import Navbar from 'components/Navbar';
-import MobileNavbar from 'components/MobileNavbar';
-import Footer from 'components/Footer';
 import BaseLayout from 'components/BaseLayout';
+import Footer from 'components/Footer';
+import MobileNavbar from 'components/MobileNavbar';
+import Navbar from 'components/Navbar';
 
 export default function Layout({ noCta, children, preview }) {
   return (

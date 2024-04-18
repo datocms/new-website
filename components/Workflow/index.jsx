@@ -1,10 +1,10 @@
-import Confetti from 'react-dom-confetti';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import LazyImage from 'components/LazyImage';
-import times from 'utils/times';
 import cn from 'classnames';
+import LazyImage from 'components/LazyImage';
+import { useEffect, useRef, useState } from 'react';
+import Confetti from 'react-dom-confetti';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import times from 'utils/times';
 import s from './style.module.css';
-import { useEffect, useState, useRef } from 'react';
 
 const stages = ['draft', 'review', 'changes', 'approved', 'published'];
 

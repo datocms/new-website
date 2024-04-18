@@ -1,7 +1,7 @@
-import useSWR from 'swr';
 import cn from 'classnames';
-import s from './style.module.css';
+import useSWR from 'swr';
 import wretch from 'wretch';
+import s from './style.module.css';
 
 const fetcher = (url) => wretch(url).get().json();
 
@@ -16,10 +16,11 @@ export default function StatusBadge() {
     fetcher,
   );
 
-  const firstDownComponent =
-    components && components.find((component) => component.status !== 'up');
+  const firstDownComponent = components?.find(
+    (component) => component.status !== 'up',
+  );
 
-  const firstDownStatus = firstDownComponent && firstDownComponent.status;
+  const firstDownStatus = firstDownComponent?.status;
 
   return (
     <a

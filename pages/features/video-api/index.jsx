@@ -56,7 +56,7 @@ function VideoStreamingEncoding({ feature, preview }) {
       <div id="main-content">
         <TitleStripWithContent
           seoAnalysis={seoAnalysis}
-          kicker={`Fastest API for any video size`}
+          kicker={'Fastest API for any video size'}
           title={<>Adaptive bitrate means fast on every device</>}
           subtitle={
             <>

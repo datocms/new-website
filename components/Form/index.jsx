@@ -1,17 +1,17 @@
-import s from './style.module.css';
+import useComponentSize from '@rehooks/component-size';
+import cn from 'classnames';
 import Button from 'components/Button';
 import Link from 'next/link';
+import { useRef } from 'react';
 import {
+  Controller,
   FormProvider,
   useForm,
   useFormContext,
-  Controller,
 } from 'react-hook-form';
-import cn from 'classnames';
-import { useToasts } from 'react-toast-notifications';
-import { useRef } from 'react';
-import useComponentSize from '@rehooks/component-size';
 import { useRecaptcha } from 'react-recaptcha-hook';
+import { useToasts } from 'react-toast-notifications';
+import s from './style.module.css';
 
 export const Field = ({
   name,
@@ -89,7 +89,7 @@ export const Field = ({
   return (
     <div
       className={cn(s.field, {
-        [s.fieldError]: errors[name] && errors[name].message,
+        [s.fieldError]: errors[name]?.message,
       })}
       style={{
         '--paddingTop': `${35 + labelHeight}px`,

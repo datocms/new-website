@@ -1,19 +1,20 @@
-import BaseLayout from 'components/BaseLayout';
-import Wrapper from 'components/Wrapper';
-import Footer from 'components/Footer';
-import Link from 'next/link';
 import ActiveLink from 'components/ActiveLink';
-import s from './style.module.css';
-import Logo from 'public/images/logo.svg';
-import LeftArrow from 'public/icons/regular/long-arrow-alt-left.svg';
-import { useState, useCallback } from 'react';
+import BaseLayout from 'components/BaseLayout';
+import Footer from 'components/Footer';
+import Wrapper from 'components/Wrapper';
+import Link from 'next/link';
 import Hamburger from 'public/icons/regular/bars.svg';
+import LeftArrow from 'public/icons/regular/long-arrow-alt-left.svg';
+import Logo from 'public/images/logo.svg';
+import { useCallback, useState } from 'react';
+import s from './style.module.css';
 
 export default function IntegrationsLayout({ children, preview }) {
   const [visible, setVisible] = useState(false);
+
   const toggleVisibility = useCallback(() => {
     setVisible((v) => !v);
-  }, [setVisible]);
+  }, []);
 
   return (
     <BaseLayout preview={preview}>
@@ -88,7 +89,11 @@ export default function IntegrationsLayout({ children, preview }) {
 
               <div className={s.space} />
 
-              <button className={s.hamburger} onClick={toggleVisibility}>
+              <button
+                type="button"
+                className={s.hamburger}
+                onClick={toggleVisibility}
+              >
                 <Hamburger />
               </button>
 

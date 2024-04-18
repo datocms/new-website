@@ -1,6 +1,6 @@
 import Wrapper from 'components/Wrapper';
-import styles from './style.module.css';
 import { containsKeywords } from 'utils/containsKeyword';
+import styles from './style.module.css';
 
 export default function Hero({
   image,

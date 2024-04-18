@@ -1,7 +1,7 @@
-import UIChrome from 'components/UiChrome';
-import s from './style.module.css';
-import { useEffect, useState } from 'react';
 import cn from 'classnames';
+import UIChrome from 'components/UiChrome';
+import { useEffect, useState } from 'react';
+import s from './style.module.css';
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const locales = [

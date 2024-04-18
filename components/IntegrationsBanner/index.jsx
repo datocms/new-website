@@ -1,6 +1,6 @@
+import Wrapper from 'components/Wrapper';
 import React from 'react';
 import s from './style.module.css';
-import Wrapper from 'components/Wrapper';
 
 export default function IntegrationsBanner({ title, bubbles, children }) {
   return (

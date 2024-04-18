@@ -1,34 +1,23 @@
-import s from './style.module.css';
 import Wrapper from 'components/Wrapper';
+import { groupBy } from 'lodash-es';
 import {
   ComposableMap,
   Geographies,
   Geography,
-  Sphere,
   Graticule,
+  Sphere,
 } from 'react-simple-maps';
-
-const groupBy = (items, fn) =>
-  items.reduce((result, item) => {
-    const key = fn(item);
-
-    return {
-      ...result,
-      [key]: [...(result[key] || []), item],
-    };
-  }, {});
+import s from './style.module.css';
 
 export default function PartnersMap({ partners }) {
   const countries = groupBy(
-    partners
-      .map((partner) =>
-        partner.locations.map((location) => ({
-          location: location,
-          partner: partner,
-        })),
-      )
-      .flat(),
-    (thing) => thing.location.code,
+    partners.flatMap((partner) =>
+      partner.locations.map((location) => ({
+        location: location,
+        partner: partner,
+      })),
+    ),
+    'location.code',
   );
 
   return (
@@ -51,7 +40,7 @@ export default function PartnersMap({ partners }) {
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
-                      fill={results ? `var(--azure-color)` : '#F5F4F6'}
+                      fill={results ? 'var(--azure-color)' : '#F5F4F6'}
                       tabIndex={-1}
                       style={{
                         default: { outline: 'none' },

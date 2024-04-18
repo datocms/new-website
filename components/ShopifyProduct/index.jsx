@@ -1,7 +1,7 @@
-import Wrapper from 'components/Wrapper';
-import { useEffect, useState } from 'react';
 import Button from 'components/Button';
+import Wrapper from 'components/Wrapper';
 import CartIcon from 'public/icons/regular/cart-plus.svg';
+import { useEffect, useState } from 'react';
 import s from './style.module.css';
 
 const currencies = {

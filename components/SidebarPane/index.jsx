@@ -1,5 +1,5 @@
-import s from './style.module.css';
 import cn from 'classnames';
+import s from './style.module.css';
 
 const SidebarPane = ({ title, icon, separateMoreFromContent, children }) => {
   return (

@@ -1,9 +1,9 @@
-import Wrapper from 'components/Wrapper';
-import LazyImage from 'components/LazyImage';
-import s from './style.module.css';
 import Heading from 'components/Heading';
+import LazyImage from 'components/LazyImage';
+import Wrapper from 'components/Wrapper';
 import { containsKeywords } from 'utils/containsKeyword';
 import slugify from 'utils/slugify';
+import s from './style.module.css';
 
 export default function TitleIllustrationStripWithContent({
   title,

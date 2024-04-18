@@ -1,24 +1,24 @@
-import React from 'react';
-import DocsLayout from 'components/DocsLayout';
 import DocPageContent from 'components/DocPageContent';
+import DocsLayout from 'components/DocsLayout';
+import Head from 'components/Head';
+import Heading from 'components/Heading';
+import Prism from 'components/Prism';
 import Space from 'components/Space';
 import Tabs, { Tab } from 'components/Tabs';
+import { handleErrors } from 'lib/datocms';
 import {
-  Toc,
   Sidebar,
+  Toc,
   getStaticProps as docPageGetStaticProps,
 } from 'pages/docs/[...chunks]';
-import tiny from 'tiny-json-http';
-import Prism from 'components/Prism';
 import s from 'pages/docs/pageStyle.module.css';
-import gqlExampleForField, { camelize } from 'utils/gqlExampleForField';
-import fieldTypes from 'utils/fieldTypes';
-import metaTypes from 'utils/metaTypes';
-import Heading from 'components/Heading';
-import Head from 'components/Head';
+import React from 'react';
 import { renderMetaTags } from 'react-datocms';
+import tiny from 'tiny-json-http';
+import fieldTypes from 'utils/fieldTypes';
+import gqlExampleForField, { camelize } from 'utils/gqlExampleForField';
+import metaTypes from 'utils/metaTypes';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
-import { handleErrors } from 'lib/datocms';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const { props } = await docPageGetStaticProps({

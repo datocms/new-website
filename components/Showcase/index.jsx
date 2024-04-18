@@ -1,9 +1,9 @@
-import s from './style.module.css';
 import Link from 'next/link';
-import Hashicorp from 'public/images/logos/hashicorp.svg';
-import Wonderland from 'public/images/logos/wonderland.svg';
 import Chillys from 'public/images/logos/chillys.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
 import MatterSupply from 'public/images/logos/matter-supply.svg';
+import Wonderland from 'public/images/logos/wonderland.svg';
+import s from './style.module.css';
 
 const SUCCESS_STORIES = {
   hashicorp: Hashicorp,

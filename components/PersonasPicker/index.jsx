@@ -1,9 +1,9 @@
-import s from './style.module.css';
+import Highlight from 'components/Highlight';
+import LazyImage from 'components/LazyImage';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
-import LazyImage from 'components/LazyImage';
-import Highlight from 'components/Highlight';
+import s from './style.module.css';
 
 export default function PersonasPicker() {
   return (
@@ -26,7 +26,7 @@ export default function PersonasPicker() {
           <Link href="/team/best-cms-for-developers">
             <a className={s.personas}>
               <div className={s.personasImage}>
-                <LazyImage src={`/images/illustrations/developers-2.svg`} />
+                <LazyImage src={'/images/illustrations/developers-2.svg'} />
               </div>
               <h6 className={s.personasTitle}>For developers</h6>
               <div className={s.personasBody}>
@@ -41,7 +41,7 @@ export default function PersonasPicker() {
           <Link href="/team/cms-digital-marketing">
             <a className={s.personas}>
               <div className={s.personasImage}>
-                <LazyImage src={`/images/illustrations/marketers.svg`} />
+                <LazyImage src={'/images/illustrations/marketers.svg'} />
               </div>
               <h6 className={s.personasTitle}>For digital marketers</h6>
               <div className={s.personasBody}>
@@ -57,7 +57,7 @@ export default function PersonasPicker() {
           <Link href="/team/content-creators">
             <a className={s.personas}>
               <div className={s.personasImage}>
-                <LazyImage src={`/images/illustrations/content-editors2.svg`} />
+                <LazyImage src={'/images/illustrations/content-editors2.svg'} />
               </div>
               <h6 className={s.personasTitle}>For content editors</h6>
               <div className={s.personasBody}>

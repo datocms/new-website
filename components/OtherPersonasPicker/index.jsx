@@ -1,8 +1,8 @@
-import s from './style.module.css';
+import LazyImage from 'components/LazyImage';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
-import LazyImage from 'components/LazyImage';
+import s from './style.module.css';
 
 export default function PersonasPicker({ title, currentPersonas }) {
   return (
@@ -20,7 +20,7 @@ export default function PersonasPicker({ title, currentPersonas }) {
             <Link href="/team/best-cms-for-developers">
               <a className={s.personas}>
                 <div className={s.personasImage}>
-                  <LazyImage src={`/images/illustrations/developers-2.svg`} />
+                  <LazyImage src={'/images/illustrations/developers-2.svg'} />
                 </div>
                 <div className={s.personasTitle}>For developers</div>
                 <div className={s.personasBody}>
@@ -37,7 +37,7 @@ export default function PersonasPicker({ title, currentPersonas }) {
             <Link href="/team/cms-digital-marketing">
               <a className={s.personas}>
                 <div className={s.personasImage}>
-                  <LazyImage src={`/images/illustrations/marketers.svg`} />
+                  <LazyImage src={'/images/illustrations/marketers.svg'} />
                 </div>
                 <div className={s.personasTitle}>For digital marketers</div>
                 <div className={s.personasBody}>
@@ -56,7 +56,7 @@ export default function PersonasPicker({ title, currentPersonas }) {
               <a className={s.personas}>
                 <div className={s.personasImage}>
                   <LazyImage
-                    src={`/images/illustrations/content-editors2.svg`}
+                    src={'/images/illustrations/content-editors2.svg'}
                   />
                 </div>
                 <div className={s.personasTitle}>For content editors</div>

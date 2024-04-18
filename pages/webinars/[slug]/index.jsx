@@ -69,8 +69,8 @@ function useOnClickOutside(ref, handler) {
 const AddCalendar = ({ webinar, p, fs, s: otherS }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
-  const onClickOutside = useCallback(() => setOpen(false), [setOpen]);
-  const onOpen = useCallback(() => setOpen(true), [setOpen]);
+  const onClickOutside = useCallback(() => setOpen(false), []);
+  const onOpen = useCallback(() => setOpen(true), []);
   useOnClickOutside(ref, onClickOutside);
 
   const options = useMemo(

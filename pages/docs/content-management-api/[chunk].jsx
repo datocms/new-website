@@ -1,4 +1,5 @@
 import DocsLayout from 'components/DocsLayout';
+import { parse } from 'flatted';
 import {
   Sidebar,
   Toc,
@@ -6,15 +7,14 @@ import {
 } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
 import fetchCma from 'utils/fetchCma';
-import { parse } from 'flatted';
 
-import { useMemo } from 'react';
-import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import { useQuerySubscription } from 'utils/useQuerySubscription';
 import DocPageContent from 'components/DocPageContent';
+import Head from 'components/Head';
 import { gqlStaticPaths } from 'lib/datocms';
 import { handleErrors } from 'lib/datocms';
+import { useMemo } from 'react';
+import { renderMetaTags } from 'react-datocms';
+import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticPaths = gqlStaticPaths(
   `

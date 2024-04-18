@@ -16,30 +16,29 @@ function convLatLongToStyle(latitude, longitude) {
 }
 
 const distance = (lat1, lon1, lat2, lon2, unit = 'K') => {
-  if (lat1 == lat2 && lon1 == lon2) {
+  if (lat1 === lat2 && lon1 === lon2) {
     return 0;
-  } else {
-    var radlat1 = (Math.PI * lat1) / 180;
-    var radlat2 = (Math.PI * lat2) / 180;
-    var theta = lon1 - lon2;
-    var radtheta = (Math.PI * theta) / 180;
-    var dist =
-      Math.sin(radlat1) * Math.sin(radlat2) +
-      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-    if (dist > 1) {
-      dist = 1;
-    }
-    dist = Math.acos(dist);
-    dist = (dist * 180) / Math.PI;
-    dist = dist * 60 * 1.1515;
-    if (unit == 'K') {
-      dist = dist * 1.609344;
-    }
-    if (unit == 'N') {
-      dist = dist * 0.8684;
-    }
-    return dist;
   }
+  const radlat1 = (Math.PI * lat1) / 180;
+  const radlat2 = (Math.PI * lat2) / 180;
+  const theta = lon1 - lon2;
+  const radtheta = (Math.PI * theta) / 180;
+  let dist =
+    Math.sin(radlat1) * Math.sin(radlat2) +
+    Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+  if (dist > 1) {
+    dist = 1;
+  }
+  dist = Math.acos(dist);
+  dist = (dist * 180) / Math.PI;
+  dist = dist * 60 * 1.1515;
+  if (unit === 'K') {
+    dist = dist * 1.609344;
+  }
+  if (unit === 'N') {
+    dist = dist * 0.8684;
+  }
+  return dist;
 };
 
 function numberWithCommas(x) {
@@ -79,15 +78,15 @@ export default function CdnMap() {
     let stopped = false;
 
     (async () => {
-      var start = new Date();
+      const start = new Date();
       const data = await fetcher('https://graphql.datocms.com/geo/ping');
 
       if (stopped) {
         return;
       }
 
-      var end = new Date();
-      setPing({ ...data, latency: parseInt((end - start) * 0.8) });
+      const end = new Date();
+      setPing({ ...data, latency: Number.parseInt((end - start) * 0.8) });
 
       if (!currentDataCenter) {
         setAndScroll(data.datacenter);
@@ -114,84 +113,81 @@ export default function CdnMap() {
               <div className={s.ripple} />
             </div>
           )}
-          {datacenters &&
-            datacenters.map((dc) => (
-              <div
-                key={dc.code}
-                className={cn(s.datacenter, {
-                  [s.activePoint]: ping && ping.datacenter === dc.code,
-                })}
-                style={{
-                  ...convLatLongToStyle(
-                    dc.coordinates.latitude,
-                    dc.coordinates.longitude,
-                  ),
-                  zIndex: ping && ping.datacenter == dc.code ? 100 : 1,
-                }}
-                onClick={() => {
-                  setAndScroll(dc.code);
-                }}
-              >
-                <div className={s.pin} />
-              </div>
-            ))}
+          {datacenters?.map((dc) => (
+            <div
+              key={dc.code}
+              className={cn(s.datacenter, {
+                [s.activePoint]: ping && ping.datacenter === dc.code,
+              })}
+              style={{
+                ...convLatLongToStyle(
+                  dc.coordinates.latitude,
+                  dc.coordinates.longitude,
+                ),
+                zIndex: ping && ping.datacenter === dc.code ? 100 : 1,
+              }}
+              onClick={() => {
+                setAndScroll(dc.code);
+              }}
+            >
+              <div className={s.pin} />
+            </div>
+          ))}
         </div>
       </Wrapper>
       <div className={s.list}>
         <div className={s.listInner}>
-          {datacenters &&
-            datacenters.map((dc) => (
+          {datacenters?.map((dc) => (
+            <div
+              key={dc.code}
+              id={`datacenter-${dc.code}`}
+              className={s.itemWrapper}
+            >
               <div
-                key={dc.code}
-                id={`datacenter-${dc.code}`}
-                className={s.itemWrapper}
+                className={cn(s.item, {
+                  [s.activeItem]:
+                    dc.code === (currentDataCenter || ping?.datacenter),
+                  [s.nearestItem]: ping && ping.datacenter === dc.code,
+                })}
+                onClick={() => setAndScroll(dc.code)}
               >
-                <div
-                  className={cn(s.item, {
-                    [s.activeItem]:
-                      dc.code ===
-                      (currentDataCenter || (ping && ping.datacenter)),
-                    [s.nearestItem]: ping && ping.datacenter == dc.code,
-                  })}
-                  onClick={() => setAndScroll(dc.code)}
-                >
-                  <div className={s.code}>{dc.code}</div>
-                  <div className={s.city}>
-                    {dc.name.split(/ \- /)[0]}, {dc.billing_region}
-                  </div>
-                  <div className={s.infos}>
-                    <div className={s.info}>
-                      <div className={s.infoTitle}>Distance</div>
-                      <div className={s.infoValue}>
-                        {location && (
-                          <>
-                            {numberWithCommas(
-                              parseInt(
-                                distance(
-                                  dc.coordinates.latitude,
-                                  dc.coordinates.longitude,
-                                  location.lat,
-                                  location.lon,
-                                ),
+                <div className={s.code}>{dc.code}</div>
+                <div className={s.city}>
+                  {dc.name.split(/ \- /)[0]}, {dc.billing_region}
+                </div>
+                <div className={s.infos}>
+                  <div className={s.info}>
+                    <div className={s.infoTitle}>Distance</div>
+                    <div className={s.infoValue}>
+                      {location && (
+                        <>
+                          {numberWithCommas(
+                            Number.parseInt(
+                              distance(
+                                dc.coordinates.latitude,
+                                dc.coordinates.longitude,
+                                location.lat,
+                                location.lon,
                               ),
-                            )}{' '}
-                            km
-                          </>
-                        )}
+                            ),
+                          )}{' '}
+                          km
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  {ping && ping.datacenter === dc.code && (
+                    <div className={s.info}>
+                      <div className={s.infoTitle}>Latency</div>
+                      <div className={s.infoValue}>
+                        {numberWithCommas(ping.latency)} ms
                       </div>
                     </div>
-                    {ping && ping.datacenter === dc.code && (
-                      <div className={s.info}>
-                        <div className={s.infoTitle}>Latency</div>
-                        <div className={s.infoValue}>
-                          {numberWithCommas(ping.latency)} ms
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>

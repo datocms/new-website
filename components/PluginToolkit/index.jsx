@@ -1,11 +1,11 @@
+import cn from 'classnames';
+import PluginBox from 'components/PluginBox';
+import Wrapper from 'components/Wrapper';
+import Link from 'next/link';
+import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
 import React from 'react';
 import gravatar from 'utils/gravatar';
-import MegaphoneIcon from 'public/icons/regular/megaphone.svg';
-import Link from 'next/link';
 import s from './style.module.css';
-import Wrapper from 'components/Wrapper';
-import PluginBox from 'components/PluginBox';
-import cn from 'classnames';
 
 export const PluginInfo = ({ children }) => {
   return <div className={s.root}>{children}</div>;

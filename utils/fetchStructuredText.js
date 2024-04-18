@@ -1,6 +1,6 @@
-import tiny from 'tiny-json-http';
-import parser from 'json-schema-ref-parser';
 import { stringify } from 'flatted';
+import parser from 'json-schema-ref-parser';
+import tiny from 'tiny-json-http';
 
 export async function buildStructuredTextDocumentSchema() {
   const { body: unreferencedSchema } = await tiny.get({

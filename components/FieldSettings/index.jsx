@@ -1,7 +1,7 @@
-import UIChrome from 'components/UiChrome';
-import s from './style.module.css';
 import cn from 'classnames';
+import UIChrome from 'components/UiChrome';
 import { useEffect, useState } from 'react';
+import s from './style.module.css';
 
 export default function FieldSettings() {
   const [on, setOn] = useState(false);

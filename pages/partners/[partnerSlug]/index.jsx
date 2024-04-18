@@ -213,7 +213,7 @@ export default function PartnerPage({ preview, subscription, plugins }) {
       >
         <LazyImage
           className={s.logo}
-          alt={partner.name + ' logo'}
+          alt={`${partner.name} logo`}
           src={partner.logo.url}
         />
       </InterstitialTitle>
@@ -362,7 +362,7 @@ export default function PartnerPage({ preview, subscription, plugins }) {
                     title={post.title}
                     href={`/marketplace/plugins/i/${post.packageName}`}
                     image={
-                      post.coverImage && post.coverImage.responsiveImage ? (
+                      post.coverImage?.responsiveImage ? (
                         <Image
                           className={s.image}
                           data={post.coverImage.responsiveImage}

@@ -1,6 +1,6 @@
-import { renderMetaTags } from 'react-datocms';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { renderMetaTags } from 'react-datocms';
 
 const DatoHead = ({ seo, children, canonicalUrl, noIndex }) => {
   const router = useRouter();

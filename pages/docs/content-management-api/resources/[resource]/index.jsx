@@ -1,16 +1,16 @@
-import DocsLayout from 'components/DocsLayout';
-import { Sidebar } from 'pages/docs/[...chunks]';
-import s from 'pages/docs/pageStyle.module.css';
-import fetchCma from 'utils/fetchCma';
-import { parse } from 'flatted';
-import { request } from 'lib/datocms';
-import { useMemo } from 'react';
-import Head from 'components/Head';
-import Link from 'next/link';
 import { Definition } from 'components/Cma/Schema';
 import DocDescription from 'components/DocDescription';
-import { useRouter } from 'next/router';
+import DocsLayout from 'components/DocsLayout';
+import Head from 'components/Head';
+import { parse } from 'flatted';
+import { request } from 'lib/datocms';
 import { handleErrors } from 'lib/datocms';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Sidebar } from 'pages/docs/[...chunks]';
+import s from 'pages/docs/pageStyle.module.css';
+import { useMemo } from 'react';
+import fetchCma from 'utils/fetchCma';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -19,20 +19,17 @@ export const getStaticPaths = async () => {
   return {
     fallback: 'blocking',
     paths: toc
-      .map(({ children }) => children)
-      .flat(1)
+      .flatMap(({ children }) => children)
       .map(({ slug }) => ({ params: { resource: slug } })),
   };
 };
 
-export const getStaticProps = handleErrors(async function ({
-  params: { resource },
-  preview,
-}) {
-  const {
-    data: { docGroup },
-  } = await request({
-    query: `
+export const getStaticProps = handleErrors(
+  async ({ params: { resource }, preview }) => {
+    const {
+      data: { docGroup },
+    } = await request({
+      query: `
       query($groupSlug: String!) {
         docGroup(filter: { slug: { eq: $groupSlug } }) {
           name
@@ -52,29 +49,30 @@ export const getStaticProps = handleErrors(async function ({
         }
       }
     `,
-    variables: { groupSlug: 'content-management-api' },
-    preview,
-  });
+      variables: { groupSlug: 'content-management-api' },
+      preview,
+    });
 
-  if (!docGroup) {
-    return { notFound: true };
-  }
+    if (!docGroup) {
+      return { notFound: true };
+    }
 
-  const cma = await fetchCma(resource);
+    const cma = await fetchCma(resource);
 
-  if (!cma) {
-    return { notFound: true };
-  }
+    if (!cma) {
+      return { notFound: true };
+    }
 
-  return {
-    props: {
-      docGroup,
-      preview: preview ? true : false,
-      cma,
-      resourceId: resource,
-    },
-  };
-});
+    return {
+      props: {
+        docGroup,
+        preview: preview ? true : false,
+        cma,
+        resourceId: resource,
+      },
+    };
+  },
+);
 
 export default function DocPage({ docGroup, cma, preview, resourceId }) {
   const router = useRouter();

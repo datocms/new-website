@@ -70,7 +70,7 @@ export default function ImageFigure({ data, imageClassName, alt, title }) {
           <img alt={data.alt} src={`${data.url}?auto=format&fit=max&w=900`} />
         </Zoomable>
       )}
-      {(data.title || (data.responsiveImage && data.responsiveImage.title)) && (
+      {(data.title || data.responsiveImage?.title) && (
         <figcaption>{data.title || data.responsiveImage.title}</figcaption>
       )}
     </figure>

@@ -1,26 +1,26 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import Link from 'next/link';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import Wrapper from 'components/Wrapper';
-import OtherPersonasPicker from 'components/OtherPersonasPicker';
-import TitleIllustrationStripWithContent from 'components/TitleIllustrationStripWithContent';
-import Result from 'components/Result';
-import InterstitialTitle from 'components/InterstitialTitle';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Bullets from 'components/Bullets';
 import IntegrationsBanner from 'components/IntegrationsBanner';
-import OmnichannelIllustration from 'components/OmnichannelIllustration';
-import Quote from 'components/Quote';
+import InterstitialTitle from 'components/InterstitialTitle';
+import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
+import OmnichannelIllustration from 'components/OmnichannelIllustration';
+import OtherPersonasPicker from 'components/OtherPersonasPicker';
+import Quote from 'components/Quote';
+import Result from 'components/Result';
+import Space from 'components/Space';
+import TitleIllustrationStripWithContent from 'components/TitleIllustrationStripWithContent';
+import Wrapper from 'components/Wrapper';
 import {
+  gqlStaticProps,
   imageFields,
   reviewFields,
-  gqlStaticProps,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import Space from 'components/Space';
+import Link from 'next/link';
 import SuccessIcon from 'public/icons/regular/check.svg';
 
 import styles from './style.module.css';

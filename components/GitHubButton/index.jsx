@@ -1,5 +1,5 @@
-import s from './style.module.css';
 import Icon from 'public/icons/brands/github.svg';
+import s from './style.module.css';
 
 export default function GitHubButton({ href, children }) {
   return (

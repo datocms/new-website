@@ -38,18 +38,18 @@ const buildToc = (schema) => {
 };
 
 function trimSchema(schema, exceptResourceId) {
-  Object.keys(schema.properties).forEach((nthResourceId) => {
+  for (const nthResourceId of Object.keys(schema.properties)) {
     if (exceptResourceId === nthResourceId) {
       return;
     }
 
-    delete schema.properties[nthResourceId].links;
-    delete schema.properties[nthResourceId].description;
-    delete schema.properties[nthResourceId].definitions.data;
-    delete schema.properties[nthResourceId].definitions.attributes;
-    delete schema.properties[nthResourceId].definitions.relationships;
-    delete schema.properties[nthResourceId].definitions.meta;
-  });
+    schema.properties[nthResourceId].links = undefined;
+    schema.properties[nthResourceId].description = undefined;
+    schema.properties[nthResourceId].definitions.data = undefined;
+    schema.properties[nthResourceId].definitions.attributes = undefined;
+    schema.properties[nthResourceId].definitions.relationships = undefined;
+    schema.properties[nthResourceId].definitions.meta = undefined;
+  }
 }
 
 export default async function buildCmaResources(resourceSlug, linkRel) {
@@ -59,7 +59,7 @@ export default async function buildCmaResources(resourceSlug, linkRel) {
   const { body: unreferencedSchema } = await tiny.get({ url });
 
   const completeSchema = await parser.dereference(unreferencedSchema);
-  const jobRetrieveLink = completeSchema.properties['job_result'].links.find(
+  const jobRetrieveLink = completeSchema.properties.job_result.links.find(
     (link) => link.rel === 'self',
   );
   const toc = buildToc(completeSchema);

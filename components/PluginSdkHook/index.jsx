@@ -1,11 +1,11 @@
 import Heading from 'components/Heading';
 import Prism from 'components/Prism';
-import ReactMarkdown from 'react-markdown';
+import GithubIcon from 'public/icons/brands/github.svg';
 import PlusIcon from 'public/icons/regular/plus.svg';
 import TimesIcon from 'public/icons/regular/times.svg';
-import GithubIcon from 'public/icons/brands/github.svg';
-import removeMarkdown from 'remove-markdown';
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import removeMarkdown from 'remove-markdown';
 import slugify from 'utils/slugify';
 import s from './style.module.css';
 
@@ -59,7 +59,11 @@ const ExpandablePane = ({ children, label }) => {
 
   return (
     <>
-      <button className={s.button} onClick={() => setOpen((open) => !open)}>
+      <button
+        type="button"
+        className={s.button}
+        onClick={() => setOpen((open) => !open)}
+      >
         {open ? <TimesIcon /> : <PlusIcon />}
         {open ? `Hide ${label}` : `Show ${label}`}
       </button>
@@ -77,7 +81,11 @@ const ExpandableAttribute = ({ item }) => {
         {open ? <TimesIcon /> : <PlusIcon />}
       </div>
       <div className={s.hookBody}>
-        <button className={s.hookName} onClick={() => setOpen((open) => !open)}>
+        <button
+          type="button"
+          className={s.hookName}
+          onClick={() => setOpen((open) => !open)}
+        >
           <span className={s.hookNameName}>
             ctx.{item.name}
             {item.type === 'function' ? '()' : ''}
@@ -110,20 +118,15 @@ const ExpandableAttribute = ({ item }) => {
 };
 
 export default function Hook({ hook }) {
-  const ctxAttrs =
-    hook.ctx && hook.ctx.map((group) => group.properties || []).flat();
+  const ctxAttrs = hook.ctx?.flatMap((group) => group.properties || []);
 
-  const ctxProperties =
-    ctxAttrs &&
-    ctxAttrs
-      .filter((i) => i.type !== 'function')
-      .sort((a, b) => a.name.localeCompare(b.name));
+  const ctxProperties = ctxAttrs
+    ?.filter((i) => i.type !== 'function')
+    .sort((a, b) => a.name.localeCompare(b.name));
 
-  const ctxMethods =
-    ctxAttrs &&
-    ctxAttrs
-      .filter((i) => i.type === 'function')
-      .sort((a, b) => a.name.localeCompare(b.name));
+  const ctxMethods = ctxAttrs
+    ?.filter((i) => i.type === 'function')
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div key={hook.name}>

@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { MDXRemote } from 'next-mdx-remote';
-import * as components from 'datocms-react-ui';
-import PlusIcon from 'public/icons/regular/plus.svg';
-import TrashIcon from 'public/icons/regular/trash.svg';
-import ChevronDownIcon from 'public/icons/regular/chevron-down.svg';
 import Prism from 'components/Prism';
 import Tabs, { Tab } from 'components/Tabs';
-import s from './style.module.css';
+import * as components from 'datocms-react-ui';
 import 'datocms-react-ui/styles.css';
+import { MDXRemote } from 'next-mdx-remote';
+import ChevronDownIcon from 'public/icons/regular/chevron-down.svg';
+import PlusIcon from 'public/icons/regular/plus.svg';
+import TrashIcon from 'public/icons/regular/trash.svg';
+import { useState } from 'react';
+import s from './style.module.css';
 
 const StateManager = ({ initial, children }) => {
   const [value, setValue] = useState(initial);
@@ -25,11 +25,11 @@ const reactUiComponents = {
 
 const ReactUiExample = ({ example }) => {
   return (
-    <div className={s['ReactUiExample']}>
+    <div className={s.ReactUiExample}>
       <Tabs>
         <Tab title="Preview">
-          <div className={s['ReactUiExample__live']}>
-            <div className={s['ReactUiExample__live__container']}>
+          <div className={s.ReactUiExample__live}>
+            <div className={s.ReactUiExample__live__container}>
               <MDXRemote
                 {...example.serialized}
                 scope={{

@@ -117,9 +117,7 @@ function MultiLanguage({ feature, preview }) {
 
         <IntegrationsBanner
           title={<>Localize both content&nbsp;and&nbsp;assets</>}
-          bubbles={icons.map((path) => (
-            <LazyImage key={path} src={path} />
-          ))}
+          bubbles={icons.map((path) => <LazyImage key={path} src={path} />)}
         >
           <strong>All your content and assets can be multi-language</strong>,
           including rich text, responsive images, geo-points, SEO metadata and
@@ -168,7 +166,7 @@ function MultiLanguage({ feature, preview }) {
         <Flag
           style="good"
           seoAnalysis={seoAnalysis}
-          kicker={`The most user-friendly headless CMS`}
+          kicker={'The most user-friendly headless CMS'}
           title={
             <>
               A complete set of{' '}

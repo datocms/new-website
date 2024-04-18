@@ -8,14 +8,14 @@ export default function schemaExampleFor(schema, pagination = true) {
   }
 
   if (
-    schema.hasOwnProperty('deprecated') ||
-    schema.hasOwnProperty('hideFromDocs') ||
-    schema.hasOwnProperty('hideFromExample')
+    'deprecated' in schema ||
+    'hideFromDocs' in schema ||
+    'hideFromExample' in schema
   ) {
     return;
   }
 
-  if (schema.hasOwnProperty('example')) {
+  if ('example' in schema) {
     return schema.example;
   }
 
@@ -44,9 +44,9 @@ export default function schemaExampleFor(schema, pagination = true) {
       }
 
       if (
-        schema.properties[property].hasOwnProperty('deprecated') ||
-        schema.properties[property].hasOwnProperty('hideFromDocs') ||
-        schema.properties[property].hasOwnProperty('hideFromExample')
+        'deprecated' in schema.properties[property] ||
+        'hideFromDocs' in schema.properties[property] ||
+        'hideFromExample' in schema.properties[property]
       ) {
         return acc;
       }
@@ -55,7 +55,8 @@ export default function schemaExampleFor(schema, pagination = true) {
         [property]: schemaExampleFor(schema.properties[property]),
       });
     }, {});
-  } else if (type === 'array') {
+  }
+  if (type === 'array') {
     if (!schema.items) {
       return [];
     }
@@ -63,7 +64,8 @@ export default function schemaExampleFor(schema, pagination = true) {
       return schema.items.oneOf.map((s) => schemaExampleFor(s));
     }
     return [schemaExampleFor(schema.items)];
-  } else if (type === 'string') {
+  }
+  if (type === 'string') {
     if (schema.format === 'date-time') {
       return '2020-04-21T07:57:11.124Z';
     }
@@ -71,15 +73,18 @@ export default function schemaExampleFor(schema, pagination = true) {
       return schema.enum[0];
     }
     return '';
-  } else if (type === 'boolean') {
-    return true;
-  } else if (type === 'integer') {
-    return 20;
-  } else if (type === 'number') {
-    return 0.5;
-  } else if (type === 'null') {
-    return null;
-  } else {
-    throw new Error(`Don't know how to manage ${type} type!`);
   }
+  if (type === 'boolean') {
+    return true;
+  }
+  if (type === 'integer') {
+    return 20;
+  }
+  if (type === 'number') {
+    return 0.5;
+  }
+  if (type === 'null') {
+    return null;
+  }
+  throw new Error(`Don't know how to manage ${type} type!`);
 }

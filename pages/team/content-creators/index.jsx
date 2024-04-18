@@ -1,26 +1,26 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import {
-  gqlStaticProps,
-  seoMetaTagsFields,
-  reviewFields,
-  imageFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import OtherPersonasPicker from 'components/OtherPersonasPicker';
-import TitleIllustrationStripWithContent from 'components/TitleIllustrationStripWithContent';
 import InterstitialTitle from 'components/InterstitialTitle';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
-import Bullets from 'components/Bullets';
+import Layout from 'components/Layout';
+import OtherPersonasPicker from 'components/OtherPersonasPicker';
 import Quote from 'components/Quote';
+import Space from 'components/Space';
+import TitleIllustrationStripWithContent from 'components/TitleIllustrationStripWithContent';
 import TitleStripWithContent from 'components/TitleStripWithContent';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import SuccessIcon from 'public/icons/regular/check.svg';
 import Arrow3 from 'public/images/illustrations/arrow-sketch-3.svg';
-import Crown from 'public/images/illustrations/corona2.svg';
 import Bugs from 'public/images/illustrations/bugs1.svg';
-import Space from 'components/Space';
+import Crown from 'public/images/illustrations/corona2.svg';
+import { renderMetaTags } from 'react-datocms';
 
 import s from './style.module.css';
 

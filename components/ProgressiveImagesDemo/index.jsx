@@ -1,9 +1,9 @@
-import s from './style.module.css';
-import { range } from 'range';
-import { useRef, useState, useCallback, useEffect } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import useInterval from '@use-it/interval';
 import cn from 'classnames';
+import { range } from 'range';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import s from './style.module.css';
 
 const images = [
   {
@@ -126,10 +126,10 @@ export default function ProgressiveImagesDemo({ name }) {
   }, 5500);
 
   useEffect(() => {
-    images.forEach((image) => {
+    for (const image of images) {
       const i = new Image();
       i.src = image.url;
-    });
+    }
     next();
 
     return () => {

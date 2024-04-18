@@ -1,11 +1,11 @@
-import Layout from 'components/Layout';
+import fs from 'node:fs';
+import util from 'node:util';
+import DocDescription from 'components/DocDescription';
+import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
+import Layout from 'components/Layout';
 import Legal from 'components/Legal';
-import DocDescription from 'components/DocDescription';
-import fs from 'fs';
-import util from 'util';
-import Head from 'components/Head';
 
 export async function getStaticProps() {
   const readFile = util.promisify(fs.readFile);

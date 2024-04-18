@@ -1,9 +1,9 @@
-import s from './style.module.css';
-import Link from 'next/link';
-import Wrapper from 'components/Wrapper';
 import { highlightStructuredText } from 'components/Highlight';
 import LazyImage from 'components/LazyImage';
+import Wrapper from 'components/Wrapper';
+import Link from 'next/link';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import s from './style.module.css';
 
 export default function UseCaseExcerpts({ cases }) {
   const firstCase = cases[0];

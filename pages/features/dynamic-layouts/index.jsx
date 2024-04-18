@@ -1,23 +1,23 @@
-import Layout from 'components/Layout';
+import Bullets from 'components/Bullets';
+import Button from 'components/Button';
+import CreateModularBlocks from 'components/CreateModularBlocks';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
-import { renderMetaTags } from 'react-datocms';
-import {
-  gqlStaticProps,
-  seoMetaTagsFields,
-  imageFields,
-  reviewFields,
-} from 'lib/datocms';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
-import CreateModularBlocks from 'components/CreateModularBlocks';
-import UseModularBlocks from 'components/UseModularBlocks';
 import LandingPagesGenerator from 'components/LandingPagesGenerator';
-import Bullets from 'components/Bullets';
-import SuccessIcon from 'public/icons/regular/check-circle.svg';
-import Button from 'components/Button';
-import Link from 'next/link';
+import Layout from 'components/Layout';
 import Quote from 'components/Quote';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
+import UseModularBlocks from 'components/UseModularBlocks';
+import {
+  gqlStaticProps,
+  imageFields,
+  reviewFields,
+  seoMetaTagsFields,
+} from 'lib/datocms';
+import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check-circle.svg';
+import { renderMetaTags } from 'react-datocms';
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -117,7 +117,7 @@ function DynamicLayouts({ page, preview, review1, review2 }) {
         </Flag>
         <Flag
           style="good"
-          kicker={`The most user-friendly CMS`}
+          kicker={'The most user-friendly CMS'}
           title={
             <>
               A complete set of{' '}

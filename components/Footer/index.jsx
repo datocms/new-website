@@ -399,7 +399,7 @@ export default function Footer({ noCta }) {
                   </Button>
                 </form>
                 <div className={s.formMessage}>
-                  {formState.errors.email && formState.errors.email.message}
+                  {formState.errors.email?.message}
                   {success && 'Successfully subscribed. Welcome on board! 🎉'}
                 </div>
               </div>

@@ -5,8 +5,8 @@ import PlusIcon from 'public/icons/regular/plus.svg';
 import TimesIcon from 'public/icons/regular/times.svg';
 import React, { createContext, useContext, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import s from './style.module.css';
 import { stripQuotes } from '/utils/stripQuotes';
+import s from './style.module.css';
 
 const DefinitionContext = createContext(false);
 
@@ -14,7 +14,11 @@ const toArray = (t) => (Array.isArray(t) ? t : [t]);
 
 const ExpandablePane = ({ children, label, open, onToggle }) => (
   <>
-    <button className={s.button} onClick={() => onToggle((open) => !open)}>
+    <button
+      type="button"
+      className={s.button}
+      onClick={() => onToggle((open) => !open)}
+    >
       {open ? <TimesIcon /> : <PlusIcon />}
       {open ? `Hide ${label}` : `Show ${label}`}
     </button>
@@ -26,7 +30,7 @@ function JsonSchemaObjectWithPatternProperties({ prefix, schema, depth }) {
   const content = (
     <>
       {Object.entries(schema.patternProperties).map(([keyPattern, schema]) => {
-        let name = keyPattern;
+        const name = keyPattern;
 
         if (keyPattern.startsWith('^(?<languagecode>')) {
           keyPattern = '<locale>';
@@ -92,7 +96,9 @@ export function JsonSchemaObject({
   const optionalProperties = [];
   const deprecatedProperties = [];
 
-  allProperties.forEach((name) => {
+  const [isOpen, setOpen] = useState(false);
+
+  for (const name of allProperties) {
     if (requiredProperties.includes(name)) {
       return;
     }
@@ -104,9 +110,7 @@ export function JsonSchemaObject({
     } else {
       optionalProperties.push(name);
     }
-  });
-
-  const [isOpen, setOpen] = useState(false);
+  }
 
   const content = (
     <>
@@ -169,7 +173,7 @@ function Enum({ values, description }) {
             <div className={s.header}>
               <span className={s.name}>{value}</span>
             </div>
-            {description && description[value] && (
+            {description?.[value] && (
               <div className={s.description}>
                 <ReactMarkdown>{description[value]}</ReactMarkdown>
               </div>
@@ -203,10 +207,9 @@ function Type({ schema }) {
         }
 
         if (realType === 'array') {
-          realType =
-            schema.items && schema.items.type
-              ? `Array<${toArray(schema.items.type).join('/')}>`
-              : 'Array';
+          realType = schema.items?.type
+            ? `Array<${toArray(schema.items.type).join('/')}>`
+            : 'Array';
         }
 
         return [
@@ -394,7 +397,7 @@ export function JsonSchemaProperty({
               <Type schema={schema} />
               {
                 // The plural "examples" will array.join these: [true,false] -> "true,false"
-                schema.examples && schema.examples.length ? (
+                schema.examples?.length ? (
                   <>
                     &nbsp;&nbsp;<span className={s.example}>Examples: </span>
                     {schema.examples.map((ex, i) => [
@@ -581,17 +584,16 @@ export function Schema({ title, optional, schema, showId }) {
               </div>
             </div>
           )}
-          {schema.properties.attributes &&
-            schema.properties.attributes.properties && (
-              <JsonSchemaObject
-                depth={0}
-                prefix={language === 'http' ? 'attributes.' : null}
-                objectIsOptional={!schema.required.includes('attributes')}
-                showProperties="requiredAndOptional"
-                schema={schema.properties.attributes}
-              />
-            )}
-          {schema.properties.meta && schema.properties.meta.properties && (
+          {schema.properties.attributes?.properties && (
+            <JsonSchemaObject
+              depth={0}
+              prefix={language === 'http' ? 'attributes.' : null}
+              objectIsOptional={!schema.required.includes('attributes')}
+              showProperties="requiredAndOptional"
+              schema={schema.properties.attributes}
+            />
+          )}
+          {schema.properties.meta?.properties && (
             <JsonSchemaObject
               depth={0}
               prefix="meta."
@@ -605,16 +607,15 @@ export function Schema({ title, optional, schema, showId }) {
               relationships={schema.properties.relationships}
             />
           )}
-          {schema.properties.attributes &&
-            schema.properties.attributes.properties && (
-              <JsonSchemaObject
-                depth={0}
-                prefix={language === 'http' ? 'attributes.' : null}
-                objectIsOptional={!schema.required.includes('attributes')}
-                showProperties="deprecated"
-                schema={schema.properties.attributes}
-              />
-            )}
+          {schema.properties.attributes?.properties && (
+            <JsonSchemaObject
+              depth={0}
+              prefix={language === 'http' ? 'attributes.' : null}
+              objectIsOptional={!schema.required.includes('attributes')}
+              showProperties="deprecated"
+              schema={schema.properties.attributes}
+            />
+          )}
         </>
       )}
     </LanguageConsumer>

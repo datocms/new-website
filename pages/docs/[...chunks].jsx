@@ -65,17 +65,17 @@ export const getStaticPaths = gqlStaticPaths(
                     ),
                 )
               : sub.slug === 'structured-text'
-              ? sub.pages.filter(
-                  (page) => (page.slugOverride || page.page.slug) !== 'dast',
-                )
-              : sub.pages
+                ? sub.pages.filter(
+                    (page) => (page.slugOverride || page.page.slug) !== 'dast',
+                  )
+                : sub.pages
             )
-              .reduce((acc, pageOrSection) => {
+              .flatMap((pageOrSection) => {
                 if (pageOrSection.__typename === 'DocGroupPageRecord') {
-                  return [...acc, pageOrSection];
+                  return pageOrSection;
                 }
-                return [...acc, ...pageOrSection.pages];
-              }, [])
+                return pageOrSection.pages;
+              })
               .map((page) =>
                 (page.slugOverride || page.page.slug) === 'index'
                   ? [sub.slug]
@@ -92,18 +92,17 @@ export const getStaticPaths = gqlStaticPaths(
   },
 );
 
-export const getStaticProps = handleErrors(async function ({
-  params: { chunks: rawChunks },
-  preview,
-}) {
-  const chunks = rawChunks.map((chunk) => chunk.split(/\//g)).flat();
-  const groupSlug = chunks.length >= 2 ? chunks[chunks.length - 2] : chunks[0];
-  const pageSlug = chunks.length >= 2 ? chunks[chunks.length - 1] : 'index';
+export const getStaticProps = handleErrors(
+  async ({ params: { chunks: rawChunks }, preview }) => {
+    const chunks = rawChunks.flatMap((chunk) => chunk.split(/\//g));
+    const groupSlug =
+      chunks.length >= 2 ? chunks[chunks.length - 2] : chunks[0];
+    const pageSlug = chunks.length >= 2 ? chunks[chunks.length - 1] : 'index';
 
-  const {
-    data: { docGroup },
-  } = await request({
-    query: `
+    const {
+      data: { docGroup },
+    } = await request({
+      query: `
       query($groupSlug: String!) {
         docGroup(filter: { slug: { eq: $groupSlug } }) {
           name
@@ -135,36 +134,34 @@ export const getStaticProps = handleErrors(async function ({
         }
       }
     `,
-    variables: { groupSlug },
-    preview,
-  });
+      variables: { groupSlug },
+      preview,
+    });
 
-  if (!docGroup) {
-    return { notFound: true };
-  }
+    if (!docGroup) {
+      return { notFound: true };
+    }
 
-  const allPages =
-    docGroup &&
-    docGroup.pages.reduce((acc, pageOrSection) => {
+    const allPages = docGroup?.pages.flatMap((pageOrSection) => {
       if (pageOrSection.__typename === 'DocGroupPageRecord') {
-        return [...acc, pageOrSection];
+        return pageOrSection;
       }
-      return [...acc, ...pageOrSection.pages];
-    }, []);
+      return pageOrSection.pages;
+    });
 
-  const page =
-    allPages &&
-    allPages.find((page) => (page.slugOverride || page.page.slug) === pageSlug);
+    const page = allPages?.find(
+      (page) => (page.slugOverride || page.page.slug) === pageSlug,
+    );
 
-  if (!page) {
-    return { notFound: true };
-  }
+    if (!page) {
+      return { notFound: true };
+    }
 
-  const { titleOverride } = page;
-  const pageId = page.page.id;
+    const { titleOverride } = page;
+    const pageId = page.page.id;
 
-  const gqlPageRequest = {
-    query: `
+    const gqlPageRequest = {
+      query: `
       query($pageId: ItemId!) {
         page: docPage(filter: { id: { eq: $pageId } }) {
           title
@@ -333,56 +330,57 @@ export const getStaticProps = handleErrors(async function ({
       ${seoMetaTagsFields}
       ${imageFields}
     `,
-    variables: { pageId },
-    preview,
-  };
-  const { data } = await request(gqlPageRequest);
+      variables: { pageId },
+      preview,
+    };
+    const { data } = await request(gqlPageRequest);
 
-  if (!data.page) {
-    return { notFound: true };
-  }
+    if (!data.page) {
+      return { notFound: true };
+    }
 
-  const additionalData = {};
+    const additionalData = {};
 
-  const interestingHookGroups = data.page.content.blocks
-    .filter((block) => block._modelApiKey === 'plugin_sdk_hook_group')
-    .map((block) => block.groupName);
+    const interestingHookGroups = data.page.content.blocks
+      .filter((block) => block._modelApiKey === 'plugin_sdk_hook_group')
+      .map((block) => block.groupName);
 
-  if (interestingHookGroups.length > 0) {
-    const allHooks = await fetchPluginSdkHooks();
+    if (interestingHookGroups.length > 0) {
+      const allHooks = await fetchPluginSdkHooks();
 
-    additionalData.pluginSdkHooks = allHooks.filter((hook) =>
-      interestingHookGroups.some((interestingHookGroup) =>
-        hook.groups.includes(interestingHookGroup),
-      ),
-    );
-  }
+      additionalData.pluginSdkHooks = allHooks.filter((hook) =>
+        interestingHookGroups.some((interestingHookGroup) =>
+          hook.groups.includes(interestingHookGroup),
+        ),
+      );
+    }
 
-  if (
-    data.page.content.blocks.some(
-      (block) => block._modelApiKey === 'react_ui_live_example',
-    )
-  ) {
-    additionalData.allReactUiExamples = await fetchReactUiExamples();
-  }
+    if (
+      data.page.content.blocks.some(
+        (block) => block._modelApiKey === 'react_ui_live_example',
+      )
+    ) {
+      additionalData.allReactUiExamples = await fetchReactUiExamples();
+    }
 
-  return {
-    props: {
-      docGroup,
-      titleOverride,
-      pageSubscription: preview
-        ? {
-            ...gqlPageRequest,
-            token: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
-            enabled: true,
-            initialData: data,
-          }
-        : { enabled: false, initialData: data },
-      additionalData,
-      preview: preview ? true : false,
-    },
-  };
-});
+    return {
+      props: {
+        docGroup,
+        titleOverride,
+        pageSubscription: preview
+          ? {
+              ...gqlPageRequest,
+              token: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
+              enabled: true,
+              initialData: data,
+            }
+          : { enabled: false, initialData: data },
+        additionalData,
+        preview: preview ? true : false,
+      },
+    };
+  },
+);
 
 const SidebarEntry = ({ url, level, label, children }) => {
   if (!url && level === 0) {
@@ -450,15 +448,13 @@ export function Toc({ content, extraEntries: extra }) {
       };
     });
 
-  const extraEntries =
-    extra &&
-    extra.map(({ anchor, label }) => (
-      <div className={s.tocEntry} key={anchor}>
-        <a href={`#${anchor}`} className={s.tocEntry}>
-          {label}
-        </a>
-      </div>
-    ));
+  const extraEntries = extra?.map(({ anchor, label }) => (
+    <div className={s.tocEntry} key={anchor}>
+      <a href={`#${anchor}`} className={s.tocEntry}>
+        {label}
+      </a>
+    </div>
+  ));
 
   return (nodes && nodes.length > 0) ||
     (extraEntries && extraEntries.length > 0) ? (
@@ -491,7 +487,7 @@ export default function DocPage({
 }) {
   const { data } = useQuerySubscription(pageSubscription);
   const page = data.page;
-  const pageTitle = titleOverride || (page && page.title);
+  const pageTitle = titleOverride || page?.title;
   const defaultSeoTitle = `${
     docGroup ? `${docGroup.name} - ` : '-'
   }${pageTitle} - DatoCMS Docs`;

@@ -1,7 +1,7 @@
-import Wrapper from 'components/Wrapper';
-import s from './style.module.css';
-import { Image as DatoImage } from 'react-datocms';
 import { highlightStructuredText } from 'components/Highlight';
+import Wrapper from 'components/Wrapper';
+import { Image as DatoImage } from 'react-datocms';
+import s from './style.module.css';
 
 export default function Quote({ review }) {
   return (

@@ -26,9 +26,8 @@ export const getStaticPaths = async () => {
   return {
     fallback: 'blocking',
     paths: toc
-      .map(({ children }) => children)
-      .flat(1)
-      .map(({ slug, children }) =>
+      .flatMap(({ children }) => children)
+      .flatMap(({ slug, children }) =>
         children
           .map((child) => ({
             params: { resource: slug, endpoint: child.slug },
@@ -36,19 +35,16 @@ export const getStaticPaths = async () => {
           // .slice() only pre-renders the first 2 sub-pages for each section
           // remove it if you want to pre-render all the pages
           .slice(0, 2),
-      )
-      .flat(),
+      ),
   };
 };
 
-export const getStaticProps = handleErrors(async function ({
-  params: { resource, endpoint },
-  preview,
-}) {
-  const {
-    data: { docGroup },
-  } = await request({
-    query: `
+export const getStaticProps = handleErrors(
+  async ({ params: { resource, endpoint }, preview }) => {
+    const {
+      data: { docGroup },
+    } = await request({
+      query: `
       query($groupSlug: String!) {
         docGroup(filter: { slug: { eq: $groupSlug } }) {
           name
@@ -68,34 +64,35 @@ export const getStaticProps = handleErrors(async function ({
         }
       }
     `,
-    variables: { groupSlug: 'content-management-api' },
-    preview,
-  });
+      variables: { groupSlug: 'content-management-api' },
+      preview,
+    });
 
-  if (!docGroup) {
-    return { notFound: true };
-  }
+    if (!docGroup) {
+      return { notFound: true };
+    }
 
-  const [cma, clientInfo] = await Promise.all([
-    fetchCma(resource, endpoint),
-    fetchCmaClientResources(resource, endpoint),
-  ]);
+    const [cma, clientInfo] = await Promise.all([
+      fetchCma(resource, endpoint),
+      fetchCmaClientResources(resource, endpoint),
+    ]);
 
-  if (!cma || !clientInfo) {
-    return { notFound: true };
-  }
+    if (!cma || !clientInfo) {
+      return { notFound: true };
+    }
 
-  return {
-    props: {
-      docGroup,
-      preview: preview ? true : false,
-      cma,
-      endpoint,
-      resource,
-      clientInfo,
-    },
-  };
-});
+    return {
+      props: {
+        docGroup,
+        preview: preview ? true : false,
+        cma,
+        endpoint,
+        resource,
+        clientInfo,
+      },
+    };
+  },
+);
 
 export default function DocPage({
   docGroup,

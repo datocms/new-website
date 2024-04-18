@@ -1,22 +1,22 @@
 import UIChrome from 'components/UiChrome';
-import s from './style.module.css';
 import { useEffect, useState } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import s from './style.module.css';
 
+import ApiTokensIcon from 'public/icons/regular/barcode-alt.svg';
 import SettingsIcon from 'public/icons/regular/cog.svg';
-import ItemTypesIcon from 'public/icons/regular/shapes.svg';
+import WebhooksIcon from 'public/icons/regular/paper-plane.svg';
 import PluginsIcon from 'public/icons/regular/puzzle-piece.svg';
+import LogIcon from 'public/icons/regular/receipt.svg';
+import DeploymentEnvironmentsIcon from 'public/icons/regular/rocket.svg';
+import ItemTypesIcon from 'public/icons/regular/shapes.svg';
 import RolesIcon from 'public/icons/regular/shield-alt.svg';
 import UsersIcon from 'public/icons/regular/user-friends.svg';
-import LogIcon from 'public/icons/regular/receipt.svg';
-import WebhooksIcon from 'public/icons/regular/paper-plane.svg';
-import DeploymentEnvironmentsIcon from 'public/icons/regular/rocket.svg';
-import ApiTokensIcon from 'public/icons/regular/barcode-alt.svg';
 
+import france from 'public/images/flags/france.svg';
+import germany from 'public/images/flags/germany.svg';
 import italy from 'public/images/flags/italy.svg';
 import spain from 'public/images/flags/spain.svg';
-import germany from 'public/images/flags/germany.svg';
-import france from 'public/images/flags/france.svg';
 import usa from 'public/images/flags/united-states-of-america.svg';
 
 const flags = {
@@ -142,57 +142,35 @@ const labels = {
     'adminArea.splitPane.usage': 'Nutzungs- und Planungsgrenzen',
     'adminArea.splitPane.webhookCalls': 'Aktivitätsprotokoll',
     'adminArea.splitPane.webhooks': 'Webhooks',
-    'adminArea.siteSettings.title': 'Projekteinstellungen',
-    'adminArea.splitPane.apiTokens': 'API-Token',
-    'adminArea.splitPane.deployment': 'Deployment',
-    'adminArea.splitPane.deploymentLogs': 'Aktivitätsprotokoll',
-    'adminArea.splitPane.deploymentSettings': 'Umgebungen',
-    'adminArea.splitPane.itemTypes': 'Models',
-    'adminArea.splitPane.manageEditors': 'Kollaborateure',
-    'adminArea.splitPane.manageRoles': 'Rollen',
-    'adminArea.splitPane.manageWebhooks': 'Webhooks',
-    'adminArea.splitPane.menuSettings': 'Navigationsleiste',
-    'adminArea.splitPane.permissions': 'Berechtigungen',
-    'adminArea.splitPane.plugins': 'Plugins',
-    'adminArea.splitPane.siteSettings': 'Einstellungen',
-    'adminArea.splitPane.ssgIntegration': 'Statische Generatoreinstellungen',
-    'adminArea.splitPane.sso': 'Single Sign-on',
-    'adminArea.splitPane.ssoGroups': 'Gruppen',
-    'adminArea.splitPane.ssoSettings': 'Einstellungen',
-    'adminArea.splitPane.ssoUsers': 'Eingerichtete Benutzer',
-    'adminArea.splitPane.structure': 'Struktur',
-    'adminArea.splitPane.usage': 'Nutzungs- und Planungsgrenzen',
-    'adminArea.splitPane.webhookCalls': 'Aktivitätsprotokoll',
-    'adminArea.splitPane.webhooks': 'Webhooks',
   },
   en: {
-    'nav.adminArea': `Settings`,
-    'nav.manageItemTypes': `Content`,
-    'nav.mediaArea': `Media`,
-    'nav.cdaExplorer': `API Explorer`,
-    'nav.languageSettings': `Language settings`,
-    'adminArea.siteSettings.title': `Project settings`,
-    'adminArea.splitPane.apiTokens': `API tokens`,
-    'adminArea.splitPane.deployment': `Deployment`,
-    'adminArea.splitPane.deploymentLogs': `Activity log`,
-    'adminArea.splitPane.deploymentSettings': `Environments`,
-    'adminArea.splitPane.itemTypes': `Models`,
-    'adminArea.splitPane.manageEditors': `Collaborators`,
-    'adminArea.splitPane.manageRoles': `Roles`,
-    'adminArea.splitPane.manageWebhooks': `Webhooks`,
-    'adminArea.splitPane.menuSettings': `Navigation bar`,
-    'adminArea.splitPane.permissions': `Permissions`,
-    'adminArea.splitPane.plugins': `Plugins`,
-    'adminArea.splitPane.siteSettings': `Settings`,
-    'adminArea.splitPane.ssgIntegration': `Static generator settings`,
-    'adminArea.splitPane.sso': `Single sign-on`,
-    'adminArea.splitPane.ssoGroups': `Groups`,
-    'adminArea.splitPane.ssoSettings': `Settings`,
-    'adminArea.splitPane.ssoUsers': `Provisioned users`,
-    'adminArea.splitPane.structure': `Structure`,
-    'adminArea.splitPane.usage': `Usage and plan limits`,
-    'adminArea.splitPane.webhooks': `Webhooks`,
-    'adminArea.splitPane.webhookCalls': `Activity log`,
+    'nav.adminArea': 'Settings',
+    'nav.manageItemTypes': 'Content',
+    'nav.mediaArea': 'Media',
+    'nav.cdaExplorer': 'API Explorer',
+    'nav.languageSettings': 'Language settings',
+    'adminArea.siteSettings.title': 'Project settings',
+    'adminArea.splitPane.apiTokens': 'API tokens',
+    'adminArea.splitPane.deployment': 'Deployment',
+    'adminArea.splitPane.deploymentLogs': 'Activity log',
+    'adminArea.splitPane.deploymentSettings': 'Environments',
+    'adminArea.splitPane.itemTypes': 'Models',
+    'adminArea.splitPane.manageEditors': 'Collaborators',
+    'adminArea.splitPane.manageRoles': 'Roles',
+    'adminArea.splitPane.manageWebhooks': 'Webhooks',
+    'adminArea.splitPane.menuSettings': 'Navigation bar',
+    'adminArea.splitPane.permissions': 'Permissions',
+    'adminArea.splitPane.plugins': 'Plugins',
+    'adminArea.splitPane.siteSettings': 'Settings',
+    'adminArea.splitPane.ssgIntegration': 'Static generator settings',
+    'adminArea.splitPane.sso': 'Single sign-on',
+    'adminArea.splitPane.ssoGroups': 'Groups',
+    'adminArea.splitPane.ssoSettings': 'Settings',
+    'adminArea.splitPane.ssoUsers': 'Provisioned users',
+    'adminArea.splitPane.structure': 'Structure',
+    'adminArea.splitPane.usage': 'Usage and plan limits',
+    'adminArea.splitPane.webhooks': 'Webhooks',
+    'adminArea.splitPane.webhookCalls': 'Activity log',
   },
 };
 

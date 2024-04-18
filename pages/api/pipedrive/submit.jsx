@@ -1,9 +1,9 @@
 const Rollbar = require('rollbar');
 import {
-  createNote,
   createLead,
-  findOrCreatePerson,
+  createNote,
   findOrCreateOrgByName,
+  findOrCreatePerson,
 } from '../../../lib/pipedriveHelpers';
 
 const rollbar = process.env.ROLLBAR_TOKEN
