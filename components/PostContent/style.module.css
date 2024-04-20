@@ -13,6 +13,7 @@
   a {
     color: inherit;
     word-wrap: break-word;
+    text-underline-offset: 5px;
 
     &:hover {
       color: var(--accent-color);
@@ -221,7 +222,7 @@
     right: 0;
     top: rfs(60px);
     font-family: var(--font-serif);
-    content: '\201C';
+    content: "\201C";
     color: var(--accent-color);
     font-size: rfs(200px);
     line-height: 0.3;
@@ -256,7 +257,7 @@
   color: var(--light-body-color);
 
   &:before {
-    content: '—';
+    content: "—";
     padding-right: 10px;
   }
 }
