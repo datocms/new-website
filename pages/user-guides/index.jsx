@@ -53,14 +53,16 @@ function Chapter({ chapter }) {
       </h2>
 
       <section className={s.chapterVideosWrapper}>
-        {chapter.videos.map((video) => (
-          <div key={video.slug} className={s.chapterItem}>
-            <div className={s.itemVideo}></div>
-            <Link href={`/user-guides/${chapter.slug}/${video.slug}`}>
-              {video.title}
-            </Link>
-          </div>
-        ))}
+        <div className={s.chapterVideos}>
+          {chapter.videos.map((video) => (
+            <div key={video.slug} className={s.chapterItem}>
+              <div className={s.itemVideo}></div>
+              <Link href={`/user-guides/${chapter.slug}/${video.slug}`}>
+                {video.title}
+              </Link>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );
@@ -83,14 +85,17 @@ export default function Academy({ subscription, preview }) {
           }
           subtitle="Editors and content creators, this one’s for you. Join along for a casual and non-technical walkthrough of DatoCMS focusing on content creation and the UI."
         />
-        <Space top={2} bottom={2}>
-          {chapters
-            .filter((chapter) => chapter.videos.length > 0)
-            .map((chapter) => (
-              <Chapter chapter={chapter} key={chapter.slug} />
-            ))}
-        </Space>
       </Wrapper>
+      
+        <Space top={2} bottom={2}>
+          <div className={s.allChapters}>
+            {chapters
+              .filter((chapter) => chapter.videos.length > 0)
+              .map((chapter) => (
+                <Chapter chapter={chapter} key={chapter.slug} />
+              ))}
+          </div>
+        </Space>
     </Layout>
   );
 }

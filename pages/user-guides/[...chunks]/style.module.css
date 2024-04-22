@@ -1,5 +1,41 @@
+.title {
+  margin-bottom: 1rem;
+}
+
+.video {
+  aspect-ratio: 16/9;
+  background-color: #ddd;
+  border-radius: 1rem;
+  width: 100%;
+}
+
 .container {
   display: grid;
-  grid-template-columns: 1fr 2fr;
   gap: 2rem;
+  grid-template-columns: 1fr 2fr;
+  margin-top: 3rem;
+}
+
+.aside {}
+
+.asideList {
+  border-left: 10px solid #ff593d;
+  padding: 10px 0 10px 20px;
+  position: sticky;
+  top: 100px;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

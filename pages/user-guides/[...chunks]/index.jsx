@@ -75,26 +75,34 @@ export default function Academy({ subscription, preview }) {
   return (
     <Layout preview={preview}>
       <Head>{video && renderMetaTags(video.seo)}</Head>
-      <Space top={2}>
+      <Space top={1}>
         <Wrapper>
-          <h1>
-            {video.title}
-          </h1>
+          <div className={s.title}>
+            <h1>
+              {video.title}
+            </h1>
+          </div>
+
+          <div className={s.video}></div>
 
           <div className={s.container}>
-            <div>
-              <ul>
-                {matchingVideos[0].videos.map((video) => (
-                  <li key={video.title}>
-                    <Link href={`/user-guides/${matchingVideos[0].slug}/${video.slug}`}>
-                      <a>{video.title}</a>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <div className={s.aside}>
+              <div className={s.asideList}>
+                <ul>
+                  {matchingVideos[0].videos.map((video) => (
+                    <li key={video.title}>
+                      <Link href={`/user-guides/${matchingVideos[0].slug}/${video.slug}`}>
+                        <a>{video.title}</a>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            <PostContent content={video.content} />
+            <article>
+              <PostContent content={video.content} />
+            </article>
           </div>
         </Wrapper>
       </Space>
