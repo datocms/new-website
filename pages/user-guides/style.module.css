@@ -1,0 +1,24 @@
+.chapter {
+  margin-bottom: 4rem;
+}
+
+.chapterVideosWrapper {
+  display: flex;
+  gap: 1rem;
+  overflow: auto;
+}
+
+.chapterItem {
+  flex-shrink: 0;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.itemVideo {
+  aspect-ratio: 16/9;
+  background-color: #ddd;
+  border-radius: 1rem;;
+  width: 100%;
+}
