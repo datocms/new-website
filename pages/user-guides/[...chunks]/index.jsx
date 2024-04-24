@@ -1,4 +1,3 @@
-import ActiveLink from 'components/ActiveLink';
 import Head from 'components/Head';
 import Layout from 'components/Layout';
 import PostContent from 'components/PostContent';
@@ -9,10 +8,11 @@ import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
   seoMetaTagsFields,
+  imageFields
 } from 'lib/datocms';
 import Link from 'next/link';
 
-import { StructuredText, renderMetaTags } from 'react-datocms';
+import { Image as DatoImage, StructuredText, renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -56,11 +56,20 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       chapterItems: allUserGuidesChapters(
         filter: { slug: { eq: $chapterSlug } }
       ) {
-        slug
         title
+        slug
         videos {
-          slug
           title
+          slug
+          image {
+
+            responsiveImage(
+              imgixParams: { auto: format, w: 200 }
+            ) {
+              ...imageFields
+            }
+            url(imgixParams: {w: 200})
+          }
           video {
             video {
               duration
@@ -71,6 +80,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     }
 
     ${seoMetaTagsFields}
+    ${imageFields}
   `,
   {
     requiredKeys: ['item', 'chapterItems[0]'],
@@ -81,7 +91,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
   },
 );
 
-export default function Academy({ subscription, preview}) {
+export default function Guide({ subscription, preview}) {
   const {
     data: { item, chapterItems},
   } = useQuerySubscription(subscription);
@@ -109,21 +119,41 @@ export default function Academy({ subscription, preview}) {
           </div>
 
           <div className={s.container}>
-            <div className={s.aside}>
-              <div className={s.asideList}>
-                <h2 className={s.asideListTitle}>{chapterItems[0].title}</h2>
-                <ul>
-                  {chapterItems[0].videos.map((video) => (
-                    <li key={video.title}>
-                      <Link href={`/user-guides/${chapterItems[0].slug}/${video.slug}`}>
-                        <a className={video.slug === item.slug ? s.activeLink : ''}>
-                          {video.title}
-                        </a>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className={s.asideWrapper}>
+              <aside className={s.aside}>
+                <div className={s.asideList}>
+                  <h2 className={s.asideListTitle}>{chapterItems[0].title}</h2>
+                  <ul>
+                    {chapterItems[0].videos.map((video) => (
+                      <li key={video.title} className={`${s.asideListItem} ${video.slug === item.slug ? s.activeListItem : ''}`}>
+                        <Link href={`/user-guides/${chapterItems[0].slug}/${video.slug}`}>
+                          <a className={s.asideListItem}>
+                            <figure>
+                              {video?.image?.responsiveImage && (
+                                <DatoImage
+                                  data={video.image.responsiveImage}
+                                />
+                              )}
+                            </figure>
+                            <div>
+                              <h4>
+                                {video.title}
+                              </h4>
+                              {video?.video?.video?.duration && (
+                                <div className={s.asideVideoDuration}>
+                                  {convertVideoSecondsInMinutes(video.video.video.duration)}
+                                </div>
+                              )}
+                            </div>
+                          </a>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div></div>
+              </aside>
             </div>
 
             <div>

@@ -93,7 +93,7 @@ function Chapter({ chapter }) {
   );
 }
 
-export default function Academy({ subscription, preview }) {
+export default function UserGuides({ subscription, preview }) {
   const {
     data: { chapters, page },
   } = useQuerySubscription(subscription);
