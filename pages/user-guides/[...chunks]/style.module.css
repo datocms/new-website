@@ -3,12 +3,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 3rem;
+  margin-top: 2rem;
   
-  @media screen and (min-width: 1024) {
+  @media screen and (min-width: 1024px) {
     align-items: center;
     flex-direction: row;
     gap: 1rem;
+    grid-column: span 2;
+    margin-top: 1.5rem;
   }
 
   h1 {
@@ -18,7 +20,7 @@
   }
 }
 
-.videoDurationPill {
+.pill {
   background-color: var(--light-bg-color);
   border-radius: 2rem;
   color: var(--light-body-color);
@@ -26,6 +28,15 @@
   font-size: 15px;
   padding: 0.2rem 0.825rem;
   white-space: nowrap;
+
+  &.isLight {
+    background-color: #fff;
+  }
+
+  &.isDark {
+    background-color: var(--base-body-color);
+    color: #fff;
+  }
 }
 
 .video {
@@ -46,7 +57,7 @@
 
 .container {
   display: grid;
-  gap: 2rem;
+  gap: 3rem;
   margin-top: 1rem;
 
   @media screen and (min-width: 1024px) {
@@ -55,59 +66,113 @@
   }
 }
 
-.aside {
-  position: sticky;
-  top: 100px;
-}
-
-.asideList {
-  font-size: 15px;
-  padding: 20px 0 20px 20px;
-  background-color: var(--light-bg-color);
-  border-radius: 0.5rem;
-
-  @media screen and (min-width: 1024px) {
-    border-radius: 1rem;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.asideWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 
   a {
     color: inherit;
     text-decoration: none;
-
-    &:hover {
-      h4 {
-        color: var(--body-color);
-      }
-    }
   }
+}
+
+.aside {
+  position: sticky;
+  top: var(--page-margin);
+
+  @media screen and (min-width: 1126px) {
+    top: 100px;
+  }
+}
+
+.asideCurrentChapter {
+  background-color: var(--light-bg-color);
+  border-radius: 0.5rem;
+  overflow: auto;
+  padding: 0 0 10px 0;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (min-width: 1024px) {
+    border-radius: 1rem;
+    max-height: calc(100dvh - var(--page-margin) * 2);
+  }
+
+  @media screen and (min-width: 1126px) {
+    max-height: calc(100dvh - 100px - var(--page-margin));
+  }
+}
+
+.asideHeading {
+  align-items: center;
+  background-color: var(--light-bg-color);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 20px;
+  position: sticky;
+  top: 0;
 }
 
 .asideListTitle {
   color: var(--light-body-color);
-  margin-top: 0;
-  margin-bottom: 1.5rem;
+  font-size: 22px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asideList {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  transition: opacity .3s, padding .3s;
+
+  @media screen and (max-width: 1023px) {
+    &.isOpen {
+      max-height: auto;
+      opacity: 1;
+      padding-bottom: 10px;
+    }
+  
+    &.isClosed {
+      opacity: 0;
+      height: 0;
+      padding-bottom: 0;
+    }
+  }
 }
 
 .asideListItem {
   a {
-    display: grid;
     align-items: center;
-    grid-template-columns: 70px 1fr;
+    display: grid;
     gap: 1rem;
+    grid-template-columns: 60px 1fr;
+    padding: 10px 20px;
+    transition: background-color .3s;
     width: 100%;
-    padding: 0;
 
     @media screen and (min-width: 640px) {
-      grid-template-columns: 90px 1fr;
+      grid-template-columns: 80px 1fr;
+    }
+
+    &:hover {
+      background-color: #fff;
+
+      h4 {
+        color: var(--body-color);
+      }
     }
   
     figure {
@@ -137,4 +202,72 @@
 
 .asideVideoDuration {
   color: var(--extra-light-body-color);
+}
+
+.mobileAccordionCta {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+
+  .mobileAccordionCtaIcon {
+    transition: transform .3s, opacity .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .5;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.isRotated {
+      transform: rotate(180deg);
+      transform-origin: center;
+    }
+  }
+}
+
+.otherChaptersWrapper {
+  margin-top: 2rem;
+  padding: 0 20px;
+  display: none;
+
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
+}
+
+.otherChaptersTitle {
+  font-size: 22px;
+  color: var(--light-body-color);
+  margin: 1.5rem 0;
+}
+
+.otherChapters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.otherChaptersItem {
+  align-items: center;
+  display: flex;
+  font-size: 22px;
+  gap: 1rem;
+  justify-content: space-between;
+  margin: 0;
+
+  h2 {
+    font-size: 18px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

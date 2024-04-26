@@ -12,9 +12,12 @@ import {
 } from 'lib/datocms';
 import Link from 'next/link';
 
+import { useState } from 'react';
 import { Image as DatoImage, StructuredText, renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
+
+import ChevronDown from 'public/icons/regular/chevron-down.svg';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -53,7 +56,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           value
         }
       }
-      chapterItems: allUserGuidesChapters(
+      currentChapter: allUserGuidesChapters(
         filter: { slug: { eq: $chapterSlug } }
       ) {
         title
@@ -62,7 +65,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           title
           slug
           image {
-
             responsiveImage(
               imgixParams: { auto: format, w: 200 }
             ) {
@@ -77,13 +79,22 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           }
         }
       }
+      otherChapters: allUserGuidesChapters(
+        filter: { slug: { neq: $chapterSlug } }
+      ) {
+        slug
+        title
+        videos {
+          slug
+        }
+      }
     }
 
     ${seoMetaTagsFields}
     ${imageFields}
   `,
   {
-    requiredKeys: ['item', 'chapterItems[0]'],
+    requiredKeys: ['item', 'currentChapter[0]'],
     paramsToVars: ({ chunks }) => ({
       chapterSlug: chunks[0],
       itemSlug: chunks[1],
@@ -93,7 +104,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
 
 export default function Guide({ subscription, preview}) {
   const {
-    data: { item, chapterItems},
+    data: { item, currentChapter, otherChapters},
   } = useQuerySubscription(subscription);
 
   const convertVideoSecondsInMinutes = (seconds) => {
@@ -101,6 +112,12 @@ export default function Guide({ subscription, preview}) {
     const remainingSeconds = seconds % 60;
     return `${minutes}m ${remainingSeconds.toString().padStart(2, '0')}s`;
   }
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <Layout preview={preview}>
@@ -119,14 +136,30 @@ export default function Guide({ subscription, preview}) {
           </div>
 
           <div className={s.container}>
+            <div className={s.heading}>
+              <h1>
+                {item.title}
+              </h1>
+              {item?.video?.video?.duration && (
+                <div className={`${s.pill} ${s.isDark}`}>
+                  {convertVideoSecondsInMinutes(item.video.video.duration)}
+                </div>
+              )}
+            </div>
+
             <div className={s.asideWrapper}>
               <aside className={s.aside}>
-                <div className={s.asideList}>
-                  <h2 className={s.asideListTitle}>{chapterItems[0].title}</h2>
-                  <ul>
-                    {chapterItems[0].videos.map((video) => (
+                <div className={s.asideCurrentChapter}>
+                  <div className={s.asideHeading}>
+                    <h2 className={s.asideListTitle}>{currentChapter[0].title}</h2>
+                    <div className={`${s.pill} ${s.isLight}`}>
+                      {currentChapter[0].videos.length} videos
+                    </div>
+                  </div>
+                  <ul className={`${s.asideList} ${isOpen ? s.isOpen : s.isClosed}`}>
+                    {currentChapter[0].videos.map((video) => (
                       <li key={video.title} className={`${s.asideListItem} ${video.slug === item.slug ? s.activeListItem : ''}`}>
-                        <Link href={`/user-guides/${chapterItems[0].slug}/${video.slug}`}>
+                        <Link href={`/user-guides/${currentChapter[0].slug}/${video.slug}`}>
                           <a className={s.asideListItem}>
                             <figure>
                               {video?.image?.responsiveImage && (
@@ -150,23 +183,33 @@ export default function Guide({ subscription, preview}) {
                       </li>
                     ))}
                   </ul>
+                  <div className={s.mobileAccordionCta} onClick={toggleAccordion}>
+                    <div className={`${s.mobileAccordionCtaIcon} ${isOpen ? s.isRotated : ''}`}>
+                      <ChevronDown />
+                    </div>
+                  </div>
                 </div>
-
-                <div></div>
+                <div className={s.otherChaptersWrapper}>
+                  <h3 className={s.otherChaptersTitle}>Other chapters</h3>
+                  <div className={s.otherChapters}>
+                    {otherChapters.filter((chapter) => chapter.videos.length).map((chapter) => (
+                      <Link key={chapter.slug} href={`/user-guides/${chapter.slug}/${chapter.videos[0]?.slug}`} passHref>
+                        <a className={s.otherChaptersItem}>
+                          <h2>
+                            {chapter.title}
+                          </h2>
+                          <div className={s.pill}>
+                            {chapter?.videos?.length} videos
+                          </div>
+                        </a>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </aside>
             </div>
 
             <div>
-              <div className={s.heading}>
-                <h1>
-                  {item.title}
-                </h1>
-                {item?.video?.video?.duration && (
-                  <div className={s.videoDurationPill}>
-                    {convertVideoSecondsInMinutes(item.video.video.duration)}
-                  </div>
-                )}
-              </div>
               <PostContent content={item.content} />
             </div>
           </div>

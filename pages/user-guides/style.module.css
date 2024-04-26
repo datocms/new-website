@@ -128,7 +128,7 @@
 .itemVideo {
   aspect-ratio: 16/9;
   background-color: var(--light-bg-color);
-  border-radius: 0.75rem;
+  border-radius: 0.675rem;
   overflow: hidden;
   position: relative;
   width: 100%;
