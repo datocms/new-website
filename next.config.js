@@ -69,6 +69,12 @@ module.exports = withNextEnv(
     },
     images: {
       disableStaticImages: true,
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'image.mux.com',
+        },
+      ],
     },
     webpack(config) {
       config.resolve.modules.push(path.resolve('./'));

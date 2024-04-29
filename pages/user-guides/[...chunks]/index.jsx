@@ -11,9 +11,10 @@ import {
   imageFields
 } from 'lib/datocms';
 import Link from 'next/link';
+import Image from 'next/image'
 
 import { useState } from 'react';
-import { Image as DatoImage, StructuredText, renderMetaTags } from 'react-datocms';
+import { StructuredText, renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -75,6 +76,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           video {
             video {
               duration
+              thumbnailUrl
+              blurUpThumb
             }
           }
         }
@@ -100,6 +103,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               ...imageFields
             }
             url(imgixParams: {w: 200})
+          }
+          video {
+            video {
+              thumbnailUrl
+              blurUpThumb
+            }
           }
         }
       }
@@ -184,24 +193,28 @@ export default function Guide({ subscription, preview}) {
                     </div>
                   </div>
                   <ul className={`${s.asideList} ${isOpen ? s.isOpen : s.isClosed}`}>
-                    {currentChapter[0].videos.map((video) => (
-                      <li key={video.title} className={`${s.asideListItem} ${video.slug === item.slug ? s.activeListItem : ''}`}>
-                        <Link href={`/user-guides/${currentChapter[0].slug}/${video.slug}`}>
+                    {currentChapter[0].videos.map((episode) => (
+                      <li key={episode.title} className={`${s.asideListItem} ${episode.slug === item.slug ? s.activeListItem : ''}`}>
+                        <Link href={`/user-guides/${currentChapter[0].slug}/${episode.slug}`}>
                           <a className={s.asideListItem}>
                             <figure>
-                              {video?.image?.responsiveImage && (
-                                <DatoImage
-                                  data={video.image.responsiveImage}
+                              {episode?.video?.video?.thumbnailUrl && (
+                                <Image
+                                  src={episode.video.video.thumbnailUrl}
+                                  blurDataURL={episode.video.video.blurUpThumb}
+                                  width={1024}
+                                  height={593}
+                                  alt={episode.title}
                                 />
                               )}
                             </figure>
                             <div>
                               <h4>
-                                {video.title}
+                                {episode.title}
                               </h4>
-                              {video?.video?.video?.duration && (
+                              {episode?.video?.video?.duration && (
                                 <div className={s.asideVideoDuration}>
-                                  {convertVideoSecondsInMinutes(video.video.video.duration)}
+                                  {convertVideoSecondsInMinutes(episode.video.video.duration)}
                                 </div>
                               )}
                             </div>
@@ -248,9 +261,13 @@ export default function Guide({ subscription, preview}) {
                   <Link href={`/user-guides/${currentChapter[0].slug}/${nextVideo.slug}`}>
                     <a>
                       <figure>
-                        {nextVideo?.image?.responsiveImage && (
-                          <DatoImage
-                            data={nextVideo.image.responsiveImage}
+                        {nextVideo?.video?.video?.thumbnailUrl && (
+                          <Image
+                            src={nextVideo.video.video.thumbnailUrl}
+                            blurDataURL={nextVideo.video.video.blurUpThumb}
+                            width={1024}
+                            height={593}
+                            alt={episode.title}
                           />
                         )}
                       </figure>
@@ -273,9 +290,13 @@ export default function Guide({ subscription, preview}) {
                   <Link href={`/user-guides/${nextChapter.slug}/${nextChapter.videos[0]?.slug}`}>
                     <a>
                       <figure>
-                        {nextChapter.videos[0]?.image?.responsiveImage && (
-                          <DatoImage
-                            data={nextChapter.videos[0].image.responsiveImage}
+                        {nextChapter.videos[0]?.video?.video?.thumbnailUrl && (
+                          <Image
+                            src={nextChapter.videos[0].video.video.thumbnailUrl}
+                            blurDataURL={nextChapter.videos[0].video.video.blurUpThumb}
+                            width={1024}
+                            height={593}
+                            alt={episode.title}
                           />
                         )}
                       </figure>

@@ -1,14 +1,13 @@
-import Button from 'components/Button';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Layout from 'components/Layout';
-import LazyImage from 'components/LazyImage';
 
 import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
 import { gqlStaticPropsWithSubscription, seoMetaTagsFields, imageFields } from 'lib/datocms';
 import Link from 'next/link';
-import { Image as DatoImage, StructuredText, renderMetaTags } from 'react-datocms';
+import Image from 'next/image'
+import { StructuredText, renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -32,6 +31,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           image {
             responsiveImage {
               ...imageFields
+            }
+          }
+          video {
+            video {
+              thumbnailUrl
+              blurUpThumb
             }
           }
         }
@@ -66,22 +71,25 @@ function Chapter({ chapter }) {
 
       <section className={s.chapterVideosWrapper}>
         <div className={s.chapterVideos}>
-          {chapter.videos.map((video) => (
-            <div key={video.slug} className={s.chapterItem}>
+          {chapter.videos.map((episode) => (
+            <div key={episode.slug} className={s.chapterItem}>
               <div className={s.itemVideo}>
-                {video.image?.responsiveImage && (
-                  <Link href={`/user-guides/${chapter.slug}/${video.slug}`} passHref>
+                {episode?.video?.video?.thumbnailUrl && (
+                  <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
                     <a>
-                      <DatoImage
-                        className={s.itemVideoImage}
-                        data={video.image.responsiveImage}
+                      <Image
+                        src={episode.video.video.thumbnailUrl}
+                        blurDataURL={episode.video.video.blurUpThumb}
+                        width={1024}
+                        height={593}
+                        alt={episode.title}
                       />
                     </a>
                   </Link>
                 )}
               </div>
-              <Link href={`/user-guides/${chapter.slug}/${video.slug}`}>
-                {video.title}
+              <Link href={`/user-guides/${chapter.slug}/${episode.slug}`}>
+                {episode.title}
               </Link>
             </div>
           ))}
