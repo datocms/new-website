@@ -272,6 +272,11 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
+                      <Link href="/cms/svelte-cms">
+                        <a className={s.extraLink}>Svelte</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
                       <Link href="/cms/vue-js-cms">
                         <a className={s.extraLink}>Vue.js</a>
                       </Link>
