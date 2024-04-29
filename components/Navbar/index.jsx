@@ -177,6 +177,9 @@ export default function Navbar() {
                         <Link href="/cms/react-cms">
                           <a className={s.integrationLink}>React</a>
                         </Link>
+                        <Link href="/cms/svelte-cms">
+                          <a className={s.integrationLink}>Svelte</a>
+                        </Link>
                         <Link href="/cms/vue-js-cms">
                           <a className={s.integrationLink}>Vue</a>
                         </Link>
