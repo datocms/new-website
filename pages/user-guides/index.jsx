@@ -24,7 +24,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         title
         slug
         introduction {
-          blocks
+          value
         }
         videos {
           title
@@ -60,9 +60,7 @@ function Chapter({ chapter }) {
         </div>
 
         <div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
+          <StructuredText data={chapter.introduction} />
         </div>
       </div>
 
