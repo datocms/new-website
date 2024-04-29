@@ -88,6 +88,21 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           slug
         }
       }
+      allChapters: allUserGuidesChapters {
+        slug
+        title
+        videos {
+          slug
+          image {
+            responsiveImage(
+              imgixParams: { auto: format, w: 200 }
+            ) {
+              ...imageFields
+            }
+            url(imgixParams: {w: 200})
+          }
+        }
+      }
     }
 
     ${seoMetaTagsFields}
@@ -104,7 +119,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
 
 export default function Guide({ subscription, preview}) {
   const {
-    data: { item, currentChapter, otherChapters},
+    data: { item, currentChapter, otherChapters, allChapters},
   } = useQuerySubscription(subscription);
 
   const convertVideoSecondsInMinutes = (seconds) => {
@@ -112,6 +127,12 @@ export default function Guide({ subscription, preview}) {
     const remainingSeconds = seconds % 60;
     return `${minutes}m ${remainingSeconds.toString().padStart(2, '0')}s`;
   }
+
+  const currentChapterIndex = allChapters.findIndex(chapter => chapter.slug === currentChapter[0].slug);
+  const nextChapter = allChapters[currentChapterIndex + 1];
+
+  const currentVideoIndex = currentChapter[0].videos.findIndex(video => video.slug === item.slug);
+  const nextVideo = currentChapter[0].videos[currentVideoIndex + 1];
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -211,6 +232,57 @@ export default function Guide({ subscription, preview}) {
 
             <div>
               <PostContent content={item.content} />
+              {nextVideo ? (
+                <div className={s.nextVideo}>
+                  <Link href={`/user-guides/${currentChapter[0].slug}/${nextVideo.slug}`}>
+                    <a>
+                      <figure>
+                        {nextVideo?.image?.responsiveImage && (
+                          <DatoImage
+                            data={nextVideo.image.responsiveImage}
+                          />
+                        )}
+                      </figure>
+
+                      <article>
+                        <p className={s.nextVideoLabel}>Next episode</p>
+                        <h2>{nextVideo.title}</h2>
+
+                        {nextVideo?.video?.video?.duration && (
+                          <div className={s.pill}>
+                            {convertVideoSecondsInMinutes(nextVideo.video.video.duration)}
+                          </div>
+                        )}
+                      </article>
+                    </a>
+                  </Link>
+                </div>
+              ) : nextChapter ? (
+                <div className={s.nextVideo}>
+                  <Link href={`/user-guides/${nextChapter.slug}/${nextChapter.videos[0]?.slug}`}>
+                    <a>
+                      <figure>
+                        {nextChapter.videos[0]?.image?.responsiveImage && (
+                          <DatoImage
+                            data={nextChapter.videos[0].image.responsiveImage}
+                          />
+                        )}
+                      </figure>
+
+                      <article>
+                        <p className={s.nextVideoLabel}>Next chapter</p>
+                        <h2>{nextChapter.title}</h2>
+
+                        {nextChapter.videos[0]?.video?.video?.duration && (
+                          <div className={s.pill}>
+                            {convertVideoSecondsInMinutes(nextChapter.videos[0].video.video.duration)}
+                          </div>
+                        )}
+                      </article>
+                    </a>
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </div>
         </Wrapper>

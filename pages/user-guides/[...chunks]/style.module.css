@@ -121,11 +121,15 @@
 
 .asideListTitle {
   color: var(--light-body-color);
-  font-size: 22px;
+  font-size: 20px;
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media screen and (min-width: 1024px) {
+    font-size: 22px;
+  }
 }
 
 .asideList {
@@ -269,5 +273,58 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+.nextVideo {
+  border-radius: 0.5rem;
+  border: 1px solid var(--light-bg-color);
+  margin-top: 4rem;
+  padding: 20px;
+  width: 100%;
+
+  @media screen and (min-width: 1024px) {
+    border-radius: 1rem;
+  }
+
+  a {
+    align-items: center;
+    color: inherit;
+    display: grid;
+    gap: 1rem;
+    text-decoration: none;
+    
+    @media screen and (min-width: 1024px) {
+      grid-template-columns: 160px 1fr;
+    }
+  }
+
+  figure {
+    aspect-ratio: 16/9;
+    background-color: var(--light-bg-color);
+    border-radius: 3px;
+    display: none;
+    margin: 0;
+    overflow: hidden;
+
+    @media screen and (min-width: 1024px) {
+      display: block;
+    }
+  }
+
+  .nextVideoLabel {
+    margin: 0;
+    color: var(--light-body-color);
+    font-size: 15px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin: 0.25rem 0 0 0;
+
+    @media screen and (min-width: 1024px) {
+      font-size: 22px;
+      margin: 0.25rem 0;
+    }
   }
 }
