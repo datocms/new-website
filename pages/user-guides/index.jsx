@@ -4,6 +4,7 @@ import Layout from 'components/Layout';
 
 import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
+import PrettyDuration from 'components/PrettyDuration';
 import { gqlStaticPropsWithSubscription, seoMetaTagsFields, imageFields } from 'lib/datocms';
 import Link from 'next/link';
 import Image from 'next/image'
@@ -53,12 +54,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
 );
 
 function Chapter({ chapter }) {
-  const convertVideoSecondsInMinutes = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}m ${remainingSeconds.toString().padStart(2, '0')}s`;
-  }
-
   return (
     <div className={s.chapter}>
       <div className={s.chapterIntro}>
@@ -100,7 +95,7 @@ function Chapter({ chapter }) {
                   {episode.title}
                   {episode?.video?.video?.duration && (
                     <div className={`${s.videoDuration}`}>
-                      {convertVideoSecondsInMinutes(episode.video.video.duration)}
+                      {PrettyDuration(episode.video.video.duration)}
                     </div>  
                   )}
                 </a>

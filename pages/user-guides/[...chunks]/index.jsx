@@ -4,6 +4,7 @@ import PostContent from 'components/PostContent';
 import Space from 'components/Space';
 import VideoPlayer from 'components/VideoPlayer';
 import Wrapper from 'components/Wrapper';
+import PrettyDuration from 'components/PrettyDuration';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
@@ -131,12 +132,6 @@ export default function Guide({ subscription, preview}) {
     data: { item, currentChapter, otherChapters, allChapters},
   } = useQuerySubscription(subscription);
 
-  const convertVideoSecondsInMinutes = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}m ${remainingSeconds.toString().padStart(2, '0')}s`;
-  }
-
   const currentChapterIndex = allChapters.findIndex(chapter => chapter.slug === currentChapter[0].slug);
   const nextChapter = allChapters[currentChapterIndex + 1];
   const getChapterIndexBySlug = (slug) => allChapters.findIndex(chapter => chapter.slug === slug) + 1;
@@ -173,7 +168,7 @@ export default function Guide({ subscription, preview}) {
               </h1>
               {item?.video?.video?.duration && (
                 <div className={`${s.pill} ${s.isDark}`}>
-                  {convertVideoSecondsInMinutes(item.video.video.duration)}
+                  {PrettyDuration(item.video.video.duration)}
                 </div>
               )}
             </div>
@@ -214,7 +209,7 @@ export default function Guide({ subscription, preview}) {
                               </h4>
                               {episode?.video?.video?.duration && (
                                 <div className={s.asideVideoDuration}>
-                                  {convertVideoSecondsInMinutes(episode.video.video.duration)}
+                                  {PrettyDuration(episode.video.video.duration)}
                                 </div>
                               )}
                             </div>
@@ -278,7 +273,7 @@ export default function Guide({ subscription, preview}) {
 
                         {nextVideo?.video?.video?.duration && (
                           <div className={s.pill}>
-                            {convertVideoSecondsInMinutes(nextVideo.video.video.duration)}
+                            {PrettyDuration(nextVideo.video.video.duration)}
                           </div>
                         )}
                       </article>
@@ -307,7 +302,7 @@ export default function Guide({ subscription, preview}) {
 
                         {nextChapter.videos[0]?.video?.video?.duration && (
                           <div className={s.pill}>
-                            {convertVideoSecondsInMinutes(nextChapter.videos[0].video.video.duration)}
+                            {PrettyDuration(nextChapter.videos[0].video.video.duration)}
                           </div>
                         )}
                       </article>
