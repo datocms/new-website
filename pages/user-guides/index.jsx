@@ -35,6 +35,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           }
           video {
             video {
+              duration
               thumbnailUrl
               blurUpThumb
             }
@@ -52,6 +53,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
 );
 
 function Chapter({ chapter }) {
+  const convertVideoSecondsInMinutes = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}m ${remainingSeconds.toString().padStart(2, '0')}s`;
+  }
+
   return (
     <div className={s.chapter}>
       <div className={s.chapterIntro}>
@@ -88,8 +95,15 @@ function Chapter({ chapter }) {
                   </Link>
                 )}
               </div>
-              <Link href={`/user-guides/${chapter.slug}/${episode.slug}`}>
-                {episode.title}
+              <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
+                <a>
+                  {episode.title}
+                  {episode?.video?.video?.duration && (
+                    <div className={`${s.videoDuration}`}>
+                      {convertVideoSecondsInMinutes(episode.video.video.duration)}
+                    </div>  
+                  )}
+                </a>
               </Link>
             </div>
           ))}

@@ -59,54 +59,68 @@
 .chapterVideosWrapper {
   position: relative;
 
-  &::before,
-  &::after {
-    content: '';
-    height: 100%;
-    position: absolute;
-    top: 0;
-    width: var(--page-margin);
-    z-index: 10;
-
-    @media screen and (min-width: 1200px) {
-      width: calc(var(--page-margin) * 2);
+  @media screen and (min-width: 768px) {
+    &::before,
+    &::after {
+      content: '';
+      height: 100%;
+      position: absolute;
+      top: 0;
+      width: var(--page-margin);
+      z-index: 10;
+  
+      @media screen and (min-width: 1200px) {
+        width: calc(var(--page-margin) * 2);
+      }
     }
-  }
-
-  &::before {
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-    left: 0;
-  }
-
-  &::after {
-    background-image: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-    right: 0;
+  
+    &::before {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+      left: 0;
+    }
+  
+    &::after {
+      background-image: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+      right: 0;
+    }
   }
 }
 
 .chapterVideos {
   display: flex;
   gap: 0.75rem;
-  overflow: auto;
   padding: 0 var(--page-margin);
-  scrollbar-width: none;
+  flex-direction: column;
+  
+  @media screen and (min-width: 768px) {
+    scrollbar-width: none;
+    overflow: auto;
+    flex-direction: row;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 
   @media screen and (min-width: 1200px) {
     padding: 0 calc(var(--page-margin) * 2);
   }
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .chapterItem {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
+  align-items: center;
+  display: grid;
   font-size: 15px;
   gap: 0.825rem;
-  width: clamp(200px, calc(140px + 15vw), 300px);
+  grid-template-columns: 100px 1fr;
+  
+  @media screen and (min-width: 768px) {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: clamp(200px, calc(140px + 15vw), 300px);
+  }
 
   &:hover {
     a {
@@ -128,10 +142,14 @@
 .itemVideo {
   aspect-ratio: 16/9;
   background-color: var(--light-bg-color);
-  border-radius: 0.675rem;
+  border-radius: 4px;
   overflow: hidden;
   position: relative;
   width: 100%;
+
+  @media screen and (min-width: 768px) {
+    border-radius: 0.675rem;
+  }
 }
 
 .itemVideoImage {
@@ -140,4 +158,8 @@
   transform-origin: top center;
   transition: transform 0.5s;
   width: 100%;
+}
+
+.videoDuration {
+  color: var(--extra-light-body-color)
 }
