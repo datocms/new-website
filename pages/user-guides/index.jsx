@@ -5,7 +5,7 @@ import Layout from 'components/Layout';
 import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
 import PrettyDuration from 'components/PrettyDuration';
-import { gqlStaticPropsWithSubscription, seoMetaTagsFields, imageFields } from 'lib/datocms';
+import { gqlStaticPropsWithSubscription, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
 import Image from 'next/image'
 import { StructuredText, renderMetaTags } from 'react-datocms';
@@ -29,11 +29,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         videos {
           title
           slug
-          image {
-            responsiveImage {
-              ...imageFields
-            }
-          }
           video {
             video {
               duration
@@ -41,12 +36,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               blurUpThumb
             }
           }
+          thumbTimeSeconds
         }
       }
     }
 
     ${seoMetaTagsFields}
-    ${imageFields}
   `,
   {
     requiredKeys: ['page', 'chapters'],
@@ -80,7 +75,7 @@ function Chapter({ chapter }) {
                   <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
                     <a>
                       <Image
-                        src={episode.video.video.thumbnailUrl}
+                        src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
                         blurDataURL={episode.video.video.blurUpThumb}
                         width={1024}
                         height={593}

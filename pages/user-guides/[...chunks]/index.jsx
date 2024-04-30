@@ -9,7 +9,6 @@ import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
   seoMetaTagsFields,
-  imageFields
 } from 'lib/datocms';
 import Link from 'next/link';
 import Image from 'next/image'
@@ -66,14 +65,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         videos {
           title
           slug
-          image {
-            responsiveImage(
-              imgixParams: { auto: format, w: 200 }
-            ) {
-              ...imageFields
-            }
-            url(imgixParams: {w: 200})
-          }
           video {
             video {
               duration
@@ -81,6 +72,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               blurUpThumb
             }
           }
+          thumbTimeSeconds
         }
       }
       otherChapters: allUserGuidesChapters(
@@ -97,26 +89,18 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         title
         videos {
           slug
-          image {
-            responsiveImage(
-              imgixParams: { auto: format, w: 200 }
-            ) {
-              ...imageFields
-            }
-            url(imgixParams: {w: 200})
-          }
           video {
             video {
               thumbnailUrl
               blurUpThumb
             }
           }
+          thumbTimeSeconds
         }
       }
     }
 
     ${seoMetaTagsFields}
-    ${imageFields}
   `,
   {
     requiredKeys: ['item', 'currentChapter[0]'],
@@ -195,7 +179,7 @@ export default function Guide({ subscription, preview}) {
                             <figure>
                               {episode?.video?.video?.thumbnailUrl && (
                                 <Image
-                                  src={episode.video.video.thumbnailUrl}
+                                  src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
                                   blurDataURL={episode.video.video.blurUpThumb}
                                   width={1024}
                                   height={593}
@@ -258,7 +242,7 @@ export default function Guide({ subscription, preview}) {
                       <figure>
                         {nextVideo?.video?.video?.thumbnailUrl && (
                           <Image
-                            src={nextVideo.video.video.thumbnailUrl}
+                            src={`${nextVideo.video.video.thumbnailUrl}${nextVideo.thumbTimeSeconds ? `?time=${nextVideo.thumbTimeSeconds}` : null}`}
                             blurDataURL={nextVideo.video.video.blurUpThumb}
                             width={1024}
                             height={593}
@@ -287,7 +271,7 @@ export default function Guide({ subscription, preview}) {
                       <figure>
                         {nextChapter.videos[0]?.video?.video?.thumbnailUrl && (
                           <Image
-                            src={nextChapter.videos[0].video.video.thumbnailUrl}
+                            src={`${nextChapter.videos[0].video.video.thumbnailUrl}${nextChapter.videos[0].thumbTimeSeconds ? `?time=${nextChapter.videos[0].thumbTimeSeconds}` : null}`}
                             blurDataURL={nextChapter.videos[0].video.video.blurUpThumb}
                             width={1024}
                             height={593}
