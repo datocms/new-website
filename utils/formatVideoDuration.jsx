@@ -1,4 +1,4 @@
-export default function PrettyDuration(seconds) {
+export default function formatVideoDuration(seconds) {
   if (typeof seconds !== 'number') {
     return '—';
   }

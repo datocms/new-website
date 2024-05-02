@@ -4,7 +4,7 @@ import Layout from 'components/Layout';
 
 import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
-import PrettyDuration from 'components/PrettyDuration';
+import formatVideoDuration from 'utils/formatVideoDuration';
 import { gqlStaticPropsWithSubscription, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
 import Image from 'next/image'
@@ -117,7 +117,7 @@ function Chapter({ chapter }) {
           <div className={s.pill}>
             <Clock />
             <span>
-              {PrettyDuration(allVideosDurations)} 
+              {formatVideoDuration(allVideosDurations)} 
             </span>
           </div>
         </div>
@@ -209,7 +209,7 @@ function VideoCard({ chapter, episode}) {
             {episode.title}
           </h4>
           <div className={`${s.videoDuration}`}>
-            {PrettyDuration(episode.video.video.duration)}
+            {formatVideoDuration(episode.video.video.duration)}
           </div>
         </a>
       </Link>

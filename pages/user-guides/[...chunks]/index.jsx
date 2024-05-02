@@ -4,7 +4,7 @@ import PostContent from 'components/PostContent';
 import Space from 'components/Space';
 import VideoPlayer from 'components/VideoPlayer';
 import Wrapper from 'components/Wrapper';
-import PrettyDuration from 'components/PrettyDuration';
+import formatVideoDuration from 'utils/formatVideoDuration';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
@@ -165,7 +165,7 @@ export default function Guide({ subscription, preview}) {
                   {item.title}
                 </h1>
                 <div className={`${s.pill} ${s.isDark}`}>
-                  {PrettyDuration(item.video.video.duration)}
+                  {formatVideoDuration(item.video.video.duration)}
                 </div>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function Guide({ subscription, preview}) {
                                 {episode.title}
                               </h4>
                               <div className={s.asideVideoDuration}>
-                                {PrettyDuration(episode.video.video.duration)}
+                                {formatVideoDuration(episode.video.video.duration)}
                               </div>
                             </div>
                           </a>
@@ -262,7 +262,7 @@ export default function Guide({ subscription, preview}) {
                         <p className={s.nextVideoLabel}>Next episode</p>
                         <h2>{nextVideo.title}</h2>
                         <div className={s.pill}>
-                          {PrettyDuration(nextVideo.video.video.duration)}
+                          {formatVideoDuration(nextVideo.video.video.duration)}
                         </div>
                       </article>
                     </a>
@@ -287,7 +287,7 @@ export default function Guide({ subscription, preview}) {
                         <h2>{nextChapter.title}</h2>
                         {nextChapter.videos[0]?.video.video.duration && (
                           <div className={s.pill}>
-                            {PrettyDuration(nextChapter.videos[0].video.video.duration)}
+                            {formatVideoDuration(nextChapter.videos[0].video.video.duration)}
                           </div>
                         )}
                       </article>
