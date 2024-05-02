@@ -82,13 +82,13 @@
 }
 
 .emblaSlide {
-  aspect-ratio: 16/9;
   background-color: var(--light-bg-color);
   border-radius: 0.675rem;
+  flex: 0 0 clamp(200px, calc(140px + 15vw), 300px);
+  height: auto;
+  min-width: 0;
   overflow: hidden;
   position: relative;
-  flex: 0 0 clamp(200px, calc(140px + 15vw), 300px);
-  min-width: 0;
 }
 
 .chapterVideosWrapper {
@@ -177,15 +177,29 @@
 }
 
 .itemVideo {
-  aspect-ratio: 16/9;
-  background-color: var(--light-bg-color);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
   width: 100%;
+  background-color: var(--light-bg-color);
 
   @media screen and (min-width: 768px) {
     border-radius: 0.675rem;
+  }
+
+  /* ugly fix for weird wrappers in Nextjs 12 */
+  &:empty {
+    aspect-ratio: 1864 / 1080; 
+  }
+
+  a {
+    overflow: hidden;
+    display: block;
+  }
+
+  span {
+    display: block !important;
+    height: 100% !important;
   }
 }
 

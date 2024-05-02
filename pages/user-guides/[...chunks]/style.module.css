@@ -194,11 +194,25 @@
     }
   
     figure {
-      aspect-ratio: 16/9;
       background-color: #fff;
       border-radius: 3px;
       margin: 0;
       overflow: hidden;
+
+      /* ugly fix for weird wrappers in Nextjs 12 */
+      &:empty {
+        aspect-ratio: 1864 / 1080; 
+      }
+
+      a {
+        overflow: hidden;
+        display: block;
+      }
+
+      span {
+        display: block !important;
+        height: 100% !important;
+      }
     }
 
     h4 {
@@ -321,7 +335,6 @@
   }
 
   figure {
-    aspect-ratio: 16/9;
     background-color: var(--light-bg-color);
     border-radius: 3px;
     display: none;
@@ -330,6 +343,21 @@
 
     @media screen and (min-width: 1024px) {
       display: block;
+    }
+
+    /* ugly fix for weird wrappers in Nextjs 12 */
+    &:empty {
+      aspect-ratio: 1864 / 1080; 
+    }
+
+    a {
+      overflow: hidden;
+      display: block;
+    }
+
+    span {
+      display: block !important;
+      height: 100% !important;
     }
   }
 
