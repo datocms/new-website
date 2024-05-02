@@ -19,6 +19,7 @@ import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
 import ChevronDown from 'public/icons/regular/chevron-down.svg';
+import ChevronLeft from 'public/icons/regular/chevron-left.svg';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -150,15 +151,26 @@ export default function Guide({ subscription, preview}) {
           </div>
 
           <div className={s.container}>
-            <div className={s.heading}>
-              <h1>
-                {item.title}
-              </h1>
-              {item?.video?.video?.duration && (
-                <div className={`${s.pill} ${s.isDark}`}>
-                  {PrettyDuration(item.video.video.duration)}
-                </div>
-              )}
+            <div className={s.headingWrapper}>
+              <Link href="/user-guides">
+                <a className={s.back}>
+                  <ChevronLeft />
+                  <span>
+                    Back to All Videos
+                  </span>
+                </a>
+              </Link>
+
+              <div className={s.heading}>
+                <h1>
+                  {item.title}
+                </h1>
+                {item?.video?.video?.duration && (
+                  <div className={`${s.pill} ${s.isDark}`}>
+                    {PrettyDuration(item.video.video.duration)}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className={s.asideWrapper}>

@@ -1,20 +1,56 @@
+.headingWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  gap: 0.5rem;
+
+  @media screen and (min-width: 1024px) {
+    grid-column: span 2;
+    margin-top: 1.5rem;
+  }
+
+  .back {
+    align-items: center;
+    color: var(--extra-light-body-color);
+    display: flex;
+    font-size: 15px;
+    gap: 0.25rem;
+    text-decoration: none;
+    transition: color .3s;
+
+    &:hover {
+      color: var(--light-body-color);
+
+      svg {
+        fill: var(--light-body-color);
+        transform: translateX(-0.25rem);
+      }
+    }
+
+    svg {
+      height: 0.75em;
+      width: 0.75em;
+      fill: var(--extra-light-body-color);
+      transition: transform .3s, color .3s;
+    }
+  }
+}
+
 .heading {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-top: 2rem;
   
   @media screen and (min-width: 1024px) {
     align-items: center;
     flex-direction: row;
     gap: 1rem;
     grid-column: span 2;
-    margin-top: 1.5rem;
   }
 
   h1 {
-    font-size: clamp(1.5rem, calc(1rem + 5vw), 3rem);
+    font-size: clamp(1.25rem, calc(1rem + 3vw), 3rem);
     letter-spacing: -0.02em;
     margin: 0;
   }
