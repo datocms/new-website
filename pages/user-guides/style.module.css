@@ -69,6 +69,18 @@
   @media screen and (min-width: 1200px) {
     padding: 0 calc(var(--page-margin) * 2);
   }
+
+  &:hover {
+    .prevSlide,
+    .nextSlide {
+      opacity: 1;
+      pointer-events: all;
+      
+      &.isDisabled svg {
+        opacity: 0.3;
+      }
+    }
+  }
 }
 
 .emblaContainer {
@@ -89,6 +101,53 @@
   min-width: 0;
   overflow: hidden;
   position: relative;
+}
+
+.prevSlide,
+.nextSlide {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 30%;
+  transition: opacity .3s, transform .3s;
+  width: 44px;
+  z-index: 20;
+  transform: translateY(-50%);
+  transform-origin: ;
+}
+
+.prevSlide {
+  left: var(--page-margin);
+  transform: translateX(-50%);
+
+  @media screen and (min-width: 1200px) {
+    left: calc(var(--page-margin) * 2);
+    
+    &:hover {
+      transform: translateX(-50%) scale(1.1);
+    }
+  }
+}
+
+.nextSlide {
+  right: var(--page-margin);
+  transform: translateX(50%);
+
+  @media screen and (min-width: 1200px) {
+    right: calc(var(--page-margin) * 2);
+
+    &:hover {
+      transform: translateX(50%) scale(1.1);
+    }
+  }
 }
 
 .chapterVideosWrapper {

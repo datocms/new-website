@@ -12,7 +12,10 @@ import { StructuredText, renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
+import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
+import AngleLeft from 'public/icons/regular/angle-left.svg'
+import AngleRight from 'public/icons/regular/angle-right.svg'
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   /* GraphQL */ `
@@ -126,7 +129,31 @@ function VideoList({ chapter }) {
 }
 
 function VideoCarousel({options, chapter}) {
-  const [emblaRef] = useEmblaCarousel(options)
+  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+  const [prevButtonDisabled, setPrevButtonDisabled] = useState(false)
+  const [nextButtonDisabled, setNextButtonDisabled] = useState(false)
+
+  const prevSlide = () => {
+    if (!emblaApi) return
+    emblaApi.scrollPrev()
+  }
+
+  const nextSlide = () => {
+    if (!emblaApi) return
+    emblaApi.scrollNext()
+  }
+
+  const onSelect = useCallback((emblaApi) => {
+    setPrevButtonDisabled(!emblaApi.canScrollPrev())
+    setNextButtonDisabled(!emblaApi.canScrollNext())
+  }, [])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    onSelect(emblaApi)
+    emblaApi.on('init', onSelect)
+    emblaApi.on('select', onSelect)
+  }, [emblaApi, onSelect])
 
   return (
     <div className={s.embla} ref={emblaRef}>
@@ -134,6 +161,14 @@ function VideoCarousel({options, chapter}) {
         {chapter.videos.map((episode, index) => (
           <VideoCard key={index} chapter={chapter} episode={episode} />
         ))}
+      </div>
+
+      <div className={`${s.prevSlide} ${prevButtonDisabled ? s.isDisabled : ''}`} onClick={prevSlide}>
+        <AngleLeft />
+      </div>
+
+      <div className={`${s.nextSlide} ${nextButtonDisabled ? s.isDisabled : ''}`} onClick={nextSlide}>
+        <AngleRight />
       </div>
     </div>
   );
