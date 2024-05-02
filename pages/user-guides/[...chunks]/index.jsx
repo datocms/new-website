@@ -70,6 +70,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               duration
               thumbnailUrl
               blurUpThumb
+              width
+              height
             }
           }
           thumbTimeSeconds
@@ -93,6 +95,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             video {
               thumbnailUrl
               blurUpThumb
+              width
+              height
             }
           }
           thumbTimeSeconds
@@ -181,8 +185,8 @@ export default function Guide({ subscription, preview}) {
                                 <Image
                                   src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
                                   blurDataURL={episode.video.video.blurUpThumb}
-                                  width={1024}
-                                  height={593}
+                                  width={episode.video.video.width / 4}
+                                  height={episode.video.video.height / 4}
                                   alt={episode.title}
                                 />
                               )}
@@ -244,8 +248,8 @@ export default function Guide({ subscription, preview}) {
                           <Image
                             src={`${nextVideo.video.video.thumbnailUrl}${nextVideo.thumbTimeSeconds ? `?time=${nextVideo.thumbTimeSeconds}` : null}`}
                             blurDataURL={nextVideo.video.video.blurUpThumb}
-                            width={1024}
-                            height={593}
+                            width={nextVideo.video.video.width / 2}
+                            height={nextVideo.video.video.height / 2}
                             alt={episode.title}
                           />
                         )}
@@ -273,8 +277,8 @@ export default function Guide({ subscription, preview}) {
                           <Image
                             src={`${nextChapter.videos[0].video.video.thumbnailUrl}${nextChapter.videos[0].thumbTimeSeconds ? `?time=${nextChapter.videos[0].thumbTimeSeconds}` : null}`}
                             blurDataURL={nextChapter.videos[0].video.video.blurUpThumb}
-                            width={1024}
-                            height={593}
+                            width={nextChapter.videos[0].video.video.width / 2}
+                            height={nextChapter.videos[0].video.video.height / 2}
                             alt={episode.title}
                           />
                         )}

@@ -34,6 +34,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               duration
               thumbnailUrl
               blurUpThumb
+              width
+              height
             }
           }
           thumbTimeSeconds
@@ -77,8 +79,8 @@ function Chapter({ chapter }) {
                       <Image
                         src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
                         blurDataURL={episode.video.video.blurUpThumb}
-                        width={1024}
-                        height={593}
+                        width={episode.video.video.width / 2}
+                        height={episode.video.video.height / 2}
                         alt={episode.title}
                       />
                     </a>
