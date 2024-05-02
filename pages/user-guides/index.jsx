@@ -16,6 +16,7 @@ import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import AngleLeft from 'public/icons/regular/angle-left.svg'
 import AngleRight from 'public/icons/regular/angle-right.svg'
+import Clock from 'public/icons/regular/clock.svg'
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   /* GraphQL */ `
@@ -80,7 +81,8 @@ export default function UserGuides({ subscription, preview }) {
             .filter((chapter) => chapter.videos.length > 0)
             .map((chapter) => (
               <Chapter chapter={chapter} key={chapter.slug} />
-            ))}
+            )
+          )}
         </div>
       </Space>
     </Layout>
@@ -93,6 +95,13 @@ function Chapter({ chapter }) {
     align: 'start',
   }
 
+  const allVideosDurations = chapter.videos.reduce((totalDuration, episode) => {
+    if (episode?.video?.video?.duration) {
+      return totalDuration + episode.video.video.duration;
+    }
+    return totalDuration;
+  }, 0);
+
   return (
     <div className={s.chapter}>
       <div className={s.chapterIntro}>
@@ -100,8 +109,16 @@ function Chapter({ chapter }) {
           <h2>
             {chapter.title}
           </h2>
-          <div className={s.chapterIntroPill}>
-            {chapter.videos.length > 1 ? `${chapter.videos.length} videos` : '1 video'}
+          <div className={s.chapterIntroPills}>
+            <div className={s.pill}>
+              {chapter.videos.length > 1 ? `${chapter.videos.length} videos` : '1 video'}
+            </div>
+            <div className={s.pill}>
+              <Clock />
+              <span>
+                {PrettyDuration(allVideosDurations)} 
+              </span>
+            </div>
           </div>
         </div>
 

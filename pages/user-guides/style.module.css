@@ -47,13 +47,24 @@
   }
 }
 
-.chapterIntroPill {
+.chapterIntroPills {
+  display: flex;
+  gap: 0.25rem
+}
+
+.pill {
+  align-items: center;
   background-color: var(--light-bg-color);
   border-radius: 2rem;
   color: var(--light-body-color);
-  display: inline-block;
+  display: flex;
   font-size: 15px;
+  gap: 0.5rem;
   padding: 0.2rem 0.825rem;
+
+  svg {
+    fill: var(--light-body-color);
+  }
 }
 
 /* only desktop */
