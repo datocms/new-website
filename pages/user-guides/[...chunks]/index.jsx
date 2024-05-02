@@ -94,6 +94,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           slug
           video {
             video {
+              duration
               thumbnailUrl
               blurUpThumb
               width
