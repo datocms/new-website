@@ -250,7 +250,7 @@ export default function Guide({ subscription, preview}) {
                             blurDataURL={nextVideo.video.video.blurUpThumb}
                             width={nextVideo.video.video.width / 2}
                             height={nextVideo.video.video.height / 2}
-                            alt={episode.title}
+                            alt={nextVideo.title}
                           />
                         )}
                       </figure>
@@ -279,7 +279,7 @@ export default function Guide({ subscription, preview}) {
                             blurDataURL={nextChapter.videos[0].video.video.blurUpThumb}
                             width={nextChapter.videos[0].video.video.width / 2}
                             height={nextChapter.videos[0].video.video.height / 2}
-                            alt={episode.title}
+                            alt={nextChapter.videos[0].title}
                           />
                         )}
                       </figure>
