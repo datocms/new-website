@@ -232,6 +232,11 @@
     text-decoration: none;
     transition: color 0.2s;
   }
+
+  h4 {
+    font-weight: 600;
+    margin: 0;
+  }
 }
 
 .itemVideo {

@@ -194,7 +194,9 @@ function VideoCard({ chapter, episode}) {
       </div>
       <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
         <a>
-          {episode.title}
+          <h4>
+            {episode.title}
+          </h4>
           {episode?.video?.video?.duration && (
             <div className={`${s.videoDuration}`}>
               {PrettyDuration(episode.video.video.duration)}
