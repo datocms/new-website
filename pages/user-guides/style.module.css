@@ -56,6 +56,41 @@
   padding: 0.2rem 0.825rem;
 }
 
+/* only desktop */
+.embla {
+  display: none;
+  
+  @media screen and (min-width: 768px) {
+    display: block;
+    overflow: hidden;
+    padding: 0 var(--page-margin);
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding: 0 calc(var(--page-margin) * 2);
+  }
+}
+
+.emblaContainer {
+  display: flex;
+  gap: 0.75rem;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.emblaSlide {
+  aspect-ratio: 16/9;
+  background-color: var(--light-bg-color);
+  border-radius: 0.675rem;
+  overflow: hidden;
+  position: relative;
+  flex: 0 0 clamp(200px, calc(140px + 15vw), 300px);
+  min-width: 0;
+}
+
 .chapterVideosWrapper {
   position: relative;
 
@@ -86,7 +121,8 @@
   }
 }
 
-.chapterVideos {
+/* only mobile */
+.chapterVideosList {
   display: flex;
   gap: 0.75rem;
   padding: 0 var(--page-margin);
@@ -96,6 +132,7 @@
     scrollbar-width: none;
     overflow: auto;
     flex-direction: row;
+    display: none;
 
     &::-webkit-scrollbar {
       display: none;

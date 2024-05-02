@@ -12,6 +12,8 @@ import { StructuredText, renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
+import useEmblaCarousel from 'embla-carousel-react'
+
 export const getStaticProps = gqlStaticPropsWithSubscription(
   /* GraphQL */ `
     {
@@ -50,61 +52,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
   },
 );
 
-function Chapter({ chapter }) {
-  return (
-    <div className={s.chapter}>
-      <div className={s.chapterIntro}>
-        <div>
-          <h2>
-            {chapter.title}
-          </h2>
-          <div className={s.chapterIntroPill}>
-            {chapter.videos.length > 1 ? `${chapter.videos.length} videos` : '1 video'}
-          </div>
-        </div>
-
-        <div>
-          <StructuredText data={chapter.introduction} />
-        </div>
-      </div>
-
-      <section className={s.chapterVideosWrapper}>
-        <div className={s.chapterVideos}>
-          {chapter.videos.map((episode) => (
-            <div key={episode.slug} className={s.chapterItem}>
-              <div className={s.itemVideo}>
-                {episode?.video?.video?.thumbnailUrl && (
-                  <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
-                    <a>
-                      <Image
-                        src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
-                        blurDataURL={episode.video.video.blurUpThumb}
-                        width={episode.video.video.width / 2}
-                        height={episode.video.video.height / 2}
-                        alt={episode.title}
-                      />
-                    </a>
-                  </Link>
-                )}
-              </div>
-              <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
-                <a>
-                  {episode.title}
-                  {episode?.video?.video?.duration && (
-                    <div className={`${s.videoDuration}`}>
-                      {PrettyDuration(episode.video.video.duration)}
-                    </div>  
-                  )}
-                </a>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
 export default function UserGuides({ subscription, preview }) {
   const {
     data: { chapters, page },
@@ -134,5 +81,92 @@ export default function UserGuides({ subscription, preview }) {
         </div>
       </Space>
     </Layout>
+  );
+}
+
+function Chapter({ chapter }) {
+  const carouselOptions = {
+    loop: false,
+    align: 'start',
+  }
+
+  return (
+    <div className={s.chapter}>
+      <div className={s.chapterIntro}>
+        <div>
+          <h2>
+            {chapter.title}
+          </h2>
+          <div className={s.chapterIntroPill}>
+            {chapter.videos.length > 1 ? `${chapter.videos.length} videos` : '1 video'}
+          </div>
+        </div>
+
+        <div>
+          <StructuredText data={chapter.introduction} />
+        </div>
+      </div>
+
+      <section className={s.chapterVideosWrapper}>
+        <VideoList chapter={chapter} />
+        <VideoCarousel options={carouselOptions} chapter={chapter} />
+      </section>
+    </div>
+  );
+}
+
+function VideoList({ chapter }) {
+  return (
+    <div className={s.chapterVideosList}>
+      {chapter.videos.map((episode, index) => (
+        <VideoCard key={index} chapter={chapter} episode={episode} />
+      ))}
+    </div>
+  );
+}
+
+function VideoCarousel({options, chapter}) {
+  const [emblaRef] = useEmblaCarousel(options)
+
+  return (
+    <div className={s.embla} ref={emblaRef}>
+      <div className={s.emblaContainer}>
+        {chapter.videos.map((episode, index) => (
+          <VideoCard key={index} chapter={chapter} episode={episode} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function VideoCard({ chapter, episode}) {
+  return (
+    <div key={episode.slug} className={s.chapterItem}>
+      <div className={s.itemVideo}>
+        {episode?.video?.video?.thumbnailUrl && (
+          <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
+            <a>
+              <Image
+                src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
+                blurDataURL={episode.video.video.blurUpThumb}
+                width={episode.video.video.width / 2}
+                height={episode.video.video.height / 2}
+                alt={episode.title}
+              />
+            </a>
+          </Link>
+        )}
+      </div>
+      <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
+        <a>
+          {episode.title}
+          {episode?.video?.video?.duration && (
+            <div className={`${s.videoDuration}`}>
+              {PrettyDuration(episode.video.video.duration)}
+            </div>  
+          )}
+        </a>
+      </Link>
+    </div>
   );
 }

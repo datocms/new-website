@@ -38,6 +38,7 @@
     "datocms-structured-text-to-plain-text": "^2.0.4",
     "datocms-structured-text-utils": "^2.0.4",
     "dotenv-load": "^2.0.0",
+    "embla-carousel-react": "^8.0.2",
     "flatted": "^3.1.1",
     "front-matter": "^4.0.2",
     "glob": "^7.1.7",
