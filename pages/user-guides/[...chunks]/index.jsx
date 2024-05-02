@@ -14,7 +14,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 
 import { useState } from 'react';
-import { StructuredText, renderMetaTags } from 'react-datocms';
+import { renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 

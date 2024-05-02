@@ -353,7 +353,12 @@
   border: 1px solid var(--light-bg-color);
   margin-top: 4rem;
   padding: 20px;
+  transition: border-color .3s;
   width: 100%;
+
+  &:hover {
+    border: 1px solid var(--border-color);
+  }
 
   @media screen and (min-width: 1024px) {
     border-radius: 1rem;

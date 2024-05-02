@@ -67,6 +67,36 @@
   }
 }
 
+.chapterVideosWrapper {
+  position: relative;
+
+  @media screen and (min-width: 768px) {
+    &::before,
+    &::after {
+      content: '';
+      height: 100%;
+      position: absolute;
+      top: 0;
+      width: var(--page-margin);
+      z-index: 10;
+  
+      @media screen and (min-width: 1200px) {
+        width: calc(var(--page-margin) * 2);
+      }
+    }
+  
+    &::before {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+      left: 0;
+    }
+  
+    &::after {
+      background-image: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+      right: 0;
+    }
+  }
+}
+
 /* only desktop */
 .embla {
   display: none;
@@ -160,36 +190,6 @@
   }
 }
 
-.chapterVideosWrapper {
-  position: relative;
-
-  @media screen and (min-width: 768px) {
-    &::before,
-    &::after {
-      content: '';
-      height: 100%;
-      position: absolute;
-      top: 0;
-      width: var(--page-margin);
-      z-index: 10;
-  
-      @media screen and (min-width: 1200px) {
-        width: calc(var(--page-margin) * 2);
-      }
-    }
-  
-    &::before {
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-      left: 0;
-    }
-  
-    &::after {
-      background-image: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-      right: 0;
-    }
-  }
-}
-
 /* only mobile */
 .chapterVideosList {
   display: flex;
@@ -198,18 +198,7 @@
   flex-direction: column;
   
   @media screen and (min-width: 768px) {
-    scrollbar-width: none;
-    overflow: auto;
-    flex-direction: row;
     display: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  @media screen and (min-width: 1200px) {
-    padding: 0 calc(var(--page-margin) * 2);
   }
 }
 
