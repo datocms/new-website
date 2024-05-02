@@ -14,11 +14,6 @@
   @media screen and (min-width: 768px) {
     margin-bottom: 8rem;
   }
-
-  h2 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-  }
 }
 
 .chapterIntro {
@@ -31,7 +26,7 @@
   width: 100%;
 
   @media screen and (min-width: 768px) {
-    gap: 2rem;
+    gap: 1.5rem;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 2rem;
   }
@@ -44,6 +39,17 @@
     color: var(--light-body-color);
     margin: 0.5rem 0;
     font-weight: 500;
+  }
+}
+
+.chapterIntroHeading {
+  @media screen and (min-width: 768px) {
+    grid-column: span 2;
+  }
+
+  h2 {
+    font-size: clamp(18px, calc(18px + 3vw), 40px);
+    margin: 0;
   }
 }
 

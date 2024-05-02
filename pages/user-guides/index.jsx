@@ -96,7 +96,7 @@ function Chapter({ chapter }) {
   }
 
   const allVideosDurations = chapter.videos.reduce((totalDuration, episode) => {
-    if (episode?.video?.video?.duration) {
+    if (episode?.video.video.duration) {
       return totalDuration + episode.video.video.duration;
     }
     return totalDuration;
@@ -105,28 +105,26 @@ function Chapter({ chapter }) {
   return (
     <div className={s.chapter}>
       <div className={s.chapterIntro}>
-        <div>
+        <div className={s.chapterIntroHeading}>
           <h2>
             {chapter.title}
           </h2>
-          <div className={s.chapterIntroPills}>
-            <div className={s.pill}>
-              {chapter.videos.length > 1 ? `${chapter.videos.length} videos` : '1 video'}
-            </div>
-            <div className={s.pill}>
-              <Clock />
-              <span>
-                {PrettyDuration(allVideosDurations)} 
-              </span>
-            </div>
+        </div>
+        <div className={s.chapterIntroPills}>
+          <div className={s.pill}>
+            {chapter.videos.length > 1 ? `${chapter.videos.length} videos` : '1 video'}
+          </div>
+          <div className={s.pill}>
+            <Clock />
+            <span>
+              {PrettyDuration(allVideosDurations)} 
+            </span>
           </div>
         </div>
-
         <div>
           <StructuredText data={chapter.introduction} />
         </div>
       </div>
-
       <section className={s.chapterVideosWrapper}>
         <VideoList chapter={chapter} />
         <VideoCarousel options={carouselOptions} chapter={chapter} />
@@ -179,11 +177,9 @@ function VideoCarousel({options, chapter}) {
           <VideoCard key={index} chapter={chapter} episode={episode} />
         ))}
       </div>
-
       <div className={`${s.prevSlide} ${prevButtonDisabled ? s.isDisabled : ''}`} onClick={prevSlide}>
         <AngleLeft />
       </div>
-
       <div className={`${s.nextSlide} ${nextButtonDisabled ? s.isDisabled : ''}`} onClick={nextSlide}>
         <AngleRight />
       </div>
@@ -195,30 +191,26 @@ function VideoCard({ chapter, episode}) {
   return (
     <div key={episode.slug} className={s.chapterItem}>
       <div className={s.itemVideo}>
-        {episode?.video?.video?.thumbnailUrl && (
-          <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
-            <a>
-              <Image
-                src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
-                blurDataURL={episode.video.video.blurUpThumb}
-                width={episode.video.video.width / 2}
-                height={episode.video.video.height / 2}
-                alt={episode.title}
-              />
-            </a>
-          </Link>
-        )}
+        <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
+          <a>
+            <Image
+              src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
+              blurDataURL={episode.video.video.blurUpThumb}
+              width={episode.video.video.width / 2}
+              height={episode.video.video.height / 2}
+              alt={episode.title}
+            />
+          </a>
+        </Link>
       </div>
       <Link href={`/user-guides/${chapter.slug}/${episode.slug}`} passHref>
         <a>
           <h4>
             {episode.title}
           </h4>
-          {episode?.video?.video?.duration && (
-            <div className={`${s.videoDuration}`}>
-              {PrettyDuration(episode.video.video.duration)}
-            </div>  
-          )}
+          <div className={`${s.videoDuration}`}>
+            {PrettyDuration(episode.video.video.duration)}
+          </div>
         </a>
       </Link>
     </div>
