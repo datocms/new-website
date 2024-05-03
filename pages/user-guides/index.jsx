@@ -79,8 +79,8 @@ export default function UserGuides({ subscription, preview }) {
         <div className={s.allChapters}>
           {chapters
             .filter((chapter) => chapter.videos.length > 0)
-            .map((chapter) => (
-              <Chapter chapter={chapter} key={chapter.slug} />
+            .map((chapter, index) => (
+              <Chapter chapter={chapter} number={index +1} key={chapter.slug} />
             )
           )}
         </div>
@@ -89,7 +89,7 @@ export default function UserGuides({ subscription, preview }) {
   );
 }
 
-function Chapter({ chapter }) {
+function Chapter({ chapter, number }) {
   const carouselOptions = {
     loop: false,
     align: 'start',
@@ -107,7 +107,7 @@ function Chapter({ chapter }) {
       <div className={s.chapterIntro}>
         <div className={s.chapterIntroHeading}>
           <h2>
-            {chapter.title}
+             <span className={s.chapterNumber}>Chapter #{number}</span> {chapter.title}
           </h2>
         </div>
         <div className={s.chapterIntroPills}>

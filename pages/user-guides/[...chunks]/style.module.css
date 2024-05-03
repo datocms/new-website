@@ -304,7 +304,7 @@
 
 .otherChaptersWrapper {
   margin-top: 2rem;
-  padding: 0 20px;
+  padding: 0 10px 0 20px;
   display: none;
 
   @media screen and (min-width: 1024px) {
@@ -314,7 +314,7 @@
 
 .otherChaptersTitle {
   font-size: 22px;
-  color: var(--light-body-color);
+  color: var(--extra-light-body-color);
   margin: 1.5rem 0;
 }
 
@@ -340,7 +340,7 @@
   justify-content: space-between;
 
   h2 {
-    font-size: 18px;
+    font-size: 1rem;
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
