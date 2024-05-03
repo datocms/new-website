@@ -174,15 +174,15 @@ export default function Guide({ subscription, preview}) {
               <aside className={s.aside}>
                 <div className={s.asideCurrentChapter}>
                   <div className={s.asideHeadingWrapper}>
-                    <p className={s.asideChapterLabel}>
-                      Chapter #{currentChapterIndex + 1}
-                    </p>
-                    <div className={s.asideHeading}>
-                      <h2 className={s.asideListTitle}>{currentChapter[0].title}</h2>
+                    <div className={s.asideHeadingIntro}>
+                      <p className={s.asideChapterLabel}>
+                        Chapter #{currentChapterIndex + 1}
+                      </p>
                       <div className={`${s.pill} ${s.isLight}`}>
                         {currentChapter[0].videos.length} videos
                       </div>
                     </div>
+                    <h2 className={s.asideListTitle}>{currentChapter[0].title}</h2>
                   </div>
                   <ul className={`${s.asideList} ${isOpen ? s.isOpen : s.isClosed}`}>
                     {currentChapter[0].videos.filter((episode) => episode?.video).map((episode) => (
@@ -223,17 +223,17 @@ export default function Guide({ subscription, preview}) {
                     {otherChapters.filter((chapter) => chapter.videos.length).map((chapter) => (
                       <Link key={chapter.slug} href={`/user-guides/${chapter.slug}/${chapter.videos[0].slug}`} passHref>
                         <a className={s.otherChaptersItem}>
-                          <p className={s.otherChaptersLabel}>
-                            Chapter #{getChapterIndexBySlug(chapter.slug)}
-                          </p>
-                          <div className={s.otherChaptersHeading}>
-                            <h2>
-                              {chapter.title}
-                            </h2>
+                          <div className={s.otherChaptersIntro}>
+                            <p className={s.otherChaptersLabel}>
+                              Chapter #{getChapterIndexBySlug(chapter.slug)}
+                            </p>
                             <div className={s.pill}>
                               {chapter.videos.length} videos
                             </div>
                           </div>
+                          <h2 className={s.otherChaptersHeading}>
+                            {chapter.title}
+                          </h2>
                         </a>
                       </Link>
                     ))}
