@@ -104,24 +104,25 @@ function Chapter({ chapter, number }) {
 
   return (
     <div className={s.chapter}>
-      <div className={s.chapterIntro}>
-        <div className={s.chapterIntroHeading}>
-          <h2>
-             <span className={s.chapterNumber}>Chapter #{number}</span> {chapter.title}
-          </h2>
-        </div>
-        <div className={s.chapterIntroPills}>
-          <div className={s.pill}>
-            {chapter.videos.length > 1 ? `${chapter.videos.length} videos` : '1 video'}
-          </div>
-          <div className={s.pill}>
-            <Clock />
-            <span>
-              {formatVideoDuration(allVideosDurations)} 
-            </span>
+      <div className={s.chapterIntroWrapper}>
+        <div className={s.chapterIntro}>
+          <span className={s.chapterNumber}>Chapter #{number}</span>
+          <div className={s.chapterIntroPills}>
+            <div className={s.pill}>
+              {chapter.videos.length > 1 ? `${chapter.videos.length} videos` : '1 video'}
+            </div>
+            <div className={s.pill}>
+              <Clock />
+              <span>
+                {formatVideoDuration(allVideosDurations)} 
+              </span>
+            </div>
           </div>
         </div>
-        <div>
+        <h2 className={s.chapterIntroHeading}>
+          {chapter.title}
+        </h2>
+        <div className={s.chapterIntroDescription}>
           <StructuredText data={chapter.introduction} />
         </div>
       </div>

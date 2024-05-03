@@ -170,6 +170,61 @@ export default function Guide({ subscription, preview}) {
               </div>
             </div>
 
+            <div>
+              <PostContent content={item.content} />
+              {nextVideo ? (
+                <div className={s.nextVideo}>
+                  <Link href={`/user-guides/${currentChapter[0].slug}/${nextVideo.slug}`}>
+                    <a>
+                      <figure>
+                        <Image
+                          src={`${nextVideo.video.video.thumbnailUrl}${nextVideo.thumbTimeSeconds ? `?time=${nextVideo.thumbTimeSeconds}` : null}`}
+                          blurDataURL={nextVideo.video.video.blurUpThumb}
+                          width={nextVideo.video.video.width / 2}
+                          height={nextVideo.video.video.height / 2}
+                          alt={nextVideo.title}
+                        />
+                      </figure>
+
+                      <article>
+                        <p className={s.nextVideoLabel}>Next episode</p>
+                        <h2>{nextVideo.title}</h2>
+                        <div className={s.pill}>
+                          {formatVideoDuration(nextVideo.video.video.duration)}
+                        </div>
+                      </article>
+                    </a>
+                  </Link>
+                </div>
+              ) : nextChapter ? (
+                <div className={s.nextVideo}>
+                  <Link href={`/user-guides/${nextChapter.slug}/${nextChapter.videos[0].slug}`}>
+                    <a>
+                      <figure>
+                        <Image
+                          src={`${nextChapter.videos[0].video.video.thumbnailUrl}${nextChapter.videos[0].thumbTimeSeconds ? `?time=${nextChapter.videos[0].thumbTimeSeconds}` : null}`}
+                          blurDataURL={nextChapter.videos[0].video.video.blurUpThumb}
+                          width={nextChapter.videos[0].video.video.width / 2}
+                          height={nextChapter.videos[0].video.video.height / 2}
+                          alt={nextChapter.videos[0].title}
+                        />
+                      </figure>
+
+                      <article>
+                        <p className={s.nextVideoLabel}>Next chapter</p>
+                        <h2>{nextChapter.title}</h2>
+                        {nextChapter.videos[0]?.video.video.duration && (
+                          <div className={s.pill}>
+                            {formatVideoDuration(nextChapter.videos[0].video.video.duration)}
+                          </div>
+                        )}
+                      </article>
+                    </a>
+                  </Link>
+                </div>
+              ) : null}
+            </div>
+
             <div className={s.asideWrapper}>
               <aside className={s.aside}>
                 <div className={s.asideCurrentChapter}>
@@ -234,6 +289,7 @@ export default function Guide({ subscription, preview}) {
                           <h2 className={s.otherChaptersHeading}>
                             {chapter.title}
                           </h2>
+
                         </a>
                       </Link>
                     ))}
@@ -242,60 +298,7 @@ export default function Guide({ subscription, preview}) {
               </aside>
             </div>
 
-            <div>
-              <PostContent content={item.content} />
-              {nextVideo ? (
-                <div className={s.nextVideo}>
-                  <Link href={`/user-guides/${currentChapter[0].slug}/${nextVideo.slug}`}>
-                    <a>
-                      <figure>
-                        <Image
-                          src={`${nextVideo.video.video.thumbnailUrl}${nextVideo.thumbTimeSeconds ? `?time=${nextVideo.thumbTimeSeconds}` : null}`}
-                          blurDataURL={nextVideo.video.video.blurUpThumb}
-                          width={nextVideo.video.video.width / 2}
-                          height={nextVideo.video.video.height / 2}
-                          alt={nextVideo.title}
-                        />
-                      </figure>
-
-                      <article>
-                        <p className={s.nextVideoLabel}>Next episode</p>
-                        <h2>{nextVideo.title}</h2>
-                        <div className={s.pill}>
-                          {formatVideoDuration(nextVideo.video.video.duration)}
-                        </div>
-                      </article>
-                    </a>
-                  </Link>
-                </div>
-              ) : nextChapter ? (
-                <div className={s.nextVideo}>
-                  <Link href={`/user-guides/${nextChapter.slug}/${nextChapter.videos[0].slug}`}>
-                    <a>
-                      <figure>
-                        <Image
-                          src={`${nextChapter.videos[0].video.video.thumbnailUrl}${nextChapter.videos[0].thumbTimeSeconds ? `?time=${nextChapter.videos[0].thumbTimeSeconds}` : null}`}
-                          blurDataURL={nextChapter.videos[0].video.video.blurUpThumb}
-                          width={nextChapter.videos[0].video.video.width / 2}
-                          height={nextChapter.videos[0].video.video.height / 2}
-                          alt={nextChapter.videos[0].title}
-                        />
-                      </figure>
-
-                      <article>
-                        <p className={s.nextVideoLabel}>Next chapter</p>
-                        <h2>{nextChapter.title}</h2>
-                        {nextChapter.videos[0]?.video.video.duration && (
-                          <div className={s.pill}>
-                            {formatVideoDuration(nextChapter.videos[0].video.video.duration)}
-                          </div>
-                        )}
-                      </article>
-                    </a>
-                  </Link>
-                </div>
-              ) : null}
-            </div>
+            
           </div>
         </Wrapper>
       </Space>
