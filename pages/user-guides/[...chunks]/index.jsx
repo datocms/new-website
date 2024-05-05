@@ -55,6 +55,20 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           height
         }
         content {
+          blocks {
+            __typename
+            ...on InternalVideoRecord {
+              id
+              video {
+                video {
+                  playbackId: muxPlaybackId
+                }
+                width
+                height
+              }
+              thumbTimeSeconds
+            }
+          }
           value
         }
       }
@@ -171,7 +185,30 @@ export default function Guide({ subscription, preview}) {
             </div>
 
             <div>
-              <PostContent content={item.content} />
+              <PostContent
+                content={item.content}
+                renderBlock={(block) => {
+                  switch (block.__typename) {
+                    case 'InternalVideoRecord': {
+                      return (
+                        <div className={s.contentVideo}>
+                          <VideoPlayer
+                            autoPlayAndLoop={false}
+                            playbackId={block.video.video.playbackId}
+                            width={block.video.width}
+                            height={block.video.height}
+                            blurUpThumb={block.video.video.blurUpThumb}
+                            thumbnailTime={block.thumbTimeSeconds}
+                          />
+                        </div>
+                      );
+                    }
+                    default: {
+                      return null;
+                    }
+                  }
+                }}
+              />
               {nextVideo ? (
                 <div className={s.nextVideo}>
                   <Link href={`/user-guides/${currentChapter[0].slug}/${nextVideo.slug}`}>

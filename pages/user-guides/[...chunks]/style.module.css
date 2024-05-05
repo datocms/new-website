@@ -109,6 +109,10 @@
   }
 }
 
+.contentVideo {
+  margin-bottom: 40px;
+}
+
 .asideWrapper {
   position: relative;
   display: flex;
