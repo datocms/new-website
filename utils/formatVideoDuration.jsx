@@ -10,7 +10,6 @@ export default function formatVideoDuration(seconds) {
 
   if (hours > 0) {
     return `${hours}h ${minutes}m`;
-  } else {
-    return `${minutes}m ${remainingSeconds.toString().padStart(2, '0')}s`;
   }
+  return `${minutes}m ${remainingSeconds.toString().padStart(2, '0')}s`;
 }

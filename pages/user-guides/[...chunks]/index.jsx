@@ -4,14 +4,14 @@ import PostContent from 'components/PostContent';
 import Space from 'components/Space';
 import VideoPlayer from 'components/VideoPlayer';
 import Wrapper from 'components/Wrapper';
-import formatVideoDuration from 'utils/formatVideoDuration';
 import {
   gqlStaticPaths,
   gqlStaticPropsWithSubscription,
   seoMetaTagsFields,
 } from 'lib/datocms';
+import Image from 'next/image';
 import Link from 'next/link';
-import Image from 'next/image'
+import formatVideoDuration from 'utils/formatVideoDuration';
 
 import { useState } from 'react';
 import { renderMetaTags } from 'react-datocms';
@@ -131,16 +131,21 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
   },
 );
 
-export default function Guide({ subscription, preview}) {
+export default function Guide({ subscription, preview }) {
   const {
-    data: { item, currentChapter, otherChapters, allChapters},
+    data: { item, currentChapter, otherChapters, allChapters },
   } = useQuerySubscription(subscription);
 
-  const currentChapterIndex = allChapters.findIndex(chapter => chapter.slug === currentChapter[0].slug);
+  const currentChapterIndex = allChapters.findIndex(
+    (chapter) => chapter.slug === currentChapter[0].slug,
+  );
   const nextChapter = allChapters[currentChapterIndex + 1];
-  const getChapterIndexBySlug = (slug) => allChapters.findIndex(chapter => chapter.slug === slug) + 1;
+  const getChapterIndexBySlug = (slug) =>
+    allChapters.findIndex((chapter) => chapter.slug === slug) + 1;
 
-  const currentVideoIndex = currentChapter[0].videos.findIndex(video => video.slug === item.slug);
+  const currentVideoIndex = currentChapter[0].videos.findIndex(
+    (video) => video.slug === item.slug,
+  );
   const nextVideo = currentChapter[0].videos[currentVideoIndex + 1];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -168,16 +173,12 @@ export default function Guide({ subscription, preview}) {
               <Link href="/user-guides">
                 <a className={s.back}>
                   <ChevronLeft />
-                  <span>
-                    Back to All Videos
-                  </span>
+                  <span>Back to All Videos</span>
                 </a>
               </Link>
 
               <div className={s.heading}>
-                <h1>
-                  {item.title}
-                </h1>
+                <h1>{item.title}</h1>
                 <div className={`${s.pill} ${s.isDark}`}>
                   {formatVideoDuration(item.video.video.duration)}
                 </div>
@@ -211,11 +212,17 @@ export default function Guide({ subscription, preview}) {
               />
               {nextVideo ? (
                 <div className={s.nextVideo}>
-                  <Link href={`/user-guides/${currentChapter[0].slug}/${nextVideo.slug}`}>
+                  <Link
+                    href={`/user-guides/${currentChapter[0].slug}/${nextVideo.slug}`}
+                  >
                     <a>
                       <figure>
                         <Image
-                          src={`${nextVideo.video.video.thumbnailUrl}${nextVideo.thumbTimeSeconds ? `?time=${nextVideo.thumbTimeSeconds}` : null}`}
+                          src={`${nextVideo.video.video.thumbnailUrl}${
+                            nextVideo.thumbTimeSeconds
+                              ? `?time=${nextVideo.thumbTimeSeconds}`
+                              : null
+                          }`}
                           blurDataURL={nextVideo.video.video.blurUpThumb}
                           width={nextVideo.video.video.width / 2}
                           height={nextVideo.video.video.height / 2}
@@ -235,12 +242,22 @@ export default function Guide({ subscription, preview}) {
                 </div>
               ) : nextChapter ? (
                 <div className={s.nextVideo}>
-                  <Link href={`/user-guides/${nextChapter.slug}/${nextChapter.videos[0].slug}`}>
+                  <Link
+                    href={`/user-guides/${nextChapter.slug}/${nextChapter.videos[0].slug}`}
+                  >
                     <a>
                       <figure>
                         <Image
-                          src={`${nextChapter.videos[0].video.video.thumbnailUrl}${nextChapter.videos[0].thumbTimeSeconds ? `?time=${nextChapter.videos[0].thumbTimeSeconds}` : null}`}
-                          blurDataURL={nextChapter.videos[0].video.video.blurUpThumb}
+                          src={`${
+                            nextChapter.videos[0].video.video.thumbnailUrl
+                          }${
+                            nextChapter.videos[0].thumbTimeSeconds
+                              ? `?time=${nextChapter.videos[0].thumbTimeSeconds}`
+                              : null
+                          }`}
+                          blurDataURL={
+                            nextChapter.videos[0].video.video.blurUpThumb
+                          }
                           width={nextChapter.videos[0].video.video.width / 2}
                           height={nextChapter.videos[0].video.video.height / 2}
                           alt={nextChapter.videos[0].title}
@@ -252,7 +269,9 @@ export default function Guide({ subscription, preview}) {
                         <h2>{nextChapter.title}</h2>
                         {nextChapter.videos[0]?.video.video.duration && (
                           <div className={s.pill}>
-                            {formatVideoDuration(nextChapter.videos[0].video.video.duration)}
+                            {formatVideoDuration(
+                              nextChapter.videos[0].video.video.duration,
+                            )}
                           </div>
                         )}
                       </article>
@@ -274,37 +293,63 @@ export default function Guide({ subscription, preview}) {
                         {currentChapter[0].videos.length} videos
                       </div>
                     </div>
-                    <h2 className={s.asideListTitle}>{currentChapter[0].title}</h2>
+                    <h2 className={s.asideListTitle}>
+                      {currentChapter[0].title}
+                    </h2>
                   </div>
-                  <ul className={`${s.asideList} ${isOpen ? s.isOpen : s.isClosed}`}>
-                    {currentChapter[0].videos.filter((episode) => episode?.video).map((episode) => (
-                      <li key={episode.title} className={`${s.asideListItem} ${episode.slug === item.slug ? s.activeListItem : ''}`}>
-                        <Link href={`/user-guides/${currentChapter[0].slug}/${episode.slug}`}>
-                          <a className={s.asideListItem}>
-                            <figure>
-                              <Image
-                                src={`${episode.video.video.thumbnailUrl}${episode.thumbTimeSeconds ? `?time=${episode.thumbTimeSeconds}` : null}`}
-                                blurDataURL={episode.video.video.blurUpThumb}
-                                width={episode.video.video.width / 4}
-                                height={episode.video.video.height / 4}
-                                alt={episode.title}
-                              />
-                            </figure>
-                            <div>
-                              <h4>
-                                {episode.title}
-                              </h4>
-                              <div className={s.asideVideoDuration}>
-                                {formatVideoDuration(episode.video.video.duration)}
+                  <ul
+                    className={`${s.asideList} ${
+                      isOpen ? s.isOpen : s.isClosed
+                    }`}
+                  >
+                    {currentChapter[0].videos
+                      .filter((episode) => episode?.video)
+                      .map((episode) => (
+                        <li
+                          key={episode.title}
+                          className={`${s.asideListItem} ${
+                            episode.slug === item.slug ? s.activeListItem : ''
+                          }`}
+                        >
+                          <Link
+                            href={`/user-guides/${currentChapter[0].slug}/${episode.slug}`}
+                          >
+                            <a className={s.asideListItem}>
+                              <figure>
+                                <Image
+                                  src={`${episode.video.video.thumbnailUrl}${
+                                    episode.thumbTimeSeconds
+                                      ? `?time=${episode.thumbTimeSeconds}`
+                                      : null
+                                  }`}
+                                  blurDataURL={episode.video.video.blurUpThumb}
+                                  width={episode.video.video.width / 4}
+                                  height={episode.video.video.height / 4}
+                                  alt={episode.title}
+                                />
+                              </figure>
+                              <div>
+                                <h4>{episode.title}</h4>
+                                <div className={s.asideVideoDuration}>
+                                  {formatVideoDuration(
+                                    episode.video.video.duration,
+                                  )}
+                                </div>
                               </div>
-                            </div>
-                          </a>
-                        </Link>
-                      </li>
-                    ))}
+                            </a>
+                          </Link>
+                        </li>
+                      ))}
                   </ul>
-                  <div className={s.mobileAccordionCta} onClick={toggleAccordion}>
-                    <div className={`${s.mobileAccordionCtaIcon} ${isOpen ? s.isRotated : ''}`}>
+                  <div
+                    className={s.mobileAccordionCta}
+                    onClick={toggleAccordion}
+                  >
+                    <div
+                      className={`${s.mobileAccordionCtaIcon} ${
+                        isOpen ? s.isRotated : ''
+                      }`}
+                    >
                       <ChevronDown />
                     </div>
                   </div>
@@ -312,30 +357,33 @@ export default function Guide({ subscription, preview}) {
                 <div className={s.otherChaptersWrapper}>
                   <h3 className={s.otherChaptersTitle}>Other chapters</h3>
                   <div className={s.otherChapters}>
-                    {otherChapters.filter((chapter) => chapter.videos.length).map((chapter) => (
-                      <Link key={chapter.slug} href={`/user-guides/${chapter.slug}/${chapter.videos[0].slug}`} passHref>
-                        <a className={s.otherChaptersItem}>
-                          <div className={s.otherChaptersIntro}>
-                            <p className={s.otherChaptersLabel}>
-                              Chapter #{getChapterIndexBySlug(chapter.slug)}
-                            </p>
-                            <div className={s.pill}>
-                              {chapter.videos.length} videos
+                    {otherChapters
+                      .filter((chapter) => chapter.videos.length)
+                      .map((chapter) => (
+                        <Link
+                          key={chapter.slug}
+                          href={`/user-guides/${chapter.slug}/${chapter.videos[0].slug}`}
+                          passHref
+                        >
+                          <a className={s.otherChaptersItem}>
+                            <div className={s.otherChaptersIntro}>
+                              <p className={s.otherChaptersLabel}>
+                                Chapter #{getChapterIndexBySlug(chapter.slug)}
+                              </p>
+                              <div className={s.pill}>
+                                {chapter.videos.length} videos
+                              </div>
                             </div>
-                          </div>
-                          <h2 className={s.otherChaptersHeading}>
-                            {chapter.title}
-                          </h2>
-
-                        </a>
-                      </Link>
-                    ))}
+                            <h2 className={s.otherChaptersHeading}>
+                              {chapter.title}
+                            </h2>
+                          </a>
+                        </Link>
+                      ))}
                   </div>
                 </div>
               </aside>
             </div>
-
-            
           </div>
         </Wrapper>
       </Space>
