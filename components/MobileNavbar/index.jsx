@@ -245,6 +245,12 @@ export default function Navbar() {
                     />
 
                     <Resource
+                      title="User Guides"
+                      description="Simple product walkthroughs for editors"
+                      href="/user-guides"
+                    />
+
+                    <Resource
                       title="Academy"
                       description="Deep dive into the concepts around headless"
                       href="/academy"
