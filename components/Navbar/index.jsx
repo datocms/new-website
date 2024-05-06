@@ -371,6 +371,12 @@ export default function Navbar() {
                         />
 
                         <TitleDesc
+                          title="User Guides"
+                          description="Simple product walkthroughs for editors"
+                          href="/user-guides"
+                        />
+
+                        <TitleDesc
                           title="Product updates"
                           description="Changelog for new features and improvements"
                           href="/product-updates"
