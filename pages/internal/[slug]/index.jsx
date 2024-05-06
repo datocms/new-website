@@ -15,6 +15,7 @@ import {
   sitemapSlugs,
   staticGeneratorsRoutes,
   allStaticRoutes as staticRoutes,
+  userGuidesRoutes,
 } from 'lib/routes';
 import s from './style.module.css';
 
@@ -54,6 +55,9 @@ export async function getStaticProps({ params: { slug } }) {
       break;
     case 'sitemap-compare':
       routes = await compareRoutes();
+      break;
+    case 'sitemap-user-guides':
+      routes = await userGuidesRoutes();
       break;
     default:
       return { notFound: true };
