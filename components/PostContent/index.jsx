@@ -201,7 +201,7 @@ function renderBlock(s, block, defaultAltForImages) {
             }}
           >
             {block.tutorials.map((tutorial) => {
-              if (tutorial._modelApiKey === 'tutorial_video') {
+              if (tutorial._modelApiKey === 'video_tutorial') {
                 return (
                   <div key={tutorial.id} className={s.pluginBoxContainer}>
                     {tutorial.res._modelApiKey === 'youtube_video_resource' ? (
