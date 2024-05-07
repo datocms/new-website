@@ -161,7 +161,7 @@ export const getStaticProps = handleErrors(
     const pageId = page.page.id;
 
     const gqlPageRequest = {
-      query: `
+      query: /* GraphQL */ `
       query($pageId: ItemId!) {
         page: docPage(filter: { id: { eq: $pageId } }) {
           title
@@ -299,24 +299,50 @@ export const getStaticProps = handleErrors(
                 id
                 _modelApiKey
                 tutorials {
-                  id
-                  title
-                  res: videoTutorialResource {
-                    ... on OtherVideoResourceRecord {
-                      _modelApiKey
-                      url
-                      coverImage {
-                        responsiveImage(imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }) {
-                          ...imageFields
-                        }
+                  ... on RecordInterface{
+                    id
+                    _modelApiKey
+                  }
+                  ... on RecordInterface{
+                    id
+                    _modelApiKey
+                  }
+                  ... on UserGuidesVideoRecord {
+                    title
+                    slug
+                    thumbTimeSeconds
+                    video {
+                      video {
+                        thumbnailUrl
+                        blurUpThumb
+                        width
+                        height
                       }
                     }
-                    ... on YoutubeVideoResourceRecord {
-                      _modelApiKey
-                      video {
+                    chapters: _allReferencingUserGuidesChapters {
+                      slug
+                    }
+                  }
+                  ... on VideoTutorialRecord {
+                    id
+                    title
+                    res: videoTutorialResource {
+                      ... on OtherVideoResourceRecord {
+                        _modelApiKey
                         url
-                        thumbnailUrl
-                        providerUid
+                        coverImage {
+                          responsiveImage(imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }) {
+                            ...imageFields
+                          }
+                        }
+                      }
+                      ... on YoutubeVideoResourceRecord {
+                        _modelApiKey
+                        video {
+                          url
+                          thumbnailUrl
+                          providerUid
+                        }
                       }
                     }
                   }

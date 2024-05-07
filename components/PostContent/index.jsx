@@ -11,6 +11,7 @@ import UiChrome from 'components/UiChrome';
 import VideoPlayer from 'components/VideoPlayer';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { isBlockquote, isCode, isHeading } from 'datocms-structured-text-utils';
+import Image from 'next/image';
 import Link from 'next/link';
 import CodeSandboxIcon from 'public/icons/brands/codesandbox.svg';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
@@ -199,36 +200,66 @@ function renderBlock(s, block, defaultAltForImages) {
                 block.tutorials.length === 1 ? 'center' : undefined,
             }}
           >
-            {block.tutorials.map((tutorial) => (
-              <div key={tutorial.title} className={s.pluginBoxContainer}>
-                {tutorial.res._modelApiKey === 'youtube_video_resource' ? (
-                  <PluginBox
-                    title={tutorial.title}
-                    description="Play video »"
-                    image={
-                      <img
-                        alt={tutorial.res.video.alt}
-                        className={s.pluginBoxImage}
-                        src={tutorial.res.video.thumbnailUrl}
+            {block.tutorials.map((tutorial) => {
+              if (tutorial._modelApiKey === 'tutorial_video') {
+                return (
+                  <div key={tutorial.id} className={s.pluginBoxContainer}>
+                    {tutorial.res._modelApiKey === 'youtube_video_resource' ? (
+                      <PluginBox
+                        title={tutorial.title}
+                        description="Play video »"
+                        image={
+                          <img
+                            alt={tutorial.res.video.alt}
+                            className={s.pluginBoxImage}
+                            src={tutorial.res.video.thumbnailUrl}
+                          />
+                        }
+                        href={tutorial.slug}
                       />
-                    }
-                    href={tutorial.res.video.url}
-                  />
-                ) : (
-                  <PluginBox
-                    title={tutorial.title}
-                    description="Play video »"
-                    image={
-                      <DatoImage
-                        className={s.pluginBoxImage}
-                        data={tutorial.res.coverImage.responsiveImage}
+                    ) : (
+                      <PluginBox
+                        title={tutorial.title}
+                        description="Play video »"
+                        image={
+                          <DatoImage
+                            className={s.pluginBoxImage}
+                            data={tutorial.res.coverImage.responsiveImage}
+                          />
+                        }
+                        href={tutorial.res.url}
                       />
-                    }
-                    href={tutorial.res.url}
-                  />
-                )}
-              </div>
-            ))}
+                    )}
+                  </div>
+                );
+              }
+
+              if (tutorial._modelApiKey === 'user_guides_video') {
+                return (
+                  <div key={tutorial.id} className={s.pluginBoxContainer}>
+                    <PluginBox
+                      title={tutorial.title}
+                      description="Play video »"
+                      image={
+                        <Image
+                          alt={tutorial.title}
+                          className={s.pluginBoxImage}
+                          blurDataURL={tutorial.video.video.blurUpThumb}
+                          src={`${tutorial.video.video.thumbnailUrl}${
+                            tutorial.thumbTimeSeconds
+                              ? `?time=${tutorial.thumbTimeSeconds}`
+                              : null
+                          }`}
+                          width={tutorial.video.video.width / 2}
+                          height={tutorial.video.video.height / 2}
+                        />
+                      }
+                      href={`/user-guides/${tutorial.chapters[0].slug}/${tutorial.slug}`}
+                    />
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
       );

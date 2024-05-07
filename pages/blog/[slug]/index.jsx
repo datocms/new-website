@@ -31,7 +31,7 @@ export const getStaticPaths = gqlStaticPaths(
 );
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
-  `
+  /* GraphQL */ `
     query ArticleQuery($slug: String!) {
       post: blogPost(filter: { slug: { eq: $slug } }) {
         _seoMetaTags {
@@ -63,24 +63,50 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
               id
               _modelApiKey
               tutorials {
-                id
-                title
-                res: videoTutorialResource {
-                  ... on OtherVideoResourceRecord {
-                    _modelApiKey
-                    url
-                    coverImage {
-                      responsiveImage(imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }) {
-                        ...imageFields
-                      }
+                ... on RecordInterface{
+                  id
+                  _modelApiKey
+                }
+                ... on RecordInterface{
+                  id
+                  _modelApiKey
+                }
+                ... on UserGuidesVideoRecord {
+                  title
+                  slug
+                  thumbTimeSeconds
+                  video {
+                    video {
+                      thumbnailUrl
+                      blurUpThumb
+                      width
+                      height
                     }
                   }
-                  ... on YoutubeVideoResourceRecord {
-                    _modelApiKey
-                    video {
+                  chapters: _allReferencingUserGuidesChapters {
+                    slug
+                  }
+                }
+                ... on VideoTutorialRecord {
+                  id
+                  title
+                  res: videoTutorialResource {
+                    ... on OtherVideoResourceRecord {
+                      _modelApiKey
                       url
-                      thumbnailUrl
-                      providerUid
+                      coverImage {
+                        responsiveImage(imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }) {
+                          ...imageFields
+                        }
+                      }
+                    }
+                    ... on YoutubeVideoResourceRecord {
+                      _modelApiKey
+                      video {
+                        url
+                        thumbnailUrl
+                        providerUid
+                      }
                     }
                   }
                 }
