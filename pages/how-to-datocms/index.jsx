@@ -7,11 +7,7 @@ import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
 import Space from 'components/Space';
 // import useSWR from 'swr';
-import {
-  gqlStaticProps,
-  imageFields,
-  seoMetaTagsFields,
-} from 'lib/datocms';
+import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import Polestar from 'public/images/logos/polestar.svg';
@@ -19,7 +15,6 @@ import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import { useEffect, useState } from 'react';
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
-
 
 export function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -56,7 +51,6 @@ export const getStaticProps = gqlStaticProps(
   `,
 );
 
-
 export default function HowToDatoCms({ members, page, review1, review2 }) {
   return (
     <Layout>
@@ -65,8 +59,7 @@ export default function HowToDatoCms({ members, page, review1, review2 }) {
         kicker="How To DatoCMS"
         title={
           <>
-            Everything you need to{' '}
-            <Highlight>master</Highlight> DatoCMS
+            Everything you need to <Highlight>master</Highlight> DatoCMS
           </>
         }
         subtitle="How To DatoCMS is your central hub to find everything you need to level up your DatoCMS and Headless CMS knowledge"
@@ -90,23 +83,17 @@ export default function HowToDatoCms({ members, page, review1, review2 }) {
         image="video-player"
         title={
           <>
-            DatoCMS{' '}
-            <FlagHighlight>
-              User&nbsp;Guides
-            </FlagHighlight>
+            DatoCMS <FlagHighlight>User&nbsp;Guides</FlagHighlight>
           </>
         }
       >
         <p>
-        Casual and non-technical walkthroughs of DatoCMS focusing on content creation and the UI, made for content creators and editors.
+          Casual and non-technical walkthroughs of DatoCMS focusing on content
+          creation and the UI, made for content creators and editors.
         </p>
-        <Button
-            as="a"
-            p="small"
-            href={`/user-guides/`}
-          >
-            Launch User Guides
-          </Button>
+        <Button as="a" p="small" href={'/user-guides/'}>
+          Launch User Guides
+        </Button>
       </Flag>
 
       <Flag
@@ -119,15 +106,12 @@ export default function HowToDatoCms({ members, page, review1, review2 }) {
         }
       >
         <p>
-        Deep dive into the concepts around Headless CMS, Content APIs, and frontend frameworks.
+          Deep dive into the concepts around Headless CMS, Content APIs, and
+          frontend frameworks.
         </p>
-        <Button
-            as="a"
-            p="small"
-            href={`/academy/`}
-          >
-            Launch Academy
-          </Button>
+        <Button as="a" p="small" href={'/academy/'}>
+          Launch Academy
+        </Button>
       </Flag>
 
       <Flag
@@ -140,17 +124,13 @@ export default function HowToDatoCms({ members, page, review1, review2 }) {
         }
       >
         <p>
-          All the technical documentation on our REST and GraphQL APIs for managing your projects.
+          All the technical documentation on our REST and GraphQL APIs for
+          managing your projects.
         </p>
-        <Button
-            as="a"
-            p="small"
-            href={`/docs/`}
-          >
-            Launch Docs
-          </Button>
+        <Button as="a" p="small" href={'/docs/'}>
+          Launch Docs
+        </Button>
       </Flag>
-
     </Layout>
   );
 }
