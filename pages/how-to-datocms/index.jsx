@@ -7,14 +7,14 @@ import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
 import Space from 'components/Space';
 // import useSWR from 'swr';
-import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
+import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
 import Polestar from 'public/images/logos/polestar.svg';
 import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import { useEffect, useState } from 'react';
-import { Image as DatoImage, renderMetaTags } from 'react-datocms';
+import { renderMetaTags } from 'react-datocms';
 
 export function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -39,14 +39,13 @@ export const getStaticProps = gqlStaticProps(
   /* GraphQL */
   `
     {
-      page: howToDatocmsIndexPage {
+      page: howToDatocmsIndex {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
       }
     }
 
-    ${imageFields}
     ${seoMetaTagsFields}
   `,
 );
