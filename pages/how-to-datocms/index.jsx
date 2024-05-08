@@ -35,23 +35,23 @@ export function useMediaQuery(query) {
   return matches;
 }
 
-export const getStaticProps = gqlStaticProps(
-  /* GraphQL */
-  `
-    {
-      page: howToDatoCmsPage {
-        seo: _seoMetaTags {
-          ...seoMetaTagsFields
-        }
-      }
-    }
+// export const getStaticProps = gqlStaticProps(
+//   /* GraphQL */
+//   `
+//     {
+//       page: howToDatoCmsPage {
+//         seo: _seoMetaTags {
+//           ...seoMetaTagsFields
+//         }
+//       }
+//     }
 
-    ${imageFields}
-    ${seoMetaTagsFields}
-  `,
-);
+//     ${imageFields}
+//     ${seoMetaTagsFields}
+//   `,
+// );
 
-export default function HowToDatoCms({ members, page, review1, review2 }) {
+export default function HowToDatoCms({ page }) {
   return (
     <Layout>
       <Head>{renderMetaTags(page.seo)}</Head>
