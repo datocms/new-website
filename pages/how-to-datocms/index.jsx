@@ -39,7 +39,7 @@ export const getStaticProps = gqlStaticProps(
   /* GraphQL */
   `
     {
-      page: howToDatocmsPage {
+      page: howToDatocmsIndexPage {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
