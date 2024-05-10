@@ -9,7 +9,12 @@ import StickySidebar from 'components/StickySidebar';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { isBlockquote } from 'datocms-structured-text-utils';
-import { gqlStaticPaths, handleErrors, request } from 'lib/datocms';
+import {
+  gqlStaticPaths,
+  handleErrors,
+  request,
+  seoMetaTagsFields,
+} from 'lib/datocms';
 import EnvelopeIcon from 'public/icons/regular/envelope.svg';
 import DescriptionIcon from 'public/icons/regular/info.svg';
 import LaptopIcon from 'public/icons/regular/laptop-code.svg';
@@ -28,16 +33,19 @@ export const getStaticPaths = gqlStaticPaths(
       }
     }
   `,
-  'techPartnerSlug',
+  'slug',
   ({ techPartners }) => techPartners.map((p) => p.slug),
 );
 
 export const getStaticProps = handleErrors(
-  async ({ params: { techPartnerSlug }, preview }) => {
+  async ({ params: { slug }, preview }) => {
     const gqlRequest = {
       query: /* GraphQL */ `
-        query TechPartnerQuery($techPartnerSlug: String!) {
-          techPartner(filter: { slug: { eq: $techPartnerSlug } }) {
+        query TechPartnerQuery($slug: String!) {
+          techPartner(filter: { slug: { eq: $slug } }) {
+            seo: _seoMetaTags {
+              ...seoMetaTagsFields
+            }
             id
             slug
             name
@@ -69,8 +77,9 @@ export const getStaticProps = handleErrors(
             }
           }
         }
+        ${seoMetaTagsFields}
       `,
-      variables: { techPartnerSlug },
+      variables: { slug },
       preview: preview || false,
     };
 
@@ -105,6 +114,7 @@ export default function TechPartnerPage({ preview, subscription }) {
   return (
     <Layout preview={preview} noCta>
       <Head>
+        {renderMetaTags(techPartner.seo)}
         <title>{techPartner.name} | DatoCMS Technology Partners</title>
         <meta
           name="description"
