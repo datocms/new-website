@@ -12,9 +12,7 @@ import { isBlockquote } from 'datocms-structured-text-utils';
 import {
   gqlStaticPaths,
   handleErrors,
-  imageFields,
   request,
-  seoMetaTagsFields,
 } from 'lib/datocms';
 import EnvelopeIcon from 'public/icons/regular/envelope.svg';
 import DescriptionIcon from 'public/icons/regular/info.svg';
@@ -75,8 +73,6 @@ export const getStaticProps = handleErrors(
             }
           }
         }
-
-        ${imageFields}
       `,
       variables: { techPartnerSlug },
       preview: preview || false,
@@ -84,7 +80,7 @@ export const getStaticProps = handleErrors(
 
     const { data } = await request(gqlRequest);
 
-    if (!data.tech_partner) {
+    if (!data.techPartner) {
       return { notFound: true };
     }
 
@@ -107,17 +103,16 @@ export const getStaticProps = handleErrors(
 
 export default function TechPartnerPage({ preview, subscription }) {
   const {
-    data: { tech_partner },
+    data: { techPartner },
   } = useQuerySubscription(subscription);
 
   return (
     <Layout preview={preview} noCta>
       <Head>
-        {renderMetaTags(tech_partner._seoMetaTags)}
-        <title>{tech_partner.name} | DatoCMS Technology Partners</title>
+        <title>{techPartner.name} | DatoCMS Technology Partners</title>
         <meta
           name="description"
-          content={toPlainText(tech_partner.shortDescription)}
+          content={toPlainText(techPartner.shortDescription)}
         />
       </Head>
       <InterstitialTitle
@@ -125,12 +120,12 @@ export default function TechPartnerPage({ preview, subscription }) {
         style="two"
         kicker={<>DatoCMS Technology Partner</>}
         bigSubtitle
-        subtitle={<StructuredText data={tech_partner.shortDescription} />}
+        subtitle={<StructuredText data={techPartner.shortDescription} />}
       >
         <LazyImage
           className={s.logo}
-          alt={`${tech_partner.name} logo`}
-          src={tech_partner.logo.url}
+          alt={`${techPartner.name} logo`}
+          src={techPartner.logo.url}
         />
       </InterstitialTitle>
       <Wrapper>
@@ -141,11 +136,11 @@ export default function TechPartnerPage({ preview, subscription }) {
                 <SidebarPane
                   icon={<MapPinIcon />}
                   title={
-                    tech_partner.locations.length > 1 ? 'Locations' : 'Location'
+                    techPartner.locations.length > 1 ? 'Locations' : 'Location'
                   }
                 >
                   <ul className={s.list}>
-                    {tech_partner.locations.map((location) => (
+                    {techPartner.locations.map((location) => (
                       <li key={location.name}>
                         {location.emoji} {location.name}
                       </li>
@@ -154,14 +149,14 @@ export default function TechPartnerPage({ preview, subscription }) {
                 </SidebarPane>
                 <SidebarPane icon={<MarkerIcon />} title="Services offered">
                   <ul className={s.list}>
-                    {tech_partner.areasOfExpertise.map((area) => (
+                    {techPartner.areasOfExpertise.map((area) => (
                       <li key={area.slug}>{area.name}</li>
                     ))}
                   </ul>
                 </SidebarPane>
                 <SidebarPane icon={<LaptopIcon />} title="Covered technologies">
                   <ul className={s.list}>
-                    {tech_partner.technologies.map((tech) => (
+                    {techPartner.technologies.map((tech) => (
                       <li key={tech.slug}>{tech.name}</li>
                     ))}
                   </ul>
@@ -172,11 +167,11 @@ export default function TechPartnerPage({ preview, subscription }) {
             <SidebarPane
               separateMoreFromContent
               icon={<DescriptionIcon />}
-              title={`About ${tech_partner.name}`}
+              title={`About ${techPartner.name}`}
             >
               <div className={s.description}>
                 <StructuredText
-                  data={tech_partner.description}
+                  data={techPartner.description}
                   customRules={[
                     renderRule(isBlockquote, ({ node, children, key }) => {
                       return (
@@ -195,19 +190,19 @@ export default function TechPartnerPage({ preview, subscription }) {
               </div>
               <div className={s.action}>
                 <div className={s.actionButton}>
-                  <Button as="a" href={tech_partner.websiteUrl} target="_blank">
+                  <Button as="a" href={techPartner.websiteUrl} target="_blank">
                     <BrowserIcon /> Visit website
                   </Button>
                 </div>
-                {tech_partner.publicContactEmail && (
+                {techPartner.publicContactEmail && (
                   <div className={s.actionButton}>
                     <Button
                       as="a"
                       s="invert"
-                      href={`mailto:${tech_partner.publicContactEmail}`}
+                      href={`mailto:${techPartner.publicContactEmail}`}
                       target="_blank"
                     >
-                      <EnvelopeIcon /> Contact {tech_partner.name}
+                      <EnvelopeIcon /> Contact {techPartner.name}
                     </Button>
                   </div>
                 )}
