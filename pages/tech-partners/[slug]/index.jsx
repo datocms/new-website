@@ -115,7 +115,7 @@ export default function TechPartnerPage({ preview, subscription }) {
     <Layout preview={preview} noCta>
       <Head>
         {renderMetaTags(techPartner.seo)}
-        <title>{techPartner.name} | DatoCMS Technology Partners</title>
+        <title>{techPartner.name} | DatoCMS Ecosystem Partners</title>
         <meta
           name="description"
           content={toPlainText(techPartner.shortDescription)}
