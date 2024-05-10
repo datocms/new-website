@@ -18,15 +18,11 @@ import {
 } from 'lib/datocms';
 import EnvelopeIcon from 'public/icons/regular/envelope.svg';
 import DescriptionIcon from 'public/icons/regular/info.svg';
-import BrowserIcon from 'public/icons/regular/link.svg';
 import LaptopIcon from 'public/icons/regular/laptop-code.svg';
+import BrowserIcon from 'public/icons/regular/link.svg';
 import MapPinIcon from 'public/icons/regular/map-marker.svg';
 import MarkerIcon from 'public/icons/regular/marker.svg';
-import {
-  StructuredText,
-  renderMetaTags,
-  renderRule,
-} from 'react-datocms';
+import { StructuredText, renderMetaTags, renderRule } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -144,7 +140,9 @@ export default function TechPartnerPage({ preview, subscription }) {
               <>
                 <SidebarPane
                   icon={<MapPinIcon />}
-                  title={tech_partner.locations.length > 1 ? 'Locations' : 'Location'}
+                  title={
+                    tech_partner.locations.length > 1 ? 'Locations' : 'Location'
+                  }
                 >
                   <ul className={s.list}>
                     {tech_partner.locations.map((location) => (
@@ -185,7 +183,9 @@ export default function TechPartnerPage({ preview, subscription }) {
                         <div key={key} className={s.quote}>
                           <div className={s.quoteQuote}>{children}</div>
                           {node.attribution && (
-                            <div className={s.quoteAuthor}>{node.attribution}</div>
+                            <div className={s.quoteAuthor}>
+                              {node.attribution}
+                            </div>
                           )}
                         </div>
                       );
