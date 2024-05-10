@@ -29,7 +29,7 @@ import s from './style.module.css';
 export const getStaticPaths = gqlStaticPaths(
   `
     query {
-      techPartners: allTechPartners(first: 100, orderBy: slug_ASC) {
+      techPartners: allTechPartners(first: 100, orderBy: name_ASC) {
         slug
       }
     }
