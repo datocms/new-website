@@ -60,9 +60,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     }
   }
 `,
-{
-  requiredKeys: ['posts1'],
-},
+  {
+    requiredKeys: ['posts1'],
+  },
 );
 
 const styles = [s.azureLogo, s.pinkLogo, s.blueLogo, s.greenLogo, s.yellowLogo];
@@ -124,7 +124,9 @@ export default function TechPartners({ subscription, preview }) {
     return acc;
   }, {});
 
-  const highlightedSlugs = techPartnersPage.highlightedPartners.map((p) => p.slug);
+  const highlightedSlugs = techPartnersPage.highlightedPartners.map(
+    (p) => p.slug,
+  );
 
   const ordered = [
     ...techPartnersPage.highlightedPartners,
@@ -211,8 +213,8 @@ export default function TechPartners({ subscription, preview }) {
           }
           subtitle={
             <>
-              DatoCMS partners with leading technology providers and APIs
-              to ensure your projects are getting the best possible treatment.
+              DatoCMS partners with leading technology providers and APIs to
+              ensure your projects are getting the best possible treatment.
             </>
           }
         />
@@ -301,7 +303,6 @@ export default function TechPartners({ subscription, preview }) {
           </div>
         </div> */}
 
-        
         <div className={s.posts}>
           {filtered.map((post, i) => (
             <Link href={`/tech-partners/${post.slug}`} key={post.slug}>
