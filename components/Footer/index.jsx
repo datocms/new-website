@@ -202,6 +202,11 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
+                      <Link href="/how-to-datocms">
+                        <a>How To DatoCMS</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
                       <Link href="/academy">
                         <a>Academy</a>
                       </Link>
