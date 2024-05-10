@@ -259,7 +259,7 @@ export default function PartnerPage({ preview, subscription, plugins }) {
               title={`About ${partner.name}`}
             >
               <div className={s.description}>
-                <StructuredText
+                {/* <StructuredText
                   data={partner.description}
                   customRules={[
                     renderRule(isBlockquote, ({ node, children, key }) => {
@@ -275,7 +275,7 @@ export default function PartnerPage({ preview, subscription, plugins }) {
                       );
                     }),
                   ]}
-                />
+                /> */}
               </div>
               <div className={s.action}>
                 <div className={s.actionButton}>
