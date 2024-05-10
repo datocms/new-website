@@ -9,11 +9,7 @@ import StickySidebar from 'components/StickySidebar';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { isBlockquote } from 'datocms-structured-text-utils';
-import {
-  gqlStaticPaths,
-  handleErrors,
-  request,
-} from 'lib/datocms';
+import { gqlStaticPaths, handleErrors, request } from 'lib/datocms';
 import EnvelopeIcon from 'public/icons/regular/envelope.svg';
 import DescriptionIcon from 'public/icons/regular/info.svg';
 import LaptopIcon from 'public/icons/regular/laptop-code.svg';
