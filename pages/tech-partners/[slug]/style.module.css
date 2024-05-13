@@ -47,7 +47,7 @@
 
 .projectsGrid {
   display: grid;
-  grid-gap: 30px;
+  gap: 30px;
   grid-template-columns: 1fr;
 
   @media (width > 450px) {
@@ -57,7 +57,7 @@
 
 .pluginsGrid {
   display: grid;
-  grid-gap: 30px;
+  gap: 30px;
   grid-template-columns: 1fr;
 
   @media (width > 450px) {
