@@ -12,7 +12,7 @@ import { uniq } from 'lodash-es';
 import sortBy from 'lodash-es/sortBy';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import ReactSelect from 'react-select';
+// import ReactSelect from 'react-select';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -170,32 +170,32 @@ export default function TechPartners({ subscription, preview }) {
     return true;
   });
 
-  const filteredCounters = calculateCounters(filtered, continentFilter);
-  const noFilterCounters = calculateCounters(ordered, continentFilter);
+  // const filteredCounters = calculateCounters(filtered, continentFilter);
+  // const noFilterCounters = calculateCounters(ordered, continentFilter);
 
-  const someFilters =
-    continentFilter ||
-    countryFilter ||
-    technologyFilter ||
-    areaOfExpertiseFilter;
+  // const someFilters =
+  //   continentFilter ||
+  //   countryFilter ||
+  //   technologyFilter ||
+  //   areaOfExpertiseFilter;
 
-  const continentOptions = Object.entries(filteredCounters.continents)
-    .sort(byCount)
-    .map(toOption);
+  // const continentOptions = Object.entries(filteredCounters.continents)
+  //   .sort(byCount)
+  //   .map(toOption);
 
-  const countryOptions = Object.entries(filteredCounters.countries)
-    .sort(byCount)
-    .map(toOption);
+  // const countryOptions = Object.entries(filteredCounters.countries)
+  //   .sort(byCount)
+  //   .map(toOption);
 
-  const technologyOptions = Object.entries(filteredCounters.technologies)
-    .sort(byCount)
-    .map(toOption);
+  // const technologyOptions = Object.entries(filteredCounters.technologies)
+  //   .sort(byCount)
+  //   .map(toOption);
 
-  const areaOfExpertiseOptions = Object.entries(
-    filteredCounters.areaOfExpertise,
-  )
-    .sort(byCount)
-    .map(toOption);
+  // const areaOfExpertiseOptions = Object.entries(
+  //   filteredCounters.areaOfExpertise,
+  // )
+  //   .sort(byCount)
+  //   .map(toOption);
 
   return (
     <Layout preview={preview}>
