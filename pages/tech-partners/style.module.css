@@ -1,6 +1,6 @@
 .posts {
   display: grid;
-  grid-gap: 40px;
+  gap: 40px;
   grid-template-columns: repeat(1, 1fr);
 
   @media (min-width: 600px) {
@@ -106,7 +106,7 @@
 
 .filterGrid {
   display: grid;
-  grid-gap: 30px;
+  gap: 30px;
   margin-bottom: 100px;
   margin-top: 80px;
   font-size: 16px;
