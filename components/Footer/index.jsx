@@ -96,6 +96,12 @@ export default function Footer({ noCta }) {
                 </div>
 
                 <div className={s.monoLink}>
+                  <Link href="/support">
+                    <a>Support</a>
+                  </Link>
+                </div>
+
+                <div className={s.monoLink}>
                   <Link href="/enterprise-headless-cms">
                     <a>DatoCMS for Enterprise</a>
                   </Link>
@@ -192,13 +198,18 @@ export default function Footer({ noCta }) {
                       </Link>
                     </div>
                     <div className={s.groupLink}>
+                      <Link href="/tech-partners">
+                        <a>Technology partners</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
                       <Link href="/partners">
                         <a>Solution partners</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
-                      <Link href="/support">
-                        <a>Support</a>
+                      <Link href="/blog">
+                        <a>Blog</a>
                       </Link>
                     </div>
                     <div className={s.groupLink}>
@@ -228,39 +239,7 @@ export default function Footer({ noCta }) {
                     </div>
                   </div>
                 </div>
-                <div className={s.group}>
-                  <div className={s.groupTitle}>Social</div>
-                  <div className={s.groupLinks}>
-                    <div className={s.groupLink}>
-                      <Link href="/blog">
-                        <a>Blog</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <a
-                        href="https://community.datocms.com"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Community forum
-                      </a>
-                    </div>
-                    <div className={s.groupLink}>
-                      <Link href="/slack">
-                        <a>Slack channel</a>
-                      </Link>
-                    </div>
-                    <div className={s.groupLink}>
-                      <a
-                        href="https://www.twitter.com/datocms"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Twitter
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
               <div className={s.col}>
                 <div className={s.group}>
@@ -341,6 +320,21 @@ export default function Footer({ noCta }) {
                     <div className={s.groupLink}>
                       <Link href="/security">
                         <a>Security</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="https://community.datocms.com">
+                        <a>Community Forum</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="/slack">
+                        <a>Slack Channel</a>
+                      </Link>
+                    </div>
+                    <div className={s.groupLink}>
+                      <Link href="https://twitter.com/datocms">
+                        <a>Twitter</a>
                       </Link>
                     </div>
                   </div>

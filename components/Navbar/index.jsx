@@ -462,11 +462,41 @@ export default function Navbar() {
                 </Pane>
               </div>
 
-              <Link href="/partners">
-                <a className={s.entry}>
+              <div className={s.group}>
+                <div className={s.groupTitle}>
                   <span>Partners</span>
-                </a>
-              </Link>
+                </div>
+
+                <Pane>
+                  <div className={s.cols}>
+                    <div className={s.cols}>
+                      <div className={s.section}>
+                        <div className={s.grid1}>
+                          <TitleDesc
+                            href="/partners"
+                            title="Solution Partners"
+                            description="Find the perfect agency partner for your projects"
+                          />
+                          <TitleDesc
+                            href="/tech-partners"
+                            title="Technology Partners"
+                            description="Explore our partner APIs to supercharge your projects"
+                          />
+                        </div>
+                      </div>
+                      <div className={s.section}>
+                        <div className={s.grid1}>
+                          <TitleDesc
+                            href="/partner-program"
+                            title="Our Partner Program"
+                            description="Find out what benefits you and your clients enjoy as a DatoCMS Agency partner!"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Pane>
+              </div>
             </div>
 
             <div className={s.actions}>
