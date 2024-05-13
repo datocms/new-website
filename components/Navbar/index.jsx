@@ -489,7 +489,7 @@ export default function Navbar() {
                           <TitleDesc
                             href="/partner-program"
                             title="Our Partner Program"
-                            description="If you're an agency, join 80+ partners from 45+ countries in implementing DatoCMS for their clients worldwide"
+                            description="Find out what benefits you and your clients enjoy as a DatoCMS Agency partner!"
                           />
                         </div>
                       </div>
