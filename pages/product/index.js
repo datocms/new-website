@@ -307,9 +307,9 @@ export default function Product({ preview, subscription }) {
       <div className={s.customFooter}>
         <Wrapper>
           <div className={s.customFooterInner}>
-            <h1 className={s.footerTitle}>
+            <p className={s.footerTitle}>
               Seen enough? Get started with DatoCMS
-            </h1>
+            </p>
             <Checks checks={['No credit card', 'Easy setup']}>
               <Button
                 fs="big"
