@@ -1,3 +1,5 @@
+'use strict';
+
 const markdownToStructuredText = require('./utils/markdownToStructuredText');
 const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
 const getAllRecords = require('./utils/getAllRecords');

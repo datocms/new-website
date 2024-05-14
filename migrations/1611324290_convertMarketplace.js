@@ -1,3 +1,5 @@
+'use strict';
+
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
 const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
 const modularContentToStructuredText = require('./utils/modularContentToStructuredText');
@@ -7,7 +9,7 @@ const swapFields = require('./utils/swapFields');
 module.exports = async (client) => {
   const itemTypesByApiKey = await getItemTypesByApiKey(client);
 
-  for (const modelApiKey of ['hosting_app', 'enterprise_app']) {
+  for (let modelApiKey of ['hosting_app', 'enterprise_app']) {
     await createStructuredTextFieldFrom(client, modelApiKey, 'content');
 
     const records = await getAllRecords(client, modelApiKey);

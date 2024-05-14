@@ -2,7 +2,7 @@ import Sitemapper from 'sitemapper';
 const { match, compile } = require('path-to-regexp');
 const redirects = require('./redirects');
 
-const liveRedirects = redirects.map((rule) => ({
+const liveRedirects = redirects.map(rule => ({
   ...rule,
   match: match(rule.source),
   toPath: compile(rule.destination),
@@ -17,14 +17,12 @@ async function start() {
   const s1 = await sitemapper.fetch('https://datocms.netlify.com/sitemap.xml');
   const s2Sites = (
     await sitemapper.fetch('https://www.datocms.com/sitemap.xml')
-  ).sites.map((x) =>
-    x.replace('https://www.datocms.com', '').replace(/\/$/, ''),
-  );
+  ).sites.map(x => x.replace('https://www.datocms.com', '').replace(/\/$/, ''));
 
-  const notFound = s1.sites.filter((url) => {
+  const notFound = s1.sites.filter(url => {
     let realUrl = url.replace('https://www.datocms.com', '').replace(/\/$/, '');
 
-    const redirect = liveRedirects.find((r) => r.match(realUrl));
+    const redirect = liveRedirects.find(r => r.match(realUrl));
 
     if (redirect) {
       const { params } = redirect.match(realUrl);

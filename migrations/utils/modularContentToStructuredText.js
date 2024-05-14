@@ -27,8 +27,11 @@ module.exports = async function convertModularContentToStructuredText(
 
   for (const block of modularContentValue) {
     const { id, meta, ...sanitizedBlock } = block;
-    const { createdAt, updatedAt, ...sanitizedAttributes } =
-      sanitizedBlock.attributes;
+    const {
+      createdAt,
+      updatedAt,
+      ...sanitizedAttributes
+    } = sanitizedBlock.attributes;
 
     sanitizedBlock.attributes = sanitizedAttributes;
 
@@ -71,17 +74,15 @@ module.exports = async function convertModularContentToStructuredText(
         if (block.attributes.highlightLines) {
           codeNode.highlight = block.attributes.highlightLines
             .split(/\s*,\s*/)
-            .flatMap((str) => {
+            .map((str) => {
               const chunks = str.split(/\-/);
               if (chunks.length === 1) {
-                return Number.parseInt(chunks[0]) - 1;
+                return parseInt(chunks[0]) - 1;
               }
 
-              return range(
-                Number.parseInt(chunks[0]) - 1,
-                Number.parseInt(chunks[1]),
-              );
-            });
+              return range(parseInt(chunks[0]) - 1, parseInt(chunks[1]));
+            })
+            .flat();
         }
 
         children.push(codeNode);

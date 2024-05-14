@@ -1,3 +1,5 @@
+'use strict';
+
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
 const markdownToStructuredText = require('./utils/markdownToStructuredText');
 const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
@@ -27,7 +29,7 @@ module.exports = async (client) => {
     ['try_demo_block', 'title'],
   ];
 
-  for (const [modelApiKey, fieldApiKey] of fieldsToConvert) {
+  for (let [modelApiKey, fieldApiKey] of fieldsToConvert) {
     await createStructuredTextFieldFrom(client, modelApiKey, fieldApiKey);
   }
 
@@ -50,17 +52,18 @@ module.exports = async (client) => {
           const updatedAttrs = {};
 
           for (const field of fieldApiKeys) {
-            updatedAttrs[`structured_text_${field}`] =
-              await markdownToStructuredText(
-                block.attributes[field],
-                field === 'title'
-                  ? {
-                      handlers: {
-                        strong: withMark('highlight'),
-                      },
-                    }
-                  : undefined,
-              );
+            updatedAttrs[
+              `structured_text_${field}`
+            ] = await markdownToStructuredText(
+              block.attributes[field],
+              field === 'title'
+                ? {
+                    handlers: {
+                      strong: withMark('highlight'),
+                    },
+                  }
+                : undefined,
+            );
           }
 
           return {
@@ -77,7 +80,7 @@ module.exports = async (client) => {
     }
   }
 
-  for (const [modelApiKey, fieldApiKey] of fieldsToConvert) {
+  for (let [modelApiKey, fieldApiKey] of fieldsToConvert) {
     await swapFields(client, modelApiKey, fieldApiKey);
   }
 };

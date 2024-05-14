@@ -30,14 +30,17 @@
 
   > svg,
   > img {
-    aspect-ratio: 5/4;
     display: block;
     margin: 0 auto;
-    width: 66%;
-    max-width: 460px;
+
+    @media screen and (width < 800px) {
+      width: 50vw;
+    }
 
     @media screen and (width >= 800px) {
       width: 100%;
+      height: 50vh;
+      min-height: 100%;
     }
   }
 }

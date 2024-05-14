@@ -1,7 +1,7 @@
 const units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'];
 
 export default function prettyBytes(num) {
-  if (Number.isNaN(Number.parseFloat(num)) || !Number.isFinite(num)) {
+  if (isNaN(parseFloat(num)) || !isFinite(num)) {
     return '-';
   }
 

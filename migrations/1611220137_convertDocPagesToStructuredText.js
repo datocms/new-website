@@ -1,3 +1,5 @@
+'use strict';
+
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
 const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
 const modularContentToStructuredText = require('./utils/modularContentToStructuredText');

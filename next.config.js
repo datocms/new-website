@@ -1,6 +1,6 @@
 const nextEnv = require('next-env');
 const dotenvLoad = require('dotenv-load');
-const path = require('node:path');
+const path = require('path');
 const redirects = require('./redirects');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -69,12 +69,6 @@ module.exports = withNextEnv(
     },
     images: {
       disableStaticImages: true,
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'image.mux.com',
-        },
-      ],
     },
     webpack(config) {
       config.resolve.modules.push(path.resolve('./'));

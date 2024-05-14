@@ -1,3 +1,5 @@
+'use strict';
+
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
 const markdownToStructuredText = require('./utils/markdownToStructuredText');
 const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
@@ -11,7 +13,7 @@ module.exports = async (client) => {
   await createStructuredTextFieldFrom(client, 'blog_post', 'content');
   await createStructuredTextFieldFrom(client, 'blog_post', 'excerpt');
 
-  for (const fieldApiKey of ['question', 'answer']) {
+  for (let fieldApiKey of ['question', 'answer']) {
     await createStructuredTextFieldFrom(client, 'question_answer', fieldApiKey);
   }
 
@@ -34,11 +36,11 @@ module.exports = async (client) => {
     }
   }
 
-  for (const fieldApiKey of ['content', 'excerpt']) {
+  for (let fieldApiKey of ['content', 'excerpt']) {
     await swapFields(client, 'blog_post', fieldApiKey);
   }
 
-  for (const fieldApiKey of ['question', 'answer']) {
+  for (let fieldApiKey of ['question', 'answer']) {
     await swapFields(client, 'question_answer', fieldApiKey);
   }
 };

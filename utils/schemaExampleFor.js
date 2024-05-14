@@ -8,14 +8,14 @@ export default function schemaExampleFor(schema, pagination = true) {
   }
 
   if (
-    'deprecated' in schema ||
-    'hideFromDocs' in schema ||
-    'hideFromExample' in schema
+    schema.hasOwnProperty('deprecated') ||
+    schema.hasOwnProperty('hideFromDocs') ||
+    schema.hasOwnProperty('hideFromExample')
   ) {
     return;
   }
 
-  if ('example' in schema) {
+  if (schema.hasOwnProperty('example')) {
     return schema.example;
   }
 
@@ -44,9 +44,9 @@ export default function schemaExampleFor(schema, pagination = true) {
       }
 
       if (
-        'deprecated' in schema.properties[property] ||
-        'hideFromDocs' in schema.properties[property] ||
-        'hideFromExample' in schema.properties[property]
+        schema.properties[property].hasOwnProperty('deprecated') ||
+        schema.properties[property].hasOwnProperty('hideFromDocs') ||
+        schema.properties[property].hasOwnProperty('hideFromExample')
       ) {
         return acc;
       }
@@ -55,8 +55,7 @@ export default function schemaExampleFor(schema, pagination = true) {
         [property]: schemaExampleFor(schema.properties[property]),
       });
     }, {});
-  }
-  if (type === 'array') {
+  } else if (type === 'array') {
     if (!schema.items) {
       return [];
     }
@@ -64,8 +63,7 @@ export default function schemaExampleFor(schema, pagination = true) {
       return schema.items.oneOf.map((s) => schemaExampleFor(s));
     }
     return [schemaExampleFor(schema.items)];
-  }
-  if (type === 'string') {
+  } else if (type === 'string') {
     if (schema.format === 'date-time') {
       return '2020-04-21T07:57:11.124Z';
     }
@@ -73,18 +71,15 @@ export default function schemaExampleFor(schema, pagination = true) {
       return schema.enum[0];
     }
     return '';
-  }
-  if (type === 'boolean') {
+  } else if (type === 'boolean') {
     return true;
-  }
-  if (type === 'integer') {
+  } else if (type === 'integer') {
     return 20;
-  }
-  if (type === 'number') {
+  } else if (type === 'number') {
     return 0.5;
-  }
-  if (type === 'null') {
+  } else if (type === 'null') {
     return null;
+  } else {
+    throw new Error(`Don't know how to manage ${type} type!`);
   }
-  throw new Error(`Don't know how to manage ${type} type!`);
 }

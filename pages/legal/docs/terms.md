@@ -12,7 +12,7 @@ account on DatoCMS platform, you represent and warrant that: (i) you are 18 year
 of age or older; (ii) you have full legal authority to be bound as a Customer to
 this Agreement; (iii) you have read and understood this Agreement. If you do not
 fulfill the age requirements and/or if you do not have the legal authority to bind
-the Customer on whose behalf you are signing this agreement, you cannot use DatoCMS and
+the Customer on whose behalf you are signing this agreement, you cannot use dato and
 therefore, please, do not click “accept”.
 
 ### 1. Definitions and services
@@ -276,7 +276,7 @@ he can request a refund according to the methods and terms referred to in paragr
 subscriptions. If the user cancels or downgrades after the 14th day of the first billing cycle they
 will receive redeemable credits to spend on the next purchase. If the User cancels before the
 14th day of the first billing cycle, they can chose between cash and redeemable credits.
-Provisions foreseen for the case of withdrawal referred to in clause 16 for refunds are applied.
+Provisions foreseen for the case of withdrawal referred to in clause 13 for refunds are applied.
 Credits are redeemable within 18 months from the time of issue.
 
 ### 8. Information on Services and Prices

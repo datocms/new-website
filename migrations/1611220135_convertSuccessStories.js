@@ -1,3 +1,5 @@
+'use strict';
+
 const getItemTypesByApiKey = require('./utils/getItemTypesByApiKey');
 const createStructuredTextFieldFrom = require('./utils/createStructuredTextFieldFrom');
 const modularContentToStructuredText = require('./utils/modularContentToStructuredText');
@@ -20,7 +22,7 @@ module.exports = async (client) => {
     contentField.validators.richTextBlocks.itemTypes,
   );
 
-  for (const fieldApiKey of ['result', 'challenge', 'title']) {
+  for (let fieldApiKey of ['result', 'challenge', 'title']) {
     await createStructuredTextFieldFrom(client, 'success_story', fieldApiKey);
   }
 
@@ -55,13 +57,14 @@ module.exports = async (client) => {
       ),
     };
 
-    for (const fieldApiKey of ['result', 'challenge', 'title']) {
-      updatedFields[`structured_text_${fieldApiKey}`] =
-        await markdownToStructuredText(record[fieldApiKey], {
-          handlers: {
-            strong: withMark('highlight'),
-          },
-        });
+    for (let fieldApiKey of ['result', 'challenge', 'title']) {
+      updatedFields[
+        `structured_text_${fieldApiKey}`
+      ] = await markdownToStructuredText(record[fieldApiKey], {
+        handlers: {
+          strong: withMark('highlight'),
+        },
+      });
     }
 
     await client.items.update(record.id, updatedFields);
@@ -72,7 +75,7 @@ module.exports = async (client) => {
     }
   }
 
-  for (const fieldApiKey of ['result', 'challenge', 'title', 'content']) {
+  for (let fieldApiKey of ['result', 'challenge', 'title', 'content']) {
     await swapFields(client, 'success_story', fieldApiKey);
   }
 

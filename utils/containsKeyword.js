@@ -1,5 +1,5 @@
-import ReactDOMServer from 'react-dom/server';
 import striptags from 'striptags';
+import ReactDOMServer from 'react-dom/server';
 
 function containsKeyword(element, keyword) {
   const extracted = ReactDOMServer.renderToString(element);

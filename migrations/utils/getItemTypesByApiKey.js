@@ -1,5 +1,6 @@
 module.exports = async function getItemTypesByApiKey(client) {
-  return Object.fromEntries(
-    (await client.itemTypes.all()).map((it) => [it.apiKey, it]),
+  return (await client.itemTypes.all()).reduce(
+    (acc, it) => ({ ...acc, [it.apiKey]: it }),
+    {},
   );
 };

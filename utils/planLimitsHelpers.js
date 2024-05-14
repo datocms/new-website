@@ -1,7 +1,7 @@
-import SuccessIcon from 'public/icons/regular/check.svg';
-import WarningIcon from 'public/icons/regular/times.svg';
 import prettyBytes from 'utils/prettyBytes';
 import prettyNumber from 'utils/prettyNumber';
+import SuccessIcon from 'public/icons/regular/check.svg';
+import WarningIcon from 'public/icons/regular/times.svg';
 
 export const hasUnit = (name) => {
   return (
@@ -72,8 +72,8 @@ export const formatValue = (name, value) => {
 
   if (name.endsWith('seconds')) {
     return value / 60 >= 5000
-      ? `${Number.parseInt(value / 60 / 60, 10)} hrs`
-      : `${Number.parseInt(value / 60, 10)} mins`;
+      ? `${parseInt(value / 60 / 60, 10)} hrs`
+      : `${parseInt(value / 60, 10)} mins`;
   }
 
   if (name.endsWith('bytes')) {
@@ -184,8 +184,8 @@ export const formatUpperBoundLimitRaw = (limit) => {
     limit.type === 'per_site_quota_managed_site_resource'
       ? limit.free_of_charge_per_site_usage
       : limit.type === 'per_environment_quota_managed_site_resource'
-        ? limit.free_of_charge_per_environment_usage
-        : limit.free_of_charge_usage;
+      ? limit.free_of_charge_per_environment_usage
+      : limit.free_of_charge_usage;
 
   return formatValue(
     limit.id,

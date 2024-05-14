@@ -56,7 +56,7 @@ const nicerFieldName = (fieldName) => {
 };
 
 export default function exampleForField(fieldName, queryFieldName, field) {
-  const filter = `${camelize(queryFieldName)}: ${exampleForType(
+  let filter = `${camelize(queryFieldName)}: ${exampleForType(
     queryFieldName,
     field,
   )}`;
@@ -83,7 +83,7 @@ export default function exampleForField(fieldName, queryFieldName, field) {
 }
 
 export function exampleForUpload(fieldName, queryFieldName, field) {
-  const filter = `${camelize(queryFieldName)}: ${exampleForType(
+  let filter = `${camelize(queryFieldName)}: ${exampleForType(
     queryFieldName,
     field,
   )}`;

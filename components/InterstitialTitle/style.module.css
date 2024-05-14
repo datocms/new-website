@@ -82,11 +82,9 @@
 .title {
   font-family: var(--font-headline);
   font-size: rfs(60px);
-  line-height: 1.1;
   margin: 0;
   font-weight: bold;
   align-items: center;
-  text-wrap: balance;
 }
 
 .kicker {

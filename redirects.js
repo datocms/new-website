@@ -366,16 +366,4 @@ module.exports = [
     source: '/docs/content-delivery-api/rate-limiting',
     destination: '/docs/content-delivery-api/technical-limits',
   },
-  {
-    source: '/partners/locale',
-    destination: '/tech-partners/locale',
-  },
-  {
-    source: '/partners/locale',
-    destination: '/tech-partners/crowdin',
-  },
-  {
-    source: '/partners/imgix',
-    destination: '/tech-partners/imgix',
-  },
 ];
