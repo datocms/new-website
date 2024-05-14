@@ -1,0 +1,238 @@
+.buttonContainer {
+  gap: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.flagContainer {
+  margin-bottom: rfs(-100px);
+  @media (width < 800px) {
+    margin-bottom: rfs(100px);
+  }
+}
+
+.testimonialsContainer {
+  display: flex;
+  overflow: scroll;
+  margin-top: rfs(-80px);
+  gap: 50px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.testimonials {
+  margin-top: rfs(80px);
+  margin-bottom: rfs(-130px);
+}
+
+.testimonialsContainer > * {
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  animation: scroll 30s linear infinite alternate-reverse;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.title {
+  font-family: var(--font-headline);
+  font-size: rfs(60px);
+  text-align: center;
+  margin: rfs(60px) auto;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: bold;
+
+  @media (width > 800px) {
+    max-width: 70%;
+  }
+  @media (width < 800px) {
+    font-size: rfs(50px);
+  }
+}
+
+.featureSectionTitle {
+  font-family: var(--font-headline);
+  font-size: rfs(60px);
+  text-align: center;
+  margin: rfs(100px) auto;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: bold;
+
+  @media (width > 800px) {
+    max-width: 70%;
+  }
+  @media (width < 800px) {
+    font-size: rfs(50px);
+  }
+}
+
+.pillarIcon {
+  margin-right: 1rem;
+}
+
+.featuresContainers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  @media (width < 800px) {
+    grid-template-columns: repeat(1, 1fr);
+    margin: rfs(80px);
+    text-align: center;
+  }
+  gap: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: rfs(120px);
+  max-width: var(--page-width-with-margin);
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  font-size: rfs(20px);
+}
+
+.featureTitle {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.root {
+  text-align: left;
+  padding-top: rfs(40px);
+  position: relative;
+  margin: rfs(200px) auto;
+
+  &:before {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    font-family: var(--font-serif);
+    content: '\201C';
+    color: var(--accent-color);
+    font-size: rfs(150px);
+    line-height: 0.3;
+    transform: translateX(-50%);
+  }
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-size: rfs(30px);
+  margin-bottom: 40px;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  text-align: center;
+  width: rfs(500px);
+
+  @media (width < 800px) {
+    font-size: rfs(25px);
+  }
+
+  &:before {
+    content: '\201C';
+  }
+
+  &:after {
+    content: '\201D';
+  }
+}
+
+.image {
+  border-radius: 400px;
+  margin: 0 auto 20px;
+  width: 80px;
+
+  @media (width > 700px) {
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: 40px;
+  }
+}
+
+.name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  @media (width < 800px) {
+    font-size: rfs(1em);
+  }
+}
+
+.content {
+  text-align: center;
+
+  @media (width > 700px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+  }
+}
+
+.authorRole {
+  text-decoration: none;
+  color: inherit;
+
+  @media (width > 700px) {
+    max-width: 250px;
+  }
+}
+
+a.authorRole:hover .name {
+  text-decoration: underline;
+}
+
+.role {
+  color: var(--light-body-color);
+  @media (width < 800px) {
+    font-size: 0.8em;
+  }
+}
+
+.flagTitle {
+  font-size: rfs(35px);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  @media (width < 800px) {
+    justify-content: center;
+  }
+}
+
+.customFooter {
+  padding: rfs(100px) 0;
+  background: linear-gradient(45deg, #fefbe4, #fdf0eb);
+  clip-path: var(--clip-path);
+  margin-top: rfs(120px);
+}
+
+.customFooterInner {
+  margin: rfs(40px) auto;
+  text-align: center;
+  @media (width > 800px) {
+    max-width: 70%;
+  }
+}
+
+.footerTitle {
+  font-family: var(--font-headline);
+  font-size: rfs(40px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: bold;
+}
