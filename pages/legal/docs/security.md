@@ -19,7 +19,7 @@ All the data centers have also backup battery and generators to provide energy i
 
 Risk of fire has been reduced with automatic fire detection and suppression equipment.
 
-**All our servers are based in Europe**, shared between Ireland, UK, Netherlands and Germany.
+**All our servers are based in European Union**, in Ireland in particular.
 
 #### Network
 
@@ -121,4 +121,4 @@ Our offices are also secured with CCTVs and alarm systems.
 
 If you have found a security vulnerability, please get in touch via [security@datocms.com](mailto:security@datocms.com). You can encrypt the message with our PGP key that you can find [on our site](https://www.datocms.com/.well-known/DatoCMS_security_pub.asc) and on [keys.openpgp.org](https://keys.openpgp.org/search?q=3FBD73EFD6C5268A21C33FE27B94FBC69CD5C678).
 
-Latest update: May 17, 2021
+Latest update: May 16, 2024
