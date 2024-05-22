@@ -47,14 +47,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     technologies {
       name
     }
-    locations {
-      emoji
-      name
-      code
-      continent {
-        name
-      }
-    }
   }
 `,
   {
@@ -309,16 +301,7 @@ export default function TechPartners({ subscription, preview }) {
                 </div>
                 <div className={s.postBody}>
                   <div className={s.postTitle}>
-                    {post.name}{' '}
-                    {post.locations.slice(0, 5).map((l) => (
-                      <span key={l.emoji}>{l.emoji}</span>
-                    ))}
-                    {post.locations.length > 5 && (
-                      <span className={s.moreLocations}>
-                        {' + '}
-                        {post.locations.length - 5} more
-                      </span>
-                    )}
+                    {post.name}
                   </div>
                   <div className={s.postDescription}>
                     {toPlainText(post.shortDescription)}
