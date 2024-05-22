@@ -117,11 +117,11 @@ export default function ProductComparison({ subscription, preview }) {
         <div className={s.hero}>
           <div className={s.heroBody}>
             <h1 className={s.heroTitle}>
-              When to choose DatoCMS vs <Highlight>{page.product}?</Highlight>
+              When to choose DatoCMS over <Highlight>{page.product}?</Highlight>
             </h1>
             <div className={s.heroSubtitle}>
-              Our customers choose DatoCMS for its convenient scalability,
-              unparalled developer experience, and clean editing interface.
+              Our customers prefer DatoCMS for its convenient scalability,
+              unrivaled developer experience, and clean editing interface.
             </div>
             <Checks checks={['No credit card', 'Easy setup']}>
               <Button as="a" href="https://dashboard.datocms.com/signup">
@@ -129,7 +129,18 @@ export default function ProductComparison({ subscription, preview }) {
               </Button>
             </Checks>
           </div>
-          <img src="/images/product.png" alt="DatoCMS editing interface" />
+          <div className={s.heroImageWrapper}>
+            <img
+              className={`${s.heroImage}`}
+              src="/images/panel-editor.webp"
+              alt="DatoCMS editing interface (editor)"
+            />
+            <img
+              className={`${s.heroImage}`}
+              src="/images/panel-schema.webp"
+              alt="DatoCMS editing interface (schema)"
+            />
+          </div>
         </div>
       </Wrapper>
 
