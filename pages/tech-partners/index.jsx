@@ -3,8 +3,6 @@ import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
-import { Announce } from 'components/PluginToolkit';
-import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { gqlStaticPropsWithSubscription } from 'lib/datocms';
@@ -12,7 +10,6 @@ import { uniq } from 'lodash-es';
 import sortBy from 'lodash-es/sortBy';
 import Link from 'next/link';
 import React, { useState } from 'react';
-// import ReactSelect from 'react-select';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -218,13 +215,6 @@ export default function TechPartners({ subscription, preview }) {
             </>
           }
         />
-
-        <Space bottom={1}>
-          <Announce href="/partner-program" center>
-            <strong>Want to become a DatoCMS Partner?</strong> Learn more about
-            our Partner Program and its benefits!
-          </Announce>
-        </Space>
 
         {/* <div className={s.filterGrid}>
           <div className={s.filter}>
