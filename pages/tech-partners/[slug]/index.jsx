@@ -3,8 +3,8 @@ import Head from 'components/Head';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
-import Wrapper from 'components/Wrapper';
 import Space from 'components/Space';
+import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { isBlockquote } from 'datocms-structured-text-utils';
 import {

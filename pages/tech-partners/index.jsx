@@ -300,9 +300,7 @@ export default function TechPartners({ subscription, preview }) {
                   <img src={post.logo.url} />
                 </div>
                 <div className={s.postBody}>
-                  <div className={s.postTitle}>
-                    {post.name}
-                  </div>
+                  <div className={s.postTitle}>{post.name}</div>
                   <div className={s.postDescription}>
                     {toPlainText(post.shortDescription)}
                   </div>

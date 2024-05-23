@@ -56,6 +56,14 @@ export default function Footer({ noCta }) {
       {!noCta && <FinalCta />}
       <div className={s.footerRoot}>
         <Wrapper>
+          <Link href="/company/job-offers/senior-full-stack-dev">
+            <a className={s.jobOffer}>
+              👩‍💻 Hey there! We&apos;re on the hunt for a{' '}
+              <strong>Senior Full-Stack Developer</strong> to join our remote
+              team! Intrigued? →
+            </a>
+          </Link>
+
           <div className={s.footerInnerRoot}>
             <div className={s.cols}>
               <div className={s.col}>
@@ -239,7 +247,6 @@ export default function Footer({ noCta }) {
                     </div>
                   </div>
                 </div>
-                
               </div>
               <div className={s.col}>
                 <div className={s.group}>
