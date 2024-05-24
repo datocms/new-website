@@ -18,7 +18,7 @@ At present, it has **thousands of paid customers in more than 70 countries**, wi
 
 Our product is used by a [diverse range of companies and organizations](https://www.datocms.com/customers), from small startups to **Fortune 500 enterprises**, across various sectors such as e-commerce, publishing, and media.
 
-The monthly churn rate is slightly less than 1% — people stick to us because the product, documentation and support is great. Each year, we see an increase in growth between 20-30%, and in 2023, our yearly recurring revenue reached 4.5 million USD. The overwhelming majority our customer conversions happen through our self-service option, without the need for any sales team involvement.
+The monthly churn rate is slightly less than 1% — people stick to us because the product, documentation and support is great. Each year, we see an increase in growth between 20-30%, and in 2023, our yearly recurring revenue reached 4.5 million USD. The overwhelming majority of our customer conversions happen through our self-service option, without the need for any sales team involvement.
 
 Not too shabby for a **fully-remote [team of 12](https://www.datocms.com/company/about)**.
 
