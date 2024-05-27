@@ -103,6 +103,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.4",
+    "@datocms/cli": "^2.0.5",
     "@datocms/cma-client": "^3.1.1",
     "critters": "^0.0.14",
     "datocms-html-to-structured-text": "^1.1.3",
