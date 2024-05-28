@@ -37,8 +37,13 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
             id
             code
             name
-            recommended
             cmsDescription
+            starterType
+            badge {
+              name
+              emoji
+            }
+            label
             githubRepo
             technology {
               name
@@ -167,7 +172,7 @@ export default function IntegrationsPage({
             key={item.code}
             title={item.name}
             href={`/marketplace/starters/${item.code}`}
-            tag={item.recommended && 'Best choice to start!'}
+            tag={item.starterType === 'full_fledged' && 'Best choice to start!'}
             description={
               <div className={s.demoDesc}>
                 <div className={s.demoDescBody}>{item.cmsDescription}</div>
