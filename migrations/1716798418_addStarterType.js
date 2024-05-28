@@ -16,9 +16,9 @@ module.exports = async (client) => {
     },
     appearance: {
       addons: [],
-      editor: 'string_radio_group',
+      editor: 'string_select',
       parameters: {
-        radios: [
+        options: [
           { hint: '', label: 'Full-fledged', value: 'full_fledged' },
           { hint: '', label: 'Tech starter kit', value: 'tech_starter' },
           { hint: '', label: 'Community', value: 'community' },
