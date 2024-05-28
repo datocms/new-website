@@ -3,7 +3,10 @@ import PluginSdkHook from 'components/PluginSdkHook';
 import PostContent from 'components/PostContent';
 import ReactUiExample from 'components/ReactUiExample';
 import s from 'pages/docs/pageStyle.module.css';
+import TriangleExclamationIcon from 'public/icons/regular/exclamation-triangle.svg';
 import InfoCircleIcon from 'public/icons/regular/info-circle.svg';
+import FaceSmileBeamIcon from 'public/icons/regular/smile.svg';
+import WandMagicSparklesIcon from 'public/icons/regular/wand-magic.svg';
 import { Fragment } from 'react';
 import { StructuredText } from 'react-datocms';
 
@@ -33,10 +36,23 @@ export default function DocPageContent({ additionalData, ...props }) {
                   s.docCallout,
                   s[`docCallout--${block.calloutType}`],
                 )}
+                data-type={block.calloutType}
               >
                 {block.title && (
                   <div className={s.docCalloutTitle}>
-                    <InfoCircleIcon /> <span>{block.title}</span>
+                    {block.calloutType === 'neutral' ? (
+                      <InfoCircleIcon />
+                    ) : block.calloutType === 'warning' ? (
+                      <TriangleExclamationIcon />
+                    ) : block.calloutType === 'positive' ? (
+                      <FaceSmileBeamIcon />
+                    ) : block.calloutType === 'protip' ? (
+                      <WandMagicSparklesIcon />
+                    ) : null}{' '}
+                    <span>
+                      {block.calloutType === 'protip' && 'Pro tip: '}
+                      {block.title}
+                    </span>
                   </div>
                 )}
                 <StructuredText data={block.text} />

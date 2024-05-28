@@ -492,7 +492,7 @@
   }
 }
 
-.docCallout--gray {
+.docCallout--neutral, .docCallout--protip {
   background: #f4f5ff;
 
   .docCalloutTitle {
@@ -504,20 +504,28 @@
   }
 }
 
-.docCallout--green {
-  background: #c0fee5;
+.docCallout--positive {
+  background: #cbffea;
 
   .docCalloutTitle {
-    color: #00a67c;
+    color: #00664c;
 
     svg {
-      fill: #00a67c;
+      fill: #00664c;
     }
   }
 }
 
-.docCallout--yellow {
+.docCallout--warning {
   background: #fffbd1;
+
+  .docCalloutTitle {
+    color: #b3701b;
+
+    svg {
+      fill: #b3701b;
+    }
+  }
 }
 
 .docCalloutTitle {
