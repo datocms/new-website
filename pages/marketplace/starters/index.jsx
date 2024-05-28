@@ -92,7 +92,10 @@ export default function Plugins({ starters, preview }) {
               title={item.name}
               key={item.code}
               href={`/marketplace/starters/${item.code}`}
-              tag={item.starterType === 'full_fledged' && 'Best choice to try out DatoCMS!'}
+              tag={
+                item.starterType === 'full_fledged' &&
+                'Best choice to try out DatoCMS!'
+              }
               description={
                 <div className={s.demoDesc}>
                   <div className={s.demoDescBody}>{item.cmsDescription}</div>
