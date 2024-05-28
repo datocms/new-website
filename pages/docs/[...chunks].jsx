@@ -20,6 +20,10 @@ import { fetchPluginSdkHooks } from 'utils/fetchPluginSdk';
 import fetchReactUiExamples from 'utils/fetchReactUiExamples';
 import filter from 'utils/filterNodes';
 import slugify from 'utils/slugify';
+import {
+  changeImageWithGeneratedDoc,
+  changeTitle,
+} from 'utils/tweakSeoMetaTags';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticPaths = gqlStaticPaths(
@@ -539,41 +543,10 @@ export default function DocPage({
     docGroup ? `${docGroup.name} - ` : '-'
   }${pageTitle} - DatoCMS Docs`;
 
-  let seo = [...page._seoMetaTags];
-
-  if (
-    page._seoMetaTags.find(
-      // This is the DatoCMS default title which is not descriptive enough for SEO
-      (t) => t.tag === 'title' && t.content === `${pageTitle} - DatoCMS`,
-    )
-  ) {
-    seo = [
-      ...seo,
-      {
-        content: defaultSeoTitle,
-        tag: 'title',
-      },
-    ];
-  }
-
-  seo = seo.map((tag) =>
-    tag?.attributes?.property === 'og:image' ||
-    tag?.attributes?.name === 'twitter:image'
-      ? {
-          ...tag,
-          attributes: {
-            ...tag.attributes,
-            content: `${
-              process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
-                ? `https://${process.env.VERCEL_BRANCH_URL}`
-                : process.env.BASE_URL
-            }/api/og-image/doc-page?${new URLSearchParams({
-              title: page.title,
-              kicker: docGroup ? `DatoCMS Docs: ${docGroup.name}` : undefined,
-            }).toString()}`,
-          },
-        }
-      : tag,
+  const seo = changeImageWithGeneratedDoc(
+    changeTitle(page._seoMetaTags, defaultSeoTitle),
+    page.title,
+    docGroup ? docGroup.name : undefined,
   );
 
   return (

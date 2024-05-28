@@ -10,7 +10,9 @@ export default async function handler(req, res) {
   const { searchParams } = new URL(req.url, `http://${req.headers.host}`);
 
   const title = searchParams.get('title') || 'General Concepts';
-  const kicker = searchParams.get('kicker');
+  const kicker = searchParams.get('kicker')
+    ? `DatoCMS Docs: ${searchParams.get('kicker')}`
+    : 'DatoCMS Docs';
 
   console.log(kicker);
 

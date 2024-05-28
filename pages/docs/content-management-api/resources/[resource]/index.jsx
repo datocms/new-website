@@ -11,6 +11,7 @@ import { Sidebar } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
 import { useMemo } from 'react';
 import fetchCma from 'utils/fetchCma';
+import { docPageOgImageUrl } from 'utils/tweakSeoMetaTags';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -79,6 +80,10 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
   const result = useMemo(() => parse(cma), [cma]);
   const url = `/docs/content-management-api/resources/${resourceId}`;
   const links = result.schema.links.filter((link) => !link.private);
+  const ogImageUrl = docPageOgImageUrl(
+    result.schema.title,
+    'Content Management API',
+  );
 
   return (
     <DocsLayout
@@ -115,7 +120,15 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
       }
     >
       <Head>
-        <title>{result.schema.title} - Content Management API - DatoCMS</title>
+        <title key="title">
+          {result.schema.title} — Content Management API — DatoCMS
+        </title>
+        <meta key="meta-og:image" property="og:image" content={ogImageUrl} />
+        <meta
+          key="meta-twitter:image"
+          name="twitter:image"
+          content={ogImageUrl}
+        />
       </Head>
       <div className={s.articleContainer}>
         <div className={s.article}>

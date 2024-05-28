@@ -16,6 +16,7 @@ import React from 'react';
 import { renderMetaTags } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import { camelize, exampleForUpload } from 'utils/gqlExampleForField';
+import { changeImageWithGeneratedDoc } from 'utils/tweakSeoMetaTags';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
@@ -80,7 +81,15 @@ export default function DocPage({
         />
       }
     >
-      <Head>{renderMetaTags(page._seoMetaTags)}</Head>
+      <Head>
+        {renderMetaTags(
+          changeImageWithGeneratedDoc(
+            page._seoMetaTags,
+            titleOverride || page.title,
+            'Content Delivery API',
+          ),
+        )}
+      </Head>
       <div className={s.articleContainer}>
         <Toc
           content={page.content}
