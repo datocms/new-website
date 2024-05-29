@@ -143,6 +143,40 @@ const Box = ({ title, description, image, href, tag }) => (
   </div>
 );
 
+const Card = ({
+  image,
+  title,
+  description,
+  technology,
+  badge,
+  label,
+  size = 'medium',
+  orientation = 'vertical',
+}) => {
+  return (
+    <div data-size={size} data-orientation={orientation} className={s.card}>
+      <DatoImage className={s.cardImage} data={image} />
+      <div className={s.cardContent}>
+        <h2 className={s.cardTitle}>{title}</h2>
+        <p className={s.cardDescription}>{description}</p>
+        {technology && (
+          <figure className={s.technology}>
+            <LazyImage className={s.technologyLogo} src={technology.logo.url} />
+          </figure>
+        )}
+        <footer className={s.cardFooter}>
+          {badge && (
+            <span className={s.cardBadge}>
+              {badge.emoji} {badge.name}
+            </span>
+          )}
+          {label && <span className={s.cardLabel}>{label}</span>}
+        </footer>
+      </div>
+    </div>
+  );
+};
+
 export default function IntegrationsPage({
   page,
   plugins,
@@ -151,11 +185,60 @@ export default function IntegrationsPage({
   enterpriseApps,
   preview,
 }) {
+  const fullFledged = page.demos.filter(
+    (item) => item.starterType === 'full_fledged',
+  );
+  const techStarters = page.demos.filter(
+    (item) => item.starterType === 'tech_starter',
+  );
+
   return (
     <Layout preview={preview}>
       <Head>
         <title>Integrations Marketplace</title>
       </Head>
+
+      <div className={s.sectionWrapper}>
+        <section className={s.section}>
+          <div className={s.sectionHeader}>
+            <h2 className={s.headerTitle}>Title</h2>
+            <div className={s.headerViewAll}>View all</div>
+          </div>
+
+          <div className={s.startersWrapper}>
+            <div className={s.fullFledged}>
+              {fullFledged.map((item) => (
+                <Card
+                  key={item.code}
+                  image={item.screenshot.responsiveImage}
+                  title={item.name}
+                  description={item.cmsDescription}
+                  technology={item.technology}
+                  badge={item.badge}
+                  label={item.label}
+                  size="large"
+                />
+              ))}
+            </div>
+
+            <div className={s.techStarters}>
+              {techStarters.map((item) => (
+                <Card
+                  key={item.code}
+                  image={item.screenshot.responsiveImage}
+                  title={item.name}
+                  description={item.cmsDescription}
+                  badge={item.badge}
+                  label={item.label}
+                  size="small"
+                  orientation="horizontal"
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+
       <Category
         title="Starter projects"
         description="Start with a fully configured DatoCMS project, a best-practice frontend and free hosting"

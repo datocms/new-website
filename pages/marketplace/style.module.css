@@ -120,3 +120,134 @@
 .demoDescBody {
   flex: 1;
 }
+
+/* WIP */
+.sectionWrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
+}
+
+.section {
+  max-width: var(--page-width-with-margin);
+  width: 100%;
+  padding: 0 var(--page-margin)
+}
+
+.sectionHeader {
+  border-bottom: 1px solid #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+}
+
+.headerTitle {
+  font-size: rfs(40px);
+  color: var(--light-body-color);
+  font-weight: bold;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.headerViewAll {
+  color: orange;
+  padding: 0.5em 0;
+}
+
+.startersWrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px
+}
+
+.fullFledged {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.techStarters {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  border-radius: 6px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+
+  &[data-size="small"] {
+    .cardTitle {
+      font-size: 18px;
+    }
+
+    .cardContent {
+      padding: 10px;
+    }
+
+    .cardDescription {
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      line-clamp: 2; 
+      overflow: hidden;
+    }
+  }
+
+  &[data-orientation="horizontal"] {
+    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.cardContent {
+  padding: 25px 20px;
+}
+
+.cardTitle {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  font-size: 21px;
+}
+
+.cardDescription {
+  font-size: 15px;
+}
+
+.technology {
+  aspect-ratio: 16/9;
+  margin: 0 0 10px 0;
+  width: 80px;
+}
+
+.technologyLogo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cardFooter {
+  display: flex;
+  gap: 0px 5px;
+}
+
+.cardBadge,
+.cardLabel {
+  border-radius: 40px;
+  font-size: 14px;
+  line-height: 1;
+  padding: 5px 15px;
+}
+
+.cardBadge {
+  border: 1px solid #eee;
+}
+
+.cardLabel {
+  background-color:#eee;
+}
