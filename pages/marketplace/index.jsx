@@ -147,6 +147,7 @@ const Box = ({ title, description, image, href, tag }) => (
 );
 
 const Card = ({
+  href,
   image,
   technology,
   text,
@@ -156,38 +157,43 @@ const Card = ({
   orientation = 'vertical',
 }) => {
   return (
-    <div data-size={size} data-orientation={orientation} className={s.card}>
-      <div className={s.imageWrapper}>
-        {image ? (
-          <DatoImage className={s.cardImage} data={image} />
-        ) : technology ? (
-          <figure className={s.cardTechnology}>
-            <LazyImage
-              className={s.technologyLogo}
-              src={technology.squareLogo.url}
-            />
-          </figure>
-        ) : null}
-      </div>
-      <article className={s.cardContent}>
-        <h2 className={s.cardTitle}>{text.title}</h2>
-        <p className={s.cardDescription}>{text.description}</p>
-        {image && technology && (
-          <figure className={s.technology}>
-            <LazyImage className={s.technologyLogo} src={technology.logo.url} />
-          </figure>
-        )}
-        <footer className={s.cardFooter}>
-          {badge && (
-            <div className={s.cardBadge}>
-              <span>{badge.emoji}</span>
-              <span>{badge.name}</span>
-            </div>
+    <Link href={href}>
+      <a className={s.card} data-size={size} data-orientation={orientation}>
+        <div className={s.imageWrapper}>
+          {image ? (
+            <DatoImage className={s.cardImage} data={image} />
+          ) : technology ? (
+            <figure className={s.cardTechnology}>
+              <LazyImage
+                className={s.technologyLogo}
+                src={technology.squareLogo.url}
+              />
+            </figure>
+          ) : null}
+        </div>
+        <article className={s.cardContent}>
+          <h2 className={s.cardTitle}>{text.title}</h2>
+          <p className={s.cardDescription}>{text.description}</p>
+          {image && technology && (
+            <figure className={s.technology}>
+              <LazyImage
+                className={s.technologyLogo}
+                src={technology.logo.url}
+              />
+            </figure>
           )}
-          {label && <span className={s.cardLabel}>{label}</span>}
-        </footer>
-      </article>
-    </div>
+          <footer className={s.cardFooter}>
+            {badge && (
+              <div className={s.cardBadge}>
+                <span>{badge.emoji}</span>
+                <span>{badge.name}</span>
+              </div>
+            )}
+            {label && <span className={s.cardLabel}>{label}</span>}
+          </footer>
+        </article>
+      </a>
+    </Link>
   );
 };
 
@@ -221,12 +227,25 @@ export default function IntegrationsPage({
 
           <div className={s.startersWrapper}>
             <div className={s.fullFledged}>
+              <div className={s.intro}>
+                <h3>Full-fledged demos</h3>
+                <p>
+                  Use our pre-built demo projects to see all of DatoCMS&apos;s
+                  features in a realistic production-ready setup. Includes many
+                  example content types, and advanced features.
+                </p>
+              </div>
+
               {fullFledged.map((item) => (
                 <Card
                   key={item.code}
+                  href={`/marketplace/starters/${item.code}`}
                   image={item.screenshot.responsiveImage}
                   technology={item.technology}
-                  text={{ title: item.name, description: item.cmsDescription }}
+                  text={{
+                    title: item.name,
+                    description: item.cmsDescription,
+                  }}
                   badge={item.badge}
                   label={item.label}
                   size="large"
@@ -235,11 +254,20 @@ export default function IntegrationsPage({
             </div>
 
             <div className={s.techStarters}>
+              <div className={s.intro}>
+                <h3>Tech starters</h3>
+                <p>Kickstart your next project with our scaffolds.</p>
+              </div>
+
               {techStarters.map((item) => (
                 <Card
                   key={item.code}
+                  href={`/marketplace/starters/${item.code}`}
                   technology={item.technology}
-                  text={{ title: item.name, description: item.cmsDescription }}
+                  text={{
+                    title: item.name,
+                    description: item.cmsDescription,
+                  }}
                   badge={item.badge}
                   label={item.label}
                   orientation="horizontal"
