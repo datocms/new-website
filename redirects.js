@@ -378,4 +378,12 @@ module.exports = [
     source: '/partners/imgix',
     destination: '/tech-partners/imgix',
   },
+  {
+    source: '/blog/introducing-visual-editing-for-vercel-and-datocms-enterprise-customers',
+    destination: '/blog/introducing-content-link-for-vercel-and-datocms-enterprise-customers',
+  },
+  {
+    source: '/blog/july-update-visual-editing-and-per-locale-publishing',
+    destination: '/blog/july-update-content-link-and-per-locale-publishing',
+  },
 ];
