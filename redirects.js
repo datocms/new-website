@@ -386,4 +386,12 @@ module.exports = [
     source: '/blog/july-update-visual-editing-and-per-locale-publishing',
     destination: '/blog/july-update-content-link-and-per-locale-publishing',
   },
+  {
+    source: '/docs/visual-editing',
+    destination: '/docs/content-link',
+  },
+  {
+    source: '/docs/visual-editing/how-to-use-visual-editing',
+    destination: '/docs/content-link/how-to-use-content-link',
+  },
 ];
