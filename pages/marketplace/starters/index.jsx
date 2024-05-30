@@ -84,14 +84,24 @@ export default function Plugins({ starters, preview }) {
       </Head>
       <Wrapper>
         <div className={s.hero}>
-          <div className={s.heroTitle}>Starter projects</div>
+          <div className={s.heroTitle}>Starters</div>
           <div className={s.heroDesc}>
             Start with a fully configured DatoCMS project, a best-practice
             frontend and free hosting
           </div>
         </div>
+      </Wrapper>
 
+      <div className={s.firstPartyStarters}>
         <section className={s.fullFledged}>
+          <div className={s.intro}>
+            <h2>Full fledged demos</h2>
+            <p>
+              Use our pre-built demo projects to see all of DatoCMS&apos;s
+              features in a <strong>realistic production-ready setup</strong>.
+              Includes many example content types, and advanced features.
+            </p>
+          </div>
           {fullFledged?.map((item) => (
             <MarketplaceCard
               key={item.code}
@@ -108,22 +118,35 @@ export default function Plugins({ starters, preview }) {
           ))}
         </section>
 
-        <section className={s.techStarters}>
-          {techStarters?.map((item) => (
-            <MarketplaceCard
-              key={item.code}
-              href={`/marketplace/starters/${item.code}`}
-              technology={item.technology}
-              text={{
-                title: item.name,
-                description: item.cmsDescription,
-              }}
-              badge={item.badge}
-              label={item.label}
-            />
-          ))}
-        </section>
+        <div className={s.techStartersWrapper}>
+          <div className={s.intro}>
+            <h2>Full fledged demos</h2>
+            <p>
+              Kickstart your next project with our{' '}
+              <strong>official scaffolds</strong>. They offer all the best
+              practices to integrate DatoCMS with your frontend framework, with
+              minimal content and styling.
+            </p>
+          </div>
+          <section className={s.techStarters}>
+            {techStarters?.map((item) => (
+              <MarketplaceCard
+                key={item.code}
+                href={`/marketplace/starters/${item.code}`}
+                technology={item.technology}
+                text={{
+                  title: item.name,
+                  description: item.cmsDescription,
+                }}
+                badge={item.badge}
+                label={item.label}
+              />
+            ))}
+          </section>
+        </div>
+      </div>
 
+      <Wrapper>
         <Announce
           href="/docs/project-starters-and-templates#generate-a-project-starter-button"
           center
