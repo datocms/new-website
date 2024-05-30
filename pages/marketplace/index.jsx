@@ -1,12 +1,13 @@
 import cn from 'classnames';
 import Head from 'components/Head';
 import LazyImage from 'components/LazyImage';
+import MarketplaceCard from 'components/MarketplaceCard';
 import Layout from 'components/MarketplaceLayout';
 import PluginBox, { LogoImage } from 'components/PluginBox';
 import { handleErrors, imageFields, request } from 'lib/datocms';
 import Link from 'next/link';
-import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import ArrowRight from 'public/icons/regular/arrow-right.svg';
+import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
 import { Image as DatoImage } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import truncate from 'truncate';
@@ -147,57 +148,6 @@ const Box = ({ title, description, image, href, tag }) => (
   </div>
 );
 
-const Card = ({
-  href,
-  image,
-  technology,
-  text,
-  badge,
-  label,
-  size = 'medium',
-  orientation = 'vertical',
-}) => {
-  return (
-    <Link href={href}>
-      <a className={s.card} data-size={size} data-orientation={orientation}>
-        <div className={s.imageWrapper}>
-          {image ? (
-            <DatoImage className={s.cardImage} data={image} />
-          ) : (
-            <figure className={s.cardTechnology}>
-              <LazyImage
-                className={s.technologyLogo}
-                src={technology.squareLogo.url}
-              />
-            </figure>
-          )}
-        </div>
-        <article className={s.cardContent}>
-          <h2 className={s.cardTitle}>{text.title}</h2>
-          <p className={s.cardDescription}>{text.description}</p>
-          {image && technology && (
-            <figure className={s.technology}>
-              <LazyImage
-                className={s.technologyLogo}
-                src={technology.logo.url}
-              />
-            </figure>
-          )}
-          <footer className={s.cardFooter}>
-            {badge && (
-              <div className={s.cardBadge}>
-                <span>{badge.emoji}</span>
-                <span>{badge.name}</span>
-              </div>
-            )}
-            {label && <span className={s.cardLabel}>{label}</span>}
-          </footer>
-        </article>
-      </a>
-    </Link>
-  );
-};
-
 export default function IntegrationsPage({
   page,
   plugins,
@@ -242,7 +192,7 @@ export default function IntegrationsPage({
               </div>
 
               {fullFledged.map((item) => (
-                <Card
+                <MarketplaceCard
                   key={item.code}
                   href={`/marketplace/starters/${item.code}`}
                   image={item.screenshot.responsiveImage}
@@ -265,7 +215,7 @@ export default function IntegrationsPage({
               </div>
 
               {techStarters.map((item) => (
-                <Card
+                <MarketplaceCard
                   key={item.code}
                   href={`/marketplace/starters/${item.code}`}
                   technology={item.technology}
