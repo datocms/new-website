@@ -1,124 +1,3 @@
-.boxes {
-  display: flex;
-  overflow-x: auto;
-  padding: 15px 0 40px var(--page-margin);
-  max-width: var(--page-width-with-margin);
-  margin-left: auto;
-  margin-right: auto;
-  align-items: stretch;
-  width: 100%;
-}
-
-.boxContainer {
-  padding-right: 30px;
-  display: flex;
-  align-items: stretch;
-  width: 330px;
-  flex-shrink: 0;
-
-  &:last-child {
-    padding-right: var(--page-margin);
-  }
-
-  > a {
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-  }
-}
-
-.boxImageImage {
-  display: block !important;
-}
-
-.category {
-  padding-bottom: rfs(60px);
-}
-
-.categoryHeader {
-  width: 100%;
-  max-width: var(--page-width-with-margin);
-  padding-left: var(--page-margin);
-  padding-right: var(--page-margin);
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-  margin: 0px auto 20px;
-  min-width: 0;
-  text-align: center;
-
-  @media (width > 900px) {
-    display: flex;
-    text-align: left;
-    align-items: flex-end;
-  }
-}
-
-.categoryLeft {
-  flex: 1;
-}
-
-.categoryDesc {
-  font-size: 0.9em;
-}
-
-.categoryTitle {
-  font-size: rfs(40px);
-  color: var(--light-body-color);
-  font-weight: bold;
-  letter-spacing: -0.03em;
-  margin-bottom: 5px;
-}
-
-.browseAll {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 14px;
-  color: var(--azure-color);
-  margin-top: rfs(30px);
-  display: block;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  svg {
-    height: 0.7em;
-    margin-left: 10px;
-    display: inline-block;
-    vertical-align: middle;
-    fill: var(--azure-color);
-  }
-}
-
-.grid {
-  @media (width > 900px) {
-    max-width: var(--page-width-with-margin);
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 20px;
-  }
-}
-
-.techLogo {
-  height: 25px;
-  margin-top: 20px;
-}
-
-.demoDesc {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-
-.demoDescBody {
-  flex: 1;
-}
-
-/* WIP */
 .sectionWrapper {
   align-items: center;
   display: flex;
@@ -243,3 +122,122 @@
   }
 }
 
+.boxes {
+  align-items: stretch;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--page-width-with-margin);
+  overflow-x: auto;
+  padding: 15px 0 40px var(--page-margin);
+  width: 100%;
+}
+
+.boxContainer {
+  align-items: stretch;
+  display: flex;
+  flex-shrink: 0;
+  padding-right: 30px;
+  width: 330px;
+
+  &:last-child {
+    padding-right: var(--page-margin);
+  }
+
+  > a {
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+  }
+}
+
+.boxImageImage {
+  display: block !important;
+}
+
+.category {
+  padding-bottom: rfs(60px);
+}
+
+.categoryHeader {
+  margin-left: auto;
+  margin-right: auto;
+  margin: 0px auto 20px;
+  max-width: var(--page-width-with-margin);
+  min-width: 0;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+  text-align: center;
+  text-align: left;
+  width: 100%;
+
+  @media (width > 900px) {
+    align-items: flex-end;
+    display: flex;
+    text-align: left;
+  }
+}
+
+.categoryLeft {
+  flex: 1;
+}
+
+.categoryDesc {
+  font-size: 0.9em;
+}
+
+.categoryTitle {
+  color: var(--light-body-color);
+  font-size: rfs(40px);
+  font-weight: bold;
+  letter-spacing: -0.03em;
+  margin-bottom: 5px;
+}
+
+.browseAll {
+  color: var(--azure-color);
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: rfs(30px);
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  svg {
+    display: inline-block;
+    fill: var(--azure-color);
+    height: 0.7em;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+}
+
+.grid {
+  @media (width > 900px) {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: var(--page-width-with-margin);
+  }
+}
+
+.techLogo {
+  margin-top: 20px;
+  height: 25px;
+}
+
+.demoDesc {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.demoDescBody {
+  flex: 1;
+}
