@@ -1,0 +1,100 @@
+.grid {
+  display: grid;
+  gap: rfs(50px) 30px;
+  grid-template-columns: 1fr;
+}
+
+@media screen and (width > 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.image {
+  border-bottom: 1px solid var(--border-color);
+  display: block !important;
+  img {
+    background: white;
+  }
+}
+
+.hero {
+  padding-bottom: rfs(80px);
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: rfs(60px);
+  color: var(--light-body-color);
+  font-weight: bold;
+  letter-spacing: -0.03em;
+  margin-bottom: 5px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: rfs(80px);
+}
+
+.searchInput {
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  padding: 10px 30px;
+  font-size: inherit;
+  font-family: inherit;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: 0;
+    border-color: #999;
+  }
+}
+
+.loading,
+.noResults {
+  padding-top: rfs(50px);
+  padding-bottom: rfs(50px);
+  text-align: center;
+  font-size: 30px;
+  color: var(--light-body-color);
+}
+
+.techLogo {
+  height: 25px;
+  margin-top: 20px;
+}
+
+.demoDesc {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.demoDescBody {
+  flex: 1;
+}
+
+/* WIP */
+.fullFledged {
+  display: grid;
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+@media screen and (min-width: 480px) {
+  .fullFledged {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 80px;
+  }
+}
+
+.techStarters {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-bottom: 80px;
+}

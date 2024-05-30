@@ -1,14 +1,12 @@
 import Head from 'components/Head';
-import LazyImage from 'components/LazyImage';
+import MarketplaceCard from 'components/MarketplaceCard';
 import Layout from 'components/MarketplaceLayout';
-import PluginBox from 'components/PluginBox';
 import { Announce } from 'components/PluginToolkit';
 import Wrapper from 'components/Wrapper';
 import { handleErrors, imageFields, request } from 'lib/datocms';
-import s from 'pages/marketplace/plugins/browse/p/[page]/style.module.css';
-import { Image as DatoImage } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';
+import s from './style.module.css';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
@@ -33,10 +31,13 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
             logo {
               url
             }
+            squareLogo {
+              url
+            }
           }
           screenshot {
             responsiveImage(
-              imgixParams: { auto: format, w: 400, h: 300, fit: crop }
+              imgixParams: { auto: format, w: 600, h: 400, fit: crop }
             ) {
               ...imageFields
             }
@@ -66,6 +67,16 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
 });
 
 export default function Plugins({ starters, preview }) {
+  const fullFledged = starters.filter(
+    (starter) => starter.starterType === 'full_fledged',
+  );
+  const techStarters = starters.filter(
+    (starter) => starter.starterType === 'tech_starter',
+  );
+  const community = starters.filter(
+    (starter) => starter.starterType === 'community',
+  );
+
   return (
     <Layout preview={preview}>
       <Head>
@@ -79,6 +90,40 @@ export default function Plugins({ starters, preview }) {
             frontend and free hosting
           </div>
         </div>
+
+        <section className={s.fullFledged}>
+          {fullFledged?.map((item) => (
+            <MarketplaceCard
+              key={item.code}
+              href={`/marketplace/starters/${item.code}`}
+              image={item.screenshot.responsiveImage}
+              technology={item.technology}
+              text={{
+                title: item.name,
+                description: item.cmsDescription,
+              }}
+              badge={item.badge}
+              label={item.label}
+            />
+          ))}
+        </section>
+
+        <section className={s.techStarters}>
+          {techStarters?.map((item) => (
+            <MarketplaceCard
+              key={item.code}
+              href={`/marketplace/starters/${item.code}`}
+              technology={item.technology}
+              text={{
+                title: item.name,
+                description: item.cmsDescription,
+              }}
+              badge={item.badge}
+              label={item.label}
+            />
+          ))}
+        </section>
+
         <Announce
           href="/docs/project-starters-and-templates#generate-a-project-starter-button"
           center
@@ -86,33 +131,21 @@ export default function Plugins({ starters, preview }) {
           <strong>Want to create your own starter project?</strong> Learn how to
           do that in our documentation!
         </Announce>
+
         <div className={s.grid}>
-          {starters?.map((item) => (
-            <PluginBox
-              title={item.name}
+          {community?.map((item) => (
+            <MarketplaceCard
               key={item.code}
               href={`/marketplace/starters/${item.code}`}
-              tag={
-                item.starterType === 'full_fledged' &&
-                'Best choice to try out DatoCMS!'
-              }
-              description={
-                <div className={s.demoDesc}>
-                  <div className={s.demoDescBody}>{item.cmsDescription}</div>
-                  <div className={s.demoDescImage}>
-                    <LazyImage
-                      className={s.techLogo}
-                      src={item.technology.logo.url}
-                    />
-                  </div>
-                </div>
-              }
-              image={
-                <DatoImage
-                  className={s.boxImageImage}
-                  data={item.screenshot.responsiveImage}
-                />
-              }
+              image={item.screenshot.responsiveImage}
+              text={{
+                title: item.name,
+                description: item.cmsDescription,
+              }}
+              badge={item.badge}
+              label={item.label}
+              orientation="horizontal"
+              size="small"
             />
           ))}
         </div>

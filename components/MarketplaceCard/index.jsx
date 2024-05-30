@@ -23,7 +23,11 @@ export default function MarketplaceCard({
             <figure className={s.cardTechnology}>
               <LazyImage
                 className={s.technologyLogo}
-                src={technology.squareLogo.url}
+                src={
+                  technology.squareLogo
+                    ? technology.squareLogo.url
+                    : technology.logo.url
+                }
               />
             </figure>
           )}

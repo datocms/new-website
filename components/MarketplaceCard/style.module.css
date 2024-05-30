@@ -34,12 +34,13 @@
 .card[data-orientation="horizontal"] {
   align-items: center;
   display: flex;
+  min-width: 0;
 
   .imageWrapper {
     aspect-ratio: 3/2;
-    width: 100%;
     flex-shrink: 0;
     max-width: 33%;
+    width: 100%;
   }
 
   .cardContent {
@@ -74,10 +75,11 @@
   gap: 20px;
 
   .imageWrapper {
-    width: 100%;
-    height: auto;
     border-radius: 6px;
     box-shadow: var(--box-shadow);
+    height: auto;
+    overflow: hidden;
+    width: 100%;
   }
 
   .cardTitle {
