@@ -150,15 +150,34 @@
 }
 
 .headerViewAll {
+  align-items: center;
   color: var(--accent-color);
-  padding: 0.25em 0;
+  display: flex;
   font-weight: 600;
+  line-height: 1;
+  gap: 8px;
+  padding: 0.25em 0;
+  text-decoration: none;
+  
+  &:hover {
+    svg {
+      transform: translateX(4px);
+    }
+  }
+  
+  svg {
+    fill: var(--accent-color);
+    height: 16px;
+    margin-bottom: 2px;
+    transition: transform .2s ease-in-out;
+    width: 16px;
+  }
 }
 
 .startersWrapper {
   display: flex;
   flex-direction: column;
-  gap: 30px
+  gap: 60px 30px
 }
 
 @media screen and (min-width: 1024px) {
@@ -211,6 +230,10 @@
 @media screen and (min-width: 480px) {
   .techStarters {
     grid-template-columns: 1fr 1fr;
+
+    .intro {
+      grid-column: 1 / -1;
+    }
   }
 }
 
@@ -291,6 +314,10 @@
     display: -webkit-box;
     line-clamp: 2; 
     overflow: hidden;
+  }
+
+  .cardFooter {
+    margin: 10px 0 0 0;
   }
 }
 

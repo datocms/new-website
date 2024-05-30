@@ -6,6 +6,7 @@ import PluginBox, { LogoImage } from 'components/PluginBox';
 import { handleErrors, imageFields, request } from 'lib/datocms';
 import Link from 'next/link';
 import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
+import ArrowRight from 'public/icons/regular/arrow-right.svg';
 import { Image as DatoImage } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import truncate from 'truncate';
@@ -162,14 +163,14 @@ const Card = ({
         <div className={s.imageWrapper}>
           {image ? (
             <DatoImage className={s.cardImage} data={image} />
-          ) : technology ? (
+          ) : (
             <figure className={s.cardTechnology}>
               <LazyImage
                 className={s.technologyLogo}
                 src={technology.squareLogo.url}
               />
             </figure>
-          ) : null}
+          )}
         </div>
         <article className={s.cardContent}>
           <h2 className={s.cardTitle}>{text.title}</h2>
@@ -222,7 +223,11 @@ export default function IntegrationsPage({
         <section className={s.section}>
           <div className={s.sectionHeader}>
             <h2 className={s.headerTitle}>Our Starters</h2>
-            <div className={s.headerViewAll}>View all</div>
+            <Link href="/marketplace/starters">
+              <a className={s.headerViewAll}>
+                <span>View all</span> <ArrowRight />
+              </a>
+            </Link>
           </div>
 
           <div className={s.startersWrapper}>
@@ -268,8 +273,6 @@ export default function IntegrationsPage({
                     title: item.name,
                     description: item.cmsDescription,
                   }}
-                  badge={item.badge}
-                  label={item.label}
                   orientation="horizontal"
                   size="small"
                 />
