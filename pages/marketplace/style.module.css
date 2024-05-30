@@ -126,83 +126,183 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-bottom: 60px;
+  margin-bottom: 120px;
 }
 
 .section {
   max-width: var(--page-width-with-margin);
+  padding: 0 var(--page-margin);
   width: 100%;
-  padding: 0 var(--page-margin)
 }
 
 .sectionHeader {
-  border-bottom: 1px solid #666;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--light-body-color);
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 30px;
-  padding-bottom: 10px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 .headerTitle {
-  font-size: rfs(40px);
-  color: var(--light-body-color);
-  font-weight: bold;
-  letter-spacing: -0.03em;
+  font-family: var(--font-headline);
+  color: var(--body-color);
+  font-size: rfs(64px);
+  font-weight: 500;
   margin: 0;
 }
 
 .headerViewAll {
-  color: orange;
-  padding: 0.5em 0;
+  color: var(--accent-color);
+  padding: 0.25em 0;
+  font-weight: 600;
 }
 
 .startersWrapper {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 30px
+}
+
+@media screen and (min-width: 1024px) {
+  .startersWrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px
+  }
 }
 
 .fullFledged {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
 
+@media screen and (min-width: 520px) {
+  .fullFledged {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .techStarters {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  gap: 20px 30px;
+}
+
+@media screen and (min-width: 480px) {
+  .techStarters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .techStarters {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .techStarters {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .card {
+  background-color: #fff;
   border-radius: 6px;
   box-shadow: var(--box-shadow);
+
+  .imageWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+}
+
+.card[data-orientation="vertical"] {
   overflow: hidden;
 
-  &[data-size="small"] {
-    .cardTitle {
-      font-size: 18px;
-    }
-
-    .cardContent {
-      padding: 10px;
-    }
-
-    .cardDescription {
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      display: -webkit-box;
-      line-clamp: 2; 
-      overflow: hidden;
-    }
+  .imageWrapper {
+    aspect-ratio: 3/2;
+    width: 100%;
   }
 
-  &[data-orientation="horizontal"] {
-    display: flex;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+  .cardContent {
+    border-top: 1px solid #eee;
   }
+}
+
+.card[data-orientation="horizontal"] {
+  align-items: center;
+  display: flex;
+
+  .imageWrapper {
+    aspect-ratio: 3/2;
+    width: 100%;
+    flex-shrink: 0;
+    max-width: 33%;
+  }
+
+  .cardContent {
+    border-left: 1px solid #eee;
+    padding: 15px 20px;
+    overflow: hidden;
+  }
+
+  .cardTitle {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cardDescription {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    line-clamp: 2; 
+    overflow: hidden;
+  }
+}
+
+.card[data-size="small"] {
+  background-color: transparent;
+  box-shadow: none;
+  gap: 20px;
+
+  .imageWrapper {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: var(--box-shadow);
+  }
+
+  .cardTitle {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .cardContent {
+    border: none;
+    padding: 0;
+  }
+}
+
+.cardImage {
+  aspect-ratio: 3/2;
+  height: 100%;
+  width: auto;
+}
+
+.cardTechnology {
+  aspect-ratio: 16/9;
+  margin: 0;
+  max-width: 90px;
+  position: relative;
+  width: 50%;
+  min-width: 50px
 }
 
 .cardContent {
@@ -217,23 +317,28 @@
 
 .cardDescription {
   font-size: 15px;
+  margin: 0;
 }
 
 .technology {
   aspect-ratio: 16/9;
   margin: 0 0 10px 0;
   width: 80px;
+  margin-top: 20px;
 }
 
 .technologyLogo {
-  width: 100%;
+  display: block;
   height: 100%;
   object-fit: contain;
+  width: 100%;
 }
 
 .cardFooter {
   display: flex;
-  gap: 0px 5px;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0 -2px;
 }
 
 .cardBadge,
@@ -242,6 +347,10 @@
   font-size: 14px;
   line-height: 1;
   padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
 }
 
 .cardBadge {
@@ -250,4 +359,5 @@
 
 .cardLabel {
   background-color:#eee;
+  white-space: nowrap;
 }

@@ -50,6 +50,9 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
               logo {
                 url
               }
+              squareLogo {
+                url
+              }
             }
             screenshot {
               responsiveImage(
@@ -145,9 +148,8 @@ const Box = ({ title, description, image, href, tag }) => (
 
 const Card = ({
   image,
-  title,
-  description,
   technology,
+  text,
   badge,
   label,
   size = 'medium',
@@ -155,24 +157,36 @@ const Card = ({
 }) => {
   return (
     <div data-size={size} data-orientation={orientation} className={s.card}>
-      <DatoImage className={s.cardImage} data={image} />
-      <div className={s.cardContent}>
-        <h2 className={s.cardTitle}>{title}</h2>
-        <p className={s.cardDescription}>{description}</p>
-        {technology && (
+      <div className={s.imageWrapper}>
+        {image ? (
+          <DatoImage className={s.cardImage} data={image} />
+        ) : technology ? (
+          <figure className={s.cardTechnology}>
+            <LazyImage
+              className={s.technologyLogo}
+              src={technology.squareLogo.url}
+            />
+          </figure>
+        ) : null}
+      </div>
+      <article className={s.cardContent}>
+        <h2 className={s.cardTitle}>{text.title}</h2>
+        <p className={s.cardDescription}>{text.description}</p>
+        {image && technology && (
           <figure className={s.technology}>
             <LazyImage className={s.technologyLogo} src={technology.logo.url} />
           </figure>
         )}
         <footer className={s.cardFooter}>
           {badge && (
-            <span className={s.cardBadge}>
-              {badge.emoji} {badge.name}
-            </span>
+            <div className={s.cardBadge}>
+              <span>{badge.emoji}</span>
+              <span>{badge.name}</span>
+            </div>
           )}
           {label && <span className={s.cardLabel}>{label}</span>}
         </footer>
-      </div>
+      </article>
     </div>
   );
 };
@@ -201,7 +215,7 @@ export default function IntegrationsPage({
       <div className={s.sectionWrapper}>
         <section className={s.section}>
           <div className={s.sectionHeader}>
-            <h2 className={s.headerTitle}>Title</h2>
+            <h2 className={s.headerTitle}>Our Starters</h2>
             <div className={s.headerViewAll}>View all</div>
           </div>
 
@@ -211,9 +225,8 @@ export default function IntegrationsPage({
                 <Card
                   key={item.code}
                   image={item.screenshot.responsiveImage}
-                  title={item.name}
-                  description={item.cmsDescription}
                   technology={item.technology}
+                  text={{ title: item.name, description: item.cmsDescription }}
                   badge={item.badge}
                   label={item.label}
                   size="large"
@@ -225,13 +238,12 @@ export default function IntegrationsPage({
               {techStarters.map((item) => (
                 <Card
                   key={item.code}
-                  image={item.screenshot.responsiveImage}
-                  title={item.name}
-                  description={item.cmsDescription}
+                  technology={item.technology}
+                  text={{ title: item.name, description: item.cmsDescription }}
                   badge={item.badge}
                   label={item.label}
-                  size="small"
                   orientation="horizontal"
+                  size="small"
                 />
               ))}
             </div>
