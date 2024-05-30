@@ -6,6 +6,8 @@
   text-decoration: none;
   transition: transform .2s ease-in-out;
 
+  width: 100%;
+
   &:hover {
     transform: translateY(-5px);
   }
@@ -19,11 +21,14 @@
 }
 
 .card[data-orientation="vertical"] {
-  overflow: hidden;
+  /* overflow: hidden; */
+  min-width: 0;
 
   .imageWrapper {
     aspect-ratio: 3/2;
     width: 100%;
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
   }
 
   .cardContent {
@@ -100,12 +105,12 @@
 }
 
 .cardTechnology {
-  aspect-ratio: 16/9;
+  aspect-ratio: 3/2;
   margin: 0;
-  max-width: 90px;
+  max-width: 120px;
   position: relative;
-  width: 50%;
-  min-width: 50px
+  width: 33%;
+  min-width: 40px
 }
 
 .cardContent {
@@ -125,9 +130,8 @@
 
 .technology {
   aspect-ratio: 16/9;
-  margin: 0 0 10px 0;
+  margin: 20px 0 0 0;
   width: 80px;
-  margin-top: 20px;
 }
 
 .technologyLogo {
@@ -141,7 +145,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin: 0 -2px;
+  margin: 20px -2px 0 -2px;
+
+  &:empty {
+    display: none;
+  }
 }
 
 .cardBadge,

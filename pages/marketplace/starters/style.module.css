@@ -1,23 +1,3 @@
-.grid {
-  display: grid;
-  gap: rfs(50px) 30px;
-  grid-template-columns: 1fr;
-}
-
-@media screen and (width > 640px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.image {
-  border-bottom: 1px solid var(--border-color);
-  display: block !important;
-  img {
-    background: white;
-  }
-}
-
 .hero {
   padding-bottom: rfs(80px);
   text-align: center;
@@ -66,22 +46,18 @@
   color: var(--light-body-color);
 }
 
-.techLogo {
-  height: 25px;
-  margin-top: 20px;
+.community {
+  display: grid;
+  gap: rfs(40px) 30px;
+  grid-template-columns: 1fr;
+  margin-top: 50px;
 }
 
-.demoDesc {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+@media screen and (width > 640px) {
+  .community {
+    grid-template-columns: 1fr 1fr;
+  }
 }
-
-.demoDescBody {
-  flex: 1;
-}
-
-/* WIP */
 
 .firstPartyStarters {
   align-items: center;
@@ -109,43 +85,39 @@
   }
 }
 
-.fullFledged {
-  display: grid;
-  gap: 30px;
-  margin-bottom: 80px;
-  max-width: var(--page-width-with-margin);
-  padding: 0 var(--page-margin);
-  width: 100%;
-}
-
-@media screen and (min-width: 480px) {
-  .fullFledged {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 80px;
-  }
-}
-
-.techStartersWrapper {
-  margin-bottom: 80px;
-  max-width: var(--page-width-with-margin);
-  padding: 0 var(--page-margin);
-  width: 100%;
+.groupWrapper {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  margin-bottom: 80px;
+  max-width: var(--page-width-with-margin);
+  padding: 0 var(--page-margin);
+  width: 100%;
+}
+
+.fullFledged {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+  max-width: var(--page-width-with-margin);
+}
+
+@media screen and (min-width: 520px) {
+  .fullFledged {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .techStarters {
   display: grid;
   gap: 30px;
+  grid-auto-rows: max-content; /* grid-auto-rows: 1fr */
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .intro {
-  grid-column: 1 / -1;
-  
+  display: block;
+
   & > * {
     max-width: 860px;
   }

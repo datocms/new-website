@@ -93,7 +93,7 @@ export default function Plugins({ starters, preview }) {
       </Wrapper>
 
       <div className={s.firstPartyStarters}>
-        <section className={s.fullFledged}>
+        <div className={s.groupWrapper}>
           <div className={s.intro}>
             <h2>Full fledged demos</h2>
             <p>
@@ -102,25 +102,27 @@ export default function Plugins({ starters, preview }) {
               Includes many example content types, and advanced features.
             </p>
           </div>
-          {fullFledged?.map((item) => (
-            <MarketplaceCard
-              key={item.code}
-              href={`/marketplace/starters/${item.code}`}
-              image={item.screenshot.responsiveImage}
-              technology={item.technology}
-              text={{
-                title: item.name,
-                description: item.cmsDescription,
-              }}
-              badge={item.badge}
-              label={item.label}
-            />
-          ))}
-        </section>
+          <section className={s.fullFledged}>
+            {fullFledged?.map((item) => (
+              <MarketplaceCard
+                key={item.code}
+                href={`/marketplace/starters/${item.code}`}
+                image={item.screenshot.responsiveImage}
+                technology={item.technology}
+                text={{
+                  title: item.name,
+                  description: item.cmsDescription,
+                }}
+                badge={item.badge}
+                label={item.label}
+              />
+            ))}
+          </section>
+        </div>
 
-        <div className={s.techStartersWrapper}>
+        <div className={s.groupWrapper}>
           <div className={s.intro}>
-            <h2>Full fledged demos</h2>
+            <h2>Tech starter kits</h2>
             <p>
               Kickstart your next project with our{' '}
               <strong>official scaffolds</strong>. They offer all the best
@@ -147,6 +149,15 @@ export default function Plugins({ starters, preview }) {
       </div>
 
       <Wrapper>
+        <div className={s.intro}>
+          <h2>Community templates</h2>
+          <p>
+            Discover the projects created by the community. They are not
+            officially supported by DatoCMS, but they can be a great source of
+            inspiration to kickstart your next project.
+          </p>
+        </div>
+
         <Announce
           href="/docs/project-starters-and-templates#generate-a-project-starter-button"
           center
@@ -155,7 +166,7 @@ export default function Plugins({ starters, preview }) {
           do that in our documentation!
         </Announce>
 
-        <div className={s.grid}>
+        <div className={s.community}>
           {community?.map((item) => (
             <MarketplaceCard
               key={item.code}

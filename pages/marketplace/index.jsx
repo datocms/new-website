@@ -58,7 +58,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
             }
             screenshot {
               responsiveImage(
-                imgixParams: { auto: format, w: 300, h: 200, fit: crop }
+                imgixParams: { auto: format, w: 600, h: 400, fit: crop }
               ) {
                 ...imageFields
               }

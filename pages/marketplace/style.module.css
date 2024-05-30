@@ -177,22 +177,14 @@
 .startersWrapper {
   display: flex;
   flex-direction: column;
-  gap: 60px 30px
+  gap: 60px 30px;
 }
 
 @media screen and (min-width: 1024px) {
   .startersWrapper {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 30px
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .startersWrapper {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
+    gap: 60px;
 
     .intro {
       grid-column: 1 / -1;
