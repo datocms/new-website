@@ -8,6 +8,7 @@ export default function MarketplaceCard({
   image,
   technology,
   text,
+  highlight,
   badge,
   label,
   size = 'medium',
@@ -16,6 +17,11 @@ export default function MarketplaceCard({
   return (
     <Link href={href}>
       <a className={s.card} data-size={size} data-orientation={orientation}>
+        {highlight && (
+          <div className={s.highlightBadge}>
+            <span>{highlight}</span>
+          </div>
+        )}
         <div className={s.imageWrapper}>
           {image ? (
             <DatoImage className={s.cardImage} data={image} />

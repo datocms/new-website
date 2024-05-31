@@ -3,6 +3,7 @@
   border-radius: 6px;
   box-shadow: var(--box-shadow);
   color: inherit;
+  position: relative;
   text-decoration: none;
   transition: transform .2s ease-in-out;
   width: 100%;
@@ -95,6 +96,26 @@
     border: none;
     padding: 0;
   }
+}
+
+.highlightBadge {
+  background-color: #F4CF58;
+  border-radius: 6px;
+  border: 1px solid #f1c430;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  left: 50%;
+  line-height: 1;
+  margin: 0 auto;
+  max-width: calc(100% - 30px);
+  overflow: hidden;
+  padding: 8px 24px;
+  position: absolute;
+  text-overflow: ellipsis;
+  transform: translate(-50%, -55%);
+  white-space: nowrap;
+  z-index: 1;
 }
 
 .cardImage {

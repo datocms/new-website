@@ -201,6 +201,7 @@ export default function IntegrationsPage({
                     title: item.name,
                     description: item.cmsDescription,
                   }}
+                  highlight={"Best choice to start!"}
                   badge={item.badge}
                   label={item.label}
                   size="large"
