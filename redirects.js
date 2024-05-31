@@ -394,4 +394,8 @@ module.exports = [
     source: '/docs/visual-editing/how-to-use-visual-editing',
     destination: '/docs/content-link/how-to-use-content-link',
   },
+  {
+    source: '/partners/harvey-cameron/showcase/jacuzzi ',
+    destination: '/partners',
+  },
 ];
