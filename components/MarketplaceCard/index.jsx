@@ -11,24 +11,25 @@ export default function MarketplaceCard({
   highlight,
   badge,
   label,
+  boxed = true,
   size = 'medium',
   orientation = 'vertical',
 }) {
   return (
     <Link href={href}>
-      <a className={s.card} data-size={size} data-orientation={orientation}>
+      <a className={s.card} data-size={size} data-orientation={orientation} data-boxed={boxed}>
         {highlight && (
           <div className={s.highlightBadge}>
             <span>{highlight}</span>
           </div>
         )}
-        <div className={s.imageWrapper}>
+        <div className={s.visualWrapper}>
           {image ? (
-            <DatoImage className={s.cardImage} data={image} />
+            <DatoImage className={s.visualImage} data={image} />
           ) : (
-            <figure className={s.cardTechnology}>
+            <figure className={s.visualTechnology}>
               <LazyImage
-                className={s.technologyLogo}
+                className={s.technology}
                 src={
                   technology.squareLogo
                     ? technology.squareLogo.url
@@ -42,9 +43,9 @@ export default function MarketplaceCard({
           <h2 className={s.cardTitle}>{text.title}</h2>
           <p className={s.cardDescription}>{text.description}</p>
           {image && technology && (
-            <figure className={s.technology}>
+            <figure className={s.technologyAside}>
               <LazyImage
-                className={s.technologyLogo}
+                className={s.technology}
                 src={technology.logo.url}
               />
             </figure>

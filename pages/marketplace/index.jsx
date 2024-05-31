@@ -224,6 +224,7 @@ export default function IntegrationsPage({
                     title: item.name,
                     description: item.cmsDescription,
                   }}
+                  boxed={false}
                   orientation="horizontal"
                   size="small"
                 />
@@ -233,45 +234,6 @@ export default function IntegrationsPage({
         </section>
       </div>
 
-      <Category
-        title="Starter projects"
-        description="Start with a fully configured DatoCMS project, a best-practice frontend and free hosting"
-        browse={
-          <Link href="/marketplace/starters">
-            <a className={s.browseAll}>
-              View all ({demos.count}) <ArrowIcon />
-            </a>
-          </Link>
-        }
-      >
-        {page.demos.map((item) => (
-          <Box
-            key={item.code}
-            title={item.name}
-            href={`/marketplace/starters/${item.code}`}
-            tag={item.starterType === 'full_fledged' && 'Best choice to start!'}
-            description={
-              <div className={s.demoDesc}>
-                <div className={s.demoDescBody}>{item.cmsDescription}</div>
-                <div className={s.demoDescImage}>
-                  <LazyImage
-                    className={s.techLogo}
-                    src={item.technology.logo.url}
-                  />
-                </div>
-              </div>
-            }
-            image={
-              item.screenshot && (
-                <DatoImage
-                  className={s.boxImageImage}
-                  data={item.screenshot.responsiveImage}
-                />
-              )
-            }
-          />
-        ))}
-      </Category>
       <Category
         title="Community Plugins"
         browse={

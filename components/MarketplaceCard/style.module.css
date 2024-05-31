@@ -3,6 +3,8 @@
   border-radius: 6px;
   box-shadow: var(--box-shadow);
   color: inherit;
+  display: flex;
+  min-width: 0;
   position: relative;
   text-decoration: none;
   transition: transform .2s ease-in-out;
@@ -12,8 +14,9 @@
     transform: translateY(-5px);
   }
 
-  .imageWrapper {
+  .visualWrapper {
     align-items: center;
+    aspect-ratio: 3/2;
     display: flex;
     justify-content: center;
     position: relative;
@@ -21,12 +24,9 @@
 }
 
 .card[data-orientation="vertical"] {
-  /* overflow: hidden; */
-  min-width: 0;
+  flex-direction: column;
 
-  .imageWrapper {
-    aspect-ratio: 3/2;
-    width: 100%;
+  .visualWrapper {
     border-radius: 6px 6px 0 0;
     overflow: hidden;
   }
@@ -38,14 +38,10 @@
 
 .card[data-orientation="horizontal"] {
   align-items: center;
-  display: flex;
-  min-width: 0;
 
-  .imageWrapper {
-    aspect-ratio: 3/2;
+  .visualWrapper {
     flex-shrink: 0;
     max-width: 33%;
-    width: 100%;
   }
 
   .cardContent {
@@ -75,21 +71,34 @@
 }
 
 .card[data-size="small"] {
-  background-color: transparent;
-  box-shadow: none;
-  gap: 20px;
-
-  .imageWrapper {
-    border-radius: 6px;
-    box-shadow: var(--box-shadow);
-    height: auto;
-    overflow: hidden;
-    width: 100%;
+  .visualTechnology {
+    background-image: none;
   }
 
   .cardTitle {
     font-size: 18px;
     margin-bottom: 6px;
+  }
+}
+
+.card[data-size="large"] {
+  .cardTitle {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+}
+
+.card[data-boxed="false"] {
+  background-color: transparent;
+  box-shadow: none;
+  gap: 20px;
+
+  .visualWrapper {
+    border-radius: 6px;
+    box-shadow: var(--box-shadow);
+    height: auto;
+    overflow: hidden;
+    width: 100%;
   }
 
   .cardContent {
@@ -118,43 +127,53 @@
   z-index: 1;
 }
 
-.cardImage {
+.visualImage {
   aspect-ratio: 3/2;
   height: 100%;
   width: auto;
 }
 
-.cardTechnology {
-  aspect-ratio: 3/2;
+.visualTechnology {
+  align-items: center;
+  background-image: linear-gradient(to right, #f9edfe, #fff);
+  display: flex;
+  height: 100%;
+  justify-content: center;
   margin: 0;
-  max-width: 120px;
   position: relative;
-  width: 33%;
-  min-width: 40px
+  width: 100%;
+
+  .technology {
+    aspect-ratio: 3/2;
+    max-width: 120px;
+    min-width: 40px;
+    width: 33%;
+    height: auto;
+  }
 }
 
 .cardContent {
   padding: 25px 20px;
+  
+  .cardTitle {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    font-size: 21px;
+  }
+  
+  .cardDescription {
+    font-size: 15px;
+    margin: 0;
+  }
 }
 
-.cardTitle {
-  margin: 0 0 10px 0;
-  font-weight: bold;
-  font-size: 21px;
-}
-
-.cardDescription {
-  font-size: 15px;
-  margin: 0;
-}
-
-.technology {
+.technologyAside {
   aspect-ratio: 16/9;
   margin: 20px 0 0 0;
   width: 80px;
 }
 
-.technologyLogo {
+.technology {
   display: block;
   height: 100%;
   object-fit: contain;

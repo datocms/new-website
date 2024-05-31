@@ -113,8 +113,10 @@ export default function Plugins({ starters, preview }) {
                   title: item.name,
                   description: item.cmsDescription,
                 }}
+                highlight={"Best choice to start!"}
                 badge={item.badge}
                 label={item.label}
+                size="large"
               />
             ))}
           </section>
@@ -178,6 +180,7 @@ export default function Plugins({ starters, preview }) {
               }}
               badge={item.badge}
               label={item.label}
+              boxed={false}
               orientation="horizontal"
               size="small"
             />

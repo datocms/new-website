@@ -98,7 +98,7 @@
   gap: 20px 30px;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 520px) {
   .techStarters {
     grid-template-columns: 1fr 1fr;
 
