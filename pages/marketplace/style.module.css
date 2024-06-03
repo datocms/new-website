@@ -17,25 +17,6 @@
   }
 }
 
-.categoryHeader {
-  margin-left: auto;
-  margin-right: auto;
-  margin: 0px auto 20px;
-  max-width: var(--page-width-with-margin);
-  min-width: 0;
-  padding-left: var(--page-margin);
-  padding-right: var(--page-margin);
-  text-align: center;
-  text-align: left;
-  width: 100%;
-
-  @media (width > 900px) {
-    align-items: flex-end;
-    display: flex;
-    text-align: left;
-  }
-}
-
 .header {
   border-bottom: 1px solid var(--light-body-color);
   display: flex;
@@ -53,7 +34,6 @@
 }
 
 .headerTitle {
-  color: var(--body-color);
   font-size: rfs(64px);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -104,7 +84,6 @@
     }
   }
 }
-
 
 .intro {
   width: 100%;
@@ -239,12 +218,12 @@
 }
 
 .controls {
+  bottom: -10px;
   display: flex;
   gap: 10px;
+  margin-right: var(--page-margin);
   position: absolute;
   right: 0;
-  bottom: -10px;
-  margin-right: var(--page-margin);
   transform: translateY(-50%);
   z-index: 10;
 

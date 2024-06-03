@@ -4,47 +4,15 @@
 }
 
 .heroTitle {
-  color: var(--body-color);
   font-size: rfs(64px);
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.125em;
-
 }
 
 .heroDesc {
   font-size: rfs(21px);
   font-weight: 500;
-}
-
-.search {
-  display: flex;
-  justify-content: center;
-  margin-bottom: rfs(80px);
-}
-
-.searchInput {
-  border: 1px solid var(--border-color);
-  border-radius: 100px;
-  padding: 10px 30px;
-  font-size: inherit;
-  font-family: inherit;
-
-  &:hover,
-  &:active,
-  &:focus {
-    outline: 0;
-    border-color: #999;
-  }
-}
-
-.loading,
-.noResults {
-  padding-top: rfs(50px);
-  padding-bottom: rfs(50px);
-  text-align: center;
-  font-size: 30px;
-  color: var(--light-body-color);
 }
 
 .community {
