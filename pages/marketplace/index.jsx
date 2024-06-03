@@ -1,16 +1,15 @@
 import cn from 'classnames';
 import Head from 'components/Head';
-import LazyImage from 'components/LazyImage';
 import MarketplaceCard from 'components/MarketplaceCard';
 import Layout from 'components/MarketplaceLayout';
-import PluginBox, { LogoImage } from 'components/PluginBox';
+import useEmblaCarousel from 'embla-carousel-react';
 import { handleErrors, imageFields, request } from 'lib/datocms';
 import Link from 'next/link';
+import AngleLeft from 'public/icons/regular/angle-left.svg';
+import AngleRight from 'public/icons/regular/angle-right.svg';
 import ArrowRight from 'public/icons/regular/arrow-right.svg';
-import ArrowIcon from 'public/images/illustrations/arrow-usecase.svg';
-import { Image as DatoImage } from 'react-datocms';
+import { useCallback, useEffect, useState } from 'react';
 import tiny from 'tiny-json-http';
-import truncate from 'truncate';
 import { githubRepoToManifest } from 'utils/githubRepo';
 import s from './style.module.css';
 
@@ -120,38 +119,74 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
 });
 
 const Category = ({ title, description, children, browse }) => (
-  <div className={s.category}>
-    <div
-      className={cn(s.categoryHeader, {
-        [s.categoryHeaderWithBrowse]: !!browse,
-      })}
-    >
-      <div className={s.categoryLeft}>
-        <div className={s.categoryTitle}>{title}</div>
-        <div className={s.categoryDesc}>{description}</div>
+  <div className={s.categoryWrapper}>
+    <div className={s.category}>
+      <div className={s.categoryIntro}>
+        <div className={s.sectionHeader}>
+          <div className={s.headerTitle}>{title}</div>
+          {browse}
+        </div>
+        <div className={s.intro}>{description}</div>
       </div>
-      {browse}
+
+      <div className={s.boxes}>{children}</div>
     </div>
-    <div className={s.boxes}>{children}</div>
   </div>
 );
 
-const Box = ({ title, description, image, href, tag }) => (
-  <div className={s.boxContainer}>
-    <PluginBox
-      href={href}
-      title={title}
-      tag={tag}
-      description={description}
-      image={image}
-    />
-  </div>
-);
+function Carousel({ options, children }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const [prevButtonDisabled, setPrevButtonDisabled] = useState(false);
+  const [nextButtonDisabled, setNextButtonDisabled] = useState(false);
+
+  const prevSlide = () => {
+    if (!emblaApi) return;
+    emblaApi.scrollPrev();
+  };
+
+  const nextSlide = () => {
+    if (!emblaApi) return;
+    emblaApi.scrollNext();
+  };
+
+  const onSelect = useCallback((emblaApi) => {
+    setPrevButtonDisabled(!emblaApi.canScrollPrev());
+    setNextButtonDisabled(!emblaApi.canScrollNext());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect(emblaApi);
+    emblaApi.on('init', onSelect);
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, onSelect]);
+
+  return (
+    <>
+      <div className={s.controls}>
+        <div
+          className={`${s.prevSlide} ${prevButtonDisabled ? s.isDisabled : ''}`}
+          onClick={prevSlide}
+        >
+          <AngleLeft />
+        </div>
+        <div
+          className={`${s.nextSlide} ${nextButtonDisabled ? s.isDisabled : ''}`}
+          onClick={nextSlide}
+        >
+          <AngleRight />
+        </div>
+      </div>
+      <div className={s.embla} ref={emblaRef}>
+        <div className={s.emblaContainer}>{children}</div>
+      </div>
+    </>
+  );
+}
 
 export default function IntegrationsPage({
   page,
   plugins,
-  demos,
   hostingApps,
   enterpriseApps,
   preview,
@@ -162,6 +197,11 @@ export default function IntegrationsPage({
   const techStarters = page.demos.filter(
     (item) => item.starterType === 'tech_starter',
   );
+
+  const carouselOptions = {
+    loop: false,
+    align: 'start',
+  };
 
   return (
     <Layout preview={preview}>
@@ -190,7 +230,6 @@ export default function IntegrationsPage({
                   example content types, and advanced features.
                 </p>
               </div>
-
               {fullFledged.map((item) => (
                 <MarketplaceCard
                   key={item.code}
@@ -201,7 +240,7 @@ export default function IntegrationsPage({
                     title: item.name,
                     description: item.cmsDescription,
                   }}
-                  highlight={"Best choice to start!"}
+                  highlight={'Best choice to start!'}
                   badge={item.badge}
                   label={item.label}
                   size="large"
@@ -219,7 +258,7 @@ export default function IntegrationsPage({
                 <MarketplaceCard
                   key={item.code}
                   href={`/marketplace/starters/${item.code}`}
-                  technology={item.technology}
+                  technology={item.technology.squareLogo}
                   text={{
                     title: item.name,
                     description: item.cmsDescription,
@@ -238,30 +277,33 @@ export default function IntegrationsPage({
         title="Community Plugins"
         browse={
           <Link href="/marketplace/plugins">
-            <a className={s.browseAll}>
-              View all ({plugins.count}) <ArrowIcon />
+            <a className={s.headerViewAll}>
+              <span>View all ({plugins.count})</span> <ArrowRight />
             </a>
           </Link>
         }
         description="Easily expand and customize the capabilities of DatoCMS with community plugins"
       >
-        {page.plugins.map((item) => (
-          <Box
-            key={item.packageName}
-            href={`/marketplace/plugins/i/${item.packageName}`}
-            title={item.title}
-            description={truncate(item.description, 55)}
-            image={
-              item.coverImage && (
-                <DatoImage
-                  className={s.boxImageImage}
-                  data={item.coverImage.responsiveImage}
-                />
-              )
-            }
-          />
-        ))}
+        <Carousel options={carouselOptions}>
+          {page.plugins.map((item, index) => (
+            <div key={index} className={s.emblaSlide}>
+              <MarketplaceCard
+                href={`/marketplace/plugins/${item.code}`}
+                image={item.coverImage.responsiveImage}
+                technology={item.technology}
+                text={{
+                  title: item.title,
+                  description: item.description,
+                }}
+                badge={item.badge}
+                label={item.label}
+                size="medium"
+              />
+            </div>
+          ))}
+        </Carousel>
       </Category>
+
       <Category
         title="Hosting &amp; CI Building"
         description={
@@ -272,21 +314,29 @@ export default function IntegrationsPage({
         }
         browse={
           <Link href="/marketplace/hosting">
-            <a className={s.browseAll}>
-              View all ({hostingApps.count}) <ArrowIcon />
+            <a className={s.headerViewAll}>
+              <span>View all ({hostingApps.count})</span> <ArrowRight />
             </a>
           </Link>
         }
       >
-        {page.hostingBuilding.map((item) => (
-          <Box
-            key={item.slug}
-            href={`/marketplace/hosting/${item.slug}`}
-            title={item.title}
-            description={truncate(item.description, 55)}
-            image={<LogoImage logo={item.logo} />}
-          />
-        ))}
+        <Carousel options={carouselOptions}>
+          {page.hostingBuilding.map((item, index) => (
+            <div key={index} className={s.emblaSlide}>
+              <MarketplaceCard
+                href={`/marketplace/hosting/${item.code}`}
+                technology={item.logo}
+                text={{
+                  title: item.title,
+                  description: item.description,
+                }}
+                badge={item.badge}
+                label={item.label}
+                size="medium"
+              />
+            </div>
+          ))}
+        </Carousel>
       </Category>
 
       <Category
@@ -299,21 +349,30 @@ export default function IntegrationsPage({
         }
         browse={
           <Link href="/marketplace/enterprise">
-            <a className={s.browseAll}>
-              View all ({enterpriseApps.count}) <ArrowIcon />
+            <a className={s.headerViewAll}>
+              <span>View all ({enterpriseApps.count})</span>
+              <ArrowRight />
             </a>
           </Link>
         }
       >
-        {page.enterpriseApps.map((item) => (
-          <Box
-            key={item.slug}
-            href={`/marketplace/enterprise/${item.slug}`}
-            title={item.title}
-            description={truncate(item.description, 55)}
-            image={<LogoImage style="azure" logo={item.logo} />}
-          />
-        ))}
+        <Carousel options={carouselOptions}>
+          {page.enterpriseApps.map((item, index) => (
+            <div key={index} className={s.emblaSlide}>
+              <MarketplaceCard
+                href={`/marketplace/enterprise/${item.code}`}
+                technology={item.logo}
+                text={{
+                  title: item.title,
+                  description: item.description,
+                }}
+                badge={item.badge}
+                label={item.label}
+                size="medium"
+              />
+            </div>
+          ))}
+        </Carousel>
       </Category>
     </Layout>
   );

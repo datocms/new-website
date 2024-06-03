@@ -17,7 +17,12 @@ export default function MarketplaceCard({
 }) {
   return (
     <Link href={href}>
-      <a className={s.card} data-size={size} data-orientation={orientation} data-boxed={boxed}>
+      <a
+        className={s.card}
+        data-size={size}
+        data-orientation={orientation}
+        data-boxed={boxed}
+      >
         {highlight && (
           <div className={s.highlightBadge}>
             <span>{highlight}</span>
@@ -28,14 +33,7 @@ export default function MarketplaceCard({
             <DatoImage className={s.visualImage} data={image} />
           ) : (
             <figure className={s.visualTechnology}>
-              <LazyImage
-                className={s.technology}
-                src={
-                  technology.squareLogo
-                    ? technology.squareLogo.url
-                    : technology.logo.url
-                }
-              />
+              <LazyImage className={s.technology} src={technology.url} />
             </figure>
           )}
         </div>
@@ -44,10 +42,7 @@ export default function MarketplaceCard({
           <p className={s.cardDescription}>{text.description}</p>
           {image && technology && (
             <figure className={s.technologyAside}>
-              <LazyImage
-                className={s.technology}
-                src={technology.logo.url}
-              />
+              <LazyImage className={s.technology} src={technology.logo.url} />
             </figure>
           )}
           <footer className={s.cardFooter}>

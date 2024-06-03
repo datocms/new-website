@@ -144,11 +144,11 @@
   width: 100%;
 
   .technology {
-    aspect-ratio: 3/2;
-    max-width: 120px;
-    min-width: 40px;
-    width: 33%;
+    aspect-ratio: 2/1;
     height: auto;
+    max-width: 160px;
+    min-width: 40px;
+    width: 50%;
   }
 }
 

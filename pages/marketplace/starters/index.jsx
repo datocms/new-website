@@ -113,7 +113,7 @@ export default function Plugins({ starters, preview }) {
                   title: item.name,
                   description: item.cmsDescription,
                 }}
-                highlight={"Best choice to start!"}
+                highlight={'Best choice to start!'}
                 badge={item.badge}
                 label={item.label}
                 size="large"
@@ -137,7 +137,7 @@ export default function Plugins({ starters, preview }) {
               <MarketplaceCard
                 key={item.code}
                 href={`/marketplace/starters/${item.code}`}
-                technology={item.technology}
+                technology={item.technology.squaredLogo || item.technology.logo}
                 text={{
                   title: item.name,
                   description: item.cmsDescription,
