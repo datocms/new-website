@@ -42,8 +42,8 @@
   flex-direction: column;
   gap: 0.5rem;
   justify-content: space-between;
-  margin-bottom: rfs(40px);
-  padding-bottom: rfs(30px);
+  margin-bottom: rfs(35px);
+  padding-bottom: rfs(25px);
   width: 100%;
 
   @media screen and (min-width: 640px) {
@@ -53,10 +53,11 @@
 }
 
 .headerTitle {
-  font-family: var(--font-headline);
   color: var(--body-color);
   font-size: rfs(64px);
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
   margin: 0;
 }
 
@@ -67,7 +68,7 @@
   font-weight: 600;
   line-height: 1;
   gap: 8px;
-  padding: 0.25em 0;
+  padding: 0.325em 0;
   text-decoration: none;
   
   &:hover {

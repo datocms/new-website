@@ -4,11 +4,12 @@
 }
 
 .heroTitle {
-  font-size: rfs(80px);
   color: var(--body-color);
-  font-family: var(--font-headline);
-  font-weight: 500;
-  margin-bottom: 0.25em;
+  font-size: rfs(64px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.125em;
+
 }
 
 .heroDesc {
