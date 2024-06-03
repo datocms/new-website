@@ -197,12 +197,12 @@ export default function PartnerPage({ preview, subscription, plugins }) {
   return (
     <Layout preview={preview} noCta>
       <Head>
+        {renderMetaTags(partner._seoMetaTags)}
         <title>{partner.name} | DatoCMS Partners</title>
         <meta
           name="description"
           content={toPlainText(partner.shortDescription)}
         />
-        <meta property="og:description" content={toPlainText(partner.shortDescription)} />
       </Head>
       <InterstitialTitle
         mainTitleOfPage
@@ -382,4 +382,3 @@ export default function PartnerPage({ preview, subscription, plugins }) {
     </Layout>
   );
 }
-
