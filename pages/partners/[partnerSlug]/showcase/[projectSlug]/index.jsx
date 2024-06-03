@@ -148,11 +148,11 @@ export default function PartnerPage({ preview, subscription }) {
   return (
     <Layout preview={preview}>
       <Head>
+        {renderMetaTags(project._seoMetaTags)}
         <title>
           {project.name} | {project.partner.name} | DatoCMS Partners
         </title>
         <meta name="description" content={toPlainText(project.headline)} />
-        <meta property="og:description" content={toPlainText(project.headline)} />
       </Head>
       <InterstitialTitle
         style="one"
