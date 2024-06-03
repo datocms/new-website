@@ -1,25 +1,50 @@
-.sectionWrapper {
+.category {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-bottom: 120px;
+  margin-top: 60px;
 }
 
-.section {
+.categoryIntro {
   max-width: var(--page-width-with-margin);
   padding: 0 var(--page-margin);
   width: 100%;
+
+  .intro {
+    @media screen and (min-width: 1024px){
+      width: calc(100% - 120px);
+    }
+  }
 }
 
-.sectionHeader {
+.categoryHeader {
+  margin-left: auto;
+  margin-right: auto;
+  margin: 0px auto 20px;
+  max-width: var(--page-width-with-margin);
+  min-width: 0;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+  text-align: center;
+  text-align: left;
+  width: 100%;
+
+  @media (width > 900px) {
+    align-items: flex-end;
+    display: flex;
+    text-align: left;
+  }
+}
+
+.header {
   border-bottom: 1px solid var(--light-body-color);
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   justify-content: space-between;
   margin-bottom: rfs(40px);
   padding-bottom: rfs(30px);
   width: 100%;
-  flex-direction: column;
-  gap: 0.5rem;
 
   @media screen and (min-width: 640px) {
     flex-direction: row;
@@ -64,10 +89,11 @@
   display: flex;
   flex-direction: column;
   gap: 60px 30px;
-}
+  margin-bottom: 80px;
+  max-width: var(--page-width-with-margin);
+  padding: 0 var(--page-margin);
 
-@media screen and (min-width: 1024px) {
-  .startersWrapper {
+  @media screen and (min-width: 1024px) {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 60px;
@@ -78,8 +104,14 @@
   }
 }
 
+
 .intro {
   width: 100%;
+  margin-bottom: 30px;
+
+  p {
+    margin: 0;
+  }
 
   h3 {
     font-size: rfs(32px);
@@ -89,54 +121,44 @@
 
 .fullFledged {
   display: grid;
-  gap: 20px 30px;
-}
+  gap: 30px;
 
-@media screen and (min-width: 520px) {
-  .fullFledged {
+  @media screen and (min-width: 520px) {
     grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
 
     .intro {
       grid-column: 1 / -1;
-    }
+    } 
   }
 }
 
 .techStarters {
   display: grid;
   gap: 20px 30px;
-}
 
-@media screen and (min-width: 520px) {
-  .techStarters {
+  @media screen and (min-width: 520px) {
     grid-template-columns: 1fr 1fr;
 
     .intro {
       grid-column: 1 / -1;
     }
   }
-}
 
-@media screen and (min-width: 800px) {
-  .techStarters {
+  @media screen and (min-width: 800px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-}
-
-@media screen and (min-width: 1024px) {
-  .techStarters {
+  
+  @media screen and (min-width: 1024px) {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 }
 
-.boxes {
+.carouselWrapper {
   align-items: stretch;
   display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
   max-width: calc(var(--page-width-with-margin) + var(--page-margin) * 2);
   position: relative;
   width: 100%;
@@ -188,100 +210,6 @@
   display: block !important;
 }
 
-.category {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: rfs(60px);
-
-  &:hover {
-    .prevSlide,
-    .nextSlide {
-      opacity: 1;
-      pointer-events: all;
-      
-      &.isDisabled svg {
-        opacity: 0.3;
-      }
-    }
-  }
-}
-
-.categoryIntro {
-  max-width: var(--page-width-with-margin);
-  padding: 0 var(--page-margin);
-  width: 100%;
-
-  .intro {
-    @media screen and (min-width: 1024px){
-      width: calc(100% - 120px);
-    }
-  }
-}
-
-.categoryHeader {
-  margin-left: auto;
-  margin-right: auto;
-  margin: 0px auto 20px;
-  max-width: var(--page-width-with-margin);
-  min-width: 0;
-  padding-left: var(--page-margin);
-  padding-right: var(--page-margin);
-  text-align: center;
-  text-align: left;
-  width: 100%;
-
-  @media (width > 900px) {
-    align-items: flex-end;
-    display: flex;
-    text-align: left;
-  }
-}
-
-.categoryLeft {
-  flex: 1;
-}
-
-.categoryDesc {
-  font-size: 0.9em;
-}
-
-.categoryTitle {
-  color: var(--light-body-color);
-  font-size: rfs(40px);
-  font-weight: bold;
-  letter-spacing: -0.03em;
-  margin-bottom: 5px;
-}
-
-.grid {
-  @media (width > 900px) {
-    display: grid;
-    grid-column-gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
-    margin-left: auto;
-    margin-right: auto;
-    max-width: var(--page-width-with-margin);
-  }
-}
-
-.techLogo {
-  margin-top: 20px;
-  height: 25px;
-}
-
-.demoDesc {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.demoDescBody {
-  flex: 1;
-}
-
-/* wip */
-
 .embla {
   overflow-x: hidden;
   padding: 0 var(--page-margin);
@@ -314,7 +242,7 @@
   gap: 10px;
   position: absolute;
   right: 0;
-  bottom: 10px;
+  bottom: -10px;
   margin-right: var(--page-margin);
   transform: translateY(-50%);
   z-index: 10;
@@ -345,5 +273,9 @@
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  &.isDisabled svg {
+    opacity: 0.3;
   }
 }
