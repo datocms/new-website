@@ -285,7 +285,7 @@ export default function IntegrationsPage({
             {page.plugins.map((item, index) => (
               <div key={index} className={s.emblaSlide}>
                 <MarketplaceCard
-                  href={`/marketplace/plugins/${item.code}`}
+                  href={`/marketplace/plugins/i/${item.packageName}`}
                   image={item.coverImage.responsiveImage}
                   technology={item.technology}
                   text={{
@@ -318,7 +318,7 @@ export default function IntegrationsPage({
             {page.hostingBuilding.map((item, index) => (
               <div key={index} className={s.emblaSlide}>
                 <MarketplaceCard
-                  href={`/marketplace/hosting/${item.code}`}
+                  href={`/marketplace/hosting/${item.slug}`}
                   technology={item.logo}
                   text={{
                     title: item.title,
@@ -351,7 +351,7 @@ export default function IntegrationsPage({
             {page.enterpriseApps.map((item, index) => (
               <div key={index} className={s.emblaSlide}>
                 <MarketplaceCard
-                  href={`/marketplace/enterprise/${item.code}`}
+                  href={`/marketplace/enterprise/${item.slug}`}
                   technology={item.logo}
                   text={{
                     title: item.title,
