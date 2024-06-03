@@ -137,7 +137,7 @@ export default function Plugins({ starters, preview }) {
               <MarketplaceCard
                 key={item.code}
                 href={`/marketplace/starters/${item.code}`}
-                technology={item.technology.squaredLogo || item.technology.logo}
+                technology={item.technology.squareLogo || item.technology.logo}
                 text={{
                   title: item.name,
                   description: item.cmsDescription,
