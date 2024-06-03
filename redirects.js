@@ -378,4 +378,60 @@ module.exports = [
     source: '/partners/imgix',
     destination: '/tech-partners/imgix',
   },
+  {
+    source: '/blog/introducing-visual-editing-for-vercel-and-datocms-enterprise-customers',
+    destination: '/blog/introducing-content-link-for-vercel-and-datocms-enterprise-customers',
+  },
+  {
+    source: '/blog/july-update-visual-editing-and-per-locale-publishing',
+    destination: '/blog/july-update-content-link-and-per-locale-publishing',
+  },
+  {
+    source: '/docs/visual-editing',
+    destination: '/docs/content-link',
+  },
+  {
+    source: '/docs/visual-editing/how-to-use-visual-editing',
+    destination: '/docs/content-link/how-to-use-content-link',
+  },
+  {
+    source: '/partners/harvey-cameron/showcase/jacuzzi ',
+    destination: '/partners',
+  },
+  {
+    source: '/docs/plugins/install', //Better Title
+    destination: '/docs/general-concepts/plugins',
+  },
+  {
+    source: '/blog/live-preview-changes-on-gatsby-preview',
+    destination: '/blog',
+  },
+  {
+    source: '/docs/hugo/localization',
+    destination: '/docs/other-ssgs/localization',
+  },
+  {
+    source: '/docs/localizing-images',
+    destination: '/docs/content-delivery-api/images-and-videos',
+  },
+  {
+    source: '/cda-explorer',
+    destination: '/docs/content-delivery-api',
+  },
+  {
+    source: '/docs/metalsmith',
+    destination: '/docs/other-ssgs',
+  },
+  {
+    source: '/docs/middleman/image-manipulation',
+    destination: '/docs/other-ssgs/image-manipulation',
+  },
+  {
+    source: '/docs/content-management-api/using-the-ruby-client',
+    destination: '/docs/content-management-api',
+  },
+  {
+    source: '/use-cases',
+    destination: '/',
+  },
 ];
