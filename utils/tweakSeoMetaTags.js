@@ -3,6 +3,33 @@ const baseUrl =
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.BASE_URL;
 
+export function changeDescription(seoMetaTags, newDescription) {
+  return seoMetaTags.map((tag) => {
+    if (tag.tag !== 'meta') {
+      return tag;
+    }
+
+    if (
+      tag.attributes.name === 'description' ||
+      tag.attributes.name === 'twitter:description'
+    ) {
+      return {
+        ...tag,
+        attributes: { ...tag.attributes, content: newDescription },
+      };
+    }
+
+    if (tag.attributes.property === 'og:description') {
+      return {
+        ...tag,
+        attributes: { ...tag.attributes, content: newDescription },
+      };
+    }
+
+    return tag;
+  });
+}
+
 export function changeTitle(seoMetaTags, newTitle) {
   return seoMetaTags.map((tag) =>
     tag.tag === 'title'

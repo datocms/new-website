@@ -16,6 +16,7 @@ import {
 import EnvelopeIcon from 'public/icons/regular/envelope.svg';
 import BrowserIcon from 'public/icons/regular/link.svg';
 import { StructuredText, renderMetaTags, renderRule } from 'react-datocms';
+import { changeDescription, changeTitle } from 'utils/tweakSeoMetaTags';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -93,12 +94,15 @@ export default function TechPartnerPage({ preview, subscription }) {
   return (
     <Layout preview={preview} noCta>
       <Head>
-        {renderMetaTags(techPartner.seo)}
-        <title>{techPartner.name} | DatoCMS Ecosystem Partners</title>
-        <meta
-          name="description"
-          content={toPlainText(techPartner.shortDescription)}
-        />
+        {renderMetaTags(
+          changeTitle(
+            changeDescription(
+              techPartner.seo,
+              toPlainText(techPartner.shortDescription),
+            ),
+            `${techPartner.name} | DatoCMS Ecosystem Partners`,
+          ),
+        )}
       </Head>
       <InterstitialTitle
         mainTitleOfPage
