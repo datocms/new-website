@@ -103,7 +103,7 @@ export default function Plugins({ starters, preview }) {
             </p>
           </div>
           <section className={s.fullFledged}>
-            {fullFledged?.map((item) => (
+            {fullFledged.map((item) => (
               <MarketplaceCard
                 key={item.code}
                 href={`/marketplace/starters/${item.code}`}
@@ -133,7 +133,7 @@ export default function Plugins({ starters, preview }) {
             </p>
           </div>
           <section className={s.techStarters}>
-            {techStarters?.map((item) => (
+            {techStarters.map((item) => (
               <MarketplaceCard
                 key={item.code}
                 href={`/marketplace/starters/${item.code}`}
@@ -169,7 +169,7 @@ export default function Plugins({ starters, preview }) {
         </Announce>
 
         <div className={s.community}>
-          {community?.map((item) => (
+          {community.map((item) => (
             <MarketplaceCard
               key={item.code}
               href={`/marketplace/starters/${item.code}`}
