@@ -388,7 +388,7 @@ module.exports = [
   },
   {
     source: '/docs/visual-editing',
-    destination: '/docs/content-link',
+    destination: '/docs/content-link/how-to-use-content-link',
   },
   {
     source: '/docs/visual-editing/how-to-use-visual-editing',
