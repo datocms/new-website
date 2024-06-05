@@ -12,14 +12,14 @@ module.exports = async (client) => {
     api_key: 'starter_type',
     validators: {
       required: {},
-      enum: { values: ['full_fledged', 'tech_starter', 'community'] },
+      enum: { values: ['fully_fledged', 'tech_starter', 'community'] },
     },
     appearance: {
       addons: [],
       editor: 'string_select',
       parameters: {
         options: [
-          { hint: '', label: 'Full-fledged', value: 'full_fledged' },
+          { hint: '', label: 'Fully fledged', value: 'fully_fledged' },
           { hint: '', label: 'Tech starter kit', value: 'tech_starter' },
           { hint: '', label: 'Community', value: 'community' },
         ],
@@ -59,7 +59,7 @@ module.exports = async (client) => {
   })) {
     await client.items.update(starter, {
       starter_type: starter.recommended
-        ? 'full_fledged'
+        ? 'fully_fledged'
         : starter.show_in_dashboard
           ? 'tech_starter'
           : 'community',

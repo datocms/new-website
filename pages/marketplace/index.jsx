@@ -192,7 +192,7 @@ export default function IntegrationsPage({
   preview,
 }) {
   const fullFledged = page.demos.filter(
-    (item) => item.starterType === 'full_fledged',
+    (item) => item.starterType === 'fully_fledged',
   );
   const techStarters = page.demos.filter(
     (item) => item.starterType === 'tech_starter',
@@ -222,7 +222,7 @@ export default function IntegrationsPage({
         <div className={s.startersWrapper}>
           <div className={s.fullFledged}>
             <div className={s.intro}>
-              <h3>Full-fledged demos</h3>
+              <h3>Full fledged demos</h3>
               <p>
                 Use our pre-built demo projects to see all of DatoCMS&apos;s
                 features in a realistic production-ready setup. Includes many

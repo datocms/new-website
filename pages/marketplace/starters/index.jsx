@@ -68,7 +68,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
 
 export default function Plugins({ starters, preview }) {
   const fullFledged = starters.filter(
-    (starter) => starter.starterType === 'full_fledged',
+    (starter) => starter.starterType === 'fully_fledged',
   );
   const techStarters = starters.filter(
     (starter) => starter.starterType === 'tech_starter',
@@ -95,7 +95,7 @@ export default function Plugins({ starters, preview }) {
       <div className={s.firstPartyStarters}>
         <div className={s.groupWrapper}>
           <div className={s.intro}>
-            <h2>Full fledged demos</h2>
+            <h2>Fully fledged demos</h2>
             <p>
               Use our pre-built demo projects to see all of DatoCMS&apos;s
               features in a <strong>realistic production-ready setup</strong>.
