@@ -34,6 +34,10 @@
   .cardContent {
     border-top: 1px solid var(--border-color);
   }
+
+  .technologyAside {
+    aspect-ratio: 16/9;
+  }
 }
 
 .card[data-orientation="horizontal"] {
@@ -67,6 +71,10 @@
 
   .cardFooter {
     margin: 10px 0 0 0;
+  }
+
+  .technologyAside {
+    aspect-ratio: 4/1;
   }
 }
 
@@ -168,7 +176,6 @@
 }
 
 .technologyAside {
-  aspect-ratio: 16/9;
   margin: 20px 0 0 0;
   width: 80px;
 }
