@@ -124,9 +124,11 @@ const Category = ({ title, description, children, browse }) => (
         <div className={s.headerTitle}>{title}</div>
         {browse}
       </div>
-      <div className={s.intro}>
-        <p>{description}</p>
-      </div>
+      {description && (
+        <div className={s.intro}>
+          <p>{description}</p>
+        </div>
+      )}
     </div>
     {children}
   </div>
