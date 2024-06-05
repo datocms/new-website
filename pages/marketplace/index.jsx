@@ -220,9 +220,9 @@ export default function IntegrationsPage({
         }
       >
         <div className={s.startersWrapper}>
-          <div className={s.fullFledged}>
+          <div className={s.fullyFledged}>
             <div className={s.intro}>
-              <h3>Full fledged demos</h3>
+              <h3>Fully fledged demos</h3>
               <p>
                 Use our pre-built demo projects to see all of DatoCMS&apos;s
                 features in a realistic production-ready setup. Includes many

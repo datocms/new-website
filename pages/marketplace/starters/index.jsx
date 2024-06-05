@@ -67,7 +67,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
 });
 
 export default function Plugins({ starters, preview }) {
-  const fullFledged = starters.filter(
+  const fullyFledged = starters.filter(
     (starter) => starter.starterType === 'fully_fledged',
   );
   const techStarters = starters.filter(
@@ -102,8 +102,8 @@ export default function Plugins({ starters, preview }) {
               Includes many example content types, and advanced features.
             </p>
           </div>
-          <section className={s.fullFledged}>
-            {fullFledged.map((item) => (
+          <section className={s.fullyFledged}>
+            {fullyFledged.map((item) => (
               <MarketplaceCard
                 key={item.code}
                 href={`/marketplace/starters/${item.code}`}
