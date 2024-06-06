@@ -539,9 +539,9 @@ export default function DocPage({
   const { data } = useQuerySubscription(pageSubscription);
   const page = data.page;
   const pageTitle = titleOverride || page?.title;
-  const defaultSeoTitle = `${
-    docGroup ? `${docGroup.name} - ` : '-'
-  }${pageTitle} - DatoCMS Docs`;
+  const defaultSeoTitle = `${pageTitle}${
+    docGroup ? `— ${docGroup.name}` : ''
+  } — DatoCMS`;
 
   const seo = changeImageWithGeneratedDoc(
     changeTitle(page._seoMetaTags, defaultSeoTitle),
