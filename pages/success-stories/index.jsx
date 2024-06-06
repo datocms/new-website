@@ -6,7 +6,6 @@ import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
 import LogosBar from 'components/LogosBar';
 import Space from 'components/Space';
-// import useSWR from 'swr';
 import { gqlStaticProps, seoMetaTagsFields } from 'lib/datocms';
 import DeutscheTelekom from 'public/images/logos/deutsche-telekom.svg';
 import Hashicorp from 'public/images/logos/hashicorp.svg';
@@ -36,7 +35,6 @@ export function useMediaQuery(query) {
 }
 
 export const getStaticProps = gqlStaticProps(
-  /* GraphQL */
   `
     {
       page: successStoriesIndex {
@@ -106,7 +104,7 @@ export default function HowToDatoCms({ page }) {
         <p>
           Our most successful customers work with our agency partners to bring some incredible projects to life
         </p>
-        <Button as="a" p="small" href={'/academy/'}>
+        <Button as="a" p="small" href={'/partners/showcase/'}>
           Explore partner showcase
         </Button>
       </Flag>
