@@ -12,26 +12,29 @@ import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
-`
-  {
-    allShowcaseProjects(first: 100, orderBy: _updatedAt_DESC) {
-      id
-      name
-      slug
-      _updatedAt
-      headline {
-        value
-      }
-      partner {
+  `
+    query {
+      allShowcaseProjects(first: 100, orderBy: _updatedAt_DESC) {
+        id
         name
         slug
-        logo {
+        _updatedAt
+        headline {
+          value
+        }
+        mainImage {
           url
+        }
+        partner {
+          name
+          slug
+          logo {
+            url
+          }
         }
       }
     }
-  }
-`,
+  `,
   {
     requiredKeys: ['allShowcaseProjects'],
   },
@@ -43,6 +46,11 @@ export default function PartnerProjects({ subscription, preview }) {
   const {
     data: { allShowcaseProjects },
   } = useQuerySubscription(subscription);
+
+  const truncateText = (text, maxLength) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  };
 
   return (
     <Layout preview={preview}>
@@ -64,17 +72,25 @@ export default function PartnerProjects({ subscription, preview }) {
           }
         />
 
-        <div className={s.posts}>
+        <div className={s.posts} style={{ display: 'grid', gap: '20px' }}>
           {allShowcaseProjects.map((project, i) => (
             <Link href={`/partners/${project.partner.slug}/showcase/${project.slug}`} key={project.slug}>
               <a className={s.post}>
-                <div className={classNames(s.postLogo, styles[i % styles.length])}>
-                  <img src={project.partner.logo.url} alt={project.partner.name} />
+                <div className={s.mainImage}>
+                  <img 
+                    src={`${project.mainImage.url}?auto=format&crop=top&fit=crop&h=500&w=750`} 
+                    alt={project.name} 
+                    style={{ width: '100%', height: 'auto' }} 
+                  />
                 </div>
                 <div className={s.postBody}>
-                  <div className={s.postTitle}>{project.name} by {project.partner.name}</div>
+                  <div className={s.postTitle}>{project.name}</div>
                   <div className={s.postDescription}>
-                    {toPlainText(project.headline)}
+                    {truncateText(toPlainText(project.headline.value), 90)}
+                  </div>
+                  <div className={s.madeBy} style={{ marginTop: '10px' }}>
+                    <p>Made by {project.partner.name}</p>
+                    <img src={project.partner.logo.url} alt={project.partner.name} style={{ maxHeight: '30px', maxWidth: '100px', verticalAlign: 'middle' }} />
                   </div>
                 </div>
               </a>
