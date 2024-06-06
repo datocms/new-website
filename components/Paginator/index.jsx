@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import omit from 'lodash-es/omit';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Paginator from 'paginator';
@@ -35,6 +36,7 @@ export default function Pagination({
   } = paginator.build(totalEntries, currentPage + 1);
 
   const router = useRouter();
+  const normalizedQuery = omit(router.query, ['page']);
 
   if (pageCount === 1) {
     return null;
@@ -47,7 +49,7 @@ export default function Pagination({
         index={previousPage - 1}
         className={cn(s.nav, s.link, s.linkPrev)}
         disabled={!hasPreviousPage}
-        query={router.query}
+        query={normalizedQuery}
       >
         &laquo; Previous
       </GoTo>
@@ -61,7 +63,7 @@ export default function Pagination({
             className={cn(s.link, {
               [s.linkActive]: firstPage + i - 1 === currentPage,
             })}
-            query={router.query}
+            query={normalizedQuery}
           >
             {firstPage + i}
           </GoTo>
@@ -69,7 +71,7 @@ export default function Pagination({
       </div>
 
       <GoTo
-        query={router.query}
+        query={normalizedQuery}
         href={href}
         index={nextPage - 1}
         className={cn(s.nav, s.link, s.linkNext)}
