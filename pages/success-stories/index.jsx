@@ -92,6 +92,24 @@ export default function HowToDatoCms({ page }) {
         </Button>
       </Flag>
 
+
+      <Flag
+        style="bad"
+        image="faces"
+        title={
+          <>
+            Customer <FlagHighlight style="bad">Stories</FlagHighlight>
+          </>
+        }
+      >
+        <p>
+            Casual conversations with customers working on some really cool use cases with DatoCMS 
+        </p>
+        <Button as="a" p="small" href={'/customer-stories/'}>
+          Explore customer stories
+        </Button>
+      </Flag>
+
       <Flag
         style="good"
         image="space"
@@ -110,11 +128,11 @@ export default function HowToDatoCms({ page }) {
       </Flag>
 
       <Flag
-        style="good"
+        style="bad"
         image="people"
         title={
           <>
-            Wall of <FlagHighlight>Love</FlagHighlight>
+            Wall of <FlagHighlight style="bad">Love</FlagHighlight>
           </>
         }
       >
