@@ -21,6 +21,7 @@ import {
 import { Image as DatoImage, renderMetaTags } from 'react-datocms';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest, githubRepoToUrl } from 'utils/githubRepo';
+import { changeImage } from 'utils/tweakSeoMetaTags';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -62,7 +63,7 @@ export const getStaticProps = handleErrors(
             }
           }
           screenshot {
-            url(imgixParams: { auto: format, w: 600, h: 500, fit: crop, crop: top })
+            ogImageUrl: url(imgixParams: { auto: format, w: 1200, h: 800, fit: crop, crop: top })
             responsiveImage(
               imgixParams: { auto: format, w: 600, h: 500, fit: crop, crop: top }
             ) {
@@ -112,9 +113,7 @@ export default function Starters({ page, preview }) {
   return (
     <Layout preview={preview}>
       <Head>
-        {renderMetaTags(page.seo)}
-        <meta property="og:image" content={page.screenshot.url} />
-        <meta name="twitter:image" content={page.screenshot.url} />
+        {renderMetaTags(changeImage(page.seo, page.screenshot.ogImageUrl))}
       </Head>
       <PluginDetails
         kicker={page.seoH1}
