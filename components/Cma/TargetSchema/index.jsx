@@ -22,7 +22,7 @@ export default function TargetSchema({ link }) {
 
   const resource = returnType.properties.type.example;
   const resourceUrl = `/docs/content-management-api/resources/${resource.replace(
-    /_/,
+    /_/g,
     '-',
   )}`;
   const resourceLink = (
