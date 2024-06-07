@@ -253,20 +253,37 @@ export default function IntegrationsPage({
               <p>Kickstart your next project with our scaffolds.</p>
             </div>
 
-            {techStarters.map((item) => (
-              <MarketplaceCard
-                key={item.code}
-                href={`/marketplace/starters/${item.code}`}
-                technology={item.technology.squareLogo}
-                text={{
-                  title: item.name,
-                  description: item.cmsDescription,
-                }}
-                boxed={false}
-                orientation="horizontal"
-                size="small"
-              />
-            ))}
+            {techStarters?.length ? (
+              techStarters.map((item) => (
+                <MarketplaceCard
+                  key={item.code}
+                  href={`/marketplace/starters/${item.code}`}
+                  technology={item.technology.squareLogo}
+                  text={{
+                    title: item.name,
+                    description: item.cmsDescription,
+                  }}
+                  boxed={false}
+                  orientation="horizontal"
+                  size="small"
+                />
+              ))
+            ) : (
+              <>
+                <div className={s.comingsoonWrapper}>
+                  <div className={s.comingsoon}>
+                    <figure />
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+                <div className={s.comingsoonWrapper}>
+                  <div className={s.comingsoon}>
+                    <figure />
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </Category>

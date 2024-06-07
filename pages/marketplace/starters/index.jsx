@@ -122,32 +122,36 @@ export default function Plugins({ starters, preview }) {
           </section>
         </div>
 
-        <div className={s.groupWrapper}>
-          <div className={s.intro}>
-            <h2>Tech starter kits</h2>
-            <p>
-              Kickstart your next project with our{' '}
-              <strong>official scaffolds</strong>. They offer all the best
-              practices to integrate DatoCMS with your frontend framework, with
-              minimal content and styling.
-            </p>
+        {techStarters.length > 0 && (
+          <div className={s.groupWrapper}>
+            <div className={s.intro}>
+              <h2>Tech starter kits</h2>
+              <p>
+                Kickstart your next project with our{' '}
+                <strong>official scaffolds</strong>. They offer all the best
+                practices to integrate DatoCMS with your frontend framework,
+                with minimal content and styling.
+              </p>
+            </div>
+            <section className={s.techStarters}>
+              {techStarters?.map((item) => (
+                <MarketplaceCard
+                  key={item.code}
+                  href={`/marketplace/starters/${item.code}`}
+                  technology={
+                    item.technology.squareLogo || item.technology.logo
+                  }
+                  text={{
+                    title: item.name,
+                    description: item.cmsDescription,
+                  }}
+                  badge={item.badge}
+                  label={item.label}
+                />
+              ))}
+            </section>
           </div>
-          <section className={s.techStarters}>
-            {techStarters.map((item) => (
-              <MarketplaceCard
-                key={item.code}
-                href={`/marketplace/starters/${item.code}`}
-                technology={item.technology.squareLogo || item.technology.logo}
-                text={{
-                  title: item.name,
-                  description: item.cmsDescription,
-                }}
-                badge={item.badge}
-                label={item.label}
-              />
-            ))}
-          </section>
-        </div>
+        )}
       </div>
 
       <Wrapper>
