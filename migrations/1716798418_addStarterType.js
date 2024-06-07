@@ -58,11 +58,7 @@ module.exports = async (client) => {
     version: 'current',
   })) {
     await client.items.update(starter, {
-      starter_type: starter.recommended
-        ? 'fully_fledged'
-        : starter.show_in_dashboard
-          ? 'tech_starter'
-          : 'community',
+      starter_type: starter.recommended ? 'fully_fledged' : 'community',
     });
     if (starter.meta.status === 'published') {
       await client.items.publish(starter);
