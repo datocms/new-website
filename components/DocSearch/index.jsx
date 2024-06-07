@@ -110,6 +110,7 @@ const areas = [
   { id: 'docs', label: 'Documentation' },
   { id: 'blog', label: 'Blog' },
   { id: 'product_updates', label: 'Product Updates' },
+  { id: 'other', label: 'Elsewhere on the website' },
   { id: 'community', label: 'Community' },
 ];
 
