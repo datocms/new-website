@@ -421,9 +421,11 @@ export default function Navbar() {
               </div>
 
               <div className={s.group}>
-                <div className={s.groupTitle}>
-                  <span>Marketplace</span>
-                </div>
+                <Link href="/marketplace">
+                  <a className={s.groupTitle}>
+                    <span>Marketplace</span>
+                  </a>
+                </Link>
 
                 <Pane>
                   <div className={s.cols}>
@@ -432,7 +434,7 @@ export default function Navbar() {
                         <div className={s.grid1}>
                           <TitleDesc
                             href="/marketplace/starters"
-                            title="Starter projects"
+                            title="Starters"
                             description="Start with a fully configured DatoCMS project"
                           />
                           <TitleDesc

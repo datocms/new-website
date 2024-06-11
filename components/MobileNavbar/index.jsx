@@ -279,7 +279,7 @@ export default function Navbar() {
                   <div className={s.twocols}>
                     <Resource
                       href="/marketplace/starters"
-                      title="Starter projects"
+                      title="Starters"
                       description="Start with a fully configured DatoCMS project"
                     />
                     <Resource

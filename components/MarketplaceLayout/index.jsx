@@ -47,7 +47,7 @@ export default function IntegrationsLayout({ children, preview }) {
                   activateParentDepth="3"
                 >
                   <a>
-                    <span>Starter projects</span>
+                    <span>Starters</span>
                   </a>
                 </ActiveLink>
                 <ActiveLink
@@ -105,7 +105,7 @@ export default function IntegrationsLayout({ children, preview }) {
                         <a>Featured</a>
                       </Link>
                       <Link href="/marketplace/starters">
-                        <a>Starter projects</a>
+                        <a>Starters</a>
                       </Link>
                       <Link href="/marketplace/plugins">
                         <a>Plugins</a>

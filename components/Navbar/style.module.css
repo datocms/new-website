@@ -86,6 +86,12 @@
     }
   }
 
+  .groupTitle {
+    &:hover {
+      color: var(--accent-color)
+    }
+  }
+
   .entryContact {
     padding-right: 28px;
   }

@@ -69,11 +69,15 @@
 }
 
 .heroTitle {
-  font-size: rfs(60px);
-  color: var(--light-body-color);
-  font-weight: bold;
-  letter-spacing: -0.03em;
-  margin-bottom: 5px;
+  font-size: rfs(64px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.125em;
+}
+
+.heroDesc {
+  font-size: rfs(21px);
+  font-weight: 500;
 }
 
 .table {
