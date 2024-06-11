@@ -273,29 +273,23 @@ export default function IntegrationsPage({
               ))
             ) : (
               <>
-                <div className={s.comingsoonWrapper}>
-                  <div className={s.comingsoon}>
-                    <figure>
-                      <Next />
-                    </figure>
-                    <p>Coming soon</p>
-                  </div>
+                <div className={s.comingsoon}>
+                  <figure>
+                    <Next />
+                  </figure>
+                  <p>Coming soon</p>
                 </div>
-                <div className={s.comingsoonWrapper}>
-                  <div className={s.comingsoon}>
-                    <figure>
-                      <Nuxt />
-                    </figure>
-                    <p>Coming soon</p>
-                  </div>
+                <div className={s.comingsoon}>
+                  <figure>
+                    <Nuxt />
+                  </figure>
+                  <p>Coming soon</p>
                 </div>
-                <div className={s.comingsoonWrapper}>
-                  <div className={s.comingsoon}>
-                    <figure>
-                      <Svelte />
-                    </figure>
-                    <p>Coming soon</p>
-                  </div>
+                <div className={s.comingsoon}>
+                  <figure>
+                    <Svelte />
+                  </figure>
+                  <p>Coming soon</p>
                 </div>
               </>
             )}
