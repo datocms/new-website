@@ -7,6 +7,9 @@ import Link from 'next/link';
 import AngleLeft from 'public/icons/regular/angle-left.svg';
 import AngleRight from 'public/icons/regular/angle-right.svg';
 import ArrowRight from 'public/icons/regular/arrow-right.svg';
+import Next from 'public/images/logos/next.svg';
+import Nuxt from 'public/images/logos/nuxt.svg';
+import Svelte from 'public/images/logos/svelte.svg';
 import { useCallback, useEffect, useState } from 'react';
 import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';
@@ -249,7 +252,7 @@ export default function IntegrationsPage({
 
           <div className={s.techStarters}>
             <div className={s.intro}>
-              <h3>Tech starters</h3>
+              <h3>Tech starter kits</h3>
               <p>Kickstart your next project with our scaffolds.</p>
             </div>
 
@@ -272,13 +275,25 @@ export default function IntegrationsPage({
               <>
                 <div className={s.comingsoonWrapper}>
                   <div className={s.comingsoon}>
-                    <figure />
+                    <figure>
+                      <Next />
+                    </figure>
                     <p>Coming soon</p>
                   </div>
                 </div>
                 <div className={s.comingsoonWrapper}>
                   <div className={s.comingsoon}>
-                    <figure />
+                    <figure>
+                      <Nuxt />
+                    </figure>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+                <div className={s.comingsoonWrapper}>
+                  <div className={s.comingsoon}>
+                    <figure>
+                      <Svelte />
+                    </figure>
                     <p>Coming soon</p>
                   </div>
                 </div>

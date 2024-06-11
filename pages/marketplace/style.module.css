@@ -152,6 +152,7 @@
   aspect-ratio: 4.2/1;
   border-radius: 6px;
   box-shadow: var(--box-shadow);
+  min-height: 70px;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -174,11 +175,19 @@
   }
 
   figure {
-    background-color: #eee;
+    align-items: center;
+    background-color: #f3f3f3;
     border-radius: 4px;
-    width: 30%;
+    display: flex;
     height: calc(100% - 20px);
+    justify-content: center;
     margin: 10px;
+    width: 30%;
+  }
+
+  svg {
+    height: 28px;
+    width: 28px;
   }
 
   p {
