@@ -379,8 +379,10 @@ module.exports = [
     destination: '/tech-partners/imgix',
   },
   {
-    source: '/blog/introducing-visual-editing-for-vercel-and-datocms-enterprise-customers',
-    destination: '/blog/introducing-content-link-for-vercel-and-datocms-enterprise-customers',
+    source:
+      '/blog/introducing-visual-editing-for-vercel-and-datocms-enterprise-customers',
+    destination:
+      '/blog/introducing-content-link-for-vercel-and-datocms-enterprise-customers',
   },
   {
     source: '/blog/july-update-visual-editing-and-per-locale-publishing',
@@ -433,5 +435,25 @@ module.exports = [
   {
     source: '/use-cases',
     destination: '/',
+  },
+  {
+    source: '/docs/cdn-settings/advanced-asset-settings',
+    destination: '/docs/asset-api/asset-cdn-settings',
+  },
+  {
+    source: '/docs/general-concepts/videos',
+    destination: '/docs/asset-api/videos',
+  }, {
+    source: '/docs/general-concepts/images',
+    destination: '/docs/asset-api/images',
+  }, {
+    source: '/docs/project-starters-and-templates',
+    destination: '/docs/general-concepts/project-starters-and-templates',
+  }, {
+    source: '/docs/project-starters-and-templates/clone-project-button',
+    destination: '/docs/general-concepts/project-starters-and-templates#generate-a-clone-project-button',
+  }, {
+    source: '/docs/project-starters-and-templates/project-starter-button',
+    destination: '/docs/general-concepts/project-starters-and-templates#generate-a-project-starter-button',
   },
 ];
