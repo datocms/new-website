@@ -540,7 +540,7 @@ export default function DocPage({
   const page = data.page;
   const pageTitle = titleOverride || page?.title;
   const defaultSeoTitle = `${pageTitle}${
-    docGroup ? `— ${docGroup.name}` : ''
+    docGroup ? ` — ${docGroup.name}` : ''
   } — DatoCMS`;
 
   const seo = changeImageWithGeneratedDoc(
