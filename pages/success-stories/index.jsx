@@ -77,6 +77,7 @@ export default function HowToDatoCms({ page }) {
 
       <Flag
         style="good"
+        flip={true}
         image="castle"
         title={
           <>
@@ -85,13 +86,13 @@ export default function HowToDatoCms({ page }) {
         }
       >
         <p>
-          An insight into how the most ambitious brands in the world use DatoCMS to manage their content
+          An insight into how the most ambitious brands in the world use DatoCMS
+          to manage their content
         </p>
         <Button as="a" p="small" href={'/customers/'}>
           Explore case studies
         </Button>
       </Flag>
-
 
       <Flag
         style="bad"
@@ -103,7 +104,8 @@ export default function HowToDatoCms({ page }) {
         }
       >
         <p>
-            Casual conversations with customers working on some really cool use cases with DatoCMS 
+          Casual conversations with customers working on some really cool use
+          cases with DatoCMS
         </p>
         <Button as="a" p="small" href={'/customer-stories/'}>
           Explore customer stories
@@ -112,6 +114,7 @@ export default function HowToDatoCms({ page }) {
 
       <Flag
         style="good"
+        flip={true}
         image="space"
         title={
           <>
@@ -120,7 +123,8 @@ export default function HowToDatoCms({ page }) {
         }
       >
         <p>
-          Our most successful customers work with our agency partners to bring some incredible projects to life
+          Our most successful customers work with our agency partners to bring
+          some incredible projects to life
         </p>
         <Button as="a" p="small" href={'/partners/showcase/'}>
           Explore partner showcase
@@ -137,7 +141,8 @@ export default function HowToDatoCms({ page }) {
         }
       >
         <p>
-          So much 🫶🏽 making us blush! See what our users and partners have to say about working with us
+          So much 🫶🏽 making us blush! See what our users and partners have to
+          say about working with us
         </p>
         <Button as="a" p="small" href={'/wall/'}>
           Read our testimonials

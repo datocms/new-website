@@ -18,6 +18,7 @@ export default function Flag({
   imageProps,
   children,
   seoAnalysis,
+  flip = false,
 }) {
   const seed = useMemo(
     () => seedrandom(title + subtitle + style)(),
@@ -62,7 +63,7 @@ export default function Flag({
 
   return (
     <Wrapper>
-      <div className={cn(s.root, s[`${style}Root`])}>
+      <div className={cn(s.root, s[`${style}Root`], { [s.isFlipped]: flip })}>
         <div className={s.imageContainer}>
           {!hideDot && (
             <div
