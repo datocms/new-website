@@ -2,10 +2,15 @@ import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
+import MarketplaceCard from 'components/MarketplaceCard';
 import Paginator from 'components/Paginator';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
-import { gqlStaticPaths, gqlStaticPropsWithSubscription } from 'lib/datocms';
+import {
+  gqlStaticPaths,
+  gqlStaticPropsWithSubscription,
+  imageFields,
+} from 'lib/datocms';
 import { PROJECTS_PER_PAGE } from 'lib/pages';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -36,7 +41,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       meta: _allBlogPostsMeta {
         count
       }
-      allShowcaseProjects(first: $first, skip: $skip, orderBy: _updatedAt_DESC) {
+      projects: allShowcaseProjects(first: $first, skip: $skip, orderBy: _updatedAt_DESC) {
         id
         name
         slug
@@ -45,6 +50,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           value
         }
         mainImage {
+          responsiveImage(
+            imgixParams: { auto: format, w: 600, h: 400, fit: crop }
+          ) {
+            ...imageFields
+          }
           url
         }
         partner {
@@ -56,6 +66,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
       }
     }
+
+    ${imageFields}
   `,
   {
     requiredKeys: ['allShowcaseProjects'],
@@ -66,13 +78,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
   },
 );
 
-// const styles = [s.azureLogo, s.pinkLogo, s.blueLogo, s.greenLogo, s.yellowLogo];
-
 export default function PartnerProjects({ preview, subscription }) {
   const router = useRouter();
 
   const {
-    data: { allShowcaseProjects, meta },
+    data: { projects, meta },
   } = useQuerySubscription(subscription);
 
   const truncateText = (text, maxLength) => {
@@ -101,8 +111,8 @@ export default function PartnerProjects({ preview, subscription }) {
           }
         />
 
-        <div className={s.posts} style={{ display: 'grid', gap: '20px' }}>
-          {allShowcaseProjects.map((project, i) => (
+        <div className={s.posts}>
+          {projects.map((project, i) => (
             <Link
               href={`/partners/${project.partner.slug}/showcase/${project.slug}`}
               key={project.slug}
@@ -116,21 +126,20 @@ export default function PartnerProjects({ preview, subscription }) {
                   />
                 </div>
                 <div className={s.postBody}>
-                  <div className={s.postTitle}>{project.name}</div>
-                  <div className={s.postDescription}>
-                    {truncateText(toPlainText(project.headline.value), 90)}
-                  </div>
-                  <div className={s.madeBy} style={{ marginTop: '10px' }}>
-                    <p>Made by {project.partner.name}</p>
-                    <img
-                      src={project.partner.logo.url}
-                      alt={project.partner.name}
-                      style={{
-                        maxHeight: '30px',
-                        maxWidth: '100px',
-                        verticalAlign: 'middle',
-                      }}
-                    />
+                  <article>
+                    <div className={s.postTitle}>{project.name}</div>
+                    <div className={s.postDescription}>
+                      {toPlainText(project.headline.value)}
+                    </div>
+                  </article>
+                  <div className={s.madeBy}>
+                    <p>Made by</p>
+                    <figure>
+                      <img
+                        src={project.partner.logo.url}
+                        alt={project.partner.name}
+                      />
+                    </figure>
                   </div>
                 </div>
               </a>
