@@ -35,10 +35,7 @@ export const getStaticPaths = gqlStaticPaths(
   ({ meta }) =>
     range(
       1,
-      Math.min(
-        5,
-        Math.ceil(meta.count / Number.parseFloat(STORIES_PER_PAGE)),
-      ),
+      Math.min(5, Math.ceil(meta.count / Number.parseFloat(STORIES_PER_PAGE))),
     ),
 );
 
@@ -118,7 +115,8 @@ export default function CustomerStories({ preview, subscription }) {
         }
         subtitle={
           <>
-            Conversations with customers working on some really cool use cases with DatoCMS
+            Conversations with customers working on some really cool use cases
+            with DatoCMS
           </>
         }
       />
@@ -160,7 +158,7 @@ export default function CustomerStories({ preview, subscription }) {
                   <div className={s.excerpt}>
                     <StructuredText data={post.excerpt} />
                   </div>
-                  {post.person && post.person.avatar && (
+                  {post.person?.avatar && (
                     <div className={s.person}>
                       <DatoImage
                         className={s.avatar}
@@ -181,7 +179,9 @@ export default function CustomerStories({ preview, subscription }) {
           perPage={STORIES_PER_PAGE}
           currentPage={router.query ? Number.parseInt(router.query.page) : 0}
           totalEntries={meta.count}
-          href={(index) => (index === 0 ? '/customer-stories' : `/customer-stories/p/${index}`)}
+          href={(index) =>
+            index === 0 ? '/customer-stories' : `/customer-stories/p/${index}`
+          }
         />
       </Wrapper>
     </Layout>

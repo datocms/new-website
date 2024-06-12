@@ -49,7 +49,7 @@ export default function PartnerProjects({ subscription, preview }) {
 
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + '...';
+    return `${text.substring(0, maxLength)}...`;
   };
 
   return (
@@ -67,20 +67,24 @@ export default function PartnerProjects({ subscription, preview }) {
           }
           subtitle={
             <>
-              Check out some of the incredible projects our partners have brought to life.
+              Check out some of the incredible projects our partners have
+              brought to life.
             </>
           }
         />
 
         <div className={s.posts} style={{ display: 'grid', gap: '20px' }}>
           {allShowcaseProjects.map((project, i) => (
-            <Link href={`/partners/${project.partner.slug}/showcase/${project.slug}`} key={project.slug}>
+            <Link
+              href={`/partners/${project.partner.slug}/showcase/${project.slug}`}
+              key={project.slug}
+            >
               <a className={s.post}>
                 <div className={s.mainImage}>
-                  <img 
-                    src={`${project.mainImage.url}?auto=format&crop=top&fit=crop&h=500&w=750`} 
-                    alt={project.name} 
-                    style={{ width: '100%', height: 'auto' }} 
+                  <img
+                    src={`${project.mainImage.url}?auto=format&crop=top&fit=crop&h=500&w=750`}
+                    alt={project.name}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
                 <div className={s.postBody}>
@@ -90,7 +94,15 @@ export default function PartnerProjects({ subscription, preview }) {
                   </div>
                   <div className={s.madeBy} style={{ marginTop: '10px' }}>
                     <p>Made by {project.partner.name}</p>
-                    <img src={project.partner.logo.url} alt={project.partner.name} style={{ maxHeight: '30px', maxWidth: '100px', verticalAlign: 'middle' }} />
+                    <img
+                      src={project.partner.logo.url}
+                      alt={project.partner.name}
+                      style={{
+                        maxHeight: '30px',
+                        maxWidth: '100px',
+                        verticalAlign: 'middle',
+                      }}
+                    />
                   </div>
                 </div>
               </a>

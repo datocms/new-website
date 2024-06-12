@@ -313,7 +313,8 @@ export default function Story({ preview, subscription }) {
               className={s.avatar}
               data={story.person.avatar.responsiveImage}
             />
-            In conversation with {story.person.name}, {story.person.title} at {story.person.company}
+            In conversation with {story.person.name}, {story.person.title} at{' '}
+            {story.person.company}
           </div>
 
           <div id="main-content">
