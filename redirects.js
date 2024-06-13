@@ -462,4 +462,9 @@ module.exports = [
     destination:
       '/docs/general-concepts/project-starters-and-templates#generate-a-project-starter-button',
   },
+  {
+    source: '/blog/headless-cms-unconventional-use-cases',
+    destination: '/customer-stories/trip-to-japan',
+      '
+  },
 ];
