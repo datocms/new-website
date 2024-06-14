@@ -2,7 +2,6 @@ import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
-import MarketplaceCard from 'components/MarketplaceCard';
 import Paginator from 'components/Paginator';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
