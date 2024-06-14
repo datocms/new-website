@@ -14,6 +14,7 @@ import Vercel from 'public/images/logos/vercel.svg';
 import Verizon from 'public/images/logos/verizon.svg';
 import { useEffect, useState } from 'react';
 import { renderMetaTags } from 'react-datocms';
+import s from './style.module.css';
 
 export function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -75,79 +76,87 @@ export default function HowToDatoCms({ page }) {
         />
       </Space>
 
-      <Flag
-        style="good"
-        flip={true}
-        image="castle"
-        title={
-          <>
-            Enterprise <FlagHighlight>Case&nbsp;Studies</FlagHighlight>
-          </>
-        }
-      >
-        <p>
-          An insight into how the most ambitious brands in the world use DatoCMS
-          to manage their content
-        </p>
-        <Button as="a" p="small" href={'/customers/'}>
-          Explore case studies
-        </Button>
-      </Flag>
+      <div className={s.wrapper}>
+        <Flag
+          style="good"
+          flip={true}
+          image="castle"
+          title={
+            <>
+              Enterprise <FlagHighlight>Case&nbsp;Studies</FlagHighlight>
+            </>
+          }
+        >
+          <p>
+            An insight into how the most ambitious brands in the world use
+            DatoCMS to manage their content
+          </p>
+          <Button as="a" p="small" href={'/customers/'}>
+            Explore case studies
+          </Button>
+        </Flag>
+      </div>
 
-      <Flag
-        style="bad"
-        image="faces"
-        title={
-          <>
-            Customer <FlagHighlight style="bad">Stories</FlagHighlight>
-          </>
-        }
-      >
-        <p>
-          Casual conversations with customers working on some really cool use
-          cases with DatoCMS
-        </p>
-        <Button as="a" p="small" href={'/customer-stories/'}>
-          Explore customer stories
-        </Button>
-      </Flag>
+      <div className={s.wrapper}>
+        <Flag
+          style="bad"
+          image="faces"
+          title={
+            <>
+              Customer <FlagHighlight style="bad">Stories</FlagHighlight>
+            </>
+          }
+        >
+          <p>
+            Casual conversations with customers working on some really cool use
+            cases with DatoCMS
+          </p>
+          <Button as="a" p="small" href={'/customer-stories/'}>
+            Explore customer stories
+          </Button>
+        </Flag>
+      </div>
 
-      <Flag
-        style="good"
-        flip={true}
-        image="space"
-        title={
-          <>
-            <FlagHighlight>Partner</FlagHighlight> Projects
-          </>
-        }
-      >
-        <p>
-          Our most successful customers work with our agency partners to bring
-          some incredible projects to life
-        </p>
-        <Button as="a" p="small" href={'/partners/showcase/'}>
-          Explore partner showcase
-        </Button>
-      </Flag>
+      <div className={s.wrapper}>
+        <Flag
+          style="good"
+          flip={true}
+          image="space"
+          title={
+            <>
+              <FlagHighlight>Partner</FlagHighlight> Projects
+            </>
+          }
+        >
+          <p>
+            Our most successful customers work with our agency partners to bring
+            some incredible projects to life
+          </p>
+          <Button as="a" p="small" href={'/partners/showcase/'}>
+            Explore partner showcase
+          </Button>
+        </Flag>
+      </div>
 
-      <Flag
-        style="bad"
-        image="people"
-        title={
-          <>
-            Wall of <FlagHighlight style="bad">Love</FlagHighlight>
-          </>
-        }
-      >
-        <p>
-          So much 🫶🏽 making us blush! See what our users and partners have to
-          say about working with us
-        </p>
-        <Button as="a" p="small" href={'/wall/'}>
-          Read our testimonials
-        </Button>
-      </Flag>
+      <div className={s.wrapper}>
+        <Flag
+          style="bad"
+          image="people"
+          title={
+            <>
+              Wall of <FlagHighlight style="bad">Love</FlagHighlight>
+            </>
+          }
+        >
+          <p>
+            So much 🫶🏽 making us blush! See what our users and partners have
+            to say about working with us
+          </p>
+          <Button as="a" p="small" href={'/wall/'}>
+            Read our testimonials
+          </Button>
+        </Flag>
+      </div>
     </Layout>
   );
 }

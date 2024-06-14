@@ -1,0 +1,7 @@
+.wrapper {
+  overflow:auto;
+
+  @media screen and (min-width: 800px) {
+    overflow: unset;
+  }
+}
