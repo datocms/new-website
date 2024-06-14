@@ -28,10 +28,7 @@ export const getStaticPaths = gqlStaticPaths(
   `,
   'page',
   ({ meta }) =>
-    range(
-      1,
-      Math.min(5, Math.ceil(meta.count / Number.parseFloat(PROJECTS_PER_PAGE))),
-    ),
+    range(1, Math.ceil(meta.count / Number.parseFloat(PROJECTS_PER_PAGE))),
 );
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
@@ -121,7 +118,6 @@ export default function PartnerProjects({ preview, subscription }) {
                   <img
                     src={`${project.mainImage.url}?auto=format&crop=top&fit=crop&h=500&w=750`}
                     alt={project.name}
-                    style={{ width: '100%', height: 'auto' }}
                   />
                 </div>
                 <div className={s.postBody}>
