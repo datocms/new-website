@@ -82,6 +82,7 @@ export const getStaticProps = handleErrors(
       ${imageFields}
     `,
       variables: { slug },
+      preview,
     });
 
     if (!page) {
