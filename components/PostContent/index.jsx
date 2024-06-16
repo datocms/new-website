@@ -136,7 +136,8 @@ function renderBlock(s, block, defaultAltForImages) {
             <div className={s.demoCopy}>
               <div className={s.demoTitle}>{block.demo.name}</div>
               <div className={s.demoDesc}>
-                Try the full-fledged DatoCMS demo project in minutes.
+                Publish this demo online with just three clicks in a matter of
+                minutes.
               </div>
               <Button
                 as="a"
