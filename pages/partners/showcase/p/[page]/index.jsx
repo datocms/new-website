@@ -14,7 +14,7 @@ import { PROJECTS_PER_PAGE } from 'lib/pages';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { range } from 'range';
-import React from 'react';
+import { Image as DatoImage } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -51,7 +51,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           ) {
             ...imageFields
           }
-          url
         }
         partner {
           name
@@ -115,10 +114,7 @@ export default function PartnerProjects({ preview, subscription }) {
             >
               <a className={s.post}>
                 <div className={s.mainImage}>
-                  <img
-                    src={`${project.mainImage.url}?auto=format&crop=top&fit=crop&h=500&w=750`}
-                    alt={project.name}
-                  />
+                  <DatoImage data={project.mainImage.responsiveImage} />
                 </div>
                 <div className={s.postBody}>
                   <article>
