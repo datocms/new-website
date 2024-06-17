@@ -80,11 +80,6 @@ export default function PartnerProjects({ preview, subscription }) {
     data: { projects, meta },
   } = useQuerySubscription(subscription);
 
-  const truncateText = (text, maxLength) => {
-    if (text.length <= maxLength) return text;
-    return `${text.substring(0, maxLength)}...`;
-  };
-
   return (
     <Layout preview={preview}>
       <Head>
@@ -110,7 +105,7 @@ export default function PartnerProjects({ preview, subscription }) {
           {projects.map((project, i) => (
             <Link
               href={`/partners/${project.partner.slug}/showcase/${project.slug}`}
-              key={project.slug}
+              key={i}
             >
               <a className={s.post}>
                 <div className={s.mainImage}>
