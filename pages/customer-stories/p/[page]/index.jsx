@@ -1,4 +1,3 @@
-import FormattedDate from 'components/FormattedDate';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
@@ -11,7 +10,7 @@ import {
   imageFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
-import { BLOG_POSTS_PER_PAGE } from 'lib/pages';
+import { STORIES_PER_PAGE } from 'lib/pages';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { range } from 'range';
@@ -27,26 +26,29 @@ import s from './style.module.css';
 export const getStaticPaths = gqlStaticPaths(
   `
     query {
-      meta: _allBlogPostsMeta {
+      meta: _allCustomerStoriesMeta {
         count
       }
     }
   `,
   'page',
   ({ meta }) =>
-    range(1, Math.ceil(meta.count / Number.parseFloat(BLOG_POSTS_PER_PAGE))),
+    range(
+      1,
+      Math.min(5, Math.ceil(meta.count / Number.parseFloat(STORIES_PER_PAGE))),
+    ),
 );
 
 export const getStaticProps = gqlStaticPropsWithSubscription(
   `
     query($first: IntType!, $skip: IntType!) {
-      blog {
+      customerStoriesIndex {
         seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
       }
 
-      posts: allBlogPosts(
+      posts: allCustomerStories(
         first: $first
         skip: $skip
         orderBy: [_firstPublishedAt_DESC, _createdAt_DESC]
@@ -64,28 +66,22 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             ...imageFields
           }
         }
-        _firstPublishedAt
-        _createdAt
-      }
-
-      meta: _allBlogPostsMeta {
-        count
-      }
-
-      latestChangelogEntry: changelogEntry(
-        orderBy: [_firstPublishedAt_DESC, _createdAt_DESC],
-        filter: {showInBlog: {eq: true}}
-      ) {
-        title
-        slug
-        _firstPublishedAt
-        _createdAt
-        categories {
+        person {
           name
-          color {
-            hex
+          title
+          company
+          avatar {
+            responsiveImage(
+              imgixParams: { auto: format, w: 50, h: 50, fit: crop, crop: faces }
+            ) {
+              ...imageFields
+            }
           }
         }
+      }
+
+      meta: _allCustomerStoriesMeta {
+        count
       }
     }
 
@@ -93,56 +89,38 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     ${seoMetaTagsFields}
   `,
   {
-    requiredKeys: ['blog', 'posts'],
+    requiredKeys: ['customerStoriesIndex', 'posts'],
     paramsToVars: ({ page }) => ({
-      first: BLOG_POSTS_PER_PAGE,
-      skip: BLOG_POSTS_PER_PAGE * Number.parseInt(page),
+      first: STORIES_PER_PAGE,
+      skip: STORIES_PER_PAGE * Number.parseInt(page),
     }),
   },
 );
 
-export default function Blog({ preview, subscription }) {
+export default function CustomerStories({ preview, subscription }) {
   const router = useRouter();
 
   const {
-    data: { posts, blog, meta, latestChangelogEntry },
+    data: { posts, customerStoriesIndex, meta },
   } = useQuerySubscription(subscription);
 
   return (
     <Layout preview={preview}>
-      <Head>{renderMetaTags(blog.seo)}</Head>
+      <Head>{renderMetaTags(customerStoriesIndex.seo)}</Head>
       <Hero
         title={
           <>
-            Welcome to the <Highlight>DatoCMS&nbsp;Blog</Highlight>
+            <Highlight>Customer Stories</Highlight>
           </>
         }
-        subtitle={<>News, tips and highlights from the team at DatoCMS</>}
+        subtitle={
+          <>
+            Conversations with customers working on some really cool use cases
+            with DatoCMS
+          </>
+        }
       />
       <Wrapper>
-        {latestChangelogEntry && (
-          <div>
-            <div className={s.changelogIntro}>
-              Latest from our Product Updates changelog →
-            </div>
-            <Link href={'/product-updates'}>
-              <a className={s.changelogEntry}>
-                <div className={s.changelogEntryTitle}>
-                  {latestChangelogEntry.title}
-                </div>
-                <div className={s.changelogEntryDate}>
-                  <FormattedDate
-                    date={
-                      latestChangelogEntry._firstPublishedAt ||
-                      latestChangelogEntry._createdAt
-                    }
-                  />
-                </div>
-              </a>
-            </Link>
-          </div>
-        )}
-
         <Masonry
           breakpointCols={{
             default: 2,
@@ -152,7 +130,7 @@ export default function Blog({ preview, subscription }) {
           columnClassName={s.column}
         >
           {posts.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`}>
+            <Link key={post.slug} href={`/customer-stories/${post.slug}`}>
               <a className={s.post}>
                 {post.coverImage?.responsiveImage && (
                   <div className={s.coverImage}>
@@ -180,14 +158,17 @@ export default function Blog({ preview, subscription }) {
                   <div className={s.excerpt}>
                     <StructuredText data={post.excerpt} />
                   </div>
-                  <div className={s.footer}>
-                    <div className={s.date}>
-                      Posted on{' '}
-                      <FormattedDate
-                        date={post._firstPublishedAt || post._createdAt}
+                  {post.person?.avatar && (
+                    <div className={s.person}>
+                      <DatoImage
+                        className={s.avatar}
+                        data={post.person.avatar.responsiveImage}
                       />
+                      <div>
+                        With {post.person.name} from {post.person.company}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </a>
             </Link>
@@ -195,10 +176,12 @@ export default function Blog({ preview, subscription }) {
         </Masonry>
 
         <Paginator
-          perPage={BLOG_POSTS_PER_PAGE}
+          perPage={STORIES_PER_PAGE}
           currentPage={router.query ? Number.parseInt(router.query.page) : 0}
           totalEntries={meta.count}
-          href={(index) => (index === 0 ? '/blog' : `/blog/p/${index}`)}
+          href={(index) =>
+            index === 0 ? '/customer-stories' : `/customer-stories/p/${index}`
+          }
         />
       </Wrapper>
     </Layout>

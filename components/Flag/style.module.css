@@ -1,18 +1,36 @@
 .root {
-  margin: rfs(120px) 0;
-  --dotBaseUnit: 40px;
+  margin: rfs(100px) 0;
+  --flip-margin: rfs(60px)
 }
 
 .root {
   text-align: center;
 
-  @media screen and (width > 800px) {
+  @media screen and (min-width: 800px) {
     display: grid;
     text-align: center;
     grid-template-columns: 45% 1fr;
     grid-column-gap: 10%;
     align-items: center;
     --dotBaseUnit: 70px;
+  }
+}
+
+.root.isFlipped {
+  @media screen and (min-width: 800px) {
+    .imageContainer {
+      order: 2
+    }
+
+    .content {
+      order: 1;
+    }
+  }
+
+  @media screen and (min-width: 1126px) {
+    .content {
+      transform: translateX(var(--flip-margin));
+    }
   }
 }
 
@@ -24,7 +42,7 @@
   margin-bottom: 40px;
   text-align: left;
 
-  @media screen and (width > 800px) {
+  @media screen and (min-width: 800px) {
     margin-bottom: 0;
   }
 
@@ -36,7 +54,7 @@
     width: 66%;
     max-width: 460px;
 
-    @media screen and (width >= 800px) {
+    @media screen and (min-width: 800px) {
       width: 100%;
     }
   }
@@ -70,6 +88,7 @@
 }
 
 .content {
+  /* border: 1px solid green; */
   @media screen and (width > 800px) {
     text-align: left;
   }
