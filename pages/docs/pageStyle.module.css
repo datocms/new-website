@@ -492,7 +492,8 @@
   }
 }
 
-.docCallout--neutral, .docCallout--protip {
+.docCallout--neutral,
+.docCallout--protip {
   background: #f4f5ff;
 
   .docCalloutTitle {
@@ -548,4 +549,8 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 1.3;
+}
+
+img.framelessResponsiveImage {
+  box-shadow: none;
 }
