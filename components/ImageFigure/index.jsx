@@ -62,6 +62,7 @@ export default function ImageFigure({ data, imageClassName, alt, title }) {
               <img
                 alt={data.alt}
                 src={`${data.url}?auto=format&fit=max&w=1500`}
+                className={imageClassName}
                 style={{ display: 'block' }}
               />
             )
