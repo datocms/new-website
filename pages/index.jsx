@@ -101,9 +101,20 @@ function Homepage({ successStories, preview, page }) {
         }
       >
         <Checks checks={['No credit card', 'Easy setup']}>
-          <Button fs="big" as="a" href="https://dashboard.datocms.com/signup">
-            Try it now for free!
-          </Button>
+          <div className={styles.buttonGroup}>
+            <Button fs="big" as="a" href="https://dashboard.datocms.com/signup">
+              Sign up for free
+            </Button>
+            <Button
+              fs="big"
+              as="a"
+              s="invert"
+              href="https://try.datocms.com"
+              target="_blank"
+            >
+              Try our interactive demo ⤑
+            </Button>
+          </div>
         </Checks>
       </Hero>
 

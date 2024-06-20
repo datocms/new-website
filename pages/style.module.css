@@ -22,3 +22,13 @@
     margin: 40px;
   }
 }
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media screen and (width > 900px) {
+    flex-direction: row;
+  }
+}
