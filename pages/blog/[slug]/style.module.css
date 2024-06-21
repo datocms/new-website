@@ -1,17 +1,23 @@
 .info {
-  text-align: center;
-  margin-bottom: 90px;
   color: var(--light-body-color);
   font-size: 0.9em;
+  margin-bottom: 90px;
+  text-align: center;
+
+  .avatarWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 
   .avatar {
-    margin: 0 auto 20px;
-    display: block !important;
-    border-radius: 60px;
-    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
     height: 50px;
+    margin-left: -6px;
     overflow: hidden;
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    width: 50px;
   }
 }
 

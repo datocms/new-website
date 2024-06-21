@@ -322,13 +322,32 @@ export default function Article({ preview, subscription }) {
       <div className={s.postWrapper}>
         <Wrapper>
           <div className={s.info}>
-            <DatoImage
-              className={s.avatar}
-              data={post.author.avatar.responsiveImage}
-            />
-            Posted on{' '}
-            <FormattedDate date={post._firstPublishedAt || post._createdAt} />{' '}
-            by {post.author.name}
+            <div className={s.avatarWrapper}>
+              {post.author.map((author, i) => (
+                <DatoImage
+                  alt={author.alt}
+                  key={author.id}
+                  className={s.avatar}
+                  data={author.avatar.responsiveImage}
+                  style={{ zIndex: 10 - i }}
+                />
+              ))}
+            </div>
+            <p>
+              Posted on{' '}
+              <FormattedDate date={post._firstPublishedAt || post._createdAt} />{' '}
+              by{' '}
+              {post.author.map((author, i) => (
+                <span key={author.id}>
+                  {author.name}
+                  {i < post.author.length - 2
+                    ? ', '
+                    : i === post.author.length - 2
+                      ? ' and '
+                      : ''}
+                </span>
+              ))}
+            </p>
           </div>
 
           <div id="main-content">
