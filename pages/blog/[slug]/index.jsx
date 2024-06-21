@@ -325,8 +325,8 @@ export default function Article({ preview, subscription }) {
             <div className={s.avatarWrapper}>
               {post.author.map((author, i) => (
                 <DatoImage
-                  alt={author.alt}
                   key={author.id}
+                  alt={author.name}
                   className={s.avatar}
                   data={author.avatar.responsiveImage}
                   style={{ zIndex: 10 - i }}
