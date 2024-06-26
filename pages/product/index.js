@@ -1,14 +1,15 @@
+import Bullets from 'components/Bullets';
+import Button from 'components/Button';
+import Checks from 'components/Checks';
+import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';
 import IntegrationsBanner from 'components/IntegrationsBanner';
-import LazyImage from 'components/LazyImage';
-import Flag, { Highlight as FlagHighlight } from 'components/Flag';
 import Layout from 'components/Layout';
-import Bullets from 'components/Bullets';
-import Checks from 'components/Checks';
-import SuccessIcon from 'public/icons/regular/check.svg';
-import Button from 'components/Button';
+import LazyImage from 'components/LazyImage';
+import Quote from 'components/Quote';
+import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPropsWithSubscription,
   imageFields,
@@ -16,11 +17,10 @@ import {
   reviewFields,
 } from 'lib/datocms';
 import Link from 'next/link';
+import SuccessIcon from 'public/icons/regular/check.svg';
 import { Image as DatoImage, StructuredText } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
-import Wrapper from 'components/Wrapper';
-import Quote from 'components/Quote';
 
 export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   query {
@@ -169,6 +169,7 @@ export default function Product({ preview, subscription }) {
           <div key={pillar.id} className={s.flagContainer}>
             <Flag
               kicker={pillar.theme}
+              flip={index % 2 === 0}
               title={
                 <div className={s.flagTitle}>
                   <LazyImage src={pillar.icon.url} height={35} width={35} />
@@ -187,7 +188,6 @@ export default function Product({ preview, subscription }) {
               imageProps={{
                 data: pillar.image.responsiveImage,
               }}
-              rightImage={!(index % 2)}
               hideDot
             >
               <p> {pillar.pillarCallout}</p>
