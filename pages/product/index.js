@@ -129,6 +129,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         description {
           value
         }
+        highlight
+        image {
+          responsiveImage {
+            ...imageFields
+          }
+        }
       }
     }
   }
@@ -248,13 +254,13 @@ export default function Product({ preview, subscription }) {
         <div className={s.testimonialsContainer}>
           {productOverview.testimonials.map((testimonial) => {
             return (
-              <div key={testimonial.id} className={s.root}>
+              <div key={testimonial.id} className={s.quoteWrapper}>
                 <div className={s.quote}>
                   {highlightStructuredText(testimonial.quote)}
                 </div>
                 <div className={s.content}>
                   <DatoImage
-                    className={s.image}
+                    className={s.avatar}
                     data={testimonial.image.responsiveImage}
                   />
                   {testimonial.partner ? (
@@ -281,23 +287,39 @@ export default function Product({ preview, subscription }) {
 
       {/* feature grid */}
 
-      <div>
+      <div className={s.featuresWrapper}>
         <h2 className={s.featureSectionTitle}>
           ...and the features they love!
         </h2>
+
         <div className={s.featuresContainers}>
           {productOverview.features.map((feature) => {
             return (
-              <div key={feature.id} className={s.feature}>
-                <div className={s.featureIcon}>
-                  <LazyImage src={feature.icon.url} height={30} width={30} />
-                </div>
-                <div className={s.featureText}>
-                  <h4 className={s.featureTitle}>{feature.title}</h4>
-                  <p>
-                    <StructuredText data={feature.description} />
-                  </p>
-                </div>
+              <div
+                key={feature.id}
+                className={`${s.feature} ${
+                  feature.highlight && s.isHighlighted
+                }`}
+              >
+                {feature.highlight && (
+                  <figure className={s.featureImage}>
+                    {feature.image && (
+                      <DatoImage data={feature.image.responsiveImage} />
+                    )}
+                  </figure>
+                )}
+
+                <article className={s.featureContent}>
+                  <div className={s.featureIcon}>
+                    <LazyImage src={feature.icon.url} height={30} width={30} />
+                  </div>
+                  <div className={s.featureText}>
+                    <h4 className={s.featureTitle}>{feature.title}</h4>
+                    <p>
+                      <StructuredText data={feature.description} />
+                    </p>
+                  </div>
+                </article>
               </div>
             );
           })}
