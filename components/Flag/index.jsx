@@ -18,7 +18,7 @@ export default function Flag({
   imageProps,
   children,
   seoAnalysis,
-  rightImage = false,
+  flip = false,
 }) {
   const seed = useMemo(
     () => seedrandom(title + subtitle + style)(),
@@ -63,24 +63,22 @@ export default function Flag({
 
   return (
     <Wrapper>
-      <div className={cn(s.root, s[`${style}Root`])}>
-        {!rightImage && (
-          <div className={s.imageContainer}>
-            {!hideDot && (
-              <div
-                className={s[`${style}Dot`]}
-                style={{
-                  left: `${x}%`,
-                  top: `${y}%`,
-                  height: `calc(var(--dotBaseUnit) * ${size})`,
-                  width: `calc(var(--dotBaseUnit) * ${size})`,
-                }}
-              />
-            )}
+      <div className={cn(s.root, s[`${style}Root`], { [s.isFlipped]: flip })}>
+        <div className={s.imageContainer}>
+          {!hideDot && (
+            <div
+              className={s[`${style}Dot`]}
+              style={{
+                left: `${x}%`,
+                top: `${y}%`,
+                height: `calc(var(--dotBaseUnit) * ${size})`,
+                width: `calc(var(--dotBaseUnit) * ${size})`,
+              }}
+            />
+          )}
 
-            <div className={s.image}>{imageEl}</div>
-          </div>
-        )}
+          <div className={s.image}>{imageEl}</div>
+        </div>
         <div className={s.content}>
           {kicker && (
             <Heading as={Kicker} className={s.kicker} anchor={slugify(kicker)}>
@@ -91,23 +89,6 @@ export default function Flag({
           {subtitle && <Subtitle className={s.subtitle}>{subtitle}</Subtitle>}
           <div className={s.body}>{children}</div>
         </div>
-        {rightImage && (
-          <div className={s.imageContainer}>
-            {!hideDot && (
-              <div
-                className={s[`${style}Dot`]}
-                style={{
-                  left: `${x}%`,
-                  top: `${y}%`,
-                  height: `calc(var(--dotBaseUnit) * ${size})`,
-                  width: `calc(var(--dotBaseUnit) * ${size})`,
-                }}
-              />
-            )}
-
-            <div className={s.image}>{imageEl}</div>
-          </div>
-        )}
       </div>
     </Wrapper>
   );

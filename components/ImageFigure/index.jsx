@@ -67,7 +67,15 @@ export default function ImageFigure({ data, imageClassName, alt, title }) {
             )
           }
         >
-          <img alt={data.alt} src={`${data.url}?auto=format&fit=max&w=900`} />
+          <img
+            className={imageClassName}
+            alt={data.alt}
+            src={
+              data.format === 'svg'
+                ? data.url
+                : `${data.url}?auto=format&fit=max&w=900`
+            }
+          />
         </Zoomable>
       )}
       {(data.title || data.responsiveImage?.title) && (

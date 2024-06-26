@@ -47,11 +47,18 @@ function App({ Component, pageProps }) {
     const urlParams = new URLSearchParams(window.location.search);
     const source = urlParams.get('utm_source');
 
-    if (source && !getCookie('datoUtm')) {
-      const medium = urlParams.get('utm_medium');
-      const campaign = urlParams.get('utm_campaign');
+    if (!source) {
+      return;
+    }
 
-      setCookie('datoUtm', JSON.stringify({ source, medium, campaign }), 365);
+    const medium = urlParams.get('utm_medium');
+    const campaign = urlParams.get('utm_campaign');
+    const cookieContent = JSON.stringify({ source, medium, campaign });
+
+    setCookie('latestDatoUtm', cookieContent, 365);
+
+    if (!getCookie('datoUtm')) {
+      setCookie('datoUtm', cookieContent, 365);
     }
   }, [router.events]);
 

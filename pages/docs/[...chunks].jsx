@@ -20,10 +20,14 @@ import { fetchPluginSdkHooks } from 'utils/fetchPluginSdk';
 import fetchReactUiExamples from 'utils/fetchReactUiExamples';
 import filter from 'utils/filterNodes';
 import slugify from 'utils/slugify';
+import {
+  changeImageWithGeneratedDoc,
+  changeTitle,
+} from 'utils/tweakSeoMetaTags';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticPaths = gqlStaticPaths(
-  `
+  /* GraphQL */ `
     {
       roots: allDocGroups(first: 100, filter: { parent: { exists: false } }) {
         slug
@@ -102,7 +106,7 @@ export const getStaticProps = handleErrors(
     const {
       data: { docGroup },
     } = await request({
-      query: `
+      query: /* GraphQL */ `
       query($groupSlug: String!) {
         docGroup(filter: { slug: { eq: $groupSlug } }) {
           name
@@ -162,186 +166,208 @@ export const getStaticProps = handleErrors(
 
     const gqlPageRequest = {
       query: /* GraphQL */ `
-      query($pageId: ItemId!) {
-        page: docPage(filter: { id: { eq: $pageId } }) {
-          title
-          _seoMetaTags {
-            ...seoMetaTagsFields
-          }
-          content {
-            value
-            blocks {
-              ... on ImageRecord {
-                id
-                _modelApiKey
-                frameless
-                image {
-                  format
-                  width
-                  responsiveImage(imgixParams: { auto: format, w: 1000 }) {
-                    ...imageFields
-                  }
-                  zoomableResponsiveImage: responsiveImage(imgixParams: { auto: format, w: 1500, fit: max }) {
-                    ...imageFields
-                  }
-                  url
-                }
-              }
-              ... on VideoRecord {
-                id
-                _modelApiKey
-                video {
-                  url
-                  title
-                  provider
-                  width
-                  height
-                  providerUid
-                }
-              }
-              ... on TableRecord {
-                id
-                _modelApiKey
-                table
-              }
-              ... on DemoRecord {
-                id
-                _modelApiKey
-                demo {
+        query ($pageId: ItemId!) {
+          page: docPage(filter: { id: { eq: $pageId } }) {
+            title
+            _seoMetaTags {
+              ...seoMetaTagsFields
+            }
+            content {
+              value
+              blocks {
+                ... on ImageRecord {
                   id
-                  name
-                  code
-                  githubRepo
-                  technology {
-                    name
-                    logo {
-                      url
+                  _modelApiKey
+                  frameless
+                  image {
+                    format
+                    width
+                    responsiveImage(imgixParams: { auto: format, w: 1000 }) {
+                      ...imageFields
                     }
-                  }
-                  screenshot {
-                    responsiveImage(
-                      imgixParams: { auto: format, w: 450, h: 350, fit: crop, crop: top }
+                    zoomableResponsiveImage: responsiveImage(
+                      imgixParams: { auto: format, w: 1500, fit: max }
                     ) {
                       ...imageFields
                     }
+                    url
                   }
                 }
-              }
-              ... on MultipleDemosBlockRecord {
-                id
-                _modelApiKey
-                demos {
+                ... on VideoRecord {
                   id
-                  name
-                  code
-                  technology {
-                    name
-                    logo {
-                      url
-                    }
-                  }
-                  screenshot {
-                    responsiveImage(
-                      imgixParams: { auto: format, w: 300, h: 200, fit: crop, crop: top }
-                    ) {
-                      ...imageFields
-                    }
-                  }
-                }
-              }
-              ... on InternalVideoRecord {
-                id
-                _modelApiKey
-                thumbTimeSeconds
-                video {
-                  title
-                  width
-                  height
-                  blurUpThumb
+                  _modelApiKey
                   video {
-                    playbackId: muxPlaybackId
-                  }
-                }
-              }
-              ... on GraphiqlEditorRecord {
-                id
-                _modelApiKey
-                query
-              }
-              ... on CloneButtonFormRecord {
-                id
-                _modelApiKey
-              }
-              ... on DeployButtonFormRecord {
-                id
-                _modelApiKey
-              }
-              ... on PluginSdkHookGroupRecord {
-                id
-                _modelApiKey
-                groupName
-              }
-              ... on DocCalloutRecord {
-                id
-                _modelApiKey
-                calloutType
-                title
-                text {
-                  value
-                }
-              }
-              ... on ReactUiLiveExampleRecord {
-                id
-                _modelApiKey
-                componentName
-              }
-              ... on TutorialVideoRecord {
-                id
-                _modelApiKey
-                tutorials {
-                  ... on RecordInterface{
-                    id
-                    _modelApiKey
-                  }
-                  ... on RecordInterface{
-                    id
-                    _modelApiKey
-                  }
-                  ... on UserGuidesVideoRecord {
+                    url
                     title
-                    slug
-                    thumbTimeSeconds
-                    video {
-                      video {
-                        thumbnailUrl
-                        blurUpThumb
-                        width
-                        height
+                    provider
+                    width
+                    height
+                    providerUid
+                  }
+                }
+                ... on TableRecord {
+                  id
+                  _modelApiKey
+                  table
+                }
+                ... on DemoRecord {
+                  id
+                  _modelApiKey
+                  demo {
+                    id
+                    name
+                    code
+                    githubRepo
+                    technology {
+                      name
+                      logo {
+                        url
                       }
                     }
-                    chapters: _allReferencingUserGuidesChapters {
-                      slug
+                    screenshot {
+                      responsiveImage(
+                        imgixParams: {
+                          auto: format
+                          w: 450
+                          h: 350
+                          fit: crop
+                          crop: top
+                        }
+                      ) {
+                        ...imageFields
+                      }
                     }
                   }
-                  ... on VideoTutorialRecord {
+                }
+                ... on MultipleDemosBlockRecord {
+                  id
+                  _modelApiKey
+                  demos {
                     id
-                    title
-                    res: videoTutorialResource {
-                      ... on OtherVideoResourceRecord {
-                        _modelApiKey
+                    name
+                    code
+                    technology {
+                      name
+                      logo {
                         url
-                        coverImage {
-                          responsiveImage(imgixParams: { auto: format, w: 300, ar: "4:3", fit: crop }) {
-                            ...imageFields
-                          }
+                      }
+                    }
+                    screenshot {
+                      responsiveImage(
+                        imgixParams: {
+                          auto: format
+                          w: 300
+                          h: 200
+                          fit: crop
+                          crop: top
+                        }
+                      ) {
+                        ...imageFields
+                      }
+                    }
+                  }
+                }
+                ... on InternalVideoRecord {
+                  id
+                  _modelApiKey
+                  thumbTimeSeconds
+                  video {
+                    title
+                    width
+                    height
+                    blurUpThumb
+                    video {
+                      playbackId: muxPlaybackId
+                    }
+                  }
+                }
+                ... on GraphiqlEditorRecord {
+                  id
+                  _modelApiKey
+                  query
+                }
+                ... on CloneButtonFormRecord {
+                  id
+                  _modelApiKey
+                }
+                ... on DeployButtonFormRecord {
+                  id
+                  _modelApiKey
+                }
+                ... on PluginSdkHookGroupRecord {
+                  id
+                  _modelApiKey
+                  groupName
+                }
+                ... on DocCalloutRecord {
+                  id
+                  _modelApiKey
+                  calloutType
+                  title
+                  text {
+                    value
+                  }
+                }
+                ... on ReactUiLiveExampleRecord {
+                  id
+                  _modelApiKey
+                  componentName
+                }
+                ... on TutorialVideoRecord {
+                  id
+                  _modelApiKey
+                  tutorials {
+                    ... on RecordInterface {
+                      id
+                      _modelApiKey
+                    }
+                    ... on RecordInterface {
+                      id
+                      _modelApiKey
+                    }
+                    ... on UserGuidesVideoRecord {
+                      title
+                      slug
+                      thumbTimeSeconds
+                      video {
+                        video {
+                          thumbnailUrl
+                          blurUpThumb
+                          width
+                          height
                         }
                       }
-                      ... on YoutubeVideoResourceRecord {
-                        _modelApiKey
-                        video {
+                      chapters: _allReferencingUserGuidesChapters {
+                        slug
+                      }
+                    }
+                    ... on VideoTutorialRecord {
+                      id
+                      title
+                      res: videoTutorialResource {
+                        ... on OtherVideoResourceRecord {
+                          _modelApiKey
                           url
-                          thumbnailUrl
-                          providerUid
+                          coverImage {
+                            responsiveImage(
+                              imgixParams: {
+                                auto: format
+                                w: 300
+                                ar: "4:3"
+                                fit: crop
+                              }
+                            ) {
+                              ...imageFields
+                            }
+                          }
+                        }
+                        ... on YoutubeVideoResourceRecord {
+                          _modelApiKey
+                          video {
+                            url
+                            thumbnailUrl
+                            providerUid
+                          }
                         }
                       }
                     }
@@ -351,11 +377,10 @@ export const getStaticProps = handleErrors(
             }
           }
         }
-      }
 
-      ${seoMetaTagsFields}
-      ${imageFields}
-    `,
+        ${seoMetaTagsFields}
+        ${imageFields}
+      `,
       variables: { pageId },
       preview,
     };
@@ -514,26 +539,15 @@ export default function DocPage({
   const { data } = useQuerySubscription(pageSubscription);
   const page = data.page;
   const pageTitle = titleOverride || page?.title;
-  const defaultSeoTitle = `${
-    docGroup ? `${docGroup.name} - ` : '-'
-  }${pageTitle} - DatoCMS Docs`;
+  const defaultSeoTitle = `${pageTitle}${
+    docGroup ? ` — ${docGroup.name}` : ''
+  } — DatoCMS`;
 
-  let seo = [...page._seoMetaTags];
-
-  if (
-    page._seoMetaTags.find(
-      // This is the DatoCMS default title which is not descriptive enough for SEO
-      (t) => t.tag === 'title' && t.content === `${pageTitle} - DatoCMS`,
-    )
-  ) {
-    seo = [
-      ...seo,
-      {
-        content: defaultSeoTitle,
-        tag: 'title',
-      },
-    ];
-  }
+  const seo = changeImageWithGeneratedDoc(
+    changeTitle(page._seoMetaTags, defaultSeoTitle),
+    page.title,
+    docGroup ? docGroup.name : undefined,
+  );
 
   return (
     <DocsLayout

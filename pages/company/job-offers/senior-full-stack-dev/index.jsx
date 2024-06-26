@@ -44,6 +44,17 @@ export default function JobOffer({ body }) {
       </Space>
       <Wrapper>
         <div className={s.body}>
+          <Space bottom={2}>
+            <Button
+              as="a"
+              href="https://forms.datocms.com/form/ZVJLrToTQu2x-srNLLdk9Q"
+              p="big"
+              fs="big"
+              block
+            >
+              Already read the job offer? Apply now →
+            </Button>
+          </Space>
           <DocDescription>{body}</DocDescription>
           <Space top={2}>
             <Button

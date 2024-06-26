@@ -3,8 +3,6 @@ import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
-import { Announce } from 'components/PluginToolkit';
-import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { gqlStaticPropsWithSubscription } from 'lib/datocms';
@@ -12,7 +10,6 @@ import { uniq } from 'lodash-es';
 import sortBy from 'lodash-es/sortBy';
 import Link from 'next/link';
 import React, { useState } from 'react';
-// import ReactSelect from 'react-select';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -49,14 +46,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
     }
     technologies {
       name
-    }
-    locations {
-      emoji
-      name
-      code
-      continent {
-        name
-      }
     }
   }
 `,
@@ -219,13 +208,6 @@ export default function TechPartners({ subscription, preview }) {
           }
         />
 
-        <Space bottom={1}>
-          <Announce href="/partner-program" center>
-            <strong>Want to become a DatoCMS Partner?</strong> Learn more about
-            our Partner Program and its benefits!
-          </Announce>
-        </Space>
-
         {/* <div className={s.filterGrid}>
           <div className={s.filter}>
             <div className={s.filterLabel}>Filter by Continent</div>
@@ -318,18 +300,7 @@ export default function TechPartners({ subscription, preview }) {
                   <img src={post.logo.url} />
                 </div>
                 <div className={s.postBody}>
-                  <div className={s.postTitle}>
-                    {post.name}{' '}
-                    {post.locations.slice(0, 5).map((l) => (
-                      <span key={l.emoji}>{l.emoji}</span>
-                    ))}
-                    {post.locations.length > 5 && (
-                      <span className={s.moreLocations}>
-                        {' + '}
-                        {post.locations.length - 5} more
-                      </span>
-                    )}
-                  </div>
+                  <div className={s.postTitle}>{post.name}</div>
                   <div className={s.postDescription}>
                     {toPlainText(post.shortDescription)}
                   </div>

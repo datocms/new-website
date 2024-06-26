@@ -34,13 +34,7 @@ export const getStaticPaths = gqlStaticPaths(
   `,
   'page',
   ({ meta }) =>
-    range(
-      1,
-      Math.min(
-        5,
-        Math.ceil(meta.count / Number.parseFloat(BLOG_POSTS_PER_PAGE)),
-      ),
-    ),
+    range(1, Math.ceil(meta.count / Number.parseFloat(BLOG_POSTS_PER_PAGE))),
 );
 
 export const getStaticProps = gqlStaticPropsWithSubscription(

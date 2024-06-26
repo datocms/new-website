@@ -222,7 +222,7 @@ export default function Navbar() {
                   </Link>
                 </Group>
 
-                <BigLink href="/customers">Customers</BigLink>
+                <BigLink href="/success-stories">Customers</BigLink>
 
                 <Group title="Learn">
                   <div className={s.twocols}>
@@ -279,7 +279,7 @@ export default function Navbar() {
                   <div className={s.twocols}>
                     <Resource
                       href="/marketplace/starters"
-                      title="Starter projects"
+                      title="Starters"
                       description="Start with a fully configured DatoCMS project"
                     />
                     <Resource

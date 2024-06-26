@@ -2,7 +2,7 @@ import Heading from 'components/Heading';
 import Wrapper from 'components/Wrapper';
 import { containsKeywords } from 'utils/containsKeyword';
 import slugify from 'utils/slugify';
-import styles from './style.module.css';
+import s from './style.module.css';
 
 export default function InterstitialTitle({
   style = 'one',
@@ -39,23 +39,21 @@ export default function InterstitialTitle({
 
   return (
     <Wrapper>
-      <div className={styles.root}>
+      <div className={s.root}>
         {kicker && (
           <Heading
             as={Kicker}
-            className={styles.kicker}
+            className={s.kicker}
             anchor={ifMainTitle(null, slugify(kicker))}
           >
             {kicker}
           </Heading>
         )}
-        <div className={styles[style]}>
-          <Title className={styles.title}>{children}</Title>
+        <div className={s[style]}>
+          <Title className={s.title}>{children}</Title>
         </div>
         {subtitle && (
-          <Subtitle
-            className={bigSubtitle ? styles.bigSubtitle : styles.subtitle}
-          >
+          <Subtitle className={bigSubtitle ? s.bigSubtitle : s.subtitle}>
             {subtitle}
           </Subtitle>
         )}

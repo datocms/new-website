@@ -18,6 +18,7 @@ import unified from 'unified';
 import visit from 'unist-util-visit';
 import fetchCma from 'utils/fetchCma';
 import fetchCmaClientResources from 'utils/fetchCmaClientResources';
+import { docPageOgImageUrl } from 'utils/tweakSeoMetaTags';
 
 export const getStaticPaths = async () => {
   const cma = await fetchCma();
@@ -106,6 +107,11 @@ export default function DocPage({
   const result = useMemo(() => parse(cma), [cma]);
   const link = result.schema.links.find((link) => link.rel === endpoint);
 
+  const ogImageUrl = docPageOgImageUrl(
+    result.schema.title,
+    'Content Management API',
+  );
+
   return (
     <DocsLayout
       languageSwitch
@@ -141,9 +147,15 @@ export default function DocPage({
       }
     >
       <Head canonicalUrl={`/docs/${docGroup.slug}/resources/${resource}`}>
-        <title>
-          {link.title} - {result.schema.title} - Content Management API
+        <title key="title">
+          {link.title} — {result.schema.title} — Content Management API
         </title>
+        <meta key="meta-og:image" property="og:image" content={ogImageUrl} />
+        <meta
+          key="meta-twitter:image"
+          name="twitter:image"
+          content={ogImageUrl}
+        />
       </Head>
       <LanguageConsumer>
         {(language) => {

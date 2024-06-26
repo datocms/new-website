@@ -30,6 +30,7 @@ import {
   renderRule,
 } from 'react-datocms';
 import truncate from 'truncate';
+import { changeDescription, changeTitle } from 'utils/tweakSeoMetaTags';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
 
@@ -197,12 +198,15 @@ export default function PartnerPage({ preview, subscription, plugins }) {
   return (
     <Layout preview={preview} noCta>
       <Head>
-        {renderMetaTags(partner._seoMetaTags)}
-        <title>{partner.name} | DatoCMS Partners</title>
-        <meta
-          name="description"
-          content={toPlainText(partner.shortDescription)}
-        />
+        {renderMetaTags(
+          changeTitle(
+            changeDescription(
+              partner._seoMetaTags,
+              toPlainText(partner.shortDescription),
+            ),
+            `${partner.name} | DatoCMS Partners`,
+          ),
+        )}
       </Head>
       <InterstitialTitle
         mainTitleOfPage

@@ -1,19 +1,19 @@
+import DocPageContent from 'components/DocPageContent';
 import DocsLayout from 'components/DocsLayout';
+import Head from 'components/Head';
 import { parse } from 'flatted';
+import { gqlStaticPaths } from 'lib/datocms';
+import { handleErrors } from 'lib/datocms';
 import {
   Sidebar,
   Toc,
   getStaticProps as docPageGetStaticProps,
 } from 'pages/docs/[...chunks]';
 import s from 'pages/docs/pageStyle.module.css';
-import fetchCma from 'utils/fetchCma';
-
-import DocPageContent from 'components/DocPageContent';
-import Head from 'components/Head';
-import { gqlStaticPaths } from 'lib/datocms';
-import { handleErrors } from 'lib/datocms';
 import { useMemo } from 'react';
 import { renderMetaTags } from 'react-datocms';
+import fetchCma from 'utils/fetchCma';
+import { changeImageWithGeneratedDoc } from 'utils/tweakSeoMetaTags';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 
 export const getStaticPaths = gqlStaticPaths(
@@ -99,7 +99,15 @@ export default function DocPage({
         )
       }
     >
-      <Head>{renderMetaTags(page._seoMetaTags)}</Head>
+      <Head>
+        {renderMetaTags(
+          changeImageWithGeneratedDoc(
+            page._seoMetaTags,
+            titleOverride || page.title,
+            'Content Management API',
+          ),
+        )}
+      </Head>
       <div className={s.articleContainer}>
         <Toc content={page.content} />
         <div className={s.article}>
