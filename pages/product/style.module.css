@@ -1,29 +1,25 @@
 .buttonContainer {
-  gap: 32px;
   display: flex;
-  justify-content: center;
-}
+  flex-direction: column;
+  gap: 10px;
 
-.flagContainer {
-  margin-bottom: rfs(-100px);
-  @media (width < 800px) {
-    margin-bottom: rfs(100px);
+  @media screen and (min-width: 480px) {
+    flex-direction: row;
+    justify-content: center;
   }
 }
 
 .testimonialsContainer {
+  -ms-overflow-style: none;
   display: flex;
-  overflow: scroll;
-  margin-top: rfs(-80px);
   gap: 50px;
+  margin-top: rfs(-80px);
+  overflow: scroll;
+  scrollbar-width: none;
 
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 .testimonials {
@@ -47,38 +43,27 @@
   }
 }
 
-.title {
+.title,
+.featureSectionTitle  {
   font-family: var(--font-headline);
-  font-size: rfs(60px);
-  text-align: center;
-  margin: rfs(60px) auto;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-size: rfs(50px);
   font-weight: bold;
-
-  @media (width > 800px) {
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-align: center;
+  
+  @media screen and (min-width: 800px) {
+    font-size: rfs(60px);
     max-width: 70%;
-  }
-  @media (width < 800px) {
-    font-size: rfs(50px);
   }
 }
 
-.featureSectionTitle {
-  font-family: var(--font-headline);
-  font-size: rfs(60px);
-  text-align: center;
-  margin: rfs(100px) auto;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  font-weight: bold;
+.title {
+  margin: rfs(100px) auto 20px auto;
+}
 
-  @media (width > 800px) {
-    max-width: 70%;
-  }
-  @media (width < 800px) {
-    font-size: rfs(50px);
-  }
+.featureSectionTitle {
+  margin: rfs(100px) auto;
 }
 
 .pillarIcon {
@@ -87,17 +72,23 @@
 
 .featuresContainers {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  @media (width < 800px) {
-    grid-template-columns: repeat(1, 1fr);
-    margin: rfs(80px);
-    text-align: center;
-  }
   gap: 50px;
+  grid-template-columns: repeat(1, 1fr);
   margin-left: auto;
   margin-right: auto;
-  margin-top: rfs(120px);
+  margin: rfs(120px) auto 0 auto;
   max-width: var(--page-width-with-margin);
+  padding: 0 var(--page-margin);
+  text-align: center;
+
+  @media screen and (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    text-align: left;
+  }
+  
+  @media screen and (min-width: 860px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .feature {
@@ -112,35 +103,35 @@
 }
 
 .root {
-  text-align: left;
+  margin: rfs(200px) auto;
   padding-top: rfs(40px);
   position: relative;
-  margin: rfs(200px) auto;
 
   &:before {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    font-family: var(--font-serif);
-    content: '\201C';
     color: var(--accent-color);
+    content: '\201C';
+    font-family: var(--font-serif);
     font-size: rfs(150px);
-    line-height: 0.3;
-    transform: translateX(-50%);
+    left: 50%;
+    line-height: 1;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%) translateY(-25%);
   }
 }
 
 .quote {
   font-family: var(--font-serif);
-  font-size: rfs(30px);
-  margin-bottom: 40px;
+  font-size: rfs(24px);
   letter-spacing: -0.03em;
   line-height: 1.2;
+  margin-bottom: 40px;
   text-align: center;
   width: rfs(500px);
-
-  @media (width < 800px) {
-    font-size: rfs(25px);
+  
+  @media screen and (min-width: 800px) {
+    font-size: rfs(30px);
   }
 
   &:before {
@@ -153,14 +144,13 @@
 }
 
 .image {
-  border-radius: 400px;
-  margin: 0 auto 20px;
+  border-radius: 50%;
+  height: 80px;
+  margin: 0 auto 20px auto;
   width: 80px;
 
-  @media (width > 700px) {
-    margin-left: 0;
-    margin-bottom: 0;
-    margin-right: 40px;
+  @media screen and (min-width: 700px) {
+    margin: 0 40px 0 0;
   }
 }
 
@@ -168,7 +158,8 @@
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 5px;
-  @media (width < 800px) {
+
+  @media screen and (min-width: 800px) {
     font-size: rfs(1em);
   }
 }
@@ -176,19 +167,19 @@
 .content {
   text-align: center;
 
-  @media (width > 700px) {
-    display: flex;
+  @media screen and (min-width: 700px) {
     align-items: center;
+    display: flex;
     justify-content: center;
     text-align: left;
   }
 }
 
 .authorRole {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 
-  @media (width > 700px) {
+  @media screen and (min-width: 700px) {
     max-width: 250px;
   }
 }
@@ -199,32 +190,37 @@ a.authorRole:hover .name {
 
 .role {
   color: var(--light-body-color);
-  @media (width < 800px) {
-    font-size: 0.8em;
+  font-size: 0.8em;
+
+  @media screen and (min-width: 800px) {
+    font-size: 1em;
   }
 }
 
 .flagTitle {
-  font-size: rfs(35px);
-  display: flex;
-  gap: 8px;
   align-items: center;
-  @media (width < 800px) {
-    justify-content: center;
+  display: flex;
+  font-size: rfs(35px);
+  gap: 12px;
+  justify-content: center;
+
+  @media screen and (min-width: 800px) {
+    justify-content: flex-start;
   }
 }
 
 .customFooter {
-  padding: rfs(100px) 0;
   background: linear-gradient(45deg, #fefbe4, #fdf0eb);
   clip-path: var(--clip-path);
   margin-top: rfs(120px);
+  padding: rfs(100px) 0;
 }
 
 .customFooterInner {
   margin: rfs(40px) auto;
   text-align: center;
-  @media (width > 800px) {
+
+  @media screen and (min-width: 800px) {
     max-width: 70%;
   }
 }
@@ -232,7 +228,7 @@ a.authorRole:hover .name {
 .footerTitle {
   font-family: var(--font-headline);
   font-size: rfs(40px);
-  line-height: 1;
-  letter-spacing: -0.02em;
   font-weight: bold;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }

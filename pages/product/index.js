@@ -153,13 +153,16 @@ export default function Product({ preview, subscription }) {
         <Hero
           title={highlightStructuredText(productOverview.header)}
           subtitle={<StructuredText data={productOverview.subheader} />}
-        />
-        <div className={s.buttonContainer}>
-          <Button fs="big">Try it for free</Button>
-          <Button fs="big" s="invert">
-            Contact sales
-          </Button>
-        </div>
+        >
+          <div className={s.buttonContainer}>
+            <Button fs="big" as="a" href="https://dashboard.datocms.com/signup">
+              Try it for free
+            </Button>
+            <Button fs="big" as="a" s="invert" href="/contact">
+              Contact sales
+            </Button>
+          </div>
+        </Hero>
       </div>
 
       {/* alternating pillars */}
@@ -190,8 +193,7 @@ export default function Product({ preview, subscription }) {
               }}
               hideDot
             >
-              <p> {pillar.pillarCallout}</p>
-
+              <p>{pillar.pillarCallout}</p>
               <Bullets
                 style="bad"
                 icon={SuccessIcon}
@@ -256,7 +258,7 @@ export default function Product({ preview, subscription }) {
                     data={testimonial.image.responsiveImage}
                   />
                   {testimonial.partner ? (
-                    <Link href={`/partners/${quote.partner.slug}`}>
+                    <Link href={`/partners/${quote.partner.slug}`} passHref>
                       <div className={s.authorRole}>
                         <div className={s.name}>{quote.name}</div>
                         <div className={s.role}>
