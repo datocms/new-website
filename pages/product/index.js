@@ -8,7 +8,6 @@ import { highlightStructuredText } from 'components/Highlight';
 import IntegrationsBanner from 'components/IntegrationsBanner';
 import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
-import Quote from 'components/Quote';
 import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPropsWithSubscription,
@@ -18,6 +17,8 @@ import {
 } from 'lib/datocms';
 import Link from 'next/link';
 import SuccessIcon from 'public/icons/regular/check.svg';
+import Marketers from 'public/images/illustrations/content-editors.svg';
+import Developers from 'public/images/illustrations/developers-2.svg';
 import { Image as DatoImage, StructuredText } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import s from './style.module.css';
@@ -135,6 +136,16 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
             ...imageFields
           }
         }
+        link {
+          __typename
+          ...on DocPageRecord {
+            slug
+          }
+          ...on FeatureRecord {
+            slug
+          }
+        }
+        featureGroup
       }
     }
   }
@@ -144,10 +155,54 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   ${imageFields}
 `);
 
+function Feature({ feature }) {
+  return (
+    <div
+      key={feature.id}
+      className={`${s.feature} ${feature.highlight && s.isHighlighted}`}
+    >
+      {feature.highlight && (
+        <figure className={s.featureImage}>
+          {feature.image && <DatoImage data={feature.image.responsiveImage} />}
+        </figure>
+      )}
+
+      <article className={s.featureContent}>
+        <div className={s.featureIcon}>
+          <LazyImage src={feature.icon.url} height={30} width={30} />
+        </div>
+        <div className={s.featureText}>
+          <h4 className={s.featureTitle}>{feature.title}</h4>
+          <StructuredText data={feature.description} />
+        </div>
+        {feature.link && (
+          <Link
+            href={
+              feature.link.__typename === 'FeatureRecord'
+                ? `/features/${feature.link.slug}`
+                : `/docs/${feature.link.slug}`
+            }
+          >
+            <a className={s.featureLink}>Learn more</a>
+          </Link>
+        )}
+      </article>
+    </div>
+  );
+}
+
 export default function Product({ preview, subscription }) {
   const {
     data: { productOverview, integrations },
   } = useQuerySubscription(subscription);
+
+  const developerFeatures = productOverview.features.filter(
+    (f) => f.featureGroup === 'developers',
+  );
+
+  const marketersFeatures = productOverview.features.filter(
+    (f) => f.featureGroup === 'marketers',
+  );
 
   return (
     <Layout preview={preview} noCta>
@@ -292,36 +347,27 @@ export default function Product({ preview, subscription }) {
           ...and the features they love!
         </h2>
 
-        <div className={s.featuresContainers}>
-          {productOverview.features.map((feature) => {
-            return (
-              <div
-                key={feature.id}
-                className={`${s.feature} ${
-                  feature.highlight && s.isHighlighted
-                }`}
-              >
-                {feature.highlight && (
-                  <figure className={s.featureImage}>
-                    {feature.image && (
-                      <DatoImage data={feature.image.responsiveImage} />
-                    )}
-                  </figure>
-                )}
+        <div className={s.featureGroupHeading}>
+          <figure className={s.featureGroupIcon}>
+            <Developers />
+          </figure>
+          <h3 className={s.featureGroupTitle}>For developers</h3>
+        </div>
+        <div className={s.featuresContainer}>
+          {developerFeatures.map((feature) => {
+            return <Feature key={feature.id} feature={feature} />;
+          })}
+        </div>
 
-                <article className={s.featureContent}>
-                  <div className={s.featureIcon}>
-                    <LazyImage src={feature.icon.url} height={30} width={30} />
-                  </div>
-                  <div className={s.featureText}>
-                    <h4 className={s.featureTitle}>{feature.title}</h4>
-                    <p>
-                      <StructuredText data={feature.description} />
-                    </p>
-                  </div>
-                </article>
-              </div>
-            );
+        <div className={s.featureGroupHeading}>
+          <figure className={s.featureGroupIcon}>
+            <Marketers />
+          </figure>
+          <h3 className={s.featureGroupTitle}>For marketers</h3>
+        </div>
+        <div className={s.featuresContainer}>
+          {marketersFeatures.map((feature) => {
+            return <Feature key={feature.id} feature={feature} />;
           })}
         </div>
       </div>
