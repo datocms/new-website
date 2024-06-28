@@ -230,6 +230,16 @@ a.authorRole:hover .name {
   }
 }
 
+/* ugly fix */
+.featuresContainer[data-developers] {
+  @media screen and (min-width: 860px) {
+    .feature.isHighlighted:last-of-type {
+      grid-row: 4;
+      grid-column: 2 / span 2;
+    }
+  }
+}
+
 .feature {
   background-color: #f6f6f6;
   border-radius: 12px;

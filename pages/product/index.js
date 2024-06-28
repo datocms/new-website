@@ -371,7 +371,7 @@ export default function Product({ preview, subscription }) {
           </figure>
           <h3 className={s.featureGroupTitle}>For developers</h3>
         </div>
-        <div className={s.featuresContainer}>
+        <div data-developers className={s.featuresContainer}>
           {developerFeatures.map((feature) => {
             return <Feature key={feature.id} feature={feature} />;
           })}
