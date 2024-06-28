@@ -8,6 +8,7 @@ import { highlightStructuredText } from 'components/Highlight';
 import IntegrationsBanner from 'components/IntegrationsBanner';
 import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
+import MaybeLink from 'components/MaybeLink';
 import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPropsWithSubscription,
@@ -175,9 +176,16 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   ${imageFields}
 `);
 
-function Feature({ feature, allDocGroups }) {
+function Feature({ feature }) {
+  const link = feature.link
+    ? feature.link.__typename === 'FeatureRecord'
+      ? `/features/${feature.link.slug}`
+      : `/docs/content-modelling/${feature.link.slug}`
+    : null;
+
   return (
-    <div
+    <MaybeLink
+      href={link}
       key={feature.id}
       className={`${s.feature} ${feature.highlight && s.isHighlighted}`}
     >
@@ -195,19 +203,9 @@ function Feature({ feature, allDocGroups }) {
           <h4 className={s.featureTitle}>{feature.title}</h4>
           <StructuredText data={feature.description} />
         </div>
-        {feature.link && (
-          <Link
-            href={
-              feature.link.__typename === 'FeatureRecord'
-                ? `/features/${feature.link.slug}`
-                : `/docs/content-modelling/${feature.link.slug}`
-            }
-          >
-            <a className={s.featureLink}>Learn more</a>
-          </Link>
-        )}
+        {feature.link && <p className={s.featureLink}>Learn more</p>}
       </article>
-    </div>
+    </MaybeLink>
   );
 }
 

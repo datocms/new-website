@@ -233,9 +233,11 @@ a.authorRole:hover .name {
 .feature {
   background-color: #f6f6f6;
   border-radius: 12px;
+  color: inherit;
   display: grid;
   grid-template-columns: 1fr;
   padding: 30px 35px;
+  text-decoration: none;
   
   &.isHighlighted {
     @media screen and (min-width: 660px) {
