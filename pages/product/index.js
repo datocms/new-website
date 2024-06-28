@@ -148,6 +148,26 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         featureGroup
       }
     }
+    allDocGroups {
+      children {
+        slug
+        __typename
+        pages {
+          ...on DocGroupPageRecord {
+            page {
+              slug
+            }
+          }
+          ...on DocGroupSectionRecord {
+            pages {
+              page {
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   ${reviewFields}
@@ -155,7 +175,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   ${imageFields}
 `);
 
-function Feature({ feature }) {
+function Feature({ feature, allDocGroups }) {
   return (
     <div
       key={feature.id}
@@ -180,7 +200,7 @@ function Feature({ feature }) {
             href={
               feature.link.__typename === 'FeatureRecord'
                 ? `/features/${feature.link.slug}`
-                : `/docs/${feature.link.slug}`
+                : `/docs/content-modelling/${feature.link.slug}`
             }
           >
             <a className={s.featureLink}>Learn more</a>
