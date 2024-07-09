@@ -228,7 +228,7 @@ export default function Product({ preview, subscription }) {
         <title>Better, with DatoCMS</title>
       </Head>
 
-      <div>
+      <div className={s.hero}>
         <Hero
           title={highlightStructuredText(productOverview.header)}
           subtitle={<StructuredText data={productOverview.subheader} />}

@@ -7,6 +7,16 @@
   }
 }
 
+.hero {
+  h1 br {
+    display: none;
+
+    @media screen and (min-width: 640px) {
+      display: block;
+    }
+  }
+}
+
 .buttonContainer {
   display: flex;
   flex-direction: column;
