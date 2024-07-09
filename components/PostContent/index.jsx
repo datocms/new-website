@@ -216,7 +216,7 @@ function renderBlock(s, block, defaultAltForImages) {
                             src={tutorial.res.video.thumbnailUrl}
                           />
                         }
-                        href={tutorial.slug}
+                        href={tutorial.res.video.url}
                       />
                     ) : (
                       <PluginBox
