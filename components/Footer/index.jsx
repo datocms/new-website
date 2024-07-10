@@ -76,6 +76,12 @@ export default function Footer({ noCta }) {
                   </div>
                 </div>
 
+                <div className={s.monoLink}>
+                  <Link href="/product">
+                    <a>Product</a>
+                  </Link>
+                </div>
+
                 <div className={s.group}>
                   <div className={s.groupTitle}>Team</div>
                   <div className={s.groupLinks}>
@@ -117,7 +123,7 @@ export default function Footer({ noCta }) {
               </div>
               <div className={s.col}>
                 <div className={s.group}>
-                  <div className={s.groupTitle}>Features</div>
+                  <div className={s.groupTitle}>Product & Features</div>
                   <div className={s.groupLinks}>
                     <Feature
                       title="Worldwide CDN"
