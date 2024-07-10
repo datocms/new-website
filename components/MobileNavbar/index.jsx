@@ -120,7 +120,11 @@ export default function Navbar() {
           <>
             <div className={s.pane}>
               <Wrapper>
-                <Group title="Why DatoCMS">
+                <Group title="Product">
+                  <Link href="/product">
+                    <a className={s.extraLink}>Overview</a>
+                  </Link>
+
                   <div className={s.sectionTitle}>Team</div>
                   <Link href="/team/best-cms-for-developers">
                     <a className={s.extraLink}>For developers</a>

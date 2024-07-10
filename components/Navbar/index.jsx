@@ -16,6 +16,7 @@ import Languages from 'public/images/illustrations/multilanguage-2.svg';
 import StructuredText from 'public/images/illustrations/scontent.svg';
 import Video from 'public/images/illustrations/video-encoding.svg';
 import Workflows from 'public/images/illustrations/workflows.svg';
+import Logo from 'public/images/logo.svg';
 import { useEffect, useState } from 'react';
 import { getCookie } from 'utils/cookies';
 import s from './style.module.css';
@@ -74,6 +75,19 @@ const Feature = ({ href, icon: Icon, title, description, keyword, isNew }) => (
           )}
         </div>
         <div className={s.flagDescription}>{description}</div>
+      </div>
+    </a>
+  </Link>
+);
+
+const Product = ({ href, icon: Icon, title }) => (
+  <Link href={href}>
+    <a className={cn(s.flag, s.flagSmall)}>
+      <div className={cn(s.flagIcon, s.grayscale)}>
+        <Icon />
+      </div>
+      <div className={s.flagBody}>
+        <div className={s.flagTitle}>{title}</div>
       </div>
     </a>
   </Link>
@@ -139,25 +153,24 @@ export default function Navbar() {
             <div className={s.entries}>
               <div className={s.group}>
                 <div className={s.groupTitle}>
-                  <span>Why DatoCMS</span>
+                  <span>Product</span>
                 </div>
                 <Pane>
                   <div className={s.cols}>
                     <div className={cn(s.section, s.sectionInverse)}>
-                      <div className={s.sectionTitle}>Happy team</div>
+                      <Product href="/product" icon={Logo} title="Overview" />
 
+                      <div className={s.sectionTitle}>Happy team</div>
                       <Team
                         href="/team/best-cms-for-developers"
                         icon={Developers}
                         title="For developers"
                       />
-
                       <Team
                         href="/team/cms-digital-marketing"
                         icon={Marketers}
                         title="For digital marketers"
                       />
-
                       <Team
                         href="/team/content-creators"
                         icon={ContentCreators}

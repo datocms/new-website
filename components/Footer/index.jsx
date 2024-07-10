@@ -76,6 +76,12 @@ export default function Footer({ noCta }) {
                   </div>
                 </div>
 
+                <div className={s.monoLink}>
+                  <Link href="/product">
+                    <a>Product</a>
+                  </Link>
+                </div>
+
                 <div className={s.group}>
                   <div className={s.groupTitle}>Team</div>
                   <div className={s.groupLinks}>
@@ -119,13 +125,6 @@ export default function Footer({ noCta }) {
                 <div className={s.group}>
                   <div className={s.groupTitle}>Product & Features</div>
                   <div className={s.groupLinks}>
-                    <Feature
-                      title="Why DatoCMS"
-                      keyword="Best Headless CMS"
-                      href="/product"
-                      description="See why 25K+ teams love DatoCMS"
-                    />
-
                     <Feature
                       title="Worldwide CDN"
                       keyword="Fastest headless CMS"
