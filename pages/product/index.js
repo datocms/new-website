@@ -79,47 +79,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         }
       }
       testimonials {
-        ... on ReviewRecord {
-          id
-          name
-          quote {
-            value
-          }
-          image {
-            responsiveImage(
-              imgixParams: {
-                w: 300
-                h: 300
-                fit: crop
-                crop: faces
-                auto: format
-              }
-            ) {
-              ...imageFields
-            }
-          }
-          role
-        }
         ... on PartnerTestimonialRecord {
-          id
-          name
-          quote {
-            value
-          }
-          image {
-            responsiveImage(
-              imgixParams: {
-                w: 300
-                h: 300
-                fit: crop
-                crop: faces
-                auto: format
-              }
-            ) {
-              ...imageFields
-            }
-          }
-          role
+          ...partnerTestimonialFields
         }
       }
       features {
@@ -244,8 +205,6 @@ export default function Product({ preview, subscription }) {
         </Hero>
       </div>
 
-      {/* alternating pillars */}
-
       {productOverview.pillars.map((pillar, index) => {
         return (
           <div key={pillar.id} className={s.flagContainer}>
@@ -320,12 +279,10 @@ export default function Product({ preview, subscription }) {
         </a>
       </IntegrationsBanner>
 
-      {/* testiominals */}
-
       <div className={s.testimonials}>
         <h2 className={s.title}>What our customers say...</h2>
         <div className={s.testimonialsContainer}>
-          {productOverview.testimonials.map((testimonial) => {
+          {productOverview.testimonials.filter((t) => t.quote).map((testimonial) => {
             return (
               <div key={testimonial.id} className={s.quoteWrapper}>
                 <div className={s.quote}>
@@ -337,9 +294,9 @@ export default function Product({ preview, subscription }) {
                     data={testimonial.image.responsiveImage}
                   />
                   {testimonial.partner ? (
-                    <Link href={`/partners/${quote.partner.slug}`} passHref>
+                    <Link href={`/partners/${testimonial.partner.slug}`} passHref>
                       <div className={s.authorRole}>
-                        <div className={s.name}>{quote.name}</div>
+                        <div className={s.name}>{testimonial.name}</div>
                         <div className={s.role}>
                           {testimonial.role} @ {testimonial.partner.name}
                         </div>
@@ -357,8 +314,6 @@ export default function Product({ preview, subscription }) {
           })}
         </div>
       </div>
-
-      {/* feature grid */}
 
       <div className={s.featuresWrapper}>
         <h2 className={s.featureSectionTitle}>
@@ -389,8 +344,6 @@ export default function Product({ preview, subscription }) {
           })}
         </div>
       </div>
-
-      {/* footer */}
 
       <div className={s.customFooter}>
         <Wrapper>

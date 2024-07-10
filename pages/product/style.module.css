@@ -94,8 +94,10 @@
 
 .quoteWrapper {
   margin: rfs(200px) auto;
+  min-width: 280px;
   padding-top: rfs(40px);
   position: relative;
+  width: rfs(500px);
 
   &:before {
     color: var(--accent-color);
@@ -118,7 +120,6 @@
   line-height: 1.2;
   margin-bottom: 40px;
   text-align: center;
-  width: rfs(500px);
   
   @media screen and (min-width: 800px) {
     font-size: rfs(30px);
