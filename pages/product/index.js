@@ -115,13 +115,16 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         slug
         __typename
         pages {
-          ...on DocGroupPageRecord {
+          __typename
+          ... on DocGroupPageRecord {
+            slugOverride
             page {
               slug
             }
           }
-          ...on DocGroupSectionRecord {
+          ... on DocGroupSectionRecord {
             pages {
+              slugOverride
               page {
                 slug
               }
@@ -137,11 +140,43 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   ${imageFields}
 `);
 
-function Feature({ feature }) {
+function findDocSlug(allDocGroups, targetSlug) {
+  const allDocSlugs = allDocGroups
+    .map((root) =>
+      root.children.map((sub) =>
+        sub.pages
+          .flatMap((pageOrSection) => {
+            if (pageOrSection.__typename === 'DocGroupPageRecord') {
+              return pageOrSection;
+            }
+            return pageOrSection.pages;
+          })
+          .map((page) =>
+            (page.slugOverride || page.page.slug) === 'index'
+              ? [sub.slug]
+              : [sub.slug, page.slugOverride || page.page.slug],
+          ),
+      ),
+    )
+    .flat(2)
+    .map((chunks) => `/docs/${chunks.join('/')}`);
+
+  const slug = allDocSlugs.find((docSlug) => docSlug.endsWith(targetSlug));
+  return slug;
+}
+
+function Feature({ feature, allDocGroups }) {
+  const docSlug =
+    feature.link && feature.link.__typename === 'DocPageRecord'
+      ? findDocSlug(allDocGroups, feature.link.slug)
+      : null;
+
   const link = feature.link
     ? feature.link.__typename === 'FeatureRecord'
       ? `/features/${feature.link.slug}`
-      : `/docs/content-modelling/${feature.link.slug}`
+      : docSlug
+        ? docSlug
+        : '/docs/content-modelling'
     : null;
 
   return (
@@ -172,7 +207,7 @@ function Feature({ feature }) {
 
 export default function Product({ preview, subscription }) {
   const {
-    data: { productOverview, integrations },
+    data: { productOverview, allDocGroups, integrations },
   } = useQuerySubscription(subscription);
 
   const developerFeatures = productOverview.features.filter(
@@ -333,7 +368,13 @@ export default function Product({ preview, subscription }) {
         </div>
         <div data-developers className={s.featuresContainer}>
           {developerFeatures.map((feature) => {
-            return <Feature key={feature.id} feature={feature} />;
+            return (
+              <Feature
+                key={feature.id}
+                feature={feature}
+                allDocGroups={allDocGroups}
+              />
+            );
           })}
         </div>
 
@@ -345,7 +386,13 @@ export default function Product({ preview, subscription }) {
         </div>
         <div className={s.featuresContainer}>
           {marketersFeatures.map((feature) => {
-            return <Feature key={feature.id} feature={feature} />;
+            return (
+              <Feature
+                key={feature.id}
+                feature={feature}
+                allDocGroups={allDocGroups}
+              />
+            );
           })}
         </div>
       </div>
