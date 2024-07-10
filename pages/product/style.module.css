@@ -86,10 +86,10 @@
 }
 
 .testimonialsContainer > * {
-  flex: 0 0 auto;
-  justify-content: center;
   align-items: center;
   animation: scroll 30s linear infinite alternate-reverse;
+  flex: 0 0 auto;
+  justify-content: center;
 }
 
 .quoteWrapper {
@@ -238,16 +238,6 @@ a.authorRole:hover .name {
   
   @media screen and (min-width: 860px) {
     grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* ugly fix */
-.featuresContainer[data-developers] {
-  @media screen and (min-width: 860px) {
-    .feature.isHighlighted:last-of-type {
-      grid-row: 4;
-      grid-column: 2 / span 2;
-    }
   }
 }
 

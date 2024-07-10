@@ -282,36 +282,41 @@ export default function Product({ preview, subscription }) {
       <div className={s.testimonials}>
         <h2 className={s.title}>What our customers say...</h2>
         <div className={s.testimonialsContainer}>
-          {productOverview.testimonials.filter((t) => t.quote).map((testimonial) => {
-            return (
-              <div key={testimonial.id} className={s.quoteWrapper}>
-                <div className={s.quote}>
-                  {highlightStructuredText(testimonial.quote)}
-                </div>
-                <div className={s.content}>
-                  <DatoImage
-                    className={s.avatar}
-                    data={testimonial.image.responsiveImage}
-                  />
-                  {testimonial.partner ? (
-                    <Link href={`/partners/${testimonial.partner.slug}`} passHref>
+          {productOverview.testimonials
+            .filter((t) => t.quote)
+            .map((testimonial) => {
+              return (
+                <div key={testimonial.id} className={s.quoteWrapper}>
+                  <div className={s.quote}>
+                    {highlightStructuredText(testimonial.quote)}
+                  </div>
+                  <div className={s.content}>
+                    <DatoImage
+                      className={s.avatar}
+                      data={testimonial.image.responsiveImage}
+                    />
+                    {testimonial.partner ? (
+                      <Link
+                        href={`/partners/${testimonial.partner.slug}`}
+                        passHref
+                      >
+                        <div className={s.authorRole}>
+                          <div className={s.name}>{testimonial.name}</div>
+                          <div className={s.role}>
+                            {testimonial.role} @ {testimonial.partner.name}
+                          </div>
+                        </div>
+                      </Link>
+                    ) : (
                       <div className={s.authorRole}>
                         <div className={s.name}>{testimonial.name}</div>
-                        <div className={s.role}>
-                          {testimonial.role} @ {testimonial.partner.name}
-                        </div>
+                        <div className={s.role}>{testimonial.role}</div>
                       </div>
-                    </Link>
-                  ) : (
-                    <div className={s.authorRole}>
-                      <div className={s.name}>{testimonial.name}</div>
-                      <div className={s.role}>{testimonial.role}</div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
 
