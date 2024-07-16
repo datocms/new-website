@@ -112,8 +112,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         featureGroup
       }
     }
-
-
     allDocGroups {
       slug
       pages {
@@ -137,8 +135,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         }
       }
     }
-
-
   }
 
   ${reviewFields}
@@ -178,18 +174,14 @@ function generateSlugMap(items, parentSlug = '') {
 }
 
 function Feature({ feature, docsSlugMap }) {
+  const getDocSlugById = (id) => docsSlugMap[id];
   let link;
 
-  const getDocSlugById = (id) => {
-    return docsSlugMap[id];
-  };
-
-  if (feature.link && feature.link.__typename === 'FeatureRecord') {
-    link = `/features/${feature.link.slug}`;
-  }
-
-  if (feature.link && feature.link.__typename === 'DocPageRecord') {
-    link = `/docs/${getDocSlugById(feature.link.id)}`;
+  if (feature.link) {
+    link =
+      feature.link.__typename === 'FeatureRecord'
+        ? `/features/${feature.link.slug}`
+        : `/docs/${getDocSlugById(feature.link.id)}`;
   }
 
   return (
