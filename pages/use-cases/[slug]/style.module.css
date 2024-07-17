@@ -45,14 +45,14 @@
 
 .quote {
   font-family: var(--font-serif);
-  font-size: rfs(24px);
+  font-size: rfs(20px);
   letter-spacing: -0.03em;
   line-height: 1.2;
   margin-bottom: 40px;
   text-align: center;
   
   @media screen and (min-width: 800px) {
-    font-size: rfs(28px);
+    font-size: rfs(24px);
   }
 
   &:before {
@@ -123,7 +123,35 @@ a.authorRole:hover .name {
 .starter {
   background-color: #200523;
   color: #fff;
+  min-height: 400px;
+  overflow-x: hidden;
   padding: rfs(100px) 0;
+  position: relative;
+}
+
+.starterText {
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+  }
+}
+
+.starterImage {
+  @media screen and (min-width: 1024px) {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+
+    .imageWrapper {
+      height: 100%;
+    }
+
+    .test {
+      position: absolute;
+      height: 100%;
+      width: 200%;
+    }
+  }
 }
 
 /* features */
@@ -139,7 +167,7 @@ a.authorRole:hover .name {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: rfs(60px) 0;
+  padding: rfs(90px) 0;
 
   &.alternative {
     background-color: rgba(255, 90, 61, 0.1);
@@ -151,8 +179,19 @@ a.authorRole:hover .name {
 }
 
 .featuresIntro {
+  align-items: center;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 40px;
   max-width: var(--page-width-with-margin);
   padding: 0 var(--page-margin);
+
+  .visual {
+    aspect-ratio: 16/9;
+    background-color: #f9f9f9;
+    width: 100%;
+  }
 }
 
 .featuresGrid {
@@ -174,7 +213,6 @@ a.authorRole:hover .name {
 }
 
 /* features card */
-
 .feature {
   background-color: #f6f6f6;
   border-radius: 12px;
@@ -221,5 +259,33 @@ a.authorRole:hover .name {
 .successStory {
   background-color: #200523;
   color: #fff;
+  min-height: 400px;
+  overflow-x: hidden;
   padding: rfs(100px) 0;
+  position: relative;
+}
+
+.successStoryText {
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+  }
+}
+
+.successStoryImage {
+  @media screen and (min-width: 1024px) {
+    bottom: 0;
+    left: 50%;
+    position: absolute;
+    top: 0;
+
+    .imageWrapper {
+      height: 100%;
+    }
+
+    .test {
+      position: absolute;
+      height: 100%;
+      width: 200%;
+    }
+  }
 }

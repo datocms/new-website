@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import Button from 'components/Button';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';
@@ -60,6 +61,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           value
         }
         starterLink: link
+        starterImage {
+          responsiveImage {
+            ...imageFields
+          }
+        }
 
         featuresTitle: heading
         featuresDescription: description {
@@ -96,6 +102,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         caseStudy {
           ...on SuccessStoryRecord {
             slug
+          }
+        }
+        successStoryImage: image {
+          responsiveImage {
+            ...imageFields
           }
         }
       }
@@ -189,11 +200,28 @@ export default function UseCase({ subscription, preview }) {
 
       <div className={s.starter}>
         <Wrapper>
-          <h2>
-            <StructuredText data={page.starterTitle} />
-          </h2>
-          <StructuredText data={page.starterDescription} />
+          <div className={s.starterText}>
+            <h2>
+              <StructuredText data={page.starterTitle} />
+            </h2>
+            <StructuredText data={page.starterDescription} />
+            <Button as="a" p="small" href={page.starterLink}>
+              Check it out
+            </Button>
+          </div>
         </Wrapper>
+
+        {page.starterImage?.responsiveImage && (
+          <div className={s.starterImage}>
+            <div className={s.imageWrapper}>
+              <DatoImage
+                className={s.test}
+                data={page.starterImage.responsiveImage}
+                pictureStyle={{ objectFit: 'contain', objectPosition: 'left' }}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       <div className={s.features}>
@@ -225,14 +253,28 @@ export default function UseCase({ subscription, preview }) {
 
       <div className={s.successStory}>
         <Wrapper>
-          <h2>
-            <StructuredText data={page.successStoryTitle} />
-          </h2>
-          <StructuredText data={page.successStorySummary} />
-          <Link href={`/customers/${page.caseStudy.slug}`} passHref>
-            <a className={s.link}>Read Case Study</a>
-          </Link>
+          <div className={s.successStoryText}>
+            <h2>
+              <StructuredText data={page.successStoryTitle} />
+            </h2>
+            <StructuredText data={page.successStorySummary} />
+            <Button as="a" p="small" href={`/customers/${page.caseStudy.slug}`}>
+              Check it out
+            </Button>
+          </div>
         </Wrapper>
+
+        {page.successStoryImage?.responsiveImage && (
+          <div className={s.successStoryImage}>
+            <div className={s.imageWrapper}>
+              <DatoImage
+                className={s.test}
+                data={page.successStoryImage.responsiveImage}
+                pictureStyle={{ objectFit: 'contain', objectPosition: 'left' }}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );
