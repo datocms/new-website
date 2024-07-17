@@ -8,18 +8,26 @@
   margin-top: rfs(80px);
 }
 
+.testimonialTitle {
+  padding: 0 var(--page-margin);
+  text-align: center;
+}
+
 .testimonialsContainer {
   display: flex;
   gap: 50px;
   margin: 0 var(--page-margin);
+  max-width: 100%;
+  overflow: auto;
+  padding: 0 var(--page-margin);
 }
 
 .quoteWrapper {
+  flex: 1;
   margin: rfs(60px) auto;
   min-width: 280px;
   padding-top: rfs(40px);
   position: relative;
-  flex: 1;
 
   &:before {
     color: var(--accent-color);
@@ -69,10 +77,10 @@
 
 .avatar {
   border-radius: 50%;
+  flex-shrink: 0;
   height: 80px;
   margin: 0 auto 20px auto;
   width: 80px;
-  flex-shrink: 0;
 
   @media screen and (min-width: 700px) {
     margin: 0 40px 0 0;
@@ -121,10 +129,97 @@ a.authorRole:hover .name {
 /* features */
 .features {
   margin: rfs(100px) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.featuresGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: rfs(60px) 0;
+
+  &.alternative {
+    background-color: rgba(255, 90, 61, 0.1);
+
+    .feature {
+      background-color: #fff;
+    }    
+  }
+}
+
+.featuresIntro {
+  max-width: var(--page-width-with-margin);
+  padding: 0 var(--page-margin);
+}
+
+.featuresGrid {
+  display: grid;
+  gap: 20px;
+  grid-auto-flow: row dense;
+  grid-template-columns: repeat(1, 1fr);
+  max-width: var(--page-width-with-margin);
+  padding: 0 var(--page-margin);
+
+  @media screen and (min-width: 660px) {
+    grid-template-columns: repeat(2, 1fr);
+    text-align: left;
+  }
+  
+  @media screen and (min-width: 860px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* features card */
+
 .feature {
-  border: 1px solid #ddd;
+  background-color: #f6f6f6;
+  border-radius: 12px;
+  color: inherit;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 30px 35px;
+  text-decoration: none;
+  
+  &.isHighlighted {
+    @media screen and (min-width: 660px) {
+      grid-column: span 2;
+    }
+  };
+}
+
+.featureIcon {
+  margin-bottom: 20px;
+  height: 20px;
+  width: auto;
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
+.featureText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.featureTitle {
+  margin: 0;
 }
 
 /* success story */
+.successStory {
+  background-color: #200523;
+  color: #fff;
+  padding: rfs(100px) 0;
+}

@@ -101,9 +101,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         link {
           __typename
           ...on DocPageRecord {
+            id
             slug
           }
           ...on FeatureRecord {
+            id
             slug
           }
         }
@@ -111,23 +113,23 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
       }
     }
     allDocGroups {
-      children {
-        slug
-        __typename
-        pages {
-          __typename
-          ... on DocGroupPageRecord {
+      slug
+      pages {
+        ...on DocGroupPageRecord {
+          slugOverride
+          page {
+            id
+            title
+            slug
+          }
+        }
+        ...on DocGroupSectionRecord { 
+          pages {
             slugOverride
             page {
+              id
+              title
               slug
-            }
-          }
-          ... on DocGroupSectionRecord {
-            pages {
-              slugOverride
-              page {
-                slug
-              }
             }
           }
         }
@@ -140,44 +142,47 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   ${imageFields}
 `);
 
-function findDocSlug(allDocGroups, targetSlug) {
-  const allDocSlugs = allDocGroups
-    .map((root) =>
-      root.children.map((sub) =>
-        sub.pages
-          .flatMap((pageOrSection) => {
-            if (pageOrSection.__typename === 'DocGroupPageRecord') {
-              return pageOrSection;
-            }
-            return pageOrSection.pages;
-          })
-          .map((page) =>
-            (page.slugOverride || page.page.slug) === 'index'
-              ? [sub.slug]
-              : [sub.slug, page.slugOverride || page.page.slug],
-          ),
-      ),
-    )
-    .flat(2)
-    .map((chunks) => `/docs/${chunks.join('/')}`);
+function generateSlugMap(items, parentSlug = '') {
+  const result = {};
 
-  const slug = allDocSlugs.find((docSlug) => docSlug.endsWith(targetSlug));
-  return slug;
+  function mapPages(pages, currentSlug) {
+    for (const page of pages) {
+      if (page.page?.id) {
+        const pageSlug = page.slugOverride || page.page.slug;
+        if (pageSlug) {
+          result[page.page.id] = `${currentSlug}/${pageSlug}`;
+        }
+      }
+      if (page.pages) {
+        const newSlug = page.slugOverride || page.page?.slug;
+        mapPages(
+          page.pages,
+          newSlug ? `${currentSlug}/${newSlug}` : currentSlug,
+        );
+      }
+    }
+  }
+
+  for (const item of items) {
+    const currentSlug = parentSlug ? `${parentSlug}/${item.slug}` : item.slug;
+    if (item.pages) {
+      mapPages(item.pages, currentSlug);
+    }
+  }
+
+  return result;
 }
 
-function Feature({ feature, allDocGroups }) {
-  const docSlug =
-    feature.link && feature.link.__typename === 'DocPageRecord'
-      ? findDocSlug(allDocGroups, feature.link.slug)
-      : null;
+function Feature({ feature, docsSlugMap }) {
+  const getDocSlugById = (id) => docsSlugMap[id];
+  let link;
 
-  const link = feature.link
-    ? feature.link.__typename === 'FeatureRecord'
-      ? `/features/${feature.link.slug}`
-      : docSlug
-        ? docSlug
-        : '/docs/content-modelling'
-    : null;
+  if (feature.link) {
+    link =
+      feature.link.__typename === 'FeatureRecord'
+        ? `/features/${feature.link.slug}`
+        : `/docs/${getDocSlugById(feature.link.id)}`;
+  }
 
   return (
     <MaybeLink
@@ -217,6 +222,8 @@ export default function Product({ preview, subscription }) {
   const marketersFeatures = productOverview.features.filter(
     (f) => f.featureGroup === 'marketers',
   );
+
+  const docsSlugMap = generateSlugMap(allDocGroups);
 
   return (
     <Layout preview={preview} noCta>
@@ -372,7 +379,7 @@ export default function Product({ preview, subscription }) {
               <Feature
                 key={feature.id}
                 feature={feature}
-                allDocGroups={allDocGroups}
+                docsSlugMap={docsSlugMap}
               />
             );
           })}
@@ -390,7 +397,7 @@ export default function Product({ preview, subscription }) {
               <Feature
                 key={feature.id}
                 feature={feature}
-                allDocGroups={allDocGroups}
+                docsSlugMap={docsSlugMap}
               />
             );
           })}

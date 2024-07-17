@@ -1,7 +1,9 @@
+import cn from 'classnames';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';
 import Layout from 'components/Layout';
+import LazyImage from 'components/LazyImage';
 import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
@@ -64,13 +66,20 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           value
         }
         callout {
+          title
+          description {
+            value
+          }
+          image {
+            responsiveImage {
+              ...imageFields
+            }
+          }
           features {
             id
             title
             icon {
-              responsiveImage {
-                ...imageFields
-              }
+              url
             }
             description {
               value
@@ -101,6 +110,27 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
   },
 );
 
+function FeatureCard({ feature }) {
+  return (
+    <div
+      key={feature.id}
+      className={`${s.feature} ${feature.highlight && s.isHighlighted}`}
+    >
+      <article className={s.featureContent}>
+        {feature.icon?.url && (
+          <div className={s.featureIcon}>
+            <LazyImage src={feature.icon.url} height={30} width={30} />
+          </div>
+        )}
+        <div className={s.featureText}>
+          <h4 className={s.featureTitle}>{feature.title}</h4>
+          <StructuredText data={feature.description.value} />
+        </div>
+      </article>
+    </div>
+  );
+}
+
 export default function UseCase({ subscription, preview }) {
   const {
     data: { page },
@@ -115,7 +145,7 @@ export default function UseCase({ subscription, preview }) {
       </Wrapper>
 
       <div className={s.testimonials}>
-        <h2 className={s.title}>
+        <h2 className={s.testimonialTitle}>
           <StructuredText data={page.quotesHeader} />
         </h2>
         <div className={s.testimonialsContainer}>
@@ -166,27 +196,35 @@ export default function UseCase({ subscription, preview }) {
         </Wrapper>
       </div>
 
-      <Wrapper>
-        <div className={s.features}>
-          {page.callout.map((callout, index) => (
-            <div key={index} className={s.feature}>
+      <div className={s.features}>
+        <h2>{page.featuresTitle}</h2>
+        {page.callout.map((callout, index) => (
+          <section
+            key={index}
+            className={cn(s.featuresGroup, { [s.alternative]: index === 1 })}
+          >
+            <div className={s.featuresIntro}>
+              <div className={s.visual}>
+                {callout.image?.responsiveImage && (
+                  <DatoImage data={callout.image.responsiveImage} />
+                )}
+              </div>
+              <article>
+                <h3>{callout.title}</h3>
+                <StructuredText data={callout.description} />
+              </article>
+            </div>
+            <div className={s.featuresGrid}>
               {callout.features.map((card, index) => (
-                <div key={index} className={s.card}>
-                  {card.icon && (
-                    <DatoImage
-                      data={card.icon.responsiveImage}
-                      className={s.icon}
-                    />
-                  )}
-                  <h3>{card.title}</h3>
-                  <StructuredText data={card.description.value.document} />
-                </div>
+                <FeatureCard key={index} feature={card} />
               ))}
             </div>
-          ))}
-        </div>
+          </section>
+        ))}
+      </div>
 
-        <div className={s.successStory}>
+      <div className={s.successStory}>
+        <Wrapper>
           <h2>
             <StructuredText data={page.successStoryTitle} />
           </h2>
@@ -194,8 +232,8 @@ export default function UseCase({ subscription, preview }) {
           <Link href={`/customers/${page.caseStudy.slug}`} passHref>
             <a className={s.link}>Read Case Study</a>
           </Link>
-        </div>
-      </Wrapper>
+        </Wrapper>
+      </div>
     </Layout>
   );
 }
