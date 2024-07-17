@@ -123,10 +123,17 @@ a.authorRole:hover .name {
 .starter {
   background-color: #200523;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   min-height: 400px;
   overflow-x: hidden;
-  padding: rfs(100px) 0;
+  padding: rfs(100px) 0 0 0;
   position: relative;
+
+  @media screen and (min-width: 1024px) {
+    padding: rfs(100px) 0;
+  }
 }
 
 .starterText {
@@ -160,6 +167,11 @@ a.authorRole:hover .name {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h2 {
+    padding: 0 var(--page-margin);
+    text-align: center;
+  }
 }
 
 .featuresGroup {
@@ -182,10 +194,13 @@ a.authorRole:hover .name {
   align-items: center;
   display: grid;
   gap: 20px;
-  grid-template-columns: 1fr 1fr;
   margin-bottom: 40px;
   max-width: var(--page-width-with-margin);
   padding: 0 var(--page-margin);
+
+  @media screen and (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   .visual {
     aspect-ratio: 16/9;
@@ -221,12 +236,6 @@ a.authorRole:hover .name {
   grid-template-columns: 1fr;
   padding: 30px 35px;
   text-decoration: none;
-  
-  &.isHighlighted {
-    @media screen and (min-width: 660px) {
-      grid-column: span 2;
-    }
-  };
 }
 
 .featureIcon {
@@ -259,10 +268,17 @@ a.authorRole:hover .name {
 .successStory {
   background-color: #200523;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   min-height: 400px;
   overflow-x: hidden;
-  padding: rfs(100px) 0;
+  padding: rfs(100px) 0 0 0;
   position: relative;
+
+  @media screen and (min-width: 1024px) {
+    padding: rfs(100px) 0;
+  }
 }
 
 .successStoryText {
