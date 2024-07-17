@@ -1,0 +1,130 @@
+/* hero */
+
+/* testimonials */
+.testimonials {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: rfs(80px);
+}
+
+.testimonialsContainer {
+  display: flex;
+  gap: 50px;
+  margin: 0 var(--page-margin);
+}
+
+.quoteWrapper {
+  margin: rfs(60px) auto;
+  min-width: 280px;
+  padding-top: rfs(40px);
+  position: relative;
+  flex: 1;
+
+  &:before {
+    color: var(--accent-color);
+    content: '\201C';
+    font-family: var(--font-serif);
+    font-size: rfs(150px);
+    left: 50%;
+    line-height: 1;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%) translateY(-25%);
+  }
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-size: rfs(24px);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 40px;
+  text-align: center;
+  
+  @media screen and (min-width: 800px) {
+    font-size: rfs(28px);
+  }
+
+  &:before {
+    content: '\201C';
+  }
+
+  &:after {
+    content: '\201D';
+  }
+}
+
+.info {
+  text-align: center;
+
+  @media screen and (min-width: 700px) {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+  }
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 80px;
+  margin: 0 auto 20px auto;
+  width: 80px;
+  flex-shrink: 0;
+
+  @media screen and (min-width: 700px) {
+    margin: 0 40px 0 0;
+  }
+}
+
+.authorRole {
+  color: inherit;
+  text-decoration: none;
+
+  @media screen and (min-width: 700px) {
+    max-width: 250px;
+  }
+}
+
+a.authorRole:hover .name {
+  text-decoration: underline;
+}
+
+.name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+
+  @media screen and (min-width: 800px) {
+    font-size: rfs(1em);
+  }
+}
+
+.role {
+  color: var(--light-body-color);
+  font-size: 0.8em;
+
+  @media screen and (min-width: 800px) {
+    font-size: 1em;
+  }
+}
+
+/* starter */
+.starter {
+  background-color: #200523;
+  color: #fff;
+  padding: rfs(100px) 0;
+}
+
+/* features */
+.features {
+  margin: rfs(100px) 0;
+}
+
+.feature {
+  border: 1px solid #ddd;
+}
+
+/* success story */
