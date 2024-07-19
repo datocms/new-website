@@ -213,7 +213,7 @@ a.authorRole:hover .name {
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   overflow-x: hidden;
-  padding: var(--page-margin);
+  padding: var(--page-margin) var(--page-margin) 0 var(--page-margin);
   position: relative;
 
   @media screen and (min-width: 800px) {
@@ -237,11 +237,33 @@ a.authorRole:hover .name {
 }
 
 .starterImage {
+  margin-top: 30px;
+  overflow: hidden;
+  position: relative;
+
+  &:after {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    content: "";
+    filter: blur(10px);
+    height: 12px;
+    margin-left: 10px;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    width: calc(100% - 20px);
+  }
+
   @media screen and (min-width: 800px) {
+    margin-top: 0;
     bottom: 0;
     left: 60%;
     position: absolute;
     top: 0;
+
+    &::after {
+      display: none;
+    }
 
     .imageWrapper {
       height: 100%;
@@ -532,13 +554,12 @@ a.authorRole:hover .name {
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
-  gap: 40px;
   min-height: 400px;
   overflow-x: hidden;
   overflow-x: hidden;
-  padding: var(--page-margin);
+  padding: var(--page-margin) var(--page-margin) 0 var(--page-margin);
   position: relative;
-
+  
   @media screen and (min-width: 1024px) {
     padding: calc(var(--page-margin) * 2) calc(var(--page-margin) * 3);
   }
@@ -551,11 +572,33 @@ a.authorRole:hover .name {
 }
 
 .successStoryImage {
+  margin-top: 30px;
+  overflow: hidden;
+  position: relative;
+
+  &:after {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    content: "";
+    filter: blur(10px);
+    height: 12px;
+    margin-left: 10px;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    width: calc(100% - 20px);
+  }
+
   @media screen and (min-width: 1024px) {
     bottom: 0;
     left: 50%;
+    margin-top: 0;
     position: absolute;
     top: 0;
+
+    &::after {
+      display: none;
+    }
 
     .imageWrapper {
       height: 100%;

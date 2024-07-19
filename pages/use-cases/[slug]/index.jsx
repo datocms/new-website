@@ -213,9 +213,11 @@ export default function UseCase({ subscription, preview }) {
         <div className={s.starterBox}>
           <div className={s.starterText}>
             <StructuredText data={page.starterDescription} />
-            <Button as="a" p="small" href={page.starterLink}>
-              Check it out
-            </Button>
+            <Space top={1}>
+              <Button as="a" p="small" href={page.starterLink}>
+                Check it out
+              </Button>
+            </Space>
           </div>
 
           {page.starterImage?.responsiveImage && (
