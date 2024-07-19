@@ -165,11 +165,11 @@ export default function UseCase({ subscription, preview }) {
       <Head>{renderMetaTags(page.seo)}</Head>
 
       <div className={s.hero}>
-        <Wrapper>
-          <div className={s.heroTitle}>
-            <Hero title={highlightStructuredText(page.title)} />
-          </div>
+        <div className={s.heroTitle}>
+          <Hero title={highlightStructuredText(page.title)} />
+        </div>
 
+        <Wrapper>
           <div className={s.heroInfo}>
             <div className={s.heroImage}>
               <DatoImage data={page.heroImage.responsiveImage} />
