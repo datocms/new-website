@@ -297,10 +297,11 @@ a.authorRole:hover .name {
     .editor,
     .dev {
       color: var(--light-body-color);
-      transition: color 0.4s;
+      padding-top: 40px;
       position: relative;
-      width: 66%;
       text-align: center;
+      transition: color 0.4s;
+      width: 66%;
 
       @media screen and (min-width: 800px) {
         max-width: 400px;
@@ -327,11 +328,16 @@ a.authorRole:hover .name {
     }
 
     .editor {
-      margin-left: 33%;
+      margin-left: 33%;;
+      transform: rotate(8deg);
 
       @media screen and (min-width: 800px) {
         margin-left: 0;
       }
+    }
+
+    .dev {
+      transform: rotate(-8deg);
     }
     
     svg {
