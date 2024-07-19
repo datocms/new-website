@@ -1,14 +1,80 @@
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 /* hero */
+.hero {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding: 80px 0;
+
+  .heroTitleWrapper {
+    margin-right: 30%;
+    width: 60%;
+    z-index: 20;
+  }
+
+  .heroTitle {
+    font-size: rfs(80px);
+  }
+
+  .heroImage {
+    margin-left: 30%;
+    margin-top: -200px;
+    width: 60%;
+  }
+}
+
+.hero2 {
+  margin: 40px 0 80px 0;
+  overflow-x: hidden;
+
+  .heroInfo {
+    align-items: center;
+    display: grid;
+    margin-top: rfs(-40px);
+
+    @media screen and (min-width: 800px) {
+      grid-template-columns: 1fr 1fr;
+      gap: rfs(40px);
+    }
+  }
+
+  .heroTitle {
+    grid-column: span 2;
+  }
+
+  .heroSubtitle {
+    font-weight: 400;
+    font-size: rfs(22px);
+  }
+
+  .buttonContainer {
+    display: flex;
+    gap: 20px;
+  }
+}
 
 /* testimonials */
 .testimonials {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: rfs(80px);
+  overflow-x: hidden;
 }
 
 .testimonialTitle {
+  font-size: rfs(36px);
   padding: 0 var(--page-margin);
   text-align: center;
 }
@@ -26,6 +92,7 @@
   flex: 1;
   margin: rfs(60px) auto;
   min-width: 280px;
+  overflow-x: hidden;
   padding-top: rfs(40px);
   position: relative;
 
@@ -128,26 +195,53 @@ a.authorRole:hover .name {
   gap: 40px;
   min-height: 400px;
   overflow-x: hidden;
-  padding: rfs(100px) 0 0 0;
+  overflow-x: hidden;
+  padding: rfs(80px) 0 0 0;
   position: relative;
+
+  @media screen and (min-width: 800px) {
+    padding: rfs(40px) 0;
+  }
 
   @media screen and (min-width: 1024px) {
     padding: rfs(100px) 0;
   }
 }
 
+.starterBox {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  overflow-x: hidden;
+  padding: var(--page-margin);
+  position: relative;
+
+  @media screen and (min-width: 800px) {
+    padding: calc(var(--page-margin) * 2) calc(var(--page-margin) * 3);
+  }
+}
+
 .starterText {
+  h2,
+  p {
+    margin-top: 0;
+  }
+
+  @media screen and (min-width: 800px) {
+    width: 60%;
+  }
+
   @media screen and (min-width: 1024px) {
     width: 50%;
   }
 }
 
 .starterImage {
-  @media screen and (min-width: 1024px) {
-    position: absolute;
-    left: 50%;
-    top: 0;
+  @media screen and (min-width: 800px) {
     bottom: 0;
+    left: 60%;
+    position: absolute;
+    top: 0;
 
     .imageWrapper {
       height: 100%;
@@ -156,6 +250,23 @@ a.authorRole:hover .name {
     .test {
       position: absolute;
       height: 100%;
+      width: 400%;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    bottom: 0;
+    left: 50%;
+    position: absolute;
+    top: 0;
+
+    .imageWrapper {
+      height: 100%;
+    }
+
+    .test {
+      height: 100%;
+      position: absolute;
       width: 200%;
     }
   }
@@ -163,38 +274,148 @@ a.authorRole:hover .name {
 
 /* features */
 .features {
-  margin: rfs(100px) 0;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: rfs(120px) 0 rfs(80px) 0;
+  overflow-x: hidden;
 
-  h2 {
-    padding: 0 var(--page-margin);
-    text-align: center;
+  .baloons {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 40px;
+    
+    @media screen and (min-width: 800px) {
+      flex-direction: row;
+      margin-bottom: 0px;
+    }
+
+    .editor,
+    .dev {
+      color: var(--light-body-color);
+      transition: color 0.4s;
+      position: relative;
+      width: 66%;
+      text-align: center;
+
+      @media screen and (min-width: 800px) {
+        max-width: 400px;
+      }
+
+      &:hover {
+        color: var(--text-color);
+
+        svg {
+          fill: var(--text-color);
+          transform: translateY(6px);
+        }
+      }
+
+      p {
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        font-weight: bold;
+        text-decoration: underline;
+      }
+    }
+
+    .editor {
+      margin-left: 33%;
+
+      @media screen and (min-width: 800px) {
+        margin-left: 0;
+      }
+    }
+    
+    svg {
+      fill: var(--light-body-color);
+      width: auto;
+      height: rfs(80px);
+      min-height: 60px;
+      transition: fill 0.4s, transform 0.4s;
+      transform: translateY(0);
+      margin-top: 15px;
+
+      @media screen and (min-width: 800px) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .niceBlock {
+    align-items: center;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    max-width: 100%;
+    width: var(--page-width-with-margin);
+
+    &:hover {
+      & > * {
+        fill: var(--text-color);
+        color: var(--text-color);
+      }
+    }
+
+    @media screen and (min-width: 800px) {
+      flex-direction: row;
+      gap: rfs(60px);
+      padding: calc(var(--page-margin) *1.5) calc(var(--page-margin) * 2);
+      text-align: left;
+    }
+  }
+
+  .blockIllustration {
+    animation: float 6s ease-in-out infinite;
+    flex-shrink: 0;
+    height: auto;
+    transform-style: preserve-3d;
+    transition: fill 0.5s;
+    width: rfs(200px);
+    min-width: 120px;
+    will-change: transform;
+  }
+
+  .blockText {
+    transition: color 0.5s;
+
+    h2 {
+      font-size: rfs(28px);
+    }
   }
 }
 
 .featuresGroup {
-  width: 100%;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  overflow-x: hidden;
   padding: rfs(90px) 0;
+  width: 100%;
 
   &.alternative {
     background-color: rgba(255, 90, 61, 0.1);
 
     .feature {
-      background-color: #fff;
-    }    
+      /* background-image: linear-gradient(120deg, #fff, #fffbfb); */
+    }
   }
 }
 
 .featuresIntro {
   align-items: center;
   display: grid;
-  gap: 20px;
-  margin-bottom: 40px;
+  gap: 40px;
+  margin-bottom: rfs(60px);
   max-width: var(--page-width-with-margin);
   padding: 0 var(--page-margin);
 
@@ -204,14 +425,44 @@ a.authorRole:hover .name {
 
   .visual {
     aspect-ratio: 16/9;
-    background-color: #f9f9f9;
+    background-color: #fff;
+    border: #ddd;
+    border-radius: 4px;
     width: 100%;
+    position: relative;
+    border: 1px solid #2f333f;
+
+    &:after {
+      background-color: #c0bac1;
+      border-radius: 4px;
+      content: '';
+      display: block;
+      filter: blur(1px);
+      height: 100%;
+      left: -6px;
+      mix-blend-mode: multiply;
+      position: absolute;
+      top: 6px;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+
+  article {
+    h3 {
+      font-size: rfs(28px);
+      margin: 0 0 10px 0;
+    }
+
+    p {
+      /* font-size: rfs(20px); */
+    }
   }
 }
 
 .featuresGrid {
   display: grid;
-  gap: 20px;
+  gap: 40px;
   grid-auto-flow: row dense;
   grid-template-columns: repeat(1, 1fr);
   max-width: var(--page-width-with-margin);
@@ -229,18 +480,22 @@ a.authorRole:hover .name {
 
 /* features card */
 .feature {
-  background-color: #f6f6f6;
+  /* background-color: #fff; */
+  /* background-image: linear-gradient(120deg, #f9f9f9, #f6f6f6); */
+  /* border: 1px solid rgba(0,0,0,.1); */
+  /* padding: 30px 35px; */
   border-radius: 12px;
   color: inherit;
   display: grid;
+  font-size: rfs(16px);
   grid-template-columns: 1fr;
-  padding: 30px 35px;
+  line-height: 1.3;
   text-decoration: none;
 }
 
 .featureIcon {
-  margin-bottom: 20px;
   height: 20px;
+  margin-bottom: 20px;
   width: auto;
 
   img {
@@ -266,18 +521,20 @@ a.authorRole:hover .name {
 
 /* success story */
 .successStory {
-  background-color: #200523;
-  color: #fff;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
   gap: 40px;
   min-height: 400px;
   overflow-x: hidden;
-  padding: rfs(100px) 0 0 0;
+  overflow-x: hidden;
+  padding: var(--page-margin);
   position: relative;
 
   @media screen and (min-width: 1024px) {
-    padding: rfs(100px) 0;
+    padding: calc(var(--page-margin) * 2) calc(var(--page-margin) * 3);
   }
 }
 
@@ -299,8 +556,8 @@ a.authorRole:hover .name {
     }
 
     .test {
-      position: absolute;
       height: 100%;
+      position: absolute;
       width: 200%;
     }
   }

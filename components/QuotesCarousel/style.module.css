@@ -112,7 +112,7 @@ a.authorRole:hover .name {
 
 .quotesInner {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-items: center;
   position: relative;
 }
