@@ -12,30 +12,6 @@
 
 /* hero */
 .hero {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  padding: 80px 0;
-
-  .heroTitleWrapper {
-    margin-right: 30%;
-    width: 60%;
-    z-index: 20;
-  }
-
-  .heroTitle {
-    font-size: rfs(80px);
-  }
-
-  .heroImage {
-    margin-left: 30%;
-    margin-top: -200px;
-    width: 60%;
-  }
-}
-
-.hero2 {
   margin: 40px 0 80px 0;
   overflow-x: hidden;
 
@@ -61,7 +37,13 @@
 
   .buttonContainer {
     display: flex;
-    gap: 20px;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @media screen and (min-width: 800px) {
+      justify-content: flex-start;
+    }
   }
 }
 
@@ -186,7 +168,6 @@ a.authorRole:hover .name {
   }
 }
 
-/* starter */
 .starter {
   background-color: #200523;
   color: #fff;
@@ -294,7 +275,6 @@ a.authorRole:hover .name {
   }
 }
 
-/* features */
 .features {
   align-items: center;
   display: flex;
@@ -506,7 +486,6 @@ a.authorRole:hover .name {
   }
 }
 
-/* features card */
 .feature {
   /* background-color: #fff; */
   /* background-image: linear-gradient(120deg, #f9f9f9, #f6f6f6); */
@@ -547,7 +526,6 @@ a.authorRole:hover .name {
   margin: 0;
 }
 
-/* success story */
 .successStory {
   background-color: #fff;
   border-radius: 10px;
@@ -609,5 +587,22 @@ a.authorRole:hover .name {
       position: absolute;
       width: 200%;
     }
+  }
+}
+
+.outro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media screen and (min-width: 800px) {
+    flex-direction: row;
   }
 }

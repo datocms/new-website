@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import Button from 'components/Button';
+import Checks from 'components/Checks';
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
@@ -48,7 +49,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         seo: _seoMetaTags {
           ...seoMetaTagsFields
         }
-
         title {
           value
         }
@@ -60,16 +60,15 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             ...imageFields
           }
         }
-
-        quotesHeader: header {
+        quotesHeader {
           value
         }
         quotes {
           ...on PartnerTestimonialRecord {
+            id
             ...partnerTestimonialFields
           }
         }
-
         starterTitle {
           value
         }
@@ -82,8 +81,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             ...imageFields
           }
         }
-
-        featuresTitle: heading
+        featuresHeader
         featuresDescription: description {
           value
         }
@@ -108,8 +106,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             }
           }
         }
-
-        successStoryTitle: headline {
+        successStoryHeader {
           value
         }
         successStorySummary: summary {
@@ -163,13 +160,11 @@ export default function UseCase({ subscription, preview }) {
     data: { page },
   } = useQuerySubscription(subscription);
 
-  const quotes = page.quotes;
-
   return (
     <Layout preview={preview} noCta>
       <Head>{renderMetaTags(page.seo)}</Head>
 
-      <div className={s.hero2}>
+      <div className={s.hero}>
         <Wrapper>
           <div className={s.heroTitle}>
             <Hero title={highlightStructuredText(page.title)} />
@@ -180,7 +175,6 @@ export default function UseCase({ subscription, preview }) {
               <DatoImage data={page.heroImage.responsiveImage} />
             </div>
             <div className={s.heroText}>
-              {/* <h1 className={s.heroTitle}>{highlightStructuredText(page.title)}</h1> */}
               <h3 className={s.heroSubtitle}>
                 {highlightStructuredText(page.subtitle)}
               </h3>
@@ -203,7 +197,7 @@ export default function UseCase({ subscription, preview }) {
         </h2>
 
         <Space top={1} bottom={2}>
-          <QuotesCarousel quotes={quotes} animated={true} />
+          <QuotesCarousel quotes={page.quotes} animated={true} />
         </Space>
       </div>
 
@@ -243,13 +237,10 @@ export default function UseCase({ subscription, preview }) {
             <div className={s.dev}>
               <p>
                 <strong>
-                  If you’re a <Highlight style="good">dev</Highlight> 
+                  If you’re a <Highlight style="good">dev</Highlight>
                 </strong>{' '}
-                looking to hook up DatoCMS to your repos, head on over to <Link href={'/docs'}>our
-                docs</Link>
-                {/* <Button as="a" p="tiny" s="invert" href="/docs">
-                  To the docs
-                </Button> */}
+                looking to hook up DatoCMS to your repos, head on over to{' '}
+                <Link href={'/docs'}>our docs</Link>
               </p>
             </div>
 
@@ -258,7 +249,7 @@ export default function UseCase({ subscription, preview }) {
                 <strong>
                   If you’re an{' '}
                   <Highlight style="good">
-                    editor, marketer, or content creator 
+                    editor, marketer, or content creator
                   </Highlight>
                 </strong>{' '}
                 on the fence about whether or not DatoCMS is for you, you’re
@@ -275,7 +266,7 @@ export default function UseCase({ subscription, preview }) {
               <Zen />
             </div>
             <div className={s.blockText}>
-              <h2>{page.featuresTitle}</h2>
+              <h2>{page.featuresHeader}</h2>
               <StructuredText data={page.featuresDescription} />
             </div>
           </div>
@@ -307,13 +298,10 @@ export default function UseCase({ subscription, preview }) {
       </div>
 
       <TitleStripWithContent
-        title={<StructuredText data={page.successStoryTitle} />}
+        title={<StructuredText data={page.successStoryHeader} />}
       >
         <div className={s.successStory}>
           <div className={s.successStoryText}>
-            <h2>
-              <StructuredText data={page.successStoryTitle} />
-            </h2>
             <StructuredText data={page.successStorySummary} />
             <Space top={1}>
               <Button
@@ -342,6 +330,29 @@ export default function UseCase({ subscription, preview }) {
           )}
         </div>
       </TitleStripWithContent>
+
+      <Space top={3}>
+        <div className={s.outro}>
+          <InterstitialTitle style="one" kicker="Seen enought?">
+            Get starter with DatoCMS
+          </InterstitialTitle>
+          <Checks checks={['No credit card', 'Easy setup']}>
+            <div className={s.buttonGroup}>
+              <Button as="a" href="https://dashboard.datocms.com/signup">
+                Sign up for free
+              </Button>
+              <Button
+                as="a"
+                s="invert"
+                href="https://try.datocms.com"
+                target="_blank"
+              >
+                Try our interactive demo ⤑
+              </Button>
+            </div>
+          </Checks>
+        </div>
+      </Space>
     </Layout>
   );
 }
