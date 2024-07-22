@@ -333,8 +333,8 @@ export default function UseCase({ subscription, preview }) {
 
       <Space top={3}>
         <div className={s.outro}>
-          <InterstitialTitle style="one" kicker="Seen enought?">
-            Get starter with DatoCMS
+          <InterstitialTitle style="one" kicker="Seen enough?">
+            Get started with DatoCMS
           </InterstitialTitle>
           <Checks checks={['No credit card', 'Easy setup']}>
             <div className={s.buttonGroup}>
