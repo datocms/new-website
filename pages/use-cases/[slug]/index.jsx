@@ -237,32 +237,34 @@ export default function UseCase({ subscription, preview }) {
         </Space>
       </div>
 
-      <div className={s.starterBox}>
+      <div className={s.starterBoxWrapper}>
         <Wrapper>
-          <div className={s.starterText}>
-            <h2>{highlightStructuredText(page.starterTitle)}</h2>
-            <StructuredText data={page.starterDescription} />
-            <Space top={1}>
-              <Button as="a" p="small" s="invert" href={page.starterLink}>
-                Check it out
-              </Button>
-            </Space>
-          </div>
-
-          {page.starterImage?.responsiveImage && (
-            <div className={s.starterImage}>
-              <div className={s.imageWrapper}>
-                <DatoImage
-                  className={s.test}
-                  data={page.starterImage.responsiveImage}
-                  pictureStyle={{
-                    objectFit: 'contain',
-                    objectPosition: 'left',
-                  }}
-                />
-              </div>
+          <div className={s.starterBox}>
+            <div className={s.starterBoxText}>
+              <h2>{highlightStructuredText(page.starterTitle)}</h2>
+              <StructuredText data={page.starterDescription} />
+              <Space top={1}>
+                <Button as="a" p="small" s="invert" href={page.starterLink}>
+                  Check it out
+                </Button>
+              </Space>
             </div>
-          )}
+
+            {page.starterImage?.responsiveImage && (
+              <div className={s.starterBoxImage}>
+                <div className={s.imageWrapper}>
+                  <DatoImage
+                    className={s.image}
+                    data={page.starterImage.responsiveImage}
+                    pictureStyle={{
+                      objectFit: 'contain',
+                      objectPosition: 'left',
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </Wrapper>
       </div>
 
@@ -354,7 +356,7 @@ export default function UseCase({ subscription, preview }) {
               <div className={s.successStoryImage}>
                 <div className={s.imageWrapper}>
                   <DatoImage
-                    className={s.test}
+                    className={s.image}
                     data={page.successStoryImage.responsiveImage}
                     pictureStyle={{
                       objectFit: 'contain',
