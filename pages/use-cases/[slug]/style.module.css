@@ -10,7 +10,6 @@
   }
 }
 
-/* hero */
 .hero {
   align-items: center;
   display: flex;
@@ -62,7 +61,6 @@
   position: relative;
 }
 
-/* testimonials */
 .testimonials {
   align-items: center;
   display: flex;
@@ -205,12 +203,9 @@ a.authorRole:hover .name {
 }
 
 .starterBox {
-  /* border-radius: 10px; */
-  /* box-shadow: var(--box-shadow); */
   background-color: #200523;
   color: #fff;
   overflow-x: hidden;
-  /* padding: var(--page-margin) var(--page-margin) 0 var(--page-margin); */
   position: relative;
 
   @media screen and (min-width: 800px) {
@@ -432,11 +427,7 @@ a.authorRole:hover .name {
   width: 100%;
 
   &.alternative {
-    background-color: rgba(255, 90, 61, 0.1);
-
-    .feature {
-      /* background-image: linear-gradient(120deg, #fff, #fffbfb); */
-    }
+    background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
   }
 }
 
@@ -482,10 +473,6 @@ a.authorRole:hover .name {
       font-size: rfs(28px);
       margin: 0 0 10px 0;
     }
-
-    p {
-      /* font-size: rfs(20px); */
-    }
   }
 }
 
@@ -508,10 +495,6 @@ a.authorRole:hover .name {
 }
 
 .feature {
-  /* background-color: #fff; */
-  /* background-image: linear-gradient(120deg, #f9f9f9, #f6f6f6); */
-  /* border: 1px solid rgba(0,0,0,.1); */
-  /* padding: 30px 35px; */
   border-radius: 12px;
   color: inherit;
   display: grid;
@@ -553,7 +536,7 @@ a.authorRole:hover .name {
 
   &:before {
     content: '';
-    background-image: linear-gradient(45deg, #200523 30%, #220724 60%);
+    background-image: linear-gradient(45deg, #200523 30%, #250928 60%);
     clip-path: var(--clip-path);
     text-align: center;
     position: absolute;
@@ -567,7 +550,9 @@ a.authorRole:hover .name {
 
 .successStory {
   background-color: #fff;
-  background-color: #76377c;
+  /* background-color: #76377c; */
+
+  background-color: color-mix(in srgb, #200523 70%, #b039b8);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   display: flex;
@@ -596,7 +581,7 @@ a.authorRole:hover .name {
   }
 
   mark {
-    background-color: rgb(221, 25, 235);
+    background-color: #b039b8;
     color: #fff;
   }
 }

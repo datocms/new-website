@@ -2,7 +2,6 @@ import cn from 'classnames';
 import Button from 'components/Button';
 import Checks from 'components/Checks';
 import Head from 'components/Head';
-import Hero from 'components/Hero';
 import Highlight from 'components/Highlight';
 import { highlightStructuredText } from 'components/Highlight';
 import InterstitialTitle from 'components/InterstitialTitle';
@@ -10,7 +9,6 @@ import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
 import QuotesCarousel from 'components/QuotesCarousel';
 import Space from 'components/Space';
-import TitleStripWithContent from 'components/TitleStripWithContent';
 import Wrapper from 'components/Wrapper';
 import {
   gqlStaticPaths,
