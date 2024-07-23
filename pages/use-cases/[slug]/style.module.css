@@ -16,7 +16,7 @@
   flex-direction: column;
   gap: rfs(80px);
   justify-content: center;
-  padding: rfs(80px) 0;
+  padding: rfs(120px) 0 rfs(80px) 0;
   text-align: center;
 
   @media screen and (min-width: 1000px) {
@@ -549,10 +549,7 @@ a.authorRole:hover .name {
 }
 
 .successStory {
-  background-color: #fff;
-  /* background-color: #76377c; */
-
-  background-color: color-mix(in srgb, #200523 70%, #b039b8);
+  background-color: color-mix(in srgb, #200523 66%, #b039b8);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   display: flex;
