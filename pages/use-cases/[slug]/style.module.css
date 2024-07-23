@@ -53,12 +53,45 @@
   }
 }
 
-.heroImage {
+.heroImageWrapper {
   align-items: center;
   display: flex;
   justify-content: center;
   max-width: 600px;
+  padding-bottom: 5%;
   position: relative;
+
+  &:hover {
+    .heroImage:nth-child(1) {
+      transform: perspective(600px) rotateY(20deg) translateY(-5px);
+    }
+
+    .heroImage:nth-child(2) {
+      transform: perspective(600px) rotateY(-20deg) translateY(5px);
+    }
+  }
+
+  .heroImage {
+    box-shadow: var(--box-shadow);
+    border-radius: 2px;
+    height: auto;
+    transition: transform 0.5s;
+
+    &:nth-child(1) {
+      margin-left: -40%;
+      margin-top: -10%;
+      position: absolute;
+      transform: perspective(600px) rotateY(20deg);
+      width: 55%;
+    }
+
+    &:nth-child(2) {
+      margin-left: 30%;
+      margin-top: 10%;
+      transform: perspective(600px) rotateY(-20deg);
+      width: 65%;
+    }
+  }
 }
 
 .testimonials {
@@ -572,7 +605,7 @@ a.authorRole:hover .name {
   }
 
   h2 {
-    font-size: rfs(42px);
+    font-size: rfs(36px);
     margin-top: 0;
     margin-bottom: 0.5em;
   }

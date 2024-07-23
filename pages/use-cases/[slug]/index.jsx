@@ -58,6 +58,16 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             ...imageFields
           }
         }
+        heroCustomer {
+          responsiveImage {
+            ...imageFields
+          }
+        }
+        heroProduct {
+          responsiveImage {
+            ...imageFields
+          }
+        }
         quotesHeader {
           value
         }
@@ -180,8 +190,20 @@ export default function UseCase({ subscription, preview }) {
               </Button>
             </div>
           </div>
-          <div className={s.heroImage}>
-            <DatoImage data={page.heroImage.responsiveImage} />
+          <div className={s.heroImageWrapper}>
+            {page.heroCustomer?.responsiveImage &&
+            page.heroProduct?.responsiveImage ? (
+              <>
+                <div className={s.heroImage}>
+                  <DatoImage data={page.heroCustomer.responsiveImage} />
+                </div>
+                <div className={s.heroImage}>
+                  <DatoImage data={page.heroProduct.responsiveImage} />
+                </div>
+              </>
+            ) : (
+              <DatoImage data={page.heroImage.responsiveImage} />
+            )}
           </div>
         </div>
       </Wrapper>
