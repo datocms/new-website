@@ -7,6 +7,7 @@ import { highlightStructuredText } from 'components/Highlight';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
 import LazyImage from 'components/LazyImage';
+import LogosBar from 'components/LogosBar';
 import QuotesCarousel from 'components/QuotesCarousel';
 import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
@@ -20,6 +21,11 @@ import {
 import Link from 'next/link';
 import Arrow from 'public/images/arrow.svg';
 import Zen from 'public/images/illustrations/zen.svg';
+import Hashicorp from 'public/images/logos/hashicorp.svg';
+import LittleCaesars from 'public/images/logos/new/little-caesars.svg';
+import Polestar from 'public/images/logos/polestar.svg';
+import Vercel from 'public/images/logos/vercel.svg';
+import Verizon from 'public/images/logos/verizon.svg';
 import {
   Image as DatoImage,
   StructuredText,
@@ -208,12 +214,25 @@ export default function UseCase({ subscription, preview }) {
         </div>
       </Wrapper>
 
-      <div className={s.testimonials}>
-        <h2 className={s.testimonialTitle}>
-          <StructuredText data={page.quotesHeader} />
-        </h2>
+      <LogosBar
+        title="We power experiences for over half a billion users"
+        clients={[
+          <Polestar key="Polestar" />,
+          <Hashicorp key="Hashicorp" />,
+          <Verizon key="Verizon" />,
+          <LittleCaesars key="LittleCaesars" />,
+          <Vercel key="Vercel" />,
+        ]}
+      />
 
-        <Space top={1} bottom={2}>
+      <div className={s.testimonials}>
+        <Wrapper>
+          <h2 className={s.testimonialTitle}>
+            {highlightStructuredText(page.quotesHeader)}
+          </h2>
+        </Wrapper>
+
+        <Space bottom={3}>
           <QuotesCarousel quotes={page.quotes} animated={true} />
         </Space>
       </div>

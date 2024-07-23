@@ -103,7 +103,7 @@
 
 .testimonialTitle {
   font-size: rfs(36px);
-  padding: 0 var(--page-margin);
+  padding: rfs(100px) 0 rfs(40px) 0;
   text-align: center;
 }
 
