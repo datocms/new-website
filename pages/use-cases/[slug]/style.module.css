@@ -205,11 +205,12 @@ a.authorRole:hover .name {
 }
 
 .starterBox {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: var(--box-shadow);
+  /* border-radius: 10px; */
+  /* box-shadow: var(--box-shadow); */
+  background-color: #200523;
+  color: #fff;
   overflow-x: hidden;
-  padding: var(--page-margin) var(--page-margin) 0 var(--page-margin);
+  /* padding: var(--page-margin) var(--page-margin) 0 var(--page-margin); */
   position: relative;
 
   @media screen and (min-width: 800px) {
@@ -218,7 +219,11 @@ a.authorRole:hover .name {
 }
 
 .starterText {
-  h2,
+  h2 {
+    font-size: rfs(42px);
+    margin-bottom: 0.5em;
+  }
+
   p {
     margin-top: 0;
   }
@@ -238,8 +243,9 @@ a.authorRole:hover .name {
   position: relative;
 
   &:after {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
+    border-bottom: 1px solid #fff;
     content: "";
     filter: blur(10px);
     height: 12px;
@@ -541,14 +547,32 @@ a.authorRole:hover .name {
   margin: 0;
 }
 
+.successStoryWrapper {
+  padding: rfs(100px) 0 0;
+  position: relative;
+
+  &:before {
+    content: '';
+    background-image: linear-gradient(45deg, #200523 30%, #220724 60%);
+    clip-path: var(--clip-path);
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 90%;
+    z-index: -1;
+  }
+}
+
 .successStory {
   background-color: #fff;
+  background-color: #76377c;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
   min-height: 400px;
-  overflow-x: hidden;
   overflow-x: hidden;
   padding: var(--page-margin) var(--page-margin) 0 var(--page-margin);
   position: relative;
@@ -559,8 +583,21 @@ a.authorRole:hover .name {
 }
 
 .successStoryText {
+  color: #fff;
+
   @media screen and (min-width: 1024px) {
-    width: 50%;
+    width: 60%;
+  }
+
+  h2 {
+    font-size: rfs(42px);
+    margin-top: 0;
+    margin-bottom: 0.5em;
+  }
+
+  mark {
+    background-color: rgb(221, 25, 235);
+    color: #fff;
   }
 }
 
@@ -570,7 +607,7 @@ a.authorRole:hover .name {
   position: relative;
 
   &:after {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
     content: "";
     filter: blur(10px);

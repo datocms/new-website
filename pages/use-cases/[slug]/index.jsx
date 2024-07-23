@@ -198,14 +198,13 @@ export default function UseCase({ subscription, preview }) {
         </Space>
       </div>
 
-      <TitleStripWithContent
-        title={<StructuredText data={page.starterTitle} />}
-      >
-        <div className={s.starterBox}>
+      <div className={s.starterBox}>
+        <Wrapper>
           <div className={s.starterText}>
+            <h2>{highlightStructuredText(page.starterTitle)}</h2>
             <StructuredText data={page.starterDescription} />
             <Space top={1}>
-              <Button as="a" p="small" href={page.starterLink}>
+              <Button as="a" p="small" s="invert" href={page.starterLink}>
                 Check it out
               </Button>
             </Space>
@@ -225,8 +224,8 @@ export default function UseCase({ subscription, preview }) {
               </div>
             </div>
           )}
-        </div>
-      </TitleStripWithContent>
+        </Wrapper>
+      </div>
 
       <div className={s.features}>
         <Wrapper>
@@ -294,39 +293,41 @@ export default function UseCase({ subscription, preview }) {
         ))}
       </div>
 
-      <TitleStripWithContent
-        title={<StructuredText data={page.successStoryHeader} />}
-      >
-        <div className={s.successStory}>
-          <div className={s.successStoryText}>
-            <StructuredText data={page.successStorySummary} />
-            <Space top={1}>
-              <Button
-                as="a"
-                p="small"
-                href={`/customers/${page.caseStudy.slug}`}
-              >
-                Check it out
-              </Button>
-            </Space>
-          </div>
-
-          {page.successStoryImage?.responsiveImage && (
-            <div className={s.successStoryImage}>
-              <div className={s.imageWrapper}>
-                <DatoImage
-                  className={s.test}
-                  data={page.successStoryImage.responsiveImage}
-                  pictureStyle={{
-                    objectFit: 'contain',
-                    objectPosition: 'left',
-                  }}
-                />
-              </div>
+      <div className={s.successStoryWrapper}>
+        <Wrapper>
+          <div className={s.successStory}>
+            <div className={s.successStoryText}>
+              <h2>{highlightStructuredText(page.successStoryHeader)}</h2>
+              <StructuredText data={page.successStorySummary} />
+              <Space top={1}>
+                <Button
+                  as="a"
+                  p="small"
+                  s="invert"
+                  href={`/customers/${page.caseStudy.slug}`}
+                >
+                  Check it out
+                </Button>
+              </Space>
             </div>
-          )}
-        </div>
-      </TitleStripWithContent>
+
+            {page.successStoryImage?.responsiveImage && (
+              <div className={s.successStoryImage}>
+                <div className={s.imageWrapper}>
+                  <DatoImage
+                    className={s.test}
+                    data={page.successStoryImage.responsiveImage}
+                    pictureStyle={{
+                      objectFit: 'contain',
+                      objectPosition: 'left',
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </Wrapper>
+      </div>
 
       <Space top={3}>
         <div className={s.outro}>
