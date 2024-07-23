@@ -12,40 +12,54 @@
 
 /* hero */
 .hero {
-  margin: 40px 0 80px 0;
-  overflow-x: hidden;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: rfs(80px);
+  justify-content: center;
+  padding: rfs(80px) 0;
+  text-align: center;
 
-  .heroInfo {
-    align-items: center;
+  @media screen and (min-width: 1000px) {
     display: grid;
-    margin-top: rfs(-40px);
-
-    @media screen and (min-width: 800px) {
-      grid-template-columns: 1fr 1fr;
-      gap: rfs(40px);
-    }
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    grid-gap: 40px;
+    text-align: left;
   }
+}
 
-  .heroTitle {
-    grid-column: span 2;
+.heroTitle {
+  font-family: var(--font-headline);
+  font-size: rfs(70px);
+  font-weight: bold;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  margin: 0 0 rfs(40px) 0;
+}
+
+.heroSubtitle {
+  margin-bottom: rfs(20px);
+}
+
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 30px;
+
+  @media screen and (min-width: 1000px) {
+    justify-content: flex-start;
   }
+}
 
-  .heroSubtitle {
-    font-weight: 400;
-    font-size: rfs(22px);
-  }
-
-  .buttonContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 30px;
-
-    @media screen and (min-width: 800px) {
-      justify-content: flex-start;
-    }
-  }
+.heroImage {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
+  position: relative;
 }
 
 /* testimonials */

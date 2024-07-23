@@ -164,32 +164,29 @@ export default function UseCase({ subscription, preview }) {
     <Layout preview={preview} noCta>
       <Head>{renderMetaTags(page.seo)}</Head>
 
-      <div className={s.hero}>
-        <div className={s.heroTitle}>
-          <Hero title={highlightStructuredText(page.title)} />
-        </div>
-
-        <Wrapper>
-          <div className={s.heroInfo}>
-            <div className={s.heroImage}>
-              <DatoImage data={page.heroImage.responsiveImage} />
+      <Wrapper>
+        <div className={s.hero}>
+          <div className={s.heroBody}>
+            <h1 className={s.heroTitle}>
+              {highlightStructuredText(page.title)}
+            </h1>
+            <div className={s.heroSubtitle}>
+              {highlightStructuredText(page.subtitle)}
             </div>
-            <div className={s.heroText}>
-              <h3 className={s.heroSubtitle}>
-                {highlightStructuredText(page.subtitle)}
-              </h3>
-              <div className={s.buttonContainer}>
-                <Button as="a" href="https://dashboard.datocms.com/signup">
-                  Try it for free
-                </Button>
-                <Button as="a" s="invert" href="/contact">
-                  Contact sales
-                </Button>
-              </div>
+            <div className={s.buttonContainer}>
+              <Button as="a" href="https://dashboard.datocms.com/signup">
+                Try it for free
+              </Button>
+              <Button as="a" s="invert" href="/contact">
+                Contact sales
+              </Button>
             </div>
           </div>
-        </Wrapper>
-      </div>
+          <div className={s.heroImage}>
+            <DatoImage data={page.heroImage.responsiveImage} />
+          </div>
+        </div>
+      </Wrapper>
 
       <div className={s.testimonials}>
         <h2 className={s.testimonialTitle}>
