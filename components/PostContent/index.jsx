@@ -21,7 +21,6 @@ import { Image as DatoImage, StructuredText, renderRule } from 'react-datocms';
 import ResponsiveEmbed from 'react-responsive-embed';
 import truncate from 'truncate';
 import slugify from 'utils/slugify';
-import partnerStyles from '/pages/partners/[partnerSlug]/style.module.css';
 import { parseShortCodes } from '../../utils/table';
 import defaultStyles from './style.module.css';
 
@@ -90,32 +89,7 @@ function renderBlock(s, block, defaultAltForImages) {
             }}
           >
             {block.showcaseProjects.map((project) => (
-              <div key={project.slug} className={s.pluginBoxContainer}>
-                <PluginBox
-                  title={project.name}
-                  key={project.slug}
-                  href={`/partners/${project.partner.slug}/showcase/${project.slug}`}
-                  description={
-                    <div className={partnerStyles.demoDesc}>
-                      <div className={partnerStyles.demoDescBody}>
-                        {truncate(toPlainText(project.headline), 120)}
-                      </div>
-                      <div className={partnerStyles.demoDescImage}>
-                        <LazyImage
-                          className={partnerStyles.techLogo}
-                          src={project.partner.logo.url}
-                        />
-                      </div>
-                    </div>
-                  }
-                  image={
-                    <DatoImage
-                      className={partnerStyles.boxImageImage}
-                      data={project.mainImage.responsiveImage}
-                    />
-                  }
-                />
-              </div>
+              <div key={project.slug} className={s.pluginBoxContainer} />
             ))}
           </div>
         </div>
