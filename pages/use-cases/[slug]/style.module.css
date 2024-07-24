@@ -33,7 +33,7 @@
   font-size: rfs(70px);
   font-weight: bold;
   letter-spacing: -0.02em;
-  line-height: 0.9;
+  line-height: 1.1;
   margin: 0 0 rfs(40px) 0;
 }
 
@@ -257,8 +257,9 @@ a.authorRole:hover .name {
 
   h2 {
     font-size: rfs(36px);
-    margin-top: 0;
+    line-height: 1.2;
     margin-bottom: 0.5em;
+    margin-top: 0;
   }
 
   mark {
@@ -312,13 +313,13 @@ a.authorRole:hover .name {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: rfs(120px) 0 rfs(80px) 0;
+  margin: rfs(120px) 0 rfs(40px) 0;
   overflow-x: hidden;
 
   .baloons {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 10px;
     justify-content: space-around;
     align-items: flex-start;
     width: 100%;
@@ -377,12 +378,12 @@ a.authorRole:hover .name {
     
     svg {
       fill: var(--light-body-color);
-      width: auto;
       height: rfs(80px);
-      min-height: 60px;
-      transition: fill 0.4s, transform 0.4s;
-      transform: translateY(0);
       margin-top: 15px;
+      min-height: 60px;
+      transform: translateY(0);
+      transition: fill 0.4s, transform 0.4s;
+      width: auto;
 
       @media screen and (min-width: 800px) {
         margin-left: 0;
@@ -392,7 +393,6 @@ a.authorRole:hover .name {
 
   .niceBlock {
     align-items: center;
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -410,7 +410,7 @@ a.authorRole:hover .name {
     @media screen and (min-width: 800px) {
       flex-direction: row;
       gap: rfs(60px);
-      padding: calc(var(--page-margin) *1.5) calc(var(--page-margin) * 2);
+      padding: 0 calc(var(--page-margin) * 2);
       text-align: left;
     }
   }
@@ -548,7 +548,7 @@ a.authorRole:hover .name {
 }
 
 .successStoryWrapper {
-  padding: rfs(100px) 0 0;
+  padding: rfs(100px) 0 0 0;
   position: relative;
 
   &:before {
@@ -590,8 +590,9 @@ a.authorRole:hover .name {
 
   h2 {
     font-size: rfs(36px);
-    margin-top: 0;
+    line-height: 1.2;
     margin-bottom: 0.5em;
+    margin-top: 0;
   }
 
   mark {

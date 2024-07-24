@@ -228,13 +228,10 @@ export default function UseCase({ subscription, preview }) {
       />
 
       <div className={s.testimonials}>
-        <Wrapper>
-          <h2 className={s.testimonialTitle}>
+        <Space top={2} bottom={3}>
+          <InterstitialTitle style="three">
             {highlightStructuredText(page.quotesHeader)}
-          </h2>
-        </Wrapper>
-
-        <Space bottom={2}>
+          </InterstitialTitle>
           <QuotesCarousel quotes={quotes} animated={false} />
         </Space>
       </div>
@@ -372,7 +369,7 @@ export default function UseCase({ subscription, preview }) {
         </Wrapper>
       </div>
 
-      <Space top={3}>
+      <Space top={2}>
         <div className={s.outro}>
           <InterstitialTitle style="one" kicker="Seen enough?">
             Get started with DatoCMS
