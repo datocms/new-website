@@ -213,6 +213,14 @@
   border: 1px solid var(--border-color);
 }
 
+.cardBadgeEmoji {
+  font-family: -apple-system, Verdana, sans-serif; /* smooth out weird font baseline */
+}
+
+.cardBadgeName {
+  padding-top: 0.1em; /* smooth out weird font baseline */
+}
+
 .cardLabel {
   background-color: var(--border-color);
   white-space: nowrap;
