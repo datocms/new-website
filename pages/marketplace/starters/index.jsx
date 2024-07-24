@@ -14,7 +14,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
   } = await request({
     query: `
       {
-        starters: allTemplateDemos(first: 100) {
+        starters: allTemplateDemos(first: 100, orderBy: position_ASC) {
           id
           name
           cmsDescription
@@ -47,6 +47,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
 
       ${imageFields}
     `,
+    preview,
   });
 
   const startersData = await Promise.all(
@@ -134,7 +135,7 @@ export default function Plugins({ starters, preview }) {
               </p>
             </div>
             <section className={s.techStarters}>
-              {techStarters?.map((item) => (
+              {techStarters.map((item) => (
                 <MarketplaceCard
                   key={item.code}
                   href={`/marketplace/starters/${item.code}`}
