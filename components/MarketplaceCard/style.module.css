@@ -7,7 +7,7 @@
   min-width: 0;
   position: relative;
   text-decoration: none;
-  transition: transform .2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   width: 100%;
 
   &:hover {
@@ -65,7 +65,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     display: -webkit-box;
-    line-clamp: 2; 
+    line-clamp: 2;
     overflow: hidden;
   }
 
@@ -75,6 +75,36 @@
 
   .technologyAside {
     aspect-ratio: 4/1;
+  }
+}
+
+.card[data-size="micro"] {
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+
+  .visualTechnology {
+    .technology {
+      aspect-ratio: 2/1;
+      height: auto;
+      max-width: 160px;
+      min-width: 40px;
+      width: 30%;
+    }
+  }
+
+  .visualWrapper {
+    aspect-ratio: 7/2;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .cardDescription,
+  .cardBadge,
+  .cardLabel {
+    font-size: 14px;
   }
 }
 
@@ -116,7 +146,7 @@
 }
 
 .highlightBadge {
-  background-color: #F4CF58;
+  background-color: #f4cf58;
   border-radius: 6px;
   border: 1px solid #f1c430;
   color: #000;
@@ -162,13 +192,13 @@
 
 .cardContent {
   padding: 25px 20px;
-  
+
   .cardTitle {
     margin: 0 0 10px 0;
     font-weight: bold;
     font-size: 21px;
   }
-  
+
   .cardDescription {
     font-size: 15px;
     margin: 0;
