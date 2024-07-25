@@ -166,7 +166,7 @@ export default function Plugins({ starters, preview }) {
         </div>
 
         <Announce
-          href="/docs/project-starters-and-templates#generate-a-project-starter-button"
+          href="/docs/general-concepts/project-starters-and-templates#generate-a-project-starter-button"
           center
         >
           <strong>Want to create your own starter project?</strong> Learn how to
