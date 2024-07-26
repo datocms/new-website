@@ -174,8 +174,6 @@ export default function UseCase({ subscription, preview }) {
     data: { page },
   } = useQuerySubscription(subscription);
 
-  const quotes = page.quotes.sort(() => 0.5 - Math.random()).slice(0, 3);
-
   return (
     <Layout preview={preview} noCta>
       <Head>{renderMetaTags(page.seo)}</Head>
@@ -232,7 +230,7 @@ export default function UseCase({ subscription, preview }) {
           <InterstitialTitle style="three">
             {highlightStructuredText(page.quotesHeader)}
           </InterstitialTitle>
-          <QuotesCarousel quotes={quotes} animated={false} />
+          <QuotesCarousel quotes={page.quotes} animated={false} />
         </Space>
       </div>
 
