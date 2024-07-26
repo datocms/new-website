@@ -100,6 +100,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
 
       ${imageFields}
     `,
+    preview,
   });
 
   page.demos = await Promise.all(
@@ -256,7 +257,7 @@ export default function IntegrationsPage({
               <p>Kickstart your next project with our scaffolds.</p>
             </div>
 
-            {techStarters?.length ? (
+            {techStarters.length ? (
               techStarters.map((item) => (
                 <MarketplaceCard
                   key={item.code}

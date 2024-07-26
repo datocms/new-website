@@ -3,6 +3,8 @@ import ActiveLink from 'components/ActiveLink';
 import DocPageContent from 'components/DocPageContent';
 import DocsLayout from 'components/DocsLayout';
 import Head from 'components/Head';
+import MarketplaceCard from 'components/MarketplaceCard';
+import Space from 'components/Space';
 import { render as toPlainText } from 'datocms-structured-text-to-plain-text';
 import { isHeading } from 'datocms-structured-text-utils';
 import {
@@ -107,24 +109,13 @@ export const getStaticProps = handleErrors(
       data: { docGroup },
     } = await request({
       query: /* GraphQL */ `
-      query($groupSlug: String!) {
-        docGroup(filter: { slug: { eq: $groupSlug } }) {
-          name
-          slug
-          pages {
-            __typename
-            ... on DocGroupPageRecord {
-              titleOverride
-              slugOverride
-              page {
-                id
-                title
-                slug
-              }
-            }
-            ... on DocGroupSectionRecord {
-              title
-              pages {
+        query($groupSlug: String!) {
+          docGroup(filter: { slug: { eq: $groupSlug } }) {
+            name
+            slug
+            pages {
+              __typename
+              ... on DocGroupPageRecord {
                 titleOverride
                 slugOverride
                 page {
@@ -133,11 +124,53 @@ export const getStaticProps = handleErrors(
                   slug
                 }
               }
+              ... on DocGroupSectionRecord {
+                title
+                pages {
+                  titleOverride
+                  slugOverride
+                  page {
+                    id
+                    title
+                    slug
+                  }
+                }
+              }
+            }
+            techStarterKit {
+              id
+              name
+              cmsDescription
+              code
+              starterType
+              badge {
+                name
+                emoji
+              }
+              label
+              githubRepo
+              technology {
+                name
+                logo {
+                  url
+                }
+                squareLogo {
+                  url
+                }
+              }
+              screenshot {
+                responsiveImage(
+                  imgixParams: { auto: format, w: 600, h: 400, fit: crop }
+                ) {
+                  ...imageFields
+                }
+              }
             }
           }
         }
-      }
-    `,
+
+        ${imageFields}
+      `,
       variables: { groupSlug },
       preview,
     });
@@ -469,7 +502,7 @@ const SidebarEntry = ({ url, level, label, children }) => {
   );
 };
 
-export const Sidebar = ({ title, entries }) => {
+export const Sidebar = ({ title, entries, techStarterKit }) => {
   return (
     <>
       <Link href="/docs">
@@ -483,6 +516,31 @@ export const Sidebar = ({ title, entries }) => {
       {entries.map((entry) => (
         <SidebarEntry key={entry.label} level={0} {...entry} />
       ))}
+
+      {techStarterKit && (
+        <Space top={1}>
+          <MarketplaceCard
+            size="micro"
+            href={`/marketplace/starters/${techStarterKit.code}`}
+            technology={
+              techStarterKit.technology.squareLogo ||
+              techStarterKit.technology.logo
+            }
+            text={{
+              title: techStarterKit.name,
+              description: (
+                <>
+                  Words are nice... but code speaks louder. Dive into a fully
+                  commented project template, showcasing these techniques (and
+                  more) in action.
+                </>
+              ),
+            }}
+            badge={techStarterKit.badge}
+            label={techStarterKit.label}
+          />
+        </Space>
+      )}
     </>
   );
 };
@@ -556,6 +614,7 @@ export default function DocPage({
         docGroup && (
           <Sidebar
             title={docGroup.name}
+            techStarterKit={docGroup.techStarterKit}
             entries={
               docGroup.pages.length > 1
                 ? docGroup.pages.map((pageOrSection) => {

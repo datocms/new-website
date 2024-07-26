@@ -48,11 +48,15 @@ export default function MarketplaceCard({
           <footer className={s.cardFooter}>
             {badge && (
               <div className={s.cardBadge}>
-                <span>{badge.emoji}</span>
-                <span>{badge.name}</span>
+                <span className={s.cardBadgeEmoji}>{badge.emoji}</span>
+                <span className={s.cardBadgeName}>{badge.name}</span>
               </div>
             )}
-            {label && <span className={s.cardLabel}>{label}</span>}
+            {label && (
+              <div className={s.cardLabel}>
+                <span className={s.cardBadgeName}>{label}</span>
+              </div>
+            )}
           </footer>
         </article>
       </a>
