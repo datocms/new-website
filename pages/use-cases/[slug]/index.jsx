@@ -241,7 +241,7 @@ export default function UseCase({ subscription, preview }) {
               <h2>{highlightStructuredText(page.starterTitle)}</h2>
               <StructuredText data={page.starterDescription} />
               <Space top={1}>
-                <Button as="a" p="small" s="invert" href={page.starterLink}>
+                <Button as="a" p="small" s="purple" href={page.starterLink}>
                   Check it out
                 </Button>
               </Space>
@@ -341,7 +341,7 @@ export default function UseCase({ subscription, preview }) {
                 <Button
                   as="a"
                   p="small"
-                  s="invert"
+                  s="purple"
                   href={`/customers/${page.caseStudy.slug}`}
                 >
                   Check it out
