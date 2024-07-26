@@ -117,14 +117,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         pages {
           __typename
           ... on DocGroupPageRecord {
-            slugOverride
             page {
               slug
             }
           }
           ... on DocGroupSectionRecord {
             pages {
-              slugOverride
               page {
                 slug
               }
@@ -152,9 +150,9 @@ function findDocSlug(allDocGroups, targetSlug) {
             return pageOrSection.pages;
           })
           .map((page) =>
-            (page.slugOverride || page.page.slug) === 'index'
+            page.page.slug === 'index'
               ? [sub.slug]
-              : [sub.slug, page.slugOverride || page.page.slug],
+              : [sub.slug, page.page.slug],
           ),
       ),
     )

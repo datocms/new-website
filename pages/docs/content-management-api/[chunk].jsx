@@ -55,13 +55,7 @@ export const getStaticProps = handleErrors(
   },
 );
 
-export default function DocPage({
-  docGroup,
-  titleOverride,
-  pageSubscription,
-  cma,
-  preview,
-}) {
+export default function DocPage({ docGroup, pageSubscription, cma, preview }) {
   const result = useMemo(() => parse(cma), [cma]);
 
   const { data } = useQuerySubscription(pageSubscription);
@@ -80,7 +74,7 @@ export default function DocPage({
                   url: `/docs/${docGroup.slug}${
                     page.page.slug === 'index' ? '' : `/${page.page.slug}`
                   }`,
-                  label: page.titleOverride || page.page.title,
+                  label: page.page.title,
                 };
               }),
               result.toc.map((entry) => {
@@ -103,7 +97,7 @@ export default function DocPage({
         {renderMetaTags(
           changeImageWithGeneratedDoc(
             page._seoMetaTags,
-            titleOverride || page.title,
+            page.title,
             'Content Management API',
           ),
         )}
@@ -111,7 +105,7 @@ export default function DocPage({
       <div className={s.articleContainer}>
         <Toc content={page.content} />
         <div className={s.article}>
-          <div className={s.title}>{titleOverride || page.title}</div>
+          <div className={s.title}>{page.title}</div>
           <DocPageContent content={page.content} style={s} />
         </div>
       </div>

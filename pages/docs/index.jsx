@@ -29,7 +29,6 @@ export const getStaticProps = gqlStaticProps(
           pages {
             __typename
             ... on DocGroupPageRecord {
-              slugOverride
               page {
                 slug
               }
@@ -86,9 +85,7 @@ export const Sidebar = ({ roots }) => (
           {root.children.map((sub) => (
             <ActiveLink
               activeClassName={s.activePage}
-              href={`/docs/${sub.slug}${normalize(
-                sub.pages[0].slugOverride || sub.pages[0].page.slug,
-              )}`}
+              href={`/docs/${sub.slug}${normalize(sub.pages[0].page.slug)}`}
               key={sub.slug}
             >
               <a className={s.guide}>{sub.name}</a>

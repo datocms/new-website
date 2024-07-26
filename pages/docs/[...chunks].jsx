@@ -38,14 +38,12 @@ export const getStaticPaths = gqlStaticPaths(
           pages {
             __typename
             ... on DocGroupPageRecord {
-              slugOverride
               page {
                 slug
               }
             }
             ... on DocGroupSectionRecord {
               pages {
-                slugOverride
                 page {
                   slug
                 }
@@ -67,13 +65,11 @@ export const getStaticPaths = gqlStaticPaths(
               ? sub.pages.filter(
                   (page) =>
                     !['filtering-records', 'filtering-uploads'].includes(
-                      page.slugOverride || page.page.slug,
+                      page.page.slug,
                     ),
                 )
               : sub.slug === 'structured-text'
-                ? sub.pages.filter(
-                    (page) => (page.slugOverride || page.page.slug) !== 'dast',
-                  )
+                ? sub.pages.filter((page) => page.page.slug !== 'dast')
                 : sub.pages
             )
               .flatMap((pageOrSection) => {
@@ -83,9 +79,9 @@ export const getStaticPaths = gqlStaticPaths(
                 return pageOrSection.pages;
               })
               .map((page) =>
-                (page.slugOverride || page.page.slug) === 'index'
+                page.page.slug === 'index'
                   ? [sub.slug]
-                  : [sub.slug, page.slugOverride || page.page.slug],
+                  : [sub.slug, page.page.slug],
               )
               // .slice() only pre-renders the first 2 sub-pages for each section
               // remove it if you want to pre-render all the pages
@@ -116,8 +112,6 @@ export const getStaticProps = handleErrors(
             pages {
               __typename
               ... on DocGroupPageRecord {
-                titleOverride
-                slugOverride
                 page {
                   id
                   title
@@ -127,8 +121,6 @@ export const getStaticProps = handleErrors(
               ... on DocGroupSectionRecord {
                 title
                 pages {
-                  titleOverride
-                  slugOverride
                   page {
                     id
                     title
@@ -186,15 +178,12 @@ export const getStaticProps = handleErrors(
       return pageOrSection.pages;
     });
 
-    const page = allPages?.find(
-      (page) => (page.slugOverride || page.page.slug) === pageSlug,
-    );
+    const page = allPages?.find((page) => page.page.slug === pageSlug);
 
     if (!page) {
       return { notFound: true };
     }
 
-    const { titleOverride } = page;
     const pageId = page.page.id;
 
     const gqlPageRequest = {
@@ -450,7 +439,6 @@ export const getStaticProps = handleErrors(
     return {
       props: {
         docGroup,
-        titleOverride,
         pageSubscription: preview
           ? {
               ...gqlPageRequest,
@@ -589,14 +577,13 @@ export function Toc({ content, extraEntries: extra }) {
 
 export default function DocPage({
   docGroup,
-  titleOverride,
   pageSubscription,
   preview,
   additionalData,
 }) {
   const { data } = useQuerySubscription(pageSubscription);
   const page = data.page;
-  const pageTitle = titleOverride || page?.title;
+  const pageTitle = page.title;
   const defaultSeoTitle = `${pageTitle}${
     docGroup ? ` — ${docGroup.name}` : ''
   } — DatoCMS`;
@@ -620,11 +607,9 @@ export default function DocPage({
                 ? docGroup.pages.map((pageOrSection) => {
                     const pageToEntry = (page) => ({
                       url: `/docs/${docGroup.slug}${
-                        (page.slugOverride || page.page.slug) === 'index'
-                          ? ''
-                          : `/${page.slugOverride || page.page.slug}`
+                        page.page.slug === 'index' ? '' : `/${page.page.slug}`
                       }`,
-                      label: page.titleOverride || page.page.title,
+                      label: page.page.title,
                     });
 
                     if (pageOrSection.__typename === 'DocGroupPageRecord') {

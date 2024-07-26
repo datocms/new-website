@@ -56,12 +56,7 @@ const Filters = ({ name, attrs }) => {
   );
 };
 
-export default function DocPage({
-  docGroup,
-  titleOverride,
-  pageSubscription,
-  filters,
-}) {
+export default function DocPage({ docGroup, pageSubscription, filters }) {
   const { data } = useQuerySubscription(pageSubscription);
   const page = data.page;
 
@@ -75,7 +70,7 @@ export default function DocPage({
               url: `/docs/${docGroup.slug}${
                 page.page.slug === 'index' ? '' : `/${page.page.slug}`
               }`,
-              label: page.titleOverride || page.page.title,
+              label: page.page.title,
             };
           })}
         />
@@ -85,7 +80,7 @@ export default function DocPage({
         {renderMetaTags(
           changeImageWithGeneratedDoc(
             page._seoMetaTags,
-            titleOverride || page.title,
+            page.title,
             'Content Delivery API',
           ),
         )}
@@ -100,7 +95,7 @@ export default function DocPage({
           }))}
         />
         <div className={s.article}>
-          <div className={s.title}>{titleOverride || page.title}</div>
+          <div className={s.title}>{page.title}</div>
           <DocPageContent content={page.content} style={s}>
             <Heading anchor="meta-fields" as="h3">
               Available filters

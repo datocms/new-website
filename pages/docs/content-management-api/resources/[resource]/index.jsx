@@ -38,8 +38,6 @@ export const getStaticProps = handleErrors(
           pages {
             __typename
             ... on DocGroupPageRecord {
-              titleOverride
-              slugOverride
               page {
                 id
                 title
@@ -98,7 +96,7 @@ export default function DocPage({ docGroup, cma, preview, resourceId }) {
                 url: `/docs/${docGroup.slug}${
                   page.page.slug === 'index' ? '' : `/${page.page.slug}`
                 }`,
-                label: page.titleOverride || page.page.title,
+                label: page.page.title,
               };
             }),
             result.toc.map((entry) => {
