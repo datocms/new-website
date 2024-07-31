@@ -66,7 +66,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
             ...imageFields
           }
         }
-        person {
+        people {
           name
           title
           company
@@ -158,17 +158,33 @@ export default function CustomerStories({ preview, subscription }) {
                   <div className={s.excerpt}>
                     <StructuredText data={post.excerpt} />
                   </div>
-                  {post.person?.avatar && (
-                    <div className={s.person}>
-                      <DatoImage
-                        className={s.avatar}
-                        data={post.person.avatar.responsiveImage}
-                      />
-                      <div>
-                        With {post.person.name} from {post.person.company}
-                      </div>
+                  <div className={s.info}>
+                    <div className={s.avatarWrapper}>
+                      {post.people.map((person, i) => (
+                        <DatoImage
+                          key={person.id}
+                          className={s.avatar}
+                          data={person.avatar.responsiveImage}
+                          style={{ zIndex: 10 - i }}
+                        />
+                      ))}
                     </div>
-                  )}
+                    <p>
+                      With{' '}
+                      {post.people.map((person, index) => {
+                        const isFirst = index === 0;
+                        const isLast = index === post.people.length - 1;
+
+                        return (
+                          <span key={person.name}>
+                            {isFirst && `${person.name}`}
+                            {!isFirst && !isLast && `, ${person.name}`}
+                            {isLast && !isFirst && ` and ${person.name}`}
+                          </span>
+                        );
+                      })}
+                    </p>
+                  </div>
                 </div>
               </a>
             </Link>

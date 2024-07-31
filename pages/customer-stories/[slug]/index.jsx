@@ -252,7 +252,8 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
         }
         _firstPublishedAt
         _createdAt
-        person {
+        people {
+          id
           name
           title
           company
@@ -309,14 +310,37 @@ export default function Story({ preview, subscription }) {
       <div className={s.postWrapper}>
         <Wrapper>
           <div className={s.info}>
-            <DatoImage
-              className={s.avatar}
-              data={story.person.avatar.responsiveImage}
-            />
-            In conversation with {story.person.name}, {story.person.title} at{' '}
-            {story.person.company}
-          </div>
+            <div className={s.avatarWrapper}>
+              {story.people.map((person, i) => (
+                <DatoImage
+                  key={person.id}
+                  className={s.avatar}
+                  data={person.avatar.responsiveImage}
+                  style={{ zIndex: 10 - i }}
+                />
+              ))}
+            </div>
+            <p>
+              In conversation with{' '}
+              {story.people.map((person, index) => {
+                const isFirst = index === 0;
+                const isLast = index === story.people.length - 1;
 
+                return (
+                  <span key={person.name}>
+                    {isFirst &&
+                      `${person.name} (${person.title} at ${person.company})`}
+                    {!isFirst &&
+                      !isLast &&
+                      `, ${person.name} (${person.title})`}
+                    {isLast &&
+                      !isFirst &&
+                      ` and ${person.name} (${person.title})`}
+                  </span>
+                );
+              })}
+            </p>
+          </div>
           <div id="main-content">
             <PostContent content={story.content} />
           </div>
