@@ -168,8 +168,6 @@ export default function Product({ preview, subscription }) {
     (f) => f.featureGroup === 'marketers',
   );
 
-  const docsSlugMap = generateSlugMap(allDocGroups);
-
   return (
     <Layout preview={preview} noCta>
       <Head>
