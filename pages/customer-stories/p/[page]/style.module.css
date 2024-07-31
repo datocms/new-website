@@ -50,18 +50,32 @@
   }
 }
 
-.person {
-  font-size: 15px;
-  color: var(--light-body-color);
-  display: flex;
+.info {
   align-items: center;
-}
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
 
-.avatar {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
+  .avatarWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    border: 2px solid #fff;
+    height: 40px;
+    margin-left: -6px;
+    overflow: hidden;
+    width: 40px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: var(--light-body-color);
+    margin: 0;
+  }
 }
 
 .grid {
