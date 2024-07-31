@@ -103,6 +103,9 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
           ...on DocPageRecord {
             id
             slug
+            parent: _allReferencingDocGroups {
+              slug
+            }
           }
           ...on FeatureRecord {
             id
@@ -112,29 +115,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         featureGroup
       }
     }
-    allDocGroups {
-      slug
-      pages {
-        ...on DocGroupPageRecord {
-          slugOverride
-          page {
-            id
-            title
-            slug
-          }
-        }
-        ...on DocGroupSectionRecord { 
-          pages {
-            slugOverride
-            page {
-              id
-              title
-              slug
-            }
-          }
-        }
-      }
-    }
   }
 
   ${reviewFields}
@@ -142,47 +122,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   ${imageFields}
 `);
 
-function generateSlugMap(items, parentSlug = '') {
-  const result = {};
-
-  function mapPages(pages, currentSlug) {
-    for (const page of pages) {
-      if (page.page?.id) {
-        const pageSlug = page.slugOverride || page.page.slug;
-        if (pageSlug) {
-          result[page.page.id] = `${currentSlug}/${pageSlug}`;
-        }
-      }
-      if (page.pages) {
-        const newSlug = page.slugOverride || page.page?.slug;
-        mapPages(
-          page.pages,
-          newSlug ? `${currentSlug}/${newSlug}` : currentSlug,
-        );
-      }
-    }
-  }
-
-  for (const item of items) {
-    const currentSlug = parentSlug ? `${parentSlug}/${item.slug}` : item.slug;
-    if (item.pages) {
-      mapPages(item.pages, currentSlug);
-    }
-  }
-
-  return result;
-}
-
-function Feature({ feature, docsSlugMap }) {
-  const getDocSlugById = (id) => docsSlugMap[id];
-  let link;
-
-  if (feature.link) {
-    link =
-      feature.link.__typename === 'FeatureRecord'
-        ? `/features/${feature.link.slug}`
-        : `/docs/${getDocSlugById(feature.link.id)}`;
-  }
+function Feature({ feature }) {
+  const link =
+    feature.link &&
+    (feature.link.__typename === 'FeatureRecord'
+      ? `/features/${feature.link.slug}`
+      : `/docs/${feature.link.parent[0].slug}/${feature.link.slug}`);
 
   return (
     <MaybeLink
@@ -212,7 +157,7 @@ function Feature({ feature, docsSlugMap }) {
 
 export default function Product({ preview, subscription }) {
   const {
-    data: { productOverview, allDocGroups, integrations },
+    data: { productOverview, integrations },
   } = useQuerySubscription(subscription);
 
   const developerFeatures = productOverview.features.filter(
@@ -375,13 +320,7 @@ export default function Product({ preview, subscription }) {
         </div>
         <div data-developers className={s.featuresContainer}>
           {developerFeatures.map((feature) => {
-            return (
-              <Feature
-                key={feature.id}
-                feature={feature}
-                docsSlugMap={docsSlugMap}
-              />
-            );
+            return <Feature key={feature.id} feature={feature} />;
           })}
         </div>
 
@@ -393,13 +332,7 @@ export default function Product({ preview, subscription }) {
         </div>
         <div className={s.featuresContainer}>
           {marketersFeatures.map((feature) => {
-            return (
-              <Feature
-                key={feature.id}
-                feature={feature}
-                docsSlugMap={docsSlugMap}
-              />
-            );
+            return <Feature key={feature.id} feature={feature} />;
           })}
         </div>
       </div>

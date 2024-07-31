@@ -1,8 +1,11 @@
-<!--datocms-autoinclude-header start--><a href="https://www.datocms.com/"><img src="https://www.datocms.com/images/full_logo.svg" height="60"></a>
+<!--datocms-autoinclude-header start-->
+
+<a href="https://www.datocms.com/"><img src="https://www.datocms.com/images/full_logo.svg" height="60"></a>
 
 👉 [Visit the DatoCMS homepage](https://www.datocms.com) or see [What is DatoCMS?](#what-is-datocms)
 
 ---
+
 <!--datocms-autoinclude-header end-->
 
 # DatoCMS Website
@@ -15,7 +18,9 @@ https://www.datocms.com/marketplace/starters
 
 
 <!--datocms-autoinclude-footer start-->
------------------
+
+---
+
 # What is DatoCMS?
 <a href="https://www.datocms.com/"><img src="https://www.datocms.com/images/full_logo.svg" height="60"></a>
 
@@ -38,4 +43,5 @@ Trusted by over 25,000 enterprise businesses, agency partners, and individuals a
 - [DatoCMS Starters](https://www.datocms.com/marketplace/starters) has examples for various Javascript frontend frameworks
 
 Or see [all our public repos](https://github.com/orgs/datocms/repositories?q=&type=public&language=&sort=stargazers)
+
 <!--datocms-autoinclude-footer end-->

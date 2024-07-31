@@ -67,12 +67,7 @@ const findAllChildrenDefinitions = (definition, foundDefs = []) => {
   );
 };
 
-export default function DocPage({
-  docGroup,
-  titleOverride,
-  pageSubscription,
-  schema,
-}) {
+export default function DocPage({ docGroup, pageSubscription, schema }) {
   const result = useMemo(() => schema && parse(schema), [schema]);
   const definitions = findAllChildrenDefinitions(result.definitions.Root);
   const { data } = useQuerySubscription(pageSubscription);
@@ -93,7 +88,7 @@ export default function DocPage({
               url: `/docs/${docGroup.slug}${
                 page.page.slug === 'index' ? '' : `/${page.page.slug}`
               }`,
-              label: page.titleOverride || page.page.title,
+              label: page.page.title,
             };
           })}
         />
@@ -120,7 +115,7 @@ export default function DocPage({
           ]}
         />
         <div className={s.article}>
-          <div className={s.title}>{titleOverride || page.title}</div>
+          <div className={s.title}>{page.title}</div>
           <DocPageContent content={page.content} style={s}>
             <Heading anchor="nodes" as="h3">
               Nodes

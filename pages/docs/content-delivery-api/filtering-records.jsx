@@ -60,7 +60,6 @@ const Filters = ({ name, attrs }) => {
 
 export default function DocPage({
   docGroup,
-  titleOverride,
   pageSubscription,
   fieldsMetaInfo,
   fieldTypesInfo,
@@ -78,7 +77,7 @@ export default function DocPage({
               url: `/docs/${docGroup.slug}${
                 page.page.slug === 'index' ? '' : `/${page.page.slug}`
               }`,
-              label: page.titleOverride || page.page.title,
+              label: page.page.title,
             };
           })}
         />
@@ -88,7 +87,7 @@ export default function DocPage({
         {renderMetaTags(
           changeImageWithGeneratedDoc(
             page._seoMetaTags,
-            titleOverride || page.title,
+            page.title,
             'Content Delivery API',
           ),
         )}
@@ -120,7 +119,7 @@ export default function DocPage({
           ]}
         />
         <div className={s.article}>
-          <div className={s.title}>{titleOverride || page.title}</div>
+          <div className={s.title}>{page.title}</div>
           <DocPageContent content={page.content} style={s}>
             <Heading anchor="field-types" as="h3">
               Filters available for field types
