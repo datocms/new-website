@@ -102,33 +102,15 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
           __typename
           ...on DocPageRecord {
             slug
+            parent: _allReferencingDocGroups {
+              slug
+            }
           }
           ...on FeatureRecord {
             slug
           }
         }
         featureGroup
-      }
-    }
-    allDocGroups {
-      children {
-        slug
-        __typename
-        pages {
-          __typename
-          ... on DocGroupPageRecord {
-            page {
-              slug
-            }
-          }
-          ... on DocGroupSectionRecord {
-            pages {
-              page {
-                slug
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -138,44 +120,12 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
   ${imageFields}
 `);
 
-function findDocSlug(allDocGroups, targetSlug) {
-  const allDocSlugs = allDocGroups
-    .map((root) =>
-      root.children.map((sub) =>
-        sub.pages
-          .flatMap((pageOrSection) => {
-            if (pageOrSection.__typename === 'DocGroupPageRecord') {
-              return pageOrSection;
-            }
-            return pageOrSection.pages;
-          })
-          .map((page) =>
-            page.page.slug === 'index'
-              ? [sub.slug]
-              : [sub.slug, page.page.slug],
-          ),
-      ),
-    )
-    .flat(2)
-    .map((chunks) => `/docs/${chunks.join('/')}`);
-
-  const slug = allDocSlugs.find((docSlug) => docSlug.endsWith(targetSlug));
-  return slug;
-}
-
-function Feature({ feature, allDocGroups }) {
-  const docSlug =
-    feature.link && feature.link.__typename === 'DocPageRecord'
-      ? findDocSlug(allDocGroups, feature.link.slug)
-      : null;
-
-  const link = feature.link
-    ? feature.link.__typename === 'FeatureRecord'
+function Feature({ feature }) {
+  const link =
+    feature.link &&
+    (feature.link.__typename === 'FeatureRecord'
       ? `/features/${feature.link.slug}`
-      : docSlug
-        ? docSlug
-        : '/docs/content-modelling'
-    : null;
+      : `/docs/${feature.link.parent[0].slug}/${feature.link.slug}`);
 
   return (
     <MaybeLink
@@ -205,7 +155,7 @@ function Feature({ feature, allDocGroups }) {
 
 export default function Product({ preview, subscription }) {
   const {
-    data: { productOverview, allDocGroups, integrations },
+    data: { productOverview, integrations },
   } = useQuerySubscription(subscription);
 
   const developerFeatures = productOverview.features.filter(
@@ -366,13 +316,7 @@ export default function Product({ preview, subscription }) {
         </div>
         <div data-developers className={s.featuresContainer}>
           {developerFeatures.map((feature) => {
-            return (
-              <Feature
-                key={feature.id}
-                feature={feature}
-                allDocGroups={allDocGroups}
-              />
-            );
+            return <Feature key={feature.id} feature={feature} />;
           })}
         </div>
 
@@ -384,13 +328,7 @@ export default function Product({ preview, subscription }) {
         </div>
         <div className={s.featuresContainer}>
           {marketersFeatures.map((feature) => {
-            return (
-              <Feature
-                key={feature.id}
-                feature={feature}
-                allDocGroups={allDocGroups}
-              />
-            );
+            return <Feature key={feature.id} feature={feature} />;
           })}
         </div>
       </div>
