@@ -556,6 +556,11 @@ a.authorRole:hover .name {
     padding: 0;
     margin: 0;
   }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
 }
 
 .featureTitle {
