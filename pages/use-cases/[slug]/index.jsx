@@ -208,7 +208,9 @@ export default function UseCase({ subscription, preview }) {
                 </div>
               </>
             ) : (
-              <DatoImage data={page.heroImage.responsiveImage} />
+              page.heroImage?.responsiveImage && (
+                <DatoImage data={page.heroImage.responsiveImage} />
+              )
             )}
           </div>
         </div>
