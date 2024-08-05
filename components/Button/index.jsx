@@ -14,6 +14,7 @@ const pClassNames = {
 
 const sClassNames = {
   invert: style.sInvert,
+  purple: style.sPurple,
 };
 
 export default function Button({

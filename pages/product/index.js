@@ -101,12 +101,14 @@ export const getStaticProps = gqlStaticPropsWithSubscription(/* GraphQL */ `
         link {
           __typename
           ...on DocPageRecord {
+            id
             slug
             parent: _allReferencingDocGroups {
               slug
             }
           }
           ...on FeatureRecord {
+            id
             slug
           }
         }

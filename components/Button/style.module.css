@@ -38,6 +38,16 @@
   }
 }
 
+.sPurple {
+  background: color-mix(in srgb, #b039b8 10%, white);
+  border: 1px solid #de66e6;
+  color: color-mix(in srgb, #200523 40%, #b039b8) !important;
+
+  svg {
+    fill: color-mix(in srgb, #200523 40%, #b039b8);
+  }
+}
+
 .pSmall {
   padding: 0.8em 1.1em;
 }
