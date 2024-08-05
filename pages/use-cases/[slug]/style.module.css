@@ -60,6 +60,17 @@
   max-width: 600px;
   padding-bottom: 5%;
   position: relative;
+  transition: transform 0.2s;
+
+  @media screen and (min-width: 1320px) {
+    max-width: 800px;
+    transform-origin: left center;
+    transform: scale(1.05);
+  }
+
+  @media screen and (min-width: 1440px) {
+    transform: scale(1.1);
+  }
 
   &:hover {
     .heroImage:nth-child(1) {
