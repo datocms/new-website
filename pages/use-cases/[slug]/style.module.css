@@ -483,6 +483,10 @@ a.authorRole:hover .name {
       width: 100%;
       z-index: -1;
     }
+
+    img {
+      border-radius: 3px;
+    }
   }
 
   article {
