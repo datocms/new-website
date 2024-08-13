@@ -491,7 +491,7 @@
     margin-bottom: 0;
   }
 
-  code {
+  pre code {
     background-color: unset;
   }
 }
