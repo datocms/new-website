@@ -9,6 +9,8 @@ import FaceSmileBeamIcon from 'public/icons/regular/smile.svg';
 import WandMagicSparklesIcon from 'public/icons/regular/wand-magic.svg';
 import { Fragment } from 'react';
 import { StructuredText } from 'react-datocms';
+import Heading from "../Heading";
+import {FUNCTIONS_REFERENCE_ANCHOR_NAME} from "../../pages/docs/[...chunks]";
 
 export default function DocPageContent({ additionalData, ...props }) {
   return (
@@ -20,6 +22,7 @@ export default function DocPageContent({ additionalData, ...props }) {
             return (
               <>
                 <hr />
+                <Heading as="h3" anchor={FUNCTIONS_REFERENCE_ANCHOR_NAME}>Function Reference</Heading>
                 {additionalData.pluginSdkHooks
                   .sort((a, b) => a.lineNumber - b.lineNumber)
                   .map((hook) => (
