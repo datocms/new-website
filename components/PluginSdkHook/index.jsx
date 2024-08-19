@@ -130,8 +130,8 @@ export default function Hook({ hook }) {
 
   return (
     <div key={hook.name}>
-      <Heading anchor={hook.name} as="h3">
-        <code>{hook.name}</code>
+      <Heading anchor={hook.name} as="h4">
+        <code>{hook.name}()</code>
       </Heading>
       <Markdown>{hook.description}</Markdown>
       {hook.returnType && (
