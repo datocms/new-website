@@ -118,30 +118,31 @@ export default function Newnavbar() {
                     <GroupItem href="/" title="Explore the capabilities!" />
                     <GroupItem href="/" title="See what’s new in DatoCMS" />
                   </Group>
-                  <div className={s.spacer} />
                   <div className={s.ctaBox}>
-                    <div className={s.ctaImageWrapper}>
-                      <div className={s.ctaImage}>
-                        <LazyImage
-                          src={'/images/illustrations/box-things.svg'}
-                        />
+                    <div className={s.ctaBoxShape}>
+                      <div className={s.ctaImageWrapper}>
+                        <div className={s.ctaImage}>
+                          <LazyImage
+                            src={'/images/illustrations/box-things.svg'}
+                          />
+                        </div>
                       </div>
+                      <article className={s.ctaBody}>
+                        <h3 className={s.ctaTitle}>Try DatoCMS for Free</h3>
+                        <p className={s.ctaDescription}>
+                          Try a no-strings-attached demo. No signup. No email.
+                          No credit card.
+                        </p>
+                      </article>
+                      <Button
+                        className={s.ctaButton}
+                        as="a"
+                        p="tiny"
+                        href="https://dashboard.datocms.com/"
+                      >
+                        Enter dashboard
+                      </Button>
                     </div>
-                    <article className={s.ctaBody}>
-                      <h3 className={s.ctaTitle}>Try DatoCMS for Free</h3>
-                      <p className={s.ctaDescription}>
-                        Try a no-strings-attached demo. No signup. No email. No
-                        credit card.
-                      </p>
-                    </article>
-                    <Button
-                      className={s.ctaButton}
-                      as="a"
-                      p="tiny"
-                      href="https://dashboard.datocms.com/"
-                    >
-                      Enter dashboard
-                    </Button>
                   </div>
                 </PanelHighlight>
                 <PanelSlice columns="2">
@@ -286,6 +287,32 @@ export default function Newnavbar() {
                     <GroupItem href="/" title="Explore Agency Partners" />
                     <GroupItem href="/" title="Explore Tech Partners" />
                   </Group>
+                  <div className={s.ctaBox}>
+                    <div className={s.ctaBoxShape}>
+                      <div className={s.ctaImageWrapper}>
+                        <div className={s.ctaImage}>
+                          <LazyImage
+                            src={'/images/illustrations/faces-2.svg'}
+                          />
+                        </div>
+                      </div>
+                      <article className={s.ctaBody}>
+                        <h3 className={s.ctaTitle}>Join The Network</h3>
+                        <p className={s.ctaDescription}>
+                          Explore the benefits you unlock when you join our
+                          partner ecosystem.
+                        </p>
+                      </article>
+                      <Button
+                        className={s.ctaButton}
+                        as="a"
+                        p="tiny"
+                        href="/partner-program"
+                      >
+                        Become a partner
+                      </Button>
+                    </div>
+                  </div>
                 </PanelHighlight>
                 <PanelSlice columns={2}>
                   <Group columns={2} title="Showcase projects">

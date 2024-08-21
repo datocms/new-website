@@ -152,22 +152,25 @@
   }
 }
 
-.spacer {
+.ctaBox {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.ctaBox {
+.ctaBoxShape {
   align-items: center;
   aspect-ratio: 1/1;
   background-color: #fff;
   border-radius: 400px 400px 0 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 40px;
-  transform: translateX(-40px);
-  width: calc(100% + 79px);
   gap: 20px;
+  justify-content: space-between;
+  padding: 40px 30px;
+  transform: translateX(-40px);
+  width: calc(100% + 80px - 1px);
 
   .ctaImageWrapper {
     align-items: center;
