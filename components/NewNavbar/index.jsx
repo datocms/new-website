@@ -117,7 +117,9 @@ export default function Newnavbar() {
           <div className={s.navList}>
             <div className={s.navItem}>
               <div className={s.navButtonWrapper}>
-                <button className={s.navButton}>Product</button>
+                <button className={s.navButton} type="button">
+                  Product
+                </button>
               </div>
               <Panel>
                 <PanelHighlight>
@@ -178,7 +180,9 @@ export default function Newnavbar() {
 
             <div className={s.navItem}>
               <div className={s.navButtonWrapper}>
-                <button className={s.navButton}>Customers</button>
+                <button className={s.navButton} type="button">
+                  Customers
+                </button>
               </div>
               <Panel>
                 <PanelHighlight>
@@ -227,7 +231,9 @@ export default function Newnavbar() {
 
             <div className={s.navItem}>
               <div className={s.navButtonWrapper}>
-                <button className={s.navButton}>Parners</button>
+                <button className={s.navButton} type="button">
+                  Parners
+                </button>
               </div>
               <Panel>
                 <PanelHighlight>
@@ -275,7 +281,9 @@ export default function Newnavbar() {
 
             <div className={s.navItem}>
               <div className={s.navButtonWrapper}>
-                <button className={s.navButton}>Developers</button>
+                <button className={s.navButton} type="button">
+                  Developers
+                </button>
               </div>
               <Panel>
                 <PanelSlice columns={1}>
@@ -350,7 +358,9 @@ export default function Newnavbar() {
 
             <div className={s.navItem}>
               <div className={s.navButtonWrapper}>
-                <button className={s.navButton}>Resources</button>
+                <button className={s.navButton} type="button">
+                  Resources
+                </button>
               </div>
               <Panel>
                 <PanelHighlight>
