@@ -2,6 +2,7 @@ import { default as classnames, default as cn } from 'classnames';
 import Button from 'components/Button';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
+import External from 'public/icons/regular/external-link.svg';
 // import FullLogo from 'public/images/full_logo.svg';
 import AlternativeLogo from 'public/images/brand-assets/svg/icon-text/color/color_full_logo_alt.svg';
 import ContentCreators from 'public/images/illustrations/content-editors2.svg';
@@ -22,16 +23,13 @@ import { useEffect, useState } from 'react';
 import { getCookie } from 'utils/cookies';
 import s from './style.module.css';
 
-import External from 'public/icons/regular/external-link.svg';
-
-
 const Panel = ({ children }) => (
   <div className={s.panel}>
     <div className={s.panelInner}>{children}</div>
   </div>
 );
 
-const PanelHighlight = ({ orientation = "verical", children }) => (
+const PanelHighlight = ({ orientation = 'verical', children }) => (
   <div data-orientation={orientation} className={s.panelHighlight}>
     {children}
   </div>
@@ -293,7 +291,7 @@ export default function Newnavbar() {
                     />
                   </Group>
                 </PanelSlice>
-                
+
                 <PanelHighlight orientation="horizontal">
                   <Group columns={3} title="Popular integrations">
                     ...
