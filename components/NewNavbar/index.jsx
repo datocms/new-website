@@ -227,7 +227,55 @@ export default function Newnavbar() {
 
             <div className={s.navItem}>
               <div className={s.navButtonWrapper}>
-                <button className={s.navButton}>Customers</button>
+                <button className={s.navButton}>Parners</button>
+              </div>
+              <Panel>
+                <PanelHighlight>
+                  <Group title="DatoCMS ❤️ Partners">
+                    <GroupItem
+                      href="/product"
+                      title="Our Partner Network"
+                      description="Our most successful customers ship their digital products faster via our partners."
+                    />
+                    <GroupItem href="/" title="Explore Agency Partners" />
+                    <GroupItem href="/" title="Explore Tech Partners" />
+                  </Group>
+                </PanelHighlight>
+                <PanelSlice columns={2}>
+                  <Group columns={2} title="Showcase projects">
+                    <GroupItem
+                      href="/"
+                      title="MDLBeast by November Five"
+                      description="Saudi Arabia’s largest entertainment company uses blocks for a stellar UX."
+                      imageUrl="a"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Toca Boca by Fully Studios"
+                      description="Leading game developer gets a new website on Next.js and AWS."
+                      imageUrl="b"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="L’Officiel by Cantiere Creativo"
+                      description="Global fashion magazine runs 30+ online magazines from a single CMS instance."
+                      imageUrl="c"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Wild by Rotate°"
+                      description="Subscription-first cosmetic brand gets a world-class content overhaul."
+                      imageUrl="d"
+                    />
+                    <GroupLink text="Explore all Partner projects" link="/" />
+                  </Group>
+                </PanelSlice>
+              </Panel>
+            </div>
+
+            <div className={s.navItem}>
+              <div className={s.navButtonWrapper}>
+                <button className={s.navButton}>Developers</button>
               </div>
               <Panel>
                 <PanelSlice columns={1}>
