@@ -31,40 +31,40 @@ const Panel = ({ children }) => (
   </div>
 );
 
-const PanelGroup = ({ columns = 1, title, children }) => (
-  <div data-col={columns} className={s.panelGroup}>
-    {title && <h3 className={s.groupTitle}>{title}</h3>}
-    {children}
-  </div>
-);
-
-const PanelHighlight = ({ orientation, children }) => (
-  <div data-orientation={orientation} className={s.highlight}>
+const PanelHighlight = ({ orientation = "verical", children }) => (
+  <div data-orientation={orientation} className={s.panelHighlight}>
     {children}
   </div>
 );
 
 const PanelSlice = ({ columns = 1, children }) => (
-  <div className={s.slice} data-col={columns}>
+  <div className={s.panelSlice} data-col={columns}>
+    {children}
+  </div>
+);
+
+const Group = ({ columns = 1, title, children }) => (
+  <div data-col={columns} className={s.group}>
+    {title && <h3 className={s.groupTitle}>{title}</h3>}
     {children}
   </div>
 );
 
 const GroupItem = ({ href, title, description, imageUrl, isNew }) => (
   <Link href={href}>
-    <a className={s.item}>
+    <a className={s.groupItem}>
       {imageUrl && (
         <div className={s.itemImage}>
-          <img src={imageUrl} alt={title} /> aaa
+          <img src={imageUrl} alt={title} />
         </div>
       )}
-      <div className={s.itemBody}>
+      <article className={s.itemBody}>
         <div className={s.itemTitle}>
           <h4>{title}</h4>
           {isNew && <span className={s.isNew}>New</span>}
         </div>
         {description && <p className={s.itemDescription}>{description}</p>}
-      </div>
+      </article>
     </a>
   </Link>
 );
@@ -87,7 +87,7 @@ export default function Newnavbar() {
 
   return (
     <div className={classnames(s.root)} data-datocms-noindex>
-      {true && (
+      {false && (
         <Link href="/webinars/how-to-use-structured-text-on-datocms">
           <a className={s.notice}>
             <Wrapper>
@@ -117,13 +117,13 @@ export default function Newnavbar() {
             </a>
           </Link>
           <div className={s.navList}>
-            <div className={s.navItemGroup}>
+            <div className={s.navItem}>
               <div className={s.navButtonWrapper}>
                 <button className={s.navButton}>Product</button>
               </div>
               <Panel>
                 <PanelHighlight>
-                  <PanelGroup title="Platform">
+                  <Group title="Platform">
                     <GroupItem
                       href="/product"
                       title="Meet DatoCMS!"
@@ -132,10 +132,10 @@ export default function Newnavbar() {
                     />
                     <GroupItem href="/" title="Explore the capabilities!" />
                     <GroupItem href="/" title="See what’s new in DatoCMS" />
-                  </PanelGroup>
+                  </Group>
                 </PanelHighlight>
                 <PanelSlice columns="2">
-                  <PanelGroup columns={2} title="Features">
+                  <Group columns="2" title="Features">
                     <GroupItem
                       href="/"
                       title="GraphQL API"
@@ -147,8 +147,8 @@ export default function Newnavbar() {
                       description="Meet (arguably) the best content editor experience in Headless CMS."
                     />
                     <GroupLink text="Explore all features" link="/" />
-                  </PanelGroup>
-                  <PanelGroup columns={1} title="Features">
+                  </Group>
+                  <Group title="Use cases">
                     <GroupItem
                       href="/"
                       title="GraphQL API"
@@ -160,8 +160,8 @@ export default function Newnavbar() {
                       description="Meet (arguably) the best content editor experience in Headless CMS."
                     />
                     <GroupLink text="Explore all features" link="/" />
-                  </PanelGroup>
-                  <PanelGroup columns={1} title="Features">
+                  </Group>
+                  <Group title="Happy Team">
                     <GroupItem
                       href="/"
                       title="GraphQL API"
@@ -173,8 +173,132 @@ export default function Newnavbar() {
                       description="Meet (arguably) the best content editor experience in Headless CMS."
                     />
                     <GroupLink text="Explore all features" link="/" />
-                  </PanelGroup>
+                  </Group>
                 </PanelSlice>
+              </Panel>
+            </div>
+
+            <div className={s.navItem}>
+              <div className={s.navButtonWrapper}>
+                <button className={s.navButton}>Customers</button>
+              </div>
+              <Panel>
+                <PanelHighlight>
+                  <Group title="DatoCMS in production">
+                    <GroupItem
+                      href="/product"
+                      title="Powering experiences globally"
+                      description="Hear real-world accounts of how DatoCMS is used at scale across the world."
+                    />
+                    <GroupItem href="/" title="Enterprise Case Studies" />
+                    <GroupItem href="/" title="Casual Customer Chats" />
+                    <GroupItem href="/" title="Our Wall of Love" />
+                  </Group>
+                </PanelHighlight>
+                <PanelSlice columns={2}>
+                  <Group columns={2} title="Showcase projects">
+                    <GroupItem
+                      href="/"
+                      title="Polestar"
+                      description="Serving users globally in 28 locales with 250+ editors across 35 custom roles."
+                      imageUrl="a"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Chilly’s"
+                      description="Unlocking 166%+ growth in annual revenue for 2M+ monthly users."
+                      imageUrl="b"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Hashicorp"
+                      description="Handling 2TB of traffic, with 5M+ monthly API calls on 35K+ records."
+                      imageUrl="c"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Arduino"
+                      description="Reducing lines of code needed by 92,5% while gaining 8x faster loading times."
+                      imageUrl="d"
+                    />
+                    <GroupLink text="Explore all features" link="/" />
+                  </Group>
+                </PanelSlice>
+              </Panel>
+            </div>
+
+            <div className={s.navItem}>
+              <div className={s.navButtonWrapper}>
+                <button className={s.navButton}>Customers</button>
+              </div>
+              <Panel>
+                <PanelSlice columns={1}>
+                  <Group title="Documentation">
+                    <GroupItem
+                      href="/"
+                      title="GraphQL API Reference"
+                      description="Learn how to fetch your content into any frontend project."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Management API Reference"
+                      description="Handle creating, updating, deleting, and fetching content of your projects via API."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Assets API Reference"
+                      description="Get up to speed with managing & optimizing images and videos in DatoCMS."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Modelling Your Schema"
+                      description="Build your administrative area and define the structure of your content."
+                    />
+                    <GroupLink text="Explore all features" link="/" />
+                  </Group>
+                </PanelSlice>
+                <PanelSlice columns={2}>
+                  <Group columns={2} title="Extensibility">
+                    <GroupItem
+                      href="/"
+                      title="Official Starters"
+                      description="Boilerplate templates to get you from zero-to-live within minutes."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Hosting & Builds"
+                      description="Server, serverless, or static - we've got you and your stack covered."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Plugins"
+                      description="From web previews to SEO, easily expand DatoCMS’s capabilities."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Enterprise Apps"
+                      description="Keep your CMS secure with SSO, custom assets, and more."
+                    />
+                  </Group>
+                  <Group columns={2} title="Community & support">
+                    <GroupItem
+                      href="/"
+                      title="Community Forum"
+                      description="Get support, request a feature, or see what we’re working on."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Slack Channel"
+                      description="Connect with 3K+ other developers using DatoCMS in production."
+                    />
+                  </Group>
+                </PanelSlice>
+                
+                <PanelHighlight orientation="horizontal">
+                  <Group columns={3} title="Popular integrations">
+                    ...
+                  </Group>
+                </PanelHighlight>
               </Panel>
             </div>
           </div>
@@ -185,13 +309,11 @@ export default function Newnavbar() {
                 <span>Pricing</span>
               </a>
             </Link>
-
             <Link href="/contact">
               <a className={cn(s.navEntry, loggedIn && s.entryContact)}>
                 <span>Contact sales</span>
               </a>
             </Link>
-
             {loggedIn ? (
               <>
                 <Button as="a" p="small" href="https://dashboard.datocms.com/">
