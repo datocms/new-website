@@ -98,6 +98,7 @@
   font-size: 17px;
   padding: 0;
   pointer-events: all;
+  transition: color 0.3s;
 }
 
 .panel {
@@ -133,8 +134,14 @@
 
 .panelHighlight {
   background: linear-gradient(90deg, white, #f8eefb);
-  padding: 40px;
+  display: flex;
   height: 100%;
+  padding: 40px;
+
+  &[data-orientation="vertical"] {
+    gap: 50px;
+    flex-direction: column;
+  }
 
   &[data-orientation="horizontal"] {
     grid-column: 1 / -1;
@@ -291,4 +298,9 @@
   color: inherit;
   font-size: 17px;
   text-decoration: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--accent-color);
+  }
 }

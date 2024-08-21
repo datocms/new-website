@@ -29,7 +29,7 @@ const Panel = ({ children }) => (
   </div>
 );
 
-const PanelHighlight = ({ orientation = 'verical', children }) => (
+const PanelHighlight = ({ orientation = 'vertical', children }) => (
   <div data-orientation={orientation} className={s.panelHighlight}>
     {children}
   </div>
@@ -347,14 +347,79 @@ export default function Newnavbar() {
                 </PanelHighlight>
               </Panel>
             </div>
-          </div>
 
-          <div className={s.navActions}>
+            <div className={s.navItem}>
+              <div className={s.navButtonWrapper}>
+                <button className={s.navButton}>Resources</button>
+              </div>
+              <Panel>
+                <PanelHighlight>
+                  <Group title="Core resources">
+                    <GroupItem
+                      href="/"
+                      title="How to DatoCMS"
+                      description="Central hub covering everything you need to become a power user."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Compare Headless CMS"
+                      description="Not sure which CMS is the right one for you? Let us help you decide. No bias."
+                    />
+                  </Group>
+                  <Group title="Featured posts">
+                    <GroupItem
+                      href="/"
+                      title="Multilingual site with Next.js"
+                      description="Let’s build a localized Next.js and GraphQL website with DatoCMS."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Introducing Cache Tags"
+                      description="No more costly and inefficient time-based invalidation methods."
+                    />
+                    <GroupLink text="Explore the Blog" link="/" />
+                  </Group>
+                </PanelHighlight>
+                <PanelSlice columns={2}>
+                  <Group columns={2} title="Featured guides">
+                    <GroupItem
+                      href="/"
+                      title="User Guide Title"
+                      description="Saudi Arabia’s largest entertainment company uses blocks for a stellar UX."
+                      imageUrl="a"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="User Guide Title"
+                      description="Leading game developer gets a new website on Next.js and AWS."
+                      imageUrl="b"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="User Guide Title"
+                      description="Global fashion magazine runs 30+ online magazines from a single CMS instance."
+                      imageUrl="c"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="User Guide Title"
+                      description="Subscription-first cosmetic brand gets a world-class content overhaul."
+                      imageUrl="d"
+                    />
+                    <GroupLink text="Explore all Partner projects" link="/" />
+                  </Group>
+                </PanelSlice>
+              </Panel>
+            </div>
+
             <Link href="/pricing">
               <a className={s.navEntry}>
                 <span>Pricing</span>
               </a>
             </Link>
+          </div>
+
+          <div className={s.navActions}>
             <Link href="/contact">
               <a className={cn(s.navEntry, loggedIn && s.entryContact)}>
                 <span>Contact sales</span>
