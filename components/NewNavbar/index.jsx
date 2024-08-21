@@ -38,7 +38,7 @@ const GroupItem = ({ href, title, description, imageUrl, isNew }) => (
     <a className={s.groupItem}>
       {imageUrl && (
         <div className={s.itemImage}>
-          <img src={imageUrl} alt={title} />
+          <LazyImage src={imageUrl} alt={title} />
         </div>
       )}
       <article className={s.itemBody}>
@@ -140,7 +140,7 @@ export default function Newnavbar() {
                         p="tiny"
                         href="https://dashboard.datocms.com/"
                       >
-                        Enter dashboard
+                        Launch interactive demo
                       </Button>
                     </div>
                   </div>
@@ -244,25 +244,25 @@ export default function Newnavbar() {
                       href="/"
                       title="Polestar"
                       description="Serving users globally in 28 locales with 250+ editors across 35 custom roles."
-                      imageUrl="a"
+                      imageUrl="https://www.datocms-assets.com/205/1648568107-webimage-31a550ca-084b-46f8-ac8d9741a15c737c.jpeg?auto=format&w=800"
                     />
                     <GroupItem
                       href="/"
                       title="Chilly’s"
                       description="Unlocking 166%+ growth in annual revenue for 2M+ monthly users."
-                      imageUrl="b"
+                      imageUrl="https://www.datocms-assets.com/205/1582294156-cover-chillys.jpg?auto=format&w=800"
                     />
                     <GroupItem
                       href="/"
                       title="Hashicorp"
                       description="Handling 2TB of traffic, with 5M+ monthly API calls on 35K+ records."
-                      imageUrl="c"
+                      imageUrl="https://www.datocms-assets.com/205/1581953189-1569253200-swilson-hc19.png?auto=format&w=800"
                     />
                     <GroupItem
                       href="/"
                       title="Arduino"
                       description="Reducing lines of code needed by 92,5% while gaining 8x faster loading times."
-                      imageUrl="d"
+                      imageUrl="https://www.datocms-assets.com/205/1581958110-copy-of-arduino-teacher-students-978x653.jpeg?auto=format&w=800"
                     />
                     <GroupLink text="Explore all features" link="/" />
                   </Group>

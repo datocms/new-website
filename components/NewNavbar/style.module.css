@@ -18,6 +18,10 @@
   .panel {
     top: 100px;
   }
+
+  .panelInner {
+    max-height: calc(100vh - 100px);
+  }
 }
 
 .notice {
@@ -127,7 +131,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
-  overflow: hidden;
+  max-height: calc(100vh - 70px);
+  overflow: auto;
   pointer-events: none;
   width: 1000px;
 }
