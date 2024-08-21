@@ -24,93 +24,58 @@ import s from './style.module.css';
 
 import External from 'public/icons/regular/external-link.svg';
 
-const TitleDesc = ({ href, title, description, target, isNew }) =>
-  target ? (
-    <a className={s.titleDesc} href={href} target={target}>
-      <div className={s.titleDescBody}>
-        <div className={s.titleDescTitle}>
-          {title}
-          {isNew && (
-            <>
-              {' '}
-              <span className={s.isNew}>New</span>
-            </>
-          )}
-        </div>
-        <div className={s.titleDescDescription}>{description}</div>
-      </div>
-    </a>
-  ) : (
-    <Link href={href}>
-      <a className={s.titleDesc}>
-        <div className={s.titleDescBody}>
-          <div className={s.titleDescTitle}>
-            {title}
-            {isNew && (
-              <>
-                {' '}
-                <span className={s.isNew}>New</span>
-              </>
-            )}
-          </div>
-          <div className={s.titleDescDescription}>{description}</div>
-        </div>
-      </a>
-    </Link>
-  );
 
-const Feature = ({ href, icon: Icon, title, description, keyword, isNew }) => (
-  <Link href={href}>
-    <a className={s.flag} title={keyword}>
-      <div className={s.flagIcon}>
-        <Icon />
-      </div>
-      <div className={s.flagBody}>
-        <div className={s.flagTitle}>
-          {title}
-          {isNew && (
-            <>
-              {' '}
-              <span className={s.isNew}>New</span>
-            </>
-          )}
-        </div>
-        <div className={s.flagDescription}>{description}</div>
-      </div>
-    </a>
-  </Link>
-);
-
-const Product = ({ href, icon: Icon, title }) => (
-  <Link href={href}>
-    <a className={cn(s.flag, s.flagSmall)}>
-      <div className={cn(s.flagIcon, s.grayscale)}>
-        <Icon />
-      </div>
-      <div className={s.flagBody}>
-        <div className={s.flagTitle}>{title}</div>
-      </div>
-    </a>
-  </Link>
-);
-
-const Team = ({ href, icon: Icon, title }) => (
-  <Link href={href}>
-    <a className={cn(s.flag, s.flagSmall)}>
-      <div className={s.flagIcon}>
-        <Icon />
-      </div>
-      <div className={s.flagBody}>
-        <div className={s.flagTitle}>{title}</div>
-      </div>
-    </a>
-  </Link>
-);
-
-const Pane = ({ children }) => (
-  <div className={s.pane}>
-    <div className={s.paneInner}>{children}</div>
+const Panel = ({ children }) => (
+  <div className={s.panel}>
+    <div className={s.panelInner}>{children}</div>
   </div>
+);
+
+const PanelGroup = ({ columns = 1, title, children }) => (
+  <div data-col={columns} className={s.panelGroup}>
+    {title && <h3 className={s.groupTitle}>{title}</h3>}
+    {children}
+  </div>
+);
+
+const PanelHighlight = ({ orientation, children }) => (
+  <div data-orientation={orientation} className={s.highlight}>
+    {children}
+  </div>
+);
+
+const PanelSlice = ({ columns = 1, children }) => (
+  <div className={s.slice} data-col={columns}>
+    {children}
+  </div>
+);
+
+const GroupItem = ({ href, title, description, imageUrl, isNew }) => (
+  <Link href={href}>
+    <a className={s.item}>
+      {imageUrl && (
+        <div className={s.itemImage}>
+          <img src={imageUrl} alt={title} /> aaa
+        </div>
+      )}
+      <div className={s.itemBody}>
+        <div className={s.itemTitle}>
+          <h4>{title}</h4>
+          {isNew && <span className={s.isNew}>New</span>}
+        </div>
+        {description && <p className={s.itemDescription}>{description}</p>}
+      </div>
+    </a>
+  </Link>
+);
+
+const GroupLink = ({ text, link }) => (
+  <Link href={link}>
+    <a className={s.groupLink}>
+      <span>{text}</span>
+      <span>→</span>
+    </a>
+  </Link>
 );
 
 export default function Newnavbar() {
@@ -121,7 +86,7 @@ export default function Newnavbar() {
   }, []);
 
   return (
-    <>
+    <div className={classnames(s.root)} data-datocms-noindex>
       {true && (
         <Link href="/webinars/how-to-use-structured-text-on-datocms">
           <a className={s.notice}>
@@ -143,415 +108,112 @@ export default function Newnavbar() {
           </a>
         </Link>
       )}
-      <div className={classnames(s.root)} data-datocms-noindex>
-        <Wrapper>
-          <div className={s.innerRoot}>
-            <Link href="/">
-              <a className={s.logo}>
-                <AlternativeLogo />
-              </a>
-            </Link>
-            <div className={s.entries}>
-              <div className={s.group}>
-                <div className={s.groupTitle} tabIndex={0}>
-                  Product
-                </div>
-                <Pane>
-                  <div className={s.cols}>
-                    <div className={cn(s.section, s.sectionInverse)}>
-                      <Product href="/product" icon={Logo} title="Overview" />
 
-                      <div className={s.sectionTitle}>Happy team</div>
-                      <Team
-                        href="/team/best-cms-for-developers"
-                        icon={Developers}
-                        title="For developers"
-                      />
-                      <Team
-                        href="/team/cms-digital-marketing"
-                        icon={Marketers}
-                        title="For digital marketers"
-                      />
-                      <Team
-                        href="/team/content-creators"
-                        icon={ContentCreators}
-                        title="For content creators"
-                      />
-
-                      <div className={s.sectionTitle}>
-                        Ready integrations with
-                      </div>
-                      <div className={s.integrations}>
-                        <Link href="/cms/nextjs-cms">
-                          <a className={s.integrationLink}>Next</a>
-                        </Link>
-                        <Link href="/cms/nuxtjs-cms">
-                          <a className={s.integrationLink}>Nuxt</a>
-                        </Link>
-                        <Link href="/cms/react-cms">
-                          <a className={s.integrationLink}>React</a>
-                        </Link>
-                        <Link href="/cms/svelte-cms">
-                          <a className={s.integrationLink}>Svelte</a>
-                        </Link>
-                        <Link href="/cms/vue-js-cms">
-                          <a className={s.integrationLink}>Vue</a>
-                        </Link>
-                        <Link href="/cms/remix-cms">
-                          <a className={s.integrationLink}>Remix</a>
-                        </Link>
-                        <Link href="/marketplace/hosting/netlify">
-                          <a className={s.integrationLink}>Netlify</a>
-                        </Link>
-                        <Link href="/marketplace/hosting/vercel">
-                          <a className={s.integrationLink}>Vercel</a>
-                        </Link>
-                      </div>
-                    </div>
-
-                    <div className={s.section}>
-                      <div className={s.sectionTitle}>Features</div>
-
-                      <div className={s.grid2}>
-                        <Feature
-                          icon={Cdn}
-                          title="Worldwide CDN"
-                          keyword="fastest-headless-cms"
-                          href="/features/worldwide-cdn"
-                          description="Performant, secure, and close to every customer"
-                        />
-
-                        <Feature
-                          icon={GraphQl}
-                          title="GraphQL Content API"
-                          keyword="Headless CMS Graphql"
-                          href="/features/headless-cms-graphql"
-                          description="Develop faster with powerful developer tools"
-                        />
-
-                        <Feature
-                          icon={Image}
-                          title="Images API"
-                          keyword="Images API"
-                          href="/features/images-api"
-                          description="Endless transformations at your disposal"
-                        />
-
-                        <Feature
-                          icon={Video}
-                          title="Video API"
-                          keyword="Video API"
-                          href="/features/video-api"
-                          description="Produce videos and serve them fast to any device"
-                        />
-
-                        <Feature
-                          icon={Languages}
-                          title="Multi-language"
-                          keyword="Headless CMS multi language"
-                          href="/features/headless-cms-multi-language"
-                          description="Reach global audience with localized content"
-                        />
-
-                        <Feature
-                          icon={Layouts}
-                          title="Dynamic layouts"
-                          keyword="Dynamic layouts CMS"
-                          href="/features/dynamic-layouts"
-                          description="Easily build dynamic layouts for landing pages"
-                        />
-
-                        <Feature
-                          icon={DataIntegrity}
-                          title="Content integrity"
-                          keyword="Content integrity CMS"
-                          href="/features/data-integrity"
-                          description="Validations, sandbox environments and roles"
-                        />
-
-                        <Feature
-                          icon={Workflows}
-                          title="Workflows"
-                          keyword="Workflow CMS"
-                          href="/features/workflow-cms"
-                          description="Supercharge your content approval process"
-                        />
-
-                        <Feature
-                          icon={RealTime}
-                          title="Real-time updates"
-                          keyword="Real-time API"
-                          href="/features/real-time-api"
-                          description="Live changes to content on production website"
-                        />
-
-                        <Feature
-                          icon={StructuredText}
-                          title="Structured text"
-                          keyword="Structured content CMS"
-                          href="/features/structured-content-cms"
-                          description="Freedom for editors, control for developers"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </Pane>
+      <Wrapper>
+        <nav className={s.nav}>
+          <Link href="/">
+            <a className={s.logo}>
+              <AlternativeLogo />
+            </a>
+          </Link>
+          <div className={s.navList}>
+            <div className={s.navItemGroup}>
+              <div className={s.navButtonWrapper}>
+                <button className={s.navButton}>Product</button>
               </div>
-
-              <div className={s.group}>
-                <div className={s.groupTitle} tabIndex={0}>
-                  Customers
-                </div>
-
-                <Pane>
-                  <div className={s.cols}>
-                    <div className={cn(s.section, s.sectionInverse)}>
-                      <div className={s.sectionTitle}>Quotes</div>
-                      <Link href="/wall">
-                        <a className={s.extraLink}>Read our Testimonials</a>
-                      </Link>
-
-                      <div className={s.sectionTitle}>Enterprise</div>
-                      <Link href="/enterprise-headless-cms">
-                        <a className={s.extraLink}>DatoCMS for Enterprise</a>
-                      </Link>
-                    </div>
-                    <div className={s.section}>
-                      <div className={s.sectionTitle}>Success stories</div>
-                      <div className={s.grid2}>
-                        <TitleDesc
-                          href="/customers/polestar"
-                          title="Polestar"
-                          isNew={true}
-                          description="Localise everything to build a global carmaker website"
-                        />
-
-                        <TitleDesc
-                          href="/customers/oberlo"
-                          title="Shopify Orberlo"
-                          isNew
-                          description="Painless switch to static from Wordpress"
-                        />
-
-                        <TitleDesc
-                          href="/customers/hashicorp"
-                          title="Hashicorp"
-                          description="How HashiCorp delivers a reliable editorial workflow"
-                        />
-
-                        <TitleDesc
-                          href="/customers/chillys"
-                          title="Chilly's Bottles"
-                          description="How Rotate built a 2M users a month e-commerce"
-                        />
-
-                        <TitleDesc
-                          href="/customers/matter-supply"
-                          title="Matter Supply"
-                          description="How to deliver an Emmy award-campaign in 4 weeks"
-                        />
-
-                        <TitleDesc
-                          href="/customers/dovetail"
-                          title="Dovetail"
-                          description="Why DatoCMS is their headless CMS of choice"
-                        />
-                      </div>
-                      <Link href="/success-stories">
-                        <a className={s.viewAll}>
-                          Explore all customer stories &raquo;
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                </Pane>
-              </div>
-
-              <div className={s.group}>
-                <div className={s.groupTitle} tabIndex={0}>
-                  Learn
-                </div>
-                <Pane>
-                  <div className={s.cols}>
-                    <div className={s.section}>
-                      <div className={s.grid1}>
-                        <TitleDesc
-                          title="Documentation"
-                          description="Guides, tutorials and API reference"
-                          href="/docs"
-                        />
-
-                        <TitleDesc
-                          title="Blog"
-                          description="Culture, learnings, and announcements"
-                          href="/blog"
-                        />
-
-                        <TitleDesc
-                          title="User Guides"
-                          description="Simple product walkthroughs for editors"
-                          href="/user-guides"
-                        />
-
-                        <TitleDesc
-                          title="Product updates"
-                          description="Changelog for new features and improvements"
-                          href="/product-updates"
-                        />
-
-                        <TitleDesc
-                          title="Academy"
-                          description="Deep dive into the concepts around headless"
-                          href="/academy"
-                        />
-                      </div>
-                    </div>
-                    <div className={s.section}>
-                      <div className={s.grid1}>
-                        <TitleDesc
-                          title={
-                            <>
-                              Community forum <External />
-                            </>
-                          }
-                          description="Ask questions and discuss with your peers"
-                          href="https://community.datocms.com"
-                          target="_blank"
-                        />
-                        <TitleDesc
-                          title="Slack channel"
-                          description="Chat live with other devs in our Slack channel"
-                          href="/slack"
-                        />
-                        <TitleDesc
-                          title="Support"
-                          description="Got questions? Get in touch with our team"
-                          href="/support"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </Pane>
-              </div>
-
-              <div className={s.group}>
-                <div className={s.groupTitle} tabIndex={0}>
-                  Marketplace
-                </div>
-                <Pane>
-                  <div className={s.cols}>
-                    <div className={s.cols}>
-                      <div className={s.section}>
-                        <div className={s.grid1}>
-                          <TitleDesc
-                            href="/marketplace/starters"
-                            title="Starters"
-                            description="Start with a fully configured DatoCMS project"
-                          />
-                          <TitleDesc
-                            href="/marketplace/plugins"
-                            title="Plugins"
-                            description="Easily expand the capabilities of DatoCMS"
-                          />
-                        </div>
-                      </div>
-                      <div className={s.section}>
-                        <div className={s.grid1}>
-                          <TitleDesc
-                            href="/marketplace/hosting"
-                            title="Hosting &amp; Builds"
-                            description="No matter the stack you're using, we've got you covered"
-                          />
-
-                          <TitleDesc
-                            href="/marketplace/enterprise"
-                            title="Enterprise apps"
-                            description="Keep your company data secure"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Pane>
-              </div>
-
-              <div className={s.group}>
-                <div className={s.groupTitle} tabIndex={0}>
-                  <span>Partners</span>
-                </div>
-
-                <Pane>
-                  <div className={s.cols}>
-                    <div className={s.cols}>
-                      <div className={s.section}>
-                        <div className={s.grid1}>
-                          <TitleDesc
-                            href="/partners"
-                            title="Solution Partners"
-                            description="Find the perfect agency partner for your projects"
-                          />
-                          <TitleDesc
-                            href="/tech-partners"
-                            title="Technology Partners"
-                            description="Explore our partner APIs to supercharge your projects"
-                          />
-                        </div>
-                      </div>
-                      <div className={s.section}>
-                        <div className={s.grid1}>
-                          <TitleDesc
-                            href="/partner-program"
-                            title="Our Partner Program"
-                            description="Find out what benefits you and your clients enjoy as a DatoCMS Agency partner!"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Pane>
-              </div>
-            </div>
-
-            <div className={s.actions}>
-              <Link href="/pricing">
-                <a className={s.entry}>
-                  <span>Pricing</span>
-                </a>
-              </Link>
-
-              <Link href="/contact">
-                <a className={cn(s.entry, loggedIn && s.entryContact)}>
-                  <span>Contact sales</span>
-                </a>
-              </Link>
-
-              {loggedIn ? (
-                <>
-                  <Button
-                    as="a"
-                    p="small"
-                    href="https://dashboard.datocms.com/"
-                  >
-                    Enter dashboard
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <a
-                    href="https://dashboard.datocms.com/login"
-                    className={cn(s.entry, s.entryContact)}
-                  >
-                    <span>Log in</span>
-                  </a>
-                  <Button as="a" p="small" href="/pricing">
-                    Get started
-                  </Button>
-                </>
-              )}
+              <Panel>
+                <PanelHighlight>
+                  <PanelGroup title="Platform">
+                    <GroupItem
+                      href="/product"
+                      title="Meet DatoCMS!"
+                      description="Everything you need to know about the friendliest Headless CMS on the market."
+                      isNew
+                    />
+                    <GroupItem href="/" title="Explore the capabilities!" />
+                    <GroupItem href="/" title="See what’s new in DatoCMS" />
+                  </PanelGroup>
+                </PanelHighlight>
+                <PanelSlice columns="2">
+                  <PanelGroup columns={2} title="Features">
+                    <GroupItem
+                      href="/"
+                      title="GraphQL API"
+                      description="Understand how our GraphQL APIs level up your developer experience."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Structured text"
+                      description="Meet (arguably) the best content editor experience in Headless CMS."
+                    />
+                    <GroupLink text="Explore all features" link="/" />
+                  </PanelGroup>
+                  <PanelGroup columns={1} title="Features">
+                    <GroupItem
+                      href="/"
+                      title="GraphQL API"
+                      description="Understand how our GraphQL APIs level up your developer experience."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Structured text"
+                      description="Meet (arguably) the best content editor experience in Headless CMS."
+                    />
+                    <GroupLink text="Explore all features" link="/" />
+                  </PanelGroup>
+                  <PanelGroup columns={1} title="Features">
+                    <GroupItem
+                      href="/"
+                      title="GraphQL API"
+                      description="Understand how our GraphQL APIs level up your developer experience."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Structured text"
+                      description="Meet (arguably) the best content editor experience in Headless CMS."
+                    />
+                    <GroupLink text="Explore all features" link="/" />
+                  </PanelGroup>
+                </PanelSlice>
+              </Panel>
             </div>
           </div>
-        </Wrapper>
-      </div>
-    </>
+
+          <div className={s.navActions}>
+            <Link href="/pricing">
+              <a className={s.navEntry}>
+                <span>Pricing</span>
+              </a>
+            </Link>
+
+            <Link href="/contact">
+              <a className={cn(s.navEntry, loggedIn && s.entryContact)}>
+                <span>Contact sales</span>
+              </a>
+            </Link>
+
+            {loggedIn ? (
+              <>
+                <Button as="a" p="small" href="https://dashboard.datocms.com/">
+                  Enter dashboard
+                </Button>
+              </>
+            ) : (
+              <>
+                <a
+                  href="https://dashboard.datocms.com/login"
+                  className={cn(s.navEntry, s.entryContact)}
+                >
+                  <span>Log in</span>
+                </a>
+                <Button as="a" p="small" href="/pricing">
+                  Get started
+                </Button>
+              </>
+            )}
+          </div>
+        </nav>
+      </Wrapper>
+    </div>
   );
 }
