@@ -1,24 +1,9 @@
 import { default as classnames, default as cn } from 'classnames';
 import Button from 'components/Button';
+import LazyImage from 'components/LazyImage';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
-import External from 'public/icons/regular/external-link.svg';
-// import FullLogo from 'public/images/full_logo.svg';
 import AlternativeLogo from 'public/images/brand-assets/svg/icon-text/color/color_full_logo_alt.svg';
-import ContentCreators from 'public/images/illustrations/content-editors2.svg';
-import Developers from 'public/images/illustrations/developers-2.svg';
-import Layouts from 'public/images/illustrations/dynamic-layouts.svg';
-import Cdn from 'public/images/illustrations/global-cdn-2.svg';
-import GraphQl from 'public/images/illustrations/graphql-api.svg';
-import Image from 'public/images/illustrations/image-api.svg';
-import RealTime from 'public/images/illustrations/live-31.svg';
-import DataIntegrity from 'public/images/illustrations/lock2.svg';
-import Marketers from 'public/images/illustrations/marketers.svg';
-import Languages from 'public/images/illustrations/multilanguage-2.svg';
-import StructuredText from 'public/images/illustrations/scontent.svg';
-import Video from 'public/images/illustrations/video-encoding.svg';
-import Workflows from 'public/images/illustrations/workflows.svg';
-import Logo from 'public/images/logo.svg';
 import { useEffect, useState } from 'react';
 import { getCookie } from 'utils/cookies';
 import s from './style.module.css';
@@ -133,6 +118,31 @@ export default function Newnavbar() {
                     <GroupItem href="/" title="Explore the capabilities!" />
                     <GroupItem href="/" title="See what’s new in DatoCMS" />
                   </Group>
+                  <div className={s.spacer} />
+                  <div className={s.ctaBox}>
+                    <div className={s.ctaImageWrapper}>
+                      <div className={s.ctaImage}>
+                        <LazyImage
+                          src={'/images/illustrations/box-things.svg'}
+                        />
+                      </div>
+                    </div>
+                    <article className={s.ctaBody}>
+                      <h3 className={s.ctaTitle}>Try DatoCMS for Free</h3>
+                      <p className={s.ctaDescription}>
+                        Try a no-strings-attached demo. No signup. No email. No
+                        credit card.
+                      </p>
+                    </article>
+                    <Button
+                      className={s.ctaButton}
+                      as="a"
+                      p="tiny"
+                      href="https://dashboard.datocms.com/"
+                    >
+                      Enter dashboard
+                    </Button>
+                  </div>
                 </PanelHighlight>
                 <PanelSlice columns="2">
                   <Group columns="2" title="Features">
@@ -146,31 +156,61 @@ export default function Newnavbar() {
                       title="Structured text"
                       description="Meet (arguably) the best content editor experience in Headless CMS."
                     />
+                    <GroupItem
+                      href="/"
+                      title="Localization"
+                      description="With i18n out of the box, meet your customers everywhere in the world."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Modular Content"
+                      description="Meet the dynamic page building experience you’ll love instantly."
+                    />
                     <GroupLink text="Explore all features" link="/" />
                   </Group>
                   <Group title="Use cases">
                     <GroupItem
                       href="/"
-                      title="GraphQL API"
-                      description="Understand how our GraphQL APIs level up your developer experience."
+                      title="Modern Websites"
+                      description="Build bold with SEO, Assets, Live Previews, and more, out of the box."
                     />
                     <GroupItem
                       href="/"
-                      title="Structured text"
-                      description="Meet (arguably) the best content editor experience in Headless CMS."
+                      title="eCommerce"
+                      description="Manage content and commerce experiences that fly off the shelf!"
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Digital Publishing"
+                      description="Ship content at scale with blazing fast speeds (or in real time)."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="Knowledge Management"
+                      description="Simplify complex content for portals, wikis, intranets, and more."
                     />
                     <GroupLink text="Explore all features" link="/" />
                   </Group>
                   <Group title="Happy Team">
                     <GroupItem
                       href="/"
-                      title="GraphQL API"
-                      description="Understand how our GraphQL APIs level up your developer experience."
+                      title="For Web Developers"
+                      description="Stop settling for legacy web technologies that slow you down."
                     />
                     <GroupItem
                       href="/"
-                      title="Structured text"
-                      description="Meet (arguably) the best content editor experience in Headless CMS."
+                      title="For Digital Marketers"
+                      description="Take control of your content with a unified platform for all channels."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="For Content Creators"
+                      description="See why DatoCMS is trusted from governments to the F500."
+                    />
+                    <GroupItem
+                      href="/"
+                      title="For Enterprise"
+                      description="See why DatoCMS is trusted from governments to the F500."
                     />
                     <GroupLink text="Explore all features" link="/" />
                   </Group>
@@ -232,7 +272,7 @@ export default function Newnavbar() {
             <div className={s.navItem}>
               <div className={s.navButtonWrapper}>
                 <button className={s.navButton} type="button">
-                  Parners
+                  Partners
                 </button>
               </div>
               <Panel>

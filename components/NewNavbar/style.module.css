@@ -138,6 +138,10 @@
   height: 100%;
   padding: 40px;
 
+  &:has(.ctaBox) {
+    padding-bottom: 0;
+  }
+
   &[data-orientation="vertical"] {
     gap: 50px;
     flex-direction: column;
@@ -148,10 +152,70 @@
   }
 }
 
+.spacer {
+  flex: 1;
+}
+
+.ctaBox {
+  align-items: center;
+  aspect-ratio: 1/1;
+  background-color: #fff;
+  border-radius: 400px 400px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  transform: translateX(-40px);
+  width: calc(100% + 79px);
+  gap: 20px;
+
+  .ctaImageWrapper {
+    align-items: center;
+    display: flex;
+    height: 50%;
+  }
+
+  .ctaImage {
+    aspect-ratio: 1/1;
+    width: 70px;
+
+    img {
+      display: block;
+      height: 100%;
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+
+  .ctaBody {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .ctaTitle {
+    font-size: 19px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .ctaDescription {
+    color: var(--light-body-color);
+    font-size: 15px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .ctaButton {
+    margin-top: 6px;
+  }
+}
+
 .panelSlice {
   display: grid;
   padding: 40px;
-  gap: 50px 12px;
+  gap: 40px 12px;
 
   &[data-col="1"] {
     grid-template-columns: 1fr;
@@ -171,7 +235,7 @@
 
 .group {
   display: grid;
-  gap: 24px 12px;
+  gap: 20px 12px;
 
   &[data-col="1"] {
     grid-column: span 1;
