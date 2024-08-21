@@ -237,6 +237,24 @@ export default function Newnavbar() {
                     <GroupItem href="/" title="Casual Customer Chats" />
                     <GroupItem href="/" title="Our Wall of Love" />
                   </Group>
+                  <div className={s.quoteWrapper}>
+                    <div className={s.quote}>
+                      <blockquote>
+                        <p>
+                          Immediately, DatoCMS ticked all the boxes without being overwhelming.
+                        </p>
+                        <footer>
+                          <div className={s.quoteAvatar}>
+                            <LazyImage src={'https://avatars.githubusercontent.com/u/1485507?v=4'} />
+                          </div>
+                          <cite>
+                            <div className={s.name}>Frank Reding</div>
+                            <div className={s.role}>Senior Developer at Oberlo</div>
+                          </cite>
+                        </footer>
+                      </blockquote>
+                    </div>
+                  </div>
                 </PanelHighlight>
                 <PanelSlice columns={2}>
                   <Group columns={2} title="Showcase projects">

@@ -115,7 +115,7 @@
   position: fixed;
   top: 70px;
   transform: translateY(10px);
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s 0.1s, transform 0.3s;
   width: 100%;
 
   @media (prefers-reduced-motion) {
@@ -217,6 +217,72 @@
 
   .ctaButton {
     margin-top: 6px;
+  }
+}
+
+.quoteWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-end;
+  transform: translateX(-10px) translateY(5px);
+  width: calc(100% + 20px);
+}
+
+.quote {
+  &:before {
+    color: var(--accent-color);
+    content: "\201C";
+    font-family: var(--font-headline);
+    font-size: 7em;
+    left: 50%;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%) translateY(22.5%);
+  }
+
+  blockquote {
+    margin: 0;
+
+    p {
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      text-align: center;
+      font-size: 21px;
+    }
+  }
+
+  footer {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 36px;
+  }
+
+  .quoteAvatar {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 50px;
+  }
+
+  cite {
+    font-style: normal;
+
+    .name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .role {
+      color: var(--light-body-color);
+      font-size: 15px;
+    }
   }
 }
 
