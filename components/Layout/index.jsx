@@ -7,7 +7,7 @@ export default function Layout({ noCta, children, preview }) {
   return (
     <BaseLayout preview={preview}>
       <NewNavbar />
-      <MobileNavbar />
+      {/* <MobileNavbar /> */}
 
       {children}
       <Footer noCta={noCta} />
