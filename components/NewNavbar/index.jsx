@@ -35,9 +35,16 @@ const Group = ({ columns = 1, title, children }) => (
   </div>
 );
 
-const GroupItem = ({ href, title, description, imageUrl, isNew }) => (
+const GroupItem = ({
+  href,
+  title,
+  description,
+  imageUrl,
+  isNew,
+  excludeMobile,
+}) => (
   <Link href={href}>
-    <a className={s.groupItem}>
+    <a className={s.groupItem} data-exclude-mobile={excludeMobile}>
       {imageUrl && (
         <div className={s.itemImage}>
           <LazyImage src={imageUrl} alt={title} />
@@ -65,15 +72,23 @@ const GroupLink = ({ text, link }) => (
 
 export default function Newnavbar() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [openNav, setOpenNav] = useState(false);
   const [openPanel, setOpenPanel] = useState(null);
 
   useEffect(() => {
     setLoggedIn(!!getCookie('datoAccountEmail'));
   }, []);
 
+  const toggleNav = () => {
+    if (!openNav) {
+      setOpenPanel(null);
+    }
+    setOpenNav(!openNav);
+  };
+
   const toggleMobileAccordion = (panel) => {
     setOpenPanel(openPanel === panel ? null : panel);
-  }
+  };
 
   return (
     <div className={classnames(s.root)} data-datocms-noindex>
@@ -99,7 +114,7 @@ export default function Newnavbar() {
         </Link>
       )}
 
-      <nav className={s.nav}>
+      <nav className={s.nav} data-open={openNav}>
         <div className={s.logoWrapper}>
           <Link href="/">
             <a className={s.logo}>
@@ -107,15 +122,23 @@ export default function Newnavbar() {
             </a>
           </Link>
 
-          <div className={s.hamburger}>
+          <button
+            type="button"
+            className={s.hamburger}
+            onClick={() => toggleNav()}
+          >
             <Hamburger />
-          </div>
+          </button>
         </div>
 
         <div className={s.navList}>
           <div className={s.navItem} data-open={openPanel === 'product'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('product')}>
+              <button
+                className={s.navButton}
+                type="button"
+                onClick={() => toggleMobileAccordion('product')}
+              >
                 Product
               </button>
               <div className={s.chevron}>
@@ -133,7 +156,7 @@ export default function Newnavbar() {
                   <GroupItem href="/" title="Explore the capabilities!" />
                   <GroupItem href="/" title="See what’s new in DatoCMS" />
                 </Group>
-                <div className={s.ctaBox}>
+                <div className={s.ctaBox} data-exclude-mobile>
                   <div className={s.ctaBoxShape}>
                     <div className={s.ctaImageWrapper}>
                       <div className={s.ctaImage}>
@@ -236,7 +259,11 @@ export default function Newnavbar() {
 
           <div className={s.navItem} data-open={openPanel === 'customers'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('customers')}>
+              <button
+                className={s.navButton}
+                type="button"
+                onClick={() => toggleMobileAccordion('customers')}
+              >
                 Customers
               </button>
               <div className={s.chevron}>
@@ -315,7 +342,11 @@ export default function Newnavbar() {
 
           <div className={s.navItem} data-open={openPanel === 'partners'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('partners')}>
+              <button
+                className={s.navButton}
+                type="button"
+                onClick={() => toggleMobileAccordion('partners')}
+              >
                 Partners
               </button>
               <div className={s.chevron}>
@@ -392,7 +423,11 @@ export default function Newnavbar() {
 
           <div className={s.navItem} data-open={openPanel === 'developers'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('developers')}>
+              <button
+                className={s.navButton}
+                type="button"
+                onClick={() => toggleMobileAccordion('developers')}
+              >
                 Developers
               </button>
               <div className={s.chevron}>
@@ -514,7 +549,11 @@ export default function Newnavbar() {
 
           <div className={s.navItem} data-open={openPanel === 'resources'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('resources')}>
+              <button
+                className={s.navButton}
+                type="button"
+                onClick={() => toggleMobileAccordion('resources')}
+              >
                 Resources
               </button>
               <div className={s.chevron}>
@@ -590,9 +629,7 @@ export default function Newnavbar() {
 
         <div className={s.navActions}>
           <Link href="/contact">
-            <a className={cn(s.navEntry, loggedIn && s.entryContact)}>
-              <span>Contact sales</span>
-            </a>
+            <a className={s.navEntry}>Contact sales</a>
           </Link>
           {loggedIn ? (
             <>
@@ -604,7 +641,8 @@ export default function Newnavbar() {
             <>
               <a
                 href="https://dashboard.datocms.com/login"
-                className={cn(s.navEntry, s.entryContact)}
+                className={s.navEntry}
+                data-exclude-mobile
               >
                 <span>Log in</span>
               </a>

@@ -39,11 +39,35 @@
 }
 
 .nav {
-  box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
   gap: 40px;
   padding: var(--page-margin);
+
+  @media screen and (max-width: 1124px) {
+    height: 90px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+
+    .navList,
+    .navActions {
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    &[data-open="true"] {
+      height: 100%;
+      overflow: inherit;
+      box-shadow: var(--box-shadow);
+
+      .navList,
+      .navActions {
+        opacity: 1;
+        transform: translateY(10px);
+      }
+    }
+  }
   
   @media screen and (min-width: 1125px) {
     align-items: center;
@@ -64,6 +88,10 @@
 }
 
 .hamburger {
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+
   @media screen and (min-width: 1125px) {
     display: none;
   }
@@ -86,8 +114,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 100%;
-  
+
   @media screen and (min-width: 1125px) {
     align-items: center;
     flex-direction: row;
@@ -157,6 +184,7 @@
   }
 
   .chevron {
+    pointer-events: none;
     position: absolute;
     right: 0;
     transform: translateY(4px);
@@ -630,6 +658,7 @@
   align-items: center;
   display: flex;
   gap: 20px;
+  justify-content: space-between;
 }
 
 .navEntry {
@@ -640,5 +669,13 @@
 
   &:hover {
     color: var(--accent-color);
+  }
+}
+
+.groupItem[data-exclude-mobile],
+.ctaBox[data-exclude-mobile],
+.navEntry[data-exclude-mobile] {
+  @media screen and (max-width: 1124px) {
+    display: none;
   }
 }
