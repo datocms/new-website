@@ -241,15 +241,22 @@ export default function Newnavbar() {
                     <div className={s.quote}>
                       <blockquote>
                         <p>
-                          Immediately, DatoCMS ticked all the boxes without being overwhelming.
+                          Immediately, DatoCMS ticked all the boxes without
+                          being overwhelming.
                         </p>
                         <footer>
                           <div className={s.quoteAvatar}>
-                            <LazyImage src={'https://avatars.githubusercontent.com/u/1485507?v=4'} />
+                            <LazyImage
+                              src={
+                                'https://avatars.githubusercontent.com/u/1485507?v=4'
+                              }
+                            />
                           </div>
                           <cite>
                             <div className={s.name}>Frank Reding</div>
-                            <div className={s.role}>Senior Developer at Oberlo</div>
+                            <div className={s.role}>
+                              Senior Developer at Oberlo
+                            </div>
                           </cite>
                         </footer>
                       </blockquote>
@@ -338,25 +345,25 @@ export default function Newnavbar() {
                       href="/"
                       title="MDLBeast by November Five"
                       description="Saudi Arabia’s largest entertainment company uses blocks for a stellar UX."
-                      imageUrl="a"
+                      imageUrl="https://www.datocms-assets.com/205/1685971352-mdlbeast.jpg?auto=format&w=800"
                     />
                     <GroupItem
                       href="/"
                       title="Toca Boca by Fully Studios"
                       description="Leading game developer gets a new website on Next.js and AWS."
-                      imageUrl="b"
+                      imageUrl="https://www.datocms-assets.com/205/1715249902-project_img.png?auto=format&w=800"
                     />
                     <GroupItem
                       href="/"
                       title="L’Officiel by Cantiere Creativo"
                       description="Global fashion magazine runs 30+ online magazines from a single CMS instance."
-                      imageUrl="c"
+                      imageUrl="https://www.datocms-assets.com/205/1640195611-home-page-fr.png?auto=format&w=800"
                     />
                     <GroupItem
                       href="/"
                       title="Wild by Rotate°"
                       description="Subscription-first cosmetic brand gets a world-class content overhaul."
-                      imageUrl="d"
+                      imageUrl="https://www.datocms-assets.com/205/1718048731-1661957070-wild_02.jpg?auto=format&w=800"
                     />
                     <GroupLink text="Explore all Partner projects" link="/" />
                   </Group>
@@ -479,27 +486,27 @@ export default function Newnavbar() {
                   <Group columns={2} title="Featured guides">
                     <GroupItem
                       href="/"
-                      title="User Guide Title"
-                      description="Saudi Arabia’s largest entertainment company uses blocks for a stellar UX."
-                      imageUrl="a"
+                      title="Deep Dive into Structured Text in DatoCMS"
+                      description=""
+                      imageUrl="https://image.mux.com/Yc4esLEsoQszLQLgkOKPCmVLARxnrMzV/thumbnail.jpg?width=918"
                     />
                     <GroupItem
                       href="/"
-                      title="User Guide Title"
-                      description="Leading game developer gets a new website on Next.js and AWS."
-                      imageUrl="b"
+                      title="Building Pages and Deep Dive into Modular Content"
+                      description=""
+                      imageUrl="https://image.mux.com/W5jgwKq95fqBS7kmfolmRJHrUx4jtEex/thumbnail.jpg?width=918"
                     />
                     <GroupItem
                       href="/"
-                      title="User Guide Title"
-                      description="Global fashion magazine runs 30+ online magazines from a single CMS instance."
-                      imageUrl="c"
+                      title="Videos and Video Optimizations"
+                      description=""
+                      imageUrl="https://image.mux.com/P1SA01aSHtY1jzHrASAu00jdfIH5OWF01Ih/thumbnail.jpg?width=918"
                     />
                     <GroupItem
                       href="/"
-                      title="User Guide Title"
-                      description="Subscription-first cosmetic brand gets a world-class content overhaul."
-                      imageUrl="d"
+                      title="Intro to the Schema Builder"
+                      description=""
+                      imageUrl="https://image.mux.com/ZXrCcv53t00n02f5yS500siKW102xdfJqG025/thumbnail.jpg?width=918"
                     />
                     <GroupLink text="Explore all Partner projects" link="/" />
                   </Group>
