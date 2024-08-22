@@ -83,6 +83,8 @@ export const findPermalink = async ({ item, itemTypeApiKey }) => {
 
       return `/academy/${chapter.courses[0].slug}/${item.attributes.slug}`;
     }
+    case 'use_case_page':
+      return `/use-cases/${item.attributes.slug}`;
     default:
       return null;
   }
