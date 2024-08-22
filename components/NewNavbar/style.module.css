@@ -57,6 +57,23 @@
   }
 }
 
+.logoWrapper {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hamburger {
+  @media screen and (min-width: 1125px) {
+    display: none;
+  }
+
+  svg {
+    width: 24px;
+    height: auto;
+  }
+}
+
 .logo {
   svg {
     height: 30px;
@@ -76,11 +93,35 @@
     flex-direction: row;
     gap: 20px;
   }
+
+  .navEntry {
+    @media screen and (max-width: 1124px) {
+      border-top: 1px solid #ddd;
+      font-family: var(--font-headline);
+      font-size: 24px;
+      padding: 12px 0;
+    }
+  }
 }
 
 .navItem {
   position: relative;
   height: 100%;
+
+  @media screen and (max-width: 1124px) {
+    &[data-open="true"] {
+      .panel {
+        overflow: inherit;
+        opacity: 1;
+        margin: 12px 0 40px 0;
+        height: auto;
+      }
+
+      .chevron {
+        transform: rotate(180deg);
+      }
+    }
+  }
   
   @media screen and (min-width: 1125px) {
     pointer-events: none;
@@ -109,10 +150,21 @@
   cursor: pointer;
   display: flex;
   height: 100%;
-  pointer-events: all;
-
+  
   @media screen and (min-width: 1125px) {
+    pointer-events: all;
     border: 0;
+  }
+
+  .chevron {
+    position: absolute;
+    right: 0;
+    transform: translateY(4px);
+    transition: transform 0.3s;
+
+    @media screen and (min-width: 1125px) {
+      display: none;
+    }
   }
 }
 
@@ -123,8 +175,10 @@
   cursor: pointer;
   font-family: var(--font-headline);
   font-size: 24px;
-  padding: 12px 0;
+  padding: 12px 0 16px 0;
+  text-align: left;
   transition: color 0.3s;
+  width: 100%;
   
   @media screen and (min-width: 1125px) {
     font-family: var(--font-sans);
@@ -135,6 +189,12 @@
 }
 
 .panel {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity .3s, margin .3s;
+
   @media screen and (min-width: 1125px) {
     align-items: center;
     color: var(--base-body-color);
@@ -147,6 +207,8 @@
     transform: translateY(10px);
     transition: opacity 0.3s 0.1s, transform 0.3s;
     width: 100%;
+    height: auto;
+    overflow: unset;
   }
 
   @media (prefers-reduced-motion) {
@@ -157,8 +219,6 @@
 .panelInner {
   display: grid;
   gap: 40px;
-  padding-top: 20px;
-  display: none;
 
   @media screen and (min-width: 1125px) {
     align-items: flex-start;
@@ -177,11 +237,22 @@
 
 .panelHighlight {
   background-color: #f8eefb;
+  border-radius: 6px;
+  padding: 30px 15px;
+  transform: translateX(-15px);
+  width: calc(100% + 30px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
   @media screen and (min-width: 1125px) {
+    border-radius: 0;
     display: flex;
     height: 100%;
     padding: 40px;
+    transform: none;
+    width: unset;
+    gap: 0;
 
     &:has(.ctaBox) {
       padding-bottom: 0;
@@ -198,12 +269,16 @@
       grid-column: 1 / -1;
     }
   }
+
+  .group {
+    grid-template-columns: 1fr;
+  }
 }
 
 .ctaBox {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  flex: 1;
   justify-content: flex-end;
 }
 
@@ -249,20 +324,31 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  text-align: center;
+  
+  @media screen and (min-width: 1125px) {
+    text-align: center;
+  }
 }
 
 .ctaTitle {
-  font-size: 19px;
+  font-size: 14px;
   margin: 0;
-  text-align: center;
+
+  @media screen and (min-width: 1125px) {
+    font-size: 19px;
+    text-align: center;
+  }
 }
 
 .ctaDescription {
   color: var(--light-body-color);
-  font-size: 15px;
   margin: 0;
-  text-align: center;
+  font-size: 14px;
+  
+  @media screen and (min-width: 1125px) {
+    font-size: 15px;
+    text-align: center;
+  }
 }
 
 .ctaButton {

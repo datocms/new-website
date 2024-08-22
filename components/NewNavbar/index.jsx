@@ -3,6 +3,8 @@ import Button from 'components/Button';
 import LazyImage from 'components/LazyImage';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
+import Hamburger from 'public/icons/regular/bars.svg';
+import ChevronDown from 'public/icons/regular/chevron-down.svg';
 import AlternativeLogo from 'public/images/brand-assets/svg/icon-text/color/color_full_logo_alt.svg';
 import { useEffect, useState } from 'react';
 import { getCookie } from 'utils/cookies';
@@ -63,10 +65,15 @@ const GroupLink = ({ text, link }) => (
 
 export default function Newnavbar() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [openPanel, setOpenPanel] = useState(null);
 
   useEffect(() => {
     setLoggedIn(!!getCookie('datoAccountEmail'));
   }, []);
+
+  const toggleMobileAccordion = (panel) => {
+    setOpenPanel(openPanel === panel ? null : panel);
+  }
 
   return (
     <div className={classnames(s.root)} data-datocms-noindex>
@@ -93,17 +100,27 @@ export default function Newnavbar() {
       )}
 
       <nav className={s.nav}>
-        <Link href="/">
-          <a className={s.logo}>
-            <AlternativeLogo />
-          </a>
-        </Link>
+        <div className={s.logoWrapper}>
+          <Link href="/">
+            <a className={s.logo}>
+              <AlternativeLogo />
+            </a>
+          </Link>
+
+          <div className={s.hamburger}>
+            <Hamburger />
+          </div>
+        </div>
+
         <div className={s.navList}>
-          <div className={s.navItem}>
+          <div className={s.navItem} data-open={openPanel === 'product'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button">
+              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('product')}>
                 Product
               </button>
+              <div className={s.chevron}>
+                <ChevronDown />
+              </div>
             </div>
             <Panel>
               <PanelHighlight>
@@ -217,11 +234,14 @@ export default function Newnavbar() {
             </Panel>
           </div>
 
-          <div className={s.navItem}>
+          <div className={s.navItem} data-open={openPanel === 'customers'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button">
+              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('customers')}>
                 Customers
               </button>
+              <div className={s.chevron}>
+                <ChevronDown />
+              </div>
             </div>
             <Panel>
               <PanelHighlight>
@@ -293,11 +313,14 @@ export default function Newnavbar() {
             </Panel>
           </div>
 
-          <div className={s.navItem}>
+          <div className={s.navItem} data-open={openPanel === 'partners'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button">
+              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('partners')}>
                 Partners
               </button>
+              <div className={s.chevron}>
+                <ChevronDown />
+              </div>
             </div>
             <Panel>
               <PanelHighlight>
@@ -367,11 +390,14 @@ export default function Newnavbar() {
             </Panel>
           </div>
 
-          <div className={s.navItem}>
+          <div className={s.navItem} data-open={openPanel === 'developers'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button">
+              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('developers')}>
                 Developers
               </button>
+              <div className={s.chevron}>
+                <ChevronDown />
+              </div>
             </div>
             <Panel>
               <PanelSlice columns={1}>
@@ -486,11 +512,14 @@ export default function Newnavbar() {
             </Panel>
           </div>
 
-          <div className={s.navItem}>
+          <div className={s.navItem} data-open={openPanel === 'resources'}>
             <div className={s.navButtonWrapper}>
-              <button className={s.navButton} type="button">
+              <button className={s.navButton} type="button" onClick={() => toggleMobileAccordion('resources')}>
                 Resources
               </button>
+              <div className={s.chevron}>
+                <ChevronDown />
+              </div>
             </div>
             <Panel>
               <PanelHighlight>
