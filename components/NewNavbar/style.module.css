@@ -399,10 +399,11 @@
 .itemTitle {
   align-items: center;
   color: var(--base-body-color);
-  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   
   h4 {
+    display: inline;
     font-size: 15px;
     margin: 0;
   }
@@ -411,11 +412,13 @@
     background: #f4cf58;
     border-radius: 3px;
     color: var(--base-body-color);
+    display: inline-flex;
     font-size: 12px;
     letter-spacing: 0.04em;
+    margin-left: 6px;
     padding: 0.2em 0.4em 0.1em;
     text-transform: uppercase;
-    vertical-align: super;
+    transform: translateY(-1px);
   }
 }
 

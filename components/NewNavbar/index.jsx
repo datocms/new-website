@@ -113,7 +113,6 @@ export default function Newnavbar() {
                       href="/product"
                       title="Meet DatoCMS!"
                       description="Everything you need to know about the friendliest Headless CMS on the market."
-                      isNew
                     />
                     <GroupItem href="/" title="Explore the capabilities!" />
                     <GroupItem href="/" title="See what’s new in DatoCMS" />
@@ -409,6 +408,7 @@ export default function Newnavbar() {
                       href="/"
                       title="Official Starters"
                       description="Boilerplate templates to get you from zero-to-live within minutes."
+                      isNew
                     />
                     <GroupItem
                       href="/"
