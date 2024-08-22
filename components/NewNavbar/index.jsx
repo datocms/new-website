@@ -442,7 +442,48 @@ export default function Newnavbar() {
 
                 <PanelHighlight orientation="horizontal">
                   <Group columns={3} title="Popular integrations">
-                    ...
+                    <div className={s.integrations}>
+                      <Link href="/">
+                        <a className={s.integrationsItem}>
+                          <LazyImage
+                            src={'/images/logos/next-squared.svg'}
+                            alt="Next.js"
+                            className={s.integrationsImage}
+                          />
+                          <p className={s.techName}>Next.js</p>
+                        </a>
+                      </Link>
+                      <Link href="/">
+                        <a className={s.integrationsItem}>
+                          <LazyImage
+                            src={'/images/logos/svelte-squared.svg'}
+                            alt="SvelteKit"
+                            className={s.integrationsImage}
+                          />
+                          <p className={s.techName}>SvelteKit</p>
+                        </a>
+                      </Link>
+                      <Link href="/">
+                        <a className={s.integrationsItem}>
+                          <LazyImage
+                            src={'/images/logos/astro-squared.svg'}
+                            alt="Next.js"
+                            className={s.integrationsImage}
+                          />
+                          <p className={s.techName}>Astro</p>
+                        </a>
+                      </Link>
+                      <Link href="/">
+                        <a className={s.integrationsItem}>
+                          <LazyImage
+                            src={'/images/logos/nuxt-squared.svg'}
+                            alt="Nuxt"
+                            className={s.integrationsImage}
+                          />
+                          <p className={s.techName}>Nuxt</p>
+                        </a>
+                      </Link>
+                    </div>
                   </Group>
                 </PanelHighlight>
               </Panel>
