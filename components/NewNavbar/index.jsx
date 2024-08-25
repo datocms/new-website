@@ -1,4 +1,3 @@
-import { default as classnames, default as cn } from 'classnames';
 import Button from 'components/Button';
 import LazyImage from 'components/LazyImage';
 import Wrapper from 'components/Wrapper';
@@ -10,8 +9,30 @@ import { useEffect, useState } from 'react';
 import { getCookie } from 'utils/cookies';
 import s from './style.module.css';
 
+const NavItem = ({ name, children }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className={s.navItem} data-open={open}>
+      <div className={s.navButtonWrapper}>
+        <button
+          className={s.navButton}
+          type="button"
+          onClick={() => setOpen(!open)}
+        >
+          {name}
+        </button>
+        <div className={s.chevron}>
+          <ChevronDown />
+        </div>
+      </div>
+      {children}
+    </div>
+  );
+};
+
 const Panel = ({ children }) => (
-  <div className={s.panel}>
+  <div className={s.panel} role="dialog">
     <div className={s.panelInner}>{children}</div>
   </div>
 );
@@ -73,25 +94,17 @@ const GroupLink = ({ text, link }) => (
 export default function Newnavbar() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [openNav, setOpenNav] = useState(false);
-  const [openPanel, setOpenPanel] = useState(null);
 
   useEffect(() => {
     setLoggedIn(!!getCookie('datoAccountEmail'));
   }, []);
 
   const toggleNav = () => {
-    if (!openNav) {
-      setOpenPanel(null);
-    }
     setOpenNav(!openNav);
   };
 
-  const toggleMobileAccordion = (panel) => {
-    setOpenPanel(openPanel === panel ? null : panel);
-  };
-
   return (
-    <div className={classnames(s.root)} data-datocms-noindex>
+    <div className={s.root} data-datocms-noindex>
       {false && (
         <Link href="/webinars/how-to-use-structured-text-on-datocms">
           <a className={s.notice}>
@@ -132,19 +145,7 @@ export default function Newnavbar() {
         </div>
 
         <div className={s.navList}>
-          <div className={s.navItem} data-open={openPanel === 'product'}>
-            <div className={s.navButtonWrapper}>
-              <button
-                className={s.navButton}
-                type="button"
-                onClick={() => toggleMobileAccordion('product')}
-              >
-                Product
-              </button>
-              <div className={s.chevron}>
-                <ChevronDown />
-              </div>
-            </div>
+          <NavItem name="Product">
             <Panel>
               <PanelHighlight>
                 <Group title="Platform">
@@ -255,21 +256,9 @@ export default function Newnavbar() {
                 </Group>
               </PanelSlice>
             </Panel>
-          </div>
+          </NavItem>
 
-          <div className={s.navItem} data-open={openPanel === 'customers'}>
-            <div className={s.navButtonWrapper}>
-              <button
-                className={s.navButton}
-                type="button"
-                onClick={() => toggleMobileAccordion('customers')}
-              >
-                Customers
-              </button>
-              <div className={s.chevron}>
-                <ChevronDown />
-              </div>
-            </div>
+          <NavItem name="Customers">
             <Panel>
               <PanelHighlight>
                 <Group title="DatoCMS in production">
@@ -338,21 +327,9 @@ export default function Newnavbar() {
                 </Group>
               </PanelSlice>
             </Panel>
-          </div>
+          </NavItem>
 
-          <div className={s.navItem} data-open={openPanel === 'partners'}>
-            <div className={s.navButtonWrapper}>
-              <button
-                className={s.navButton}
-                type="button"
-                onClick={() => toggleMobileAccordion('partners')}
-              >
-                Partners
-              </button>
-              <div className={s.chevron}>
-                <ChevronDown />
-              </div>
-            </div>
+          <NavItem name="Partners">
             <Panel>
               <PanelHighlight>
                 <Group title="DatoCMS ❤️ Partners">
@@ -419,21 +396,9 @@ export default function Newnavbar() {
                 </Group>
               </PanelSlice>
             </Panel>
-          </div>
+          </NavItem>
 
-          <div className={s.navItem} data-open={openPanel === 'developers'}>
-            <div className={s.navButtonWrapper}>
-              <button
-                className={s.navButton}
-                type="button"
-                onClick={() => toggleMobileAccordion('developers')}
-              >
-                Developers
-              </button>
-              <div className={s.chevron}>
-                <ChevronDown />
-              </div>
-            </div>
+          <NavItem name="Developers">
             <Panel>
               <PanelSlice columns={1}>
                 <Group title="Documentation">
@@ -545,21 +510,9 @@ export default function Newnavbar() {
                 </Group>
               </PanelHighlight>
             </Panel>
-          </div>
+          </NavItem>
 
-          <div className={s.navItem} data-open={openPanel === 'resources'}>
-            <div className={s.navButtonWrapper}>
-              <button
-                className={s.navButton}
-                type="button"
-                onClick={() => toggleMobileAccordion('resources')}
-              >
-                Resources
-              </button>
-              <div className={s.chevron}>
-                <ChevronDown />
-              </div>
-            </div>
+          <NavItem name="Resources">
             <Panel>
               <PanelHighlight>
                 <Group title="Core resources">
@@ -618,10 +571,10 @@ export default function Newnavbar() {
                 </Group>
               </PanelSlice>
             </Panel>
-          </div>
+          </NavItem>
 
           <Link href="/pricing">
-            <a className={s.navEntry}>
+            <a className={s.navLink}>
               <span>Pricing</span>
             </a>
           </Link>
@@ -629,7 +582,7 @@ export default function Newnavbar() {
 
         <div className={s.navActions}>
           <Link href="/contact">
-            <a className={s.navEntry}>Contact sales</a>
+            <a className={s.navLink}>Contact sales</a>
           </Link>
           {loggedIn ? (
             <>
@@ -641,7 +594,7 @@ export default function Newnavbar() {
             <>
               <a
                 href="https://dashboard.datocms.com/login"
-                className={s.navEntry}
+                className={s.navLink}
                 data-exclude-mobile
               >
                 <span>Log in</span>

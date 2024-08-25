@@ -121,7 +121,7 @@
     gap: 20px;
   }
 
-  .navEntry {
+  .navLink {
     @media screen and (max-width: 1124px) {
       border-top: 1px solid #ddd;
       font-family: var(--font-headline);
@@ -662,7 +662,7 @@
   justify-content: space-between;
 }
 
-.navEntry {
+.navLink {
   color: inherit;
   font-size: 17px;
   text-decoration: none;
@@ -675,7 +675,7 @@
 
 .groupItem[data-exclude-mobile],
 .ctaBox[data-exclude-mobile],
-.navEntry[data-exclude-mobile] {
+.navLink[data-exclude-mobile] {
   @media screen and (max-width: 1124px) {
     display: none;
   }
