@@ -14,11 +14,15 @@
 
 .root:has(.notice) {
   .panel {
-    top: 100px;
+    @media screen and (min-width: 1125px) {
+      top: 110px;
+    }
   }
 
   .panelInner {
-    max-height: calc(100vh - 100px);
+    @media screen and (min-width: 1125px) {
+      max-height: calc(100vh - 110px);
+    }
   }
 }
 
@@ -41,19 +45,18 @@
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: var(--page-margin);
-
+  padding: 0 var(--page-margin) var(--page-margin) var(--page-margin);
+  
   @media screen and (max-width: 1124px) {
-    height: 90px;
+    gap: 30px;
+    height: 80px;
     overflow: hidden;
     transition: box-shadow 0.3s;
 
     .navList,
     .navActions {
       opacity: 0;
-      transform: translateY(-6px);
-      transition: opacity 0.3s, transform 0.3s;
+      transition: opacity 0.3s;
     }
 
     &[data-open="true"] {
@@ -64,7 +67,6 @@
       .navList,
       .navActions {
         opacity: 1;
-        transform: translateY(10px);
       }
     }
   }
@@ -73,6 +75,7 @@
     align-items: center;
     box-shadow: none;
     flex-direction: row;
+    gap: 40px;
     height: 80px;
     margin: 0 auto;
     max-width: var(--page-width-with-margin);
@@ -85,6 +88,12 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  height: 80px;
+  flex-shrink: 0;
+
+  @media screen and (min-width: 1125px) {
+    height: auto;
+  }
 }
 
 .hamburger {
@@ -119,6 +128,7 @@
     align-items: center;
     flex-direction: row;
     gap: 20px;
+    height: 100%;
   }
 
   .navLink {
@@ -231,7 +241,7 @@
     padding: 0 50px 50px 50px;
     pointer-events: none;
     position: fixed;
-    top: 70px;
+    top: 80px;
     transform: translateY(10px);
     transition: opacity 0.3s 0.1s, transform 0.3s;
     width: 100%;
@@ -256,7 +266,7 @@
     gap: 0;
     grid-template-columns: repeat(3, 1fr);
     margin: 0 auto;
-    max-height: calc(100vh - 70px);
+    max-height: calc(100vh - 80px);
     overflow: auto;
     pointer-events: none;
     width: 1000px;
