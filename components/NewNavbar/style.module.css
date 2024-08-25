@@ -256,7 +256,7 @@
 
 .panelInner {
   display: grid;
-  gap: 40px;
+  gap: 30px;
 
   @media screen and (min-width: 1125px) {
     align-items: flex-start;
@@ -264,6 +264,7 @@
     border-radius: 6px;
     box-shadow: var(--box-shadow);
     gap: 0;
+    gap: 40px;
     grid-template-columns: repeat(3, 1fr);
     margin: 0 auto;
     max-height: calc(100vh - 80px);
@@ -465,9 +466,10 @@
 
 .panelSlice {
   display: grid;
-  gap: 40px 12px;
+  gap: 30px 12px;
   
   @media screen and (min-width: 1125px) {
+    gap: 40px 12px;
     padding: 40px;
 
     &[data-col="1"] {
@@ -489,9 +491,24 @@
 
 .group {
   display: grid;
-  gap: 20px 12px;
+  gap: 12px;
   width: 100%;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
+
+  @media screen and (min-width: 375px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 12px;
+  }
+
+  @media screen and (min-width: 860px) {
+    &:has(.itemImage) {
+      grid-template-columns: repeat(3, 1fr);
+
+      .groupItem:nth-child(n+5) {
+        display: none;
+      }
+    }
+  }
 
   @media screen and (min-width: 1125px) {
     &[data-col="1"] {
@@ -568,6 +585,10 @@
   overflow: hidden;
   width: 100%;
 
+  @media screen and (max-width: 374px) {
+    display: none;
+  }
+
   img {
     display: block;
     height: 100%;
@@ -629,7 +650,7 @@
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
   
-  @media screen and (min-width: 640px) {
+  @media screen and (min-width: 860px) {
     display: flex;
   }
 }
@@ -660,8 +681,12 @@
 
   .techName {
     color: var(--base-body-color);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
+
+    @media screen and (min-width: 640px) {
+      font-size: 15px;
+    }
   }
 }
 
