@@ -264,7 +264,6 @@
     border-radius: 6px;
     box-shadow: var(--box-shadow);
     gap: 0;
-    gap: 40px;
     grid-template-columns: repeat(3, 1fr);
     margin: 0 auto;
     max-height: calc(100vh - 80px);
@@ -469,6 +468,7 @@
   gap: 30px 12px;
   
   @media screen and (min-width: 1125px) {
+    align-items: flex-start;
     gap: 40px 12px;
     padding: 40px;
 
@@ -500,7 +500,7 @@
     gap: 20px 12px;
   }
 
-  @media screen and (min-width: 860px) {
+  @media screen and (min-width: 860px) and (max-width: 1124px) {
     &:has(.itemImage) {
       grid-template-columns: repeat(3, 1fr);
 

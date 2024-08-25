@@ -229,7 +229,7 @@ export default function Newnavbar() {
                     title="Knowledge Management"
                     description="Simplify complex content for portals, wikis, intranets, and more."
                   />
-                  <GroupLink text="Explore all features" link="/" />
+                  <GroupLink text="Explore all use cases" link="/" />
                 </Group>
                 <Group title="Happy Team">
                   <GroupItem
@@ -252,7 +252,6 @@ export default function Newnavbar() {
                     title="For Enterprise"
                     description="See why DatoCMS is trusted from governments to the F500."
                   />
-                  <GroupLink text="Explore all features" link="/" />
                 </Group>
               </PanelSlice>
             </Panel>
@@ -323,7 +322,7 @@ export default function Newnavbar() {
                     description="Reducing lines of code needed by 92,5% while gaining 8x faster loading times."
                     imageUrl="https://www.datocms-assets.com/205/1581958110-copy-of-arduino-teacher-students-978x653.jpeg?auto=format&w=800"
                   />
-                  <GroupLink text="Explore all features" link="/" />
+                  <GroupLink text="Explore all case studies" link="/" />
                 </Group>
               </PanelSlice>
             </Panel>
@@ -392,7 +391,7 @@ export default function Newnavbar() {
                     description="Subscription-first cosmetic brand gets a world-class content overhaul."
                     imageUrl="https://www.datocms-assets.com/205/1718048731-1661957070-wild_02.jpg?auto=format&w=800"
                   />
-                  <GroupLink text="Explore all Partner projects" link="/" />
+                  <GroupLink text="Explore all partner projects" link="/" />
                 </Group>
               </PanelSlice>
             </Panel>
