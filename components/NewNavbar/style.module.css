@@ -50,13 +50,13 @@
   @media screen and (max-width: 1124px) {
     gap: 30px;
     height: 80px;
-    overflow: hidden;
     transition: box-shadow 0.3s;
 
     .navList,
     .navActions {
       opacity: 0;
       transition: opacity 0.3s;
+      visibility: hidden;
     }
 
     &[data-open="true"] {
@@ -67,6 +67,7 @@
       .navList,
       .navActions {
         opacity: 1;
+        visibility: visible;
       }
     }
   }
@@ -146,12 +147,14 @@
   height: 100%;
 
   @media screen and (max-width: 1124px) {
-    &[data-open="true"] {
+    &[data-open="true"],
+    &:has([aria-expanded="true"]) {
       .panel {
         overflow: inherit;
         opacity: 1;
         margin: 12px 0 40px 0;
         height: auto;
+        visibility: visible;
       }
 
       .chevron {
@@ -164,7 +167,7 @@
     pointer-events: none;
 
     &:hover,
-    &:focus-within {
+    &:has([aria-expanded="true"]) {
       .navButton {
         color: var(--accent-color)
       }
@@ -172,6 +175,7 @@
       .panel {
         opacity: 1;
         transform: translateY(0);
+        visibility: visible;
       }
 
       .panelInner {
@@ -232,6 +236,7 @@
   opacity: 0;
   overflow: hidden;
   transition: opacity .3s, margin .3s;
+  visibility: hidden;
 
   @media screen and (min-width: 1125px) {
     align-items: center;
