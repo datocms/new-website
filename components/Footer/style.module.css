@@ -12,7 +12,7 @@
   margin-top: rfs(150px);
 
   &:before {
-    content: '';
+    content: "";
     background: var(--dark-bg-color);
     clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
     position: absolute;
@@ -156,7 +156,7 @@
     span {
       display: inline;
       &:after {
-        content: ' —';
+        content: " —";
       }
       &:last-child:after {
         display: none;
@@ -176,7 +176,7 @@
   position: relative;
 
   &:before {
-    content: '';
+    content: "";
     background: #13151b;
     clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
     position: absolute;
@@ -290,30 +290,4 @@
   margin-left: 0.2em;
   font-weight: bold;
   color: var(--dark-bg-color);
-}
-
-.jobOffer {
-  padding: 15px;
-  background: #ffe79e;
-  border-radius: 5px;
-  box-shadow: var(--box-shadow);
-  color: var(--base-body-color) !important;
-  display: block;
-  text-align: center;
-  margin-bottom: rfs(60px);
-  font-size: 15px;
-  transition: all 0.1s ease-in-out;
-
-  &:hover {
-    text-decoration: none !important;
-    background: #fff0c3;
-    box-shadow: 0 0 30px rgba(255, 240, 195, 0.5);
-  }
-
-  ::-moz-selection {
-    background: #f4cf58;
-  }
-  ::selection {
-    background: #f4cf58;
-  }
 }
