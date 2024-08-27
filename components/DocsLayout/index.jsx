@@ -2,6 +2,7 @@ import BaseLayout from 'components/BaseLayout';
 import Button from 'components/Button';
 import DocSearch from 'components/DocSearch';
 import Link from 'next/link';
+import Hamburger from 'public/icons/regular/bars.svg';
 import SupportIcon from 'public/icons/regular/headset.svg';
 import StatusIcon from 'public/icons/regular/tachometer.svg';
 import ThumbsDownIcon from 'public/icons/regular/thumbs-down.svg';
@@ -138,6 +139,8 @@ export default function DocsLayout({
   preview,
   languageSwitch,
 }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const content = (
     <div className={s.container}>
       {children}
@@ -168,32 +171,28 @@ export default function DocsLayout({
     <BaseLayout preview={preview}>
       <div className={s.root}>
         <div className={s.sidebar}>
-          <Link href="/">
-            <a className={s.logo}>
-              <FullLogo height={30} />
-            </a>
-          </Link>
-          <div className={s.innerSidebar} data-datocms-noindex>
-            {sidebar}
-            {false && (
-              <Link href="/webinars/how-to-use-structured-text-on-datocms">
-                <a className={s.notice}>
-                  <strong>
-                    📅 Want to learn how to use our new Structured Text field
-                    with Next.js?
-                  </strong>{' '}
-                  Follow our webinar on Wednesday,{' '}
-                  {new Date('2021-03-10T18:00:00+01:00').toLocaleTimeString(
-                    'en-US',
-                    {
-                      hour: 'numeric',
-                      minute: '2-digit',
-                      timeZoneName: 'short',
-                    },
-                  )}
-                </a>
-              </Link>
+          <div className={s.sidebarHeader}>
+            <Link href="/">
+              <a className={s.logo}>
+                <FullLogo height={30} />
+              </a>
+            </Link>
+            <button
+              type="button"
+              className={s.hamburger}
+              onClick={() => setSidebarOpen((old) => !old)}
+            >
+              <Hamburger />
+            </button>
+          </div>
+          <div
+            className={classNames(
+              s.innerSidebar,
+              sidebarOpen && s.innerSidebarOpen,
             )}
+            data-datocms-noindex
+          >
+            {sidebar}
           </div>
         </div>
         <div className={s.contentWrapper}>

@@ -3,12 +3,12 @@ import DocsLayout from 'components/DocsLayout';
 import Head from 'components/Head';
 import { gqlStaticProps, imageFields, seoMetaTagsFields } from 'lib/datocms';
 import Link from 'next/link';
+import CMAIcon from 'public/images/illustrations/content-editors2.svg';
+import HeadlessIcon from 'public/images/illustrations/developers-2.svg';
 import SchemaIcon from 'public/images/illustrations/dynamic-layouts.svg';
 import CDAIcon from 'public/images/illustrations/graphql-api.svg';
 import GettingStartedIcon from 'public/images/illustrations/marketers.svg';
-import VideoIcon from 'public/images/illustrations/video-encoding.svg'
-import HeadlessIcon from 'public/images/illustrations/developers-2.svg'
-import CMAIcon from 'public/images/illustrations/content-editors2.svg'
+import VideoIcon from 'public/images/illustrations/video-encoding.svg';
 import NextIcon from 'public/images/logos/next.svg';
 import NuxtIcon from 'public/images/logos/nuxt.svg';
 import SvelteIcon from 'public/images/logos/svelte.svg';
@@ -127,7 +127,7 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
         <div className={s.useCaseCards}>
           <Link href="/docs/general-concepts">
             <a className={s.useCaseCard}>
-              <GettingStartedIcon/>
+              <GettingStartedIcon />
               <div className={s.useCaseCardTitle}>What is DatoCMS?</div>
               <p>Learn the basic concepts and features of DatoCMS.</p>
             </a>
@@ -135,50 +135,58 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
 
           <Link href="/user-guides">
             <a className={s.useCaseCard}>
-              <VideoIcon/>
+              <VideoIcon />
               <div className={s.useCaseCardTitle}>Videos & Tutorials</div>
-              <p>Jump right in with our video walkthroughs and step-by-step tutorials.</p>
+              <p>
+                Jump right in with our video walkthroughs and step-by-step
+                tutorials.
+              </p>
             </a>
           </Link>
 
           <Link href="/docs/content-modelling">
             <a className={s.useCaseCard}>
-              <SchemaIcon/>
-              <div className={s.useCaseCardTitle}>Modeling your first schema</div>
-              <p>
-               Structure your own content in our easy-to-use interface.
-              </p>
+              <SchemaIcon />
+              <div className={s.useCaseCardTitle}>
+                Modeling your first schema
+              </div>
+              <p>Structure your own content in our easy-to-use interface.</p>
             </a>
           </Link>
-
-
         </div>
 
         <h6 className={s.introTitle}>For developers</h6>
         <div className={s.useCaseCards}>
           <Link href="/academy">
             <a className={s.useCaseCard}>
-              <HeadlessIcon/>
+              <HeadlessIcon />
               <div className={s.useCaseCardTitle}>What is a headless CMS?</div>
               <p>
-                Join us for a gentle intro to modern web dev with headless CMSes and JS frontends.
+                Join us for a gentle intro to modern web dev with headless CMSes
+                and JS frontends.
               </p>
             </a>
           </Link>
 
           <Link href="/docs/content-delivery-api">
             <a className={s.useCaseCard}>
-              <CDAIcon/>
+              <CDAIcon />
               <div className={s.useCaseCardTitle}>GraphQL API Reference</div>
-              <p>Fetch exactly what your frontend needs with our Content Delivery API.</p>
+              <p>
+                Fetch exactly what your frontend needs with our Content Delivery
+                API.
+              </p>
             </a>
           </Link>
 
           <Link href="/docs/content-management-api">
             <a className={s.useCaseCard}>
-              <CMAIcon/>
+              <CMAIcon />
               <div className={s.useCaseCardTitle}>REST API Reference</div>
-              <p>Programmatically create and edit content with our Content Management API.</p>
+              <p>
+                Programmatically create and edit content with our Content
+                Management API.
+              </p>
             </a>
           </Link>
         </div>
@@ -187,64 +195,69 @@ export default function Docs({ roots, preview, tutorials, tutsCount, page }) {
         <div className={s.useCaseCards}>
           <Link href="/docs/next-js">
             <a className={s.useCaseCard}>
-              <NextIcon/>
+              <NextIcon />
               <div className={s.useCaseCardTitle}>Next.js + DatoCMS</div>
               <p>Learn how to integrate your Next.js website with DatoCMS</p>
             </a>
           </Link>
           <Link href="/docs/nuxt">
             <a className={s.useCaseCard}>
-              <NuxtIcon/>
+              <NuxtIcon />
               <div className={s.useCaseCardTitle}>Nuxt + DatoCMS</div>
               <p>Learn how to integrate your Nuxt website with DatoCMS</p>
             </a>
           </Link>
           <Link href="/docs/svelte">
             <a className={s.useCaseCard}>
-              <SvelteIcon/>
+              <SvelteIcon />
               <div className={s.useCaseCardTitle}>Svelte + DatoCMS</div>
               <p>Learn how to integrate your Svelte website with DatoCMS</p>
             </a>
           </Link>
         </div>
 
-        <h6 className={s.introTitle}>
-          Community Videos
-        </h6>
-        <p>If you&apos;re new to DatoCMS, we recommend starting with our official <Link href="/user-guides">Editor Guides</Link>, which cover the basics in a series of videos and written tutorials.</p>
-        <p>Want more videos? Check out these awesome community contributions:</p>
+        <h6 className={s.introTitle}>Community Videos</h6>
+        <p>
+          If you&apos;re new to DatoCMS, we recommend starting with our official{' '}
+          <Link href="/user-guides">Editor Guides</Link>, which cover the basics
+          in a series of videos and written tutorials.
+        </p>
+        <p>
+          Want more videos? Check out these awesome community contributions:
+        </p>
         <div className={s.useCaseCards}>
           {tutorials.map((tutorial) =>
-              tutorial.res._modelApiKey === 'youtube_video_resource' ? (
-                  <a
-                      href={tutorial.res.video.url}
-                      key={tutorial.res.video.url}
-                      className={s.videoCard}
-                  >
-                    <div className={s.tutorialCover}>
-                      <img src={tutorial.res.video.thumbnailUrl}/>
-                    </div>
-                    <div className={s.videoCardTitle}>{tutorial.title}</div>
-                  </a>
-              ) : (
-                  <a
-                      href={tutorial.res.url}
-                      key={tutorial.res.url}
-                      className={s.videoCard}
-                  >
-                    <div className={s.videoCardCover}>
-                      {tutorial.res.coverImage && (
-                          <DatoImage data={tutorial.res.coverImage.responsiveImage}/>
-                      )}
-                    </div>
-                    <div className={s.videoCardTitle}>{tutorial.title}</div>
-                  </a>
-              ),
+            tutorial.res._modelApiKey === 'youtube_video_resource' ? (
+              <a
+                href={tutorial.res.video.url}
+                key={tutorial.res.video.url}
+                className={s.videoCard}
+              >
+                <div className={s.tutorialCover}>
+                  <img src={tutorial.res.video.thumbnailUrl} />
+                </div>
+                <div className={s.videoCardTitle}>{tutorial.title}</div>
+              </a>
+            ) : (
+              <a
+                href={tutorial.res.url}
+                key={tutorial.res.url}
+                className={s.videoCard}
+              >
+                <div className={s.videoCardCover}>
+                  {tutorial.res.coverImage && (
+                    <DatoImage data={tutorial.res.coverImage.responsiveImage} />
+                  )}
+                </div>
+                <div className={s.videoCardTitle}>{tutorial.title}</div>
+              </a>
+            ),
           )}
         </div>
-        <p><Link href="/docs/community-tutorials">
-          <a>See more videos ({tutsCount.count} total)</a>
-        </Link>
+        <p>
+          <Link href="/docs/community-tutorials">
+            <a>See more videos ({tutsCount.count} total)</a>
+          </Link>
         </p>
       </div>
     </DocsLayout>

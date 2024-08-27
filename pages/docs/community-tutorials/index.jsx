@@ -1,11 +1,11 @@
 import DocsLayout from 'components/DocsLayout';
 import Head from 'components/Head';
 import { gqlStaticProps, imageFields } from 'lib/datocms';
+import Link from 'next/link';
 import { Sidebar } from 'pages/docs';
 import s from 'pages/docs/pageStyle.module.css';
 import { Image as DatoImage } from 'react-datocms';
 import t from './style.module.css';
-import Link from "next/link";
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -68,9 +68,18 @@ export default function Tutorials({ tutorials, roots }) {
         <div className={s.article}>
           <div className={s.title}>DatoCMS Community Videos</div>
 
-          <p>New here? We recommend starting with our official <Link href="/user-guides">DatoCMS Editor Guides</Link>, which offer a series of videos and written tutorials to help you learn the basics.</p>
+          <p>
+            New here? We recommend starting with our official{' '}
+            <Link href="/user-guides">DatoCMS Editor Guides</Link>, which offer
+            a series of videos and written tutorials to help you learn the
+            basics.
+          </p>
 
-          <p>The below are a collection of additional videos made by our awesome community members covering a wide range of topics, from beginner to advanced.</p>
+          <p>
+            The below are a collection of additional videos made by our awesome
+            community members covering a wide range of topics, from beginner to
+            advanced.
+          </p>
 
           <div className={t.tutorials}>
             {tutorials.map((tutorial) =>

@@ -1,6 +1,5 @@
 import s from './style.module.css';
 
-
 /**
  * Add a header. Specify an anchor name to provide an easy deep-link target.
  * @param {string} props.as - Required: The tag to be rendered (e.g., 'h1', 'h2')

@@ -567,36 +567,41 @@ export function Toc({ content, extraEntries: extra, pluginSdkHooks = [] }) {
           <div className={s.tocTitle}>In this page</div>
           <div className={s.entries}>
             {nodes.map((node) => (
-                <div className={s.tocEntry} key={node.url}>
-                  <StructuredText data={node}/>
-                </div>
+              <div className={s.tocEntry} key={node.url}>
+                <StructuredText data={node} />
+              </div>
             ))}
             {extraEntries}
             {
               // If a plugin page, also make TOC entries for each function
-              !!pluginSdkHooks?.length && <>
-              <br/>
-              <div className={s.tocTitle}>Function Reference</div>
-              <div className={s.tocEntry}>
-                {pluginSdkHooks.map((hook, key) => (
-                    <div className={s.tocEntry} key={key}>
-                      <a href={`#${hook.name}`} className={s.tocEntry}>
-                        <code>{
-                          // Add zero-width spaces to camelCase function names so they can wrap at word boundaries
-                          hook.name.replace(/([a-z])([A-Z])/g, "$1\u200B$2")
-                        }()</code>
-                      </a>
-                    </div>
-                ))}
-              </div>
-            </>
+              !!pluginSdkHooks?.length && (
+                <>
+                  <br />
+                  <div className={s.tocTitle}>Function Reference</div>
+                  <div className={s.tocEntry}>
+                    {pluginSdkHooks.map((hook, key) => (
+                      <div className={s.tocEntry} key={key}>
+                        <a href={`#${hook.name}`} className={s.tocEntry}>
+                          <code>
+                            {
+                              // Add zero-width spaces to camelCase function names so they can wrap at word boundaries
+                              hook.name.replace(/([a-z])([A-Z])/g, '$1\u200B$2')
+                            }
+                            ()
+                          </code>
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )
             }
           </div>
         </div>
       </div>
     </div>
   ) : (
-      <div className={s.emptySidebar}/>
+    <div className={s.emptySidebar} />
   );
 }
 
@@ -667,18 +672,21 @@ export default function DocPage({
       <Head>{renderMetaTags(seo)}</Head>
       <div className={s.articleContainer}>
         {docGroup && docGroup.pages.length > 1 && (
-          <Toc content={page.content} pluginSdkHooks={additionalData?.pluginSdkHooks}/>
+          <Toc
+            content={page.content}
+            pluginSdkHooks={additionalData?.pluginSdkHooks}
+          />
         )}
         <div className={s.article}>
           <h1 className={s.kicker}>{`${
-              docGroup && `${docGroup.name} > `
+            docGroup && `${docGroup.name} > `
           }${pageTitle}`}</h1>
           <div className={s.title}>{pageTitle}</div>
           <DocPageContent
-              additionalData={additionalData}
-              content={page.content}
-              style={s}
-              defaultAltForImages={defaultSeoTitle}
+            additionalData={additionalData}
+            content={page.content}
+            style={s}
+            defaultAltForImages={defaultSeoTitle}
           />
         </div>
       </div>
