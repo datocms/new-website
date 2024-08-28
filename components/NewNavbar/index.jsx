@@ -155,8 +155,8 @@ export default function Newnavbar() {
                   title="Meet DatoCMS!"
                   description="Everything you need to know about the friendliest Headless CMS on the market."
                 />
-                <GroupItem href="/" title="Explore the capabilities!" />
-                <GroupItem href="/" title="See what’s new in DatoCMS" />
+                <GroupItem href="/product" title="Explore the capabilities!" />
+                <GroupItem href="/product-updates" title="See what’s new in DatoCMS" />
               </Group>
               <div className={s.ctaBox} data-exclude-mobile>
                 <div className={s.ctaBoxShape}>
@@ -176,7 +176,7 @@ export default function Newnavbar() {
                     className={s.ctaButton}
                     as="a"
                     p="tiny"
-                    href="https://dashboard.datocms.com/"
+                    href="https://try.datocms.com/"
                   >
                     Launch interactive demo
                   </Button>
@@ -186,70 +186,70 @@ export default function Newnavbar() {
             <PanelSlice columns="2">
               <Group columns="2" title="Features">
                 <GroupItem
-                  href="/"
+                  href="/features/headless-cms-graphql"
                   title="GraphQL API"
-                  description="Understand how our GraphQL APIs level up your developer experience."
+                  description="See why Headless CMS and GraphQL APIs are a match made in heaven."
                 />
                 <GroupItem
-                  href="/"
+                  href="/features/structured-content-cms"
                   title="Structured text"
-                  description="Meet (arguably) the best content editor experience in Headless CMS."
+                  description="Meet (arguably) the best headless content editor out there."
                 />
                 <GroupItem
-                  href="/"
+                  href="/features/headless-cms-multi-language"
                   title="Localization"
-                  description="With i18n out of the box, meet your customers everywhere in the world."
+                  description="With i18n out of the box, meet your customers wherever they are."
                 />
                 <GroupItem
-                  href="/"
+                  href="/features/dynamic-layouts"
                   title="Modular Content"
-                  description="Meet the dynamic page building experience you’ll love instantly."
+                  description="Check out the dynamic page building experience you’ll fall in love with."
                 />
-                <GroupLink text="Explore all features" link="/" />
+                <GroupLink text="Explore all capabilities" link="/product" />
               </Group>
               <Group title="Use cases">
                 <GroupItem
-                  href="/"
+                  href="/use-cases/headless-cms-websites"
                   title="Modern Websites"
                   description="Build bold with SEO, Assets, Live Previews, and more, out of the box."
                 />
                 <GroupItem
-                  href="/"
+                  href="/use-cases/headless-ecommerce"
                   title="eCommerce"
                   description="Manage content and commerce experiences that fly off the shelf!"
                 />
                 <GroupItem
-                  href="/"
+                  href="/use-cases/headless-cms-publishing"
                   title="Digital Publishing"
                   description="Ship content at scale with blazing fast speeds (or in real time)."
                 />
                 <GroupItem
-                  href="/"
+                  href="/use-cases/headless-cms-knowledge-management"
                   title="Knowledge Management"
                   description="Simplify complex content for portals, wikis, intranets, and more."
                 />
-                <GroupLink text="Explore all use cases" link="/" />
+                {/* <GroupLink text="Explore all use cases" link="/" /> */}
               </Group>
               <Group title="Happy Team">
                 <GroupItem
-                  href="/"
+                  href="/team/best-cms-for-developers"
                   title="For Web Developers"
                   description="Stop settling for legacy web technologies that slow you down."
                 />
                 <GroupItem
-                  href="/"
+                  href="/team/cms-digital-marketing"
                   title="For Digital Marketers"
                   description="Take control of your content with a unified platform for all channels."
                 />
                 <GroupItem
-                  href="/"
+                  href="/team/content-creators"
                   title="For Content Creators"
-                  description="See why DatoCMS is trusted from governments to the F500."
+                  description="Aggreggate all your content in one place and go live in seconds"
                 />
                 <GroupItem
-                  href="/"
+                  href="/enterprise-headless-cms"
                   title="For Enterprise"
-                  description="See why DatoCMS is trusted from governments to the F500."
+                  description="Join 25K+ teams, from governments to the F500, in trusting DatoCMS."
                 />
               </Group>
             </PanelSlice>
