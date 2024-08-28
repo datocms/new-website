@@ -392,60 +392,61 @@ export default function Newnavbar() {
             <PanelSlice columns={1}>
               <Group title="Documentation">
                 <GroupItem
-                  href="/"
+                  href="/docs/content-delivery-api"
                   title="GraphQL API Reference"
                   description="Learn how to fetch your content into any frontend project."
                 />
                 <GroupItem
-                  href="/"
+                  href="/docs/content-management-api"
                   title="Management API Reference"
                   description="Handle creating, updating, deleting, and fetching content of your projects via API."
                 />
                 <GroupItem
-                  href="/"
+                  href="/docs/asset-api/images"
                   title="Assets API Reference"
                   description="Get up to speed with managing & optimizing images and videos in DatoCMS."
                 />
                 <GroupItem
-                  href="/"
+                  href="/docs/content-modelling"
                   title="Modelling Your Schema"
                   description="Build your administrative area and define the structure of your content."
                 />
-                <GroupLink text="Explore all features" link="/" />
+                <GroupLink text="Explore the docs" link="/docs" />
               </Group>
             </PanelSlice>
             <PanelSlice columns={2}>
               <Group columns={2} title="Extensibility">
                 <GroupItem
-                  href="/"
+                  href="/marketplace/starters"
                   title="Official Starters"
                   description="Boilerplate templates to get you from zero-to-live within minutes."
                   isNew
                 />
                 <GroupItem
-                  href="/"
+                  href="/marketplace/hosting"
                   title="Hosting & Builds"
                   description="Server, serverless, or static - we've got you and your stack covered."
                 />
                 <GroupItem
-                  href="/"
+                  href="/marketplace/plugins"
                   title="Plugins"
                   description="From web previews to SEO, easily expand DatoCMS’s capabilities."
                 />
                 <GroupItem
-                  href="/"
+                  href="/marketplace/enterprise"
                   title="Enterprise Apps"
                   description="Keep your CMS secure with SSO, custom assets, and more."
                 />
               </Group>
               <Group columns={2} title="Community & support">
                 <GroupItem
-                  href="/"
+                  href="https://community.datocms.com"
                   title="Community Forum"
                   description="Get support, request a feature, or see what we’re working on."
+                  target="_blank"
                 />
                 <GroupItem
-                  href="/"
+                  href="/slack"
                   title="Slack Channel"
                   description="Connect with 3K+ other developers using DatoCMS in production."
                 />
@@ -455,7 +456,7 @@ export default function Newnavbar() {
             <PanelHighlight orientation="horizontal">
               <Group columns={3} title="Popular integrations">
                 <div className={s.integrations}>
-                  <Link href="/">
+                  <Link href="/docs/next-js">
                     <a className={s.integrationsItem}>
                       <LazyImage
                         src={'/images/logos/next-squared.svg'}
@@ -465,7 +466,7 @@ export default function Newnavbar() {
                       <p className={s.techName}>Next.js</p>
                     </a>
                   </Link>
-                  <Link href="/">
+                  <Link href="/docs/svelte">
                     <a className={s.integrationsItem}>
                       <LazyImage
                         src={'/images/logos/svelte-squared.svg'}
@@ -475,17 +476,17 @@ export default function Newnavbar() {
                       <p className={s.techName}>SvelteKit</p>
                     </a>
                   </Link>
-                  <Link href="/">
+                  <Link href="/docs/astro">
                     <a className={s.integrationsItem}>
                       <LazyImage
                         src={'/images/logos/astro-squared.svg'}
-                        alt="Next.js"
+                        alt="Astro"
                         className={s.integrationsImage}
                       />
                       <p className={s.techName}>Astro</p>
                     </a>
                   </Link>
-                  <Link href="/">
+                  <Link href="/docs/nuxt">
                     <a className={s.integrationsItem}>
                       <LazyImage
                         src={'/images/logos/nuxt-squared.svg'}
