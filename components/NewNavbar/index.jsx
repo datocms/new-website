@@ -325,12 +325,12 @@ export default function Newnavbar() {
             <PanelHighlight>
               <Group title="DatoCMS ❤️ Partners">
                 <GroupItem
-                  href="/product"
+                  href="/partners"
                   title="Our Partner Network"
-                  description="Our most successful customers ship their digital products faster via our partners."
+                  description="Some of our most successful customer projects come to life thanks to our incredible partners."
                 />
-                <GroupItem href="/" title="Explore Agency Partners" />
-                <GroupItem href="/" title="Explore Tech Partners" />
+                <GroupItem href="/partners" title="Explore Agency Partners" />
+                <GroupItem href="/tech-partners" title="Explore Tech Partners" />
               </Group>
               <div className={s.ctaBox}>
                 <div className={s.ctaBoxShape}>
@@ -360,30 +360,30 @@ export default function Newnavbar() {
             <PanelSlice columns={2}>
               <Group columns={2} title="Showcase projects">
                 <GroupItem
-                  href="/"
+                  href="/partners/november-five/showcase/mdlbeast"
                   title="MDLBeast by November Five"
-                  description="Saudi Arabia’s largest entertainment company uses blocks for a stellar UX."
+                  description="One of EMEA's largest entertainment companies uses blocks for a stellar UX."
                   imageUrl="https://www.datocms-assets.com/205/1685971352-mdlbeast.jpg?auto=format&w=800"
                 />
                 <GroupItem
-                  href="/"
+                  href="/partners/fully-studios/showcase/toca-boca"
                   title="Toca Boca by Fully Studios"
                   description="Leading game developer gets a new website on Next.js and AWS."
                   imageUrl="https://www.datocms-assets.com/205/1715249902-project_img.png?auto=format&w=800"
                 />
                 <GroupItem
-                  href="/"
+                  href="/partners/cantiere-creativo/showcase/l-officiel"
                   title="L’Officiel by Cantiere Creativo"
                   description="Global fashion magazine runs 30+ online magazines from a single CMS instance."
                   imageUrl="https://www.datocms-assets.com/205/1640195611-home-page-fr.png?auto=format&w=800"
                 />
                 <GroupItem
-                  href="/"
+                  href="/partners/rotate/showcase/wild"
                   title="Wild by Rotate°"
                   description="Subscription-first cosmetic brand gets a world-class content overhaul."
                   imageUrl="https://www.datocms-assets.com/205/1718048731-1661957070-wild_02.jpg?auto=format&w=800"
                 />
-                <GroupLink text="Explore all partner projects" link="/" />
+                <GroupLink text="Explore all partner projects" link="/partners/showcase" />
               </Group>
             </PanelSlice>
           </NavItem>
