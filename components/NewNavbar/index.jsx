@@ -259,32 +259,31 @@ export default function Newnavbar() {
             <PanelHighlight>
               <Group title="DatoCMS in production">
                 <GroupItem
-                  href="/product"
-                  title="Powering experiences globally"
+                  href="/succeess-stories"
+                  title="Powering content globally"
                   description="Hear real-world accounts of how DatoCMS is used at scale across the world."
                 />
-                <GroupItem href="/" title="Enterprise Case Studies" />
-                <GroupItem href="/" title="Casual Customer Chats" />
-                <GroupItem href="/" title="Our Wall of Love" />
+                <GroupItem href="/customers" title="Enterprise Case Studies" />
+                <GroupItem href="/customer-stories" title="Casual Customer Chats" />
+                <GroupItem href="/wall" title="Our Wall of Love" />
               </Group>
               <div className={s.quoteWrapper}>
                 <div className={s.quote}>
                   <blockquote>
                     <p>
-                      Immediately, DatoCMS ticked all the boxes without being
-                      overwhelming.
+                    DatoCMS has become an indispensable tool for us. Fast, flexible, and a pleasure to use.
                     </p>
                     <footer>
                       <div className={s.quoteAvatar}>
                         <LazyImage
                           src={
-                            'https://avatars.githubusercontent.com/u/1485507?v=4'
+                            'https://www.datocms-assets.com/205/1712274924-img_4983.jpg?auto=format&crop=faces&fit=crop&h=300&w=300'
                           }
                         />
                       </div>
                       <cite>
-                        <div className={s.name}>Frank Reding</div>
-                        <div className={s.role}>Senior Developer at Oberlo</div>
+                        <div className={s.name}>Tim Chesney</div>
+                        <div className={s.role}>Director at Make</div>
                       </cite>
                     </footer>
                   </blockquote>
@@ -294,30 +293,30 @@ export default function Newnavbar() {
             <PanelSlice columns={2}>
               <Group columns={2} title="Showcase projects">
                 <GroupItem
-                  href="/"
+                  href="/customers/polestar"
                   title="Polestar"
-                  description="Serving users globally in 28 locales with 250+ editors across 35 custom roles."
+                  description="Serving content in 28 locales with 250+ editors across 35 custom roles."
                   imageUrl="https://www.datocms-assets.com/205/1648568107-webimage-31a550ca-084b-46f8-ac8d9741a15c737c.jpeg?auto=format&w=800"
                 />
                 <GroupItem
-                  href="/"
+                  href="/customers/chillys"
                   title="Chilly’s"
-                  description="Unlocking 166%+ growth in annual revenue for 2M+ monthly users."
+                  description="Unlocking 166%+ growth in annual revenue with 2M+ monthly users."
                   imageUrl="https://www.datocms-assets.com/205/1582294156-cover-chillys.jpg?auto=format&w=800"
                 />
                 <GroupItem
-                  href="/"
+                  href="/customers/hashicorp"
                   title="Hashicorp"
                   description="Handling 2TB of traffic, with 5M+ monthly API calls on 35K+ records."
                   imageUrl="https://www.datocms-assets.com/205/1581953189-1569253200-swilson-hc19.png?auto=format&w=800"
                 />
                 <GroupItem
-                  href="/"
+                  href="/customers/arduino"
                   title="Arduino"
-                  description="Reducing lines of code needed by 92,5% while gaining 8x faster loading times."
+                  description="Reducing lines of code by 92,5% while gaining 8x faster loading times."
                   imageUrl="https://www.datocms-assets.com/205/1581958110-copy-of-arduino-teacher-students-978x653.jpeg?auto=format&w=800"
                 />
-                <GroupLink text="Explore all case studies" link="/" />
+                <GroupLink text="Explore all enterprise case studies" link="/customers" />
               </Group>
             </PanelSlice>
           </NavItem>
