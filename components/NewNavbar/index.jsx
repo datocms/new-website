@@ -505,57 +505,57 @@ export default function Newnavbar() {
             <PanelHighlight>
               <Group title="Core resources">
                 <GroupItem
-                  href="/"
+                  href="/how-to-datocms"
                   title="How to DatoCMS"
-                  description="Central hub covering everything you need to become a power user."
+                  description="User guides, comparisons, concepts, and so much more!"
                 />
                 <GroupItem
-                  href="/"
-                  title="Compare Headless CMS"
-                  description="Not sure which CMS is the right one for you? Let us help you decide. No bias."
+                  href="/blog"
+                  title="Blog"
+                  description="News, tips, and highlights from the DatoCMS team."
                 />
               </Group>
               <Group title="Featured posts">
                 <GroupItem
-                  href="/"
+                  href="/blog/how-to-build-a-multi-language-website-with-next-js-i18n"
                   title="Multilingual site with Next.js"
                   description="Let’s build a localized Next.js and GraphQL website with DatoCMS."
                 />
                 <GroupItem
-                  href="/"
+                  href="/blog/introducing-datocms-cache-tags"
                   title="Introducing Cache Tags"
                   description="No more costly and inefficient time-based invalidation methods."
                 />
-                <GroupLink text="Explore the Blog" link="/" />
+                <GroupLink text="Explore all posts" link="/blog" />
               </Group>
             </PanelHighlight>
             <PanelSlice columns={2}>
               <Group columns={2} title="Featured guides">
                 <GroupItem
-                  href="/"
-                  title="Deep Dive into Structured Text in DatoCMS"
-                  description=""
+                  href="/user-guides/content-management/deep-dive-into-structured-text-in-datocms"
+                  title="Deep Dive into Structured Text"
+                  description="All the magic of the Structured Text field and why editors LOVE it."
                   imageUrl="https://image.mux.com/Yc4esLEsoQszLQLgkOKPCmVLARxnrMzV/thumbnail.jpg?width=918"
                 />
                 <GroupItem
-                  href="/"
-                  title="Building Pages and Deep Dive into Modular Content"
-                  description=""
+                  href="/user-guides/content-management/building-pages-and-deep-dive-into-modular-content"
+                  title="Building Pages with Modular Content"
+                  description="A WYSIWYG drag-and-drop experience? In headless? Madness!"
                   imageUrl="https://image.mux.com/W5jgwKq95fqBS7kmfolmRJHrUx4jtEex/thumbnail.jpg?width=918"
                 />
                 <GroupItem
-                  href="/"
+                  href="/user-guides/media-management/videos-and-video-optimizations"
                   title="Videos and Video Optimizations"
-                  description=""
+                  description="Serve crunchy, crispy, 4K videos to any device in any format, with subs."
                   imageUrl="https://image.mux.com/P1SA01aSHtY1jzHrASAu00jdfIH5OWF01Ih/thumbnail.jpg?width=918"
                 />
                 <GroupItem
-                  href="/"
+                  href="/user-guides/the-basics/intro-to-the-schema-builder"
                   title="Intro to the Schema Builder"
-                  description=""
+                  description="Master how to set up the foundations of your project's schema successfully."
                   imageUrl="https://image.mux.com/ZXrCcv53t00n02f5yS500siKW102xdfJqG025/thumbnail.jpg?width=918"
                 />
-                <GroupLink text="Explore all Partner projects" link="/" />
+                <GroupLink text="Explore all User Guides" link="/user-guides" />
               </Group>
             </PanelSlice>
           </NavItem>
@@ -586,7 +586,7 @@ export default function Newnavbar() {
               >
                 <span>Log in</span>
               </a>
-              <Button as="a" p="small" href="/pricing">
+              <Button as="a" p="small" href="https://dashboard.datocms.com/">
                 Get started
               </Button>
             </>
