@@ -509,7 +509,7 @@
     &:has(.itemImage) {
       grid-template-columns: repeat(3, 1fr);
 
-      .groupItem:nth-child(n+5) {
+      .groupItem:nth-child(n+4 of .groupItem) {
         display: none;
       }
     }
@@ -575,8 +575,10 @@
   text-decoration: none;
 
   &:hover {
-    .itemDescription {
-      color: var(--base-body-color);
+    .itemTitle {
+      h4 {
+        color: var(--accent-color)
+      }
     }
   }
 }
@@ -618,6 +620,7 @@
     display: inline;
     font-size: 14px;
     margin: 0 6px 0 0;
+    transition: color 0.3s;
 
     @media screen and (min-width: 640px) {
       font-size: 15px;

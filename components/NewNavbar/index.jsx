@@ -63,24 +63,33 @@ const GroupItem = ({
   imageUrl,
   isNew,
   excludeMobile,
-}) => (
-  <Link href={href}>
-    <a className={s.groupItem} data-exclude-mobile={excludeMobile}>
-      {imageUrl && (
-        <div className={s.itemImage}>
-          <LazyImage src={imageUrl} alt={title} />
-        </div>
-      )}
-      <article className={s.itemBody}>
-        <div className={s.itemTitle}>
-          <h4>{title}</h4>
-          {isNew && <span className={s.isNew}>New</span>}
-        </div>
-        {description && <p className={s.itemDescription}>{description}</p>}
-      </article>
-    </a>
-  </Link>
-);
+}) => {
+  const isExternal = href.startsWith('http');
+
+  return (
+    <Link href={href}>
+      <a
+        className={s.groupItem}
+        target={isExternal ? '_blank' : '_self'}
+        rel={isExternal ? 'noopener noreferrer' : ''}
+        data-exclude-mobile={excludeMobile}
+      >
+        {imageUrl && (
+          <div className={s.itemImage}>
+            <LazyImage src={imageUrl} alt={title} />
+          </div>
+        )}
+        <article className={s.itemBody}>
+          <div className={s.itemTitle}>
+            <h4>{title}</h4>
+            {isNew && <span className={s.isNew}>New</span>}
+          </div>
+          {description && <p className={s.itemDescription}>{description}</p>}
+        </article>
+      </a>
+    </Link>
+  );
+};
 
 const GroupLink = ({ text, link }) => (
   <Link href={link}>
@@ -156,7 +165,10 @@ export default function Newnavbar() {
                   description="Everything you need to know about the friendliest Headless CMS on the market."
                 />
                 <GroupItem href="/product" title="Explore the capabilities!" />
-                <GroupItem href="/product-updates" title="See what’s new in DatoCMS" />
+                <GroupItem
+                  href="/product-updates"
+                  title="See what’s new in DatoCMS"
+                />
               </Group>
               <div className={s.ctaBox} data-exclude-mobile>
                 <div className={s.ctaBoxShape}>
@@ -177,6 +189,7 @@ export default function Newnavbar() {
                     as="a"
                     p="tiny"
                     href="https://try.datocms.com/"
+                    target="_blank"
                   >
                     Launch interactive demo
                   </Button>
@@ -264,14 +277,18 @@ export default function Newnavbar() {
                   description="Hear real-world accounts of how DatoCMS is used at scale across the world."
                 />
                 <GroupItem href="/customers" title="Enterprise Case Studies" />
-                <GroupItem href="/customer-stories" title="Casual Customer Chats" />
+                <GroupItem
+                  href="/customer-stories"
+                  title="Casual Customer Chats"
+                />
                 <GroupItem href="/wall" title="Our Wall of Love" />
               </Group>
               <div className={s.quoteWrapper}>
                 <div className={s.quote}>
                   <blockquote>
                     <p>
-                    DatoCMS has become an indispensable tool for us. Fast, flexible, and a pleasure to use.
+                      DatoCMS has become an indispensable tool for us. Fast,
+                      flexible, and a pleasure to use.
                     </p>
                     <footer>
                       <div className={s.quoteAvatar}>
@@ -316,7 +333,10 @@ export default function Newnavbar() {
                   description="Reducing lines of code by 92,5% while gaining 8x faster loading times."
                   imageUrl="https://www.datocms-assets.com/205/1581958110-copy-of-arduino-teacher-students-978x653.jpeg?auto=format&w=800"
                 />
-                <GroupLink text="Explore all enterprise case studies" link="/customers" />
+                <GroupLink
+                  text="Explore all enterprise case studies"
+                  link="/customers"
+                />
               </Group>
             </PanelSlice>
           </NavItem>
@@ -330,7 +350,10 @@ export default function Newnavbar() {
                   description="Some of our most successful customer projects come to life thanks to our incredible partners."
                 />
                 <GroupItem href="/partners" title="Explore Agency Partners" />
-                <GroupItem href="/tech-partners" title="Explore Tech Partners" />
+                <GroupItem
+                  href="/tech-partners"
+                  title="Explore Tech Partners"
+                />
               </Group>
               <div className={s.ctaBox}>
                 <div className={s.ctaBoxShape}>
@@ -383,7 +406,10 @@ export default function Newnavbar() {
                   description="Subscription-first cosmetic brand gets a world-class content overhaul."
                   imageUrl="https://www.datocms-assets.com/205/1718048731-1661957070-wild_02.jpg?auto=format&w=800"
                 />
-                <GroupLink text="Explore all partner projects" link="/partners/showcase" />
+                <GroupLink
+                  text="Explore all partner projects"
+                  link="/partners/showcase"
+                />
               </Group>
             </PanelSlice>
           </NavItem>
@@ -443,7 +469,6 @@ export default function Newnavbar() {
                   href="https://community.datocms.com"
                   title="Community Forum"
                   description="Get support, request a feature, or see what we’re working on."
-                  target="_blank"
                 />
                 <GroupItem
                   href="/slack"
