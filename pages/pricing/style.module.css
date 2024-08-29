@@ -293,7 +293,16 @@
   }
 
   @media screen and (height >= 750px) and (width >= 1125px) {
-    top: 90px;
+    top: 80px;
+  }
+}
+
+:global(html):has([data-notice]) {
+  .fTableHead,
+  .fTablePlan {
+    @media screen and (height >= 750px) and (width >= 1125px) {
+      top: 110px;
+    }
   }
 }
 

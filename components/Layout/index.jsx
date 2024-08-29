@@ -1,13 +1,13 @@
 import BaseLayout from 'components/BaseLayout';
 import Footer from 'components/Footer';
 import MobileNavbar from 'components/MobileNavbar';
-import Navbar from 'components/Navbar';
+import NewNavbar from 'components/NewNavbar';
 
 export default function Layout({ noCta, children, preview }) {
   return (
     <BaseLayout preview={preview}>
-      <Navbar />
-      <MobileNavbar />
+      <NewNavbar />
+      {/* <MobileNavbar /> */}
 
       {children}
       <Footer noCta={noCta} />
