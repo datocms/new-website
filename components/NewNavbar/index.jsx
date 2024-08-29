@@ -328,7 +328,7 @@ export default function Newnavbar() {
             <PanelHighlight>
               <Group title="DatoCMS in production">
                 <GroupItem
-                  href="/succeess-stories"
+                  href="/success-stories"
                   title="Powering content globally"
                   description="Hear real-world accounts of how DatoCMS is used at scale across the world."
                 />
