@@ -12,7 +12,9 @@
   }
 }
 
-.root:has(.notice) {
+.root:has(.notice),
+.root:has(.marketplaceNotice)
+ {
   .panel {
     @media screen and (min-width: 1125px) {
       top: 110px;
@@ -26,20 +28,24 @@
   }
 }
 
-.notice {
+.notice,
+.marketplaceNotice {
   display: none;
 
   @media screen and (min-width: 1125px) {
     align-items: center;
     background: #fff0e8;
     color: black;
-    display: block;
     display: flex;
     font-size: 14px;
     height: 30px;
     text-align: center;
     text-decoration: none;
   }
+}
+
+.marketplaceNotice {
+  background: #f4cf58
 }
 
 .nav {
@@ -226,7 +232,7 @@
     font-family: var(--font-sans);
     font-size: 17px;
     padding: 0;
-    pointer-events: all;
+    pointer-events: none;
   }
 }
 

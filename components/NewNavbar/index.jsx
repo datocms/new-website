@@ -2,27 +2,48 @@ import Button from 'components/Button';
 import LazyImage from 'components/LazyImage';
 import Wrapper from 'components/Wrapper';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Hamburger from 'public/icons/regular/bars.svg';
 import ChevronDown from 'public/icons/regular/chevron-down.svg';
 import AlternativeLogo from 'public/images/brand-assets/svg/icon-text/color/color_full_logo_alt.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getCookie } from 'utils/cookies';
 import slugify from 'utils/slugify';
 import s from './style.module.css';
 
-const NavItem = ({ name, children }) => {
-  const [open, setOpen] = useState(false);
-  const lowecaseName = slugify(name);
+const NavItem = ({ name, children, onToggle, activeNavItem }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const lowercaseName = slugify(name);
+  const navItemRef = useRef();
+
+  useEffect(() => {
+    setIsOpen(activeNavItem === name);
+  }, [activeNavItem, name]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(
+        () => navItemRef.current?.scrollIntoView({ behavior: 'smooth' }),
+        200,
+      );
+    }
+  }, [isOpen]);
+
+  const handleToggle = () => {
+    const newIsOpen = !isOpen;
+    setIsOpen(newIsOpen);
+    onToggle(name, newIsOpen);
+  };
 
   return (
-    <div className={s.navItem} data-open={open}>
+    <div className={s.navItem} data-open={isOpen} ref={navItemRef}>
       <div className={s.navButtonWrapper}>
         <button
           className={s.navButton}
           type="button"
-          onClick={() => setOpen(!open)}
-          aria-expanded={open}
-          aria-controls={lowecaseName}
+          onClick={handleToggle}
+          aria-expanded={isOpen}
+          aria-controls={lowercaseName}
         >
           {name}
         </button>
@@ -30,7 +51,7 @@ const NavItem = ({ name, children }) => {
           <ChevronDown />
         </div>
       </div>
-      <div id={lowecaseName} className={s.panel} role="dialog">
+      <div id={lowercaseName} className={s.panel} role="dialog">
         <div className={s.panelInner}>{children}</div>
       </div>
     </div>
@@ -102,21 +123,38 @@ const GroupLink = ({ text, link }) => (
 
 export default function Newnavbar() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [openNav, setOpenNav] = useState(false);
+  const [openMobileNav, setOpenMobileNav] = useState(false);
+  const [activeNavItem, setActiveNavItem] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     setLoggedIn(!!getCookie('datoAccountEmail'));
   }, []);
 
+  useEffect(() => {
+    if (!openMobileNav) {
+      setActiveNavItem(null);
+    }
+  }, [openMobileNav]);
+
   const toggleNav = () => {
-    setOpenNav(!openNav);
+    setOpenMobileNav(!openMobileNav);
   };
+
+  const handleNavItemToggle = (name, isOpen) => {
+    if (isOpen) {
+      setActiveNavItem(name);
+    }
+  };
+
+  const routerUrl = router.pathname;
+  const isMarketplace = routerUrl.startsWith('/marketplace');
 
   return (
     <div className={s.root} data-datocms-noindex>
-      {false && (
+      {false && !isMarketplace && (
         <Link href="/webinars/how-to-use-structured-text-on-datocms">
-          <a className={s.notice}>
+          <a data-notice className={s.notice}>
             <Wrapper>
               <strong>
                 📅 Want to learn how to use our new Structured Text field with
@@ -136,7 +174,17 @@ export default function Newnavbar() {
         </Link>
       )}
 
-      <nav className={s.nav} data-open={openNav}>
+      {true && isMarketplace && (
+        <div data-marketplace-notice className={s.marketplaceNotice}>
+          <Wrapper>
+            <strong>🎈 Welcome to the Marketplace</strong> — Explore and
+            discover the ecosystem around DatoCMS, and share your own work with
+            the community!
+          </Wrapper>
+        </div>
+      )}
+
+      <nav className={s.nav} data-open={openMobileNav}>
         <div className={s.logoWrapper}>
           <Link href="/">
             <a className={s.logo}>
@@ -148,15 +196,19 @@ export default function Newnavbar() {
             type="button"
             className={s.hamburger}
             onClick={() => toggleNav()}
-            aria-expanded={openNav}
+            aria-expanded={openMobileNav}
             aria-controls="navList"
           >
             <Hamburger />
           </button>
         </div>
 
-        <div id="navList" className={s.navList} aria-disabled={!openNav}>
-          <NavItem name="Product">
+        <div id="navList" className={s.navList} aria-disabled={!openMobileNav}>
+          <NavItem
+            name="Product"
+            onToggle={handleNavItemToggle}
+            activeNavItem={activeNavItem}
+          >
             <PanelHighlight>
               <Group title="Platform">
                 <GroupItem
@@ -268,7 +320,11 @@ export default function Newnavbar() {
             </PanelSlice>
           </NavItem>
 
-          <NavItem name="Customers">
+          <NavItem
+            name="Customers"
+            onToggle={handleNavItemToggle}
+            activeNavItem={activeNavItem}
+          >
             <PanelHighlight>
               <Group title="DatoCMS in production">
                 <GroupItem
@@ -341,7 +397,11 @@ export default function Newnavbar() {
             </PanelSlice>
           </NavItem>
 
-          <NavItem name="Partners">
+          <NavItem
+            name="Partners"
+            onToggle={handleNavItemToggle}
+            activeNavItem={activeNavItem}
+          >
             <PanelHighlight>
               <Group title="DatoCMS ❤️ Partners">
                 <GroupItem
@@ -414,7 +474,11 @@ export default function Newnavbar() {
             </PanelSlice>
           </NavItem>
 
-          <NavItem name="Developers">
+          <NavItem
+            name="Developers"
+            onToggle={handleNavItemToggle}
+            activeNavItem={activeNavItem}
+          >
             <PanelSlice columns={1}>
               <Group title="Documentation">
                 <GroupItem
@@ -463,6 +527,7 @@ export default function Newnavbar() {
                   title="Enterprise Apps"
                   description="Keep your CMS secure with SSO, custom assets, and more."
                 />
+                <GroupLink text="Explore the Marketplace" link="/marketplace" />
               </Group>
               <Group columns={2} title="Community & support">
                 <GroupItem
@@ -526,7 +591,11 @@ export default function Newnavbar() {
             </PanelHighlight>
           </NavItem>
 
-          <NavItem name="Resources">
+          <NavItem
+            name="Resources"
+            onToggle={handleNavItemToggle}
+            activeNavItem={activeNavItem}
+          >
             <PanelHighlight>
               <Group title="Core resources">
                 <GroupItem
