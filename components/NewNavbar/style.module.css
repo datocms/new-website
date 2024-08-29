@@ -82,7 +82,7 @@
     align-items: center;
     box-shadow: none;
     flex-direction: row;
-    gap: 40px;
+    gap: 30px;
     height: 80px;
     margin: 0 auto;
     max-width: var(--page-width-with-margin);
@@ -134,7 +134,6 @@
   @media screen and (min-width: 1125px) {
     align-items: center;
     flex-direction: row;
-    gap: 20px;
     height: 100%;
   }
 
@@ -201,6 +200,7 @@
   @media screen and (min-width: 1125px) {
     pointer-events: all;
     border: 0;
+    padding: 0 10px;
   }
 
   .chevron {
@@ -225,7 +225,7 @@
   font-size: 24px;
   padding: 12px 0 16px 0;
   text-align: left;
-  transition: color 0.3s;
+  transition: color 0.2s;
   width: 100%;
   
   @media screen and (min-width: 1125px) {
@@ -626,7 +626,6 @@
     display: inline;
     font-size: 14px;
     margin: 0 6px 0 0;
-    transition: color 0.3s;
 
     @media screen and (min-width: 640px) {
       font-size: 15px;
@@ -707,8 +706,11 @@
 .navActions {
   align-items: center;
   display: flex;
-  gap: 20px;
   justify-content: space-between;
+
+  & > *:last-child {
+    margin-left: 10px;
+  }
 }
 
 .navLink {
@@ -719,6 +721,10 @@
 
   &:hover {
     color: var(--accent-color);
+  }
+
+  @media screen and (min-width: 1125px) {
+    padding: 0 10px;
   }
 }
 
