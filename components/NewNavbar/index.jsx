@@ -406,13 +406,13 @@ export default function Newnavbar() {
               <Group title="DatoCMS ❤️ Partners">
                 <GroupItem
                   href="/partners"
-                  title="Our Partner Network"
+                  title="Agency Partner Network"
                   description="Some of our most successful customer projects come to life thanks to our incredible partners."
                 />
-                <GroupItem href="/partners" title="Explore Agency Partners" />
                 <GroupItem
                   href="/tech-partners"
-                  title="Explore Tech Partners"
+                  title="Tech Partner Ecosystem"
+                  description="We work with the best APIs and tools in the space to make sure your projects stand out."
                 />
               </Group>
               <div className={s.ctaBox}>
