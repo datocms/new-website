@@ -214,12 +214,12 @@ export default function Newnavbar() {
                 <GroupItem
                   href="/product"
                   title="Meet DatoCMS!"
-                  description="Everything you need to know about the friendliest Headless CMS on the market."
+                  description="Explore all the capabilities of the friendliest Headless CMS in town."
                 />
-                <GroupItem href="/product" title="Explore the capabilities!" />
                 <GroupItem
                   href="/product-updates"
-                  title="See what’s new in DatoCMS"
+                  title="See what’s new"
+                  description="Check out the latest releases and updates on our changelog."
                 />
               </Group>
               <div className={s.ctaBox} data-exclude-mobile>
@@ -295,7 +295,7 @@ export default function Newnavbar() {
                 />
                 {/* <GroupLink text="Explore all use cases" link="/" /> */}
               </Group>
-              <Group title="Happy Team">
+              <Group title="Happy Teams">
                 <GroupItem
                   href="/team/best-cms-for-developers"
                   title="For Web Developers"
