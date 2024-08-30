@@ -172,8 +172,10 @@ export default function Product({ preview, subscription }) {
     <Layout
       preview={preview}
       finalCta={{
-        title: 'Seen enough? Get started with DatoCMS',
+        title: 'Seen enough?<br /> Get started with DatoCMS',
         subtitle: null,
+        buttonText: 'Try it now for free!',
+        href: 'https://dashboard.datocms.com/signup',
       }}
     >
       <Head>
@@ -339,25 +341,6 @@ export default function Product({ preview, subscription }) {
             return <Feature key={feature.id} feature={feature} />;
           })}
         </div>
-      </div>
-
-      <div className={s.customFooter}>
-        <Wrapper>
-          <div className={s.customFooterInner}>
-            <p className={s.footerTitle}>
-              Seen enough? Get started with DatoCMS
-            </p>
-            <Checks checks={['No credit card', 'Easy setup']}>
-              <Button
-                fs="big"
-                as="a"
-                href="https://dashboard.datocms.com/signup"
-              >
-                Try it now for free!
-              </Button>
-            </Checks>
-          </div>
-        </Wrapper>
       </div>
     </Layout>
   );

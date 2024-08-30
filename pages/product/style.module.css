@@ -331,32 +331,8 @@ a.authorRole:hover .name {
 
 .featureLink {
   color: var(--accent-color);
-  font-weight: bold;
-  text-decoration: none;
-  margin-top: 20px;
   display: inline-block;
-}
-
-.customFooter {
-  background: linear-gradient(45deg, #fefbe4, #fdf0eb);
-  clip-path: var(--clip-path);
-  margin-top: rfs(120px);
-  padding: rfs(100px) 0;
-}
-
-.customFooterInner {
-  margin: rfs(40px) auto;
-  text-align: center;
-
-  @media screen and (min-width: 800px) {
-    max-width: 70%;
-  }
-}
-
-.footerTitle {
-  font-family: var(--font-headline);
-  font-size: rfs(40px);
   font-weight: bold;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  margin-top: 20px;
+  text-decoration: none;
 }
