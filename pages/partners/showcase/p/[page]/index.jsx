@@ -37,11 +37,11 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
       meta: _allBlogPostsMeta {
         count
       }
-      projects: allShowcaseProjects(first: $first, skip: $skip, orderBy: _updatedAt_DESC) {
+      projects: allShowcaseProjects(first: $first, skip: $skip, orderBy: _firstPublishedAt_DESC) {
         id
         name
         slug
-        _updatedAt
+        _firstPublishedAt
         headline {
           value
         }
