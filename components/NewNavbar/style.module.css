@@ -155,10 +155,10 @@
     &[data-open="true"],
     &:has([aria-expanded="true"]) {
       .panel {
-        overflow: inherit;
-        opacity: 1;
-        margin: 12px 0 40px 0;
         height: auto;
+        margin: 12px 0 40px 0;
+        opacity: 1;
+        overflow: inherit;
         visibility: visible;
       }
 
@@ -169,8 +169,6 @@
   }
   
   @media screen and (min-width: 1125px) {
-    pointer-events: none;
-
     &:hover,
     &:has([aria-expanded="true"]) {
       .navButton {
@@ -185,6 +183,22 @@
 
       .panelInner {
         pointer-events: all;
+      }
+    }
+
+    &:hover {
+      z-index: 100;
+
+      &::after {
+        bottom: 0px;
+        clip-path: polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%);
+        content: "";
+        display: block;
+        height: 32px;
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+        width: 600px;
       }
     }
   }
@@ -227,7 +241,7 @@
   text-align: left;
   transition: color 0.2s;
   width: 100%;
-  
+
   @media screen and (min-width: 1125px) {
     font-family: var(--font-sans);
     font-size: 17px;
