@@ -37,7 +37,7 @@ export default function Support() {
   }
 
   return (
-    <Layout noCta>
+    <Layout finalCta={false}>
       <Head>
         <title>Agency Partner Program</title>
       </Head>

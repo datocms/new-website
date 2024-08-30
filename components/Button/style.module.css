@@ -1,16 +1,17 @@
 .root {
   background: var(--accent-color);
-  color: white !important;
-  display: inline-block;
-  padding: 1em 1.5em;
-  font-family: var(--font-sans);
-  font-weight: bold;
   border-radius: 3px;
   border: 1px solid var(--accent-color);
-  font-size: inherit;
-  transition: opacity 150ms ease-in-out;
+  color: white !important;
   cursor: pointer;
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: inherit;
+  font-weight: bold;
+  padding: 1em 1.5em;
   text-decoration: none;
+  transition: opacity 150ms ease-in-out;
+  white-space: nowrap;
 
   &:hover {
     opacity: 0.8;

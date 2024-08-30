@@ -92,7 +92,7 @@ export default function TechPartnerPage({ preview, subscription }) {
   } = useQuerySubscription(subscription);
 
   return (
-    <Layout preview={preview} noCta>
+    <Layout preview={preview} finalCta={false}>
       <Head>
         {renderMetaTags(
           changeTitle(

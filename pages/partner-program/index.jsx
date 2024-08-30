@@ -70,7 +70,7 @@ export default function Agencies({ subscription }) {
   );
 
   return (
-    <Layout noCta>
+    <Layout finalCta={false}>
       <Head>
         <title>Special pricing for agencies - DatoCMS</title>
       </Head>

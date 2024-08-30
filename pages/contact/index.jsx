@@ -14,7 +14,7 @@ import s from './style.module.css';
 
 export default function Support() {
   return (
-    <Layout noCta>
+    <Layout finalCta={false}>
       <Head noIndex>
         <title>Contact our Sales team</title>
       </Head>
