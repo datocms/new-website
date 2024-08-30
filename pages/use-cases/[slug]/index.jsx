@@ -175,7 +175,7 @@ export default function UseCase({ subscription, preview }) {
   } = useQuerySubscription(subscription);
 
   return (
-    <Layout preview={preview} noCta>
+    <Layout preview={preview} finalCta={false}>
       <Head>{renderMetaTags(page.seo)}</Head>
 
       <Wrapper>

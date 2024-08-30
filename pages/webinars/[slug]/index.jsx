@@ -206,7 +206,7 @@ export default function Webinar({ preview, subscription }) {
   } = useQuerySubscription(subscription);
 
   return (
-    <Layout preview={preview} noCta>
+    <Layout preview={preview} finalCta={false}>
       <Head>{renderMetaTags(webinar._seoMetaTags)}</Head>
       <Wrapper>
         <Space top={2}>

@@ -98,7 +98,7 @@ export default function Support({ preview, topics }) {
   }, [formVisible]);
 
   return (
-    <Layout noCta preview={preview}>
+    <Layout finalCta={false} preview={preview}>
       <Head noIndex>
         <title>Support page</title>
       </Head>

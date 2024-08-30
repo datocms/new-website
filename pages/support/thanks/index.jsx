@@ -14,7 +14,7 @@ import s from '../style.module.css';
 
 export default function Support({ preview, topics }) {
   return (
-    <Layout noCta preview={preview}>
+    <Layout finalCta={false} preview={preview}>
       <Head>
         <title>Support page</title>
       </Head>

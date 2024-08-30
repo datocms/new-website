@@ -196,7 +196,7 @@ export default function PartnerPage({ preview, subscription, plugins }) {
   } = useQuerySubscription(subscription);
 
   return (
-    <Layout preview={preview} noCta>
+    <Layout preview={preview} finalCta={false}>
       <Head>
         {renderMetaTags(
           changeTitle(

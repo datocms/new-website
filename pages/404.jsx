@@ -5,7 +5,7 @@ import Layout from 'components/Layout';
 
 function ErrorPage() {
   return (
-    <Layout noCta>
+    <Layout finalCta={false}>
       <Head>
         <title>404 Page not found!</title>
       </Head>

@@ -169,7 +169,13 @@ export default function Product({ preview, subscription }) {
   );
 
   return (
-    <Layout preview={preview} noCta>
+    <Layout
+      preview={preview}
+      finalCta={{
+        title: 'Seen enough? Get started with DatoCMS',
+        subtitle: null,
+      }}
+    >
       <Head>
         <title>Better, with DatoCMS</title>
       </Head>

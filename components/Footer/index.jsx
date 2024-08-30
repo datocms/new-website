@@ -27,7 +27,7 @@ const Feature = ({ href, isNew, title, keyword }) => (
   </div>
 );
 
-export default function Footer({ noCta }) {
+export default function Footer({ finalCta }) {
   const { register, reset, setError, handleSubmit, formState } = useForm();
 
   const [success, setSuccess] = useState(false);
@@ -48,12 +48,19 @@ export default function Footer({ noCta }) {
     }
   };
 
+  const showFinalCta = finalCta !== false && finalCta !== null;
+
   return (
     <div
-      className={cn(s.footerBg, { [s.noCta]: noCta, [s.cta]: !noCta })}
+      className={cn(s.footerBg, { [s.noCta]: !finalCta, [s.cta]: finalCta })}
       data-datocms-noindex
     >
-      {!noCta && <FinalCta />}
+      {showFinalCta &&
+        (typeof finalCta === 'object' ? (
+          <FinalCta {...finalCta} />
+        ) : (
+          <FinalCta />
+        ))}
       <div className={s.footerRoot}>
         <Wrapper>
           <div className={s.footerInnerRoot}>

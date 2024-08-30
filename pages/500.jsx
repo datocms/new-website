@@ -6,7 +6,7 @@ import Wrapper from 'components/Wrapper';
 
 function ErrorPage() {
   return (
-    <Layout noCta>
+    <Layout finalCta={false}>
       <Head>
         <title>Website error</title>
       </Head>
