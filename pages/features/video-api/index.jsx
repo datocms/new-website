@@ -140,25 +140,22 @@ function VideoStreamingEncoding({ feature, preview }) {
           kicker={`a flexible ${keyword}`}
           title={
             <>
-              An API that works with{' '}
-              <FlagHighlight>any&nbsp;video&nbsp;player</FlagHighlight>
+              Fast, high-quality streaming video for{' '}
+              <FlagHighlight>your framework of choice</FlagHighlight>
             </>
           }
         >
-          <p>
-            We make it&nbsp;
-            <strong>easy to integrate with all major video players</strong>,
-            open-source or professional, web or native. Or, you can simply get
-            the&nbsp;<strong>DatoCMS Video Component</strong>&nbsp;for{' '}
-            <a href="https://www.datocms.com/docs/react/displaying-videos">
-              React
+          <p>Our seamless integration with the <a href="https://www.mux.com/">Mux</a> video CDN makes it easy to serve streaming video using any video player you like,
+            open-source or professional, web or native. Or, you can simply use one of our own <strong>DatoCMS Video Components</strong> for {' '}
+            <a href="https://www.datocms.com/docs/next-js/displaying-videos">
+              React/Next.js
             </a>
-            , <a href="https://www.datocms.com/docs/vue/display-videos">Vue</a>,
+            , <a href="https://www.datocms.com/docs/nuxt/displaying-videos">Vue/Nuxt</a>,
             or{' '}
             <a href="https://www.datocms.com/docs/svelte/displaying-videos">
-              Svelte
+              Svelte/SvelteKit
             </a>
-            , all powered by the Mux Player.
+            , for easy, drop-in video playback in your project.
           </p>
         </Flag>
 
