@@ -127,7 +127,19 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
           value
         }
         caseStudy {
-          ...on SuccessStoryRecord {
+          ... on RecordInterface {
+            __typename
+          }
+          ... on SuccessStoryRecord {
+            slug
+          }
+          ... on ShowcaseProjectRecord {
+            slug
+            partner {
+              slug
+            }
+          }
+          ... on CustomerStoryRecord {
             slug
           }
         }
@@ -344,7 +356,15 @@ export default function UseCase({ subscription, preview }) {
                   as="a"
                   p="small"
                   s="purple"
-                  href={`/customers/${page.caseStudy.slug}`}
+                  href={
+                    page.caseStudy.__typename === 'SuccessStoryRecord'
+                      ? `/customers/${page.caseStudy.slug}`
+                      : page.caseStudy.__typename === 'ShowcaseProjectRecord'
+                        ? `/partners/${page.caseStudy.partner.slug}/showcase/${page.caseStudy.slug}`
+                        : page.caseStudy.__typename === 'CustomerStoryRecord'
+                          ? `/customer-stories/${page.caseStudy.slug}`
+                          : undefined
+                  }
                 >
                   Check it out
                 </Button>

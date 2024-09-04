@@ -17,8 +17,14 @@ export default function FinalCta({
         <a className={s.root}>
           <div className={s.rootInner}>
             <div className={s.body}>
-              <div className={s.title} dangerouslySetInnerHTML={{__html: title}}></div>
-              <div className={s.subtitle} dangerouslySetInnerHTML={{__html: subtitle}}></div>
+              <div
+                className={s.title}
+                dangerouslySetInnerHTML={{ __html: title }}
+              />
+              <div
+                className={s.subtitle}
+                dangerouslySetInnerHTML={{ __html: subtitle }}
+              />
             </div>
             <div className={s.action}>
               <Checks checks={checks}>
