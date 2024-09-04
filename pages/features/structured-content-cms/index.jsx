@@ -145,10 +145,9 @@ function StructuredText({ feature, preview, integrations, review }) {
           image={VideoBrowser}
           hideDot
           imageProps={{
-            controls: false,
-            autoPlay: true,
+            autoPlayAndLoop: true,
             title: keyword,
-            src: 'https://stream.mux.com/5hKbBhhU7TF202HRvbivd1WWAKuGgmP0100.m3u8',
+            playbackId: '5hKbBhhU7TF202HRvbivd1WWAKuGgmP0100',
           }}
         >
           <p>
@@ -177,9 +176,8 @@ function StructuredText({ feature, preview, integrations, review }) {
           image={VideoBrowser}
           hideDot
           imageProps={{
-            controls: false,
-            autoPlay: true,
-            src: 'https://stream.mux.com/uzYE02PAHSMwU91m01CoQtM00xMZuLr1Tm3.m3u8',
+            autoPlayAndLoop: true,
+            playbackId: 'uzYE02PAHSMwU91m01CoQtM00xMZuLr1Tm3',
             title: keyword,
           }}
         >

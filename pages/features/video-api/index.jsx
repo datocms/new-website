@@ -145,13 +145,20 @@ function VideoStreamingEncoding({ feature, preview }) {
             </>
           }
         >
-          <p>Our seamless integration with the <a href="https://www.mux.com/">Mux</a> video CDN makes it easy to serve streaming video using any video player you like,
-            open-source or professional, web or native. Or, you can simply use one of our own <strong>DatoCMS Video Components</strong> for {' '}
+          <p>
+            Our seamless integration with the{' '}
+            <a href="https://www.mux.com/">Mux</a> video CDN makes it easy to
+            serve streaming video using any video player you like, open-source
+            or professional, web or native. Or, you can simply use one of our
+            own <strong>DatoCMS Video Components</strong> for{' '}
             <a href="https://www.datocms.com/docs/next-js/displaying-videos">
               React/Next.js
             </a>
-            , <a href="https://www.datocms.com/docs/nuxt/displaying-videos">Vue/Nuxt</a>,
-            or{' '}
+            ,{' '}
+            <a href="https://www.datocms.com/docs/nuxt/displaying-videos">
+              Vue/Nuxt
+            </a>
+            , or{' '}
             <a href="https://www.datocms.com/docs/svelte/displaying-videos">
               Svelte/SvelteKit
             </a>
