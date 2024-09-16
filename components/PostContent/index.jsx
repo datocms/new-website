@@ -265,20 +265,6 @@ function renderBlock(s, block, defaultAltForImages) {
         </div>
       );
 
-    case 'graphiql_editor':
-      return (
-        <div className={s.unwrap}>
-          <iframe
-            loading="lazy"
-            src={`https://cda-explorer.datocms.com/?${queryString.stringify({
-              embed: true,
-              apitoken: process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN,
-              query: block.query,
-            })}`}
-          />
-        </div>
-      );
-
     case 'image': {
       const { width, height, responsiveImage, alt, title } = block.image;
 

@@ -303,11 +303,6 @@ export const getStaticProps = handleErrors(
                     }
                   }
                 }
-                ... on GraphiqlEditorRecord {
-                  id
-                  _modelApiKey
-                  query
-                }
                 ... on CloneButtonFormRecord {
                   id
                   _modelApiKey
