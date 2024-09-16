@@ -215,18 +215,6 @@ export const getStaticProps = handleErrors(
                     url
                   }
                 }
-                ... on VideoRecord {
-                  id
-                  _modelApiKey
-                  video {
-                    url
-                    title
-                    provider
-                    width
-                    height
-                    providerUid
-                  }
-                }
                 ... on TableRecord {
                   id
                   _modelApiKey
