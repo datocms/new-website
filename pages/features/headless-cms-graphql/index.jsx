@@ -11,7 +11,7 @@ import VideoPlayer from 'components/VideoPlayer';
 import {
   gqlStaticProps,
   imageFields,
-  reviewFields,
+  partnerTestimonialFields,
   seoMetaTagsFields,
 } from 'lib/datocms';
 import Link from 'next/link';
@@ -31,17 +31,17 @@ export const getStaticProps = gqlStaticProps(
         seoH1
         yoastAnalysis
       }
-      review(filter: { name: { eq: "Ryan Harris" } }) {
-        ...reviewFields
+      partnerTestimonial(filter: {id: {eq: "Nakg9-9yR16uzaeXTWeXqA"}}) {
+        ...partnerTestimonialFields
       }
     }
     ${imageFields}
-    ${reviewFields}
+    ${partnerTestimonialFields}
     ${seoMetaTagsFields}
   `,
 );
 
-function GraphQlContentApi({ feature, preview, review }) {
+function GraphQlContentApi({ feature, preview, partnerTestimonial }) {
   const seoAnalysis = feature.yoastAnalysis;
   const { keyword } = seoAnalysis;
 
@@ -165,7 +165,7 @@ function GraphQlContentApi({ feature, preview, review }) {
           </GraphQlDemo>
         </TitleStripWithContent>
 
-        <Quote review={review} />
+        <Quote review={partnerTestimonial} />
 
         <TitleStripWithContent
           title={<>Move faster with powerful developer tools</>}
