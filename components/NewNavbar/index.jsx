@@ -70,9 +70,21 @@ const PanelSlice = ({ columns = 1, children }) => (
   </div>
 );
 
-const Group = ({ columns = 1, title, children }) => (
+const Group = ({ columns = 1, title, link, children }) => (
   <div data-col={columns} className={s.group}>
-    {title && <h3 className={s.groupTitle}>{title}</h3>}
+    {title && (
+      <h3 className={s.groupTitle}>
+        {link ? (
+          <Link href={link} passHref>
+            <a>
+              <span>{title}</span> <span>→</span>
+            </a>
+          </Link>
+        ) : (
+          title
+        )}
+      </h3>
+    )}
     {children}
   </div>
 );
@@ -111,15 +123,6 @@ const GroupItem = ({
     </Link>
   );
 };
-
-const GroupLink = ({ text, link }) => (
-  <Link href={link}>
-    <a className={s.groupLink}>
-      <span>{text}</span>
-      <span>→</span>
-    </a>
-  </Link>
-);
 
 export default function Newnavbar() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -249,7 +252,7 @@ export default function Newnavbar() {
               </div>
             </PanelHighlight>
             <PanelSlice columns="2">
-              <Group columns="2" title="Features">
+              <Group columns="2" title="Features" link="/product">
                 <GroupItem
                   href="/features/headless-cms-graphql"
                   title="GraphQL API"
@@ -270,7 +273,6 @@ export default function Newnavbar() {
                   title="Modular Content"
                   description="Check out the dynamic page building experience you’ll fall in love with."
                 />
-                <GroupLink text="Explore all capabilities" link="/product" />
               </Group>
               <Group title="Use cases">
                 <GroupItem
@@ -293,7 +295,6 @@ export default function Newnavbar() {
                   title="Knowledge Management"
                   description="Simplify complex content for portals, wikis, intranets, and more."
                 />
-                {/* <GroupLink text="Explore all use cases" link="/" /> */}
               </Group>
               <Group title="Happy Teams">
                 <GroupItem
@@ -329,8 +330,8 @@ export default function Newnavbar() {
               <Group title="DatoCMS in production">
                 <GroupItem
                   href="/success-stories"
-                  title="Powering content globally"
-                  description="Hear real-world accounts of how DatoCMS is used at scale across the world."
+                  title="DatoCMS Success Stories"
+                  description="See how DatoCMS is used by customers and partners."
                 />
                 <GroupItem href="/customers" title="Enterprise Case Studies" />
                 <GroupItem
@@ -364,7 +365,7 @@ export default function Newnavbar() {
               </div>
             </PanelHighlight>
             <PanelSlice columns={2}>
-              <Group columns={2} title="Showcase projects">
+              <Group columns={2} title="Enterprise projects" link="/customers">
                 <GroupItem
                   href="/customers/polestar"
                   title="Polestar"
@@ -388,10 +389,6 @@ export default function Newnavbar() {
                   title="Arduino"
                   description="Reducing lines of code by 92,5% while gaining 8x faster loading times."
                   imageUrl="https://www.datocms-assets.com/205/1581958110-copy-of-arduino-teacher-students-978x653.jpeg?auto=format&w=800"
-                />
-                <GroupLink
-                  text="Explore all enterprise case studies"
-                  link="/customers"
                 />
               </Group>
             </PanelSlice>
@@ -441,7 +438,11 @@ export default function Newnavbar() {
               </div>
             </PanelHighlight>
             <PanelSlice columns={2}>
-              <Group columns={2} title="Showcase projects">
+              <Group
+                columns={2}
+                title="Partner projects"
+                link="/partners/showcase"
+              >
                 <GroupItem
                   href="/partners/november-five/showcase/mdlbeast"
                   title="MDLBeast by November Five"
@@ -466,10 +467,6 @@ export default function Newnavbar() {
                   description="Subscription-first cosmetic brand gets a world-class content overhaul."
                   imageUrl="https://www.datocms-assets.com/205/1718048731-1661957070-wild_02.jpg?auto=format&w=800"
                 />
-                <GroupLink
-                  text="Explore all partner projects"
-                  link="/partners/showcase"
-                />
               </Group>
             </PanelSlice>
           </NavItem>
@@ -480,7 +477,7 @@ export default function Newnavbar() {
             activeNavItem={activeNavItem}
           >
             <PanelSlice columns={1}>
-              <Group title="Documentation">
+              <Group title="Documentation" link="/docs">
                 <GroupItem
                   href="/docs/content-delivery-api"
                   title="GraphQL API Reference"
@@ -501,11 +498,10 @@ export default function Newnavbar() {
                   title="Modelling Your Schema"
                   description="Build your administrative area and define the structure of your content."
                 />
-                <GroupLink text="Explore the docs" link="/docs" />
               </Group>
             </PanelSlice>
             <PanelSlice columns={2}>
-              <Group columns={2} title="Extensibility">
+              <Group columns={2} title="Marketplace" link="/marketplace">
                 <GroupItem
                   href="/marketplace/starters"
                   title="Official Starters"
@@ -527,7 +523,6 @@ export default function Newnavbar() {
                   title="Enterprise Apps"
                   description="Keep your CMS secure with SSO, custom assets, and more."
                 />
-                <GroupLink text="Explore the Marketplace" link="/marketplace" />
               </Group>
               <Group columns={2} title="Community & support">
                 <GroupItem
@@ -598,18 +593,18 @@ export default function Newnavbar() {
           >
             <PanelHighlight>
               <Group title="Core resources">
+              <GroupItem
+                  href="/docs"
+                  title="Docs"
+                  description="API reference, integrations, and guides to work with DatoCMS."
+                />
                 <GroupItem
                   href="/how-to-datocms"
                   title="How to DatoCMS"
                   description="User guides, comparisons, concepts, and so much more!"
                 />
-                <GroupItem
-                  href="/blog"
-                  title="Blog"
-                  description="News, tips, and highlights from the DatoCMS team."
-                />
               </Group>
-              <Group title="Featured posts">
+              <Group title="Blog" link="/blog">
                 <GroupItem
                   href="/blog/how-to-build-a-multi-language-website-with-next-js-i18n"
                   title="Multilingual site with Next.js"
@@ -620,11 +615,10 @@ export default function Newnavbar() {
                   title="Introducing Cache Tags"
                   description="No more costly and inefficient time-based invalidation methods."
                 />
-                <GroupLink text="Explore all posts" link="/blog" />
               </Group>
             </PanelHighlight>
             <PanelSlice columns={2}>
-              <Group columns={2} title="Featured guides">
+              <Group columns={2} title="User guides" link="/user-guides">
                 <GroupItem
                   href="/user-guides/content-management/deep-dive-into-structured-text-in-datocms"
                   title="Deep Dive into Structured Text"
@@ -649,7 +643,6 @@ export default function Newnavbar() {
                   description="Master how to set up the foundations of your project's schema successfully."
                   imageUrl="https://image.mux.com/ZXrCcv53t00n02f5yS500siKW102xdfJqG025/thumbnail.jpg?width=918"
                 />
-                <GroupLink text="Explore all User Guides" link="/user-guides" />
               </Group>
             </PanelSlice>
           </NavItem>
