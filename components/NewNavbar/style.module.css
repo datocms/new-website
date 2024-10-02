@@ -441,7 +441,7 @@
     line-height: 1;
     position: absolute;
     top: 0;
-    transform: translateX(-50%) translateY(22.5%);
+    transform: translateX(-50%) translateY(-22.5%);
   }
 
   blockquote {
