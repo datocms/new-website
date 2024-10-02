@@ -124,15 +124,6 @@ const GroupItem = ({
   );
 };
 
-const GroupLink = ({ text, link }) => (
-  <Link href={link}>
-    <a className={s.groupLink}>
-      <span>{text}</span>
-      <span>→</span>
-    </a>
-  </Link>
-);
-
 export default function Newnavbar() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [openMobileNav, setOpenMobileNav] = useState(false);
@@ -282,7 +273,6 @@ export default function Newnavbar() {
                   title="Modular Content"
                   description="Check out the dynamic page building experience you’ll fall in love with."
                 />
-                {/* <GroupLink text="Explore all capabilities" link="/product" /> */}
               </Group>
               <Group title="Use cases">
                 <GroupItem
@@ -305,7 +295,6 @@ export default function Newnavbar() {
                   title="Knowledge Management"
                   description="Simplify complex content for portals, wikis, intranets, and more."
                 />
-                {/* <GroupLink text="Explore all use cases" link="/" /> */}
               </Group>
               <Group title="Happy Teams">
                 <GroupItem
@@ -401,10 +390,6 @@ export default function Newnavbar() {
                   description="Reducing lines of code by 92,5% while gaining 8x faster loading times."
                   imageUrl="https://www.datocms-assets.com/205/1581958110-copy-of-arduino-teacher-students-978x653.jpeg?auto=format&w=800"
                 />
-                {/* <GroupLink
-                  text="Explore all enterprise case studies"
-                  link="/customers"
-                /> */}
               </Group>
             </PanelSlice>
           </NavItem>
@@ -482,10 +467,6 @@ export default function Newnavbar() {
                   description="Subscription-first cosmetic brand gets a world-class content overhaul."
                   imageUrl="https://www.datocms-assets.com/205/1718048731-1661957070-wild_02.jpg?auto=format&w=800"
                 />
-                {/* <GroupLink
-                  text="Explore all partner projects"
-                  link="/partners/showcase"
-                /> */}
               </Group>
             </PanelSlice>
           </NavItem>
@@ -517,7 +498,6 @@ export default function Newnavbar() {
                   title="Modelling Your Schema"
                   description="Build your administrative area and define the structure of your content."
                 />
-                {/* <GroupLink text="Explore the docs" link="/docs" /> */}
               </Group>
             </PanelSlice>
             <PanelSlice columns={2}>
@@ -543,7 +523,6 @@ export default function Newnavbar() {
                   title="Enterprise Apps"
                   description="Keep your CMS secure with SSO, custom assets, and more."
                 />
-                {/* <GroupLink text="Explore the Marketplace" link="/marketplace" /> */}
               </Group>
               <Group columns={2} title="Community & support">
                 <GroupItem
@@ -636,7 +615,6 @@ export default function Newnavbar() {
                   title="Introducing Cache Tags"
                   description="No more costly and inefficient time-based invalidation methods."
                 />
-                {/* <GroupLink text="Explore all posts" link="/blog" /> */}
               </Group>
             </PanelHighlight>
             <PanelSlice columns={2}>
@@ -665,7 +643,6 @@ export default function Newnavbar() {
                   description="Master how to set up the foundations of your project's schema successfully."
                   imageUrl="https://image.mux.com/ZXrCcv53t00n02f5yS500siKW102xdfJqG025/thumbnail.jpg?width=918"
                 />
-                {/* <GroupLink text="Explore all User Guides" link="/user-guides" /> */}
               </Group>
             </PanelSlice>
           </NavItem>
