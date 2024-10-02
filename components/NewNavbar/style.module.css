@@ -561,6 +561,24 @@
   margin-bottom: 4px;
   margin: 0;
   text-transform: uppercase;
+
+  & a {
+    align-items: center;
+    color: var(--accent-color);
+    display: flex;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  span:last-of-type {
+    transition: transform .3s;
+  }
+
+  &:hover {
+    span:last-of-type {
+      transform: translateX(4px)
+    }
+  }
 }
 
 .groupLink {
