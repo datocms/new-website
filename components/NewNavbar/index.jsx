@@ -341,8 +341,8 @@ export default function Newnavbar() {
               <Group title="DatoCMS in production">
                 <GroupItem
                   href="/success-stories"
-                  title="Powering content globally"
-                  description="Hear real-world accounts of how DatoCMS is used at scale across the world."
+                  title="DatoCMS Success Stories"
+                  description="See how DatoCMS is used by customers and partners."
                 />
                 <GroupItem href="/customers" title="Enterprise Case Studies" />
                 <GroupItem
@@ -455,7 +455,7 @@ export default function Newnavbar() {
             <PanelSlice columns={2}>
               <Group
                 columns={2}
-                title="Partners projects"
+                title="Partner projects"
                 link="/partners/showcase"
               >
                 <GroupItem
@@ -614,15 +614,15 @@ export default function Newnavbar() {
           >
             <PanelHighlight>
               <Group title="Core resources">
+              <GroupItem
+                  href="/docs"
+                  title="Docs"
+                  description="API reference, integrations, and guides to work with DatoCMS."
+                />
                 <GroupItem
                   href="/how-to-datocms"
                   title="How to DatoCMS"
                   description="User guides, comparisons, concepts, and so much more!"
-                />
-                <GroupItem
-                  href="/blog"
-                  title="Blog"
-                  description="News, tips, and highlights from the DatoCMS team."
                 />
               </Group>
               <Group title="Blog" link="/blog">
