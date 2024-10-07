@@ -139,7 +139,65 @@ export const getStaticProps = gqlStaticProps(
     ${reviewFields},
     ${partnerTestimonialFields}
   `,
+  {
+    requiredKeys: ['page'],
+  },
 );
+
+export const FeatureCard = ({ feature }) => {
+  if (feature.__typename === 'FeatureRegularCardRecord') {
+    return (
+      <div className={s.feature}>
+        <figure className={s.featureImage}>
+          {feature.image && <DatoImage data={feature.image.responsiveImage} />}
+        </figure>
+        <article>
+          <h3 className={s.featureTitle}>{feature.title}</h3>
+          <div className={s.featureDescription}>
+            <StructuredText data={feature.description} />
+          </div>
+        </article>
+      </div>
+    );
+  }
+};
+
+export const TestimonialCard = ({ feature }) => {
+  if (feature.__typename === 'TestimonialCardRecord') {
+    return (
+      <div className={s.quoteWrapper}>
+        <div className={s.quote}>
+          {highlightStructuredText(feature.testimonial.quote)}
+        </div>
+        <div className={s.content}>
+          <DatoImage
+            className={s.avatar}
+            data={feature.testimonial.image.responsiveImage}
+          />
+          {feature.testimonial.partner ? (
+            <Link
+              href={`/partners/${feature.testimonial.partner.slug}`}
+              passHref
+            >
+              <div className={s.authorRole}>
+                <div className={s.name}>{feature.testimonial.name}</div>
+                <div className={s.role}>
+                  {feature.testimonial.role} @ {feature.testimonial.partner.name}
+                </div>
+              </div>
+            </Link>
+          ) : (
+            <div className={s.authorRole}>
+              <div className={s.name}>{feature.testimonial.name}</div>
+              <div className={s.role}>{feature.testimonial.role}</div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+};
+
 
 export default function Features({ page, preview }) {
   const {
@@ -255,66 +313,13 @@ export default function Features({ page, preview }) {
                     {features.map((feature, i) => {
                       if (feature.__typename === 'FeatureRegularCardRecord') {
                         return (
-                          <div key={i} className={s.feature}>
-                            <figure className={s.featureImage}>
-                              {feature.image && (
-                                <DatoImage
-                                  data={feature.image.responsiveImage}
-                                />
-                              )}
-                            </figure>
-                            <article>
-                              <h3 className={s.featureTitle}>
-                                {feature.title}
-                              </h3>
-                              <div className={s.featureDescription}>
-                                <StructuredText data={feature.description} />
-                              </div>
-                            </article>
-                          </div>
+                          <FeatureCard key={i} feature={feature} />
                         );
                       }
 
                       if (feature.__typename === 'TestimonialCardRecord') {
                         return (
-                          <div key={i} className={s.quoteWrapper}>
-                            <div className={s.quote}>
-                              {highlightStructuredText(
-                                feature.testimonial.quote,
-                              )}
-                            </div>
-                            <div className={s.content}>
-                              <DatoImage
-                                className={s.avatar}
-                                data={feature.testimonial.image.responsiveImage}
-                              />
-                              {feature.testimonial.partner ? (
-                                <Link
-                                  href={`/partners/${feature.testimonial.partner.slug}`}
-                                  passHref
-                                >
-                                  <div className={s.authorRole}>
-                                    <div className={s.name}>
-                                      {feature.testimonial.name}
-                                    </div>
-                                    <div className={s.role}>
-                                      {feature.testimonial.role} @{' '}
-                                      {feature.testimonial.partner.name}
-                                    </div>
-                                  </div>
-                                </Link>
-                              ) : (
-                                <div className={s.authorRole}>
-                                  <div className={s.name}>
-                                    {feature.testimonial.name}
-                                  </div>
-                                  <div className={s.role}>
-                                    {feature.testimonial.role}
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          </div>
+                          <TestimonialCard key={i} feature={feature} />
                         );
                       }
                     })}
