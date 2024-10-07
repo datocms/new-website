@@ -1,0 +1,257 @@
+.hero {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: rfs(80px);
+  justify-content: center;
+  padding: rfs(120px) 0 rfs(80px) 0;
+  text-align: center;
+
+  @media screen and (min-width: 1000px) {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    grid-gap: 40px;
+    text-align: left;
+  }
+}
+
+.heroTitle {
+  font-family: var(--font-headline);
+  font-size: rfs(70px);
+  font-weight: bold;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 rfs(40px) 0;
+}
+
+.heroSubtitle {
+  margin-bottom: rfs(20px);
+}
+
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 30px;
+
+  @media screen and (min-width: 1000px) {
+    justify-content: flex-start;
+  }
+}
+
+.heroImageWrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
+  padding-bottom: 5%;
+  position: relative;
+  transition: transform 0.2s;
+
+  @media screen and (min-width: 1320px) {
+    max-width: 800px;
+    transform-origin: left center;
+    transform: scale(1.05);
+  }
+
+  @media screen and (min-width: 1440px) {
+    transform: scale(1.1);
+  }
+
+  &:hover {
+    .heroImage:nth-child(1) {
+      transform: perspective(600px) rotateY(20deg) translateY(-5px);
+    }
+
+    .heroImage:nth-child(2) {
+      transform: perspective(600px) rotateY(-20deg) translateY(5px);
+    }
+  }
+
+  .heroImage {
+    box-shadow: var(--box-shadow);
+    border-radius: 2px;
+    height: auto;
+    transition: transform 0.5s;
+
+    &:nth-child(1) {
+      margin-left: -40%;
+      margin-top: -12%;
+      position: absolute;
+      transform: perspective(600px) rotateY(20deg);
+      width: 55%;
+    }
+
+    &:nth-child(2) {
+      margin-left: 30%;
+      margin-top: 12%;
+      transform: perspective(600px) rotateY(-20deg);
+      width: 65%;
+    }
+  }
+}
+
+.features {
+  align-items: start;
+  display: grid;
+  gap: rfs(40px);
+  grid-template-columns: 2fr 5fr;
+  margin-top: rfs(100px);
+}
+
+.aside {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  position: sticky;
+  top: 80px;
+}
+
+.asideAnchors {
+  list-style-type: none;
+  padding: 0;
+
+  a {
+    color: inherit;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: rfs(40px);
+}
+
+.section {
+  margin-bottom: rfs(120px);
+  scroll-margin-top: 80px;
+}
+
+.sectionTitle {
+  font-family: var(--font-headline);
+  font-size: rfs(42px);
+  font-weight: 400;
+  margin-bottom: rfs(40px);
+  margin-top: 20px;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: rfs(40px);
+}
+
+.feature {
+  display: grid;
+  gap: rfs(40px);
+  grid-template-columns: 2fr 3fr;
+  align-items: center;
+}
+
+.featureImage {
+  border-radius: 2px;
+  box-shadow: var(--box-shadow);
+  height: auto;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+.quoteWrapper {
+  margin: rfs(80px) auto;
+  max-width: 800px;
+  padding-top: rfs(40px);
+  position: relative;
+  width: 100%;
+
+  &:before {
+    color: var(--accent-color);
+    content: '\201C';
+    font-family: var(--font-serif);
+    font-size: rfs(150px);
+    left: 50%;
+    line-height: 1;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%) translateY(-25%);
+  }
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-size: rfs(24px);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 40px;
+  text-align: center;
+  
+  @media screen and (min-width: 800px) {
+    font-size: rfs(30px);
+  }
+
+  &:before {
+    content: '\201C';
+  }
+
+  &:after {
+    content: '\201D';
+  }
+}
+
+.content {
+  text-align: center;
+
+  @media screen and (min-width: 700px) {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+  }
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 80px;
+  margin: 0 auto 20px auto;
+  width: 80px;
+
+  @media screen and (min-width: 700px) {
+    margin: 0 40px 0 0;
+  }
+}
+
+.authorRole {
+  color: inherit;
+  text-decoration: none;
+
+  @media screen and (min-width: 700px) {
+    max-width: 250px;
+  }
+}
+
+a.authorRole:hover .name {
+  text-decoration: underline;
+}
+
+.name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+
+  @media screen and (min-width: 800px) {
+    font-size: rfs(1em);
+  }
+}
+
+.role {
+  color: var(--light-body-color);
+  font-size: 0.8em;
+
+  @media screen and (min-width: 800px) {
+    font-size: 1em;
+  }
+}
