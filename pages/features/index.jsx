@@ -1,6 +1,5 @@
 import Button from 'components/Button';
 import Head from 'components/Head';
-import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
@@ -242,9 +241,7 @@ export default function Features({ page, preview }) {
             <ul className={s.asideAnchors}>
               {featuresGroup.map(({ title }, i) => (
                 <li key={i}>
-                  <a  href={`#${slugify(title)}`}>
-                    {title}
-                  </a>
+                  <a href={`#${slugify(title)}`}>{title}</a>
                 </li>
               ))}
             </ul>
@@ -267,9 +264,9 @@ export default function Features({ page, preview }) {
                               )}
                             </figure>
                             <article>
-                              <h2 className={s.featureTitle}>
+                              <h3 className={s.featureTitle}>
                                 {feature.title}
-                              </h2>
+                              </h3>
                               <div className={s.featureDescription}>
                                 <StructuredText data={feature.description} />
                               </div>
