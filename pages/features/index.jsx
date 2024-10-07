@@ -148,9 +148,11 @@ export const FeatureCard = ({ feature }) => {
   if (feature.__typename === 'FeatureRegularCardRecord') {
     return (
       <div className={s.feature}>
-        <figure className={s.featureImage}>
-          {feature.image && <DatoImage data={feature.image.responsiveImage} />}
-        </figure>
+        {feature.image && (
+          <figure className={s.featureImage}>
+            <DatoImage data={feature.image.responsiveImage} />
+          </figure>
+        )}
         <article>
           <h3 className={s.featureTitle}>{feature.title}</h3>
           <div className={s.featureDescription}>
