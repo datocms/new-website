@@ -95,28 +95,111 @@
 
 .features {
   align-items: start;
-  display: grid;
-  gap: rfs(40px);
-  grid-template-columns: 1fr 2fr;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
   margin-top: rfs(100px);
+  
+  @media screen and (min-width: 960px) {
+    display: grid;
+    gap: rfs(40px);
+    grid-template-columns: 1fr 2fr;
+  }
 }
 
 .aside {
-  align-self: start;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
   position: sticky;
-  top: 80px;
+  top: 20px;
+  width: 100%;
+  z-index: 10;
+  
+  @media screen and (min-width: 960px) {
+    align-self: start;
+    padding: 20px 0;
+    position: sticky;
+    top: 80px;
+    width: auto;
+  }
+}
+
+.asideAnchorsWrapper {
+  backdrop-filter: blur(10px);
+  background-color: color-mix(in srgb, var(--dark-bg-color) 85%, transparent);
+  border-radius: 20px;
+  max-width: 640px;
+  padding: 15px 20px;
+  position: absolute;
+  width: 100%;
+
+  @media screen and (min-width: 960px) {
+    background-color: transparent;
+    border-radius: none;
+    max-width: unset;
+    padding: 0;
+    position: relative;
+  }
+
+  &:hover {
+    .asideAnchors {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      padding: 0.75em 0;
+      position: relative;
+
+      @media screen and (min-width: 960px) {
+        padding: 20px 0
+      }
+    }
+  }
+}
+
+.currentAnchor {
+  color: #fff;
+  font-weight: 600;
+
+  @media screen and (min-width: 960px) {
+    display: none;
+  }
 }
 
 .asideAnchors {
-  list-style-type: none;
+  color: #fff;
+  display: grid; 
+  grid-template-rows: 0fr;
+  opacity: 0;
   padding: 0;
+  transition: 0.3s grid-template-rows ease, padding .3s, opacity .3s;
+  width: 100%;
+
+  @media screen and (min-width: 960px) {
+    color: inherit;
+    grid-template-rows: 1fr;
+    height: auto;
+    opacity: 1;
+    padding: 20px 0;
+    position: relative;
+    transition: none;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+  }
 
   a {
     color: inherit;
+    display: inline-block;
+    padding: 0.5em 0 0 0;
     text-decoration: none;
+
+    @media screen and (min-width: 960px) {
+      padding: 0;
+    }
   }
 
   a:hover {

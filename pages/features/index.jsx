@@ -374,14 +374,23 @@ export default function Features({ page, preview }) {
       <Wrapper>
         <div className={s.features}>
           <aside className={s.aside}>
-            <ul className={s.asideAnchors}>
-              {featuresGroup.map(({ title }, i) => (
-                <li key={i}>
-                  <a href={`#${slugify(title)}`}>{title}</a>
-                </li>
-              ))}
-            </ul>
+            <div className={s.asideAnchorsWrapper}>
+              <div className={s.currentAnchor}>
+                <span>Scroll to</span>
+              </div>
+
+              <div className={s.asideAnchors}>
+                <ul>
+                  {featuresGroup.map(({ title }, i) => (
+                    <li key={i}>
+                      <a href={`#${slugify(title)}`}>{title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </aside>
+
           <div className={s.main}>
             {featuresGroup.map(({ title, features }, i) => {
               return (
