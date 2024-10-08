@@ -206,6 +206,24 @@
   }
 }
 
+.featureLinks {
+  align-items: center;
+  display: flex;
+  gap: rfs(20px);
+  margin-bottom: 10px;
+
+  .link {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--darker-accent-color)
+    }
+  }
+}
+
+
 .quoteWrapper {
   margin: rfs(80px) auto;
   max-width: 800px;

@@ -145,6 +145,68 @@ export const getStaticProps = gqlStaticProps(
 );
 
 export const FeatureCard = ({ feature }) => {
+  const titleMapping = {
+    docs: 'Docs',
+    guide: 'Guide',
+    learn_more: 'Learn more',
+    watch_demo: 'Watch demo',
+  };
+
+  const links = feature.links.map((link) => {
+    const resolvedLinkTitle = titleMapping[link.linkTitle] || 'Learn more';
+
+    switch (link.content.__typename) {
+      case 'BlogPostRecord':
+        return {
+          url: `/blog/${link.content.slug}`,
+          __typename: link.content.__typename,
+          linkTitle: resolvedLinkTitle,
+        };
+      case 'ChangelogEntryRecord':
+        return {
+          url: `/product-updates/${link.content.slug}`,
+          __typename: link.content.__typename,
+          linkTitle: resolvedLinkTitle,
+        };
+      case 'DocPageRecord':
+        return {
+          url: `/docs/${link.content.parent[0].slug}/${link.content.slug}`,
+          __typename: link.content.__typename,
+          linkTitle: resolvedLinkTitle,
+        };
+      case 'FeatureRecord':
+        return {
+          url: `/features/${link.content.slug}`,
+          __typename: link.content.__typename,
+          linkTitle: resolvedLinkTitle,
+        };
+      case 'PluginRecord':
+        return {
+          url: `/marketplace/plugins/i/${link.content.packageName}`,
+          __typename: link.content.__typename,
+          linkTitle: resolvedLinkTitle,
+        };
+      case 'TemplateDemoRecord':
+        return {
+          url: `/marketplace/starters/${link.content.code}`,
+          __typename: link.content.__typename,
+          linkTitle: resolvedLinkTitle,
+        };
+      case 'UserGuidesVideoRecord':
+        return {
+          url: `/user-guides/${link.content.slug}`,
+          __typename: link.content.__typename,
+          linkTitle: resolvedLinkTitle,
+        };
+      default:
+        return {
+          url: '/',
+          __typename: link.content.__typename,
+          linkTitle: resolvedLinkTitle,
+        };
+    }
+  });
+
   if (feature.__typename === 'FeatureRegularCardRecord') {
     return (
       <div className={s.feature}>
@@ -158,6 +220,20 @@ export const FeatureCard = ({ feature }) => {
           <div className={s.featureDescription}>
             <StructuredText data={feature.description} />
           </div>
+
+          {links.length > 0 && (
+            <div className={s.featureLinks}>
+              {links.map((link, i) => (
+                <div key={i}>
+                  <Link key={i} href={link.url} passHref>
+                    <a data-type={link.__typename} className={s.link}>
+                      {link.linkTitle}
+                    </a>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
         </article>
       </div>
     );
@@ -184,7 +260,8 @@ export const TestimonialCard = ({ feature }) => {
               <div className={s.authorRole}>
                 <div className={s.name}>{feature.testimonial.name}</div>
                 <div className={s.role}>
-                  {feature.testimonial.role} @ {feature.testimonial.partner.name}
+                  {feature.testimonial.role} @{' '}
+                  {feature.testimonial.partner.name}
                 </div>
               </div>
             </Link>
@@ -199,7 +276,6 @@ export const TestimonialCard = ({ feature }) => {
     );
   }
 };
-
 
 export default function Features({ page, preview }) {
   const {
@@ -314,15 +390,11 @@ export default function Features({ page, preview }) {
                   <div className={s.blocks}>
                     {features.map((feature, i) => {
                       if (feature.__typename === 'FeatureRegularCardRecord') {
-                        return (
-                          <FeatureCard key={i} feature={feature} />
-                        );
+                        return <FeatureCard key={i} feature={feature} />;
                       }
 
                       if (feature.__typename === 'TestimonialCardRecord') {
-                        return (
-                          <TestimonialCard key={i} feature={feature} />
-                        );
+                        return <TestimonialCard key={i} feature={feature} />;
                       }
                     })}
                   </div>
