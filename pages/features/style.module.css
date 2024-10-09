@@ -157,11 +157,24 @@
 }
 
 .currentAnchor {
+  align-items: center;
   color: #fff;
+  display: flex;
   font-weight: 600;
+  justify-content: space-between;
 
   @media screen and (min-width: 960px) {
     display: none;
+  }
+}
+
+.currentAnchorArrow {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  svg {
+    fill: #fff;
   }
 }
 
@@ -173,6 +186,7 @@
   padding: 0;
   transition: 0.3s grid-template-rows ease, padding .3s, opacity .3s;
   width: 100%;
+  font-size: 1rem;
 
   @media screen and (min-width: 960px) {
     color: inherit;
@@ -198,7 +212,7 @@
     text-decoration: none;
 
     @media screen and (min-width: 960px) {
-      padding: 0;
+      padding: 0.25em 0;
     }
   }
 

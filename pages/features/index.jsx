@@ -12,6 +12,7 @@ import {
   seoMetaTagsFields,
 } from 'lib/datocms';
 import Link from 'next/link';
+import ChevronDown from 'public/icons/regular/chevron-down.svg';
 import {
   Image as DatoImage,
   StructuredText,
@@ -194,7 +195,7 @@ export const FeatureCard = ({ feature }) => {
         };
       case 'UserGuidesVideoRecord':
         return {
-          url: `/user-guides/${link.content.slug}`,
+          url: `/user-guides/${link.content.parent[0].slug}/${link.content.slug}`,
           __typename: link.content.__typename,
           linkTitle: resolvedLinkTitle,
         };
@@ -377,6 +378,9 @@ export default function Features({ page, preview }) {
             <div className={s.asideAnchorsWrapper}>
               <div className={s.currentAnchor}>
                 <span>Scroll to</span>
+                <div className={s.currentAnchorArrow}>
+                  <ChevronDown />
+                </div>
               </div>
 
               <div className={s.asideAnchors}>
