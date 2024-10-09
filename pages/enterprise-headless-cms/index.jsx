@@ -140,7 +140,7 @@ function Enterprise({ page, review1, review2, review3 }) {
           title="We are here to ensure your content has no limits"
           description={
             <p>
-              Customers of our enterprise headless CMS benefit of performance
+              Customers of our enterprise headless CMS benefit from performance
               and service SLAs to ensure they can{' '}
               <strong>scale without lag</strong>.
             </p>
@@ -199,11 +199,11 @@ function Enterprise({ page, review1, review2, review3 }) {
           }
         >
           <Point
-            title="Bespoke Workflows"
+            title="Bespoke workflows"
             description="Set up a precise state machine to bring a draft content up to the final publication through a series of intermediate, fully customizable approval steps."
           />
           <Point
-            title="Enhanced per locale permissions & Granular roles"
+            title="Enhanced per locale permissions & granular roles"
             description="Assign the appropriate roles and permissions, even per locale, to your team members, precisely determining what actions they can perform."
           />
           <Point
@@ -222,7 +222,7 @@ function Enterprise({ page, review1, review2, review3 }) {
                   <p>
                     <strong>Quick and efficient support</strong> is essential
                     for an enterprise headless CMS. Enterprise accounts are put
-                    on a fast-lane when it comes to provide help, feature
+                    on a fast lane when it comes to providing help, feature
                     requests and fixes of any kind.{' '}
                     <strong>
                       Our experts are available in a number of ways
@@ -244,7 +244,7 @@ function Enterprise({ page, review1, review2, review3 }) {
           kicker="A CMS that empowers all team"
           title={
             <>
-              A technology investment that doubles performaces and productivity
+              A technology investment that doubles performance and productivity
             </>
           }
         >
@@ -283,9 +283,7 @@ function Enterprise({ page, review1, review2, review3 }) {
             >
               <strong>Vercel</strong> hosted its{' '}
               <a
-                href="https://nextjs.org/conf/jun21"
-                target="_blank"
-                rel="noreferrer"
+                href="/blog/how-datocms-supports-next-js-conf"
               >
                 Next.js international conference
               </a>{' '}
@@ -307,10 +305,10 @@ function Enterprise({ page, review1, review2, review3 }) {
           image="key"
         >
           <p>
-            The best CMS for enterprise is the one that can{' '}
-            <strong>scale with your company with no effort</strong>. DatoCMS
-            offers services and support to make your company reach all kind
-            market segments.
+            The best CMS for enterprise is one that can{' '}
+            <strong>scale with your company with minimal effort</strong>. DatoCMS
+            offers the services and support that lets your website reach different
+            market segments and grow with your needs.
           </p>
         </Flag>
       </div>
