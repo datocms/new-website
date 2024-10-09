@@ -1,8 +1,11 @@
+import { useGSAP } from '@gsap/react';
 import Button from 'components/Button';
 import Head from 'components/Head';
 import { highlightStructuredText } from 'components/Highlight';
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import {
   featureCardFields,
   gqlStaticProps,
@@ -13,6 +16,7 @@ import {
 } from 'lib/datocms';
 import Link from 'next/link';
 import ChevronDown from 'public/icons/regular/chevron-down.svg';
+import { useRef } from 'react';
 import {
   Image as DatoImage,
   StructuredText,
@@ -20,6 +24,8 @@ import {
 } from 'react-datocms';
 import slugify from 'utils/slugify';
 import s from './style.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const getStaticProps = gqlStaticProps(
   /* GraphQL */
@@ -53,7 +59,7 @@ export const getStaticProps = gqlStaticProps(
           }
         }
         editorExperienceFeature {
-        __typename
+          __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
             testimonial {
@@ -279,6 +285,10 @@ export const TestimonialCard = ({ feature }) => {
 };
 
 export default function Features({ page, preview }) {
+  const asideRef = useRef(null);
+  const sectionsRef = useRef([]);
+  const currentAnchorRef = useRef(null);
+
   const {
     coreFeature,
     editorExperienceFeature,
@@ -330,6 +340,36 @@ export default function Features({ page, preview }) {
     },
   ];
 
+  useGSAP(() => {
+    sectionsRef.current.forEach((section, index) => {
+      if (!section) return;
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: () => updateCurrentSection(index),
+        onEnterBack: () => updateCurrentSection(index),
+        // markers: true, // check the trigger position
+      });
+    });
+  }, []);
+
+  const updateCurrentSection = (index) => {
+    const links = asideRef.current.querySelectorAll('a');
+    for (const link of links) {
+      link.classList.remove(s.active);
+    }
+    links[index]?.classList.add(s.active);
+    if (currentAnchorRef.current) {
+      currentAnchorRef.current.textContent = featuresGroup[index].title;
+    }
+  };
+
+  const assignSectionRef = (el, i) => {
+    sectionsRef.current[i] = el;
+  };
+
   return (
     <Layout preview={preview}>
       <Head>{renderMetaTags(page.seo)}</Head>
@@ -374,10 +414,10 @@ export default function Features({ page, preview }) {
 
       <Wrapper>
         <div className={s.features}>
-          <aside className={s.aside}>
+          <aside className={s.aside} ref={asideRef}>
             <div className={s.asideAnchorsWrapper}>
               <div className={s.currentAnchor}>
-                <span>Scroll to</span>
+                <span ref={currentAnchorRef}>Scroll to</span>
                 <div className={s.currentAnchorArrow}>
                   <ChevronDown />
                 </div>
@@ -398,14 +438,18 @@ export default function Features({ page, preview }) {
           <div className={s.main}>
             {featuresGroup.map(({ title, features }, i) => {
               return (
-                <div key={i} className={s.section} id={slugify(title)}>
+                <div
+                  key={i}
+                  className={s.section}
+                  id={slugify(title)}
+                  ref={(el) => assignSectionRef(el, i)}
+                >
                   <h2 className={s.sectionTitle}>{title}</h2>
                   <div className={s.blocks}>
                     {features.map((feature, i) => {
                       if (feature.__typename === 'FeatureRegularCardRecord') {
                         return <FeatureCard key={i} feature={feature} />;
                       }
-
                       if (feature.__typename === 'TestimonialCardRecord') {
                         return <TestimonialCard key={i} feature={feature} />;
                       }
