@@ -10,7 +10,7 @@ import slugify from 'utils/slugify';
 import s from './style.module.css';
 
 const baseUrl =
-  'https://github.com/datocms/plugins-sdk/blob/master/packages/sdk/src/types.ts';
+  'https://github.com/datocms/plugins-sdk/blob/master/packages/sdk/src/';
 
 const MarkdownHeading = ({ level, children, node }) => {
   return (
@@ -58,25 +58,63 @@ const ExpandablePane = ({ children, label }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
+    <div className={s.pane}>
       <button
         type="button"
-        className={s.button}
+        className={s.expandablePaneButton}
         onClick={() => setOpen((open) => !open)}
       >
         {open ? <TimesIcon /> : <PlusIcon />}
-        {open ? `Hide ${label}` : `Show ${label}`}
+        {label}
       </button>
-      {open && children}
-    </>
+      {open && <div className={s.expandablePaneContent}>{children}</div>}
+    </div>
   );
 };
 
-const ExpandableAttribute = ({ item }) => {
+const sortByNameWithNullOnTop = (a, b) => {
+  // If both names are null, maintain their original order
+  if (!a.name && !b.name) return 0;
+
+  // If a's name is null, it should come first
+  if (!a.name) return -1;
+
+  // If b's name is null, it should come first
+  if (!b.name) return 1;
+
+  // If neither name is null, use localeCompare for alphabetical sorting
+  return a.name.localeCompare(b.name);
+};
+
+function mergeUnnamedGroups(groups) {
+  const mergedItems = {}; // To collect merged items
+
+  const filteredGroups = groups.filter((group) => {
+    // If group has no name and no comment, merge its items
+    if (!group.name && !group.comment) {
+      Object.assign(mergedItems, group.items); // Merge the items
+      return false; // Exclude this group from the final array
+    }
+    return true; // Keep the group if it has a name or comment
+  });
+
+  // If there were any unnamed/uncommented groups, add the merged result as a new group
+  if (Object.keys(mergedItems).length > 0) {
+    filteredGroups.push({
+      items: mergedItems, // Merged items from unnamed/uncommented groups
+    });
+  }
+
+  return filteredGroups;
+}
+
+const PropertyOrMethod = ({ name, propertyOrMethod }) => {
   const [open, setOpen] = useState(false);
 
+  console.log('propertyOrMethod', propertyOrMethod);
+
   return (
-    <div key={item.name} className={s.hook}>
+    <div key={name} className={s.hook}>
       <div className={s.hookExpand} onClick={() => setOpen((open) => !open)}>
         {open ? <TimesIcon /> : <PlusIcon />}
       </div>
@@ -87,21 +125,23 @@ const ExpandableAttribute = ({ item }) => {
           onClick={() => setOpen((open) => !open)}
         >
           <span className={s.hookNameName}>
-            ctx.{item.name}
-            {item.type === 'function' ? '()' : ''}
+            ctx.{name}
+            {propertyOrMethod.type.startsWith('(') ? '()' : ''}
           </span>
-          {!open && (
+          {!open && propertyOrMethod.comment?.markdownText && (
             <span className={s.hookNameDesc}>
-              {removeMarkdown(item.description)}
+              {removeMarkdown(propertyOrMethod.comment?.markdownText)}
             </span>
           )}
         </button>
         {open && (
           <div className={s.hookDeets}>
             <div className={s.hookDescription}>
-              <Markdown>{item.description}</Markdown>
+              {propertyOrMethod.comment?.markdownText && (
+                <Markdown>{propertyOrMethod.comment?.markdownText}</Markdown>
+              )}
               <a
-                href={`${baseUrl}#L${item.lineNumber}`}
+                href={`${baseUrl}${propertyOrMethod.location.filePath}#L${propertyOrMethod.location.lineNumber}`}
                 target="_blank"
                 rel="noreferrer"
                 className={s.hookGithub}
@@ -109,7 +149,9 @@ const ExpandableAttribute = ({ item }) => {
                 View on Github <GithubIcon />
               </a>
             </div>
-            {item.example && <Prism code={item.example} language="ts" />}
+            {propertyOrMethod.comment?.example && (
+              <Prism code={propertyOrMethod.comment?.example} language="ts" />
+            )}
           </div>
         )}
       </div>
@@ -117,16 +159,65 @@ const ExpandableAttribute = ({ item }) => {
   );
 };
 
-export default function Hook({ hook }) {
-  const ctxAttrs = hook.ctx?.flatMap((group) => group.properties || []);
+function capitalize(input) {
+  const transformed = input
+    .replace(/([A-Z])/g, ' $1')
+    .trim()
+    .toLowerCase();
+  return transformed.charAt(0).toUpperCase() + transformed.slice(1);
+}
 
-  const ctxProperties = ctxAttrs
-    ?.filter((i) => i.type !== 'function')
-    .sort((a, b) => a.name.localeCompare(b.name));
+function PropertiesOrMethodsGroupPane({ group, nonCollapsible }) {
+  const content = (
+    <>
+      {group.comment?.markdownText && <div>{group.comment?.markdownText}</div>}
+      {Object.entries(group.items)
+        .filter(
+          ([_name, propertyOrMethod]) =>
+            !propertyOrMethod.comment?.deprecatedMarkdownText,
+        )
+        .map(([name, propertyOrMethod]) => (
+          <PropertyOrMethod
+            key={name}
+            name={name}
+            propertyOrMethod={propertyOrMethod}
+          />
+        ))}
+    </>
+  );
 
-  const ctxMethods = ctxAttrs
-    ?.filter((i) => i.type === 'function')
-    .sort((a, b) => a.name.localeCompare(b.name));
+  return nonCollapsible ? (
+    content
+  ) : (
+    <ExpandablePane
+      label={group.name ? capitalize(group.name) : 'Properties and methods'}
+    >
+      {content}
+    </ExpandablePane>
+  );
+}
+
+export default function Hook({
+  hook,
+  baseCtx,
+  selfResizingPluginFrameCtxSizingUtilities,
+}) {
+  const specific = mergeUnnamedGroups(
+    [
+      ...(hook.ctxArgument?.additionalProperties || []),
+      ...(hook.ctxArgument?.additionalMethods || []),
+    ].sort(sortByNameWithNullOnTop),
+  );
+
+  const base = mergeUnnamedGroups(
+    [
+      ...baseCtx.properties,
+      ...baseCtx.methods,
+      ...(hook.ctxArgument?.type === 'SelfResizingPluginFrameCtx'
+        ? [selfResizingPluginFrameCtxSizingUtilities]
+        : []),
+    ].sort(sortByNameWithNullOnTop),
+  );
 
   return (
     <div key={hook.name}>
@@ -134,7 +225,7 @@ export default function Hook({ hook }) {
         <code>{hook.name}()</code>
       </Heading>
       <Markdown>{hook.description}</Markdown>
-      {hook.returnType && (
+      {hook.returnType !== 'void' && (
         <>
           <Heading
             anchor={`${hook.name}-context`}
@@ -143,92 +234,59 @@ export default function Hook({ hook }) {
           >
             Return value
           </Heading>
-          {hook.returnType.properties ? (
-            <>
-              <p>
-                The function must return{' '}
-                {hook.returnType.isArray ? 'an array of objects' : 'an object'}{' '}
-                with the following structure:
-              </p>
-              <ExpandablePane label="structure">
-                <div className={s.propertyGroup}>
-                  {hook.returnType.properties
-                    .sort((a, b) => a.lineNumber - b.lineNumber)
-                    .map((item) => (
-                      <div key={item.name} className={s.returnValue}>
-                        <div className={s.returnValueName}>
-                          <a
-                            href={`${baseUrl}#L${item.lineNumber}`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {item.name}
-                            <GithubIcon />
-                          </a>{' '}
-                          {item.isOptional ? (
-                            <span className={s.optional}>Optional</span>
-                          ) : (
-                            <span className={s.required}>Required</span>
-                          )}
-                        </div>
-                        <div className={s.returnValueDescription}>
-                          <Markdown>{item.description}</Markdown>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </ExpandablePane>
-            </>
-          ) : (
-            <>
-              <p>
-                The{' '}
-                {hook.returnType.isMaybePromise ? '(optionally async) ' : ' '}
-                function must return{' '}
-                {hook.returnType.isArray
-                  ? `an array of ${hook.returnType.type}`
-                  : `a ${hook.returnType.type}`}
-                .
-              </p>
-            </>
-          )}
+          <p>
+            The function must return <code>{hook.returnType}</code>.
+          </p>
         </>
       )}
-      {hook.ctx && (
+      {hook.ctxArgument && (
         <>
-          {ctxProperties && ctxProperties.length > 0 && (
-            <>
-              <Heading
-                anchor={`${hook.name}-context-properties`}
-                as="h5"
-                className={s.subchapter}
-              >
-                Properties available in context
-              </Heading>
-              <p>The following information and methods are available:</p>
-              {ctxProperties.map((item) => (
-                <ExpandableAttribute item={item} key={item.name} />
-              ))}
-            </>
+          <Heading
+            anchor={`${hook.name}-context-object`}
+            as="h5"
+            className={s.subchapter}
+          >
+            Context object
+          </Heading>
+          <p>
+            The following properties and methods are available in the{' '}
+            <code>ctx</code> argument:
+          </p>
+
+          {specific.length > 0 && (
+            <ExpandablePane label="Hook-specific properties and methods">
+              <p>
+                This hook exposes additional information and operations specific
+                to the context in which it operates.
+              </p>
+              {specific.length > 1 ? (
+                specific.map((group) => (
+                  <PropertiesOrMethodsGroupPane
+                    key={group.name}
+                    group={group}
+                  />
+                ))
+              ) : (
+                <PropertiesOrMethodsGroupPane
+                  group={specific[0]}
+                  nonCollapsible
+                />
+              )}
+            </ExpandablePane>
           )}
-          {ctxMethods && ctxMethods.length > 0 && (
-            <>
-              <Heading
-                anchor={`${hook.name}-context-methods`}
-                as="h5"
-                className={s.subchapter}
-              >
-                Methods available in context
-              </Heading>
-              <p>The following information and methods are available:</p>
-              {ctxMethods.map((item) => (
-                <ExpandableAttribute item={item} key={item.name} />
-              ))}
-            </>
-          )}
+
+          <ExpandablePane label="Properties and methods available in every hook">
+            <p>
+              Every hook available in the Plugin SDK shares the same minumum set
+              of properties and methods.
+            </p>
+
+            {base.map((group) => (
+              <PropertiesOrMethodsGroupPane key={group.name} group={group} />
+            ))}
+          </ExpandablePane>
         </>
       )}
-      {hook.example && <Prism code={hook.example} language="js" />}
     </div>
   );
 }

@@ -593,7 +593,7 @@ export default function Newnavbar() {
           >
             <PanelHighlight>
               <Group title="Core resources">
-              <GroupItem
+                <GroupItem
                   href="/docs"
                   title="Docs"
                   description="API reference, integrations, and guides to work with DatoCMS."

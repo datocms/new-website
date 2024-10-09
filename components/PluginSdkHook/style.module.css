@@ -17,31 +17,6 @@
   color: #555;
 }
 
-.button {
-  background: white;
-  color: var(--light-body-color);
-  border: 1px solid var(--border-color);
-  margin-top: 10px;
-  padding: 5px 13px;
-  font-family: var(--font-sans);
-  border-radius: 3px;
-  font-size: inherit;
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  font-size: 15px;
-
-  svg {
-    margin-right: 5px;
-    fill: var(--extra-light-body-color);
-  }
-
-  &:hover {
-    color: var(--base-body-color);
-  }
-}
-
 .hook {
   border: 1px solid var(--border-color);
   margin-top: 10px;
@@ -182,4 +157,39 @@ a.hookGithub {
   &:hover svg {
     fill: #555;
   }
+}
+
+.pane {
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.expandablePaneButton {
+  background: white;
+  color: var(--base-body-color);
+  border: 0;
+  padding: 10px;
+  font-family: var(--font-sans);
+  font-size: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--light-bg-color);
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  svg {
+    fill: var(--extra-light-body-color);
+  }
+}
+
+.expandablePaneContent {
+  padding: 15px;
+  font-size: 16px;
 }
