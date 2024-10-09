@@ -18,7 +18,7 @@ import Link from 'next/link';
 import s from 'pages/docs/pageStyle.module.css';
 import LeftIcon from 'public/icons/regular/chevron-double-left.svg';
 import { StructuredText, renderMetaTags } from 'react-datocms';
-import { fetchPluginSdkHooks } from 'utils/fetchPluginSdk';
+import { fetchPluginSdkManifest } from 'utils/fetchPluginSdk';
 import fetchReactUiExamples from 'utils/fetchReactUiExamples';
 import filter from 'utils/filterNodes';
 import slugify from 'utils/slugify';
@@ -402,13 +402,17 @@ export const getStaticProps = handleErrors(
       .map((block) => block.groupName);
 
     if (interestingHookGroups.length > 0) {
-      const allHooks = await fetchPluginSdkHooks();
+      const { hooks, ...other } = await fetchPluginSdkManifest();
 
-      additionalData.pluginSdkHooks = allHooks.filter((hook) =>
-        interestingHookGroups.some((interestingHookGroup) =>
-          hook.groups.includes(interestingHookGroup),
+      additionalData.pluginSdkHooks = {
+        hooks: Object.values(hooks).filter((hook) =>
+          interestingHookGroups.some(
+            (interestingHookGroup) =>
+              hook.comment?.tag === interestingHookGroup,
+          ),
         ),
-      );
+        ...other,
+      };
     }
 
     if (
@@ -657,7 +661,7 @@ export default function DocPage({
         {docGroup && docGroup.pages.length > 1 && (
           <Toc
             content={page.content}
-            pluginSdkHooks={additionalData?.pluginSdkHooks}
+            pluginSdkHooks={additionalData?.pluginSdkHooks?.hooks}
           />
         )}
         <div className={s.article}>

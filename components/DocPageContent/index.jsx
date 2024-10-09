@@ -25,11 +25,17 @@ export default function DocPageContent({ additionalData, ...props }) {
                 <Heading as="h3" anchor={FUNCTIONS_REFERENCE_ANCHOR_NAME}>
                   Function Reference
                 </Heading>
-                {additionalData.pluginSdkHooks
-                  .sort((a, b) => a.lineNumber - b.lineNumber)
-                  .map((hook) => (
-                    <PluginSdkHook key={hook.name} hook={hook} />
-                  ))}
+                {additionalData.pluginSdkHooks.hooks.map((hook) => (
+                  <PluginSdkHook
+                    key={hook.name}
+                    hook={hook}
+                    baseCtx={additionalData.pluginSdkHooks.baseCtx}
+                    selfResizingPluginFrameCtxSizingUtilities={
+                      additionalData.pluginSdkHooks
+                        .selfResizingPluginFrameCtxSizingUtilities
+                    }
+                  />
+                ))}
               </>
             );
           }

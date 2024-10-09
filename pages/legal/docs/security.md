@@ -1,3 +1,64 @@
+## Our internal security policy
+
+### Objectives of the ISMS (Information Security Management System)
+The information security policy aims to:
+- ensure that the organisation's activities take information security into consideration right from their design;
+- ensure that all staff, internal and external, are aware and informed of their responsibilities regarding information security;
+- define roles and responsibilities regarding the security of information and associated assets;
+- guarantee that in terms of access to information everyone should be authorised, identified and consistent with one's access rights;
+- strengthen the awareness of all people and entities who access the information assets;
+- implement security controls effectively and efficiently;
+- monitor and promptly recognize events, threats, vulnerabilities and incidents;
+- improve organizational compliance.
+
+The principles detailed in this document are functional to the full implementation of the Information Security Management System and the pursuit of the objectives described.
+
+### Management process
+In order to guarantee the continuous improvement of the ISMS, DatoCMS adopts the PDCA methodology:
+- **Plan**: planning and definition of requirements and needs in terms of information security, identification of roles and responsibilities, the necessary detailed documentary apparatus is determined;
+- **Do**: implementation of what was planned through the implementation of controls and the defined documentary apparatus, consistently with the risk analysis;
+- **Check**: verification of the effectiveness of the system;
+- **Act**: continuous improvement of the Information Security Management System, to ensure that the measures implemented are always in line with company requirements.
+
+### Resources to protect
+The resources to be protected are the following:
+- all information generated, processed, stored, verbalized and recorded by DatoCMS; in all forms, places and means of processing and storage;
+- physical and digital environments for information and communication systems;
+- data storage media.
+
+### Application
+The contents and elements described in this document apply within the entire organizational structure and to the parties that provide information processing and/or processing services.
+
+### Responsibility
+The issuing of this policy is the responsibility of the Top Management.
+All stakeholders must take responsibility for the management, quality, continuity and security of information. This document, together with all the documented information produced for its full and specific application, acts as internal regulations for the management of information and, as such, must be observed by employees in compliance with their obligations of diligence pursuant to the Italian law, art. 2104 c.c.
+This information security policy is communicated to all internal and external staff.
+The responsibilities of the ISMS in detail are contained in the Manual.
+
+### Edit
+Any change to this document or to any of its operational or documentary applications may be reported by all staff to their contact person or directly to the Information Security Management System Manager (RSGSI).
+
+The methods of proposing changes will be consistent with the documentation management process.
+
+### Review and development
+This policy must be reviewed and updated on an annual basis to ensure:
+- alignment with the “best practice" of sector;
+- compliance with regulatory, legal and contractual changes.
+
+The review of this policy must be carried out, even in the event of substantial changes to the organization need of a coherent update of the SGSI or in the presence of changes in the relevant regulations.
+
+### Review
+The Organization and Top Management verify the effectiveness and efficiency of this policy on an annual basis, ensuring corresponding adaptation to organizational objectives.
+
+### Information security awareness and training
+The Organization prepares periodic courses on information security for staff, collaborators and third-party users based on the role held.
+An information security awareness program aims to make the entire Organization aware of its responsibilities regarding information security and the means by which these responsibilities are implemented.
+Information security risks must be monitored and managed periodically according to information security classification and standards. These risks must be managed in accordance with the ISO CEI 27001:2014 standard.
+
+---
+
+## Additional details
+
 In this document we are going to analyze how DatoCMS works, what are the main security choices that we've taken and what are our main security policies in the company.
 
 ### Infrastructure
@@ -66,11 +127,6 @@ We interact with many third parties that are useful for various parts of the app
 
 We make sure that every third party that we use is as careful as we are on security.
 
-Here's the list of the third parties that we are using with links to their security or compliance page and why we use them:
-
-- [Redis Labs](https://redislabs.com/company/compliance-and-privacy/) as a caching layer and as a volatile database
-- [Scout APM](https://docs.scoutapm.com/#security) to find performance bottlenecks on our server
-
 ### Data
 
 All the **data is encrypted in transit with TLS**, both internally between services and externally when reaching the users.
@@ -121,4 +177,4 @@ Our offices are also secured with CCTVs and alarm systems.
 
 If you have found a security vulnerability, please get in touch via [security@datocms.com](mailto:security@datocms.com). You can encrypt the message with our PGP key that you can find [on our site](https://www.datocms.com/.well-known/DatoCMS_security_pub.asc) and on [keys.openpgp.org](https://keys.openpgp.org/search?q=3FBD73EFD6C5268A21C33FE27B94FBC69CD5C678).
 
-Latest update: May 16, 2024
+Latest update: Oct 2, 2024
