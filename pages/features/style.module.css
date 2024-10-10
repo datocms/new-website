@@ -94,7 +94,7 @@
 }
 
 .features {
-  align-items: start;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 80px;
@@ -117,7 +117,7 @@
   z-index: 10;
   
   @media screen and (min-width: 960px) {
-    align-self: start;
+    align-self: flex-start;
     padding: 20px 0;
     position: sticky;
     top: 80px;

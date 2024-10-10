@@ -38,6 +38,9 @@ export const getStaticProps = gqlStaticProps(
         title {
           value
         }
+        subtitle {
+          value
+        }
         heroImageLeft {
           responsiveImage {
             ...imageFields
@@ -214,7 +217,6 @@ export const FeatureCard = ({ feature }) => {
     }
   });
 
-  if (feature.__typename === 'FeatureRegularCardRecord') {
     return (
       <div className={s.feature}>
         {feature.image && (
@@ -244,11 +246,9 @@ export const FeatureCard = ({ feature }) => {
         </article>
       </div>
     );
-  }
 };
 
 export const TestimonialCard = ({ feature }) => {
-  if (feature.__typename === 'TestimonialCardRecord') {
     return (
       <div className={s.quoteWrapper}>
         <div className={s.quote}>
@@ -281,12 +281,11 @@ export const TestimonialCard = ({ feature }) => {
         </div>
       </div>
     );
-  }
 };
 
 export default function Features({ page, preview }) {
-  const asideRef = useRef(null);
   const sectionsRef = useRef([]);
+  const anchorsRef = useRef([]);
   const currentAnchorRef = useRef(null);
 
   const {
@@ -356,11 +355,14 @@ export default function Features({ page, preview }) {
   }, []);
 
   const updateCurrentSection = (index) => {
-    const links = asideRef.current.querySelectorAll('a');
-    for (const link of links) {
-      link.classList.remove(s.active);
-    }
-    links[index]?.classList.add(s.active);
+    anchorsRef.current.forEach((anchor, i) => {
+      if (i === index) {
+        anchor.classList.add(s.active);
+      } else {
+        anchor.classList.remove(s.active);
+      }
+    });
+
     if (currentAnchorRef.current) {
       currentAnchorRef.current.textContent = featuresGroup[index].title;
     }
@@ -369,6 +371,10 @@ export default function Features({ page, preview }) {
   const assignSectionRef = (el, i) => {
     sectionsRef.current[i] = el;
   };
+
+  const assignAsideRef = (el, i) => {
+    anchorsRef.current[i] = el
+  }
 
   return (
     <Layout preview={preview}>
@@ -414,7 +420,7 @@ export default function Features({ page, preview }) {
 
       <Wrapper>
         <div className={s.features}>
-          <aside className={s.aside} ref={asideRef}>
+          <aside className={s.aside}>
             <div className={s.asideAnchorsWrapper}>
               <div className={s.currentAnchor}>
                 <span ref={currentAnchorRef}>Scroll to</span>
@@ -427,7 +433,12 @@ export default function Features({ page, preview }) {
                 <ul>
                   {featuresGroup.map(({ title }, i) => (
                     <li key={i}>
-                      <a href={`#${slugify(title)}`}>{title}</a>
+                      <a
+                        href={`#${slugify(title)}`}
+                        ref={(item) => assignAsideRef(item, i)}
+                      >
+                        {title}
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -442,7 +453,7 @@ export default function Features({ page, preview }) {
                   key={i}
                   className={s.section}
                   id={slugify(title)}
-                  ref={(el) => assignSectionRef(el, i)}
+                  ref={(item) => assignSectionRef(item, i)}
                 >
                   <h2 className={s.sectionTitle}>{title}</h2>
                   <div className={s.blocks}>
