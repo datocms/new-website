@@ -51,7 +51,7 @@ export const getStaticProps = gqlStaticProps(
             ...imageFields
           }
         }
-        coreFeature {
+        coreFeaturesBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -61,7 +61,7 @@ export const getStaticProps = gqlStaticProps(
             }
           }
         }
-        editorExperienceFeature {
+        editorExperienceBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -71,7 +71,7 @@ export const getStaticProps = gqlStaticProps(
             }
           }
         }
-        developerExperienceFeature {
+        developerExperienceBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -81,7 +81,7 @@ export const getStaticProps = gqlStaticProps(
             }
           }
         }
-        imageVideoManagementFeature {
+        imageVideoManagementBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -91,7 +91,7 @@ export const getStaticProps = gqlStaticProps(
             }
           }
         }
-        localizationFeature {
+        localizationBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -101,7 +101,7 @@ export const getStaticProps = gqlStaticProps(
             }
           }
         }
-        extensibilityFeature {
+        extensibilityBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -111,7 +111,7 @@ export const getStaticProps = gqlStaticProps(
             }
           }
         }
-        contentIntegrityFeature {
+        contentIntegrityBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -121,7 +121,7 @@ export const getStaticProps = gqlStaticProps(
             }
           }
         }
-        governanceAndComplianceFeature {
+        governanceAndComplianceBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -131,7 +131,7 @@ export const getStaticProps = gqlStaticProps(
             }
           }
         }
-        securityAndInfrastructureFeature {
+        securityAndInfrastructureBlocks {
           __typename
           ...featureCardFields
           ... on TestimonialCardRecord {
@@ -289,53 +289,53 @@ export default function Features({ page, preview }) {
   const currentAnchorRef = useRef(null);
 
   const {
-    coreFeature,
-    editorExperienceFeature,
-    developerExperienceFeature,
-    imageVideoManagementFeature,
-    localizationFeature,
-    extensibilityFeature,
-    contentIntegrityFeature,
-    governanceAndComplianceFeature,
-    securityAndInfrastructureFeature,
+    coreFeaturesBlocks,
+    editorExperienceBlocks,
+    developerExperienceBlocks,
+    imageVideoManagementBlocks,
+    localizationBlocks,
+    extensibilityBlocks,
+    contentIntegrityBlocks,
+    governanceAndComplianceBlocks,
+    securityAndInfrastructureBlocks,
   } = page;
 
   const featuresGroup = [
     {
       title: 'Core Feature',
-      features: coreFeature,
+      features: coreFeaturesBlocks,
     },
     {
       title: 'Editor Experience',
-      features: editorExperienceFeature,
+      features: editorExperienceBlocks,
     },
     {
       title: 'Developer Experience',
-      features: developerExperienceFeature,
+      features: developerExperienceBlocks,
     },
     {
       title: 'Image & Video Management',
-      features: imageVideoManagementFeature,
+      features: imageVideoManagementBlocks,
     },
     {
       title: 'Localization',
-      features: localizationFeature,
+      features: localizationBlocks,
     },
     {
       title: 'Extensibility',
-      features: extensibilityFeature,
+      features: extensibilityBlocks,
     },
     {
       title: 'Content Integrity',
-      features: contentIntegrityFeature,
+      features: contentIntegrityBlocks,
     },
     {
       title: 'Governance & Compliance',
-      features: governanceAndComplianceFeature,
+      features: governanceAndComplianceBlocks,
     },
     {
       title: 'Security & Infrastructure',
-      features: securityAndInfrastructureFeature,
+      features: securityAndInfrastructureBlocks,
     },
   ];
 
