@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { trackLinkedInConversion } from '../lib/linkedinTracking';
+import { trackLinkedInConversion } from 'lib/linkedinTracking';
 import Head from 'components/Head';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
