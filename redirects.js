@@ -466,4 +466,20 @@ module.exports = [
     source: '/blog/headless-cms-unconventional-use-cases',
     destination: '/customer-stories/trip-to-japan',
   },
+  {
+    source: '/docs/plugin-sdk/',
+    destination: '/docs/plugin-sdk/introduction',
+  },
+  {
+    source: '/docs/general-concepts/environments',
+    destination: '/docs/general-concepts/primary-and-sandbox-environments',
+  },
+  {
+    source: '/docs/vue/:rest*',
+    destination: '/docs/nuxt/:rest*',
+  },
+  {
+    source: '/docs/react/:rest*',
+    destination: '/docs/next-js/:rest*',
+  }
 ];
