@@ -161,10 +161,6 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                 url
               }
             }
-            ... on TypeformRecord {
-              id
-              _modelApiKey
-            }
             ... on CodesandboxEmbedBlockRecord {
               id
               _modelApiKey
