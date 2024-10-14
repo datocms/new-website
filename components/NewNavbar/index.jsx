@@ -11,7 +11,7 @@ import { getCookie } from 'utils/cookies';
 import slugify from 'utils/slugify';
 import s from './style.module.css';
 
-import { trackLinkedInConversion } from '../lib/linkedinTracking';
+import { trackLinkedInConversion } from 'lib/linkedinTracking';
 
 const NavItem = ({ name, children, onToggle, activeNavItem }) => {
   const [isOpen, setIsOpen] = useState(false);
