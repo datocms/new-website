@@ -302,7 +302,7 @@ export default function Features({ page, preview }) {
 
   const featuresGroup = [
     {
-      title: 'Core Feature',
+      title: 'Core Features',
       features: coreFeaturesBlocks,
     },
     {
