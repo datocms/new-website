@@ -156,10 +156,10 @@ export const getStaticProps = gqlStaticProps(
 
 export const FeatureCard = ({ feature }) => {
   const titleMapping = {
-    docs: 'Docs',
-    guide: 'Guide',
-    learn_more: 'Learn more',
-    watch_demo: 'Watch demo',
+    docs: 'Read Docs →',
+    guide: 'Read Guie →',
+    learn_more: 'Learn more →',
+    watch_demo: 'Watch Video →',
   };
 
   const links = feature.links.map((link) => {
