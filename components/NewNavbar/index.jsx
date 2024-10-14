@@ -11,6 +11,8 @@ import { getCookie } from 'utils/cookies';
 import slugify from 'utils/slugify';
 import s from './style.module.css';
 
+import { trackLinkedInConversion } from '../lib/linkedinTracking';
+
 const NavItem = ({ name, children, onToggle, activeNavItem }) => {
   const [isOpen, setIsOpen] = useState(false);
   const lowercaseName = slugify(name);
@@ -139,6 +141,24 @@ export default function Newnavbar() {
       setActiveNavItem(null);
     }
   }, [openMobileNav]);
+
+    // Remove when removing LinkedIn
+    const handleDashboardClick = (e) => {
+      const target = e.target.closest('a');
+      if (target && target.href.startsWith('https://dashboard.datocms.com')) {
+        trackLinkedInConversion('18968666', 'DASHBOARD');
+      }
+    };
+  
+    useEffect(() => {
+      document.addEventListener('click', handleDashboardClick);
+  
+      return () => {
+        document.removeEventListener('click', handleDashboardClick);
+      };
+    }, []);
+        // Remove when removing LinkedIn
+
 
   const toggleNav = () => {
     setOpenMobileNav(!openMobileNav);

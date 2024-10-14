@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { trackLinkedInConversion } from '../lib/linkedinTracking';
 import Head from 'components/Head';
 import Highlight from 'components/Highlight';
 import Layout from 'components/Layout';
@@ -13,6 +15,10 @@ import Verizon from 'public/images/logos/verizon.svg';
 import s from './style.module.css';
 
 export default function Support() {
+  useEffect(() => {
+    trackLinkedInConversion('18968650', 'VISIT_SALES');
+  }, []);
+
   return (
     <Layout finalCta={false}>
       <Head noIndex>
@@ -32,12 +38,10 @@ export default function Support() {
                   product, or are already using DatoCMS and have questions about
                   expanding your current package, we’re ready to help.
                 </p>
-
                 <p>
                   Fill out the form below and one of our sales expert we’ll be
                   in touch as soon as possible.
                 </p>
-
                 <p>
                   <b>
                     Filling all the fields helps us giving you a more informed
@@ -46,12 +50,10 @@ export default function Support() {
                   Also helps you thinking about your project in terms that are
                   useful for us to understand what you are up to.
                 </p>
-
                 <p className={s.support}>
                   To learn more about our self-service plans, visit our{' '}
                   <Link href="/pricing">Pricing page</Link>.
                 </p>
-
                 <p className={s.support}>
                   Need support? Please visit our{' '}
                   <Link href="/support">Support page</Link>.

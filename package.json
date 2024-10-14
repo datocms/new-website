@@ -26,6 +26,7 @@
     "@vercel/og": "^0.6.2",
     "@vercel/postgres": "^0.5.0",
     "@wordpress/shortcode": "^3.26.0",
+    "axios": "^1.7.7",
     "babel-plugin-react-css-modules": "^5.2.6",
     "clamp": "^1.0.1",
     "classnames": "^2.3.1",
