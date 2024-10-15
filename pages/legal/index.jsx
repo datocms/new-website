@@ -22,31 +22,31 @@ export default function LegalPage({ body }) {
       />
       <Legal>
         <div>
-          <h3>The following pages cover our security and policies:</h3>
-          
+          <h3>
+            The following pages cover our security and policies:
+          </h3>
           <ul>
-      <li>
-        <Link href="/legal/privacy-policy" rel="noopener noreferrer">
-          Privacy Policy
-        </Link>
-      </li>
-      <li>
-        <Link href="/legal/cookie-policy" rel="noopener noreferrer">
-          Cookie Policy
-        </Link>
-      </li>
-      <li>
-        <Link href="/legal/gdpr" rel="noopener noreferrer">
-          GDPR Compliance
-        </Link>
-      </li>
-      <li>
-        <Link href="/legal/terms" rel="noopener noreferrer">
-          Terms of Service
-        </Link>
-      </li>
-    </ul>
-
+            <li>
+              <Link href="/legal/privacy-policy" rel="noopener noreferrer">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/legal/cookie-policy" rel="noopener noreferrer">
+                Cookie Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/legal/gdpr" rel="noopener noreferrer">
+                GDPR Compliance
+              </Link>
+            </li>
+            <li>
+              <Link href="/legal/terms" rel="noopener noreferrer">
+                Terms of Service
+              </Link>
+            </li>
+          </ul>
           </div>
       </Legal>
     </Layout>
