@@ -42,7 +42,7 @@ export default function LegalPage({ body }) {
           </Link></strong>: <span>How we collect and process your data.</span>
         </li>
         <li>
-        <strong><Link href="/legal/security" rel="noopener noreferrer">
+        <strong><Link href="/security" rel="noopener noreferrer">
             Security
           </Link></strong>: <span>Our internal security policies.</span>
         </li>
