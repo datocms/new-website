@@ -266,7 +266,7 @@ export default function Plugin({ plugin, preview }) {
           </Button>
         }
         announce={
-          <Announce href="/docs/plugin-sdk">
+          <Announce href="/docs/plugin-sdk/introduction">
             <strong>This is a Community Plugin!</strong> Learn how create your
             own plugin, or copy and remix existing ones in our documentation
           </Announce>
