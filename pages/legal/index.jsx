@@ -26,12 +26,7 @@ export default function LegalPage({ body }) {
             The following pages cover our security and policies:
           </h3>
           <ul>
-        <li>
-        <strong><Link href="/legal/privacy-policy" rel="noopener noreferrer">
-            Privacy Policy
-          </Link></strong>: <span>How we collect and process your data.</span>
-        </li>
-        <li>
+          <li>
           <strong><Link href="/legal/cookie-policy" rel="noopener noreferrer">
             Cookie Policy
           </Link></strong>: <span>Understand our use of cookies and tracking.</span>
@@ -40,6 +35,16 @@ export default function LegalPage({ body }) {
         <strong><Link href="/legal/gdpr" rel="noopener noreferrer">
             GDPR Compliance
           </Link></strong>: <span>Information on how we handle personally identifiable data.</span>
+        </li>
+        <li>
+        <strong><Link href="/legal/privacy-policy" rel="noopener noreferrer">
+            Privacy Policy
+          </Link></strong>: <span>How we collect and process your data.</span>
+        </li>
+        <li>
+        <strong><Link href="/legal/security" rel="noopener noreferrer">
+            Security
+          </Link></strong>: <span>Our internal security policies.</span>
         </li>
         <li>
         <strong><Link href="/legal/terms" rel="noopener noreferrer">
