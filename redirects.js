@@ -466,4 +466,8 @@ module.exports = [
     source: '/blog/headless-cms-unconventional-use-cases',
     destination: '/customer-stories/trip-to-japan',
   },
+  {
+    source: '/security',
+    destination: '/legal/security',
+  },
 ];
