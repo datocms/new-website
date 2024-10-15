@@ -109,10 +109,9 @@ function Homepage({ successStories, preview, page }) {
               fs="big"
               as="a"
               s="invert"
-              href="https://try.datocms.com"
-              target="_blank"
+              href="/contact"
             >
-              Try our interactive demo ⤑
+              Contact Sales
             </Button>
           </div>
         </Checks>
