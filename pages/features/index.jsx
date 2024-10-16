@@ -317,39 +317,55 @@ export default function Features({ page, preview }) {
     {
       title: 'Core Features',
       subtitle:
-        'The essential features. The ones that distinguish DatoCMS and that you will probably use every day.',
+        'The essential features that you would interact with most often in DatoCMS.',
       features: coreFeaturesBlocks,
     },
     {
       title: 'Editor Experience',
+      subtitle:
+      'Features specifically focused on giving content teams and creators the right tools.',
       features: editorExperienceBlocks,
     },
     {
       title: 'Developer Experience',
+      subtitle:
+      'From our APIs to the CLI, we put a lot of focus on delivering a solid DX.',
       features: developerExperienceBlocks,
     },
     {
       title: 'Image & Video Management',
+      subtitle:
+      'DatoCMS offers Digital Asset Management (DAM) out of the box to optimize your media.',
       features: imageVideoManagementBlocks,
     },
     {
       title: 'Localization',
+      subtitle:
+      'Granular localization options to ensure you connect with your customers wherever they are.',
       features: localizationBlocks,
     },
     {
       title: 'Extensibility',
+      subtitle:
+      'Plugins allow you to extend the capabilities of the CMS for specific use-cases.',
       features: extensibilityBlocks,
     },
     {
       title: 'Content Integrity',
+      subtitle:
+      'We have measures in place to ensure your content is not at risk of loss or inconsistencies.',
       features: contentIntegrityBlocks,
     },
     {
       title: 'Governance & Compliance',
+      subtitle:
+      'Robust features to put your mind at ease when using DatoCMS at scale.',
       features: governanceAndComplianceBlocks,
     },
     {
       title: 'Security & Infrastructure',
+      subtitle:
+      'Our foundations help companies of all sizes scale without obstacles.',
       features: securityAndInfrastructureBlocks,
     },
   ];
