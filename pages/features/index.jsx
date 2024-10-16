@@ -2,6 +2,7 @@ import { useGSAP } from '@gsap/react';
 import Button from 'components/Button';
 import Head from 'components/Head';
 import { highlightStructuredText } from 'components/Highlight';
+import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
 import Wrapper from 'components/Wrapper';
 import gsap from 'gsap';
@@ -16,6 +17,8 @@ import {
 } from 'lib/datocms';
 import Link from 'next/link';
 import ChevronDown from 'public/icons/regular/chevron-down.svg';
+import Arrow from 'public/images/arrow.svg';
+import Arrow2 from 'public/images/illustrations/arrow-sketch-1.svg';
 import { useRef } from 'react';
 import {
   Image as DatoImage,
@@ -154,7 +157,7 @@ export const getStaticProps = gqlStaticProps(
   },
 );
 
-export const FeatureCard = ({ feature }) => {
+export const FeatureCard = ({ feature, index }) => {
   const titleMapping = {
     docs: 'Read Docs →',
     guide: 'Read Guie →',
@@ -217,70 +220,80 @@ export const FeatureCard = ({ feature }) => {
     }
   });
 
-    return (
-      <div className={s.feature}>
-        {feature.image && (
-          <figure className={s.featureImage}>
-            <DatoImage data={feature.image.responsiveImage} />
-          </figure>
-        )}
-        <article>
-          <h3 className={s.featureTitle}>{feature.title}</h3>
-          <div className={s.featureDescription}>
-            <StructuredText data={feature.description} />
+  return (
+    <div className={s.feature}>
+      {feature.image && (
+        <figure className={s.featureImage}>
+          <DatoImage data={feature.image.responsiveImage} />
+        </figure>
+      )}
+      <article>
+        {feature.badge && (
+          <div className={s.featureBadge}>
+            {feature.badge}
+            {index % 2 === 0 ? (
+              <div className={s.arrow}>
+                <Arrow />
+              </div>
+            ) : (
+              <div className={s.arrow2}>
+                <Arrow2 />
+              </div>
+            )}
           </div>
+        )}
+        <h3 className={s.featureTitle}>{feature.title}</h3>
+        <div className={s.featureDescription}>
+          <StructuredText data={feature.description} />
+        </div>
 
-          {links.length > 0 && (
-            <div className={s.featureLinks}>
-              {links.map((link, i) => (
-                <div key={i}>
-                  <Link key={i} href={link.url} passHref>
-                    <a data-type={link.__typename} className={s.link}>
-                      {link.linkTitle}
-                    </a>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          )}
-        </article>
-      </div>
-    );
+        {links.length > 0 && (
+          <div className={s.featureLinks}>
+            {links.map((link, i) => (
+              <div key={i}>
+                <Link key={i} href={link.url} passHref>
+                  <a data-type={link.__typename} className={s.link}>
+                    {link.linkTitle}
+                  </a>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+      </article>
+    </div>
+  );
 };
 
 export const TestimonialCard = ({ feature }) => {
-    return (
-      <div className={s.quoteWrapper}>
-        <div className={s.quote}>
-          {highlightStructuredText(feature.testimonial.quote)}
-        </div>
-        <div className={s.content}>
-          <DatoImage
-            className={s.avatar}
-            data={feature.testimonial.image.responsiveImage}
-          />
-          {feature.testimonial.partner ? (
-            <Link
-              href={`/partners/${feature.testimonial.partner.slug}`}
-              passHref
-            >
-              <div className={s.authorRole}>
-                <div className={s.name}>{feature.testimonial.name}</div>
-                <div className={s.role}>
-                  {feature.testimonial.role} @{' '}
-                  {feature.testimonial.partner.name}
-                </div>
-              </div>
-            </Link>
-          ) : (
+  return (
+    <div className={s.quoteWrapper}>
+      <div className={s.quote}>
+        {highlightStructuredText(feature.testimonial.quote)}
+      </div>
+      <div className={s.content}>
+        <DatoImage
+          className={s.avatar}
+          data={feature.testimonial.image.responsiveImage}
+        />
+        {feature.testimonial.partner ? (
+          <Link href={`/partners/${feature.testimonial.partner.slug}`} passHref>
             <div className={s.authorRole}>
               <div className={s.name}>{feature.testimonial.name}</div>
-              <div className={s.role}>{feature.testimonial.role}</div>
+              <div className={s.role}>
+                {feature.testimonial.role} @ {feature.testimonial.partner.name}
+              </div>
             </div>
-          )}
-        </div>
+          </Link>
+        ) : (
+          <div className={s.authorRole}>
+            <div className={s.name}>{feature.testimonial.name}</div>
+            <div className={s.role}>{feature.testimonial.role}</div>
+          </div>
+        )}
       </div>
-    );
+    </div>
+  );
 };
 
 export default function Features({ page, preview }) {
@@ -303,6 +316,8 @@ export default function Features({ page, preview }) {
   const featuresGroup = [
     {
       title: 'Core Features',
+      subtitle:
+        'The essential features. The ones that distinguish DatoCMS and that you will probably use every day.',
       features: coreFeaturesBlocks,
     },
     {
@@ -373,8 +388,8 @@ export default function Features({ page, preview }) {
   };
 
   const assignAsideRef = (el, i) => {
-    anchorsRef.current[i] = el
-  }
+    anchorsRef.current[i] = el;
+  };
 
   return (
     <Layout preview={preview}>
@@ -447,7 +462,7 @@ export default function Features({ page, preview }) {
           </aside>
 
           <div className={s.main}>
-            {featuresGroup.map(({ title, features }, i) => {
+            {featuresGroup.map(({ title, subtitle, features }, i) => {
               return (
                 <div
                   key={i}
@@ -455,14 +470,34 @@ export default function Features({ page, preview }) {
                   id={slugify(title)}
                   ref={(item) => assignSectionRef(item, i)}
                 >
-                  <h2 className={s.sectionTitle}>{title}</h2>
+                  <div className={s.sectionTitle}>
+                    <InterstitialTitle
+                      style="one"
+                      below={
+                        subtitle && (
+                          <h4 className={s.sectionSubtitle}>{subtitle}</h4>
+                        )
+                      }
+                    >
+                      {title}
+                    </InterstitialTitle>
+                  </div>
+
                   <div className={s.blocks}>
                     {features.map((feature, i) => {
                       if (feature.__typename === 'FeatureRegularCardRecord') {
-                        return <FeatureCard key={i} feature={feature} />;
+                        return (
+                          <FeatureCard key={i} feature={feature} index={i} />
+                        );
                       }
                       if (feature.__typename === 'TestimonialCardRecord') {
-                        return <TestimonialCard key={i} feature={feature} />;
+                        return (
+                          <TestimonialCard
+                            key={i}
+                            feature={feature}
+                            index={i}
+                          />
+                        );
                       }
                     })}
                   </div>
