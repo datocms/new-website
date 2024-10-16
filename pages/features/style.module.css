@@ -142,7 +142,7 @@
     position: relative;
   }
 
-  &:hover {
+  &[data-open="true"] {
     .asideAnchors {
       grid-template-rows: 1fr;
       opacity: 1;
@@ -153,12 +153,17 @@
         padding: 20px 0
       }
     }
+
+    .currentAnchorArrow {
+      transform: rotate(180deg);
+    }
   }
 }
 
 .currentAnchor {
   align-items: center;
   color: #fff;
+  cursor: pointer;
   display: flex;
   font-weight: 600;
   justify-content: space-between;

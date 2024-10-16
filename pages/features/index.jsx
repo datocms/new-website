@@ -19,7 +19,7 @@ import Link from 'next/link';
 import ChevronDown from 'public/icons/regular/chevron-down.svg';
 import Arrow from 'public/images/arrow.svg';
 import Arrow2 from 'public/images/illustrations/arrow-sketch-1.svg';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
   Image as DatoImage,
   StructuredText,
@@ -300,6 +300,11 @@ export default function Features({ page, preview }) {
   const sectionsRef = useRef([]);
   const anchorsRef = useRef([]);
   const currentAnchorRef = useRef(null);
+  const [mobileAnchorsOpen, setMobileAnchorsOpen] = useState(false);
+
+  const toggleMobileAnchors = () => {
+    setMobileAnchorsOpen(!mobileAnchorsOpen);
+  };
 
   const {
     coreFeaturesBlocks,
@@ -323,49 +328,49 @@ export default function Features({ page, preview }) {
     {
       title: 'Editor Experience',
       subtitle:
-      'Features specifically focused on giving content teams and creators the right tools.',
+        'Features specifically focused on giving content teams and creators the right tools.',
       features: editorExperienceBlocks,
     },
     {
       title: 'Developer Experience',
       subtitle:
-      'From our APIs to the CLI, we put a lot of focus on delivering a solid DX.',
+        'From our APIs to the CLI, we put a lot of focus on delivering a solid DX.',
       features: developerExperienceBlocks,
     },
     {
       title: 'Image & Video Management',
       subtitle:
-      'DatoCMS offers Digital Asset Management (DAM) out of the box to optimize your media.',
+        'DatoCMS offers Digital Asset Management (DAM) out of the box to optimize your media.',
       features: imageVideoManagementBlocks,
     },
     {
       title: 'Localization',
       subtitle:
-      'Granular localization options to ensure you connect with your customers wherever they are.',
+        'Granular localization options to ensure you connect with your customers wherever they are.',
       features: localizationBlocks,
     },
     {
       title: 'Extensibility',
       subtitle:
-      'Plugins allow you to extend the capabilities of the CMS for specific use-cases.',
+        'Plugins allow you to extend the capabilities of the CMS for specific use-cases.',
       features: extensibilityBlocks,
     },
     {
       title: 'Content Integrity',
       subtitle:
-      'We have measures in place to ensure your content is not at risk of loss or inconsistencies.',
+        'We have measures in place to ensure your content is not at risk of loss or inconsistencies.',
       features: contentIntegrityBlocks,
     },
     {
       title: 'Governance & Compliance',
       subtitle:
-      'Robust features to put your mind at ease when using DatoCMS at scale.',
+        'Robust features to put your mind at ease when using DatoCMS at scale.',
       features: governanceAndComplianceBlocks,
     },
     {
       title: 'Security & Infrastructure',
       subtitle:
-      'Our foundations help companies of all sizes scale without obstacles.',
+        'Our foundations help companies of all sizes scale without obstacles.',
       features: securityAndInfrastructureBlocks,
     },
   ];
@@ -452,7 +457,11 @@ export default function Features({ page, preview }) {
       <Wrapper>
         <div className={s.features}>
           <aside className={s.aside}>
-            <div className={s.asideAnchorsWrapper}>
+            <div
+              className={s.asideAnchorsWrapper}
+              onClick={toggleMobileAnchors}
+              data-open={mobileAnchorsOpen}
+            >
               <div className={s.currentAnchor}>
                 <span ref={currentAnchorRef}>Scroll to</span>
                 <div className={s.currentAnchorArrow}>
