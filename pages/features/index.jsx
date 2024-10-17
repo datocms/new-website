@@ -1,6 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import Button from 'components/Button';
 import Head from 'components/Head';
+import Hero from 'components/Hero';
 import { highlightStructuredText } from 'components/Highlight';
 import InterstitialTitle from 'components/InterstitialTitle';
 import Layout from 'components/Layout';
@@ -416,43 +417,21 @@ export default function Features({ page, preview }) {
     <Layout preview={preview}>
       <Head>{renderMetaTags(page.seo)}</Head>
 
-      <Wrapper>
-        <div className={s.hero}>
-          <div className={s.heroBody}>
-            <h1 className={s.heroTitle}>
-              {highlightStructuredText(page.title)}
-            </h1>
-            <div className={s.heroSubtitle}>
-              {highlightStructuredText(page.subtitle)}
-            </div>
-            <div className={s.buttonContainer}>
-              <Button as="a" href="https://dashboard.datocms.com/signup">
-                Try it for free
-              </Button>
-              <Button as="a" s="invert" href="/contact">
-                Contact sales
-              </Button>
-            </div>
+      <div className={s.hero}>
+        <Hero
+          title={highlightStructuredText(page.title)}
+          subtitle={<StructuredText data={page.subtitle} />}
+        >
+          <div className={s.buttonContainer}>
+            <Button fs="big" as="a" href="https://dashboard.datocms.com/signup">
+              Try it for free
+            </Button>
+            <Button fs="big" as="a" s="invert" href="/contact">
+              Contact sales
+            </Button>
           </div>
-          <div className={s.heroImageWrapper}>
-            {page.heroImageLeft?.responsiveImage &&
-            page.heroImageRight?.responsiveImage ? (
-              <>
-                <div className={s.heroImage}>
-                  <DatoImage data={page.heroImageLeft.responsiveImage} />
-                </div>
-                <div className={s.heroImage}>
-                  <DatoImage data={page.heroImageRight.responsiveImage} />
-                </div>
-              </>
-            ) : (
-              page.heroImage?.responsiveImage && (
-                <DatoImage data={page.heroImage.responsiveImage} />
-              )
-            )}
-          </div>
-        </div>
-      </Wrapper>
+        </Hero>
+      </div>
 
       <Wrapper>
         <div className={s.features}>
