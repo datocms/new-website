@@ -105,12 +105,7 @@ function Homepage({ successStories, preview, page }) {
             <Button fs="big" as="a" href="https://dashboard.datocms.com/signup">
               Sign up for free
             </Button>
-            <Button
-              fs="big"
-              as="a"
-              s="invert"
-              href="/contact"
-            >
+            <Button fs="big" as="a" s="invert" href="/contact">
               Contact Sales
             </Button>
           </div>
