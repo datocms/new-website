@@ -102,7 +102,7 @@
   
   @media screen and (min-width: 960px) {
     display: grid;
-    gap: rfs(120px);
+    gap: rfs(130px);
     grid-template-columns: 300px 1fr;
   }
 }
@@ -297,7 +297,7 @@
 
   &:hover {
     .featureBadge {
-      transform: rotate(-8deg) translateX(-165px) translateY(-40%);
+      transform: rotate(-8deg) translateX(-110px) translateY(-40%);
     }
   }
 
@@ -311,14 +311,14 @@
   color: var(--light-body-color);
   display: flex;
   flex-direction: column;
-  font-size: 14px;
+  font-size: 13px;
   gap: 10px;
   position: absolute;
   text-align: center;
   top: 0;
-  transform: rotate(-10deg) translateX(-170px) translateY(-55%);
+  transform: rotate(-10deg) translateX(-115px) translateY(-55%);
   transition: transform 0.3s;
-  width: 160px;
+  width: 110px;
 
   @media screen and (max-width: 960px) {
     display: none;
