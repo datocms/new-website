@@ -52,7 +52,7 @@ const cookieConsentScript = `
 (() => {
   const posthogScript = \`${posthogScript}\`;
 
-  function addPostHogScript() {
+  function addPosthogScript() {
     const script = document.createElement('script');
     script.appendChild(document.createTextNode(posthogScript));
     document.getElementsByTagName('head')[0].appendChild(script);
