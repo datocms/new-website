@@ -29,10 +29,6 @@ module.exports = [
     destination: '/company/brand-assets',
   },
   {
-    source: '/features',
-    destination: '/team/best-cms-for-developers',
-  },
-  {
     source: '/docs/building-plugins/:rest*',
     destination: '/docs/legacy-plugins/:rest*',
   },

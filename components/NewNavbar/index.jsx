@@ -252,7 +252,7 @@ export default function Newnavbar() {
               </div>
             </PanelHighlight>
             <PanelSlice columns="2">
-              <Group columns="2" title="Features" link="/product">
+              <Group columns="2" title="Features" link="/features">
                 <GroupItem
                   href="/features/headless-cms-graphql"
                   title="GraphQL API"
