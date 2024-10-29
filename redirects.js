@@ -479,7 +479,7 @@ module.exports = [
     destination: '/docs/next-js/:rest*',
   },
   {
-    source: '/docs/gatsby',
+    source: '/docs/gatsby/:rest*',
     destination: '/',
   },
   {
@@ -487,7 +487,7 @@ module.exports = [
     destination: '/docs/plugin-sdk/introduction',
   },
   {
-    source: '/docs/other-ssgs',
+    source: '/docs/other-ssgs/:rest*',
     destination: '/',
   },
   {
@@ -545,5 +545,33 @@ module.exports = [
   {
     source: '/docs/plugin-sdk/sdk/field-extensions ',
     destination: '/docs/plugin-sdk/field-extensions',
+  },
+  {
+    source: '/docs/middleman/:rest*',
+    destination: '/',
+  },
+  {
+    source: '/docs/hugo/:rest*',
+    destination: '/',
+  },
+  {
+    source: '/cms/hugo-cms',
+    destination: '/',
+  },
+  {
+    source: '/docs/jekyll/:rest*',
+    destination: '/',
+  },
+  {
+    source: '/marketplace/starters/next-13-company-landing-page-demo',
+    destination: '/marketplace/starters/next-js-starter-kit',
+  },
+  {
+    source: '/docs/agency-partner-program/benefits',
+    destination: '/partner-program',
+  },
+  {
+    source: '/internal/sitemap-partners',
+    destination: '/internal/sitemap-static',
   },
 ];
