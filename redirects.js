@@ -477,5 +477,73 @@ module.exports = [
   {
     source: '/docs/react/:rest*',
     destination: '/docs/next-js/:rest*',
-  }
+  },
+  {
+    source: '/docs/gatsby',
+    destination: '/',
+  },
+  {
+    source: '/docs/plugin-sdk',
+    destination: '/docs/plugin-sdk/introduction',
+  },
+  {
+    source: '/docs/other-ssgs',
+    destination: '/',
+  },
+  {
+    source: '/marketplace/plugins/i/datocms-plugin-gatsby-cloud',
+    destination: '/',
+  },
+  {
+    source: '/docs/content-management-api/resources/sso-token',
+    destination: '/docs/content-management-api/resources/sso-settings/generate_token',
+  },
+  {
+    source: '/docs/next-js/setting-up-next-js-preview-mode',
+    destination: '/docs/legacy-next-js-documentation/setting-up-next-js-preview-mode',
+  },
+  {
+    source: '/docs/plugin-sdk/execute-code-on-boot',
+    destination: '/docs/plugin-sdk/event-hooks',
+  },
+  {
+    source: '/partners/harvey-cameron',
+    destination: '/partners',
+  },
+  {
+    source: '/docs/vue/display-videos',
+    destination: '/docs/nuxt',
+  },
+  {
+    source: '/docs/general-concepts/environments',
+    destination: '/docs/scripting-migrations/introduction',
+  },
+  {
+    source: '/docs/vue/loading-responsive-progressive-images-from-datocms',
+    destination: '/docs/nuxt',
+  },
+  {
+    source: '/docs/vue',
+    destination: '/docs/nuxt',
+  },
+  {
+    source: '/docs/vue',
+    destination: '/docs/nuxt',
+  },
+  {
+    source: '/docs/vue/:rest*',
+    destination: '/docs/nuxt/:rest*',
+  },
+  {
+    source: '/docs/sveltekit/getting-started-with-sveltekit-and-datocms',
+    destination: '/docs/svelte',
+  },
+  {
+    source: '/partners/dev-kitchen',
+    destination: '/partners',
+  },
+  {
+    source: '/docs/plugin-sdk/sdk/field-extensions ',
+    destination: '/docs/plugin-sdk/field-extensions',
+  },
 ];
