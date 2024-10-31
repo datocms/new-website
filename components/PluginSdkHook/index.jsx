@@ -10,7 +10,7 @@ import slugify from 'utils/slugify';
 import s from './style.module.css';
 
 const baseUrl =
-  'https://github.com/datocms/plugins-sdk/blob/master/packages/sdk/src/';
+  'https://github.com/datocms/plugins-sdk/blob/master/packages/sdk/';
 
 const MarkdownHeading = ({ level, children, node }) => {
   return (
