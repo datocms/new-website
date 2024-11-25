@@ -496,11 +496,13 @@ module.exports = [
   },
   {
     source: '/docs/content-management-api/resources/sso-token',
-    destination: '/docs/content-management-api/resources/sso-settings/generate_token',
+    destination:
+      '/docs/content-management-api/resources/sso-settings/generate_token',
   },
   {
     source: '/docs/next-js/setting-up-next-js-preview-mode',
-    destination: '/docs/legacy-next-js-documentation/setting-up-next-js-preview-mode',
+    destination:
+      '/docs/legacy-next-js-documentation/setting-up-next-js-preview-mode',
   },
   {
     source: '/docs/plugin-sdk/execute-code-on-boot',

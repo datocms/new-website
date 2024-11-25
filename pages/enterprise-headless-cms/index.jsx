@@ -282,9 +282,7 @@ function Enterprise({ page, review1, review2, review3 }) {
               }
             >
               <strong>Vercel</strong> hosted its{' '}
-              <a
-                href="/blog/how-datocms-supports-next-js-conf"
-              >
+              <a href="/blog/how-datocms-supports-next-js-conf">
                 Next.js international conference
               </a>{' '}
               on DatoCMS.
@@ -306,9 +304,9 @@ function Enterprise({ page, review1, review2, review3 }) {
         >
           <p>
             The best CMS for enterprise is one that can{' '}
-            <strong>scale with your company with minimal effort</strong>. DatoCMS
-            offers the services and support that lets your website reach different
-            market segments and grow with your needs.
+            <strong>scale with your company with minimal effort</strong>.
+            DatoCMS offers the services and support that lets your website reach
+            different market segments and grow with your needs.
           </p>
         </Flag>
       </div>
