@@ -129,7 +129,7 @@ function Enterprise({ page, review1, review2, review3 }) {
           />
           <Point
             title="ISO 27001 and GDPR Compliance"
-            description="We have a GDPR DPA and our data centers are ISO 27001, SOC 1 and SOC 2 compliant."
+            description="We have a GDPR DPA and have been officially certified as ISO 27001 compliant."
           />
         </EnterpriseStrip>
 
