@@ -1,22 +1,2 @@
-User-agent: Googlebot
-Disallow:/legal/
-Disallow:/contact
-Disallow:/slack
-Disallow:/support
-
-User-agent: DatoCmsSearchBot
-Disallow:/legal/
-Disallow:/contact
-Disallow:/slack
-Disallow:/support
-Disallow:/pricing/compare
-Disallow:/marketplace/plugins
-Disallow:/internal
-
 User-agent: *
-Disallow:/legal/
-Disallow:/contact
-Disallow:/slack
-Disallow:/support
-
-Sitemap: https://www.datocms.com/sitemap.xml
+Disallow: /
