@@ -22,6 +22,7 @@ import ResponsiveEmbed from 'react-responsive-embed';
 import truncate from 'truncate';
 import slugify from 'utils/slugify';
 import partnerStyles from '/pages/partners/[partnerSlug]/style.module.css';
+import { backticksToHtmlCodeBlock } from '../../utils/backticksToHtmlCodeBlock';
 import { parseShortCodes } from '../../utils/table';
 import defaultStyles from './style.module.css';
 
@@ -363,18 +364,26 @@ function renderBlock(s, block, defaultAltForImages) {
             <thead>
               <tr>
                 {columns.map((col) => (
-                  <th key={col.id} style={toCss(col.style)}>
-                    {col.content}
-                  </th>
+                  <th
+                    key={col.id}
+                    style={toCss(col.style)}
+                    dangerouslySetInnerHTML={{
+                      __html: backticksToHtmlCodeBlock(col.content),
+                    }}
+                  />
                 ))}
               </tr>
             </thead>
             {block.table.data.map((row) => (
               <tr key={JSON.stringify(row)}>
                 {columns.map((col) => (
-                  <td key={col.id} style={toCss(col.style)}>
-                    {row[col.id]}
-                  </td>
+                  <td
+                    key={col.id}
+                    style={toCss(col.style)}
+                    dangerouslySetInnerHTML={{
+                      __html: backticksToHtmlCodeBlock(row[col.id]),
+                    }}
+                  />
                 ))}
               </tr>
             ))}
