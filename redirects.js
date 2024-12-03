@@ -433,8 +433,8 @@ module.exports = [
     destination: '/',
   },
   {
-    source: '/docs/cdn-settings/advanced-asset-settings',
-    destination: '/docs/asset-api/asset-cdn-settings',
+    source: '/docs/cdn-settings/:rest*',
+    destination: '/docs/asset-api/:rest*',
   },
   {
     source: '/docs/general-concepts/videos',
