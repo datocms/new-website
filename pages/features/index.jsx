@@ -206,7 +206,7 @@ export const FeatureCard = ({ feature, index }) => {
           __typename: link.content.__typename,
           linkTitle: resolvedLinkTitle,
         };
-      case 'UserGuidesVideoRecord':
+      case 'UserGuidesEpisodeRecord':
         return {
           url: `/user-guides/${link.content.parent[0].slug}/${link.content.slug}`,
           __typename: link.content.__typename,

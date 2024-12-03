@@ -56,7 +56,7 @@ export const getStaticProps = gqlStaticPropsWithSubscription(
                   id
                   _modelApiKey
                 }
-                ... on UserGuidesVideoRecord {
+                ... on UserGuidesEpisodeRecord {
                   title
                   slug
                   thumbTimeSeconds

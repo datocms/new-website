@@ -330,7 +330,7 @@ export const getStaticProps = handleErrors(
                       id
                       _modelApiKey
                     }
-                    ... on UserGuidesVideoRecord {
+                    ... on UserGuidesEpisodeRecord {
                       title
                       slug
                       thumbTimeSeconds

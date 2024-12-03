@@ -40,7 +40,7 @@ export const getStaticPaths = gqlStaticPaths(
 export const getStaticProps = gqlStaticPropsWithSubscription(
   /* GraphQL */ `
     query itemQuery($chapterSlug: String!, $itemSlug: String!) {
-      item: userGuidesVideo(filter: { slug: { eq: $itemSlug } }) {
+      item: userGuidesEpisode(filter: { slug: { eq: $itemSlug } }) {
         slug
         seo: _seoMetaTags {
           ...seoMetaTagsFields
